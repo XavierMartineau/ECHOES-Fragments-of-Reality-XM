@@ -35,6 +35,10 @@
     "/^cmd /c \"ren Docs docs-temp\"; if \\(Test-Path 'docs-temp'\\) \\{ cmd /c \"ren docs-temp docs\" \\}; Get-ChildItem -Name$/": {
       "approve": true,
       "matchCommandLine": true
+    },
+    "/^\\(Get-Content 'Documentation\\\\Info-en\\.txt'\\)\\.Count; \\(Get-Item 'Documentation\\\\Info-en\\.txt'\\)\\.Length$/": {
+      "approve": true,
+      "matchCommandLine": true
     }
   }
 }
