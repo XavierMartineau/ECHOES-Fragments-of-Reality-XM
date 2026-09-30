@@ -4,6 +4,7 @@ const saveChoice = document.getElementById("saveChoice");
 const saveSummary = document.getElementById("saveSummary");
 const newGameButton = document.getElementById("newGameButton");
 const resumeButton = document.getElementById("resumeButton");
+const deleteSaveButton = document.getElementById("deleteSaveButton");
 const passwordInput = document.getElementById("password");
 const passwordToggle = document.getElementById("passwordToggle");
 const translations = window.translations;
@@ -44,6 +45,7 @@ function showSaveChoice(username) {
   const save = window.EchoesSave.getSave(username);
   saveChoice.hidden = false;
   resumeButton.hidden = !save;
+  deleteSaveButton.hidden = !save;
   saveSummary.textContent = save
     ? `${dictionary.saveFound} ${save.currentLevel || 0}.`
     : dictionary.saveEmpty;
@@ -75,4 +77,12 @@ newGameButton.addEventListener("click", () => {
 resumeButton.addEventListener("click", () => {
   const save = window.EchoesSave.getSave(currentUsername);
   window.location.href = destinationForSave(save);
+});
+
+deleteSaveButton.addEventListener("click", () => {
+  if (!window.confirm(dictionary.deleteSaveConfirm)) return;
+  window.EchoesSave.deleteSave(currentUsername);
+  resumeButton.hidden = true;
+  deleteSaveButton.hidden = true;
+  saveSummary.textContent = dictionary.saveEmpty;
 });

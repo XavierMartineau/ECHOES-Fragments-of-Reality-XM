@@ -245,6 +245,17 @@ body::before {
   line-height: 1.7;
   overflow-wrap: anywhere;
 }
+.system-transmission.success {
+  border-left-color: var(--success);
+  background: rgba(8, 36, 31, 0.82);
+  box-shadow:
+    0 0 22px rgba(128, 255, 207, 0.18),
+    inset 0 0 22px rgba(128, 255, 207, 0.08);
+}
+.system-transmission.success .system-label,
+.system-transmission.success p {
+  color: var(--success);
+}
 
 .puzzle-panel {
   border: 1px solid var(--line);
@@ -447,6 +458,11 @@ body::before {
 .piece-triangle.selected {
   box-shadow: 0 0 24px rgba(121, 247, 255, 0.72);
 }
+@media (hover: hover) and (pointer: fine) {
+  .piece-triangle:hover {
+    animation: triangle-hover 0.7s ease-in-out infinite alternate;
+  }
+}
 .piece-circle {
   border-color: #48b0ff;
   background: rgba(72, 176, 255, 0.32);
@@ -514,6 +530,27 @@ body::before {
   border-color: var(--cyan);
   color: var(--text);
   outline: none;
+}
+.next-level-button {
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  border: 1px solid var(--success);
+  background: rgba(128, 255, 207, 0.12);
+  color: var(--success);
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.58rem;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+.next-level-button:hover,
+.next-level-button:focus-visible {
+  background: rgba(128, 255, 207, 0.24);
+  box-shadow: 0 0 18px rgba(128, 255, 207, 0.32);
+  outline: none;
+}
+[hidden] {
+  display: none !important;
 }
 
 .level-footer {
@@ -653,5 +690,15 @@ body::before {
     padding: 9px 13px;
     font-size: 0.5rem;
     letter-spacing: 0.08rem;
+  }
+}
+@keyframes triangle-hover {
+  from {
+    transform: translateY(-5px) scale(1.08) rotate(0deg);
+    filter: drop-shadow(0 0 10px rgba(121, 247, 255, 0.7));
+  }
+  to {
+    transform: translateY(-9px) scale(1.14) rotate(-3deg);
+    filter: drop-shadow(0 0 22px rgba(121, 247, 255, 1));
   }
 }

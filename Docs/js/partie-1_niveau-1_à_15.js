@@ -8,26 +8,17 @@ const systemMessage = document.getElementById("systemMessage");
 const resetButton = document.getElementById("resetButton");
 const levelProgress = document.getElementById("levelProgress");
 const saveGameButton = document.getElementById("saveGameButton");
+const nextLevelButton = document.getElementById("nextLevelButton");
+const systemTransmission = document.querySelector(".system-transmission");
 
 const solution = ["circle", "triangle", "square"];
 const targetByShape = { circle: 0, triangle: 1, square: 2 };
 const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+const levelCopy = window.translations?.[language]?.level1;
 const systemMessages = {
-  fr: {
-    input:
-      "SYSTEME:: ENTREE REQUISE // 3 FRAGMENTS DETECTES // ORDRE CIBLES: CERCLE > TRIANGLE > LOSANGE",
-    success:
-      "SYSTEME:: ALIGNEMENT ACCEPTE // STABILITE DU FRAGMENT +1 // PROCHAIN PROTOCOLE DEBLOQUE",
-    error:
-      "SYSTEME:: ERREUR D'ALIGNEMENT // DESYNCHRONISATION // NOUVELLE SEQUENCE REQUISE",
-  },
-  en: {
-    input:
-      "SYSTEM:: INPUT REQUIRED // 3 FRAGMENTS DETECTED // TARGET ORDER: CIRCLE > TRIANGLE > DIAMOND",
-    success:
-      "SYSTEM:: ALIGNMENT ACCEPTED // FRAGMENT STABILITY +1 // NEXT PROTOCOL UNLOCKED",
-    error: "SYSTEM:: ALIGNMENT ERROR // PATTERN DESYNC // RESEQUENCE REQUIRED",
-  },
+  input: levelCopy.systemInput,
+  success: levelCopy.systemSuccess,
+  error: levelCopy.systemError,
 };
 const currentLevel = 1;
 const progressStorageKey = "echoes-completed-levels";
@@ -36,6 +27,34 @@ const completedLevels = new Set(
 );
 let selectedPiece = null;
 let placedShapes = [null, null, null];
+
+document.documentElement.lang = language;
+document.querySelectorAll("[data-i18n]").forEach((element) => {
+  const key = element.dataset.i18n;
+  if (levelCopy[key]) element.textContent = levelCopy[key];
+});
+document.querySelectorAll("[data-i18n-aria]").forEach((element) => {
+  const values = levelCopy[element.dataset.i18nAria];
+  if (!values) return;
+  if (Array.isArray(values)) {
+    element.setAttribute("aria-label", values.join(" / "));
+    element.querySelectorAll(".target-slot").forEach((slot, index) => {
+      if (values[index]) slot.setAttribute("aria-label", values[index]);
+    });
+  } else {
+    element.setAttribute("aria-label", values);
+  }
+});
+saveGameButton.textContent = levelCopy.save;
+resetButton.textContent = levelCopy.reset;
+status.textContent = levelCopy.statusReady;
+const shapeLabels =
+  language === "en"
+    ? { triangle: "Triangle", circle: "Circle", square: "Diamond" }
+    : { triangle: "Triangle", circle: "Cercle", square: "Losange" };
+pieces.forEach((piece) => {
+  piece.setAttribute("aria-label", shapeLabels[piece.dataset.shape]);
+});
 
 function shufflePieces() {
   const shuffledPieces = [...pieces].sort(() => Math.random() - 0.5);
@@ -75,6 +94,25 @@ function updateProgress() {
   progressReadout.textContent = `${placedCount} / ${solution.length}`;
 }
 
+function typeSystemMessage(message, onComplete) {
+  systemMessage.textContent = "";
+  let characterIndex = 0;
+
+  function typeCharacter() {
+    systemMessage.textContent += message[characterIndex];
+    characterIndex += 1;
+    systemTransmission.scrollIntoView({ behavior: "auto", block: "center" });
+
+    if (characterIndex < message.length) {
+      window.setTimeout(typeCharacter, 20);
+    } else if (onComplete) {
+      onComplete();
+    }
+  }
+
+  typeCharacter();
+}
+
 function selectPiece(piece) {
   if (piece.classList.contains("placed")) return;
   pieces.forEach((item) => item.classList.remove("selected"));
@@ -82,8 +120,7 @@ function selectPiece(piece) {
   selectedPiece = piece;
   piece.classList.add("selected");
   showSlotPreview(piece.dataset.shape);
-  status.textContent =
-    "Forme sélectionnée. Choisis son emplacement holographique.";
+  status.textContent = levelCopy.statusSelected;
   status.className = "puzzle-status";
 }
 
@@ -133,20 +170,26 @@ function checkSolution() {
   if (isCorrect) {
     slots.forEach((slot) => slot.classList.add("correct"));
     board.classList.add("solved");
-    status.textContent = "Résonance stabilisée. Le fragment répond à ECHO.";
+    status.textContent = levelCopy.statusSuccess;
     status.className = "puzzle-status success";
-    systemMessage.textContent = systemMessages[language].success;
+    systemTransmission.classList.add("success");
     markCurrentLevelCompleted();
+    typeSystemMessage(systemMessages.success, () => {
+      window.setTimeout(() => {
+        nextLevelButton.hidden = false;
+        nextLevelButton.focus();
+      }, 450);
+    });
     return;
   }
 
   slots.forEach((slot, index) => {
     slot.classList.toggle("incorrect", placedShapes[index] !== solution[index]);
   });
-  status.textContent =
-    "Désynchronisation détectée. Les formes ne répondent pas au même rythme.";
+  status.textContent = levelCopy.statusError;
   status.className = "puzzle-status error";
-  systemMessage.textContent = systemMessages[language].error;
+  systemMessage.textContent = systemMessages.error;
+  systemTransmission.classList.remove("success");
 }
 
 function resetPuzzle() {
@@ -162,10 +205,11 @@ function resetPuzzle() {
     piece.classList.remove("selected", "placed");
     piece.removeAttribute("aria-disabled");
   });
-  status.textContent =
-    "Sélectionne une forme ou fais-la glisser vers un emplacement.";
+  status.textContent = levelCopy.statusReady;
   status.className = "puzzle-status";
-  systemMessage.textContent = systemMessages[language].input;
+  nextLevelButton.hidden = true;
+  systemMessage.textContent = systemMessages.input;
+  systemTransmission.classList.remove("success");
   updateProgress();
 }
 
@@ -193,9 +237,18 @@ saveGameButton.addEventListener("click", () => {
     currentLevel: currentLevel,
     completedLevels: [...completedLevels].sort((a, b) => a - b),
   });
-  saveGameButton.textContent = "SAUVEGARDÉ";
+  saveGameButton.textContent = language === "en" ? "SAVED" : "SAUVEGARDÉ";
+});
+
+nextLevelButton.addEventListener("click", () => {
+  window.EchoesSave.saveProgress({
+    currentPage: "level-2",
+    currentLevel: 2,
+    completedLevels: [...completedLevels].sort((a, b) => a - b),
+  });
+  window.location.href = "niveau-02.html";
 });
 shufflePieces();
-systemMessage.textContent = systemMessages[language].input;
+systemMessage.textContent = systemMessages.input;
 updateProgress();
 renderProgress();

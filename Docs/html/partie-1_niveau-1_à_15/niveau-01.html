@@ -19,13 +19,13 @@
     <header class="level-header">
       <a class="brand" href="../../../../index.html">ECHOES</a>
       <div class="level-meta">
-        <span>PARTIE 1 // INITIATION</span>
+        <span data-i18n="part">PARTIE 1 // INITIATION</span>
         <div
           class="level-progress"
           id="levelProgress"
           aria-label="Progression des niveaux 1 à 15"
         ></div>
-        <strong>NIVEAU 01</strong>
+        <strong data-i18n="level">NIVEAU 01</strong>
       </div>
       <button class="save-game-button" id="saveGameButton" type="button">
         SAUVEGARDER
@@ -39,18 +39,20 @@
       data-level-end="15"
     >
       <section class="level-intro" aria-labelledby="levelTitle">
-        <p class="eyebrow">Fragment 001 // Géométrie primaire</p>
-        <h1 id="levelTitle">Alignement primaire</h1>
-        <p class="level-description">
+        <p class="eyebrow" data-i18n="eyebrow">
+          Fragment 001 // Géométrie primaire
+        </p>
+        <h1 id="levelTitle" data-i18n="title">Alignement primaire</h1>
+        <p class="level-description" data-i18n="description">
           Trois formes flottent dans le premier fragment de réalité. Aligne-les
           sur la ligne holographique pour stabiliser le signal.
         </p>
 
         <div class="system-transmission" aria-live="polite">
-          <span class="system-label">SYSTEM://LOG</span>
+          <span class="system-label" data-i18n="systemLabel">SYSTEM://LOG</span>
           <p id="systemMessage">
-            SYSTEM:: INPUT REQUIRED // 3 GEOMETRIC FRAGMENTS DETECTED //
-            ALIGNMENT PROTOCOL READY
+            SYSTEME:: ENTREE REQUISE // 3 FRAGMENTS DETECTES // ORDRE CIBLES:
+            CERCLE &gt; TRIANGLE &gt; LOSANGE
           </p>
         </div>
       </section>
@@ -58,15 +60,23 @@
       <section class="puzzle-panel" aria-labelledby="puzzleTitle">
         <div class="panel-heading">
           <div>
-            <p class="panel-kicker">PUZZLE // ALIGNEMENT</p>
-            <h2 id="puzzleTitle">Résonance géométrique</h2>
+            <p class="panel-kicker" data-i18n="puzzleKicker">
+              PUZZLE // ALIGNEMENT
+            </p>
+            <h2 id="puzzleTitle" data-i18n="puzzleTitle">
+              Résonance géométrique
+            </h2>
           </div>
           <span class="progress-readout" id="progressReadout">0 / 3</span>
         </div>
 
         <div class="puzzle-board" id="puzzleBoard">
           <div class="target-line" aria-hidden="true"></div>
-          <div class="target-slots" aria-label="Emplacements des formes">
+          <div
+            class="target-slots"
+            data-i18n-aria="slots"
+            aria-label="Emplacements des formes"
+          >
             <button
               class="target-slot"
               type="button"
@@ -86,7 +96,12 @@
               aria-label="Emplacement 3"
             ></button>
           </div>
-          <div class="piece-tray" id="pieceTray" aria-label="Formes à aligner">
+          <div
+            class="piece-tray"
+            id="pieceTray"
+            data-i18n-aria="trayAria"
+            aria-label="Formes à aligner"
+          >
             <button
               class="puzzle-piece piece-triangle"
               type="button"
@@ -115,6 +130,14 @@
           <p class="puzzle-status" id="puzzleStatus">
             Sélectionne une forme ou fais-la glisser vers un emplacement.
           </p>
+          <button
+            class="next-level-button"
+            id="nextLevelButton"
+            type="button"
+            hidden
+          >
+            CONTINUER VERS LE NIVEAU 2
+          </button>
           <button class="reset-button" id="resetButton" type="button">
             Réinitialiser
           </button>
@@ -123,11 +146,12 @@
     </main>
 
     <footer class="level-footer">
-      <span>ÉCHO // INITIATION ACTIVE</span>
-      <span>1 / 90</span>
+      <span data-i18n="footer">ÉCHO // INITIATION ACTIVE</span>
+      <span data-i18n="counter">1 / 90</span>
     </footer>
 
+    <script src="../../js/translations.js"></script>
     <script src="../../js/save-system.js"></script>
-    <script src="../../js/partie-1_niveau-1_à_15.js?v=3"></script>
+    <script src="../../js/partie-1_niveau-1_à_15.js?v=6"></script>
   </body>
 </html>

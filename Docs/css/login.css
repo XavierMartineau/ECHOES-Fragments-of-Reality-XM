@@ -95,6 +95,12 @@ body {
     inset 0 0 30px rgba(121, 247, 255, 0.04);
   backdrop-filter: blur(14px);
 }
+@media (min-width: 701px) {
+  .login-card {
+    width: min(680px, calc(100vw - 80px));
+    padding: clamp(42px, 5vw, 66px);
+  }
+}
 .login-kicker {
   margin: 0 0 14px;
   color: var(--login-cyan);
@@ -218,6 +224,16 @@ input:focus {
 .save-actions button:last-child {
   border-color: var(--login-violet);
   background: rgba(179, 108, 255, 0.13);
+}
+.delete-save-button {
+  border-color: rgba(255, 104, 132, 0.7) !important;
+  background: rgba(255, 45, 83, 0.08) !important;
+  color: #ffb6c3 !important;
+}
+.delete-save-button:hover,
+.delete-save-button:focus-visible {
+  background: rgba(255, 45, 83, 0.2) !important;
+  box-shadow: 0 0 18px rgba(255, 45, 83, 0.25);
 }
 [hidden] {
   display: none !important;

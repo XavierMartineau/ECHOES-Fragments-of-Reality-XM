@@ -64,6 +64,12 @@ window.EchoesSave = (() => {
     return true;
   }
 
+  function deleteSave(username = getCurrentUser()) {
+    if (!username) return false;
+    localStorage.removeItem(keyFor(savePrefix, username));
+    return true;
+  }
+
   function startNewGame(username = getCurrentUser()) {
     return saveProgress(
       {
@@ -85,6 +91,7 @@ window.EchoesSave = (() => {
     getSave,
     loginOrCreate,
     saveProgress,
+    deleteSave,
     startNewGame,
     logout,
   };
