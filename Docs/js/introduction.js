@@ -13,6 +13,7 @@ let currentLanguage = localStorage.getItem("echoes-language") || "fr";
 let dialogueMessages = [];
 let spectrumActivity = 0;
 let targetSpectrumActivity = 0;
+let dialogueScrollFrame = 0;
 let spectrumGlitch = 0;
 let targetSpectrumGlitch = 0;
 
@@ -152,6 +153,19 @@ function drawSpectrum(timestamp) {
       );
       spectrumContext.stroke();
     }
+
+    for (let glitchBarIndex = 0; glitchBarIndex < 5; glitchBarIndex += 1) {
+      const glitchWave = Math.sin(time * 24 + glitchBarIndex * 2.7);
+      const glitchY = (glitchWave * 0.42 + 0.5) * spectrumSize - center;
+      const glitchWidth = spectrumSize * (0.16 + Math.abs(glitchWave) * 0.28);
+      spectrumContext.fillStyle = `rgba(255, 45, 83, ${spectrumGlitch * 0.28})`;
+      spectrumContext.fillRect(
+        -glitchWidth / 2 + glitchWave * spectrumSize * 0.14,
+        glitchY,
+        glitchWidth,
+        1 + Math.abs(glitchWave) * 2,
+      );
+    }
   }
 
   spectrumContext.restore();
@@ -164,7 +178,21 @@ function setSpectrumActivity(isEchoSpeaking, isGlitching = false) {
 }
 
 function keepDialogueInView() {
-  dialogueShell.scrollIntoView({ behavior: "smooth", block: "center" });
+  if (dialogueScrollFrame) return;
+  dialogueScrollFrame = window.requestAnimationFrame(() => {
+    const activeLine = dialogueText.lastElementChild;
+    if (activeLine) {
+      const bottomSpace = 140;
+      const lineBottom = activeLine.getBoundingClientRect().bottom + window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const targetScroll = Math.min(
+        maxScroll,
+        Math.max(0, lineBottom - window.innerHeight + bottomSpace),
+      );
+      window.scrollTo({ top: targetScroll, behavior: "auto" });
+    }
+    dialogueScrollFrame = 0;
+  });
 }
 
 function typeMessage(messageIndex = 0) {
@@ -190,6 +218,9 @@ function typeMessage(messageIndex = 0) {
   let characterIndex = 0;
 
   line.className = "dialogue-line";
+  if (message.className.includes("system")) {
+    line.classList.add("system-line");
+  }
   if (message.glitch) {
     line.classList.add("glitch-line");
     dialogueShell.classList.add("is-glitching");
@@ -209,6 +240,7 @@ function typeMessage(messageIndex = 0) {
   function typeCharacter() {
     text.textContent += message.text[characterIndex];
     characterIndex += 1;
+    keepDialogueInView();
 
     if (characterIndex < message.text.length) {
       window.setTimeout(typeCharacter, 24);

@@ -279,6 +279,34 @@ body::before {
     -2px 0 0 rgba(121, 247, 255, 0.65);
   animation: core-failure 0.34s steps(2, end) infinite;
 }
+.simulation-failure .spectrum-label::before,
+.simulation-failure .spectrum-label::after {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: inherit;
+  content: "ECHO";
+  pointer-events: none;
+  font: inherit;
+  letter-spacing: inherit;
+}
+.simulation-failure .spectrum-label::before {
+  color: rgba(255, 45, 83, 0.8);
+  clip-path: inset(16% 0 58% 0);
+  transform: translateX(3px);
+  animation: label-glitch-red 0.28s steps(2, end) infinite;
+}
+.simulation-failure .spectrum-label::after {
+  color: rgba(121, 247, 255, 0.75);
+  clip-path: inset(61% 0 12% 0);
+  transform: translateX(-3px);
+  animation: label-glitch-cyan 0.24s steps(2, end) infinite reverse;
+}
+.simulation-failure .spectrum-canvas {
+  filter: drop-shadow(0 0 12px rgba(255, 45, 83, 0.72)) saturate(1.35);
+  animation: canvas-glitch 0.3s steps(2, end) infinite;
+}
 
 .ai-stage::before,
 .ai-stage::after {
@@ -491,8 +519,9 @@ body::before {
   display: block;
   color: var(--cyan);
   font-family: "Orbitron", sans-serif;
-  font-size: clamp(0.7rem, 1.4vw, 0.86rem);
-  letter-spacing: 0.12rem;
+  font-size: clamp(0.82rem, 1.7vw, 1.05rem);
+  font-weight: 600;
+  letter-spacing: 0.1rem;
   text-align: center;
   text-shadow: 0 0 12px rgba(121, 247, 255, 0.55);
   animation: placeholder-pulse 1.8s ease-in-out infinite;
@@ -522,6 +551,21 @@ body::before {
 .speaker.traveler {
   color: #d7b6ff;
   text-shadow: 0 0 8px rgba(179, 108, 255, 0.4);
+}
+.speaker.system {
+  color: var(--success, #80ffcf);
+  text-shadow: 0 0 8px rgba(128, 255, 207, 0.45);
+}
+.system-line {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(128, 255, 207, 0.28);
+  font-family: "Space Mono", monospace;
+  font-size: 0.82em;
+  letter-spacing: 0.02rem;
+}
+.system-line .dialogue-line-text {
+  color: #caffeb;
 }
 .dialogue-line-text {
   color: var(--text);
@@ -808,6 +852,38 @@ body::before {
     clip-path: inset(58% 0 8% 0);
   }
 }
+@keyframes label-glitch-red {
+  0%,
+  100% {
+    clip-path: inset(16% 0 58% 0);
+  }
+  50% {
+    clip-path: inset(35% 0 38% 0);
+    transform: translateX(5px);
+  }
+}
+@keyframes label-glitch-cyan {
+  0%,
+  100% {
+    clip-path: inset(61% 0 12% 0);
+  }
+  50% {
+    clip-path: inset(72% 0 4% 0);
+    transform: translateX(-5px);
+  }
+}
+@keyframes canvas-glitch {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  45% {
+    transform: translate(1px, -1px);
+  }
+  70% {
+    transform: translate(-2px, 1px);
+  }
+}
 @keyframes pulse {
   0%,
   100% {
@@ -828,14 +904,18 @@ body::before {
     padding-bottom: 150px;
   }
   .ai-stage {
-    width: min(290px, 42vw);
-    margin: 28px 0 22px;
+    width: min(270px, 38vw);
+    margin: 24px 0 18px;
   }
   .dialogue-shell {
     width: min(700px, calc(100% - 24px));
   }
   .dialogue-body {
     min-height: 140px;
+    font-size: 1.05rem;
+  }
+  .dialogue-line-text {
+    overflow-wrap: anywhere;
   }
   .site-footer {
     bottom: 38px;
@@ -875,11 +955,25 @@ body::before {
     padding-bottom: 160px;
     padding-inline: 14px;
   }
+  .intro-title {
+    letter-spacing: 0.1em;
+  }
+  .intro-subtitle {
+    letter-spacing: 0.18rem;
+  }
+  .eyebrow {
+    letter-spacing: 0.1rem;
+  }
   .ai-stage {
-    width: min(330px, 80vw);
-    margin-top: 34px;
+    width: min(270px, 72vw);
+    margin: 24px 0 22px;
+  }
+  .dialogue-shell {
+    width: 100%;
   }
   .dialogue-head {
+    flex-direction: column;
+    gap: 5px;
     font-size: 0.52rem;
   }
   .dialogue-body {
@@ -892,9 +986,13 @@ body::before {
     gap: 3px;
     margin-bottom: 13px;
   }
+  .dialogue-line-text {
+    overflow-wrap: anywhere;
+  }
   .dialogue-placeholder {
-    font-size: 0.62rem;
-    letter-spacing: 0.07rem;
+    font-size: 0.76rem;
+    letter-spacing: 0.055rem;
+    line-height: 1.4;
   }
   .dialogue-hint {
     padding: 0 17px 13px;

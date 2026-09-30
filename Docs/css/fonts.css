@@ -61,11 +61,30 @@ select {
   font-size: var(--font-size-copy);
 }
 
+.dialogue-placeholder {
+  font-size: clamp(0.82rem, 1.7vw, 1.05rem);
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+}
+
 .eyebrow,
 .label,
 .code,
-.dialogue-placeholder,
 .dialogue-hint,
 .mission-objective {
   font-size: var(--font-size-label);
+}
+
+.dialogue-placeholder {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+}
+
+@media (max-width: 650px) {
+  .dialogue-placeholder {
+    font-size: 0.9rem;
+    letter-spacing: 0.045rem;
+    line-height: 1.4;
+  }
 }
