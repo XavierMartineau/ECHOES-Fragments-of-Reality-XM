@@ -44,14 +44,6 @@ Ce document sert à suivre l’avancement du projet et à noter l’état de cha
 - Vérification de l’affichage sur plusieurs tailles d’écran
 - Lancement et validation du projet sur le Live Server local
 
-## Template de suivi
-
-- [ ] Étape suivante :
-- [ ] Vérification visuelle :
-- [ ] Vérification fonctionnelle :
-- [ ] Fichiers modifiés :
-- [ ] Commentaire :
-
 ## Note
 
 À remplir à chaque modification importante pour garder une trace claire de l’avancement du projet.
