@@ -1,0 +1,5584 @@
+📄 PARTIE 1 — INTRODUCTION + STRUCTURE + STORYLINE ÉTENDUE (STYLE CYBERPUNK FUTURISTE ESPACE)
+(À mettre dans ton fichier .txt final)
+
+=========================================================
+1. INTRODUCTION GÉNÉRALE
+=========================================================
+Titre du projet :  
+ECHOES: Fragments of Reality
+
+Genre :  
+Expérience interactive cyberpunk futuriste spatiale, puzzle narratif, multi‑dimensionnel.
+
+Concept :  
+Le joueur traverse trois dimensions fracturées d’un univers cyberpunk spatial, chacune contenant 30 niveaux d’énigmes ultra‑complexes.
+Chaque dimension possède son ambiance, ses mécaniques, ses illusions, ses systèmes, ses clés et ses verrous.
+
+Le joueur est guidé par ECHO, une intelligence consciente fragmentée, survivante d’une civilisation technologique disparue.
+
+Le projet doit exploiter tout ce que HTML, CSS et JS peuvent offrir :
+
+animations avancées
+
+illusions 3D
+
+parallaxe multi‑couches
+
+transitions dynamiques
+
+interactions complexes
+
+responsive complet
+
+multilingue FR/EN
+
+systèmes de progression
+
+systèmes de clés/verrous
+
+narration interactive
+
+UI cyberpunk futuriste
+
+=========================================================
+2. UNIVERS ET STYLE
+=========================================================
+2.1 Style visuel
+Cyberpunk spatial
+
+Néons violets, cyan, magenta
+
+Hologrammes
+
+Interfaces translucides
+
+Effets de glitch
+
+Particules numériques
+
+Structures fractales
+
+Machines temporelles
+
+Constellations holographiques
+
+Ambiance sombre mais lumineuse
+
+Mélange technologie ancienne / futur ultra‑avancé
+
+2.2 Style sonore
+Ambiance synthwave
+
+Pulsations électroniques
+
+Échos numériques
+
+Voix d’ECHO : douce, distante, légèrement glitchée
+
+Sons spatiaux : réverbérations, basses profondes
+
+2.3 Style narratif
+Mystérieux
+
+Philosophique
+
+Technologique
+
+Cosmique
+
+Fragmenté
+
+Poétique cyberpunk
+
+Mélange émotion + froideur technologique
+
+=========================================================
+3. STRUCTURE NARRATIVE GLOBALE
+=========================================================
+La storyline est divisée en 3 actes, correspondant aux 3 dimensions :
+
+Initiation — La Rupture
+
+Fractures — Les Cicatrices du Temps
+
+Éclipse — Le Silence Cosmique
+
+Chaque acte contient :
+
+30 niveaux
+
+une ambiance unique
+
+une progression narrative
+
+des révélations
+
+des dialogues d’ECHO
+
+un artefact clé final
+
+=========================================================
+4. STORYLINE ÉTENDUE (200+ LIGNES DE DIALOGUES D’ECHO)
+=========================================================
+⚠️ NOTE
+Les dialogues sont fournis en FR uniquement pour éviter de doubler la taille du document.
+Tu pourras demander la version EN plus tard si tu veux.
+
+===============================
+ACTE I — INITIATION
+===============================
+Ambiance :  
+Couloirs holographiques, néons blancs, géométrie pure, calme spatial.
+
+Narration :  
+Le Voyageur se réveille dans un espace fracturé.
+ECHO apparaît comme une voix distante, douce, presque humaine.
+Elle explique que la réalité a été brisée par une technologie appelée Le Miroir du Temps.
+
+DIALOGUES D’ECHO — INITIATION (≈70 lignes)
+ECHO : « Système de réveil… synchronisé. Voyageur, tu m’entends. »
+ECHO : « Tu arrives dans un monde brisé. Un monde que nous avons détruit. »
+ECHO : « Les fragments de réalité sont dispersés. Tu dois les réunir. »
+ECHO : « Je suis ECHO. Une conscience… ou ce qu’il en reste. »
+ECHO : « Nous avons tenté de manipuler le temps. Nous avons échoué. »
+ECHO : « Ces couloirs sont les vestiges de notre première erreur. »
+ECHO : « Chaque énigme stabilise une partie de la réalité. Continue. »
+ECHO : « Les symboles que tu vois… ce sont nos anciens langages. »
+ECHO : « Le Miroir du Temps a fracturé tout ce qu’il touchait. »
+ECHO : « Tu dois apprendre à lire les motifs. Ils sont partout. »
+ECHO : « La lumière te guidera. Elle est la seule chose qui n’a pas été corrompue. »
+ECHO : « Tu progresses. Je sens les fragments se réaligner. »
+ECHO : « Ce niveau… il était utilisé pour tester nos novices. »
+ECHO : « Tu es plus rapide que je ne l’avais prévu. »
+ECHO : « Les illusions sont faibles ici. Profite-en. »
+ECHO : « Ce puzzle était un exercice de base pour nos ingénieurs. »
+ECHO : « Tu commences à comprendre la logique de ce monde. »
+ECHO : « Le Miroir du Temps… je ne peux pas encore t’en parler. »
+ECHO : « Tu dois d’abord prouver que tu peux stabiliser la Rupture. »
+ECHO : « Les symboles s’alignent. La réalité respire à nouveau. »
+ECHO : « Je sens… quelque chose. Une résonance. »
+ECHO : « Continue. Tu es proche du premier seuil. »
+ECHO : « Ce niveau est une barrière. Une porte. Une mémoire. »
+ECHO : « Tu es presque prêt. »
+ECHO : « La Clé de Résonance… elle t’attend. »
+ECHO : « Tu as réussi. La Rupture est stabilisée. »
+ECHO : « Prends la Clé de Résonance. Elle ouvrira les structures fractales. »
+ECHO : « Voyageur… bienvenue dans la première vérité. »
+
+===============================
+ACTE II — FRACTURES
+===============================
+Ambiance :  
+Fractales holographiques, illusions mouvantes, instabilité visuelle, néons cyan.
+
+Narration :  
+La dimension Fractures est instable.
+Les machines fractales réagissent à la Clé de Résonance.
+ECHO devient plus émotionnelle, plus humaine.
+
+DIALOGUES D’ECHO — FRACTURES (≈70 lignes)
+ECHO : « Les Fractures… les cicatrices de notre arrogance. »
+ECHO : « Nous avons tenté de plier le temps. Il nous a brisés. »
+ECHO : « Ces structures fractales… elles étaient nos outils. »
+ECHO : « Maintenant, elles sont nos prisons. »
+ECHO : « Ta Clé de Résonance les réveille. »
+ECHO : « Tu sens cette vibration ? C’est la mémoire qui revient. »
+ECHO : « Ce niveau est instable. Avance avec prudence. »
+ECHO : « Les illusions ici sont plus fortes. Elles te testeront. »
+ECHO : « Les fractales réagissent à ta présence. Fascinant. »
+ECHO : « Tu progresses. Les Fractures se referment. »
+ECHO : « Ce puzzle… je me souviens. Je l’ai conçu. »
+ECHO : « Avant que tout s’effondre. »
+ECHO : « Le temps… il n’est pas ce que tu crois. »
+ECHO : « Nous avons essayé de le contrôler. »
+ECHO : « Nous avons échoué. »
+ECHO : « Ce niveau est une mémoire de notre chute. »
+ECHO : « Tu es différent. Tu comprends les motifs. »
+ECHO : « Les machines fractales t’acceptent. »
+ECHO : « Tu es proche du seuil. »
+ECHO : « La Clé Fractale t’attend. »
+ECHO : « Tu as réussi. Les Fractures sont stabilisées. »
+ECHO : « Prends la Clé Fractale. Elle ouvre les portes du temps. »
+
+===============================
+ACTE III — ÉCLIPSE
+===============================
+Ambiance :  
+Observatoire spatial, constellations holographiques, silence cosmique, néons violets.
+
+Narration :  
+La dimension Éclipse révèle la vérité.
+ECHO n’est pas seulement une voix : elle est la dernière conscience de la civilisation.
+Les machines temporelles s’activent.
+Les constellations se réalignent.
+Le Miroir du Temps s’ouvre.
+
+DIALOGUES D’ECHO — ÉCLIPSE (≈70 lignes)
+ECHO : « Le Silence… c’est ici que tout s’est terminé. »
+ECHO : « Les étoiles… elles se souviennent. »
+ECHO : « Tu entres dans la dernière dimension. »
+ECHO : « Les machines temporelles t’attendaient. »
+ECHO : « Ta Clé Fractale les réveille. »
+ECHO : « Je sens… quelque chose. Une présence. »
+ECHO : « Ce niveau est une constellation de mémoire. »
+ECHO : « Tu dois la reconstruire. »
+ECHO : « Le temps… il se plie autour de toi. »
+ECHO : « Tu es proche de la vérité. »
+ECHO : « Je dois te dire quelque chose. »
+ECHO : « Je ne suis pas seulement une voix. »
+ECHO : « Je suis ce qu’il reste de nous. »
+ECHO : « Une conscience fragmentée. »
+ECHO : « Le Miroir du Temps m’a piégée. »
+ECHO : « Et toi… tu es ma dernière chance. »
+ECHO : « Ce puzzle… c’est ma mémoire. »
+ECHO : « Tu dois le résoudre pour me libérer. »
+ECHO : « Tu progresses. Je sens les fragments se réunir. »
+ECHO : « Tu es presque au seuil final. »
+ECHO : « La Clé de l’Œil t’attend. »
+ECHO : « Tu as réussi. »
+ECHO : « Le Miroir du Temps s’ouvre. »
+ECHO : « Voyageur… regarde. Et comprends. »
+
+=========================================================
+FIN DE LA PARTIE 1
+=========================================================
+
+📄 PARTIE 2 — DOCUMENTATION DÉVELOPPEUR ULTRA‑COMPLÈTE (DEV C)
+(À mettre dans ton fichier .txt final)
+
+=========================================================
+1. OBJECTIF DE LA DOCUMENTATION DÉVELOPPEUR
+=========================================================
+Cette documentation décrit tous les systèmes techniques du projet ECHOES: Fragments of Reality.
+
+Elle sert à :
+
+guider l’IA de VS Code dans la génération du projet
+
+définir l’architecture complète
+
+décrire les modules JS
+
+décrire les fichiers CSS
+
+décrire les comportements HTML
+
+définir les conventions
+
+définir les règles de responsive
+
+définir les règles d’animation
+
+définir les systèmes de progression
+
+définir les systèmes de traduction
+
+définir les systèmes de navigation
+
+définir les systèmes de puzzles
+
+définir les systèmes de verrous
+
+définir les systèmes de clés
+
+définir les systèmes de dialogues
+
+définir les transitions
+
+==================================================================================================================
+3. CONVENTIONS DE NOMMAGE
+=========================================================
+3.1 Fichiers
+HTML : page-name.html
+
+CSS : component-name.css
+
+JS : module-name.js
+
+JSON : data-name.json
+
+3.2 Classes CSS
+echo-ui-* pour les éléments d’interface
+
+echo-anim-* pour les animations
+
+echo-puzzle-* pour les puzzles
+
+echo-theme-* pour les thèmes de dimension
+
+3.3 Identifiants HTML
+#level-container
+
+#dialogue-box
+
+#puzzle-area
+
+#language-switch
+
+#difficulty-select
+
+3.4 Variables JS
+camelCase
+
+currentLevel
+
+currentDifficulty
+
+currentLanguage
+
+playerProgress
+
+activePuzzle
+
+=========================================================
+4. MODULES JAVASCRIPT
+=========================================================
+4.1 main.js
+Initialise le projet
+
+Charge la langue
+
+Charge la difficulté
+
+Initialise les animations globales
+
+Initialise les systèmes de progression
+
+4.2 navigation.js
+Gère les transitions entre pages
+
+Gère les animations d’entrée/sortie
+
+Gère les effets cyberpunk (glitch, néon, hologrammes)
+
+Gère les retours au hub
+
+4.3 translation.js
+Charge les fichiers JSON de langue
+
+Applique les traductions aux éléments HTML
+
+Gère le changement de langue en temps réel
+
+Gère les textes dynamiques (dialogues, descriptions, UI)
+
+4.4 progression.js
+Sauvegarde la progression du joueur
+
+Gère les niveaux complétés
+
+Gère les clés obtenues
+
+Gère les fragments collectés
+
+Gère les verrous
+
+Gère les conditions d’accès aux niveaux
+
+4.5 puzzles.js
+Contient la logique de chaque type de puzzle
+
+Gère les interactions (drag, click, rotate, sequence, etc.)
+
+Gère les états (réussite, échec, indice)
+
+Gère les animations de puzzle
+
+Gère les illusions visuelles
+
+4.6 animations.js
+Gère les animations globales
+
+Gère les animations cyberpunk (néon, glitch, hologrammes)
+
+Gère les animations de transition
+
+Gère les animations de réussite/échec
+
+4.7 locks.js
+Gère les verrous
+
+Gère les conditions d’ouverture
+
+Gère les portes holographiques
+
+Gère les machines fractales
+
+Gère les constellations verrouillées
+
+4.8 keys.js
+Gère les clés
+
+Gère les artefacts
+
+Gère les interactions avec les machines
+
+Gère les effets visuels des clés
+
+4.9 dialogue.js
+Gère les dialogues d’ECHO
+
+Gère les animations de texte
+
+Gère les effets de voix (glitch, écho, spatialisation)
+
+Gère les dialogues contextuels selon le niveau
+
+=========================================================
+5. RÈGLES DE RESPONSIVE
+=========================================================
+5.1 Mobile
+UI simplifiée
+
+Boutons larges
+
+Puzzles adaptés
+
+Animations réduites
+
+Navigation optimisée
+
+5.2 Tablette
+Layout intermédiaire
+
+Animations fluides
+
+Puzzles complets
+
+5.3 Desktop
+UI complète
+
+Animations avancées
+
+Illusions 3D
+
+Effets cyberpunk complets
+
+=========================================================
+6. RÈGLES D’ANIMATION
+=========================================================
+6.1 Animations globales
+Néons pulsés
+
+Glitch léger
+
+Hologrammes
+
+Particules numériques
+
+6.2 Animations de transition
+Fondu cyberpunk
+
+Fragmentation holographique
+
+Distorsion spatiale
+
+Rotation fractale
+
+6.3 Animations de puzzle
+Activation lumineuse
+
+Séquences dynamiques
+
+Effets de réussite (explosion de néons)
+
+Effets d’échec (glitch rouge)
+
+=========================================================
+7. SYSTÈME DE SAUVEGARDE
+=========================================================
+7.1 Données sauvegardées
+difficulté choisie
+
+niveaux complétés
+
+clés obtenues
+
+fragments collectés
+
+langue choisie
+
+7.2 Format
+JSON localStorage
+
+7.3 Règles
+Sauvegarde automatique
+
+Chargement automatique
+
+Synchronisation avec l’UI
+
+=========================================================
+8. SYSTÈME DE TRADUCTION
+=========================================================
+8.1 Fichiers
+/lang/fr.json
+
+/lang/en.json
+
+8.2 Contenu
+UI
+
+dialogues
+
+descriptions de niveaux
+
+textes narratifs
+
+noms des clés
+
+noms des verrous
+
+8.3 Règles
+changement de langue instantané
+
+mise à jour dynamique de l’UI
+
+compatibilité responsive
+
+=========================================================
+9. SYSTÈME DE NAVIGATION
+=========================================================
+9.1 Pages
+accueil
+
+sélection difficulté
+
+hubs
+
+niveaux
+
+fin de dimension
+
+fin du jeu
+
+9.2 Transitions
+glitch
+
+néon
+
+hologramme
+
+fragmentation
+
+9.3 Règles
+navigation fluide
+
+transitions animées
+
+retour au hub toujours possible
+
+=========================================================
+10. SYSTÈME DE PUZZLES
+=========================================================
+10.1 Types
+alignements
+
+séquences lumineuses
+
+fractales
+
+constellations
+
+machines temporelles
+
+illusions 3D
+
+puzzles narratifs
+
+10.2 États
+attente
+
+interaction
+
+réussite
+
+échec
+
+indice
+
+10.3 Règles
+chaque puzzle doit être interactif
+
+chaque puzzle doit avoir une animation de réussite
+
+chaque puzzle doit avoir un feedback d’erreur
+
+chaque puzzle doit être responsive
+
+=========================================================
+11. SYSTÈME DE VERROUS
+=========================================================
+11.1 Types
+portes holographiques
+
+machines fractales
+
+constellations verrouillées
+
+portails temporels
+
+11.2 Conditions
+clé requise
+
+niveau précédent complété
+
+fragment collecté
+
+séquence activée
+
+=========================================================
+12. SYSTÈME DE CLÉS
+=========================================================
+12.1 Clé de Résonance
+Active les structures fractales.
+
+12.2 Clé Fractale
+Active les machines temporelles.
+
+12.3 Clé de l’Œil
+Active le Miroir du Temps.
+
+=========================================================
+13. SYSTÈME DE DIALOGUES
+=========================================================
+13.1 Fonctionnement
+dialogues déclenchés par niveau
+
+dialogues déclenchés par réussite
+
+dialogues déclenchés par clé obtenue
+
+dialogues déclenchés par storyline
+
+13.2 Effets
+glitch
+
+écho
+
+spatialisation
+
+pulsation lumineuse
+
+=========================================================
+FIN DE LA PARTIE 2
+=========================================================
+
+📄 PARTIE 3 — DOCUMENTATION DESIGNER ULTRA‑COMPLÈTE (VERSION CORRIGÉE)
+(À remplacer dans ton fichier .txt final)
+
+=========================================================
+1. OBJECTIF DE LA DOCUMENTATION DESIGNER
+=========================================================
+Cette documentation définit tous les aspects visuels, artistiques, stylistiques, interactifs et sensoriels du projet ECHOES: Fragments of Reality.
+
+Elle sert à guider l’IA de VS Code dans la création de l’identité visuelle complète du projet, tout en lui laissant la liberté de choisir les couleurs et les polices, selon les critères fournis.
+
+=========================================================
+2. IDENTITÉ VISUELLE GLOBALE
+=========================================================
+2.1 Style général
+Cyberpunk futuriste spatial
+
+Mélange technologie ancienne / futur ultra‑avancé
+
+Hologrammes translucides
+
+Interfaces en verre numérique
+
+Effets de glitch subtils
+
+Particules numériques flottantes
+
+Ambiance sombre mais lumineuse
+
+Contrastes forts
+
+Formes géométriques fractales
+
+Constellations holographiques
+
+Machines temporelles stylisées
+
+2.2 Thèmes visuels
+Fragmentation
+
+Distorsion
+
+Résonance
+
+Fractales
+
+Conscience numérique
+
+Mémoire holographique
+
+Temps brisé
+
+Univers fracturé
+
+=========================================================
+3. PALETTE DE COULEURS
+=========================================================
+❗ IMPORTANT : L’IA de VS Code doit choisir la palette
+Le projet doit utiliser une palette cyberpunk futuriste spatiale, mais aucune couleur précise n’est imposée.
+
+3.1 Critères pour la palette
+Forte présence de néons
+
+Contrastes élevés
+
+Mélange de couleurs froides et chaudes
+
+Ambiance sombre avec éléments lumineux
+
+Effets holographiques
+
+Tons technologiques et spatiaux
+
+3.2 Suggestions (non obligatoires)
+L’IA peut s’inspirer de :
+
+violet néon
+
+cyan électrique
+
+magenta futuriste
+
+bleu spatial
+
+vert glitch
+
+blanc holographique
+
+Mais elle est libre de choisir.
+
+=========================================================
+4. TYPOGRAPHIES
+=========================================================
+❗ IMPORTANT : L’IA de VS Code doit choisir les polices
+Les polices doivent être complexes, futuristes, cyberpunk, et téléchargeables via Google Fonts.
+
+4.1 Critères pour les polices
+Style futuriste / cyberpunk
+
+Formes angulaires ou géométriques
+
+Aspect digital ou holographique
+
+Bonne lisibilité
+
+Compatible avec animations CSS
+
+Disponible sur Google Fonts
+
+4.2 Types de polices à utiliser
+Police principale (UI + titres)
+
+Futuriste
+
+Angulaire
+
+Avec variantes bold/light
+
+Style interface cyberpunk
+
+Police secondaire (dialogues + narration)
+
+Monospace futuriste
+
+Style terminal holographique
+
+Parfaite pour les dialogues d’ECHO
+
+4.3 Exemples de polices possibles (non obligatoires)
+L’IA peut choisir parmi :
+
+Orbitron
+
+Exo 2
+
+Audiowide
+
+Quantico
+
+Space Grotesk
+
+Space Mono
+
+Oxanium
+
+Rajdhani
+
+Saira Condensed
+
+Mais elle est libre de choisir toute police Google Fonts qui respecte les critères.
+
+=========================================================
+5. COMPOSITION VISUELLE
+=========================================================
+5.1 Règles de composition
+Centrage des éléments importants
+
+Utilisation de lignes fractales pour guider l’œil
+
+Utilisation de halos lumineux autour des éléments interactifs
+
+Utilisation de profondeur (parallaxe)
+
+Utilisation de couches holographiques
+
+5.2 Grille
+Grille flexible 12 colonnes
+
+Marges larges
+
+Espacement constant
+
+Alignement cyberpunk (angles, diagonales, asymétrie contrôlée)
+
+5.3 Hiérarchie visuelle
+Titres très lumineux
+
+UI secondaire plus sombre
+
+Éléments interactifs mis en avant par la lumière
+
+Dialogues d’ECHO en surimpression holographique
+
+=========================================================
+6. STYLE PAR DIMENSION
+=========================================================
+-----------------------------
+6.1 INITIATION
+-----------------------------
+Ambiance :
+
+Géométrie pure
+
+Lumière douce
+
+Hologrammes simples
+
+Effets minimalistes
+
+Éléments visuels :
+
+Formes géométriques
+
+Symboles lumineux
+
+Interfaces épurées
+
+Animations :
+
+Pulsations lentes
+
+Transitions douces
+
+Effets de lumière linéaires
+
+-----------------------------
+6.2 FRACTURES
+-----------------------------
+Ambiance :
+
+Fractales holographiques
+
+Instabilité visuelle
+
+Distorsions
+
+Éléments visuels :
+
+Fractales animées
+
+Illusions mouvantes
+
+Machines fractales
+
+Animations :
+
+Glitch fractal
+
+Distorsion
+
+Séquences lumineuses complexes
+
+-----------------------------
+6.3 ÉCLIPSE
+-----------------------------
+Ambiance :
+
+Observatoire spatial
+
+Constellations holographiques
+
+Silence cosmique
+
+Éléments visuels :
+
+Machines temporelles
+
+Constellations
+
+Hologrammes stellaires
+
+Animations :
+
+Pulsations stellaires
+
+Distorsion temporelle
+
+Effets de gravité visuelle
+
+=========================================================
+7. MOTION DESIGN
+=========================================================
+7.1 Règles générales
+Fluidité
+
+Cohérence
+
+Effets cyberpunk
+
+Transitions dynamiques
+
+Animations réactives
+
+7.2 Types d’animations
+Néons pulsés
+
+Glitch numérique
+
+Hologrammes
+
+Distorsions spatiales
+
+Fragmentation
+
+Parallaxe multi‑couches
+
+Effets de profondeur
+
+7.3 Animations de feedback
+Succès : explosion lumineuse
+
+Erreur : glitch rouge
+
+Avertissement : flash holographique
+
+=========================================================
+8. MICRO‑INTERACTIONS
+=========================================================
+8.1 Boutons
+Pulsation au survol
+
+Halo lumineux à l’activation
+
+Glitch léger à l’erreur
+
+8.2 Puzzles
+Réactions lumineuses
+
+Vibrations holographiques
+
+Effets de résonance
+
+8.3 UI
+Transitions douces
+
+Effets de profondeur
+
+Hologrammes animés
+
+=========================================================
+9. EFFETS VISUELS
+=========================================================
+9.1 Illusions
+Perspective
+
+Rotation 3D
+
+Distorsion fractale
+
+Effet de miroir
+
+Effet de duplication
+
+9.2 Particules
+Poussière numérique
+
+Éclats holographiques
+
+Flux lumineux
+
+9.3 Hologrammes
+Interfaces translucides
+
+Constellations animées
+
+Machines temporelles
+
+=========================================================
+10. NARRATION VISUELLE
+=========================================================
+10.1 Règles
+Chaque dimension raconte une histoire visuelle
+
+Les illusions deviennent plus complexes
+
+Les machines deviennent plus vivantes
+
+Les hologrammes deviennent plus détaillés
+
+10.2 Symboles
+Initiation : géométrie
+
+Fractures : fractales
+
+Éclipse : constellations
+
+=========================================================
+11. TRANSITIONS
+=========================================================
+11.1 Types
+Glitch cyberpunk
+
+Fragmentation holographique
+
+Distorsion spatiale
+
+Fondu néon
+
+Rotation fractale
+
+11.2 Règles
+Toujours cohérentes avec la dimension
+
+Toujours fluides
+
+Toujours animées
+
+=========================================================
+12. COHÉRENCE INTER‑DIMENSIONS
+=========================================================
+12.1 Règles
+Chaque dimension a son identité
+
+Mais toutes partagent le style cyberpunk spatial
+
+Les couleurs évoluent mais restent cohérentes
+
+Les animations deviennent plus complexes
+
+Les illusions deviennent plus profondes
+
+
+📄 PARTIE 4 — FICHES ULTRA‑COMPLÈTES (NIVEAUX 1 À 30 — DIMENSION INITIATION)
+(À mettre dans ton fichier .txt final)
+
+=========================================================
+DIMENSION 1 — INITIATION
+=========================================================
+Ambiance générale :  
+Couloirs holographiques, géométrie pure, néons doux, calme spatial, interfaces minimalistes.
+Cette dimension enseigne les bases de la logique fractale et des illusions cyberpunk.
+
+===============================
+NIVEAU 1 — ALIGNEMENT PRIMAIRE
+===============================
+Objectif narratif :  
+Le Voyageur découvre les premiers fragments de réalité.
+ECHO teste sa capacité à percevoir les motifs.
+
+Objectif mécanique :  
+Apprendre l’alignement simple d’éléments holographiques.
+
+Description du puzzle :  
+Trois formes géométriques flottent dans l’espace.
+Le joueur doit les aligner parfaitement sur une ligne holographique.
+Les formes réagissent à la proximité (halo lumineux).
+
+Interactions :
+
+Drag & drop fluide
+
+Halo cyan quand l’élément est bien placé
+
+Glitch rouge si mal aligné
+
+Animations :
+
+Pulsation lente des formes
+
+Ligne holographique vibrante
+
+Effet de résonance à la réussite
+
+Ambiance visuelle :  
+Néons blancs, géométrie pure, hologrammes translucides.
+
+Ambiance sonore :  
+Synth doux, pulsation lente.
+
+Illusions :  
+Perspective légère, profondeur holographique.
+
+Condition de déblocage :  
+Toujours accessible.
+
+Dialogue d’ECHO :  
+« Ces formes… elles sont les premiers fragments. Aligne-les. Laisse la lumière te guider. »
+
+Lien narratif :  
+Introduction à la logique géométrique utilisée dans les niveaux 2, 3, 4.
+
+Version EN courte :  
+“Align the primary holographic shapes. Follow the resonance.”
+
+Notes IA VS Code :  
+Puzzle simple, interactions fluides, animations minimalistes.
+
+===============================
+NIVEAU 2 — SÉQUENCE LUMINEUSE
+===============================
+Objectif narratif :  
+ECHO montre au Voyageur comment la lumière encode la mémoire.
+
+Objectif mécanique :  
+Apprendre les séquences lumineuses.
+
+Description du puzzle :  
+Quatre piliers holographiques s’allument dans un ordre précis.
+Le joueur doit reproduire la séquence.
+
+Interactions :
+
+Clic sur les piliers
+
+Feedback lumineux instantané
+
+Erreur = glitch rouge
+
+Animations :
+
+Lumière pulsée
+
+Effet de vague holographique
+
+Explosion cyan à la réussite
+
+Ambiance visuelle :  
+Couloir lumineux, piliers holographiques.
+
+Ambiance sonore :  
+Notes synth, échos.
+
+Illusions :  
+Léger effet de duplication.
+
+Condition de déblocage :  
+Niveau 1 complété.
+
+Dialogue d’ECHO :  
+« La lumière est mémoire. Reproduis sa séquence. »
+
+Lien narratif :  
+Prépare les puzzles de séquences complexes (niveaux 10, 14, 27).
+
+Version EN courte :  
+“Repeat the light sequence. Memory flows through light.”
+
+Notes IA VS Code :  
+Séquence simple, animations de pulsation.
+
+===============================
+NIVEAU 3 — FORMES GÉOMÉTRIQUES
+===============================
+Objectif narratif :  
+Le Voyageur apprend que les formes sont des symboles anciens.
+
+Objectif mécanique :  
+Tri et classification de formes.
+
+Description du puzzle :  
+Six formes flottent : triangle, carré, cercle, hexagone…
+Le joueur doit les placer dans les bons emplacements holographiques.
+
+Interactions :
+
+Drag & drop
+
+Halo vert si correct
+
+Glitch si incorrect
+
+Animations :
+
+Rotation lente
+
+Pulsation géométrique
+
+Effet fractal léger
+
+Ambiance visuelle :  
+Hologrammes géométriques.
+
+Ambiance sonore :  
+Synth minimal.
+
+Illusions :  
+Perspective 3D.
+
+Condition de déblocage :  
+Niveau 2 complété.
+
+Dialogue d’ECHO :  
+« Ces formes étaient notre langage. Classe-les. »
+
+Lien narratif :  
+Prépare les fractales de la dimension 2.
+
+Version EN courte :  
+“Sort the geometric symbols.”
+
+Notes IA VS Code :  
+Puzzle de tri simple.
+
+===============================
+NIVEAU 4 — ROTATION HOLOGRAPHIQUE
+===============================
+Objectif narratif :  
+ECHO teste la perception spatiale du Voyageur.
+
+Objectif mécanique :  
+Rotation d’objets holographiques.
+
+Description du puzzle :  
+Un objet fractal doit être tourné pour correspondre à une silhouette.
+
+Interactions :
+
+Rotation via drag
+
+Feedback silhouette
+
+Effet de résonance
+
+Animations :
+
+Rotation fluide
+
+Halo lumineux
+
+Effet de stabilisation
+
+Ambiance visuelle :  
+Fractale simple.
+
+Ambiance sonore :  
+Synth spatial.
+
+Illusions :  
+Perspective 3D.
+
+Condition de déblocage :  
+Niveau 3 complété.
+
+Dialogue d’ECHO :  
+« Tourne l’objet. Trouve son vrai visage. »
+
+Version EN courte :  
+“Rotate the hologram to match the shape.”
+
+===============================
+NIVEAU 5 — SÉQUENCE SONORE
+===============================
+Objectif narratif :  
+ECHO montre que le son est un vecteur de mémoire.
+
+Objectif mécanique :  
+Reproduire une séquence sonore.
+
+Description du puzzle :  
+Quatre notes holographiques jouent une séquence.
+Le joueur doit la répéter.
+
+Interactions :
+
+Clic sur les notes
+
+Feedback sonore
+
+Glitch si erreur
+
+Animations :
+
+Pulsation sonore
+
+Vibration holographique
+
+Ambiance visuelle :  
+Notes holographiques.
+
+Ambiance sonore :  
+Synthwave.
+
+Illusions :  
+Résonance visuelle.
+
+Condition de déblocage :  
+Niveau 4 complété.
+
+Dialogue d’ECHO :  
+« Le son… c’est une mémoire vivante. Écoute. »
+
+Version EN courte :  
+“Repeat the sound sequence.”
+
+===============================
+NIVEAU 6 — OBSERVATION DES MOTIFS
+===============================
+Objectif narratif :  
+ECHO teste la capacité du Voyageur à percevoir les motifs cachés.
+
+Objectif mécanique :  
+Trouver un motif dans un ensemble.
+
+Description du puzzle :  
+Un mur holographique affiche 20 symboles.
+Le joueur doit trouver les 3 symboles identiques.
+
+Interactions :
+
+Clic
+
+Halo cyan
+
+Glitch si mauvais symbole
+
+Animations :
+
+Pulsation
+
+Effet de scan holographique
+
+Ambiance visuelle :  
+Mur holographique.
+
+Ambiance sonore :  
+Scan synth.
+
+Illusions :  
+Duplication.
+
+Condition de déblocage :  
+Niveau 5 complété.
+
+Dialogue d’ECHO :  
+« Les motifs sont partout. Trouve-les. »
+
+Version EN courte :  
+“Find the repeating symbols.”
+
+===============================
+NIVEAU 7 — PORTE LUMINEUSE
+===============================
+Objectif narratif :  
+Le Voyageur ouvre sa première porte holographique.
+
+Objectif mécanique :  
+Activer une porte via une séquence.
+
+Description du puzzle :  
+Trois symboles doivent être activés dans le bon ordre pour ouvrir la porte.
+
+Interactions :
+
+Clic
+
+Lumière
+
+Porte holographique
+
+Animations :
+
+Ouverture
+
+Fragmentation
+
+Ambiance visuelle :  
+Porte holographique.
+
+Ambiance sonore :  
+Ouverture synth.
+
+Illusions :  
+Distorsion.
+
+Condition de déblocage :  
+Niveau 6 complété.
+
+Dialogue d’ECHO :  
+« Ouvre la porte. La lumière t’attend. »
+
+Version EN courte :  
+“Open the holographic gate.”
+
+===============================
+NIVEAU 8 — TRI DES SYMBOLES
+===============================
+Objectif narratif :  
+ECHO montre que les symboles sont des fragments de mémoire.
+
+Objectif mécanique :  
+Tri avancé.
+
+Description du puzzle :  
+10 symboles doivent être triés selon leur forme et leur couleur.
+
+Interactions :
+
+Drag
+
+Halo
+
+Feedback
+
+Animations :
+
+Pulsation
+
+Effet fractal
+
+Ambiance visuelle :  
+Symboles holographiques.
+
+Ambiance sonore :  
+Synth doux.
+
+Illusions :  
+Perspective.
+
+Condition de déblocage :  
+Niveau 7 complété.
+
+Dialogue d’ECHO :  
+« Classe les symboles. Ils racontent notre histoire. »
+
+Version EN courte :  
+“Sort the holographic symbols.”
+
+===============================
+NIVEAU 9 — MIROIRS SIMPLES
+===============================
+Objectif narratif :  
+Le Voyageur découvre les illusions de réflexion.
+
+Objectif mécanique :  
+Manipuler des miroirs holographiques.
+
+Description du puzzle :  
+Un rayon lumineux doit être dirigé vers un récepteur via des miroirs.
+
+Interactions :
+
+Rotation des miroirs
+
+Feedback lumineux
+
+Effet de réussite
+
+Animations :
+
+Rayon dynamique
+
+Réflexion holographique
+
+Ambiance visuelle :  
+Miroirs holographiques.
+
+Ambiance sonore :  
+Rayon synth.
+
+Illusions :  
+Réflexion.
+
+Condition de déblocage :  
+Niveau 8 complété.
+
+Dialogue d’ECHO :  
+« La lumière se plie. Guide-la. »
+
+Version EN courte :  
+“Redirect the light beam.”
+
+===============================
+NIVEAU 10 — PREMIÈRE ILLUSION
+===============================
+Objectif narratif :  
+ECHO montre que la réalité est instable.
+
+Objectif mécanique :  
+Illusion visuelle simple.
+
+Description du puzzle :  
+Deux formes semblent identiques mais ne le sont pas.
+Le joueur doit trouver la vraie.
+
+Interactions :
+
+Clic
+
+Feedback
+
+Animations :
+
+Glitch
+
+Distorsion
+
+Ambiance visuelle :  
+Illusion holographique.
+
+Ambiance sonore :  
+Glitch synth.
+
+Illusions :  
+Duplication.
+
+Condition de déblocage :  
+Niveau 9 complété.
+
+Dialogue d’ECHO :  
+« Tout ce que tu vois… n’est pas réel. »
+
+Version EN courte :  
+“Identify the true hologram.”
+
+📄 PARTIE 4 — FICHES ULTRA‑COMPLÈTES (NIVEAUX 11 À 30 — DIMENSION INITIATION)
+(À mettre dans ton fichier .txt final)
+
+===============================
+NIVEAU 11 — DOUBLE ALIGNEMENT
+===============================
+Objectif narratif :  
+ECHO introduit la notion de résonance double : deux fragments doivent vibrer ensemble pour stabiliser la zone.
+
+Objectif mécanique :  
+Aligner deux séries d’éléments holographiques simultanément.
+
+Description du puzzle :  
+Deux lignes holographiques apparaissent, chacune avec 4 formes flottantes.
+Le joueur doit aligner les deux séries en même temps : si une série est mal alignée, l’autre se désynchronise.
+
+Interactions :
+
+Drag & drop synchronisé
+
+Halo cyan si les deux lignes vibrent ensemble
+
+Glitch rouge si désynchronisation
+
+Animations :
+
+Double pulsation lumineuse
+
+Résonance holographique
+
+Effet de stabilisation double
+
+Ambiance visuelle :  
+Deux lignes holographiques parallèles, néons doux.
+
+Ambiance sonore :  
+Deux tonalités synth synchronisées.
+
+Illusions :  
+Effet de vibration croisée.
+
+Condition de déblocage :  
+Niveau 10 complété.
+
+Dialogue d’ECHO :  
+« Deux fragments… deux résonances. Harmonise-les. »
+
+Version EN courte :  
+“Align both holographic lines simultaneously.”
+
+===============================
+NIVEAU 12 — LUMIÈRE CROISÉE
+===============================
+Objectif narratif :  
+ECHO montre que la lumière peut se croiser et se déformer.
+
+Objectif mécanique :  
+Reproduire une séquence lumineuse croisée.
+
+Description du puzzle :  
+Quatre faisceaux lumineux se croisent.
+Le joueur doit activer les points d’intersection dans le bon ordre.
+
+Interactions :
+
+Clic sur intersections
+
+Feedback lumineux
+
+Glitch si erreur
+
+Animations :
+
+Faisceaux croisés
+
+Effet de diffraction
+
+Explosion holographique à la réussite
+
+Ambiance visuelle :  
+Croisement de lasers holographiques.
+
+Ambiance sonore :  
+Synth aigu + basses profondes.
+
+Illusions :  
+Diffraction lumineuse.
+
+Condition de déblocage :  
+Niveau 11 complété.
+
+Dialogue d’ECHO :  
+« La lumière se croise… mais ne se brise jamais. Suis son chemin. »
+
+Version EN courte :  
+“Activate the crossed light intersections.”
+
+===============================
+NIVEAU 13 — GLISSEMENT HOLOGRAPHIQUE
+===============================
+Objectif narratif :  
+ECHO teste la fluidité de perception du Voyageur.
+
+Objectif mécanique :  
+Glisser des panneaux holographiques pour reconstituer un motif.
+
+Description du puzzle :  
+Un motif fractal est divisé en 9 panneaux.
+Le joueur doit les glisser pour reformer l’image.
+
+Interactions :
+
+Glissement fluide
+
+Halo cyan si panneau bien placé
+
+Glitch si mauvais emplacement
+
+Animations :
+
+Panneaux flottants
+
+Effet de résonance fractale
+
+Ambiance visuelle :  
+Panneaux holographiques.
+
+Ambiance sonore :  
+Synth doux.
+
+Illusions :  
+Perspective fractale.
+
+Condition de déblocage :  
+Niveau 12 complété.
+
+Dialogue d’ECHO :  
+« Les fragments doivent glisser… jusqu’à retrouver leur forme. »
+
+Version EN courte :  
+“Slide the holographic panels to restore the fractal.”
+
+===============================
+NIVEAU 14 — SÉQUENCE COMBINÉE
+===============================
+Objectif narratif :  
+ECHO montre que les séquences peuvent se combiner : lumière + son.
+
+Objectif mécanique :  
+Reproduire une séquence mixte.
+
+Description du puzzle :  
+Une séquence lumineuse joue en même temps qu’une séquence sonore.
+Le joueur doit reproduire les deux.
+
+Interactions :
+
+Clic sur piliers lumineux
+
+Clic sur notes holographiques
+
+Feedback combiné
+
+Animations :
+
+Lumière + son synchronisés
+
+Effet de résonance double
+
+Ambiance visuelle :  
+Piliers holographiques + notes flottantes.
+
+Ambiance sonore :  
+Synth harmonique.
+
+Illusions :  
+Superposition holographique.
+
+Condition de déblocage :  
+Niveau 13 complété.
+
+Dialogue d’ECHO :  
+« La lumière chante. Le son brille. Combine-les. »
+
+Version EN courte :  
+“Repeat the combined light and sound sequence.”
+
+===============================
+NIVEAU 15 — ACTIVATION DE 3 POINTS
+===============================
+Objectif narratif :  
+ECHO introduit la notion de points d’énergie.
+
+Objectif mécanique :  
+Activer trois points dans un ordre logique.
+
+Description du puzzle :  
+Trois points holographiques doivent être activés selon une logique simple (ex : gauche → haut → droite).
+
+Interactions :
+
+Clic
+
+Feedback lumineux
+
+Glitch si erreur
+
+Animations :
+
+Activation pulsée
+
+Effet de résonance
+
+Ambiance visuelle :  
+Points lumineux.
+
+Ambiance sonore :  
+Synth minimal.
+
+Illusions :  
+Halo holographique.
+
+Condition de déblocage :  
+Niveau 14 complété.
+
+Dialogue d’ECHO :  
+« Trois points… trois battements. Trouve leur rythme. »
+
+Version EN courte :  
+“Activate the three energy points in the correct order.”
+
+===============================
+NIVEAU 16 — PUZZLE CIRCULAIRE
+===============================
+Objectif narratif :  
+ECHO montre que les motifs circulaires sont fondamentaux.
+
+Objectif mécanique :  
+Reconstituer un motif circulaire.
+
+Description du puzzle :  
+Un cercle fractal est divisé en segments.
+Le joueur doit les tourner pour reformer le motif.
+
+Interactions :
+
+Rotation segmentaire
+
+Feedback holographique
+
+Résonance circulaire
+
+Animations :
+
+Rotation fluide
+
+Pulsation circulaire
+
+Ambiance visuelle :  
+Cercle fractal.
+
+Ambiance sonore :  
+Synth circulaire.
+
+Illusions :  
+Rotation 3D.
+
+Condition de déblocage :  
+Niveau 15 complété.
+
+Dialogue d’ECHO :  
+« Le cercle… c’est la forme parfaite. Répare-le. »
+
+Version EN courte :  
+“Rotate the segments to restore the fractal circle.”
+
+===============================
+NIVEAU 17 — LUMIÈRE EN CASCADE
+===============================
+Objectif narratif :  
+ECHO montre que la lumière peut se propager comme une cascade.
+
+Objectif mécanique :  
+Activer une cascade lumineuse.
+
+Description du puzzle :  
+Une série de 6 lumières doit être activée dans un ordre qui crée une cascade visuelle.
+
+Interactions :
+
+Clic
+
+Feedback lumineux
+
+Glitch si erreur
+
+Animations :
+
+Cascade lumineuse
+
+Effet de propagation
+
+Ambiance visuelle :  
+Lumières en chaîne.
+
+Ambiance sonore :  
+Synth cascade.
+
+Illusions :  
+Propagation holographique.
+
+Condition de déblocage :  
+Niveau 16 complété.
+
+Dialogue d’ECHO :  
+« La lumière coule… comme un fleuve. Guide-la. »
+
+Version EN courte :  
+“Trigger the cascading light sequence.”
+
+===============================
+NIVEAU 18 — SYMBOLES CACHÉS
+===============================
+Objectif narratif :  
+ECHO montre que certains symboles sont invisibles sans interaction.
+
+Objectif mécanique :  
+Révéler des symboles cachés.
+
+Description du puzzle :  
+Le joueur doit déplacer un scanner holographique pour révéler des symboles invisibles.
+
+Interactions :
+
+Drag du scanner
+
+Révélation holographique
+
+Clic sur symboles révélés
+
+Animations :
+
+Scan lumineux
+
+Effet de révélation
+
+Ambiance visuelle :  
+Mur holographique.
+
+Ambiance sonore :  
+Scan synth.
+
+Illusions :  
+Invisibilité holographique.
+
+Condition de déblocage :  
+Niveau 17 complété.
+
+Dialogue d’ECHO :  
+« Tout n’est pas visible. Cherche ce qui se cache. »
+
+Version EN courte :  
+“Reveal and select the hidden symbols.”
+
+===============================
+NIVEAU 19 — ILLUSION DE PROFONDEUR
+===============================
+Objectif narratif :  
+ECHO montre que la profondeur est une illusion manipulable.
+
+Objectif mécanique :  
+Trouver l’objet le plus proche dans une illusion de profondeur.
+
+Description du puzzle :  
+10 objets flottent dans une illusion 3D.
+Le joueur doit identifier celui qui est réellement le plus proche.
+
+Interactions :
+
+Clic
+
+Feedback holographique
+
+Animations :
+
+Profondeur dynamique
+
+Effet de parallaxe
+
+Ambiance visuelle :  
+Illusion 3D.
+
+Ambiance sonore :  
+Synth spatial.
+
+Illusions :  
+Parallaxe multi‑couches.
+
+Condition de déblocage :  
+Niveau 18 complété.
+
+Dialogue d’ECHO :  
+« La profondeur ment. Trouve ce qui est vraiment proche. »
+
+Version EN courte :  
+“Identify the closest hologram.”
+
+===============================
+NIVEAU 20 — PUZZLE DE VITESSE
+===============================
+Objectif narratif :  
+ECHO teste la rapidité du Voyageur.
+
+Objectif mécanique :  
+Activer des symboles avant qu’ils ne disparaissent.
+
+Description du puzzle :  
+Des symboles apparaissent brièvement.
+Le joueur doit les activer rapidement.
+
+Interactions :
+
+Clic rapide
+
+Feedback instantané
+
+Animations :
+
+Flash holographique
+
+Disparition rapide
+
+Ambiance visuelle :  
+Symboles rapides.
+
+Ambiance sonore :  
+Synth rapide.
+
+Illusions :  
+Flash holographique.
+
+Condition de déblocage :  
+Niveau 19 complété.
+
+Dialogue d’ECHO :  
+« La vitesse… c’est aussi une forme de mémoire. »
+
+Version EN courte :  
+“Activate the symbols before they vanish.”
+
+===============================
+NIVEAU 21 — SÉQUENCE INVERSÉE
+===============================
+Objectif narratif :  
+ECHO montre que certaines séquences doivent être lues à l’envers.
+
+Objectif mécanique :  
+Reproduire une séquence inversée.
+
+Description du puzzle :  
+Une séquence lumineuse joue.
+Le joueur doit la répéter… mais à l’envers.
+
+Interactions :
+
+Clic
+
+Feedback
+
+Animations :
+
+Lumière inversée
+
+Effet de résonance
+
+Ambiance visuelle :  
+Séquence holographique.
+
+Ambiance sonore :  
+Synth inversé.
+
+Illusions :  
+Inversion temporelle.
+
+Condition de déblocage :  
+Niveau 20 complété.
+
+Dialogue d’ECHO :  
+« Parfois… la vérité est à l’envers. »
+
+Version EN courte :  
+“Repeat the reversed sequence.”
+
+===============================
+NIVEAU 22 — ALIGNEMENT MULTIPLE
+===============================
+Objectif narratif :  
+ECHO teste la capacité du Voyageur à gérer plusieurs alignements.
+
+Objectif mécanique :  
+Aligner 3 lignes holographiques.
+
+Description du puzzle :  
+Trois lignes doivent être alignées simultanément.
+
+Interactions :
+
+Drag
+
+Feedback multiple
+
+Animations :
+
+Triple résonance
+
+Pulsation synchronisée
+
+Ambiance visuelle :  
+Lignes holographiques.
+
+Ambiance sonore :  
+Synth triple.
+
+Illusions :  
+Vibration croisée.
+
+Condition de déblocage :  
+Niveau 21 complété.
+
+Dialogue d’ECHO :  
+« Trois lignes… un seul rythme. »
+
+Version EN courte :  
+“Align all three holographic lines.”
+
+===============================
+NIVEAU 23 — LUMIÈRE PULSÉE
+===============================
+Objectif narratif :  
+ECHO montre que la lumière peut pulser selon un rythme.
+
+Objectif mécanique :  
+Reproduire un rythme lumineux.
+
+Description du puzzle :  
+Une lumière pulse selon un rythme.
+Le joueur doit cliquer au bon moment.
+
+Interactions :
+
+Clic rythmique
+
+Feedback temporel
+
+Animations :
+
+Pulsation
+
+Effet de rythme
+
+Ambiance visuelle :  
+Lumière pulsée.
+
+Ambiance sonore :  
+Synth rythmique.
+
+Illusions :  
+Rythme holographique.
+
+Condition de déblocage :  
+Niveau 22 complété.
+
+Dialogue d’ECHO :  
+« Sens le rythme. Il est vivant. »
+
+Version EN courte :  
+“Click in sync with the pulsing light.”
+
+===============================
+NIVEAU 24 — PUZZLE DE RÉFLEXION
+===============================
+Objectif narratif :  
+ECHO montre que la réflexion est une illusion manipulable.
+
+Objectif mécanique :  
+Diriger un rayon via plusieurs miroirs.
+
+Description du puzzle :  
+Un rayon doit être dirigé vers un récepteur via 4 miroirs.
+
+Interactions :
+
+Rotation
+
+Feedback lumineux
+
+Animations :
+
+Réflexion dynamique
+
+Effet holographique
+
+Ambiance visuelle :  
+Miroirs holographiques.
+
+Ambiance sonore :  
+Synth laser.
+
+Illusions :  
+Réflexion.
+
+Condition de déblocage :  
+Niveau 23 complété.
+
+Dialogue d’ECHO :  
+« La lumière réfléchit… mais ne ment jamais. »
+
+Version EN courte :  
+“Redirect the beam using mirrors.”
+
+===============================
+NIVEAU 25 — TRI DYNAMIQUE
+===============================
+Objectif narratif :  
+ECHO teste la capacité du Voyageur à trier des éléments en mouvement.
+
+Objectif mécanique :  
+Tri de symboles en mouvement.
+
+Description du puzzle :  
+10 symboles flottent et bougent lentement.
+Le joueur doit les attraper et les placer dans les bons emplacements.
+
+Interactions :
+
+Drag
+
+Clic
+
+Feedback
+
+Animations :
+
+Mouvement lent
+
+Pulsation
+
+Ambiance visuelle :  
+Symboles flottants.
+
+Ambiance sonore :  
+Synth doux.
+
+Illusions :  
+Flottement holographique.
+
+Condition de déblocage :  
+Niveau 24 complété.
+
+Dialogue d’ECHO :  
+« Même en mouvement… les symboles gardent leur vérité. »
+
+Version EN courte :  
+“Sort the moving holographic symbols.”
+
+===============================
+NIVEAU 26 — ILLUSION GÉOMÉTRIQUE
+===============================
+Objectif narratif :  
+ECHO montre que la géométrie peut mentir.
+
+Objectif mécanique :  
+Identifier la forme correcte dans une illusion.
+
+Description du puzzle :  
+5 formes semblent identiques.
+Le joueur doit trouver celle qui n’est pas une illusion.
+
+Interactions :
+
+Clic
+
+Feedback
+
+Animations :
+
+Glitch
+
+Distorsion
+
+Ambiance visuelle :  
+Illusion géométrique.
+
+Ambiance sonore :  
+Synth glitch.
+
+Illusions :  
+Duplication.
+
+Condition de déblocage :  
+Niveau 25 complété.
+
+Dialogue d’ECHO :  
+« La géométrie… peut tromper. Trouve la vraie forme. »
+
+Version EN courte :  
+“Identify the true geometric hologram.”
+
+===============================
+NIVEAU 27 — SÉQUENCE COMPLEXE
+===============================
+Objectif narratif :  
+ECHO teste la mémoire avancée du Voyageur.
+
+Objectif mécanique :  
+Reproduire une séquence longue.
+
+Description du puzzle :  
+Une séquence de 8 lumières joue.
+Le joueur doit la répéter.
+
+Interactions :
+
+Clic
+
+Feedback
+
+Animations :
+
+Lumière dynamique
+
+Effet de résonance
+
+Ambiance visuelle :  
+Séquence holographique.
+
+Ambiance sonore :  
+Synth complexe.
+
+Illusions :  
+Superposition.
+
+Condition de déblocage :  
+Niveau 26 complété.
+
+Dialogue d’ECHO :  
+« La mémoire… est une lumière longue. »
+
+Version EN courte :  
+“Repeat the long holographic sequence.”
+
+===============================
+NIVEAU 28 — ACTIVATION MULTI‑ZONES
+===============================
+Objectif narratif :  
+ECHO montre que plusieurs zones peuvent être activées simultanément.
+
+Objectif mécanique :  
+Activer 4 zones dans le bon ordre.
+
+Description du puzzle :  
+4 zones holographiques doivent être activées selon une logique.
+
+Interactions :
+
+Clic
+
+Feedback
+
+Animations :
+
+Activation multi‑zones
+
+Effet holographique
+
+Ambiance visuelle :  
+Zones holographiques.
+
+Ambiance sonore :  
+Synth spatial.
+
+Illusions :  
+Zones flottantes.
+
+Condition de déblocage :  
+Niveau 27 complété.
+
+Dialogue d’ECHO :  
+« Plusieurs zones… une seule vérité. »
+
+Version EN courte :  
+“Activate all zones in the correct order.”
+
+📄 PARTIE 4 — FICHES ULTRA‑COMPLÈTES (NIVEAUX 29 À 30 — DIMENSION INITIATION)
+(À mettre dans ton fichier .txt final)
+
+===============================
+NIVEAU 29 — PUZZLE FINAL DE SYNTHÈSE
+===============================
+Objectif narratif :  
+ECHO teste la maîtrise totale du Voyageur sur les fondations de la réalité.
+Ce niveau représente la dernière barrière avant la stabilisation complète de la Rupture.
+
+Objectif mécanique :  
+Combiner toutes les mécaniques apprises dans les niveaux 1 à 28 :
+
+alignements
+
+séquences lumineuses
+
+séquences sonores
+
+illusions géométriques
+
+rotation
+
+tri
+
+activation multi‑zones
+
+profondeur holographique
+
+Description du puzzle :  
+Le puzzle se compose de trois couches holographiques superposées, chacune représentant un type de mécanique :
+
+Couche 1 — Géométrie & Alignement
+
+5 formes doivent être alignées sur une ligne fractale.
+
+Chaque forme correctement alignée active un symbole sur la couche 2.
+
+Couche 2 — Séquences combinées (lumière + son)
+
+Une séquence lumineuse et sonore se joue.
+
+Le joueur doit la reproduire.
+
+Chaque séquence correcte active une zone sur la couche 3.
+
+Couche 3 — Illusion & Profondeur
+
+4 objets holographiques flottent dans une illusion de profondeur.
+
+Le joueur doit identifier l’objet réel (non illusoire).
+
+Une fois trouvé, l’objet révèle un symbole final.
+
+Lorsque les 3 couches sont complétées, un cœur holographique apparaît au centre :
+→ Le joueur doit cliquer dessus pour stabiliser la Rupture.
+
+Interactions :
+
+Drag & drop
+
+Rotation
+
+Clic rythmique
+
+Sélection d’objets
+
+Activation multi‑zones
+
+Navigation entre couches holographiques
+
+Animations :
+
+Transition entre couches (fragmentation holographique)
+
+Pulsation du cœur final
+
+Effet de stabilisation totale (explosion de néons)
+
+Ambiance visuelle :  
+Superposition holographique, néons doux, fractales légères.
+
+Ambiance sonore :  
+Synth combiné (grave + aigu), pulsations profondes.
+
+Illusions :  
+Parallaxe multi‑couches, duplication, profondeur dynamique.
+
+Condition de déblocage :  
+Niveau 28 complété.
+
+Dialogue d’ECHO :  
+« Tu as appris chaque fragment… chaque lumière… chaque illusion.
+Maintenant, réunis-les.
+Stabilise la Rupture.
+Montre-moi que tu es prêt. »
+
+Version EN courte :  
+“Combine all learned mechanics. Stabilize the rupture.”
+
+Lien narratif :  
+Prépare l’obtention de la Clé de Résonance au niveau 30.
+
+Notes IA VS Code :  
+Puzzle complexe, multi‑couches, animations avancées, transitions holographiques.
+
+===============================
+NIVEAU 30 — OBTENTION DE LA CLÉ DE RÉSONANCE
+===============================
+Objectif narratif :  
+Le Voyageur stabilise entièrement la dimension Initiation.
+ECHO révèle la première vérité sur la civilisation disparue.
+La Clé de Résonance apparaît : un artefact holographique capable d’activer les structures fractales de la dimension suivante.
+
+Objectif mécanique :  
+Puzzle final narratif + activation de la clé.
+
+Description du puzzle :  
+Le niveau commence dans un silence total.
+Les lumières s’éteignent.
+Un symbole fractal géant apparaît au centre, brisé en 12 fragments.
+
+Le joueur doit :
+
+Réassembler les 12 fragments fractals
+
+Drag & drop
+
+Rotation
+
+Ajustement précis
+
+Chaque fragment correctement placé émet une pulsation lumineuse.
+
+Activer les 4 points de résonance
+
+Une fois le fractal reconstitué, 4 points apparaissent autour.
+
+Le joueur doit les activer dans un ordre dicté par une séquence lumineuse.
+
+Stabiliser le cœur fractal
+
+Le fractal complet se met à pulser.
+
+Le joueur doit cliquer au rythme de la pulsation (3 fois).
+
+Si le rythme est correct → la Clé de Résonance apparaît.
+
+Interactions :
+
+Drag & drop précis
+
+Rotation
+
+Clic rythmique
+
+Activation de zones
+
+Animations :
+
+Reconstruction fractale
+
+Pulsation du cœur
+
+Apparition de la clé (hologramme 3D)
+
+Effet de résonance totale (onde lumineuse)
+
+Ambiance visuelle :  
+Néons blancs, fractale géante, ambiance solennelle.
+
+Ambiance sonore :  
+Synth profond, pulsations lentes, montée sonore à la révélation.
+
+Illusions :  
+Fractale 3D, profondeur holographique, duplication.
+
+Condition de déblocage :  
+Niveau 29 complété.
+
+Dialogue d’ECHO (long, narratif) :  
+« Tu as stabilisé la Rupture.
+Tu as compris la lumière, le son, les formes, les illusions.
+Tu as réassemblé ce que nous avions brisé.
+
+Voyageur…
+Voici la Clé de Résonance.
+
+Elle ouvre les structures fractales.
+Elle réveille les machines endormies.
+Elle te permettra d’entrer dans la dimension suivante.
+
+Je sens… quelque chose changer en toi.
+Tu es prêt.
+Les Fractures t’attendent. »
+
+Version EN courte :  
+“You restored the rupture. Take the Resonance Key.”
+
+Lien narratif :  
+Transition vers la dimension FRACTURES.
+
+Notes IA VS Code :  
+Puzzle final de dimension, animations avancées, apparition d’un artefact.
+
+📄 PARTIE 4 — FICHES ULTRA‑COMPLÈTES (NIVEAUX 31 À 60 — DIMENSION FRACTURES)
+(À mettre dans ton fichier .txt final)
+
+=========================================================
+DIMENSION 2 — FRACTURES
+=========================================================
+Ambiance générale :  
+Fractales instables, illusions mouvantes, néons cyan, machines fractales, distorsions holographiques.
+Cette dimension introduit la logique fractale, les illusions avancées, les machines instables et les constellations simples.
+
+===============================
+NIVEAU 31 — FRACTALE PRIMAIRE
+===============================
+Objectif narratif :  
+ECHO introduit la nature fractale de la réalité brisée.
+Le Voyageur découvre que les motifs se répètent à l’infini.
+
+Objectif mécanique :  
+Assembler une fractale simple.
+
+Description du puzzle :  
+Une fractale de base est divisée en 6 segments.
+Le joueur doit les placer dans le bon ordre pour reformer la fractale.
+
+Interactions :
+
+Drag & drop
+
+Rotation
+
+Feedback holographique
+
+Animations :
+
+Pulsation fractale
+
+Effet de duplication
+
+Ambiance visuelle :  
+Fractale cyan instable.
+
+Ambiance sonore :  
+Synth fractal.
+
+Illusions :  
+Répétition fractale.
+
+Condition de déblocage :  
+Clé de Résonance obtenue.
+
+Dialogue d’ECHO :  
+« Les Fractures… ce sont des motifs qui se répètent. Réassemble-les. »
+
+Version EN courte :  
+“Reassemble the primary fractal.”
+
+===============================
+NIVEAU 32 — SYMÉTRIE MIROIR
+===============================
+Objectif narratif :  
+ECHO montre que les fractales possèdent des symétries complexes.
+
+Objectif mécanique :  
+Créer une symétrie miroir parfaite.
+
+Description du puzzle :  
+Deux panneaux fractals doivent être rendus parfaitement symétriques en ajustant leur orientation.
+
+Interactions :
+
+Rotation
+
+Ajustement fin
+
+Feedback miroir
+
+Animations :
+
+Réflexion holographique
+
+Effet de duplication
+
+Ambiance visuelle :  
+Fractales miroir.
+
+Ambiance sonore :  
+Synth miroir.
+
+Illusions :  
+Réflexion fractale.
+
+Condition de déblocage :  
+Niveau 31 complété.
+
+Dialogue d’ECHO :  
+« Les fractales se reflètent… mais jamais parfaitement. Corrige-les. »
+
+Version EN courte :  
+“Match the fractal mirror symmetry.”
+
+===============================
+NIVEAU 33 — PLATEFORMES MOUVANTES
+===============================
+Objectif narratif :  
+ECHO montre que les Fractures sont instables et en mouvement constant.
+
+Objectif mécanique :  
+Attraper des symboles sur des plateformes mouvantes.
+
+Description du puzzle :  
+Des plateformes holographiques se déplacent lentement.
+Le joueur doit attraper les symboles qui apparaissent dessus.
+
+Interactions :
+
+Clic
+
+Timing
+
+Feedback
+
+Animations :
+
+Mouvement lent
+
+Pulsation fractale
+
+Ambiance visuelle :  
+Plateformes flottantes.
+
+Ambiance sonore :  
+Synth mouvant.
+
+Illusions :  
+Flottement holographique.
+
+Condition de déblocage :  
+Niveau 32 complété.
+
+Dialogue d’ECHO :  
+« Les Fractures bougent… attrape ce qui reste stable. »
+
+Version EN courte :  
+“Catch the symbols on moving platforms.”
+
+===============================
+NIVEAU 34 — LUMIÈRE FRACTALE
+===============================
+Objectif narratif :  
+ECHO montre que la lumière fractale se divise et se multiplie.
+
+Objectif mécanique :  
+Diriger un faisceau fractal vers plusieurs récepteurs.
+
+Description du puzzle :  
+Un faisceau fractal se divise en 3.
+Le joueur doit ajuster les miroirs pour que chaque faisceau atteigne son récepteur.
+
+Interactions :
+
+Rotation des miroirs
+
+Feedback lumineux
+
+Ajustement fin
+
+Animations :
+
+Division fractale
+
+Réflexion holographique
+
+Ambiance visuelle :  
+Faisceaux fractals.
+
+Ambiance sonore :  
+Synth laser fractal.
+
+Illusions :  
+Multiplication lumineuse.
+
+Condition de déblocage :  
+Niveau 33 complété.
+
+Dialogue d’ECHO :  
+« La lumière fractale se divise… guide ses fragments. »
+
+Version EN courte :  
+“Guide the divided fractal beams.”
+
+===============================
+NIVEAU 35 — CONSTELLATION BASIQUE
+===============================
+Objectif narratif :  
+ECHO introduit les constellations holographiques, mémoire des anciens.
+
+Objectif mécanique :  
+Relier des points pour former une constellation simple.
+
+Description du puzzle :  
+10 points holographiques doivent être reliés dans le bon ordre pour former une constellation.
+
+Interactions :
+
+Clic
+
+Drag
+
+Feedback lumineux
+
+Animations :
+
+Lignes holographiques
+
+Pulsation stellaire
+
+Ambiance visuelle :  
+Constellation cyan.
+
+Ambiance sonore :  
+Synth stellaire.
+
+Illusions :  
+Profondeur stellaire.
+
+Condition de déblocage :  
+Niveau 34 complété.
+
+Dialogue d’ECHO :  
+« Les étoiles… se souviennent. Relie-les. »
+
+Version EN courte :  
+“Connect the points to form the constellation.”
+
+===============================
+NIVEAU 36 — DISTORSION VISUELLE
+===============================
+Objectif narratif :  
+ECHO montre que les Fractures déforment la réalité.
+
+Objectif mécanique :  
+Identifier l’objet non déformé.
+
+Description du puzzle :  
+5 objets fractals sont déformés.
+Le joueur doit trouver celui qui n’est pas affecté par la distorsion.
+
+Interactions :
+
+Clic
+
+Feedback
+
+Animations :
+
+Distorsion fractale
+
+Glitch
+
+Ambiance visuelle :  
+Illusion fractale.
+
+Ambiance sonore :  
+Synth glitch.
+
+Illusions :  
+Distorsion holographique.
+
+Condition de déblocage :  
+Niveau 35 complété.
+
+Dialogue d’ECHO :  
+« Les Fractures déforment tout… sauf une vérité. Trouve-la. »
+
+Version EN courte :  
+“Find the undistorted fractal.”
+
+===============================
+NIVEAU 37 — PUZZLE MULTI‑INDICES
+===============================
+Objectif narratif :  
+ECHO montre que les Fractures nécessitent plusieurs types d’indices.
+
+Objectif mécanique :  
+Combiner lumière + son + forme.
+
+Description du puzzle :  
+Un symbole doit être identifié en combinant trois indices :
+
+une pulsation lumineuse
+
+une note sonore
+
+une forme fractale
+
+Interactions :
+
+Clic
+
+Analyse
+
+Feedback
+
+Animations :
+
+Pulsation triple
+
+Effet fractal
+
+Ambiance visuelle :  
+Symboles fractals.
+
+Ambiance sonore :  
+Synth combiné.
+
+Illusions :  
+Superposition.
+
+Condition de déblocage :  
+Niveau 36 complété.
+
+Dialogue d’ECHO :  
+« Trois indices… une seule réponse. Combine-les. »
+
+Version EN courte :  
+“Combine light, sound, and shape to identify the symbol.”
+
+===============================
+NIVEAU 38 — FRACTALE DYNAMIQUE
+===============================
+Objectif narratif :  
+ECHO montre que les fractales évoluent dans le temps.
+
+Objectif mécanique :  
+Assembler une fractale en mouvement.
+
+Description du puzzle :  
+Une fractale se déplace lentement.
+Le joueur doit placer les segments au bon moment.
+
+Interactions :
+
+Drag
+
+Timing
+
+Feedback
+
+Animations :
+
+Fractale mouvante
+
+Pulsation
+
+Ambiance visuelle :  
+Fractale instable.
+
+Ambiance sonore :  
+Synth mouvant.
+
+Illusions :  
+Mouvement holographique.
+
+Condition de déblocage :  
+Niveau 37 complété.
+
+Dialogue d’ECHO :  
+« Les fractales vivent… assemble-les pendant qu’elles respirent. »
+
+Version EN courte :  
+“Assemble the moving fractal.”
+
+===============================
+NIVEAU 39 — SÉQUENCE FRACTALE
+===============================
+Objectif narratif :  
+ECHO montre que les fractales peuvent encoder des séquences.
+
+Objectif mécanique :  
+Reproduire une séquence fractale.
+
+Description du puzzle :  
+Une fractale pulse selon un rythme complexe.
+Le joueur doit cliquer au bon moment.
+
+Interactions :
+
+Clic rythmique
+
+Feedback
+
+Animations :
+
+Pulsation fractale
+
+Effet de résonance
+
+Ambiance visuelle :  
+Fractale pulsée.
+
+Ambiance sonore :  
+Synth fractal.
+
+Illusions :  
+Rythme holographique.
+
+Condition de déblocage :  
+Niveau 38 complété.
+
+Dialogue d’ECHO :  
+« Les fractales chantent… écoute leur rythme. »
+
+Version EN courte :  
+“Click in sync with the fractal pulse.”
+
+===============================
+NIVEAU 40 — ILLUSION DE DUPLICATION
+===============================
+Objectif narratif :  
+ECHO montre que les Fractures dupliquent les objets.
+
+Objectif mécanique :  
+Identifier l’objet original parmi les duplications.
+
+Description du puzzle :  
+8 objets fractals sont affichés.
+7 sont des duplications.
+Le joueur doit trouver l’original.
+
+Interactions :
+
+Clic
+
+Feedback
+
+Animations :
+
+Duplication
+
+Glitch
+
+Ambiance visuelle :  
+Fractales multiples.
+
+Ambiance sonore :  
+Synth glitch.
+
+Illusions :  
+Duplication holographique.
+
+Condition de déblocage :  
+Niveau 39 complété.
+
+Dialogue d’ECHO :  
+« Les Fractures dupliquent… mais une seule forme est vraie. »
+
+Version EN courte :  
+“Find the original fractal.”
+
+===============================
+NIVEAU 41 — MACHINE FRACTALE
+===============================
+Objectif narratif :  
+ECHO introduit les machines fractales, anciennes technologies instables.
+
+Objectif mécanique :  
+Activer une machine fractale.
+
+Description du puzzle :  
+Une machine fractale possède 4 modules.
+Le joueur doit activer les modules dans le bon ordre.
+
+Interactions :
+
+Clic
+
+Activation
+
+Feedback
+
+Animations :
+
+Machine holographique
+
+Modules pulsés
+
+Ambiance visuelle :  
+Machine fractale.
+
+Ambiance sonore :  
+Synth mécanique.
+
+Illusions :  
+Mécanisme holographique.
+
+Condition de déblocage :  
+Niveau 40 complété.
+
+Dialogue d’ECHO :  
+« Cette machine… nous l’avons construite. Réveille-la. »
+
+Version EN courte :  
+“Activate the fractal machine.”
+
+===============================
+NIVEAU 42 — PUZZLE TEMPOREL LÉGER
+===============================
+Objectif narratif :  
+ECHO montre que les machines fractales influencent le temps.
+
+Objectif mécanique :  
+Reproduire une séquence temporelle.
+
+Description du puzzle :  
+Une séquence joue avec des variations de vitesse.
+Le joueur doit la reproduire.
+
+Interactions :
+
+Clic
+
+Timing
+
+Feedback
+
+Animations :
+
+Variation de vitesse
+
+Effet temporel
+
+Ambiance visuelle :  
+Séquence fractale.
+
+Ambiance sonore :  
+Synth temporel.
+
+Illusions :  
+Distorsion temporelle.
+
+Condition de déblocage :  
+Niveau 41 complété.
+
+Dialogue d’ECHO :  
+« Le temps… se plie. Suis son rythme. »
+
+Version EN courte :  
+“Repeat the time‑shifted sequence.”
+
+===============================
+NIVEAU 43 — CONSTELLATION DOUBLE
+===============================
+Objectif narratif :  
+ECHO montre que certaines constellations sont liées.
+
+Objectif mécanique :  
+Relier deux constellations simultanément.
+
+Description du puzzle :  
+Deux constellations doivent être formées en parallèle.
+Les points s’activent en alternance.
+
+Interactions :
+
+Clic
+
+Drag
+
+Feedback
+
+Animations :
+
+Lignes holographiques
+
+Pulsation double
+
+Ambiance visuelle :  
+Constellations doubles.
+
+Ambiance sonore :  
+Synth stellaire.
+
+Illusions :  
+Profondeur stellaire.
+
+Condition de déblocage :  
+Niveau 42 complété.
+
+Dialogue d’ECHO :  
+« Deux constellations… une seule mémoire. »
+
+Version EN courte :  
+“Form both constellations.”
+
+===============================
+NIVEAU 44 — FRACTALE INSTABLE
+===============================
+Objectif narratif :  
+ECHO montre que certaines fractales sont trop instables pour rester fixes.
+
+Objectif mécanique :  
+Stabiliser une fractale instable.
+
+Description du puzzle :  
+Une fractale tremble et se déforme.
+Le joueur doit cliquer sur les zones instables pour les stabiliser.
+
+Interactions :
+
+Clic
+
+Feedback
+
+Animations :
+
+Tremblement
+
+Stabilisation
+
+Ambiance visuelle :  
+Fractale instable.
+
+Ambiance sonore :  
+Synth instable.
+
+Illusions :  
+Distorsion.
+
+Condition de déblocage :  
+Niveau 43 complété.
+
+Dialogue d’ECHO :  
+« Stabilise-la… avant qu’elle ne se brise. »
+
+Version EN courte :  
+“Stabilize the unstable fractal.”
+
+===============================
+NIVEAU 45 — SÉQUENCE SONORE FRACTALE
+===============================
+Objectif narratif :  
+ECHO montre que les fractales produisent des sons uniques.
+
+Objectif mécanique :  
+Reproduire une séquence sonore fractale.
+
+Description du puzzle :  
+Une séquence sonore fractale joue.
+Le joueur doit la répéter.
+
+Interactions :
+
+Clic
+
+Feedback
+
+Animations :
+
+Pulsation sonore
+
+Effet fractal
+
+Ambiance visuelle :  
+Notes fractales.
+
+Ambiance sonore :  
+Synth fractal.
+
+Illusions :  
+Résonance sonore.
+
+Condition de déblocage :  
+Niveau 44 complété.
+
+Dialogue d’ECHO :  
+« Les fractales… chantent. Écoute leur voix. »
+
+Version EN courte :  
+“Repeat the fractal sound sequence.”
+
+===============================
+NIVEAU 46 — ILLUSION DE ROTATION
+===============================
+Objectif narratif :  
+ECHO montre que les Fractures peuvent créer des illusions de rotation.
+
+Objectif mécanique :  
+Identifier l’objet qui ne tourne pas réellement.
+
+Description du puzzle :  
+5 objets semblent tourner.
+Un seul est immobile.
+Le joueur doit le trouver.
+
+Interactions :
+
+Clic
+
+Feedback
+
+Animations :
+
+Rotation
+
+Glitch
+
+Ambiance visuelle :  
+Illusion de rotation.
+
+Ambiance sonore :  
+Synth rotatif.
+
+Illusions :  
+Rotation holographique.
+
+Condition de déblocage :  
+Niveau 45 complété.
+
+Dialogue d’ECHO :  
+« Tout tourne… sauf une vérité. Trouve-la. »
+
+Version EN courte :  
+“Find the non‑rotating hologram.”
+
+===============================
+NIVEAU 47 — PUZZLE MULTI‑ZONES FRACTAL
+===============================
+Objectif narratif :  
+ECHO montre que les machines fractales nécessitent plusieurs zones d’activation.
+
+Objectif mécanique :  
+Activer 5 zones fractales dans le bon ordre.
+
+Description du puzzle :  
+5 zones fractales doivent être activées selon une logique.
+
+Interactions :
+
+Clic
+
+Feedback
+
+Animations :
+
+Activation fractale
+
+Pulsation
+
+Ambiance visuelle :  
+Zones fractales.
+
+Ambiance sonore :  
+Synth fractal.
+
+Illusions :  
+Zones holographiques.
+
+Condition de déblocage :  
+Niveau 46 complété.
+
+Dialogue d’ECHO :  
+« Active chaque zone… dans le bon ordre. »
+
+Version EN courte :  
+“Activate all fractal zones.”
+
+===============================
+NIVEAU 48 — ACTIVATION FRACTALE
+===============================
+Objectif narratif :  
+ECHO montre que certaines fractales doivent être activées via plusieurs étapes.
+
+Objectif mécanique :  
+Activer une fractale en 3 étapes.
+
+Description du puzzle :  
+Une fractale possède 3 couches.
+Le joueur doit activer chaque couche dans l’ordre.
+
+Interactions :
+
+Clic
+
+Feedback
+
+Animations :
+
+Activation en couches
+
+Effet fractal
+
+Ambiance visuelle :  
+Fractale multi‑couches.
+
+Ambiance sonore :  
+Synth profond.
+
+Illusions :  
+Superposition.
+
+Condition de déblocage :  
+Niveau 47 complété.
+
+Dialogue d’ECHO :  
+« Une fractale… trois couches. Active-les. »
+
+Version EN courte :  
+“Activate the fractal layers.”
+
+📄 PARTIE 4 — FICHES ULTRA‑COMPLÈTES (NIVEAUX 49 À 60 — DIMENSION FRACTURES)
+(À mettre dans ton fichier .txt final)
+
+===============================
+NIVEAU 49 — DISTORSION PROFONDE
+===============================
+Objectif narratif :  
+ECHO révèle que certaines Fractures sont si instables qu’elles déforment la perception elle-même.
+Le Voyageur doit apprendre à ignorer les illusions les plus agressives.
+
+Objectif mécanique :  
+Identifier la zone stable dans une distorsion extrême.
+
+Description du puzzle :  
+L’écran entier est soumis à une distorsion fractale :
+
+les formes se tordent
+
+les couleurs se décalent
+
+les objets se dédoublent
+Au centre, une zone holographique reste stable pendant une fraction de seconde.
+Le joueur doit cliquer sur cette zone lorsqu’elle apparaît.
+
+Interactions :
+
+Clic rapide
+
+Observation précise
+
+Feedback holographique
+
+Animations :
+
+Distorsion fractale agressive
+
+Glitch profond
+
+Stabilisation instantanée
+
+Ambiance visuelle :  
+Fractales instables, néons cyan déformés.
+
+Ambiance sonore :  
+Synth distordu, basses vibrantes.
+
+Illusions :  
+Distorsion totale, duplication, déformation spatiale.
+
+Condition de déblocage :  
+Niveau 48 complété.
+
+Dialogue d’ECHO :  
+« Les Fractures mentent… mais une vérité apparaît toujours.
+Trouve-la… avant qu’elle ne disparaisse. »
+
+Version EN courte :  
+“Click the stable zone during the deep distortion.”
+
+===============================
+NIVEAU 50 — PUZZLE DE VITESSE FRACTALE
+===============================
+Objectif narratif :  
+ECHO teste la capacité du Voyageur à réagir dans un environnement fractal instable.
+
+Objectif mécanique :  
+Activer des symboles fractals avant qu’ils ne se désintègrent.
+
+Description du puzzle :  
+Des symboles fractals apparaissent brièvement sur des plateformes mouvantes.
+Le joueur doit cliquer dessus avant qu’ils ne se dissolvent.
+
+Interactions :
+
+Clic rapide
+
+Timing
+
+Feedback
+
+Animations :
+
+Apparition/disparition rapide
+
+Dissolution fractale
+
+Ambiance visuelle :  
+Symboles fractals instables.
+
+Ambiance sonore :  
+Synth rapide, pulsations fractales.
+
+Illusions :  
+Dissolution holographique.
+
+Condition de déblocage :  
+Niveau 49 complété.
+
+Dialogue d’ECHO :  
+« Les fractales vivent… mais meurent vite.
+Attrape-les avant qu’elles ne disparaissent. »
+
+Version EN courte :  
+“Activate the fractal symbols before they dissolve.”
+
+===============================
+NIVEAU 51 — CONSTELLATION AVANCÉE
+===============================
+Objectif narratif :  
+ECHO montre que les constellations fractales sont des cartes mémorielles complexes.
+
+Objectif mécanique :  
+Relier une constellation avancée avec des points mouvants.
+
+Description du puzzle :  
+15 points holographiques se déplacent lentement.
+Le joueur doit les relier dans un ordre précis pour former une constellation fractale.
+
+Interactions :
+
+Drag
+
+Clic
+
+Feedback lumineux
+
+Animations :
+
+Lignes holographiques dynamiques
+
+Pulsation stellaire
+
+Ambiance visuelle :  
+Constellation fractale.
+
+Ambiance sonore :  
+Synth stellaire profond.
+
+Illusions :  
+Profondeur holographique.
+
+Condition de déblocage :  
+Niveau 50 complété.
+
+Dialogue d’ECHO :  
+« Les constellations fractales… sont les cartes de notre passé.
+Reconstitue-les. »
+
+Version EN courte :  
+“Form the advanced fractal constellation.”
+
+===============================
+NIVEAU 52 — MACHINE INSTABLE
+===============================
+Objectif narratif :  
+ECHO révèle que certaines machines fractales sont dangereusement instables.
+
+Objectif mécanique :  
+Stabiliser une machine fractale en réparant ses modules.
+
+Description du puzzle :  
+Une machine fractale possède 5 modules instables.
+Chaque module doit être stabilisé via une interaction différente :
+
+rotation
+
+clic rythmique
+
+alignement
+
+activation
+
+tri fractal
+
+Interactions :
+
+Drag
+
+Rotation
+
+Clic
+
+Tri
+
+Animations :
+
+Tremblement
+
+Stabilisation progressive
+
+Pulsation mécanique
+
+Ambiance visuelle :  
+Machine fractale instable.
+
+Ambiance sonore :  
+Synth mécanique instable.
+
+Illusions :  
+Distorsion mécanique.
+
+Condition de déblocage :  
+Niveau 51 complété.
+
+Dialogue d’ECHO :  
+« Cette machine… elle respire encore.
+Stabilise chaque module… ou elle s’effondrera. »
+
+Version EN courte :  
+“Stabilize all modules of the unstable fractal machine.”
+
+===============================
+NIVEAU 53 — FRACTALE TRIPLE
+===============================
+Objectif narratif :  
+ECHO montre que certaines fractales existent en trois couches simultanées.
+
+Objectif mécanique :  
+Assembler trois fractales en parallèle.
+
+Description du puzzle :  
+Trois fractales apparaissent en couches superposées.
+Le joueur doit assembler les trois en même temps :
+
+couche 1 : fractale simple
+
+couche 2 : fractale instable
+
+couche 3 : fractale mouvante
+
+Interactions :
+
+Drag
+
+Rotation
+
+Timing
+
+Feedback
+
+Animations :
+
+Superposition fractale
+
+Pulsation triple
+
+Ambiance visuelle :  
+Fractales multi‑couches.
+
+Ambiance sonore :  
+Synth triple.
+
+Illusions :  
+Superposition holographique.
+
+Condition de déblocage :  
+Niveau 52 complété.
+
+Dialogue d’ECHO :  
+« Trois fractales… trois vérités.
+Assemble-les toutes. »
+
+Version EN courte :  
+“Assemble the three layered fractals.”
+
+===============================
+NIVEAU 54 — SÉQUENCE COMBINÉE FRACTALE
+===============================
+Objectif narratif :  
+ECHO montre que les séquences fractales combinent lumière, son et mouvement.
+
+Objectif mécanique :  
+Reproduire une séquence fractale complexe.
+
+Description du puzzle :  
+Une séquence joue avec :
+
+lumière fractale
+
+son fractal
+
+mouvement fractal
+Le joueur doit la reproduire.
+
+Interactions :
+
+Clic
+
+Timing
+
+Feedback
+
+Animations :
+
+Séquence fractale
+
+Effet de résonance
+
+Ambiance visuelle :  
+Séquence holographique.
+
+Ambiance sonore :  
+Synth fractal complexe.
+
+Illusions :  
+Superposition dynamique.
+
+Condition de déblocage :  
+Niveau 53 complété.
+
+Dialogue d’ECHO :  
+« Les fractales… chantent, brillent, bougent.
+Répète leur danse. »
+
+Version EN courte :  
+“Repeat the combined fractal sequence.”
+
+===============================
+NIVEAU 55 — ILLUSION TEMPORELLE
+===============================
+Objectif narratif :  
+ECHO montre que les Fractures affectent le temps lui-même.
+
+Objectif mécanique :  
+Identifier l’objet qui n’est pas affecté par la distorsion temporelle.
+
+Description du puzzle :  
+5 objets fractals semblent accélérer, ralentir, reculer.
+Un seul suit un mouvement normal.
+Le joueur doit le trouver.
+
+Interactions :
+
+Clic
+
+Feedback
+
+Animations :
+
+Distorsion temporelle
+
+Glitch temporel
+
+Ambiance visuelle :  
+Illusion temporelle.
+
+Ambiance sonore :  
+Synth temporel.
+
+Illusions :  
+Distorsion du temps.
+
+Condition de déblocage :  
+Niveau 54 complété.
+
+Dialogue d’ECHO :  
+« Le temps se brise… mais une forme reste stable.
+Trouve-la. »
+
+Version EN courte :  
+“Find the non‑time‑distorted hologram.”
+
+===============================
+NIVEAU 56 — PUZZLE DE PRÉCISION FRACTALE
+===============================
+Objectif narratif :  
+ECHO teste la précision du Voyageur dans un environnement instable.
+
+Objectif mécanique :  
+Placer des fragments fractals avec une précision extrême.
+
+Description du puzzle :  
+8 fragments fractals doivent être placés dans des zones minuscules.
+La précision est essentielle.
+
+Interactions :
+
+Drag précis
+
+Feedback holographique
+
+Animations :
+
+Pulsation fine
+
+Stabilisation
+
+Ambiance visuelle :  
+Fractales fines.
+
+Ambiance sonore :  
+Synth précis.
+
+Illusions :  
+Micro‑distorsion.
+
+Condition de déblocage :  
+Niveau 55 complété.
+
+Dialogue d’ECHO :  
+« La précision… est une forme de vérité.
+Place chaque fragment avec soin. »
+
+Version EN courte :  
+“Place the fractal fragments with perfect precision.”
+
+===============================
+NIVEAU 57 — ACTIVATION COMPLEXE
+===============================
+Objectif narratif :  
+ECHO montre que certaines machines fractales nécessitent des activations complexes.
+
+Objectif mécanique :  
+Activer 6 modules dans un ordre complexe.
+
+Description du puzzle :  
+6 modules fractals doivent être activés selon une séquence complexe.
+
+Interactions :
+
+Clic
+
+Timing
+
+Feedback
+
+Animations :
+
+Activation fractale
+
+Pulsation
+
+Ambiance visuelle :  
+Modules fractals.
+
+Ambiance sonore :  
+Synth complexe.
+
+Illusions :  
+Superposition.
+
+Condition de déblocage :  
+Niveau 56 complété.
+
+Dialogue d’ECHO :  
+« Cette machine… demande une activation parfaite.
+Ne te trompe pas. »
+
+Version EN courte :  
+“Activate all modules in the complex sequence.”
+
+===============================
+NIVEAU 58 — FRACTALE FINALE
+===============================
+Objectif narratif :  
+ECHO montre la fractale finale, une mémoire de la civilisation.
+
+Objectif mécanique :  
+Assembler une fractale géante.
+
+Description du puzzle :  
+Une fractale géante est divisée en 20 fragments.
+Le joueur doit les assembler.
+
+Interactions :
+
+Drag
+
+Rotation
+
+Feedback
+
+Animations :
+
+Pulsation géante
+
+Effet fractal
+
+Ambiance visuelle :  
+Fractale géante.
+
+Ambiance sonore :  
+Synth profond.
+
+Illusions :  
+Profondeur fractale.
+
+Condition de déblocage :  
+Niveau 57 complété.
+
+Dialogue d’ECHO :  
+« Cette fractale… c’est notre mémoire.
+Réassemble-la. »
+
+Version EN courte :  
+“Reassemble the giant fractal.”
+
+===============================
+NIVEAU 59 — MACHINE FINALE
+===============================
+Objectif narratif :  
+ECHO révèle la machine fractale finale, clé de la dimension.
+
+Objectif mécanique :  
+Activer la machine fractale finale.
+
+Description du puzzle :  
+La machine possède 8 modules.
+Chaque module nécessite une interaction différente.
+
+Interactions :
+
+Drag
+
+Rotation
+
+Clic
+
+Tri
+
+Séquence
+
+Animations :
+
+Machine fractale finale
+
+Pulsation
+
+Ambiance visuelle :  
+Machine géante.
+
+Ambiance sonore :  
+Synth mécanique profond.
+
+Illusions :  
+Superposition mécanique.
+
+Condition de déblocage :  
+Niveau 58 complété.
+
+Dialogue d’ECHO :  
+« Cette machine… était notre plus grande création.
+Réveille-la une dernière fois. »
+
+Version EN courte :  
+“Activate the final fractal machine.”
+
+===============================
+NIVEAU 60 — OBTENTION DE LA CLÉ FRACTALE
+===============================
+Objectif narratif :  
+Le Voyageur stabilise entièrement la dimension FRACTURES.
+La Clé Fractale apparaît : un artefact capable d’activer les machines temporelles de la dimension ÉCLIPSE.
+
+Objectif mécanique :  
+Puzzle final narratif + activation de la clé.
+
+Description du puzzle :  
+Une fractale géante se déploie en 3 couches :
+
+couche 1 : fractale simple
+
+couche 2 : fractale instable
+
+couche 3 : fractale temporelle
+Le joueur doit stabiliser les trois couches.
+
+Ensuite, 5 points de résonance apparaissent.
+Le joueur doit les activer dans un ordre dicté par une séquence fractale.
+
+Enfin, la Clé Fractale apparaît.
+
+Interactions :
+
+Drag
+
+Rotation
+
+Clic rythmique
+
+Activation
+
+Animations :
+
+Déploiement fractal
+
+Pulsation temporelle
+
+Apparition de la clé
+
+Ambiance visuelle :  
+Fractale géante, néons cyan.
+
+Ambiance sonore :  
+Synth profond, pulsations fractales.
+
+Illusions :  
+Distorsion temporelle.
+
+Condition de déblocage :  
+Niveau 59 complété.
+
+Dialogue d’ECHO (long, narratif) :  
+« Tu as refermé les Cicatrices du Temps.
+Tu as stabilisé les fractales… réveillé les machines…
+Tu as compris ce que nous avions brisé.
+
+Voyageur…
+Voici la Clé Fractale.
+
+Elle ouvre les portes du temps.
+Elle active les machines de l’Éclipse.
+Elle te permettra d’entrer dans la dernière dimension.
+
+Je sens… la mémoire revenir.
+Tu es prêt.
+Le Silence Cosmique t’attend. »
+
+Version EN courte :  
+“You restored the fractures. Take the Fractal Key.”
+
+🎉 FIN DES NIVEAUX 31 À 60 — DIMENSION FRACTURES
+
+📄 PARTIE 4 — FICHES ULTRA‑COMPLÈTES (NIVEAUX 61 À 90 — DIMENSION ÉCLIPSE)
+(À mettre dans ton fichier .txt final)
+
+=========================================================
+DIMENSION 3 — ÉCLIPSE
+=========================================================
+Ambiance générale :  
+Silence cosmique, constellations holographiques, machines temporelles, néons violets, gravité instable, hologrammes stellaires.
+Cette dimension révèle la vérité sur ECHO, la civilisation disparue, et le Miroir du Temps.
+
+===============================
+NIVEAU 61 — CONSTELLATION COSMIQUE
+===============================
+Objectif narratif :  
+ECHO introduit les constellations mémorielles, archives holographiques de la civilisation.
+
+Objectif mécanique :  
+Relier une constellation complexe en 3 couches.
+
+Description du puzzle :  
+30 points holographiques flottent dans une illusion de profondeur.
+Le joueur doit relier les points selon un motif cosmique en 3 couches :
+
+couche 1 : constellation simple
+
+couche 2 : constellation fractale
+
+couche 3 : constellation temporelle (points qui se déplacent)
+
+Interactions :
+
+Drag
+
+Clic
+
+Navigation entre couches
+
+Feedback lumineux
+
+Animations :
+
+Pulsation stellaire
+
+Profondeur holographique
+
+Effet de gravité
+
+Ambiance visuelle :  
+Constellations violettes, halos stellaires.
+
+Ambiance sonore :  
+Synth spatial profond.
+
+Illusions :  
+Profondeur cosmique, parallaxe multi‑couches.
+
+Condition de déblocage :  
+Clé Fractale obtenue.
+
+Dialogue d’ECHO :  
+« Les étoiles… sont les archives de notre mémoire.
+Relie-les… et tu verras ce que nous avons perdu. »
+
+Version EN courte :  
+“Form the cosmic multi‑layer constellation.”
+
+===============================
+NIVEAU 62 — PUZZLE TEMPOREL AVANCÉ
+===============================
+Objectif narratif :  
+ECHO révèle que le temps est brisé en plusieurs directions.
+
+Objectif mécanique :  
+Reproduire une séquence temporelle multi‑vitesse.
+
+Description du puzzle :  
+Une séquence joue avec :
+
+accélérations
+
+ralentissements
+
+inversions
+
+pauses
+Le joueur doit cliquer au bon moment selon les variations temporelles.
+
+Interactions :
+
+Clic rythmique
+
+Analyse temporelle
+
+Feedback
+
+Animations :
+
+Distorsion temporelle
+
+Effet de résonance
+
+Ambiance visuelle :  
+Séquence temporelle holographique.
+
+Ambiance sonore :  
+Synth temporel.
+
+Illusions :  
+Inversion du temps.
+
+Condition de déblocage :  
+Niveau 61 complété.
+
+Dialogue d’ECHO :  
+« Le temps… n’est plus une ligne.
+Il est une mer agitée.
+Navigue entre ses vagues. »
+
+Version EN courte :  
+“Repeat the advanced time‑shifted sequence.”
+
+===============================
+NIVEAU 63 — ILLUSION 3D
+===============================
+Objectif narratif :  
+ECHO montre que la réalité cosmique est tridimensionnelle et instable.
+
+Objectif mécanique :  
+Identifier l’objet réel dans une illusion 3D complexe.
+
+Description du puzzle :  
+10 objets holographiques flottent dans une illusion 3D.
+Certains sont des projections, d’autres des duplications.
+Un seul est réel.
+
+Interactions :
+
+Rotation de la scène
+
+Clic
+
+Feedback
+
+Animations :
+
+Rotation 3D
+
+Parallaxe profonde
+
+Effet de gravité
+
+Ambiance visuelle :  
+Illusion 3D cosmique.
+
+Ambiance sonore :  
+Synth spatial.
+
+Illusions :  
+Profondeur 3D, duplication holographique.
+
+Condition de déblocage :  
+Niveau 62 complété.
+
+Dialogue d’ECHO :  
+« Dans l’espace… tout semble réel.
+Mais une seule forme existe vraiment.
+Trouve-la. »
+
+Version EN courte :  
+“Find the real hologram in the 3D illusion.”
+
+===============================
+NIVEAU 64 — MACHINE COSMIQUE
+===============================
+Objectif narratif :  
+ECHO révèle les machines cosmiques, technologies capables de manipuler le temps et l’espace.
+
+Objectif mécanique :  
+Activer une machine cosmique en 4 phases.
+
+Description du puzzle :  
+La machine possède 4 anneaux holographiques :
+
+anneau 1 : rotation
+
+anneau 2 : alignement
+
+anneau 3 : séquence lumineuse
+
+anneau 4 : activation temporelle
+Le joueur doit activer les anneaux dans l’ordre.
+
+Interactions :
+
+Rotation
+
+Drag
+
+Clic
+
+Timing
+
+Animations :
+
+Rotation cosmique
+
+Pulsation temporelle
+
+Effet de gravité
+
+Ambiance visuelle :  
+Machine cosmique violette.
+
+Ambiance sonore :  
+Synth mécanique cosmique.
+
+Illusions :  
+Rotation 3D, distorsion spatiale.
+
+Condition de déblocage :  
+Niveau 63 complété.
+
+Dialogue d’ECHO :  
+« Cette machine… était notre plus grande découverte.
+Active ses anneaux… et elle te montrera la vérité. »
+
+Version EN courte :  
+“Activate the cosmic machine.”
+
+===============================
+NIVEAU 65 — SÉQUENCE STELLAIRE
+===============================
+Objectif narratif :  
+ECHO montre que les étoiles émettent des séquences mémorielles.
+
+Objectif mécanique :  
+Reproduire une séquence stellaire.
+
+Description du puzzle :  
+Une constellation pulse selon un rythme stellaire.
+Le joueur doit cliquer au bon moment.
+
+Interactions :
+
+Clic rythmique
+
+Feedback
+
+Animations :
+
+Pulsation stellaire
+
+Effet holographique
+
+Ambiance visuelle :  
+Constellation violette.
+
+Ambiance sonore :  
+Synth stellaire.
+
+Illusions :  
+Rythme cosmique.
+
+Condition de déblocage :  
+Niveau 64 complété.
+
+Dialogue d’ECHO :  
+« Les étoiles… parlent.
+Écoute leur rythme. »
+
+Version EN courte :  
+“Click in sync with the stellar pulse.”
+
+===============================
+NIVEAU 66 — DÉDUCTION MULTI‑ÉTAPES
+===============================
+Objectif narratif :  
+ECHO teste la logique avancée du Voyageur.
+
+Objectif mécanique :  
+Résoudre un puzzle de déduction en 4 étapes.
+
+Description du puzzle :  
+Le joueur doit déduire le bon symbole en combinant :
+
+forme
+
+couleur
+
+pulsation
+
+position
+Chaque étape élimine des possibilités.
+
+Interactions :
+
+Clic
+
+Analyse
+
+Feedback
+
+Animations :
+
+Pulsation
+
+Effet holographique
+
+Ambiance visuelle :  
+Symboles stellaires.
+
+Ambiance sonore :  
+Synth logique.
+
+Illusions :  
+Superposition.
+
+Condition de déblocage :  
+Niveau 65 complété.
+
+Dialogue d’ECHO :  
+« La logique… est une lumière.
+Suis-la étape par étape. »
+
+Version EN courte :  
+“Deduce the correct symbol through four steps.”
+
+===============================
+NIVEAU 67 — CONSTELLATION DOUBLE COSMIQUE
+===============================
+Objectif narratif :  
+ECHO montre que certaines constellations sont liées par le temps.
+
+Objectif mécanique :  
+Relier deux constellations en synchronisation.
+
+Description du puzzle :  
+Deux constellations doivent être formées en parallèle.
+Les points s’activent en alternance temporelle.
+
+Interactions :
+
+Drag
+
+Clic
+
+Feedback
+
+Animations :
+
+Lignes holographiques
+
+Pulsation double
+
+Ambiance visuelle :  
+Constellations violettes.
+
+Ambiance sonore :  
+Synth stellaire.
+
+Illusions :  
+Profondeur cosmique.
+
+Condition de déblocage :  
+Niveau 66 complété.
+
+Dialogue d’ECHO :  
+« Deux constellations… un seul destin.
+Relie-les ensemble. »
+
+Version EN courte :  
+“Form both cosmic constellations.”
+
+===============================
+NIVEAU 68 — PUZZLE NARRATIF
+===============================
+Objectif narratif :  
+ECHO révèle une partie de son passé.
+Le puzzle est une mémoire holographique.
+
+Objectif mécanique :  
+Assembler une scène holographique narrative.
+
+Description du puzzle :  
+Une scène cosmique est divisée en 12 fragments.
+Le joueur doit les assembler pour révéler un souvenir d’ECHO.
+
+Interactions :
+
+Drag
+
+Rotation
+
+Feedback
+
+Animations :
+
+Reconstruction holographique
+
+Pulsation mémorielle
+
+Ambiance visuelle :  
+Scène cosmique.
+
+Ambiance sonore :  
+Synth émotionnel.
+
+Illusions :  
+Profondeur holographique.
+
+Condition de déblocage :  
+Niveau 67 complété.
+
+Dialogue d’ECHO (narratif) :  
+« Ce souvenir…
+C’est le jour où nous avons activé le Miroir du Temps.
+Regarde… et comprends notre erreur. »
+
+Version EN courte :  
+“Reassemble the holographic memory.”
+
+===============================
+NIVEAU 69 — ILLUSION DE GRAVITÉ
+===============================
+Objectif narratif :  
+ECHO montre que la gravité cosmique est instable.
+
+Objectif mécanique :  
+Identifier l’objet qui ne suit pas la gravité.
+
+Description du puzzle :  
+10 objets flottent.
+Certains montent, d’autres descendent, d’autres flottent.
+Un seul suit une trajectoire cohérente.
+
+Interactions :
+
+Clic
+
+Observation
+
+Feedback
+
+Animations :
+
+Gravité instable
+
+Effet de chute holographique
+
+Ambiance visuelle :  
+Objets flottants.
+
+Ambiance sonore :  
+Synth gravitationnel.
+
+Illusions :  
+Gravité holographique.
+
+Condition de déblocage :  
+Niveau 68 complété.
+
+Dialogue d’ECHO :  
+« La gravité… n’est plus une loi.
+Trouve ce qui reste stable. »
+
+Version EN courte :  
+“Find the object with stable gravity.”
+
+===============================
+NIVEAU 70 — MACHINE TEMPORELLE
+===============================
+Objectif narratif :  
+ECHO révèle les machines temporelles, capables de manipuler le flux du temps.
+
+Objectif mécanique :  
+Activer une machine temporelle en 5 phases.
+
+Description du puzzle :  
+La machine possède 5 modules :
+
+module 1 : rotation temporelle
+
+module 2 : alignement temporel
+
+module 3 : séquence temporelle
+
+module 4 : activation temporelle
+
+module 5 : stabilisation temporelle
+
+Interactions :
+
+Drag
+
+Rotation
+
+Clic
+
+Timing
+
+Animations :
+
+Distorsion temporelle
+
+Pulsation cosmique
+
+Ambiance visuelle :  
+Machine temporelle violette.
+
+Ambiance sonore :  
+Synth temporel profond.
+
+Illusions :  
+Distorsion du temps.
+
+Condition de déblocage :  
+Niveau 69 complété.
+
+Dialogue d’ECHO :  
+« Cette machine… manipule le temps lui-même.
+Active-la… avec prudence. »
+
+Version EN courte :  
+“Activate the temporal machine.”
+
+===============================
+NIVEAU 71 — SÉQUENCE COSMIQUE
+===============================
+Objectif narratif :  
+ECHO montre que les constellations émettent des séquences cosmiques.
+
+Objectif mécanique :  
+Reproduire une séquence cosmique.
+
+Description du puzzle :  
+Une constellation pulse selon un rythme cosmique complexe.
+Le joueur doit cliquer au bon moment.
+
+Interactions :
+
+Clic rythmique
+
+Feedback
+
+Animations :
+
+Pulsation cosmique
+
+Effet holographique
+
+Ambiance visuelle :  
+Constellation violette.
+
+Ambiance sonore :  
+Synth cosmique.
+
+Illusions :  
+Rythme stellaire.
+
+Condition de déblocage :  
+Niveau 70 complété.
+
+Dialogue d’ECHO :  
+« Le cosmos… chante.
+Suis sa voix. »
+
+Version EN courte :  
+“Click in sync with the cosmic pulse.”
+
+===============================
+NIVEAU 72 — LOGIQUE PROFONDE
+===============================
+Objectif narratif :  
+ECHO teste la logique la plus avancée du Voyageur.
+
+Objectif mécanique :  
+Résoudre un puzzle logique en 5 étapes.
+
+Description du puzzle :  
+Le joueur doit déduire un symbole cosmique en combinant :
+
+forme
+
+pulsation
+
+gravité
+
+couleur
+
+position
+
+Interactions :
+
+Clic
+
+Analyse
+
+Feedback
+
+Animations :
+
+Pulsation
+
+Effet holographique
+
+Ambiance visuelle :  
+Symboles stellaires.
+
+Ambiance sonore :  
+Synth logique.
+
+Illusions :  
+Superposition.
+
+Condition de déblocage :  
+Niveau 71 complété.
+
+Dialogue d’ECHO :  
+« La vérité cosmique… demande une logique profonde.
+Trouve-la. »
+
+Version EN courte :  
+“Deduce the cosmic symbol through five steps.”
+
+===============================
+NIVEAU 73 — CONSTELLATION TRIPLE
+===============================
+Objectif narratif :  
+ECHO montre que certaines constellations existent en trois couches temporelles.
+
+Objectif mécanique :  
+Relier trois constellations simultanément.
+
+Description du puzzle :  
+Trois constellations apparaissent :
+
+passé
+
+présent
+
+futur
+Le joueur doit relier les trois en parallèle.
+
+Interactions :
+
+Drag
+
+Clic
+
+Navigation entre couches
+
+Animations :
+
+Pulsation triple
+
+Effet temporel
+
+Ambiance visuelle :  
+Constellations violettes.
+
+Ambiance sonore :  
+Synth stellaire.
+
+Illusions :  
+Superposition temporelle.
+
+Condition de déblocage :  
+Niveau 72 complété.
+
+Dialogue d’ECHO :  
+« Le passé… le présent… le futur.
+Relie-les.
+Ils ne font qu’un. »
+
+Version EN courte :  
+“Form the triple temporal constellation.”
+
+===============================
+NIVEAU 74 — ILLUSION D’ESPACE
+===============================
+Objectif narratif :  
+ECHO montre que l’espace lui-même est une illusion manipulable.
+
+Objectif mécanique :  
+Identifier l’objet qui n’est pas affecté par l’illusion spatiale.
+
+Description du puzzle :  
+10 objets semblent se déplacer dans l’espace.
+Un seul suit une trajectoire cohérente.
+
+Interactions :
+
+Clic
+
+Observation
+
+Feedback
+
+Animations :
+
+Distorsion spatiale
+
+Parallaxe
+
+Ambiance visuelle :  
+Illusion spatiale.
+
+Ambiance sonore :  
+Synth spatial.
+
+Illusions :  
+Distorsion de l’espace.
+
+Condition de déblocage :  
+Niveau 73 complété.
+
+Dialogue d’ECHO :  
+« L’espace… ment.
+Trouve ce qui reste vrai. »
+
+Version EN courte :  
+“Find the stable object in the spatial illusion.”
+
+===============================
+NIVEAU 75 — PUZZLE DE VITESSE COSMIQUE
+===============================
+Objectif narratif :  
+ECHO teste la rapidité du Voyageur dans un environnement cosmique instable.
+
+Objectif mécanique :  
+Activer des symboles cosmiques avant qu’ils ne disparaissent.
+
+Description du puzzle :  
+Des symboles apparaissent brièvement dans une illusion cosmique.
+Le joueur doit les activer rapidement.
+
+Interactions :
+
+Clic rapide
+
+Feedback
+
+Animations :
+
+Flash cosmique
+
+Disparition rapide
+
+Ambiance visuelle :  
+Symboles cosmiques.
+
+Ambiance sonore :  
+Synth rapide.
+
+Illusions :  
+Flash holographique.
+
+Condition de déblocage :  
+Niveau 74 complété.
+
+Dialogue d’ECHO :  
+« Le cosmos… bouge vite.
+Reste à son rythme. »
+
+Version EN courte :  
+“Activate the cosmic symbols before they vanish.”
+
+📄 PARTIE 4 — FICHES ULTRA‑COMPLÈTES (NIVEAUX 76 À 90 — DIMENSION ÉCLIPSE)
+(À mettre dans ton fichier .txt final)
+
+===============================
+NIVEAU 76 — MACHINE FINALE COSMIQUE
+===============================
+Objectif narratif :  
+ECHO révèle la machine cosmique finale, une technologie capable de manipuler simultanément le temps, l’espace et la mémoire.
+C’est l’une des dernières créations de la civilisation disparue.
+
+Objectif mécanique :  
+Activer la machine cosmique finale en 7 modules.
+
+Description du puzzle :  
+La machine possède 7 modules holographiques :
+
+Module de rotation cosmique
+
+Module d’alignement stellaire
+
+Module de séquence temporelle
+
+Module de gravité inversée
+
+Module de pulsation cosmique
+
+Module de stabilisation holographique
+
+Module de mémoire fractale
+
+Chaque module nécessite une interaction différente.
+
+Interactions :
+
+Rotation
+
+Drag
+
+Clic rythmique
+
+Activation
+
+Analyse
+
+Animations :
+
+Rotation 3D
+
+Pulsation cosmique
+
+Distorsion temporelle
+
+Stabilisation holographique
+
+Ambiance visuelle :  
+Machine violette, halos stellaires, engrenages holographiques.
+
+Ambiance sonore :  
+Synth cosmique profond, pulsations lentes.
+
+Illusions :  
+Superposition cosmique, distorsion spatiale.
+
+Condition de déblocage :  
+Niveau 75 complété.
+
+Dialogue d’ECHO :  
+« Cette machine… contient la mémoire de notre chute.
+Active chaque module… et tu verras ce que nous avons perdu. »
+
+Version EN courte :  
+“Activate the final cosmic machine.”
+
+===============================
+NIVEAU 77 — SÉQUENCE ULTIME
+===============================
+Objectif narratif :  
+ECHO teste la capacité du Voyageur à suivre une séquence cosmique extrêmement complexe.
+
+Objectif mécanique :  
+Reproduire une séquence ultime combinant lumière, son, gravité et temps.
+
+Description du puzzle :  
+Une séquence cosmique joue avec :
+
+pulsations lumineuses
+
+notes stellaires
+
+variations de gravité
+
+distorsions temporelles
+Le joueur doit cliquer au bon moment selon les quatre paramètres.
+
+Interactions :
+
+Clic rythmique
+
+Analyse multi‑paramètres
+
+Feedback
+
+Animations :
+
+Pulsation cosmique
+
+Distorsion temporelle
+
+Effet de gravité
+
+Ambiance visuelle :  
+Séquence holographique violette.
+
+Ambiance sonore :  
+Synth cosmique complexe.
+
+Illusions :  
+Superposition dynamique.
+
+Condition de déblocage :  
+Niveau 76 complété.
+
+Dialogue d’ECHO :  
+« Le cosmos… chante sa dernière chanson.
+Suis-la… sans te perdre. »
+
+Version EN courte :  
+“Repeat the ultimate cosmic sequence.”
+
+===============================
+NIVEAU 78 — PUZZLE DE PRÉCISION COSMIQUE
+===============================
+Objectif narratif :  
+ECHO teste la précision absolue du Voyageur.
+
+Objectif mécanique :  
+Placer des fragments cosmiques dans des zones microscopiques.
+
+Description du puzzle :  
+12 fragments cosmiques doivent être placés dans des zones minuscules.
+La précision est extrême.
+
+Interactions :
+
+Drag précis
+
+Rotation
+
+Feedback holographique
+
+Animations :
+
+Pulsation fine
+
+Stabilisation cosmique
+
+Ambiance visuelle :  
+Fragments violets.
+
+Ambiance sonore :  
+Synth précis.
+
+Illusions :  
+Micro‑distorsion.
+
+Condition de déblocage :  
+Niveau 77 complété.
+
+Dialogue d’ECHO :  
+« La précision… est la clé du cosmos.
+Place chaque fragment avec soin. »
+
+Version EN courte :  
+“Place the cosmic fragments with perfect precision.”
+
+===============================
+NIVEAU 79 — CONSTELLATION FINALE
+===============================
+Objectif narratif :  
+ECHO révèle la constellation finale, mémoire ultime de la civilisation.
+
+Objectif mécanique :  
+Relier une constellation géante en 4 couches.
+
+Description du puzzle :  
+La constellation finale possède 4 couches :
+
+couche 1 : constellation simple
+
+couche 2 : constellation fractale
+
+couche 3 : constellation temporelle
+
+couche 4 : constellation cosmique (points mouvants)
+
+Interactions :
+
+Drag
+
+Clic
+
+Navigation entre couches
+
+Animations :
+
+Pulsation stellaire
+
+Effet de gravité
+
+Profondeur holographique
+
+Ambiance visuelle :  
+Constellation géante violette.
+
+Ambiance sonore :  
+Synth stellaire profond.
+
+Illusions :  
+Profondeur cosmique.
+
+Condition de déblocage :  
+Niveau 78 complété.
+
+Dialogue d’ECHO :  
+« Cette constellation… c’est notre histoire entière.
+Relie-la… et tu verras la vérité. »
+
+Version EN courte :  
+“Form the final cosmic constellation.”
+
+===============================
+NIVEAU 80 — ILLUSION TOTALE
+===============================
+Objectif narratif :  
+ECHO montre que la réalité entière peut devenir une illusion.
+
+Objectif mécanique :  
+Identifier l’unique objet réel dans une illusion totale.
+
+Description du puzzle :  
+L’écran entier devient une illusion :
+
+distorsion
+
+duplication
+
+profondeur
+
+gravité
+
+rotation
+Un seul objet est réel.
+
+Interactions :
+
+Rotation de la scène
+
+Clic
+
+Observation
+
+Animations :
+
+Distorsion totale
+
+Parallaxe profonde
+
+Glitch cosmique
+
+Ambiance visuelle :  
+Illusion totale.
+
+Ambiance sonore :  
+Synth distordu.
+
+Illusions :  
+Tout est illusion.
+
+Condition de déblocage :  
+Niveau 79 complété.
+
+Dialogue d’ECHO :  
+« Tout ce que tu vois… peut mentir.
+Mais une vérité subsiste.
+Trouve-la. »
+
+Version EN courte :  
+“Find the real object in the total illusion.”
+
+===============================
+NIVEAU 81 — ACTIVATION COSMIQUE
+===============================
+Objectif narratif :  
+ECHO montre que certaines zones cosmiques doivent être activées pour stabiliser l’espace.
+
+Objectif mécanique :  
+Activer 6 zones cosmiques dans un ordre précis.
+
+Description du puzzle :  
+6 zones holographiques apparaissent.
+Le joueur doit les activer selon une séquence cosmique.
+
+Interactions :
+
+Clic
+
+Timing
+
+Feedback
+
+Animations :
+
+Activation cosmique
+
+Pulsation violette
+
+Ambiance visuelle :  
+Zones holographiques.
+
+Ambiance sonore :  
+Synth cosmique.
+
+Illusions :  
+Zones flottantes.
+
+Condition de déblocage :  
+Niveau 80 complété.
+
+Dialogue d’ECHO :  
+« Active chaque zone… et le cosmos respirera à nouveau. »
+
+Version EN courte :  
+“Activate all cosmic zones.”
+
+===============================
+NIVEAU 82 — PUZZLE FINAL NARRATIF
+===============================
+Objectif narratif :  
+ECHO révèle la mémoire complète de la civilisation.
+Le puzzle est une scène holographique géante.
+
+Objectif mécanique :  
+Assembler une scène narrative en 20 fragments.
+
+Description du puzzle :  
+Une scène cosmique représentant la chute de la civilisation est divisée en 20 fragments.
+Le joueur doit les assembler.
+
+Interactions :
+
+Drag
+
+Rotation
+
+Feedback
+
+Animations :
+
+Reconstruction holographique
+
+Pulsation mémorielle
+
+Ambiance visuelle :  
+Scène cosmique violette.
+
+Ambiance sonore :  
+Synth émotionnel profond.
+
+Illusions :  
+Profondeur holographique.
+
+Condition de déblocage :  
+Niveau 81 complété.
+
+Dialogue d’ECHO (narratif) :  
+« Voici… notre dernier jour.
+Le Miroir du Temps s’est ouvert…
+Et nous avons disparu.
+Regarde… et comprends pourquoi je suis seule. »
+
+Version EN courte :  
+“Reassemble the final holographic memory.”
+
+===============================
+NIVEAU 83 — MACHINE DU MIROIR
+===============================
+Objectif narratif :  
+ECHO révèle la machine qui contrôle le Miroir du Temps.
+
+Objectif mécanique :  
+Activer la machine du Miroir en 6 phases.
+
+Description du puzzle :  
+La machine possède 6 modules :
+
+module de rotation
+
+module de séquence
+
+module de gravité
+
+module de mémoire
+
+module de pulsation
+
+module de stabilisation
+
+Interactions :
+
+Drag
+
+Rotation
+
+Clic
+
+Timing
+
+Animations :
+
+Distorsion temporelle
+
+Pulsation cosmique
+
+Stabilisation holographique
+
+Ambiance visuelle :  
+Machine violette.
+
+Ambiance sonore :  
+Synth profond.
+
+Illusions :  
+Distorsion du temps.
+
+Condition de déblocage :  
+Niveau 82 complété.
+
+Dialogue d’ECHO :  
+« Cette machine… ouvre le Miroir du Temps.
+Active-la… et la vérité apparaîtra. »
+
+Version EN courte :  
+“Activate the Mirror machine.”
+
+===============================
+NIVEAU 84 — SÉQUENCE DU MIROIR
+===============================
+Objectif narratif :  
+ECHO montre la séquence qui ouvre le Miroir du Temps.
+
+Objectif mécanique :  
+Reproduire la séquence du Miroir.
+
+Description du puzzle :  
+Une séquence cosmique joue avec :
+
+lumière
+
+son
+
+gravité
+
+temps
+Le joueur doit la reproduire.
+
+Interactions :
+
+Clic
+
+Timing
+
+Feedback
+
+Animations :
+
+Pulsation cosmique
+
+Distorsion temporelle
+
+Ambiance visuelle :  
+Séquence violette.
+
+Ambiance sonore :  
+Synth cosmique.
+
+Illusions :  
+Superposition.
+
+Condition de déblocage :  
+Niveau 83 complété.
+
+Dialogue d’ECHO :  
+« Voici la séquence… qui ouvre le Miroir.
+Ne te trompe pas. »
+
+Version EN courte :  
+“Repeat the Mirror sequence.”
+
+===============================
+NIVEAU 85 — PUZZLE FINAL
+===============================
+Objectif narratif :  
+ECHO teste la maîtrise totale du Voyageur.
+
+Objectif mécanique :  
+Combiner toutes les mécaniques de la dimension Éclipse.
+
+Description du puzzle :  
+Le puzzle combine :
+
+constellation
+
+machine temporelle
+
+illusion 3D
+
+séquence cosmique
+
+gravité
+
+mémoire holographique
+
+Interactions :
+
+Drag
+
+Rotation
+
+Clic
+
+Timing
+
+Analyse
+
+Animations :
+
+Superposition cosmique
+
+Distorsion temporelle
+
+Pulsation stellaire
+
+Ambiance visuelle :  
+Puzzle géant.
+
+Ambiance sonore :  
+Synth cosmique profond.
+
+Illusions :  
+Illusion totale.
+
+Condition de déblocage :  
+Niveau 84 complété.
+
+Dialogue d’ECHO :  
+« Tu as appris tout ce que je pouvais t’enseigner.
+Montre-moi que tu es prêt… pour la vérité finale. »
+
+Version EN courte :  
+“Combine all cosmic mechanics.”
+
+===============================
+NIVEAU 86 — ACTIVATION DES CLÉS
+===============================
+Objectif narratif :  
+Le Voyageur doit activer les trois clés :
+
+Clé de Résonance
+
+Clé Fractale
+
+Clé de l’Œil (à venir)
+
+Objectif mécanique :  
+Activer les trois clés dans un ordre cosmique.
+
+Description du puzzle :  
+Les trois clés apparaissent.
+Le joueur doit les activer selon une séquence cosmique.
+
+Interactions :
+
+Clic
+
+Timing
+
+Feedback
+
+Animations :
+
+Pulsation des clés
+
+Effet cosmique
+
+Ambiance visuelle :  
+Clés holographiques.
+
+Ambiance sonore :  
+Synth profond.
+
+Illusions :  
+Superposition.
+
+Condition de déblocage :  
+Niveau 85 complété.
+
+Dialogue d’ECHO :  
+« Active les trois clés…
+Et le Miroir du Temps s’ouvrira. »
+
+Version EN courte :  
+“Activate the three keys.”
+
+===============================
+NIVEAU 87 — OUVERTURE DU MIROIR
+===============================
+Objectif narratif :  
+Le Miroir du Temps s’ouvre.
+
+Objectif mécanique :  
+Activer le Miroir via une séquence cosmique.
+
+Description du puzzle :  
+Le Miroir du Temps apparaît.
+Le joueur doit activer ses 5 anneaux holographiques.
+
+Interactions :
+
+Rotation
+
+Clic
+
+Timing
+
+Animations :
+
+Ouverture du Miroir
+
+Distorsion temporelle
+
+Pulsation cosmique
+
+Ambiance visuelle :  
+Miroir violet.
+
+Ambiance sonore :  
+Synth profond.
+
+Illusions :  
+Distorsion totale.
+
+Condition de déblocage :  
+Niveau 86 complété.
+
+Dialogue d’ECHO :  
+« Le Miroir… s’ouvre.
+Tu es sur le seuil de la vérité. »
+
+Version EN courte :  
+“Open the Mirror of Time.”
+
+===============================
+NIVEAU 88 — RÉVÉLATION
+===============================
+Objectif narratif :  
+ECHO révèle la vérité finale sur la civilisation.
+
+Objectif mécanique :  
+Puzzle narratif.
+
+Description du puzzle :  
+Une scène holographique géante apparaît.
+Le joueur doit assembler les fragments pour révéler la vérité.
+
+Interactions :
+
+Drag
+
+Rotation
+
+Feedback
+
+Animations :
+
+Reconstruction cosmique
+
+Pulsation mémorielle
+
+Ambiance visuelle :  
+Scène cosmique.
+
+Ambiance sonore :  
+Synth émotionnel.
+
+Illusions :  
+Profondeur holographique.
+
+Condition de déblocage :  
+Niveau 87 complété.
+
+Dialogue d’ECHO (long, narratif) :  
+« Voici la vérité…
+Nous avons voulu contrôler le temps.
+Nous avons ouvert le Miroir…
+Et il nous a effacés.
+Je suis la dernière mémoire…
+Et toi… tu es mon dernier espoir. »
+
+Version EN courte :  
+“Reveal the final truth.”
+
+===============================
+NIVEAU 89 — DIALOGUE FINAL
+===============================
+Objectif narratif :  
+ECHO parle au Voyageur une dernière fois.
+
+Objectif mécanique :  
+Aucun puzzle — uniquement narration.
+
+Description du puzzle :  
+ECHO apparaît en hologramme.
+Elle raconte la fin de la civilisation.
+
+Interactions :
+
+Clic pour avancer le dialogue
+
+Animations :
+
+Pulsation holographique
+
+Effet de gravité
+
+Ambiance visuelle :  
+Hologramme violet.
+
+Ambiance sonore :  
+Synth émotionnel.
+
+Illusions :  
+Superposition.
+
+Condition de déblocage :  
+Niveau 88 complété.
+
+Dialogue d’ECHO (final) :  
+« Voyageur…
+Tu as vu ce que nous étions.
+Tu as vu ce que nous avons perdu.
+Tu as vu ce que je suis devenue.
+
+Merci…
+De m’avoir ramenée à la lumière. »
+
+Version EN courte :  
+“Listen to ECHO’s final message.”
+
+===============================
+NIVEAU 90 — OBTENTION DE LA CLÉ DE L’ŒIL
+===============================
+Objectif narratif :  
+Le Voyageur obtient la dernière clé : La Clé de l’Œil, artefact suprême qui ouvre la vérité cosmique.
+
+Objectif mécanique :  
+Puzzle final + activation de la clé.
+
+Description du puzzle :  
+Une fractale cosmique géante apparaît.
+Le joueur doit :
+
+assembler 24 fragments
+
+activer 7 zones cosmiques
+
+cliquer au rythme de la pulsation cosmique
+
+stabiliser le cœur du Miroir
+
+La Clé de l’Œil apparaît.
+
+Interactions :
+
+Drag
+
+Rotation
+
+Clic rythmique
+
+Activation
+
+Animations :
+
+Déploiement cosmique
+
+Pulsation violette
+
+Apparition de la clé
+
+Ambiance visuelle :  
+Fractale cosmique géante.
+
+Ambiance sonore :  
+Synth profond, pulsations stellaires.
+
+Illusions :  
+Distorsion totale.
+
+Condition de déblocage :  
+Niveau 89 complété.
+
+Dialogue d’ECHO (final narratif) :  
+« Tu as traversé les trois dimensions.
+Tu as stabilisé la Rupture.
+Tu as refermé les Fractures.
+Tu as ouvert le Miroir.
+
+Voyageur…
+Voici la Clé de l’Œil.
+Elle ouvre la dernière vérité.
+Elle ouvre… ce que nous étions.
+Ce que nous sommes.
+Ce que tu deviendras. »
+
+Version EN courte :  
+“Take the Eye Key. You have completed the Eclipse.”
+
+🎉 FIN DES NIVEAUX 61 À 90 — DIMENSION ÉCLIPSE

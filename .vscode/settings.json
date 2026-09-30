@@ -1,0 +1,20 @@
+{
+  "chat.tools.terminal.autoApprove": {
+    "/^Get-Location; git status --short --branch; git remote -v; Get-ChildItem -Force$/": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "/^Get-Content \\.git\\\\config; if \\(Test-Path \\.gitignore\\) \\{ Get-Content \\.gitignore \\} else \\{ Write-Output 'NO_GITIGNORE' \\}$/": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "/^Set-Location 'C:\\\\ECHOES-Fragments-of-Reality-XM'; python -m http\\.server 8000$/": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "/^git add -A; git commit -m \"Initialise le projet ECHOES\"$/": {
+      "approve": true,
+      "matchCommandLine": true
+    }
+  }
+}

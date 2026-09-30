@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ECHOES: Fragments of Reality</title>
+    <meta
+      name="description"
+      content="ECHOES: Fragments of Reality — une expérience cyberpunk spatiale de puzzles et de narration."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <canvas id="background"></canvas>
+    <div class="ambient-grid"></div>
+
+    <div class="lang-switcher" aria-label="Choix de langue">
+      <button class="lang-btn active" data-lang="fr" type="button">FR</button>
+      <button class="lang-btn" data-lang="en" type="button">EN</button>
+    </div>
+
+    <div class="hud top-left">
+      <span class="label" data-i18n="systemLabel">SYSTÈME</span>
+      <span class="status" data-i18n="systemStatus">EN LIGNE</span>
+    </div>
+
+    <div class="hud top-right">
+      <span class="label" data-i18n="dimensionLabel">DIMENSION</span>
+      <span class="status" data-i18n="dimensionStatus">RUPTURE</span>
+    </div>
+
+    <main class="hero">
+      <div class="scanlines"></div>
+
+      <div class="content">
+        <div class="signal-ring"></div>
+        <p class="eyebrow" data-i18n="eyebrow">
+          INTELLIGENCE CONSCIENTE FRAGMENTÉE
+        </p>
+        <h1 class="title" data-text="ECHOES">ECHOES</h1>
+        <h2 class="subtitle" data-i18n="subtitle">Fragments de la réalité</h2>
+
+        <p class="description" data-i18n="description">
+          Le monde a été brisé. Les dimensions se fracturent. La mémoire du
+          temps est perdue. La seule voix qui reste est celle d’ECHO.
+        </p>
+
+        <div class="actions">
+          <button class="primary-btn" id="startButton" data-i18n="startButton">
+            Entrer dans la rupture
+          </button>
+        </div>
+
+        <div class="meta">
+          <span data-i18n="metaAct">ACTE I</span>
+          <span data-i18n="metaAwakening">RÉVEIL</span>
+          <span data-i18n="metaStabilization">STABILISATION</span>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <span data-i18n="footerYear">© 2026 Xavier Martineau</span>
+      <span data-i18n="footerRights">Tous droits réservés.</span>
+    </footer>
+
+    <div class="console-footer">
+      <span data-i18n="consoleText">ÉCHO // VÉRIFICATION DE LA RÉALITÉ</span>
+      <span class="pulse">●</span>
+    </div>
+
+    <script src="docs/data/translations.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
