@@ -27,6 +27,8 @@ window.translations = {
     introStarting: "Simulation en cours...",
     introActive: "Simulation active // canal sécurisé",
     introFooter: "ÉCHO // TRANSMISSION ACTIVE",
+    introFooterYear: "© 2026 Xavier Martineau",
+    introFooterRights: "Tous droits réservés.",
     introMissionButton: "RÉCUPÉRER LES 3 CLÉS",
     introMissionStarted:
       "Recherche des clés initialisée // objectif verrouillé",
@@ -115,6 +117,8 @@ window.translations = {
     introStarting: "Simulation starting...",
     introActive: "Simulation active // secure channel",
     introFooter: "ECHO // ACTIVE TRANSMISSION",
+    introFooterYear: "© 2026 Xavier Martineau",
+    introFooterRights: "All rights reserved.",
     introMissionButton: "RECOVER THE 3 KEYS",
     introMissionStarted: "Key search initialized // objective locked",
     introObjective: "SYSTEM: Find the 3 keys named by ECHO to help ECHO.",

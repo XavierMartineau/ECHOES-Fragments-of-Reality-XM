@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap");
+
+:root {
+  --font-body: "Rajdhani", sans-serif;
+  --font-display: "Orbitron", sans-serif;
+  --font-size-interface: clamp(0.62rem, 0.72vw, 0.78rem);
+  --font-size-copy: clamp(1rem, 1.5vw, 1.2rem);
+  --font-size-label: clamp(0.62rem, 0.8vw, 0.78rem);
+  --font-size-title: clamp(2.8rem, 8vw, 7rem);
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  font-family: var(--font-body);
+}
+
+.brand,
+.status-pill,
+.eyebrow,
+.intro-title,
+.intro-subtitle,
+.title,
+.subtitle,
+.label,
+.code,
+.lang-btn,
+.language-button,
+.dialogue-head,
+.dialogue-placeholder,
+.speaker,
+.mission-objective,
+.mission-button {
+  font-family: var(--font-display);
+}
+
+.intro-title,
+.title {
+  font-size: var(--font-size-title);
+}
+
+.status-pill,
+.dialogue-head,
+.console-footer,
+.site-footer,
+.lang-btn,
+.language-button,
+.mission-button {
+  font-size: var(--font-size-interface);
+}
+
+.description,
+.dialogue-body,
+.dialogue-line-text {
+  font-size: var(--font-size-copy);
+}
+
+.eyebrow,
+.label,
+.code,
+.dialogue-placeholder,
+.dialogue-hint,
+.mission-objective {
+  font-size: var(--font-size-label);
+}
