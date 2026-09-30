@@ -192,15 +192,15 @@ body.simulation-failure .intro-title {
 
 .brand::before {
   display: grid;
-  width: 29px;
-  height: 29px;
+  width: 1.45rem;
+  height: 1.45rem;
   place-items: center;
   border: 1px solid var(--cyan);
   box-shadow:
     0 0 18px rgba(121, 247, 255, 0.4),
     inset 0 0 12px rgba(121, 247, 255, 0.2);
   content: "E";
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   transition:
     background 0.2s ease,
     box-shadow 0.2s ease,
@@ -224,6 +224,22 @@ body.simulation-failure .intro-title {
   font-size: 0.62rem;
   letter-spacing: 0.12rem;
   text-transform: uppercase;
+}
+.save-game-button {
+  padding: 8px 12px;
+  border: 1px solid rgba(121, 247, 255, 0.5);
+  background: rgba(121, 247, 255, 0.08);
+  color: var(--cyan);
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.58rem;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+.save-game-button:hover,
+.save-game-button:focus-visible {
+  background: rgba(121, 247, 255, 0.2);
+  outline: none;
 }
 
 .top-controls {

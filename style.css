@@ -246,6 +246,47 @@ body::before {
   backdrop-filter: blur(12px);
 }
 
+.home-brand {
+  position: fixed;
+  top: 26px;
+  left: 28px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--cyan);
+  font-family: "Orbitron", sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.24rem;
+  text-decoration: none;
+  text-shadow: 0 0 12px rgba(115, 243, 255, 0.45);
+}
+.home-brand-symbol {
+  display: grid;
+  width: 1.45rem;
+  height: 1.45rem;
+  place-items: center;
+  border: 1px solid var(--cyan);
+  box-shadow:
+    0 0 20px rgba(115, 243, 255, 0.52),
+    inset 0 0 12px rgba(115, 243, 255, 0.2);
+  font-size: 0.78rem;
+}
+.home-brand:hover,
+.home-brand:focus-visible {
+  color: #fff;
+  outline: none;
+  text-shadow: 0 0 18px rgba(115, 243, 255, 0.9);
+}
+.home-brand:hover .home-brand-symbol,
+.home-brand:focus-visible .home-brand-symbol {
+  background: rgba(115, 243, 255, 0.16);
+  box-shadow:
+    0 0 28px rgba(115, 243, 255, 0.82),
+    inset 0 0 16px rgba(115, 243, 255, 0.34);
+}
+
 .strobe-notice {
   position: relative;
   z-index: 2;
@@ -346,6 +387,7 @@ body.reduced-effects .pulse {
 }
 
 .top-left {
+  top: 28px;
   left: 28px;
 }
 
@@ -445,7 +487,19 @@ body.reduced-effects .pulse {
     top: 18px;
   }
 
+  .home-brand {
+    top: 14px;
+    left: 12px;
+    font-size: 0.78rem;
+  }
+  .home-brand-symbol {
+    width: 27px;
+    height: 27px;
+    font-size: 0.8rem;
+  }
+
   .top-left {
+    top: 18px;
     left: 12px;
   }
 

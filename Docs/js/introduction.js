@@ -4,6 +4,7 @@ const dialogueShell = document.getElementById("dialogueShell");
 const dialogueText = document.getElementById("dialogueText");
 const dialogueHint = document.getElementById("dialogueHint");
 const missionButton = document.getElementById("missionButton");
+const saveGameButton = document.getElementById("saveGameButton");
 const translations = window.translations;
 const translatableElements = document.querySelectorAll("[data-i18n]");
 
@@ -285,9 +286,19 @@ missionButton.addEventListener("click", () => {
   missionButton.querySelector("[data-i18n]").textContent =
     translations[currentLanguage].introMissionStarted;
   missionButton.disabled = true;
+  window.EchoesSave.saveProgress({ currentPage: "level-1", currentLevel: 1 });
   window.setTimeout(() => {
     window.location.href = "partie-1_niveau-1_à_15/niveau-01.html";
   }, 650);
+});
+
+saveGameButton.addEventListener("click", () => {
+  window.EchoesSave.saveProgress({
+    currentPage: "introduction",
+    currentLevel: 0,
+  });
+  saveGameButton.textContent =
+    currentLanguage === "en" ? "Saved" : "Sauvegardé";
 });
 
 window.addEventListener("resize", resizeSpectrum);

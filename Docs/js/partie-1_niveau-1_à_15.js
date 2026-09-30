@@ -7,6 +7,7 @@ const progressReadout = document.getElementById("progressReadout");
 const systemMessage = document.getElementById("systemMessage");
 const resetButton = document.getElementById("resetButton");
 const levelProgress = document.getElementById("levelProgress");
+const saveGameButton = document.getElementById("saveGameButton");
 
 const solution = ["circle", "triangle", "square"];
 const targetByShape = { circle: 0, triangle: 1, square: 2 };
@@ -61,6 +62,11 @@ function markCurrentLevelCompleted() {
     progressStorageKey,
     JSON.stringify([...completedLevels].sort((a, b) => a - b)),
   );
+  window.EchoesSave.saveProgress({
+    currentPage: "level-1",
+    currentLevel: currentLevel,
+    completedLevels: [...completedLevels].sort((a, b) => a - b),
+  });
   renderProgress();
 }
 
@@ -181,6 +187,14 @@ slots.forEach((slot) => {
 });
 
 resetButton.addEventListener("click", resetPuzzle);
+saveGameButton.addEventListener("click", () => {
+  window.EchoesSave.saveProgress({
+    currentPage: "level-1",
+    currentLevel: currentLevel,
+    completedLevels: [...completedLevels].sort((a, b) => a - b),
+  });
+  saveGameButton.textContent = "SAUVEGARDÉ";
+});
 shufflePieces();
 systemMessage.textContent = systemMessages[language].input;
 updateProgress();

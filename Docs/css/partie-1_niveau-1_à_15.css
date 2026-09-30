@@ -87,6 +87,9 @@ body::before {
 }
 
 .brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   color: var(--cyan);
   font-family: var(--font-display, "Orbitron", sans-serif);
   font-size: 1rem;
@@ -100,6 +103,41 @@ body::before {
   color: #fff;
   outline: none;
   text-shadow: 0 0 18px rgba(121, 247, 255, 0.85);
+}
+.brand::before {
+  display: grid;
+  width: 1.45rem;
+  height: 1.45rem;
+  place-items: center;
+  border: 1px solid var(--cyan);
+  box-shadow:
+    0 0 18px rgba(121, 247, 255, 0.4),
+    inset 0 0 12px rgba(121, 247, 255, 0.2);
+  content: "E";
+  font-size: 0.78rem;
+}
+.brand:hover::before,
+.brand:focus-visible::before {
+  background: rgba(121, 247, 255, 0.14);
+  box-shadow:
+    0 0 24px rgba(121, 247, 255, 0.76),
+    inset 0 0 14px rgba(121, 247, 255, 0.28);
+}
+.save-game-button {
+  padding: 8px 12px;
+  border: 1px solid rgba(121, 247, 255, 0.5);
+  background: rgba(121, 247, 255, 0.08);
+  color: var(--cyan);
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.58rem;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+.save-game-button:hover,
+.save-game-button:focus-visible {
+  background: rgba(121, 247, 255, 0.2);
+  outline: none;
 }
 .level-meta {
   display: flex;
@@ -203,8 +241,9 @@ body::before {
   margin: 9px 0 0;
   color: #c9faff;
   font-family: "Space Mono", monospace;
-  font-size: 0.86rem;
+  font-size: clamp(0.78rem, 1vw, 0.98rem);
   line-height: 1.7;
+  overflow-wrap: anywhere;
 }
 
 .puzzle-panel {
@@ -515,7 +554,7 @@ body::before {
     max-width: none;
     text-align: center;
   }
-  .echo-transmission {
+  .system-transmission {
     max-width: 620px;
     margin-inline: auto;
     text-align: left;
@@ -529,6 +568,8 @@ body::before {
   .level-header {
     width: calc(100% - 28px);
     padding: 17px 0;
+    flex-wrap: wrap;
+    gap: 12px;
   }
   .level-meta {
     flex-direction: column;
@@ -537,9 +578,9 @@ body::before {
     font-size: 0.5rem;
   }
   .level-progress {
-    max-width: 160px;
+    max-width: 180px;
     justify-content: flex-end;
-    gap: 6px;
+    gap: 5px;
   }
   .level-square {
     width: 8px;
@@ -553,13 +594,32 @@ body::before {
   .level-intro h1 {
     font-size: clamp(2rem, 11vw, 3.2rem);
   }
+  @media (hover: hover) and (pointer: fine) {
+    .piece-square:hover {
+      animation: diamond-hover 0.72s ease-in-out infinite alternate;
+    }
+  }
+  @keyframes diamond-hover {
+    from {
+      transform: rotate(43deg) translateY(-5px) scale(0.82);
+      filter: drop-shadow(0 0 10px rgba(179, 108, 255, 0.7));
+    }
+    to {
+      transform: rotate(49deg) translateY(-9px) scale(0.9);
+      filter: drop-shadow(0 0 20px rgba(210, 146, 255, 0.98));
+    }
+  }
   .level-description {
     margin-top: 18px;
     font-size: 1rem;
   }
-  .echo-transmission {
+  .system-transmission {
     margin-top: 24px;
     padding: 14px;
+  }
+  .system-transmission p {
+    font-size: 0.78rem;
+    line-height: 1.55;
   }
   .panel-heading {
     padding: 18px 16px;

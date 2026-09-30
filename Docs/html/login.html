@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../assets/images/echoes-favicon.svg"
+    />
+    <title>ECHOES - Connexion</title>
+    <link rel="stylesheet" href="../css/fonts.css" />
+    <link rel="stylesheet" href="../css/login.css" />
+  </head>
+  <body>
+    <div class="login-background"></div>
+    <main class="login-shell">
+      <a class="login-brand" href="../../index.html">ECHOES</a>
+      <section class="login-card" aria-labelledby="loginTitle">
+        <p class="login-kicker" data-i18n="loginKicker">
+          SECURE ACCESS // MEMORY SYSTEM
+        </p>
+        <h1 id="loginTitle" data-i18n="loginTitle">Connexion requise</h1>
+        <p class="login-description" data-i18n="loginDescription">
+          Connecte-toi pour commencer une nouvelle partie ou reprendre ta
+          progression.
+        </p>
+
+        <form id="loginForm" autocomplete="on">
+          <label for="username" data-i18n="usernameLabel">Nom du joueur</label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            autocomplete="username"
+            required
+          />
+          <label for="password" data-i18n="passwordLabel">Mot de passe</label>
+          <div class="password-field">
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              required
+            />
+            <button
+              class="password-toggle"
+              id="passwordToggle"
+              type="button"
+              aria-controls="password"
+              aria-pressed="false"
+              data-i18n="showPassword"
+            >
+              Afficher
+            </button>
+          </div>
+          <p class="login-error" id="loginError" role="alert" hidden></p>
+          <button class="login-submit" type="submit" data-i18n="loginSubmit">
+            Se connecter
+          </button>
+        </form>
+
+        <section class="save-choice" id="saveChoice" aria-live="polite" hidden>
+          <p class="login-kicker" data-i18n="saveKicker">MEMORY CHECKPOINT</p>
+          <h2 data-i18n="saveTitle">Nouvelle sauvegarde</h2>
+          <p id="saveSummary"></p>
+          <div class="save-actions">
+            <button id="newGameButton" type="button" data-i18n="newGameButton">
+              Nouvelle partie
+            </button>
+            <button id="resumeButton" type="button" data-i18n="resumeButton">
+              Reprendre
+            </button>
+          </div>
+        </section>
+      </section>
+    </main>
+    <script src="../js/translations.js"></script>
+    <script src="../js/save-system.js"></script>
+    <script src="../js/login.js"></script>
+  </body>
+</html>
