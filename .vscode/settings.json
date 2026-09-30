@@ -15,6 +15,26 @@
     "/^git add -A; git commit -m \"Initialise le projet ECHOES\"$/": {
       "approve": true,
       "matchCommandLine": true
+    },
+    "/^git status --short --branch; git log -1 --oneline; git rev-parse --abbrev-ref --symbolic-full-name '@\\{u\\}'$/": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "/^Rename-Item -Path 'Docs' -NewName 'docs-temp'; Rename-Item -Path 'docs-temp' -NewName 'docs'; git status --short --branch$/": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "/^Rename-Item -Path 'Docs' -NewName 'docs-temp'; Rename-Item -Path 'docs-temp' -NewName 'docs'; Get-ChildItem -Name$/": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "/^git mv Docs docs-temp; git mv docs-temp docs; git status --short --branch$/": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "/^cmd /c \"ren Docs docs-temp\"; if \\(Test-Path 'docs-temp'\\) \\{ cmd /c \"ren docs-temp docs\" \\}; Get-ChildItem -Name$/": {
+      "approve": true,
+      "matchCommandLine": true
     }
   }
 }

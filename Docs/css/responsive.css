@@ -1,0 +1,204 @@
+@media (min-width: 1200px) {
+  .content {
+    width: min(900px, 82vw);
+    padding: 64px 58px 46px;
+  }
+
+  .hero {
+    padding-inline: 48px;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1199px) {
+  html,
+  body {
+    overflow: auto;
+  }
+
+  .hero {
+    min-height: 100svh;
+    padding: 104px 32px 112px;
+  }
+
+  .content {
+    width: min(760px, 92vw);
+    padding: 46px 36px 34px;
+  }
+
+  .hud {
+    top: 22px;
+    font-size: 0.66rem;
+  }
+
+  .top-left {
+    left: 18px;
+  }
+
+  .top-right {
+    right: 18px;
+  }
+
+  .lang-switcher {
+    top: 18px;
+  }
+
+  .description {
+    max-width: 580px;
+  }
+}
+
+@media (max-width: 700px) {
+  html,
+  body {
+    min-height: 100%;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .hero {
+    min-height: 100svh;
+    padding: 112px 14px 126px;
+  }
+
+  .content {
+    width: min(100%, 520px);
+    padding: 38px 20px 28px;
+  }
+
+  .content::before,
+  .content::after {
+    inset: 8px;
+  }
+
+  .signal-ring {
+    inset: 14px;
+  }
+
+  .eyebrow {
+    margin-bottom: 14px;
+    font-size: 0.66rem;
+    line-height: 1.5;
+    letter-spacing: 0.16rem;
+  }
+
+  .title {
+    font-size: clamp(3rem, 17vw, 5.8rem);
+    letter-spacing: 0.1em;
+  }
+
+  .subtitle {
+    font-size: clamp(0.9rem, 4vw, 1.2rem);
+    line-height: 1.35;
+    letter-spacing: 0.16rem;
+  }
+
+  .description {
+    margin-top: 22px;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .actions {
+    margin-top: 28px;
+  }
+
+  .primary-btn {
+    width: 100%;
+    min-height: 54px;
+    padding: 15px 18px;
+    font-size: 0.7rem;
+    line-height: 1.4;
+    letter-spacing: 0.1rem;
+  }
+
+  .meta {
+    gap: 10px 16px;
+    margin-top: 24px;
+    font-size: 0.62rem;
+    line-height: 1.4;
+    letter-spacing: 0.1rem;
+  }
+
+  .lang-switcher {
+    top: 14px;
+    padding: 4px;
+  }
+
+  .lang-btn {
+    padding: 8px 10px;
+    font-size: 0.62rem;
+    letter-spacing: 0.12rem;
+  }
+
+  .hud {
+    top: 60px;
+    max-width: calc(50vw - 20px);
+    padding: 7px 8px;
+    font-size: 0.56rem;
+    line-height: 1.4;
+    letter-spacing: 0.08rem;
+  }
+
+  .label {
+    display: block;
+    margin: 0;
+  }
+
+  .top-left {
+    left: 10px;
+  }
+
+  .top-right {
+    right: 10px;
+    text-align: right;
+  }
+
+  .site-footer {
+    bottom: 42px;
+    padding: 8px 14px;
+    gap: 4px;
+    font-size: 0.56rem;
+    line-height: 1.35;
+    letter-spacing: 0.06rem;
+  }
+
+  .console-footer {
+    padding: 10px 12px;
+    font-size: 0.56rem;
+    letter-spacing: 0.08rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero {
+    padding-inline: 10px;
+  }
+
+  .content {
+    padding-inline: 15px;
+  }
+
+  .title {
+    font-size: clamp(2.65rem, 16vw, 4rem);
+  }
+
+  .description {
+    font-size: 0.94rem;
+  }
+
+  .site-footer {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
