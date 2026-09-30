@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ECHOES — Introduction</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../assets/images/echoes-favicon.svg"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/introduction.css" />
+  </head>
+  <body>
+    <div class="background-glow"></div>
+    <div class="grid-overlay"></div>
+
+    <header class="top-bar">
+      <a
+        class="brand"
+        href="../../index.html"
+        aria-label="Retour à l'accueil ECHOES"
+        >ECHOES</a
+      >
+      <div class="status-pill" data-i18n="introStatus">
+        ACTE I / INITIALISATION
+      </div>
+    </header>
+
+    <main class="intro">
+      <p class="eyebrow" data-i18n="introEyebrow">
+        Intelligence consciente fragmentée
+      </p>
+      <h1 class="intro-title">ECHOES</h1>
+      <p class="intro-subtitle" data-i18n="introSubtitle">
+        Fragments de la réalité
+      </p>
+
+      <section class="ai-stage" aria-label="Spectre audio ECHO">
+        <canvas
+          class="spectrum-canvas"
+          id="spectrumCanvas"
+          aria-hidden="true"
+        ></canvas>
+        <span class="spectrum-label">ECHO</span>
+      </section>
+
+      <section
+        class="dialogue-shell"
+        id="dialogueShell"
+        role="button"
+        tabindex="0"
+        aria-label="Cliquer pour débuter la simulation"
+      >
+        <div class="dialogue-head">
+          <strong data-i18n="introDialogueTitle"
+            >Neural dialogue // ECHO</strong
+          >
+          <span data-i18n="introProtocol">protocol://simulation_01</span>
+        </div>
+        <div class="dialogue-body" id="dialogueText" aria-live="polite">
+          <span class="dialogue-placeholder" data-i18n="introPlaceholder"
+            >CLIQUE-MOI POUR DÉBUTER LA SIMULATION</span
+          >
+        </div>
+        <p class="dialogue-hint" id="dialogueHint" data-i18n="introHint">
+          Interface en attente // entrée utilisateur requise
+        </p>
+      </section>
+
+      <p class="mission-objective" id="missionObjective" hidden>
+        <span data-i18n="introObjective"
+          >SYSTÈME: Trouver les 3 clés nommées par ECHO pour aider ECHO.</span
+        >
+      </p>
+
+      <button class="mission-button" id="missionButton" type="button" hidden>
+        <span data-i18n="introMissionButton">RÉCUPÉRER LES 3 CLÉS</span>
+        <span class="mission-arrow">→</span>
+      </button>
+    </main>
+
+    <footer class="console-footer">
+      <span data-i18n="introFooter">ÉCHO // TRANSMISSION ACTIVE</span>
+      <span class="pulse">●</span>
+    </footer>
+
+    <script src="../js/translations.js"></script>
+    <script src="../js/introduction.js"></script>
+  </body>
+</html>

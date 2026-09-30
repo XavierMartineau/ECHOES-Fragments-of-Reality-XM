@@ -104,7 +104,7 @@ const startButton = document.getElementById("startButton");
 const languageButtons = document.querySelectorAll(".lang-btn");
 const translatableElements = document.querySelectorAll("[data-i18n]");
 
-let currentLang = "fr";
+let currentLang = localStorage.getItem("echoes-language") || "fr";
 
 function updateStartButton() {
   const labelKey =
@@ -113,8 +113,8 @@ function updateStartButton() {
 }
 
 function applyLanguage(lang) {
-  currentLang = lang;
-  const dictionary = translations[lang];
+  currentLang = translations[lang] ? lang : "fr";
+  const dictionary = translations[currentLang];
 
   translatableElements.forEach((element) => {
     const key = element.dataset.i18n;
@@ -124,10 +124,11 @@ function applyLanguage(lang) {
   });
 
   languageButtons.forEach((button) => {
-    button.classList.toggle("active", button.dataset.lang === lang);
+    button.classList.toggle("active", button.dataset.lang === currentLang);
   });
 
-  document.documentElement.lang = lang;
+  document.documentElement.lang = currentLang;
+  localStorage.setItem("echoes-language", currentLang);
   updateStartButton();
 }
 
@@ -140,6 +141,7 @@ startButton.addEventListener("click", () => {
     startButton.dataset.loading = "false";
     updateStartButton();
     startButton.disabled = false;
+    window.location.href = "docs/html/introduction.html";
   }, 1200);
 });
 
@@ -152,4 +154,4 @@ languageButtons.forEach((button) => {
 window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 drawBackground();
-applyLanguage("fr");
+applyLanguage(currentLang);
