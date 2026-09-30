@@ -101,10 +101,21 @@ function drawBackground() {
 }
 
 const startButton = document.getElementById("startButton");
+const reducedEffectsButton = document.getElementById("reducedEffectsButton");
 const languageButtons = document.querySelectorAll(".lang-btn");
 const translatableElements = document.querySelectorAll("[data-i18n]");
 
 let currentLang = localStorage.getItem("echoes-language") || "fr";
+let reducedEffects = localStorage.getItem("echoes-reduced-effects") === "true";
+
+function updateReducedEffects() {
+  document.body.classList.toggle("reduced-effects", reducedEffects);
+  reducedEffectsButton.textContent =
+    translations[currentLang][
+      reducedEffects ? "effectsReduced" : "reduceStrobe"
+    ];
+  reducedEffectsButton.setAttribute("aria-pressed", String(reducedEffects));
+}
 
 function updateStartButton() {
   const labelKey =
@@ -130,6 +141,7 @@ function applyLanguage(lang) {
   document.documentElement.lang = currentLang;
   localStorage.setItem("echoes-language", currentLang);
   updateStartButton();
+  updateReducedEffects();
 }
 
 startButton.addEventListener("click", () => {
@@ -149,6 +161,12 @@ languageButtons.forEach((button) => {
   button.addEventListener("click", () => {
     applyLanguage(button.dataset.lang);
   });
+});
+
+reducedEffectsButton.addEventListener("click", () => {
+  reducedEffects = !reducedEffects;
+  localStorage.setItem("echoes-reduced-effects", String(reducedEffects));
+  updateReducedEffects();
 });
 
 window.addEventListener("resize", resizeCanvas);

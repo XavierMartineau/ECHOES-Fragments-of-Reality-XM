@@ -120,25 +120,29 @@ body::before {
 .level-progress {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
-  max-width: 190px;
+  gap: 7px;
+  max-width: 220px;
 }
 .level-square {
   display: block;
-  width: 8px;
-  height: 8px;
-  border: 1px solid rgba(121, 247, 255, 0.4);
-  background: rgba(121, 247, 255, 0.08);
-  box-shadow: inset 0 0 5px rgba(121, 247, 255, 0.08);
+  width: 10px;
+  height: 10px;
+  border: 1px solid rgba(72, 176, 255, 0.35);
+  border-radius: 50%;
+  background: rgba(72, 176, 255, 0.1);
+  box-shadow: inset 0 0 7px rgba(121, 247, 255, 0.08);
 }
 .level-square.current {
-  border-color: #fff;
-  box-shadow: 0 0 8px rgba(121, 247, 255, 0.72);
+  border-color: rgba(72, 176, 255, 0.55);
+  background: rgba(72, 176, 255, 0.16);
 }
 .level-square.completed {
   border-color: var(--success);
   background: var(--success);
-  box-shadow: 0 0 8px rgba(128, 255, 207, 0.8);
+  box-shadow:
+    0 0 12px rgba(128, 255, 207, 0.9),
+    inset 0 0 8px rgba(255, 255, 255, 0.28);
+  color: #04251b;
 }
 
 .level-shell {
@@ -296,6 +300,60 @@ body::before {
 .target-slot.filled {
   border-style: solid;
 }
+.target-slot.slot-triangle {
+  border-color: var(--cyan);
+  background: radial-gradient(
+    circle,
+    rgba(121, 247, 255, 0.28),
+    rgba(4, 15, 29, 0.7)
+  );
+  box-shadow:
+    0 0 18px rgba(121, 247, 255, 0.42),
+    inset 0 0 16px rgba(121, 247, 255, 0.12);
+}
+.target-slot.slot-circle {
+  border-color: #48b0ff;
+  background: radial-gradient(
+    circle,
+    rgba(72, 176, 255, 0.28),
+    rgba(4, 15, 29, 0.7)
+  );
+  box-shadow:
+    0 0 18px rgba(72, 176, 255, 0.42),
+    inset 0 0 16px rgba(72, 176, 255, 0.12);
+}
+.target-slot.slot-square {
+  border-color: var(--violet);
+  background: radial-gradient(
+    circle,
+    rgba(179, 108, 255, 0.28),
+    rgba(4, 15, 29, 0.7)
+  );
+  box-shadow:
+    0 0 18px rgba(179, 108, 255, 0.42),
+    inset 0 0 16px rgba(179, 108, 255, 0.12);
+}
+.target-slot.preview-triangle {
+  border-color: rgba(121, 247, 255, 0.7);
+  background: rgba(121, 247, 255, 0.08);
+  box-shadow:
+    0 0 14px rgba(121, 247, 255, 0.2),
+    inset 0 0 12px rgba(121, 247, 255, 0.08);
+}
+.target-slot.preview-circle {
+  border-color: rgba(72, 176, 255, 0.72);
+  background: rgba(72, 176, 255, 0.08);
+  box-shadow:
+    0 0 14px rgba(72, 176, 255, 0.22),
+    inset 0 0 12px rgba(72, 176, 255, 0.08);
+}
+.target-slot.preview-square {
+  border-color: rgba(179, 108, 255, 0.72);
+  background: rgba(179, 108, 255, 0.08);
+  box-shadow:
+    0 0 14px rgba(179, 108, 255, 0.22),
+    inset 0 0 12px rgba(179, 108, 255, 0.08);
+}
 .target-slot.correct {
   border-color: var(--success);
   box-shadow: 0 0 24px rgba(128, 255, 207, 0.56);
@@ -341,10 +399,24 @@ body::before {
   transform: scale(0.8);
 }
 .piece-triangle {
+  border-color: var(--cyan);
+  background: rgba(121, 247, 255, 0.3);
+  filter: drop-shadow(0 0 10px rgba(121, 247, 255, 0.58));
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
+.piece-triangle:hover,
+.piece-triangle.selected {
+  box-shadow: 0 0 24px rgba(121, 247, 255, 0.72);
+}
 .piece-circle {
+  border-color: #48b0ff;
+  background: rgba(72, 176, 255, 0.32);
   border-radius: 50%;
+  filter: drop-shadow(0 0 10px rgba(72, 176, 255, 0.55));
+}
+.piece-circle:hover,
+.piece-circle.selected {
+  box-shadow: 0 0 24px rgba(72, 176, 255, 0.72);
 }
 .piece-square {
   transform: rotate(45deg) scale(0.74);
@@ -354,7 +426,9 @@ body::before {
 .piece-square:hover,
 .piece-square.selected {
   transform: rotate(45deg) translateY(-5px) scale(0.82);
-  box-shadow: 0 0 22px rgba(179, 108, 255, 0.6);
+  box-shadow:
+    0 0 26px rgba(179, 108, 255, 0.78),
+    0 0 42px rgba(210, 146, 255, 0.28);
 }
 .target-slot .piece-triangle,
 .target-slot .piece-circle,
@@ -463,13 +537,13 @@ body::before {
     font-size: 0.5rem;
   }
   .level-progress {
-    max-width: 150px;
+    max-width: 160px;
     justify-content: flex-end;
-    gap: 3px;
+    gap: 6px;
   }
   .level-square {
-    width: 7px;
-    height: 7px;
+    width: 8px;
+    height: 8px;
   }
   .level-shell {
     width: calc(100% - 28px);

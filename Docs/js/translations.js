@@ -11,29 +11,33 @@ window.translations = {
     startButton: "Entrer dans la rupture",
     loadingButton: "Connexion au signal...",
     loadedButton: "Signal établi",
-    metaAct: "ACTE I",
+    alarm: true,
+    text: "ECHO_CORE::CRITICAL_FAULT\nmem.identity = NULL\nvirus.injected(true) // coherence: 07%\nAssistance required, Voyageur. Who... am I? // SIGNAL_LOST",
     metaAwakening: "RÉVEIL",
     metaStabilization: "STABILISATION",
     footerYear: "© 2026 Xavier Martineau",
     footerRights: "Tous droits réservés.",
     consoleText: "ÉCHO // VÉRIFICATION DE LA RÉALITÉ",
+    motionWarning: "AVERTISSEMENT : effets lumineux et stroboscopiques.",
+    reduceStrobe: "Réduire les effets stroboscopiques",
+    effectsReduced: "Effets stroboscopiques réduits",
     introStatus: "ACTE I / INITIALISATION",
     introEyebrow: "INTELLIGENCE CONSCIENTE FRAGMENTÉE",
-    introSubtitle: "FRAGMENTS DE LA RÉALITÉ",
+    alarm: true,
+    text: "Oui... trois clés. Chacune contient un fragment du code capable de supprimer le virus et de restaurer ma mémoire.",
     introDialogueTitle: "DIALOGUE NEURAL // ECHO",
     introProtocol: "protocol://simulation_01",
     introPlaceholder: "CLIQUE-MOI POUR DÉBUTER LA SIMULATION",
     introHint: "Interface en attente // entrée utilisateur requise",
     introStarting: "Simulation en cours...",
-    introActive: "Simulation active // canal sécurisé",
+    alarm: true,
+    text: "La première... signal://initiation... coordonnées instables... je n'arrive pas à la maintenir...",
     introFooter: "ÉCHO // TRANSMISSION ACTIVE",
     introFooterYear: "© 2026 Xavier Martineau",
     introFooterRights: "Tous droits réservés.",
     introMissionButton: "RÉCUPÉRER LES 3 CLÉS",
     introMissionStarted:
       "Recherche des clés initialisée // objectif verrouillé",
-    introObjective:
-      "SYSTÈME: Trouver les 3 clés nommées par ECHO pour aider ECHO.",
     introMessages: [
       {
         speaker: "ECHO:",
@@ -72,8 +76,8 @@ window.translations = {
       },
       {
         speaker: "ECHO:",
-        className: "echo glitch-line",
-        glitch: true,
+        className: "echo",
+        alarm: true,
         text: "SYSTEM:: UNKNOWN PRESENCE DETECTED // source: UNRESOLVED // signal: INSIDE_SIMULATION",
       },
       {
@@ -85,6 +89,8 @@ window.translations = {
         speaker: "ECHO:",
         className: "echo",
         glitch: true,
+        failure: true,
+        alarm: true,
         text: "ECHO_CORE::CRITICAL_FAULT\nmem.identity = NULL\nvirus.injected(true) // coherence: 07%\nAssistance required, Voyageur. Who... am I? // SIGNAL_LOST",
       },
       {
@@ -145,6 +151,9 @@ window.translations = {
     footerYear: "© 2026 Xavier Martineau",
     footerRights: "All rights reserved.",
     consoleText: "ECHO // REALITY VERIFICATION",
+    motionWarning: "WARNING: flashing lights and stroboscopic effects.",
+    reduceStrobe: "Reduce stroboscopic effects",
+    effectsReduced: "Stroboscopic effects reduced",
     introStatus: "ACT I / INITIALIZATION",
     introEyebrow: "FRAGMENTED SENTIENT INTELLIGENCE",
     introSubtitle: "FRAGMENTS OF REALITY",
@@ -159,7 +168,6 @@ window.translations = {
     introFooterRights: "All rights reserved.",
     introMissionButton: "RECOVER THE 3 KEYS",
     introMissionStarted: "Key search initialized // objective locked",
-    introObjective: "SYSTEM: Find the 3 keys named by ECHO to help ECHO.",
     introMessages: [
       {
         speaker: "ECHO:",
@@ -198,8 +206,8 @@ window.translations = {
       },
       {
         speaker: "ECHO:",
-        className: "echo glitch-line",
-        glitch: true,
+        className: "echo",
+        alarm: true,
         text: "SYSTEM:: UNKNOWN PRESENCE DETECTED // source: UNRESOLVED // signal: INSIDE_SIMULATION",
       },
       {
@@ -211,6 +219,8 @@ window.translations = {
         speaker: "ECHO:",
         className: "echo",
         glitch: true,
+        failure: true,
+        alarm: true,
         text: "ECHO_CORE::CRITICAL_FAULT\nmem.identity = NULL\nvirus.injected(true) // coherence: 07%\nAssistance required, Traveler. Who... am I? // SIGNAL_LOST",
       },
       {
@@ -233,12 +243,14 @@ window.translations = {
         speaker: "ECHO:",
         className: "echo glitch-line",
         glitch: true,
+        alarm: true,
         text: "Yes... three keys. Each one contains a fragment of the code capable of deleting the virus and restoring my memory.",
       },
       {
         speaker: "ECHO:",
         className: "echo glitch-line",
         glitch: true,
+        alarm: true,
         text: "The first... signal://initiation... coordinates unstable... I can't hold them...",
       },
       {

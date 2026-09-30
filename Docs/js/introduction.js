@@ -3,10 +3,13 @@ const spectrumContext = spectrumCanvas.getContext("2d");
 const dialogueShell = document.getElementById("dialogueShell");
 const dialogueText = document.getElementById("dialogueText");
 const dialogueHint = document.getElementById("dialogueHint");
-const missionObjective = document.getElementById("missionObjective");
 const missionButton = document.getElementById("missionButton");
 const translations = window.translations;
 const translatableElements = document.querySelectorAll("[data-i18n]");
+
+if (localStorage.getItem("echoes-reduced-effects") === "true") {
+  document.body.classList.add("reduced-effects");
+}
 
 let hasStarted = false;
 let currentLanguage = localStorage.getItem("echoes-language") || "fr";
@@ -183,8 +186,10 @@ function keepDialogueInView() {
     const activeLine = dialogueText.lastElementChild;
     if (activeLine) {
       const bottomSpace = 140;
-      const lineBottom = activeLine.getBoundingClientRect().bottom + window.scrollY;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const lineBottom =
+        activeLine.getBoundingClientRect().bottom + window.scrollY;
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
       const targetScroll = Math.min(
         maxScroll,
         Math.max(0, lineBottom - window.innerHeight + bottomSpace),
@@ -202,8 +207,6 @@ function typeMessage(messageIndex = 0) {
       false,
       document.body.classList.contains("simulation-failure"),
     );
-    missionObjective.hidden = false;
-    missionObjective.classList.add("objective-reveal");
     window.setTimeout(() => {
       missionButton.hidden = false;
       missionButton.classList.add("mission-ready");
@@ -218,12 +221,17 @@ function typeMessage(messageIndex = 0) {
   let characterIndex = 0;
 
   line.className = "dialogue-line";
+  if (message.alarm) {
+    line.classList.add("alarm-line");
+  }
   if (message.className.includes("system")) {
     line.classList.add("system-line");
   }
   if (message.glitch) {
     line.classList.add("glitch-line");
     dialogueShell.classList.add("is-glitching");
+  }
+  if (message.failure) {
     document.body.classList.add("simulation-failure");
   }
   speaker.className = `speaker ${message.className}`;
@@ -231,7 +239,9 @@ function typeMessage(messageIndex = 0) {
   text.className = "dialogue-line-text";
   setSpectrumActivity(
     message.className.includes("echo"),
-    message.glitch === true,
+    message.failure === true ||
+      (document.body.classList.contains("simulation-failure") &&
+        message.className.includes("echo")),
   );
   line.append(speaker, text);
   dialogueText.appendChild(line);
@@ -274,6 +284,10 @@ missionButton.addEventListener("click", () => {
   missionButton.classList.add("mission-launched");
   missionButton.querySelector("[data-i18n]").textContent =
     translations[currentLanguage].introMissionStarted;
+  missionButton.disabled = true;
+  window.setTimeout(() => {
+    window.location.href = "partie-1_niveau-1_à_15/niveau-01.html";
+  }, 650);
 });
 
 window.addEventListener("resize", resizeSpectrum);

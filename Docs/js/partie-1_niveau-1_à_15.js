@@ -1,13 +1,33 @@
 const board = document.getElementById("puzzleBoard");
 const pieces = [...document.querySelectorAll(".puzzle-piece")];
 const slots = [...document.querySelectorAll(".target-slot")];
+const pieceTray = document.getElementById("pieceTray");
 const status = document.getElementById("puzzleStatus");
 const progressReadout = document.getElementById("progressReadout");
 const systemMessage = document.getElementById("systemMessage");
 const resetButton = document.getElementById("resetButton");
 const levelProgress = document.getElementById("levelProgress");
 
-const solution = ["triangle", "circle", "square"];
+const solution = ["circle", "triangle", "square"];
+const targetByShape = { circle: 0, triangle: 1, square: 2 };
+const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+const systemMessages = {
+  fr: {
+    input:
+      "SYSTEME:: ENTREE REQUISE // 3 FRAGMENTS DETECTES // ORDRE CIBLES: CERCLE > TRIANGLE > LOSANGE",
+    success:
+      "SYSTEME:: ALIGNEMENT ACCEPTE // STABILITE DU FRAGMENT +1 // PROCHAIN PROTOCOLE DEBLOQUE",
+    error:
+      "SYSTEME:: ERREUR D'ALIGNEMENT // DESYNCHRONISATION // NOUVELLE SEQUENCE REQUISE",
+  },
+  en: {
+    input:
+      "SYSTEM:: INPUT REQUIRED // 3 FRAGMENTS DETECTED // TARGET ORDER: CIRCLE > TRIANGLE > DIAMOND",
+    success:
+      "SYSTEM:: ALIGNMENT ACCEPTED // FRAGMENT STABILITY +1 // NEXT PROTOCOL UNLOCKED",
+    error: "SYSTEM:: ALIGNMENT ERROR // PATTERN DESYNC // RESEQUENCE REQUIRED",
+  },
+};
 const currentLevel = 1;
 const progressStorageKey = "echoes-completed-levels";
 const completedLevels = new Set(
@@ -15,6 +35,11 @@ const completedLevels = new Set(
 );
 let selectedPiece = null;
 let placedShapes = [null, null, null];
+
+function shufflePieces() {
+  const shuffledPieces = [...pieces].sort(() => Math.random() - 0.5);
+  shuffledPieces.forEach((piece) => pieceTray.appendChild(piece));
+}
 
 function renderProgress() {
   levelProgress.replaceChildren();
@@ -47,11 +72,30 @@ function updateProgress() {
 function selectPiece(piece) {
   if (piece.classList.contains("placed")) return;
   pieces.forEach((item) => item.classList.remove("selected"));
+  clearSlotPreviews();
   selectedPiece = piece;
   piece.classList.add("selected");
+  showSlotPreview(piece.dataset.shape);
   status.textContent =
     "Forme sélectionnée. Choisis son emplacement holographique.";
   status.className = "puzzle-status";
+}
+
+function clearSlotPreviews() {
+  slots.forEach((slot) => {
+    slot.classList.remove(
+      "preview-triangle",
+      "preview-circle",
+      "preview-square",
+    );
+  });
+}
+
+function showSlotPreview(shape) {
+  const targetSlot = slots[targetByShape[shape]];
+  if (targetSlot && !targetSlot.classList.contains("filled")) {
+    targetSlot.classList.add(`preview-${shape}`);
+  }
 }
 
 function placePiece(piece, slot) {
@@ -63,7 +107,8 @@ function placePiece(piece, slot) {
   visualPiece.className = `puzzle-piece ${piece.className.replace(" selected", "")} placed`;
   visualPiece.setAttribute("aria-hidden", "true");
   slot.appendChild(visualPiece);
-  slot.classList.add("filled");
+  clearSlotPreviews();
+  slot.classList.add("filled", `slot-${shape}`);
   placedShapes[slotIndex] = shape;
   piece.classList.remove("selected");
   piece.classList.add("placed");
@@ -84,8 +129,7 @@ function checkSolution() {
     board.classList.add("solved");
     status.textContent = "Résonance stabilisée. Le fragment répond à ECHO.";
     status.className = "puzzle-status success";
-    systemMessage.textContent =
-      "SYSTEM:: ALIGNMENT ACCEPTED // FRAGMENT STABILITY +1 // NEXT PROTOCOL UNLOCKED";
+    systemMessage.textContent = systemMessages[language].success;
     markCurrentLevelCompleted();
     return;
   }
@@ -96,8 +140,7 @@ function checkSolution() {
   status.textContent =
     "Désynchronisation détectée. Les formes ne répondent pas au même rythme.";
   status.className = "puzzle-status error";
-  systemMessage.textContent =
-    "SYSTEM:: ALIGNMENT ERROR // PATTERN DESYNC // RESEQUENCE REQUIRED";
+  systemMessage.textContent = systemMessages[language].error;
 }
 
 function resetPuzzle() {
@@ -108,6 +151,7 @@ function resetPuzzle() {
     slot.className = "target-slot";
     slot.replaceChildren();
   });
+  clearSlotPreviews();
   pieces.forEach((piece) => {
     piece.classList.remove("selected", "placed");
     piece.removeAttribute("aria-disabled");
@@ -115,8 +159,7 @@ function resetPuzzle() {
   status.textContent =
     "Sélectionne une forme ou fais-la glisser vers un emplacement.";
   status.className = "puzzle-status";
-  systemMessage.textContent =
-    "SYSTEM:: INPUT REQUIRED // 3 GEOMETRIC FRAGMENTS DETECTED // ALIGNMENT PROTOCOL READY";
+  systemMessage.textContent = systemMessages[language].input;
   updateProgress();
 }
 
@@ -138,5 +181,7 @@ slots.forEach((slot) => {
 });
 
 resetButton.addEventListener("click", resetPuzzle);
+shufflePieces();
+systemMessage.textContent = systemMessages[language].input;
 updateProgress();
 renderProgress();
