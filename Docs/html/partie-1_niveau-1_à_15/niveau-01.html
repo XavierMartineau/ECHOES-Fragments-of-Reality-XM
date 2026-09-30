@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ECHOES - Niveau 1</title>
+    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_15.css" />
+    <link rel="stylesheet" href="../../css/fonts.css" />
+  </head>
+  <body>
+    <div class="background-glow"></div>
+    <div class="grid-overlay"></div>
+
+    <header class="level-header">
+      <a class="brand" href="../../../../index.html">ECHOES</a>
+      <div class="level-meta">
+        <span>PARTIE 1 // INITIATION</span>
+        <div
+          class="level-progress"
+          id="levelProgress"
+          aria-label="Progression des niveaux 1 à 15"
+        ></div>
+        <strong>NIVEAU 01</strong>
+      </div>
+    </header>
+
+    <main
+      id="partie-1"
+      class="level-shell"
+      data-level-start="1"
+      data-level-end="15"
+    >
+      <section class="level-intro" aria-labelledby="levelTitle">
+        <p class="eyebrow">Fragment 001 // Géométrie primaire</p>
+        <h1 id="levelTitle">Alignement primaire</h1>
+        <p class="level-description">
+          Trois formes flottent dans le premier fragment de réalité. Aligne-les
+          sur la ligne holographique pour stabiliser le signal.
+        </p>
+
+        <div class="system-transmission" aria-live="polite">
+          <span class="system-label">SYSTEM://LOG</span>
+          <p id="systemMessage">
+            SYSTEM:: INPUT REQUIRED // 3 GEOMETRIC FRAGMENTS DETECTED //
+            ALIGNMENT PROTOCOL READY
+          </p>
+        </div>
+      </section>
+
+      <section class="puzzle-panel" aria-labelledby="puzzleTitle">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-kicker">PUZZLE // ALIGNEMENT</p>
+            <h2 id="puzzleTitle">Résonance géométrique</h2>
+          </div>
+          <span class="progress-readout" id="progressReadout">0 / 3</span>
+        </div>
+
+        <div class="puzzle-board" id="puzzleBoard">
+          <div class="target-line" aria-hidden="true"></div>
+          <div class="target-slots" aria-label="Emplacements des formes">
+            <button
+              class="target-slot"
+              type="button"
+              data-slot="0"
+              aria-label="Emplacement 1"
+            ></button>
+            <button
+              class="target-slot"
+              type="button"
+              data-slot="1"
+              aria-label="Emplacement 2"
+            ></button>
+            <button
+              class="target-slot"
+              type="button"
+              data-slot="2"
+              aria-label="Emplacement 3"
+            ></button>
+          </div>
+          <div class="piece-tray" id="pieceTray" aria-label="Formes à aligner">
+            <button
+              class="puzzle-piece piece-triangle"
+              type="button"
+              draggable="true"
+              data-shape="triangle"
+              aria-label="Triangle"
+            ></button>
+            <button
+              class="puzzle-piece piece-circle"
+              type="button"
+              draggable="true"
+              data-shape="circle"
+              aria-label="Cercle"
+            ></button>
+            <button
+              class="puzzle-piece piece-square"
+              type="button"
+              draggable="true"
+              data-shape="square"
+              aria-label="Carré"
+            ></button>
+          </div>
+        </div>
+
+        <div class="puzzle-actions">
+          <p class="puzzle-status" id="puzzleStatus">
+            Sélectionne une forme ou fais-la glisser vers un emplacement.
+          </p>
+          <button class="reset-button" id="resetButton" type="button">
+            Réinitialiser
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="level-footer">
+      <span>ÉCHO // INITIATION ACTIVE</span>
+      <span>1 / 90</span>
+    </footer>
+
+    <script src="../../js/partie-1_niveau-1_à_15.js"></script>
+  </body>
+</html>
