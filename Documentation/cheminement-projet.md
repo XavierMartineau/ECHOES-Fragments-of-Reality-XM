@@ -40,6 +40,9 @@ Ce document sert à suivre l’avancement du projet et à noter l’état de cha
 - Ajout du bouton FR / EN avec vraie logique de langue
 - Ajout du footer et amélioration visuelle premium
 - Mise en place de la structure de dossiers docs/
+- Création de la feuille responsive pour mobile, tablette et PC
+- Vérification de l’affichage sur plusieurs tailles d’écran
+- Lancement et validation du projet sur le Live Server local
 
 ## Template de suivi
 
