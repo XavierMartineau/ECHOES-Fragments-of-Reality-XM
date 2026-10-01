@@ -542,7 +542,8 @@ body::before {
   max-width: 100%;
   overflow-wrap: anywhere;
   font-family: var(--font-display, "Orbitron", sans-serif);
-  font-size: clamp(1.8rem, 3.5vw, 3.5rem);
+  font-size: clamp(1.8rem, 3.1vw, 3.2rem);
+  letter-spacing: 0.04rem;
   line-height: 1.05;
   text-transform: uppercase;
   text-shadow: 0 0 24px rgba(121, 247, 255, 0.28);
@@ -1526,7 +1527,7 @@ body.level-corruption .level-footer {
     padding: 28px 0 72px;
   }
   .level-intro h1 {
-    font-size: clamp(2rem, 11vw, 3.2rem);
+    font-size: clamp(1.8rem, 9vw, 2.8rem);
   }
   @media (hover: hover) and (pointer: fine) {
     .piece-square:hover {

@@ -1225,6 +1225,7 @@ if (activeLevelScript) {
         );
       } else {
         markCurrentLevelCompleted();
+        nextLevelButton.hidden = false;
         typeSystemMessage(systemMessages.success, () => {
           window.setTimeout(() => {
             nextLevelButton.hidden = false;
@@ -1300,13 +1301,17 @@ if (activeLevelScript) {
     saveGameButton.textContent = language === "en" ? "SAVED" : "SAUVEGARDÉ";
   });
 
-  nextLevelButton.addEventListener("click", () => {
+  nextLevelButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
     window.EchoesSave.saveProgress({
       currentPage: "level-2",
       currentLevel: 2,
       completedLevels: [...completedLevels].sort((a, b) => a - b),
     });
-    window.location.href = "niveau-02.html";
+    window.location.assign(
+      new URL("niveau-02.html", window.location.href).href,
+    );
   });
   startPuzzleButton.textContent = levelCopy.startPuzzle;
   nextLevelButton.textContent =
