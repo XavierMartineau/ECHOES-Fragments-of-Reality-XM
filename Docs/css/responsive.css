@@ -51,9 +51,25 @@
   html,
   body {
     min-height: 100%;
-    height: auto;
-    overflow-x: hidden;
+    min-height: 100dvh;
+    height: 100dvh;
+    overflow-x: clip;
     overflow-y: auto;
+    background-attachment: scroll;
+  }
+
+  body::before,
+  #background,
+  .ambient-grid {
+    left: -7vw;
+    right: -7vw;
+    width: auto;
+  }
+
+  #background,
+  .ambient-grid {
+    transform: scale(1.08);
+    transform-origin: center;
   }
 
   .hero {

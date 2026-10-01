@@ -72,28 +72,44 @@ function resizeCanvas() {
 }
 
 function drawBackground() {
+  const isReduced = reducedEffects;
+  const particleFactor = isReduced ? 0.6 : 1;
+  const lineAlpha = isReduced ? 0.1 : 0.18;
+
   ctx.clearRect(0, 0, width, height);
 
-  particles.forEach((particle) => {
-    particle.y += particle.speed;
+  particles.forEach((particle, index) => {
+    if (isReduced && index % 2 !== 0) {
+      return;
+    }
+
+    particle.y += particle.speed * particleFactor;
     if (particle.y > height + 10) {
       particle.y = -10;
       particle.x = Math.random() * width;
     }
 
+    const alpha = isReduced ? particle.alpha * 0.7 : particle.alpha;
     ctx.beginPath();
-    ctx.fillStyle = `rgba(115, 243, 255, ${particle.alpha})`;
-    ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(115, 243, 255, ${alpha})`;
+    ctx.arc(
+      particle.x,
+      particle.y,
+      particle.radius * (isReduced ? 0.86 : 1),
+      0,
+      Math.PI * 2,
+    );
     ctx.fill();
   });
 
-  ctx.strokeStyle = "rgba(176, 96, 255, 0.18)";
+  ctx.strokeStyle = `rgba(176, 96, 255, ${lineAlpha})`;
   ctx.lineWidth = 1;
-  for (let i = 0; i < 8; i++) {
-    const y = (height / 8) * i + 40;
+  const lineCount = isReduced ? 6 : 8;
+  for (let i = 0; i < lineCount; i++) {
+    const y = (height / lineCount) * i + 40;
     ctx.beginPath();
     ctx.moveTo(0, y);
-    ctx.lineTo(width, y + Math.sin(i) * 20);
+    ctx.lineTo(width, y + Math.sin(i) * (isReduced ? 12 : 20));
     ctx.stroke();
   }
 
