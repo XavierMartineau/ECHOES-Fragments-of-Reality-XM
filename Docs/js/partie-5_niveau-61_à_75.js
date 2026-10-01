@@ -24,6 +24,18 @@ function installBackButton() {
   document.body.prepend(button);
 }
 installBackButton();
-const currentLevel = Number(window.location.pathname.match(/niveau-(\d+)/)?.[1] || 0);
-const autoSave = () => window.EchoesSave?.saveProgress({ currentPage: `level-${currentLevel}`, currentLevel });
-if (window.EchoesSave) autoSave(); else { const script = document.createElement("script"); script.src = "../../js/save-system.js"; script.onload = autoSave; document.head.appendChild(script); }
+const currentLevel = Number(
+  window.location.pathname.match(/niveau-(\d+)/)?.[1] || 0,
+);
+const autoSave = () =>
+  window.EchoesSave?.saveProgress({
+    currentPage: `level-${currentLevel}`,
+    currentLevel,
+  });
+if (window.EchoesSave) autoSave();
+else {
+  const script = document.createElement("script");
+  script.src = "../../js/save-system.js";
+  script.onload = autoSave;
+  document.head.appendChild(script);
+}

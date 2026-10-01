@@ -32,9 +32,19 @@ if (activeLevelScript) {
     localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const accountId = window.EchoesSave?.getCurrentUser?.() || "guest";
   const progressStorageKey = `echoes-completed-levels-${encodeURIComponent(accountId)}`;
-  const completedLevels = new Set(
-    JSON.parse(localStorage.getItem(progressStorageKey) || "[]"),
+  const legacyCompletedLevels = JSON.parse(
+    localStorage.getItem("echoes-completed-levels") || "[]",
   );
+  const completedLevels = new Set([
+    ...legacyCompletedLevels,
+    ...JSON.parse(localStorage.getItem(progressStorageKey) || "[]"),
+  ]);
+  if (accountId !== "guest" && completedLevels.size) {
+    localStorage.setItem(
+      progressStorageKey,
+      JSON.stringify([...completedLevels].sort((a, b) => a - b)),
+    );
+  }
   const levelNumber = activeLevelScript[1];
   const futureCopy = {
     6: {
@@ -161,8 +171,12 @@ if (activeLevelScript) {
     });
     renderProgress();
   };
-  const successMessage = (message) =>
-    `${message} // PROGRESSION: ${completedLevels.size} / 90`;
+  const successMessage = (message) => {
+    const sector = Math.ceil(levelNumber / 15);
+    const nextSector = Math.min(sector + 1, 6);
+    const remaining = sector * 15 - levelNumber;
+    return `${message} // ${remaining} NIVEAUX AVANT SECTEUR ${nextSector}`;
+  };
   const applyCopy = () => {
     document.documentElement.lang = language;
     document.querySelectorAll("[data-i18n]").forEach((element) => {
@@ -181,9 +195,10 @@ if (activeLevelScript) {
     document.getElementById("resetButton").textContent = levelCopy.reset;
     const nextButton = document.getElementById("nextLevelButton");
     if (nextButton) {
-      nextButton.textContent = language === "en"
-        ? `CONTINUE TO LEVEL ${levelNumber + 1}`
-        : `CONTINUER VERS LE NIVEAU ${levelNumber + 1}`;
+      nextButton.textContent =
+        language === "en"
+          ? `CONTINUE TO LEVEL ${levelNumber + 1}`
+          : `CONTINUER VERS LE NIVEAU ${levelNumber + 1}`;
     }
   };
   installBackButton();
@@ -848,12 +863,26 @@ if (activeLevelScript) {
     success: levelCopy.systemSuccess,
     error: levelCopy.systemError,
   };
+  const sectorProgressMessage = (message) => {
+    const remaining = 15 - currentLevel;
+    return `${message} // ${remaining} NIVEAUX AVANT SECTEUR 2`;
+  };
   const currentLevel = 1;
   const accountId = window.EchoesSave?.getCurrentUser?.() || "guest";
   const progressStorageKey = `echoes-completed-levels-${encodeURIComponent(accountId)}`;
-  const completedLevels = new Set(
-    JSON.parse(localStorage.getItem(progressStorageKey) || "[]"),
+  const legacyCompletedLevels = JSON.parse(
+    localStorage.getItem("echoes-completed-levels") || "[]",
   );
+  const completedLevels = new Set([
+    ...legacyCompletedLevels,
+    ...JSON.parse(localStorage.getItem(progressStorageKey) || "[]"),
+  ]);
+  if (accountId !== "guest" && completedLevels.size) {
+    localStorage.setItem(
+      progressStorageKey,
+      JSON.stringify([...completedLevels].sort((a, b) => a - b)),
+    );
+  }
   let selectedPiece = null;
   let placedShapes = [null, null, null];
   let puzzleStarted = false;
@@ -925,7 +954,7 @@ if (activeLevelScript) {
       currentLevel: currentLevel,
       completedLevels: [...completedLevels].sort((a, b) => a - b),
     });
-    systemMessages.success = `${levelCopy.systemSuccess} // PROGRESSION: ${completedLevels.size} / 90`;
+    systemMessages.success = sectorProgressMessage(levelCopy.systemSuccess);
     renderProgress();
   }
 
@@ -1096,9 +1125,8 @@ if (activeLevelScript) {
     window.location.href = "niveau-02.html";
   });
   startPuzzleButton.textContent = levelCopy.startPuzzle;
-  nextLevelButton.textContent = language === "en"
-    ? "CONTINUE TO LEVEL 2"
-    : "CONTINUER VERS LE NIVEAU 2";
+  nextLevelButton.textContent =
+    language === "en" ? "CONTINUE TO LEVEL 2" : "CONTINUER VERS LE NIVEAU 2";
   pieces.forEach((piece) => (piece.disabled = true));
   slots.forEach((slot) => (slot.disabled = true));
   startPuzzleButton.addEventListener("click", () => {
