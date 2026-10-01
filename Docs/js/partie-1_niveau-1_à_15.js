@@ -249,6 +249,17 @@ if (activeLevelScript) {
       }),
     );
     start.addEventListener("click", () => {
+      if (solved) {
+        solved = false;
+        board.classList.remove("solved");
+        lights.forEach((_, index) => state(index, null));
+        transmission.classList.remove("success");
+        input = [];
+        status.className = "puzzle-status";
+        status.textContent = levelCopy.statusReady;
+        system.textContent = levelCopy.systemInput;
+        update();
+      }
       started = true;
       play();
     });
@@ -288,7 +299,7 @@ if (activeLevelScript) {
       status.textContent = levelCopy.statusSuccess;
       status.className = "puzzle-status success";
       system.textContent = levelCopy.systemSuccess;
-      start.disabled = true;
+      start.disabled = false;
       next.hidden = false;
     }
     update();
@@ -391,10 +402,26 @@ if (activeLevelScript) {
     slots.forEach((slot) => (slot.disabled = true));
     start.textContent = levelCopy.startPuzzle;
     start.addEventListener("click", () => {
+      if (completedLevels.has(3)) {
+        placed = 0;
+        selected = null;
+        board.classList.remove("solved");
+        transmission.classList.remove("success");
+        slots.forEach((slot) => {
+          slot.className = `sort-slot slot-${slot.dataset.shape}`;
+          const piece = slot.querySelector(".sort-piece");
+          if (piece) pieceTray.appendChild(piece);
+        });
+        pieces.forEach((piece) => {
+          piece.disabled = false;
+          piece.className = `sort-piece shape-${piece.dataset.shape}`;
+        });
+        update();
+      }
       started = true;
       pieces.forEach((piece) => (piece.disabled = false));
       slots.forEach((slot) => (slot.disabled = false));
-      start.disabled = true;
+      start.disabled = false;
       status.textContent = levelCopy.statusReady;
     });
     slots.forEach((slot) => slot.addEventListener("click", () => place(slot)));
@@ -416,7 +443,7 @@ if (activeLevelScript) {
       status.className = "puzzle-status success";
       system.textContent = levelCopy.systemSuccess;
       next.hidden = false;
-      start.disabled = true;
+      start.disabled = false;
     }
     update();
   }
@@ -482,8 +509,16 @@ if (activeLevelScript) {
     rotate.disabled = true;
     start.textContent = levelCopy.startPuzzle;
     start.addEventListener("click", () => {
+      if (solved) {
+        solved = false;
+        index = 0;
+        board.classList.remove("solved");
+        transmission.classList.remove("success");
+        load();
+        next.hidden = false;
+      }
       started = true;
-      start.disabled = true;
+      start.disabled = false;
       rotate.disabled = false;
       status.textContent = levelCopy.statusReady;
     });
@@ -500,7 +535,7 @@ if (activeLevelScript) {
       status.textContent = levelCopy.statusSuccess;
       status.className = "puzzle-status success";
       system.textContent = levelCopy.systemSuccess;
-      start.disabled = true;
+      start.disabled = false;
       rotate.disabled = true;
       next.hidden = false;
     }
@@ -592,6 +627,19 @@ if (activeLevelScript) {
       }),
     );
     start.addEventListener("click", () => {
+      if (solved) {
+        solved = false;
+        board.classList.remove("solved");
+        notes.forEach((note) =>
+          note.classList.remove("is-correct", "is-error"),
+        );
+        transmission.classList.remove("success");
+        input = [];
+        readout.textContent = "0 / 4";
+        status.className = "puzzle-status";
+        status.textContent = levelCopy.statusReady;
+        system.textContent = levelCopy.systemInput;
+      }
       started = true;
       play();
     });
@@ -609,8 +657,120 @@ if (activeLevelScript) {
       status.textContent = levelCopy.statusSuccess;
       status.className = "puzzle-status success";
       system.textContent = levelCopy.systemSuccess;
-      start.disabled = true;
+      start.disabled = false;
       next.hidden = false;
+    }
+  }
+
+  // ===== NIVEAU 6 // OBSERVATION DES MOTIFS =====
+  if (document.querySelector(".pattern-board")) {
+    const grid = document.getElementById("patternGrid");
+    const start = document.getElementById("startPuzzleButton");
+    const next = document.getElementById("nextLevelButton");
+    const reset = document.getElementById("resetButton");
+    const status = document.getElementById("puzzleStatus");
+    const readout = document.getElementById("progressReadout");
+    const system = document.getElementById("systemMessage");
+    let targetIndexes;
+    let started = false;
+    let found = 0;
+    const symbols = [
+      "◇",
+      "○",
+      "△",
+      "⬡",
+      "□",
+      "✧",
+      "✺",
+      "✹",
+      "⬢",
+      "✣",
+      "◈",
+      "✥",
+      "▽",
+      "⬟",
+      "✤",
+      "◊",
+      "❖",
+      "⊙",
+      "⌁",
+      "≈",
+    ];
+    const renderPattern = () => {
+      targetIndexes = new Set(
+        shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 3),
+      );
+      grid.replaceChildren();
+      symbols.forEach((symbol, index) => {
+        const button = document.createElement("button");
+        button.className = `pattern-symbol${targetIndexes.has(index) ? " pattern-target" : ""}`;
+        button.type = "button";
+        button.textContent = targetIndexes.has(index) ? "★" : symbol;
+        button.dataset.match = targetIndexes.has(index) ? "true" : "false";
+        button.disabled = true;
+        grid.appendChild(button);
+        button.addEventListener("click", () => {
+          if (!started || button.disabled) return;
+          if (button.dataset.match === "true") {
+            button.classList.add("is-correct");
+            button.disabled = true;
+            found += 1;
+            readout.textContent = `${found} / 3`;
+            if (found === 3) {
+              status.textContent = levelCopy.statusSuccess;
+              status.className = "puzzle-status success";
+              saveCompletion();
+              next.hidden = false;
+            }
+          } else {
+            button.classList.add("is-error");
+            status.textContent = levelCopy.statusError;
+            window.setTimeout(() => button.classList.remove("is-error"), 400);
+          }
+        });
+      });
+    };
+    renderPattern();
+    start.textContent = levelCopy.startPuzzle;
+    start.addEventListener("click", () => {
+      started = true;
+      start.disabled = true;
+      grid
+        .querySelectorAll("button")
+        .forEach((button) => (button.disabled = false));
+      status.textContent = levelCopy.statusReady;
+    });
+    reset.addEventListener("click", () => {
+      started = false;
+      found = 0;
+      renderPattern();
+      grid
+        .querySelectorAll("button")
+        .forEach((button) => (button.disabled = true));
+      grid.classList.remove("is-solved");
+      readout.textContent = "0 / 3";
+      status.className = "puzzle-status";
+      status.textContent = levelCopy.statusReady;
+      system.textContent = levelCopy.systemInput;
+      start.disabled = false;
+      next.hidden = true;
+    });
+    next.addEventListener("click", () => {
+      window.location.href = "niveau-07.html";
+    });
+    if (completedLevels.has(6)) {
+      started = true;
+      found = 3;
+      grid.querySelectorAll("button[data-match='true']").forEach((button) => {
+        button.classList.add("is-correct");
+        button.disabled = true;
+      });
+      grid.classList.add("is-solved");
+      status.textContent = levelCopy.statusSuccess;
+      status.className = "puzzle-status success";
+      next.hidden = false;
+      start.disabled = false;
+      readout.textContent = "3 / 3";
     }
   }
 } else {
@@ -926,6 +1086,10 @@ if (activeLevelScript) {
   pieces.forEach((piece) => (piece.disabled = true));
   slots.forEach((slot) => (slot.disabled = true));
   startPuzzleButton.addEventListener("click", () => {
+    if (completedLevels.has(1)) {
+      resetPuzzle();
+      nextLevelButton.hidden = false;
+    }
     puzzleStarted = true;
     startPuzzleButton.disabled = true;
     pieces.forEach((piece) => (piece.disabled = false));
@@ -933,18 +1097,18 @@ if (activeLevelScript) {
     status.textContent = levelCopy.statusReady;
   });
   if (completedLevels.has(1)) {
-    puzzleStarted = true;
+    puzzleStarted = false;
     board.classList.add("solved");
     slots.forEach((slot) => slot.classList.add("correct"));
     systemTransmission.classList.add("success");
     status.textContent = levelCopy.statusSuccess;
     status.className = "puzzle-status success";
     systemMessage.textContent = systemMessages.success;
-    startPuzzleButton.disabled = true;
+    startPuzzleButton.disabled = false;
     nextLevelButton.hidden = false;
   }
   shufflePieces();
-  systemMessage.textContent = systemMessages.input;
+  if (!completedLevels.has(1)) systemMessage.textContent = systemMessages.input;
   updateProgress();
   renderProgress();
 }

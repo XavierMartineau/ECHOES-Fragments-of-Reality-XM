@@ -13,6 +13,19 @@
     <link rel="stylesheet" href="../../css/fonts.css" />
   </head>
   <body>
+    <div class="background-glow"></div>
+    <div class="grid-overlay"></div>
+    <header class="level-header">
+      <a class="brand" href="../../../../index.html">ECHOES</a>
+      <div class="level-meta">
+        <span data-i18n="part">PARTIE 1 // INITIATION</span>
+        <div class="level-progress" id="levelProgress"></div>
+        <strong data-i18n="level">NIVEAU 09</strong>
+      </div>
+      <button class="save-game-button" id="saveGameButton" type="button">
+        SAUVEGARDER
+      </button>
+    </header>
     <main class="level-shell" data-level-start="1" data-level-end="15">
       <section class="level-intro">
         <p class="eyebrow">Fragment 009 // Miroirs simples</p>
@@ -56,6 +69,10 @@
         </div>
       </section>
     </main>
+    <footer class="level-footer">
+      <span data-i18n="footer">ÉCHO // INITIATION ACTIVE</span
+      ><span data-i18n="counter">9 / 90</span>
+    </footer>
     <script src="../../js/partie-1_niveau-1_à_15.js?v=8"></script>
   </body>
 </html>
