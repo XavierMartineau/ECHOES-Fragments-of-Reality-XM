@@ -49,8 +49,9 @@
       progressAria: "Progression des niveaux 1 à 15",
       slots: ["Emplacement 1", "Emplacement 2", "Emplacement 3"],
       trayAria: "Formes à aligner",
+      trayHint: "Clique sur une forme, puis dépose-la dans la bonne couleur",
       statusReady:
-        "Sélectionne une forme ou fais-la glisser vers un emplacement.",
+        "Clique sur une forme, puis dépose-la dans la bonne couleur.",
       startPuzzle: "DÉMARRER LE PUZZLE",
       statusSelected:
         "Forme sélectionnée. Choisis son emplacement holographique.",
@@ -382,7 +383,8 @@
       progressAria: "Progress for levels 1 to 15",
       slots: ["Slot 1", "Slot 2", "Slot 3"],
       trayAria: "Shapes to align",
-      statusReady: "Select a shape or drag it to a target slot.",
+      trayHint: "Click a shape, then drop it on the matching color",
+      statusReady: "Click a shape, then drop it on the matching color.",
       startPuzzle: "START PUZZLE",
       statusSelected: "Shape selected. Choose its holographic target.",
       statusSuccess: "Resonance stabilized. The fragment responds to ECHO.",

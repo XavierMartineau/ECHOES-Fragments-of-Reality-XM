@@ -841,6 +841,19 @@ body.level-corruption .level-footer {
   justify-content: center;
   gap: 42px;
 }
+.piece-tray-hint {
+  position: absolute;
+  right: 0;
+  bottom: 84px;
+  left: 0;
+  margin: 0;
+  color: rgba(223, 234, 249, 0.72);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.56rem;
+  letter-spacing: 0.08rem;
+  text-align: center;
+  text-transform: uppercase;
+}
 .puzzle-piece {
   position: relative;
   width: 52px;
