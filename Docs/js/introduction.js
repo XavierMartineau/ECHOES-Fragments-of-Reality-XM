@@ -263,7 +263,7 @@ function typeMessage(messageIndex = 0) {
           : 22
         : window.innerWidth <= 700
           ? 92
-          : 68;
+          : 28;
       const punctuationDelay = ".!?".includes(character)
         ? isEchoError
           ? window.innerWidth <= 700
@@ -271,7 +271,7 @@ function typeMessage(messageIndex = 0) {
             : 65
           : window.innerWidth <= 700
             ? 420
-            : 320
+            : 120
         : character === ","
           ? isEchoError
             ? window.innerWidth <= 700
@@ -279,7 +279,7 @@ function typeMessage(messageIndex = 0) {
               : 35
             : window.innerWidth <= 700
               ? 190
-              : 140
+              : 55
           : 0;
       const delay = baseDelay + punctuationDelay;
       window.setTimeout(typeCharacter, delay);
@@ -290,7 +290,7 @@ function typeMessage(messageIndex = 0) {
           : 280
         : window.innerWidth <= 700
           ? 1350
-          : 1050;
+          : 420;
       window.setTimeout(() => typeMessage(messageIndex + 1), delay);
     }
   }
