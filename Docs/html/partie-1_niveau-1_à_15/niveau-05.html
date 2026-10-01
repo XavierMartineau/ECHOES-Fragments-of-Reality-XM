@@ -3,17 +3,110 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="../../assets/images/echoes-favicon.svg" />
-    <title>ECHOES - Partie 1</title>
-    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_15.css" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../../assets/images/echoes-favicon.svg"
+    />
+    <title>ECHOES - Niveau 5</title>
+    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_15.css?v=5" />
     <link rel="stylesheet" href="../../css/fonts.css" />
   </head>
   <body>
-    <main class="level-shell" data-level-part="1" data-level-range="1-15">
-      <p>Partie 1 // Initiation</p>
-      <h1>Niveau à construire</h1>
+    <div class="background-glow"></div>
+    <div class="grid-overlay"></div>
+    <header class="level-header">
+      <a class="brand" href="../../../../index.html">ECHOES</a>
+      <div class="level-meta">
+        <span data-i18n="part">PARTIE 1 // INITIATION</span>
+        <div class="level-progress" id="levelProgress"></div>
+        <strong data-i18n="level">NIVEAU 05</strong>
+      </div>
+      <button class="save-game-button" id="saveGameButton" type="button">
+        SAUVEGARDER
+      </button>
+    </header>
+    <main
+      id="partie-1"
+      class="level-shell"
+      data-level-start="1"
+      data-level-end="15"
+    >
+      <section class="level-intro" aria-labelledby="levelTitle">
+        <p class="eyebrow" data-i18n="eyebrow">
+          Fragment 005 // Résonance sonore
+        </p>
+        <h1 id="levelTitle" data-i18n="title">Séquence sonore</h1>
+        <p class="level-description" data-i18n="description">
+          La mémoire ne répond plus à la lumière seule. Écoute les quatre notes
+          holographiques, puis reproduis leur rythme.
+        </p>
+        <div class="system-transmission" aria-live="polite">
+          <span class="system-label" data-i18n="systemLabel">SYSTEM://LOG</span>
+          <p id="systemMessage">
+            SYSTEME:: CANAL SONORE OUVERT // 4 NOTES EN ATTENTE
+          </p>
+        </div>
+      </section>
+      <section class="puzzle-panel" aria-labelledby="puzzleTitle">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-kicker" data-i18n="puzzleKicker">PUZZLE // SON</p>
+            <h2 id="puzzleTitle" data-i18n="puzzleTitle">Écho harmonique</h2>
+          </div>
+          <span class="progress-readout" id="progressReadout">0 / 4</span>
+        </div>
+        <div class="puzzle-board sound-board" id="puzzleBoard">
+          <div class="sound-wave" aria-hidden="true"></div>
+          <div
+            class="note-sequence"
+            id="noteSequence"
+            data-i18n-aria="notesAria"
+            aria-label="Notes holographiques à jouer"
+          >
+            <button class="sound-note note-low" type="button" data-note="0">
+              <span>01</span></button
+            ><button class="sound-note note-mid" type="button" data-note="1">
+              <span>02</span></button
+            ><button class="sound-note note-high" type="button" data-note="2">
+              <span>03</span></button
+            ><button class="sound-note note-clear" type="button" data-note="3">
+              <span>04</span>
+            </button>
+          </div>
+        </div>
+        <div class="sequence-controls">
+          <button
+            class="sequence-start-button"
+            id="sequenceStartButton"
+            type="button"
+          >
+            ÉCOUTER LA SÉQUENCE
+          </button>
+          <p class="puzzle-status" id="puzzleStatus">
+            Écoute la séquence, puis rejoue les notes dans le même ordre.
+          </p>
+        </div>
+        <div class="puzzle-actions">
+          <button
+            class="next-level-button"
+            id="nextLevelButton"
+            type="button"
+            hidden
+          >
+            CONTINUER VERS LE NIVEAU 6</button
+          ><button class="reset-button" id="resetButton" type="button">
+            Réinitialiser
+          </button>
+        </div>
+      </section>
     </main>
-    <script src="../../js/partie-1_niveau-1_à_15.js"></script>
+    <footer class="level-footer">
+      <span data-i18n="footer">ÉCHO // INITIATION ACTIVE</span
+      ><span data-i18n="counter">5 / 90</span>
+    </footer>
+    <script src="../../js/translations.js"></script>
+    <script src="../../js/save-system.js"></script>
+    <script src="../../js/niveau-05.js?v=1"></script>
   </body>
 </html>
-

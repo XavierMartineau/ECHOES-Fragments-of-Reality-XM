@@ -3,17 +3,107 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="../../assets/images/echoes-favicon.svg" />
-    <title>ECHOES - Partie 1</title>
-    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_15.css" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../../assets/images/echoes-favicon.svg"
+    />
+    <title>ECHOES - Niveau 4</title>
+    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_15.css?v=5" />
     <link rel="stylesheet" href="../../css/fonts.css" />
   </head>
   <body>
-    <main class="level-shell" data-level-part="1" data-level-range="1-15">
-      <p>Partie 1 // Initiation</p>
-      <h1>Niveau à construire</h1>
+    <div class="background-glow"></div>
+    <div class="grid-overlay"></div>
+    <header class="level-header">
+      <a class="brand" href="../../../../index.html">ECHOES</a>
+      <div class="level-meta">
+        <span data-i18n="part">PARTIE 1 // INITIATION</span>
+        <div class="level-progress" id="levelProgress"></div>
+        <strong data-i18n="level">NIVEAU 04</strong>
+      </div>
+      <button class="save-game-button" id="saveGameButton" type="button">
+        SAUVEGARDER
+      </button>
+    </header>
+    <main
+      id="partie-1"
+      class="level-shell"
+      data-level-start="1"
+      data-level-end="15"
+    >
+      <section class="level-intro" aria-labelledby="levelTitle">
+        <p class="eyebrow" data-i18n="eyebrow">
+          Fragment 004 // Perspective holographique
+        </p>
+        <h1 id="levelTitle" data-i18n="title">Rotation holographique</h1>
+        <p class="level-description" data-i18n="description">
+          Un objet fractal masque son vrai visage. Fais-le pivoter jusqu'à ce
+          que ses arêtes rejoignent la silhouette mémoire.
+        </p>
+        <div class="system-transmission" aria-live="polite">
+          <span class="system-label" data-i18n="systemLabel">SYSTEM://LOG</span>
+          <p id="systemMessage">
+            SYSTEME:: OBJET FRACTAL VERROUILLE // ORIENTATION REQUISE: 120°
+          </p>
+        </div>
+      </section>
+      <section class="puzzle-panel" aria-labelledby="puzzleTitle">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-kicker" data-i18n="puzzleKicker">
+              PUZZLE // ROTATION
+            </p>
+            <h2 id="puzzleTitle" data-i18n="puzzleTitle">
+              Résonance angulaire
+            </h2>
+          </div>
+          <span class="progress-readout" id="progressReadout">0° / 120°</span>
+        </div>
+        <div class="rotation-board puzzle-board" id="puzzleBoard">
+          <div class="rotation-target" aria-hidden="true"></div>
+          <div
+            class="rotation-object"
+            id="rotationObject"
+            aria-label="Objet fractal à faire pivoter"
+          >
+            <span>Δ</span>
+          </div>
+          <div class="rotation-readout">
+            <span data-i18n="targetLabel">Orientation cible</span
+            ><strong>120°</strong
+            ><span data-i18n="currentLabel">Orientation actuelle</span
+            ><strong id="currentAngle">0°</strong>
+          </div>
+        </div>
+        <div class="rotation-controls">
+          <button class="sequence-start-button" id="rotateButton" type="button">
+            PIVOTER DE 30°
+          </button>
+          <p class="puzzle-status" id="puzzleStatus">
+            Fais pivoter l'objet jusqu'à l'orientation cible.
+          </p>
+        </div>
+        <div class="puzzle-actions">
+          <button
+            class="next-level-button"
+            id="nextLevelButton"
+            type="button"
+            hidden
+          >
+            CONTINUER VERS LE NIVEAU 5</button
+          ><button class="reset-button" id="resetButton" type="button">
+            Réinitialiser
+          </button>
+        </div>
+      </section>
     </main>
-    <script src="../../js/partie-1_niveau-1_à_15.js"></script>
+    <footer class="level-footer">
+      <span data-i18n="footer">ÉCHO // INITIATION ACTIVE</span
+      ><span data-i18n="counter">4 / 90</span>
+    </footer>
+    <script src="../../js/translations.js"></script>
+    <script src="../../js/save-system.js"></script>
+    <script src="../../js/niveau-04.js?v=1"></script>
   </body>
 </html>
-

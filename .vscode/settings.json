@@ -59,6 +59,10 @@
     "/^cd 'C:\\\\ECHOES-Fragments-of-Reality-XM'; node -e \"const fs=require\\('fs'\\); const s=fs\\.readFileSync\\('docs/js/translations\\.js','utf8'\\); console\\.log\\(JSON\\.stringify\\(s\\.slice\\(0,120\\)\\)\\);\"$/": {
       "approve": true,
       "matchCommandLine": true
+    },
+    "/^node --check docs/js/niveau-03\\.js; node --check docs/js/niveau-04\\.js; node --check docs/js/niveau-05\\.js$/": {
+      "approve": true,
+      "matchCommandLine": true
     }
   }
 }

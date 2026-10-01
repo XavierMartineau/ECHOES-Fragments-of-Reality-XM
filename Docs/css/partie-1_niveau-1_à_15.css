@@ -115,6 +115,10 @@ body::before {
     inset 0 0 12px rgba(121, 247, 255, 0.2);
   content: "E";
   font-size: 0.78rem;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 .brand:hover::before,
 .brand:focus-visible::before {
@@ -122,6 +126,7 @@ body::before {
   box-shadow:
     0 0 24px rgba(121, 247, 255, 0.76),
     inset 0 0 14px rgba(121, 247, 255, 0.28);
+  transform: rotate(8deg) scale(1.06);
 }
 .save-game-button {
   padding: 8px 12px;
@@ -493,6 +498,439 @@ body::before {
   pointer-events: none;
 }
 
+.sort-board {
+  display: grid;
+  gap: 28px;
+  min-height: 390px;
+}
+.sort-slots,
+.sort-pieces {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(48px, 1fr));
+  gap: 12px;
+  align-items: center;
+  justify-items: center;
+}
+.sort-slots {
+  padding-top: 22px;
+}
+.sort-slot,
+.sort-piece {
+  position: relative;
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border: 1px dashed rgba(121, 247, 255, 0.55);
+  background: rgba(4, 15, 29, 0.7);
+  color: var(--cyan);
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.68rem;
+  transition: 0.2s ease;
+}
+.sort-slot::after {
+  position: absolute;
+  inset: 12px;
+  border: 1px solid currentColor;
+  content: "";
+  opacity: 0.36;
+}
+.sort-piece {
+  border-style: solid;
+  color: #d7b6ff;
+  box-shadow: 0 0 12px rgba(179, 108, 255, 0.2);
+}
+.sort-slot:hover,
+.sort-slot:focus-visible,
+.sort-piece:hover,
+.sort-piece.is-selected {
+  border-color: #fff;
+  box-shadow: 0 0 22px currentColor;
+  outline: none;
+  transform: translateY(-4px);
+}
+.sort-piece.is-placed {
+  width: 38px;
+  height: 38px;
+  cursor: default;
+  pointer-events: none;
+}
+.sort-piece.is-locked {
+  animation: light-pulse 0.8s ease-in-out infinite alternate;
+}
+.sort-slot.is-filled {
+  border-style: solid;
+  border-color: var(--success);
+  box-shadow: 0 0 18px rgba(128, 255, 207, 0.4);
+}
+.sort-slot.is-error {
+  border-color: var(--danger);
+  box-shadow: 0 0 22px rgba(255, 69, 109, 0.7);
+  animation: puzzle-shake 0.25s linear 2;
+}
+.shape-triangle,
+.shape-circle,
+.shape-square,
+.shape-hexagon,
+.shape-diamond,
+.shape-star {
+  color: var(--cyan);
+}
+.shape-triangle::after {
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  background: currentColor;
+  border: 0;
+}
+.shape-circle::after {
+  border-radius: 50%;
+}
+.shape-square::after {
+  transform: rotate(45deg) scale(0.72);
+}
+.shape-hexagon::after {
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  background: currentColor;
+  border: 0;
+}
+.shape-diamond::after {
+  transform: rotate(45deg) scale(0.72);
+}
+.shape-star::after {
+  clip-path: polygon(
+    50% 0,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 100%,
+    50% 73%,
+    21% 100%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  background: currentColor;
+  border: 0;
+}
+.slot-circle,
+.shape-circle {
+  color: #48b0ff;
+}
+.slot-square,
+.shape-square {
+  color: var(--violet);
+}
+.slot-hexagon,
+.shape-hexagon {
+  color: var(--success);
+}
+.slot-diamond,
+.shape-diamond {
+  color: #ff70c2;
+}
+.slot-star,
+.shape-star {
+  color: #ffd166;
+}
+
+.rotation-board {
+  display: grid;
+  min-height: 390px;
+  place-items: center;
+}
+.rotation-target,
+.rotation-object {
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  border: 1px dashed rgba(128, 255, 207, 0.72);
+  clip-path: polygon(50% 0, 100% 25%, 78% 100%, 22% 100%, 0 25%);
+  transform: rotate(120deg);
+}
+.rotation-target {
+  box-shadow: 0 0 28px rgba(128, 255, 207, 0.22);
+}
+.rotation-object {
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--violet);
+  background: rgba(179, 108, 255, 0.16);
+  color: #fff;
+  font-size: 3.2rem;
+  transform: rotate(var(--object-angle, 0deg));
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.2s ease;
+  box-shadow:
+    0 0 22px rgba(179, 108, 255, 0.48),
+    inset 0 0 28px rgba(179, 108, 255, 0.22);
+}
+.rotation-object::before {
+  position: absolute;
+  inset: 14px;
+  border: 1px solid currentColor;
+  content: "";
+  opacity: 0.5;
+}
+.rotation-readout {
+  position: absolute;
+  right: 24px;
+  bottom: 22px;
+  display: grid;
+  gap: 4px;
+  color: var(--muted);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.56rem;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+.rotation-readout strong {
+  color: var(--cyan);
+  font-size: 0.82rem;
+}
+.rotation-board.solved .rotation-object {
+  border-color: var(--success);
+  box-shadow:
+    0 0 36px rgba(128, 255, 207, 0.8),
+    inset 0 0 28px rgba(128, 255, 207, 0.25);
+}
+.rotation-controls {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 22px;
+  border-top: 1px solid rgba(121, 247, 255, 0.16);
+}
+
+.sound-board {
+  display: grid;
+  min-height: 360px;
+  place-items: center;
+}
+.sound-wave {
+  position: absolute;
+  width: 78%;
+  height: 100px;
+  border-top: 1px solid rgba(121, 247, 255, 0.32);
+  border-bottom: 1px solid rgba(179, 108, 255, 0.25);
+  border-radius: 50%;
+  transform: skewY(-8deg);
+  box-shadow: 0 0 28px rgba(121, 247, 255, 0.16);
+}
+.note-sequence {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: clamp(18px, 4vw, 42px);
+  align-items: end;
+}
+.sound-note {
+  display: grid;
+  width: 58px;
+  height: 118px;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50% 50% 8px 8px;
+  background: rgba(7, 18, 35, 0.72);
+  color: var(--cyan);
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.68rem;
+  transition: 0.2s ease;
+}
+.sound-note:nth-child(2) {
+  height: 148px;
+}
+.sound-note:nth-child(3) {
+  height: 178px;
+}
+.sound-note:nth-child(4) {
+  height: 132px;
+}
+.sound-note:hover,
+.sound-note:focus-visible {
+  transform: translateY(-6px);
+  outline: none;
+  box-shadow: 0 0 22px currentColor;
+}
+.sound-note.is-active,
+.sound-note.is-correct {
+  background: currentColor;
+  color: #06101d;
+  box-shadow:
+    0 0 26px currentColor,
+    0 0 50px currentColor;
+  animation: light-pulse 0.42s ease-out;
+}
+.sound-note.is-error {
+  border-color: var(--danger);
+  color: #ff9bb0;
+  box-shadow: 0 0 24px rgba(255, 69, 109, 0.8);
+  animation: puzzle-shake 0.25s linear 2;
+}
+.note-mid {
+  color: #48b0ff;
+}
+.note-high {
+  color: var(--violet);
+}
+.note-clear {
+  color: #ff70c2;
+}
+
+.sequence-board {
+  min-height: 360px;
+  display: grid;
+  place-items: center;
+}
+.sequence-orbit {
+  position: absolute;
+  width: min(420px, 78%);
+  aspect-ratio: 1;
+  border: 1px solid rgba(121, 247, 255, 0.14);
+  border-radius: 50%;
+  box-shadow:
+    0 0 34px rgba(121, 247, 255, 0.08),
+    inset 0 0 34px rgba(179, 108, 255, 0.08);
+  transform: rotate(18deg) scaleY(0.48);
+}
+.sequence-orbit::before,
+.sequence-orbit::after {
+  position: absolute;
+  inset: 12%;
+  border: 1px solid rgba(179, 108, 255, 0.16);
+  border-radius: 50%;
+  content: "";
+}
+.sequence-orbit::after {
+  inset: 24%;
+  border-color: rgba(255, 112, 194, 0.16);
+}
+.light-sequence {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(86px, 110px));
+  gap: 30px 58px;
+}
+.sequence-light {
+  position: relative;
+  display: grid;
+  width: 100%;
+  aspect-ratio: 0.68;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  background: rgba(7, 18, 35, 0.72);
+  color: var(--cyan);
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.68rem;
+  letter-spacing: 0.1rem;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+.sequence-light::before,
+.sequence-light::after {
+  position: absolute;
+  right: 12%;
+  left: 12%;
+  height: 1px;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+  content: "";
+  opacity: 0.48;
+}
+.sequence-light::before {
+  top: 25%;
+}
+.sequence-light::after {
+  bottom: 25%;
+}
+.sequence-light:hover,
+.sequence-light:focus-visible {
+  transform: translateY(-5px);
+  outline: none;
+  box-shadow: 0 0 24px currentColor;
+}
+.sequence-light.is-active,
+.sequence-light.is-correct {
+  background: currentColor;
+  color: #06101d;
+  box-shadow:
+    0 0 20px currentColor,
+    0 0 52px currentColor;
+  animation: light-pulse 0.42s ease-out;
+}
+.sequence-light.is-error {
+  border-color: var(--danger);
+  background: rgba(255, 69, 109, 0.32);
+  color: #ff9bb0;
+  box-shadow: 0 0 26px rgba(255, 69, 109, 0.82);
+  animation: puzzle-shake 0.25s linear 2;
+}
+.light-blue {
+  color: #48b0ff;
+}
+.light-violet {
+  color: var(--violet);
+}
+.light-pink {
+  color: #ff70c2;
+}
+.sequence-board.solved .sequence-orbit {
+  border-color: rgba(128, 255, 207, 0.42);
+  box-shadow:
+    0 0 50px rgba(128, 255, 207, 0.22),
+    inset 0 0 42px rgba(128, 255, 207, 0.14);
+  animation: orbit-breathe 1.2s ease-in-out infinite alternate;
+}
+.sequence-controls {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 22px;
+  border-top: 1px solid rgba(121, 247, 255, 0.16);
+}
+.sequence-start-button {
+  padding: 10px 14px;
+  border: 1px solid var(--cyan);
+  background: rgba(121, 247, 255, 0.1);
+  color: var(--cyan);
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.58rem;
+  letter-spacing: 0.08rem;
+}
+.sequence-start-button:hover,
+.sequence-start-button:focus-visible {
+  background: rgba(121, 247, 255, 0.22);
+  box-shadow: 0 0 18px rgba(121, 247, 255, 0.3);
+  outline: none;
+}
+.sequence-start-button:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+@keyframes light-pulse {
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes orbit-breathe {
+  to {
+    transform: rotate(378deg) scaleY(0.48);
+  }
+}
+
 .puzzle-actions {
   display: flex;
   align-items: center;
@@ -677,6 +1115,72 @@ body::before {
   }
   .piece-tray {
     gap: 24px;
+  }
+  .sequence-board {
+    min-height: 310px;
+  }
+  .sort-board {
+    min-height: 450px;
+    gap: 24px;
+  }
+  .sort-slots,
+  .sort-pieces {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px 8px;
+  }
+  .sort-slot,
+  .sort-piece {
+    width: 52px;
+    height: 52px;
+  }
+  .rotation-board {
+    min-height: 330px;
+  }
+  .rotation-target,
+  .rotation-object {
+    width: 132px;
+    height: 132px;
+  }
+  .rotation-readout {
+    right: 14px;
+    bottom: 14px;
+  }
+  .rotation-controls {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .rotation-controls .sequence-start-button {
+    width: 100%;
+  }
+  .sound-board {
+    min-height: 310px;
+  }
+  .note-sequence {
+    gap: 12px;
+  }
+  .sound-note {
+    width: 48px;
+    height: 94px;
+  }
+  .sound-note:nth-child(2) {
+    height: 118px;
+  }
+  .sound-note:nth-child(3) {
+    height: 142px;
+  }
+  .sound-note:nth-child(4) {
+    height: 106px;
+  }
+  .light-sequence {
+    grid-template-columns: repeat(2, 76px);
+    gap: 22px 32px;
+  }
+  .sequence-controls {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .sequence-start-button {
+    width: 100%;
   }
   .puzzle-actions {
     align-items: stretch;
