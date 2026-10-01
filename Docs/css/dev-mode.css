@@ -307,3 +307,21 @@
     padding-left: 9px;
   }
 }
+
+/* Keep the fixed controls stacked: DEV MODE above, RETOUR below. */
+.level-back-button,
+.page-back-button {
+  position: fixed !important;
+  top: auto !important;
+  bottom: 52px !important;
+  left: 18px !important;
+  z-index: 999 !important;
+}
+
+@media (max-width: 520px) {
+  .level-back-button,
+  .page-back-button {
+    bottom: 46px !important;
+    left: 14px !important;
+  }
+}

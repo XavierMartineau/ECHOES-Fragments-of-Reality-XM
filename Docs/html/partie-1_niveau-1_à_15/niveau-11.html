@@ -26,32 +26,25 @@
     </header>
     <main class="level-shell">
       <section class="level-intro">
-        <p class="eyebrow">Fragment 011 // Formes géométriques</p>
-        <h1>Construction géométrique</h1>
+        <p class="eyebrow">Fragment 011 // Paires de résonance</p>
+        <h1>Paires de résonance</h1>
         <p class="level-description">
-          Déplace les points et relie-les pour reproduire chaque forme.
+          Trouve les cartes qui portent le même symbole.
         </p>
         <div class="system-transmission" aria-live="polite">
           <span class="system-label">SYSTEM://LOG</span>
-          <p id="systemMessage">SYSTEME:: FORME EXEMPLE EN ATTENTE</p>
+          <p id="systemMessage">SYSTEME:: PAIRES DE RESONANCE EN ATTENTE</p>
         </div>
       </section>
-      <section class="puzzle-panel geometry-board">
+      <section class="puzzle-panel pairs-board">
         <div class="panel-heading">
-          <h2>Atelier de formes</h2>
-          <span class="progress-readout" id="progressReadout">0 / 4</span>
+          <h2>Cartes de résonance</h2>
+          <span class="progress-readout" id="progressReadout">0 / 3</span>
         </div>
-        <div class="geometry-example" id="geometryExample">
-          <span>FORME À REPRODUIRE</span
-          ><svg viewBox="0 0 100 100" aria-hidden="true">
-            <polyline></polyline>
-          </svg>
+        <div class="resonance-guide">
+          Chaque manche contient des paires identiques : 6, 12 puis 20 cartes.
         </div>
-        <div class="geometry-workspace" id="geometryWorkspace">
-          <svg viewBox="0 0 100 100" aria-hidden="true">
-            <polyline></polyline>
-          </svg>
-        </div>
+        <div class="resonance-pairs-grid" id="resonancePairsGrid"></div>
         <div class="puzzle-actions">
           <button
             class="sequence-start-button"
@@ -61,15 +54,8 @@
             DÉMARRER LE PUZZLE
           </button>
           <p class="puzzle-status" id="puzzleStatus">
-            Déplace les points : la ligne les relie automatiquement.
+            Clique deux cartes pour révéler leur symbole.
           </p>
-          <button
-            class="validate-structure-button"
-            id="validateStructureButton"
-            type="button"
-          >
-            VALIDER LA STRUCTURE
-          </button>
           <button
             class="next-level-button"
             id="nextLevelButton"
@@ -86,10 +72,9 @@
     <footer class="level-footer">
       <span>ÉCHO // INITIATION ACTIVE</span><span>11 / 90</span>
     </footer>
-    <script src="../../js/translations.js?v=3"></script>
+    <script src="../../js/translations.js?v=5"></script>
     <script src="../../js/save-system.js"></script>
-    <script src="../../js/partie-1_niveau-1_à_15.js?v=24"></script>
+    <script src="../../js/partie-1_niveau-1_à_15.js?v=34"></script>
     <script src="../../js/dev-mode.js"></script>
   </body>
 </html>
-

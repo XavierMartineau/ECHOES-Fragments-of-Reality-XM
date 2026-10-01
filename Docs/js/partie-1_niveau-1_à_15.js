@@ -6,7 +6,7 @@
  * - Level 08: .advanced-sort-board -> color sorting.
  * - Level 09: .constellation-board -> three star sequences.
  * - Level 10: .color-sequence-board -> color memory sequence.
- * - Level 11: .geometry-board -> four movable geometric shapes.
+ * - Level 11: .pairs-board -> memory matching, 6/12/21 cards.
  * - Level 12: .cross-light-board -> ordered light intersections.
  * - Level 13: .fractal-board -> five-panel fractal pattern.
  * - Level 14: .combined-sequence-board -> combined ordered sequence.
@@ -24,7 +24,7 @@ const levelScriptByMarker = [
   [".advanced-sort-board", 8],
   [".constellation-board", 9],
   [".color-sequence-board", 10],
-  [".geometry-board", 11],
+  [".pairs-board", 11],
   [".cross-light-board", 12],
   [".fractal-board", 13],
   [".combined-sequence-board", 14],
@@ -1924,142 +1924,140 @@ function installOrderedGridLevel(
   });
 }
 
-// Level 11 // Geometry workshop: move points, keep the polyline connected,
-// and validate the shape against the visible example.
-if (document.querySelector(".geometry-board")) {
-  installAdvancedLevel(11, ({ started, finish, setStatus }) => {
-    const example = document.querySelector("#geometryExample polyline");
-    const workspace = document.getElementById("geometryWorkspace");
-    const validateButton = document.getElementById("validateStructureButton");
-    const progress = workspace
+// Level 11 // Memory pairs: all cards must be matched by color/symbol.
+if (document.querySelector(".pairs-board")) {
+  installAdvancedLevel(11, ({ started, finish, setStatus, registerStart }) => {
+    const grid = document.getElementById("resonancePairsGrid");
+    const progress = grid
       .closest(".puzzle-panel")
       .querySelector(".progress-readout");
-    const rounds = [
-      [
-        [20, 76],
-        [50, 20],
-        [80, 76],
-      ],
-      [
-        [22, 24],
-        [78, 24],
-        [78, 76],
-        [22, 76],
-      ],
-      [
-        [50, 16],
-        [82, 40],
-        [70, 78],
-        [30, 78],
-        [18, 40],
-      ],
-      [
-        [50, 12],
-        [84, 32],
-        [72, 76],
-        [28, 76],
-        [16, 32],
-        [50, 50],
-      ],
-    ];
-    let round = 0;
-    let points = [];
-    let connected = [];
-    let dragging = null;
-    let roundComplete = false;
-    const distance = (first, second) =>
-      Math.hypot(first[0] - second[0], first[1] - second[1]);
-    const render = () => {
-      example.setAttribute(
-        "points",
-        rounds[round].map(([x, y]) => `${x},${y}`).join(" "),
-      );
-      const line = workspace.querySelector("polyline");
-      line.setAttribute(
-        "points",
-        connected.map((index) => points[index].join(",")).join(" "),
-      );
-      workspace.querySelectorAll(".geometry-point").forEach((point) => {
-        const index = Number(point.dataset.index);
-        point.style.left = `${points[index][0]}%`;
-        point.style.top = `${points[index][1]}%`;
-        point.classList.toggle("is-connected", connected.includes(index));
-      });
-      workspace.dataset.round = String(round + 1);
+    const roundCardCounts = [6, 12, 20];
+    const round = { index: 0, selected: [], found: 0, locked: false };
+    const symbols = ["◇", "◈", "✦", "⬡", "✚", "✧", "✺", "★", "✥", "⬢"];
+    const symbolTones = {
+      "◇": "cyan",
+      "◈": "violet",
+      "✦": "pink",
+      "⬡": "yellow",
+      "✚": "green",
+      "✧": "blue",
+      "✺": "magenta",
+      "★": "orange",
+      "✥": "lime",
+      "⬢": "white",
     };
-    const startRound = () => {
-      const scrambledPositions = [
-        [86, 18],
-        [16, 78],
-        [72, 82],
-        [28, 18],
-        [92, 56],
-        [52, 88],
-      ];
-      points = rounds[round].map((_, index) => scrambledPositions[index]);
-      connected = points.map((_, index) => index);
-      roundComplete = false;
-      workspace.innerHTML = `<svg viewBox="0 0 100 100" aria-hidden="true"><polyline></polyline></svg>${points.map((_, index) => `<button class="geometry-point" data-index="${index}" type="button" aria-label="Point ${index + 1}">${index + 1}</button>`).join("")}`;
-      workspace.querySelectorAll(".geometry-point").forEach((point) => {
-        point.addEventListener("pointerdown", (event) => {
-          if (!started()) return;
-          dragging = {
-            index: Number(point.dataset.index),
-            pointerId: event.pointerId,
-          };
-          point.setPointerCapture(event.pointerId);
-        });
-        point.addEventListener("pointermove", (event) => {
-          if (!dragging || dragging.index !== Number(point.dataset.index))
-            return;
-          const rect = workspace.getBoundingClientRect();
-          points[dragging.index] = [
-            Math.max(
-              4,
-              Math.min(96, ((event.clientX - rect.left) / rect.width) * 100),
-            ),
-            Math.max(
-              4,
-              Math.min(88, ((event.clientY - rect.top) / rect.height) * 100),
-            ),
-          ];
-          render();
-        });
-        point.addEventListener("pointerup", () => {
-          dragging = null;
-        });
-      });
-      render();
-    };
-    const validateRound = () => {
-      if (!started() || roundComplete) return;
-      const accurate = points.every(
-        (pointValue, pointIndex) =>
-          distance(pointValue, rounds[round][pointIndex]) < 30,
-      );
-      if (!accurate) {
-        setStatus(
-          "Les points doivent être plus proches de la forme exemple.",
-          "error",
-        );
-        return;
-      }
-      roundComplete = true;
-      round += 1;
-      progress.textContent = `${round} / 4`;
-      if (round === rounds.length) {
-        finish();
-        return;
-      }
+
+    const createRound = (showFaces) => {
+      const cardCount = roundCardCounts[round.index];
+      const groupSize = 2;
+      const groupCount = cardCount / groupSize;
+      const cards = symbols
+        .slice(0, groupCount)
+        .flatMap((symbol) => Array.from({ length: groupSize }, () => symbol));
+      cards.sort(() => Math.random() - 0.5);
+      round.selected = [];
+      round.found = 0;
+      round.locked = false;
+      grid.innerHTML = cards
+        .map(
+          (symbol, index) =>
+            `<button class="resonance-card resonance-${symbolTones[symbol]}${showFaces ? " is-open" : ""}" style="--stack-index:${index}" data-symbol="${symbol}" type="button" aria-label="Carte ${index + 1}"><span>?</span><strong>${symbol}</strong></button>`,
+        )
+        .join("");
+      grid.classList.remove("is-stacking", "is-shuffling", "is-dealing");
+      grid.dataset.groupSize = String(groupSize);
+      progress.textContent = `${round.index} / 3`;
       setStatus(
-        `Forme ${round} / 4 réussie. Nouvelle forme chargée.`,
-        "success",
+        `Manche ${round.index + 1} / 3 // ${cardCount} cartes // paires.`,
       );
-      window.setTimeout(startRound, 650);
+      grid.querySelectorAll(".resonance-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          if (
+            !started() ||
+            round.locked ||
+            card.classList.contains("is-found") ||
+            card.classList.contains("is-open")
+          )
+            return;
+          card.classList.add("is-open");
+          round.selected.push(card);
+          if (round.selected.length < groupSize) return;
+          round.locked = true;
+          const selectedSymbols = round.selected.map(
+            (item) => item.dataset.symbol,
+          );
+          if (selectedSymbols.every((value) => value === selectedSymbols[0])) {
+            round.selected.forEach((item) => item.classList.add("is-found"));
+            round.found += 1;
+            round.selected = [];
+            round.locked = false;
+            setStatus(
+              `Manche ${round.index + 1} / 3 // groupe trouvé : ${round.found} / ${groupCount}.`,
+            );
+            if (round.found === groupCount) {
+              round.index += 1;
+              progress.textContent = `${round.index} / 3`;
+              if (round.index === roundCardCounts.length) {
+                finish();
+                return;
+              }
+              setStatus(
+                `Manche ${round.index} / 3 réussie. Nouvelles cartes chargées.`,
+                "success",
+              );
+              window.setTimeout(playShuffle, 650);
+            }
+            return;
+          }
+          setStatus(
+            `Manche ${round.index + 1} / 3 // cartes différentes. Recommence.`,
+            "error",
+          );
+          window.setTimeout(() => {
+            round.selected.forEach((item) => item.classList.remove("is-open"));
+            round.selected = [];
+            round.locked = false;
+          }, 650);
+        });
+      });
     };
-    validateButton.addEventListener("click", validateRound);
-    progress.textContent = "0 / 4";
-    startRound();
+
+    const playShuffle = () => {
+      createRound(true);
+      round.locked = true;
+      setStatus(`Manche ${round.index + 1} / 3 // observation des cartes...`);
+      window.setTimeout(() => {
+        grid.classList.add("is-stacking");
+        setStatus(
+          `Manche ${round.index + 1} / 3 // rassemblement du paquet...`,
+        );
+      }, 1000);
+      window.setTimeout(() => {
+        grid.classList.add("is-shuffling");
+        setStatus(`Manche ${round.index + 1} / 3 // mélange en cours...`);
+      }, 1650);
+      window.setTimeout(() => {
+        grid.classList.remove("is-stacking", "is-shuffling");
+        grid.classList.add("is-dealing");
+        grid
+          .querySelectorAll(".resonance-card")
+          .forEach((card) => card.classList.remove("is-open"));
+        setStatus(
+          `Manche ${round.index + 1} / 3 // redistribution des cartes...`,
+        );
+      }, 2450);
+      window.setTimeout(() => {
+        grid.classList.remove("is-dealing");
+        round.locked = false;
+        setStatus(
+          `Manche ${round.index + 1} / 3 // retourne deux cartes pour trouver une paire.`,
+        );
+      }, 3300);
+    };
+
+    registerStart(() => playShuffle());
+    progress.textContent = "0 / 3";
+    createRound(true);
   });
 }
 // Level 12 // Crossed light: activate the intersections in sequence.

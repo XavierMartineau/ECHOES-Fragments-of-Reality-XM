@@ -2346,6 +2346,193 @@ body.level-corruption .level-footer {
   }
 }
 
+.pairs-board .resonance-guide {
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(121, 247, 255, 0.16);
+  background: rgba(5, 7, 17, 0.55);
+  color: var(--muted);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.58rem;
+  letter-spacing: 0.06rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+.resonance-pairs-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(58px, 1fr));
+  gap: 14px;
+  min-height: 390px;
+  padding: 44px 30px;
+  align-content: center;
+  background:
+    radial-gradient(circle at center, rgba(20, 63, 92, 0.25), transparent 62%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    );
+}
+.resonance-card {
+  position: relative;
+  display: grid;
+  min-height: 94px;
+  place-items: center;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+  background: #050711;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  perspective: 700px;
+  transform-style: preserve-3d;
+  transition:
+    transform 0.45s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.22);
+}
+.resonance-card span,
+.resonance-card strong {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  backface-visibility: hidden;
+}
+.resonance-card span {
+  font-size: 1.6rem;
+}
+.resonance-card strong {
+  font-size: 2rem;
+  transform: rotateY(180deg);
+}
+.resonance-card:hover,
+.resonance-card:focus-visible {
+  transform: translateY(-5px) scale(1.03);
+  background: #161925;
+  border-color: #ffffff;
+  outline: none;
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.58);
+}
+.resonance-card.is-open,
+.resonance-card.is-found {
+  transform: rotateY(180deg);
+}
+.resonance-pairs-grid.is-stacking {
+  position: relative;
+}
+.resonance-pairs-grid.is-stacking .resonance-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: calc(10 + var(--stack-index));
+  width: min(118px, 16%);
+  min-height: 94px;
+  transform: translate(-50%, -50%)
+    rotate(calc((var(--stack-index) * 7deg) - 24deg)) rotateY(180deg);
+  transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.resonance-pairs-grid.is-stacking .resonance-card:nth-child(3n) {
+  transform: translate(-50%, -50%)
+    rotate(calc((var(--stack-index) * 7deg) - 24deg)) rotateY(180deg)
+    translateY(-5px);
+}
+.resonance-pairs-grid.is-shuffling .resonance-card {
+  animation: resonance-shuffle 0.42s ease-in-out infinite alternate;
+  animation-delay: calc(var(--stack-index) * 35ms);
+}
+.resonance-pairs-grid.is-dealing .resonance-card {
+  animation: resonance-deal 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--stack-index) * 45ms);
+}
+@keyframes resonance-shuffle {
+  from {
+    transform: translate(-50%, -50%) rotate(-12deg) rotateY(180deg) scale(0.96);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(12deg) rotateY(180deg) scale(1.04);
+  }
+}
+@keyframes resonance-deal {
+  from {
+    opacity: 0.3;
+    transform: translateY(-24px) scale(0.72);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.resonance-card.is-found {
+  border-color: var(--match-color);
+  background: var(--match-background);
+  box-shadow: 0 0 30px var(--match-glow);
+}
+.resonance-card.is-found strong {
+  color: var(--match-color);
+}
+.resonance-cyan {
+  --match-color: #79f7ff;
+  --match-background: rgba(25, 170, 205, 0.35);
+  --match-glow: rgba(121, 247, 255, 0.72);
+}
+.resonance-violet {
+  --match-color: #b36cff;
+  --match-background: rgba(132, 61, 210, 0.35);
+  --match-glow: rgba(179, 108, 255, 0.72);
+}
+.resonance-pink {
+  --match-color: #ff70c2;
+  --match-background: rgba(210, 66, 145, 0.35);
+  --match-glow: rgba(255, 112, 194, 0.72);
+}
+.resonance-yellow {
+  --match-color: #ffd166;
+  --match-background: rgba(201, 145, 39, 0.35);
+  --match-glow: rgba(255, 209, 102, 0.72);
+}
+.resonance-green {
+  --match-color: #80ffcf;
+  --match-background: rgba(44, 180, 137, 0.35);
+  --match-glow: rgba(128, 255, 207, 0.72);
+}
+.resonance-blue {
+  --match-color: #48b0ff;
+  --match-background: rgba(37, 125, 207, 0.35);
+  --match-glow: rgba(72, 176, 255, 0.72);
+}
+.resonance-magenta {
+  --match-color: #ff70c2;
+  --match-background: rgba(210, 66, 145, 0.35);
+  --match-glow: rgba(255, 112, 194, 0.72);
+}
+.resonance-orange {
+  --match-color: #ff9f43;
+  --match-background: rgba(255, 159, 67, 0.35);
+  --match-glow: rgba(255, 159, 67, 0.72);
+}
+.resonance-lime {
+  --match-color: #b8ff66;
+  --match-background: rgba(184, 255, 102, 0.35);
+  --match-glow: rgba(184, 255, 102, 0.72);
+}
+.resonance-white {
+  --match-color: #ffffff;
+  --match-background: rgba(255, 255, 255, 0.22);
+  --match-glow: rgba(255, 255, 255, 0.72);
+}
+@media (max-width: 560px) {
+  .resonance-pairs-grid {
+    grid-template-columns: repeat(4, minmax(58px, 1fr));
+    padding-inline: 18px;
+  }
+}
+
 .geometry-board .geometry-example {
   position: relative;
   min-height: 130px;
@@ -2377,6 +2564,31 @@ body.level-corruption .level-footer {
   stroke-linejoin: round;
   stroke-width: 1.2;
   filter: drop-shadow(0 0 5px var(--cyan));
+}
+.geometry-guide {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 18px;
+  padding: 10px 18px;
+  border-bottom: 1px solid rgba(121, 247, 255, 0.16);
+  background: rgba(5, 7, 17, 0.6);
+  color: var(--muted);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.54rem;
+  letter-spacing: 0.04rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+.geometry-guide b {
+  display: inline-grid;
+  width: 17px;
+  height: 17px;
+  margin-right: 4px;
+  place-items: center;
+  border: 1px solid var(--cyan);
+  border-radius: 50%;
+  color: var(--cyan);
 }
 .geometry-workspace {
   position: relative;
@@ -2423,6 +2635,12 @@ body.level-corruption .level-footer {
   box-shadow: 0 0 24px rgba(128, 255, 207, 0.76);
   cursor: grabbing;
   outline: none;
+}
+.geometry-point.is-activated {
+  border-color: #ffffff;
+  background: #050711;
+  color: #ffffff;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.86);
 }
 .geometry-workspace[data-round="2"] polyline {
   stroke: var(--violet);

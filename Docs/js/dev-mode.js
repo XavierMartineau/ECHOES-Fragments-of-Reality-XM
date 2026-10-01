@@ -181,6 +181,9 @@
   // Verifies the enrolled Windows Hello credential without opening a camera.
   const requestFaceId = async () => {
     faceIdModal.hidden = false;
+    const isLocalDevelopmentHost = /^(localhost|127\.0\.0\.1|::1)$/i.test(
+      window.location.hostname,
+    );
     const storedCredential = localStorage.getItem("echoes-dev-face-credential");
     faceIdTitle.textContent = storedCredential
       ? "VERIFY OWNER FACE"
@@ -193,12 +196,12 @@
 
     try {
       if (
-        !window.isSecureContext ||
+        (!window.isSecureContext && !isLocalDevelopmentHost) ||
         !navigator.credentials ||
         !window.PublicKeyCredential
       ) {
         throw new Error(
-          "Face ID requires HTTPS or localhost and Windows Hello.",
+          "Face ID requires HTTPS, localhost, or a local Live Server host with Windows Hello.",
         );
       }
 
@@ -249,7 +252,7 @@
     } catch (error) {
       const browserMessage = String(error.message || "");
       const message = browserMessage.includes("Public-key credentials")
-        ? "Open ECHOES through localhost or HTTPS to use Windows Hello."
+        ? "Open ECHOES through Live Server on localhost or HTTPS to use Windows Hello."
         : browserMessage || "Face ID verification failed.";
       setFaceIdStatus(message, "error");
     }
