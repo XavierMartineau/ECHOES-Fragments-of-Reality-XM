@@ -338,7 +338,7 @@ body.simulation-failure .intro-title {
     padding-top: clamp(54px, 7vh, 92px);
   }
   .intro-title {
-    font-size: clamp(5rem, 9vw, 8rem);
+    font-size: clamp(4.4rem, 8vw, 7.2rem);
   }
   .intro-subtitle {
     margin-top: 20px;
@@ -373,7 +373,7 @@ body.simulation-failure .intro-title {
   margin: 0;
   color: var(--text);
   font-family: "Orbitron", sans-serif;
-  font-size: clamp(2.8rem, 8vw, 7rem);
+  font-size: clamp(2.5rem, 7vw, 6.2rem);
   font-weight: 900;
   letter-spacing: 0.16em;
   line-height: 0.95;
@@ -1275,7 +1275,7 @@ body.simulation-failure .intro-title {
     padding-bottom: 150px;
   }
   .intro-title {
-    font-size: clamp(4rem, 10vw, 7rem);
+    font-size: clamp(3.5rem, 9vw, 6.2rem);
   }
   .intro-subtitle {
     margin-top: 18px;

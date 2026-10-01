@@ -243,7 +243,7 @@ html:has(.intro-page),
   }
 
   .intro-page.desktop-layout .intro-title {
-    font-size: clamp(5rem, 9vw, 8rem);
+    font-size: clamp(4.4rem, 8vw, 7.2rem);
   }
 
   .intro-page.desktop-layout .ai-stage {
@@ -293,7 +293,7 @@ html:has(.intro-page),
   }
 
   .intro-page .intro-title {
-    font-size: clamp(5rem, 9vw, 8rem);
+    font-size: clamp(4.4rem, 8vw, 7.2rem);
   }
 
   .intro-page .ai-stage {
@@ -325,7 +325,7 @@ html:has(.intro-page),
   }
 
   .intro-page .intro-title {
-    font-size: clamp(4rem, 10vw, 7rem);
+    font-size: clamp(3.5rem, 9vw, 6.2rem);
   }
 
   .intro-page .ai-stage {
@@ -395,7 +395,7 @@ html:has(.intro-page),
   padding: clamp(54px, 7vh, 92px) 24px 48px;
 }
 .intro-page.desktop-layout .intro-title {
-  font-size: clamp(5rem, 9vw, 8rem);
+  font-size: clamp(4.4rem, 8vw, 7.2rem);
 }
 .intro-page.desktop-layout .ai-stage {
   width: min(430px, 32vw);

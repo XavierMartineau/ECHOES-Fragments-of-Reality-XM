@@ -224,7 +224,7 @@
   border-color: var(--success);
 }
 .level-shell:has(.pattern-board) .level-intro h1 {
-  font-size: clamp(1.8rem, 3.4vw, 3.4rem);
+  font-size: clamp(1.7rem, 3.1vw, 3.1rem);
 }
 .pattern-board .panel-heading h2 {
   font-size: clamp(1rem, 1.8vw, 1.45rem);
@@ -542,7 +542,7 @@ body::before {
   max-width: 100%;
   overflow-wrap: anywhere;
   font-family: var(--font-display, "Orbitron", sans-serif);
-  font-size: clamp(2rem, 4vw, 4rem);
+  font-size: clamp(1.8rem, 3.5vw, 3.5rem);
   line-height: 1.05;
   text-transform: uppercase;
   text-shadow: 0 0 24px rgba(121, 247, 255, 0.28);
