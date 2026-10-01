@@ -9,6 +9,20 @@ const levelScriptByMarker = [
   [".mirror-board", 9],
   [".illusion-board", 10],
 ];
+function ensureLevelFooter() {
+  let footer = document.querySelector(".level-footer");
+  if (!footer) {
+    footer = document.createElement("footer");
+    footer.className = "level-footer";
+    document.body.appendChild(footer);
+  }
+  if (!footer.querySelector(".site-credit")) {
+    const credit = document.createElement("span");
+    credit.className = "site-credit";
+    credit.textContent = "© 2026 Xavier Martineau // TOUS DROITS RÉSERVÉS";
+    footer.appendChild(credit);
+  }
+}
 const activeLevelScript = levelScriptByMarker.find(([marker]) =>
   document.querySelector(marker),
 );
@@ -108,6 +122,7 @@ if (activeLevelScript) {
     return result;
   };
   const installBackButton = () => {
+    ensureLevelFooter();
     const button = document.createElement("button");
     button.className = "level-back-button";
     button.type = "button";
@@ -702,7 +717,8 @@ if (activeLevelScript) {
       targetIndexes = new Set(
         shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 3),
       );
-      targetGlyph = targetGlyphs[Math.floor(Math.random() * targetGlyphs.length)];
+      targetGlyph =
+        targetGlyphs[Math.floor(Math.random() * targetGlyphs.length)];
       grid.replaceChildren();
       symbols.forEach((symbol, index) => {
         const button = document.createElement("button");
@@ -768,24 +784,18 @@ if (activeLevelScript) {
       window.location.href = "niveau-07.html";
     });
     if (completedLevels.has(6)) {
-      started = true;
-      found = 3;
-      grid.querySelectorAll("button[data-match='true']").forEach((button) => {
-        button.classList.add("is-correct");
-        button.disabled = true;
-      });
-      grid.classList.add("is-solved");
-      status.textContent = levelCopy.statusSuccess;
-      status.className = "puzzle-status success";
       next.hidden = false;
       start.disabled = false;
-      readout.textContent = "3 / 3";
+      started = false;
+      found = 0;
+      readout.textContent = "0 / 3";
     }
   }
 } else {
   // ===== NIVEAU 1 =====
   // Le puzzle d'alignement est géré directement dans ce bloc.
   function installBackButton(fallbackHref = "../../../index.html") {
+    ensureLevelFooter();
     if (document.querySelector(".level-back-button")) return;
     const style = document.createElement("style");
     style.textContent = `.level-back-button{position:fixed;top:auto;bottom:52px;left:18px;z-index:20;padding:9px 12px;border:1px solid rgba(121,247,255,.5);background:rgba(5,7,17,.9);color:#79f7ff;cursor:pointer;font:0.58rem var(--font-display,"Orbitron",sans-serif);letter-spacing:.08rem;text-transform:uppercase}.level-back-button:hover,.level-back-button:focus-visible{background:rgba(121,247,255,.18);box-shadow:0 0 18px rgba(121,247,255,.32);outline:none}@media(max-width:560px){.level-back-button{top:auto;bottom:46px;left:14px}.level-header{padding-top:64px}.level-shell{padding-bottom:96px}.level-meta{flex-wrap:wrap;max-width:100%}.level-meta strong,.level-meta span{overflow-wrap:anywhere}.level-description,.system-transmission p,.puzzle-status{overflow-wrap:anywhere}}`;

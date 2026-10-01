@@ -1,4 +1,5 @@
 /* Styles de la partie 2. */
+.level-footer{position:fixed;right:0;bottom:0;left:0;z-index:2;display:flex;justify-content:space-between;padding:11px 28px;border-top:1px solid rgba(121,247,255,.2);background:rgba(5,7,17,.9);color:#9cabc4;font:0.62rem var(--font-display,"Orbitron",sans-serif);letter-spacing:.12rem;text-transform:uppercase}.level-footer .site-credit{color:rgba(223,234,249,.72);font-size:.58rem}
 .level-back-button {
   top: auto !important;
   bottom: 52px !important;

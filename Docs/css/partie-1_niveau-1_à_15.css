@@ -38,6 +38,10 @@
 .level-footer span {
   overflow-wrap: anywhere;
 }
+.level-footer .site-credit {
+  color: rgba(223, 234, 249, 0.72);
+  font-size: 0.58rem;
+}
 .volume-notice {
   display: inline-block;
   margin: 18px 0 0;
@@ -79,6 +83,22 @@
   color: #ffd166;
   text-shadow: 0 0 8px rgba(255, 209, 102, 0.42);
 }
+.pattern-symbol:nth-child(4n + 1) {
+  color: var(--cyan);
+  border-color: rgba(121, 247, 255, 0.55);
+}
+.pattern-symbol:nth-child(4n + 2) {
+  color: #ff70c2;
+  border-color: rgba(255, 112, 194, 0.55);
+}
+.pattern-symbol:nth-child(4n + 3) {
+  color: var(--violet);
+  border-color: rgba(179, 108, 255, 0.55);
+}
+.pattern-symbol:nth-child(4n) {
+  color: #ffd166;
+  border-color: rgba(255, 209, 102, 0.55);
+}
 .pattern-symbol.pattern-target {
   border-color: rgba(255, 209, 102, 0.62);
   color: #ffd166;
@@ -99,25 +119,34 @@
   box-shadow: 0 0 22px rgba(128, 255, 207, 0.7);
 }
 .pattern-symbol.pattern-target.is-correct {
-  border-color: rgba(255, 209, 102, 0.9);
-  background: rgba(255, 209, 102, 0.14);
-  color: #ffd166;
-  box-shadow: 0 0 24px rgba(255, 209, 102, 0.78);
+  border-color: var(--success);
+  background: rgba(128, 255, 207, 0.18);
+  color: var(--success);
+  box-shadow: 0 0 24px rgba(128, 255, 207, 0.78);
 }
 .pattern-symbol,
 .pattern-symbol.pattern-target,
 .pattern-symbol.pattern-target.is-correct {
-  border-color: rgba(255, 209, 102, 0.62);
-  background: rgba(255, 209, 102, 0.08);
-  color: #ffd166;
+  border-color: var(--success);
+  background: rgba(128, 255, 207, 0.18);
+  color: var(--success);
   font-size: 1.45rem;
-  text-shadow: 0 0 10px rgba(255, 209, 102, 0.58);
-  box-shadow: 0 0 14px rgba(255, 209, 102, 0.34);
+  text-shadow: 0 0 10px rgba(128, 255, 207, 0.58);
+  box-shadow: 0 0 18px rgba(128, 255, 207, 0.48);
 }
 .pattern-symbol.is-correct,
 .pattern-symbol.pattern-target.is-correct {
-  background: rgba(255, 209, 102, 0.08);
-  box-shadow: 0 0 18px rgba(255, 209, 102, 0.48);
+  background: rgba(128, 255, 207, 0.18);
+  box-shadow: 0 0 22px rgba(128, 255, 207, 0.7);
+}
+.pattern-symbol:not(.is-correct):not(.is-error),
+.pattern-symbol.pattern-target:not(.is-correct):not(.is-error) {
+  border-color: rgba(121, 247, 255, 0.55);
+  background: rgba(4, 38, 72, 0.78);
+  color: var(--cyan);
+  font-size: 1.45rem;
+  text-shadow: 0 0 10px rgba(121, 247, 255, 0.58);
+  box-shadow: 0 0 14px rgba(121, 247, 255, 0.28);
 }
 .pattern-symbol.is-error {
   border-color: var(--danger);
