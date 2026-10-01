@@ -1022,7 +1022,6 @@ if (activeLevelScript) {
   let selectedPiece = null;
   let placedShapes = [null, null, null];
   let puzzleStarted = false;
-  let roundIndex = 0;
 
   document.documentElement.lang = language;
   document.querySelectorAll("[data-i18n]").forEach((element) => {
@@ -1090,8 +1089,8 @@ if (activeLevelScript) {
     shufflePieces();
     systemMessages.input =
       language === "en"
-        ? `SYSTEM:: ROUND ${roundIndex + 1} OF 3 // TARGET ORDER: ${solution.map((shape) => shapeLabels[shape].toUpperCase()).join(" > ")}`
-        : `SYSTEME:: MANCHE ${roundIndex + 1} SUR 3 // ORDRE CIBLES: ${solution.map((shape) => shapeLabels[shape].toUpperCase()).join(" > ")}`;
+        ? `SYSTEM:: TARGET ORDER: ${solution.map((shape) => shapeLabels[shape].toUpperCase()).join(" > ")}`
+        : `SYSTEME:: ORDRE CIBLES: ${solution.map((shape) => shapeLabels[shape].toUpperCase()).join(" > ")}`;
     systemMessage.textContent = systemMessages.input;
     updateProgress();
   }
@@ -1126,7 +1125,11 @@ if (activeLevelScript) {
   }
 
   function updateProgress() {
-    progressReadout.textContent = `${roundIndex} / 3`;
+    const correctPlacements = placedShapes.reduce(
+      (count, shape, index) => count + (shape === solution[index] ? 1 : 0),
+      0,
+    );
+    progressReadout.textContent = `${correctPlacements} / 3`;
   }
 
   function typeSystemMessage(message, onComplete) {
@@ -1208,31 +1211,12 @@ if (activeLevelScript) {
       status.textContent = levelCopy.statusSuccess;
       status.className = "puzzle-status success";
       systemTransmission.classList.add("success");
-      roundIndex += 1;
       updateProgress();
-      if (roundIndex < 3) {
-        typeSystemMessage(
-          language === "en"
-            ? `ROUND ${roundIndex} RESTORED // NEXT ROUND LOADING`
-            : `MANCHE ${roundIndex} RESTAUREE // MANCHE SUIVANTE`,
-          () =>
-            window.setTimeout(() => {
-              systemTransmission.classList.remove("success");
-              status.className = "puzzle-status";
-              status.textContent = levelCopy.statusReady;
-              prepareRound();
-            }, 500),
-        );
-      } else {
-        markCurrentLevelCompleted();
-        nextLevelButton.hidden = false;
-        typeSystemMessage(systemMessages.success, () => {
-          window.setTimeout(() => {
-            nextLevelButton.hidden = false;
-            nextLevelButton.focus();
-          }, 450);
-        });
-      }
+      markCurrentLevelCompleted();
+      nextLevelButton.hidden = false;
+      typeSystemMessage(systemMessages.success, () => {
+        nextLevelButton.focus();
+      });
       return;
     }
 
@@ -1249,7 +1233,6 @@ if (activeLevelScript) {
   }
 
   function resetPuzzle() {
-    roundIndex = 0;
     placedShapes = [null, null, null];
     selectedPiece = null;
     puzzleStarted = false;
