@@ -11,6 +11,15 @@
   style.href = new URL("../css/dev-mode.css", script.src).href;
   document.head.appendChild(style);
 
+  // Keeps the browser tab title synchronized with the current level language.
+  const levelMatch = window.location.pathname.match(/niveau-(\d+)\.html$/i);
+  if (levelMatch) {
+    const currentLevel = String(Number(levelMatch[1])).padStart(2, "0");
+    const titlePrefix =
+      localStorage.getItem("echoes-language") === "en" ? "Level" : "Niveau";
+    document.title = `ECHOES - ${titlePrefix} ${currentLevel}`;
+  }
+
   const parts = [
     {
       number: 1,
