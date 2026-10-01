@@ -51,6 +51,7 @@
       trayAria: "Formes à aligner",
       statusReady:
         "Sélectionne une forme ou fais-la glisser vers un emplacement.",
+      startPuzzle: "DÉMARRER LE PUZZLE",
       statusSelected:
         "Forme sélectionnée. Choisis son emplacement holographique.",
       statusSuccess: "Résonance stabilisée. Le fragment répond à ECHO.",
@@ -132,6 +133,7 @@
         "Étoile",
       ],
       statusReady: "Sélectionne un symbole, puis son emplacement mémoire.",
+      startPuzzle: "DÉMARRER LE PUZZLE",
       statusSelected: "Symbole sélectionné. Choisis son emplacement.",
       statusSuccess: "Les symboles ont retrouvé leur langage.",
       statusError: "Ce symbole ne correspond pas à cet emplacement.",
@@ -156,10 +158,11 @@
       puzzleKicker: "PUZZLE // ROTATION",
       puzzleTitle: "Résonance angulaire",
       progressAria: "Progression des niveaux 1 à 15",
-      rotateButton: "PIVOTER DE 30°",
+      rotateButton: "PIVOTER DE 45°",
       targetLabel: "Orientation cible",
       currentLabel: "Orientation actuelle",
       statusReady: "Fais pivoter l'objet jusqu'à l'orientation cible.",
+      startPuzzle: "DÉMARRER LE PUZZLE",
       statusSuccess: "La silhouette et l'objet ne forment plus qu'un.",
       statusError:
         "L'orientation est correcte, mais la résonance n'est pas encore stabilisée.",
@@ -178,6 +181,7 @@
       title: "Séquence sonore",
       description:
         "La mémoire ne répond plus à la lumière seule. Écoute les quatre notes holographiques, puis reproduis leur rythme.",
+      volumeNotice: "SÉQUENCE SONORE // VEUILLEZ ACTIVER LE VOLUME",
       systemLabel: "SYSTEM://LOG",
       systemInput: "SYSTEME:: CANAL SONORE OUVERT // 4 NOTES EN ATTENTE",
       puzzleKicker: "PUZZLE // SON",
@@ -379,6 +383,7 @@
       slots: ["Slot 1", "Slot 2", "Slot 3"],
       trayAria: "Shapes to align",
       statusReady: "Select a shape or drag it to a target slot.",
+      startPuzzle: "START PUZZLE",
       statusSelected: "Shape selected. Choose its holographic target.",
       statusSuccess: "Resonance stabilized. The fragment responds to ECHO.",
       statusError: "Desynchronization detected. The shapes are out of rhythm.",
@@ -458,6 +463,7 @@
         "Star",
       ],
       statusReady: "Select a symbol, then choose its memory slot.",
+      startPuzzle: "START PUZZLE",
       statusSelected: "Symbol selected. Choose its slot.",
       statusSuccess: "The symbols have recovered their language.",
       statusError: "This symbol does not match this slot.",
@@ -482,10 +488,11 @@
       puzzleKicker: "PUZZLE // ROTATION",
       puzzleTitle: "Angular resonance",
       progressAria: "Progress for levels 1 to 15",
-      rotateButton: "ROTATE 30°",
+      rotateButton: "ROTATE 45°",
       targetLabel: "Target orientation",
       currentLabel: "Current orientation",
       statusReady: "Rotate the object until it reaches the target orientation.",
+      startPuzzle: "START PUZZLE",
       statusSuccess: "The silhouette and the object are one again.",
       statusError:
         "The orientation is close, but the resonance is not stable yet.",
@@ -504,6 +511,7 @@
       title: "Sound sequence",
       description:
         "Memory no longer answers to light alone. Listen to the four holographic notes, then repeat their rhythm.",
+      volumeNotice: "SOUND SEQUENCE // PLEASE TURN YOUR VOLUME ON",
       systemLabel: "SYSTEM://LOG",
       systemInput: "SYSTEM:: SOUND CHANNEL OPEN // 4 NOTES WAITING",
       puzzleKicker: "PUZZLE // SOUND",

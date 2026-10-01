@@ -38,6 +38,19 @@
 .level-footer span {
   overflow-wrap: anywhere;
 }
+.volume-notice {
+  display: inline-block;
+  margin: 18px 0 0;
+  padding: 9px 12px;
+  border: 1px solid rgba(255, 209, 102, 0.6);
+  background: rgba(255, 209, 102, 0.08);
+  color: #ffd166;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.62rem;
+  letter-spacing: 0.08rem;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
 
 * {
   box-sizing: border-box;
@@ -601,13 +614,6 @@ body::before {
     0 0 26px rgba(128, 255, 207, 0.68);
   animation: target-pulse 0.9s ease-in-out infinite alternate;
 }
-.sort-slot-label {
-  position: relative;
-  z-index: 1;
-  color: currentColor;
-  font-size: 0.62rem;
-  opacity: 0.72;
-}
 .sort-piece.is-placed {
   width: 38px;
   height: 38px;
@@ -722,6 +728,22 @@ body::before {
   box-shadow:
     0 0 22px rgba(179, 108, 255, 0.48),
     inset 0 0 28px rgba(179, 108, 255, 0.22);
+}
+.rotation-object.shape-diamond {
+  border-radius: 0;
+  color: #ff70c2;
+}
+.rotation-object.shape-circle {
+  border-radius: 50%;
+  color: #48b0ff;
+}
+.rotation-object.shape-hexagon {
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  color: var(--success);
+}
+.rotation-object.is-cleared {
+  opacity: 0;
+  transform: scale(0.2) rotate(var(--object-angle, 0deg));
 }
 .rotation-object::before {
   position: absolute;

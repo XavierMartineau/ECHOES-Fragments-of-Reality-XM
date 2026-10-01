@@ -3,17 +3,54 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="../../assets/images/echoes-favicon.svg" />
-    <title>ECHOES - Partie 1</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../../assets/images/echoes-favicon.svg"
+    />
+    <title>ECHOES - Niveau 8</title>
     <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_15.css" />
     <link rel="stylesheet" href="../../css/fonts.css" />
   </head>
   <body>
-    <main class="level-shell" data-level-part="1" data-level-range="1-15">
-      <p>Partie 1 // Initiation</p>
-      <h1>Niveau à construire</h1>
+    <main class="level-shell" data-level-start="1" data-level-end="15">
+      <section class="level-intro">
+        <p class="eyebrow">Fragment 008 // Tri des symboles</p>
+        <h1 data-i18n="title">Tri des symboles</h1>
+        <p class="level-description" data-i18n="description">
+          Classe les symboles selon leur couleur.
+        </p>
+      </section>
+      <section class="puzzle-panel advanced-sort-board">
+        <div class="panel-heading">
+          <h2 data-i18n="puzzleTitle">Classification chromatique</h2>
+          <span class="progress-readout" id="progressReadout">0 / 6</span>
+        </div>
+        <div class="color-sort-grid" id="colorSortGrid"></div>
+        <div class="puzzle-actions">
+          <button
+            class="sequence-start-button"
+            id="startPuzzleButton"
+            type="button"
+          >
+            DÉMARRER LE PUZZLE
+          </button>
+          <p class="puzzle-status" id="puzzleStatus">
+            Classe chaque symbole dans sa couleur.
+          </p>
+          <button
+            class="next-level-button"
+            id="nextLevelButton"
+            type="button"
+            hidden
+          >
+            CONTINUER</button
+          ><button class="reset-button" id="resetButton" type="button">
+            Réinitialiser
+          </button>
+        </div>
+      </section>
     </main>
-    <script src="../../js/partie-1_niveau-1_à_15.js"></script>
+    <script src="../../js/partie-1_niveau-1_à_15.js?v=8"></script>
   </body>
 </html>
-

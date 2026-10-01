@@ -3,17 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="../../assets/images/echoes-favicon.svg" />
-    <title>ECHOES - Partie 1</title>
-    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_15.css" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../../assets/images/echoes-favicon.svg"
+    />
+    <title>ECHOES - Niveau 6</title>
+    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_15.css?v=8" />
     <link rel="stylesheet" href="../../css/fonts.css" />
   </head>
   <body>
-    <main class="level-shell" data-level-part="1" data-level-range="1-15">
-      <p>Partie 1 // Initiation</p>
-      <h1>Niveau à construire</h1>
+    <main class="level-shell" data-level-start="1" data-level-end="15">
+      <section class="level-intro">
+        <p class="eyebrow" data-i18n="eyebrow">
+          Fragment 006 // Observation des motifs
+        </p>
+        <h1 data-i18n="title">Observation des motifs</h1>
+        <p class="level-description" data-i18n="description">
+          Trouve les trois symboles identiques dans le mur holographique.
+        </p>
+        <div class="system-transmission">
+          <span class="system-label">SYSTEM://LOG</span>
+          <p id="systemMessage">SYSTEME:: MOTIFS EN ATTENTE</p>
+        </div>
+      </section>
+      <section class="puzzle-panel pattern-board">
+        <div class="panel-heading">
+          <h2 data-i18n="puzzleTitle">Motifs cachés</h2>
+          <span class="progress-readout" id="progressReadout">0 / 3</span>
+        </div>
+        <div class="pattern-grid" id="patternGrid"></div>
+        <div class="puzzle-actions">
+          <button
+            class="sequence-start-button"
+            id="startPuzzleButton"
+            type="button"
+          >
+            DÉMARRER LE PUZZLE
+          </button>
+          <p class="puzzle-status" id="puzzleStatus">
+            Repère les trois symboles identiques.
+          </p>
+          <button
+            class="next-level-button"
+            id="nextLevelButton"
+            type="button"
+            hidden
+          >
+            CONTINUER</button
+          ><button class="reset-button" id="resetButton" type="button">
+            Réinitialiser
+          </button>
+        </div>
+      </section>
     </main>
-    <script src="../../js/partie-1_niveau-1_à_15.js"></script>
+    <script src="../../js/partie-1_niveau-1_à_15.js?v=8"></script>
   </body>
 </html>
-
