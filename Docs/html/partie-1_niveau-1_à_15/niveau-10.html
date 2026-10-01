@@ -28,25 +28,24 @@
     </header>
     <main class="level-shell" data-level-start="1" data-level-end="15">
       <section class="level-intro">
-        <p class="eyebrow">Fragment 010 // Première illusion</p>
+        <p class="eyebrow">Fragment 010 // Séquence chromatique</p>
         <h1 data-i18n="title">Première illusion</h1>
         <p class="level-description" data-i18n="description">
-          Une seule forme est réelle. Trouve-la parmi les hologrammes.
+          Observe la séquence de couleurs, puis reproduis-la dans le même ordre.
         </p>
         <div class="system-transmission" aria-live="polite">
           <span class="system-label" data-i18n="systemLabel">SYSTEM://LOG</span>
           <p id="systemMessage" data-i18n="systemInput">
-            SYSTEME:: ANALYSE HOLOGRAPHIQUE EN ATTENTE // 6 PROJECTIONS
-            DETECTEES
+            SYSTEME:: SEQUENCE CHROMATIQUE EN ATTENTE // 5 COULEURS DETECTEES
           </p>
         </div>
       </section>
-      <section class="puzzle-panel illusion-board">
+      <section class="puzzle-panel color-sequence-board">
         <div class="panel-heading">
-          <h2 data-i18n="puzzleTitle">Hologrammes instables</h2>
-          <span class="progress-readout" id="progressReadout">0 / 1</span>
+          <h2 data-i18n="puzzleTitle">Mémoire des couleurs</h2>
+          <span class="progress-readout" id="progressReadout">0 / 5</span>
         </div>
-        <div class="illusion-grid" id="illusionGrid"></div>
+        <div class="color-sequence-grid" id="colorSequenceGrid"></div>
         <div class="puzzle-actions">
           <button
             class="sequence-start-button"
@@ -56,8 +55,17 @@
             DÉMARRER LE PUZZLE
           </button>
           <p class="puzzle-status" id="puzzleStatus">
-            Identifie l'hologramme réel.
+            Observe la séquence de couleurs.
           </p>
+          <button
+            class="sequence-replay-button"
+            id="replaySequenceButton"
+            data-i18n="replaySequence"
+            type="button"
+            hidden
+          >
+            REJOUER LA SEQUENCE
+          </button>
           <button
             class="next-level-button"
             id="nextLevelButton"
@@ -77,7 +85,7 @@
     </footer>
     <script src="../../js/translations.js"></script>
     <script src="../../js/save-system.js"></script>
-    <script src="../../js/partie-1_niveau-1_à_15.js?v=10"></script>
+    <script src="../../js/partie-1_niveau-1_à_15.js?v=12"></script>
     <script src="../../js/dev-mode.js"></script>
   </body>
 </html>

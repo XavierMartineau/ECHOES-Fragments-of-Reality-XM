@@ -7,7 +7,12 @@ const levelScriptByMarker = [
   [".gate-board", 7],
   [".advanced-sort-board", 8],
   [".constellation-board", 9],
-  [".illusion-board", 10],
+  [".color-sequence-board", 10],
+  [".double-alignment-board", 11],
+  [".cross-light-board", 12],
+  [".fractal-board", 13],
+  [".combined-sequence-board", 14],
+  [".energy-board", 15],
 ];
 function ensureLevelFooter() {
   let footer = document.querySelector(".level-footer");
@@ -23,6 +28,50 @@ function ensureLevelFooter() {
     footer.appendChild(credit);
   }
 }
+
+function installProgressDots() {
+  document.querySelectorAll(".progress-readout").forEach((readout) => {
+    const actions = readout
+      .closest(".puzzle-panel")
+      ?.querySelector(".puzzle-actions");
+    if (!actions) return;
+
+    let dots = actions.querySelector(".sequence-progress-dots");
+    if (!dots) {
+      dots = document.createElement("div");
+      dots.className = "sequence-progress-dots";
+      dots.setAttribute("role", "img");
+      dots.setAttribute("aria-label", "Progression du puzzle");
+      actions.appendChild(dots);
+    }
+
+    const updateDots = () => {
+      const match = readout.textContent.match(/(\d+)\s*\/\s*(\d+)/);
+      if (!match) return;
+      const current = Number(match[1]);
+      const total = Number(match[2]);
+      dots.replaceChildren(
+        ...Array.from({ length: total }, (_, index) => {
+          const dot = document.createElement("span");
+          dot.className = `sequence-progress-dot${index < current ? " is-complete" : ""}`;
+          dot.setAttribute("aria-hidden", "true");
+          return dot;
+        }),
+      );
+      dots.setAttribute("aria-label", `Progression : ${current} sur ${total}`);
+    };
+
+    updateDots();
+    new MutationObserver(updateDots).observe(readout, {
+      childList: true,
+      characterData: true,
+      subtree: true,
+    });
+  });
+}
+
+installProgressDots();
+
 const activeLevelScript = levelScriptByMarker.find(([marker]) =>
   document.querySelector(marker),
 );
@@ -118,6 +167,61 @@ if (activeLevelScript) {
       statusError: "Cette forme est une illusion.",
       systemSuccess: "SYSTEME:: ILLUSION 010 STABILISEE",
       systemError: "SYSTEME:: PROJECTION DETECTEE",
+      reset: "Reinitialiser",
+      save: "SAUVEGARDER",
+    },
+    11: {
+      level: "NIVEAU 11",
+      title: "Double alignement",
+      description: "Active les deux lignes holographiques dans le bon ordre.",
+      puzzleTitle: "Synchronisation double",
+      statusReady: "Active les modules dans l'ordre indique.",
+      statusSuccess: "Les deux lignes sont synchronisees.",
+      statusError: "Mauvais module. La sequence recommence.",
+      reset: "Reinitialiser",
+      save: "SAUVEGARDER",
+    },
+    12: {
+      level: "NIVEAU 12",
+      title: "Lumiere croisee",
+      description: "Active les intersections lumineuses dans le bon ordre.",
+      puzzleTitle: "Reseau de lumiere",
+      statusReady: "Active les intersections dans l'ordre indique.",
+      statusSuccess: "Le reseau lumineux est stabilise.",
+      statusError: "Mauvaise intersection. La sequence recommence.",
+      reset: "Reinitialiser",
+      save: "SAUVEGARDER",
+    },
+    13: {
+      level: "NIVEAU 13",
+      title: "Glissement holographique",
+      description: "Reconstruis le motif fractal dans les neuf panneaux.",
+      puzzleTitle: "Motif fractal",
+      statusReady: "Active les panneaux du motif lumineux.",
+      statusSuccess: "Le motif fractal est reconstruit.",
+      statusError: "Le motif reste instable.",
+      reset: "Reinitialiser",
+      save: "SAUVEGARDER",
+    },
+    14: {
+      level: "NIVEAU 14",
+      title: "Sequence combinee",
+      description: "Reproduis la combinaison lumineuse dans le bon ordre.",
+      puzzleTitle: "Protocole combine",
+      statusReady: "Observe puis reproduis la combinaison.",
+      statusSuccess: "Les signaux combines sont stabilises.",
+      statusError: "Signal incorrect. La sequence recommence.",
+      reset: "Reinitialiser",
+      save: "SAUVEGARDER",
+    },
+    15: {
+      level: "NIVEAU 15",
+      title: "Trois points d'energie",
+      description: "Active les trois points d'energie pour ouvrir le seuil.",
+      puzzleTitle: "Seuil d'activation",
+      statusReady: "Active les trois points dans l'ordre indique.",
+      statusSuccess: "Le seuil d'initiation est ouvert.",
+      statusError: "Activation incorrecte. Recommence la sequence.",
       reset: "Reinitialiser",
       save: "SAUVEGARDER",
     },
@@ -1347,6 +1451,7 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
   ]);
   let started = false;
   let completed = false;
+  let onStart = () => {};
 
   const setStatus = (message, state = "") => {
     status.textContent = message;
@@ -1376,13 +1481,22 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
     startButton.disabled = false;
     nextButton.hidden = true;
     setStatus(levelCopy?.statusReady || "Ready.");
-    buildPuzzle({ started: () => started, finish, setStatus });
+    onStart = () => {};
+    buildPuzzle({
+      started: () => started,
+      finish,
+      setStatus,
+      registerStart: (callback) => {
+        onStart = callback;
+      },
+    });
   };
 
   startButton.addEventListener("click", () => {
     started = true;
     startButton.disabled = true;
     setStatus(levelCopy?.statusReady || "Choose a target.");
+    onStart();
   });
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
@@ -1495,6 +1609,9 @@ if (document.querySelector(".constellation-board")) {
       <svg class="constellation-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
         <polyline points=""></polyline>
       </svg>
+      <div class="constellation-space" aria-hidden="true">
+        ${Array.from({ length: 12 }, (_, index) => `<span class="flying-star flying-star-${index + 1}"></span>`).join("")}
+      </div>
       ${positions.map((_, index) => `<button class="constellation-star star-${index + 1}" data-star="${index + 1}" type="button" aria-label="Etoile ${index + 1}"><span>${String(index + 1).padStart(2, "0")}</span></button>`).join("")}
       <div class="constellation-sequence-display">
         <span>SEQUENCE ACTIVE</span>
@@ -1527,14 +1644,25 @@ if (document.querySelector(".constellation-board")) {
           ),
         );
       });
+      sequenceDisplay
+        .querySelectorAll(".sequence-number")
+        .forEach((number, index) => {
+          number.classList.toggle("is-selected", index < step);
+        });
       field.dataset.round = String(round + 1);
     };
 
     const showSequence = () => {
-      const sequence = sequences[round]
+      const sequenceValues = sequences[round];
+      const sequence = sequenceValues
         .map((value) => String(value).padStart(2, "0"))
         .join(" > ");
-      sequenceDisplay.textContent = sequence;
+      sequenceDisplay.innerHTML = sequenceValues
+        .map(
+          (value, index) =>
+            `<span class="sequence-number star-sequence-${value}"><span class="sequence-label">${String(value).padStart(2, "0")}</span></span>${index < sequenceValues.length - 1 ? '<span class="sequence-separator">&gt;</span>' : ""}`,
+        )
+        .join("");
       setStatus(`Manche ${round + 1} / 3 : active la séquence ${sequence}.`);
     };
 
@@ -1589,37 +1717,261 @@ if (document.querySelector(".constellation-board")) {
   });
 }
 
-if (document.querySelector(".illusion-board")) {
-  installAdvancedLevel(10, ({ started, finish, setStatus }) => {
-    const grid = document.getElementById("illusionGrid");
-    const realIndex = Math.floor(Math.random() * 6);
-    grid.innerHTML = Array.from(
-      { length: 6 },
-      (_, index) =>
-        `<button class="hologram ${index === realIndex ? "is-real" : ""}" data-index="${index}" type="button" aria-label="Hologramme ${index + 1}"><span>◇</span></button>`,
-    ).join("");
-    const holograms = [...grid.querySelectorAll(".hologram")];
-    const update = (solved) => {
-      grid
-        .closest(".puzzle-panel")
-        .querySelector(".progress-readout").textContent = solved
-        ? "1 / 1"
-        : "0 / 1";
+if (document.querySelector(".color-sequence-board")) {
+  installAdvancedLevel(10, ({ started, finish, setStatus, registerStart }) => {
+    const grid = document.getElementById("colorSequenceGrid");
+    const replayButton = document.getElementById("replaySequenceButton");
+    const colors = ["cyan", "pink", "yellow", "violet", "blue"];
+    const labels = {
+      cyan: "CYAN",
+      pink: "ROSE",
+      yellow: "JAUNE",
+      violet: "VIOLET",
+      blue: "BLEU",
     };
-    holograms.forEach((hologram) => {
-      hologram.addEventListener("click", () => {
-        if (!started()) return;
-        if (Number(hologram.dataset.index) === realIndex) {
-          hologram.classList.add("is-found");
-          update(true);
-          finish();
-        } else {
-          hologram.classList.add("is-flicker");
-          setStatus("Illusion détectée. Cherche l'hologramme réel.", "error");
+    let input = [];
+    let showing = false;
+    let playToken = 0;
+    let lastSequenceKey = "";
+    const generateSequence = () => {
+      let nextSequence;
+      do {
+        nextSequence = [];
+        for (let index = 0; index < 5; index += 1) {
+          const previousColor = nextSequence[index - 1];
+          const available = colors.filter((color) => color !== previousColor);
+          nextSequence.push(
+            available[Math.floor(Math.random() * available.length)],
+          );
         }
+      } while (nextSequence.join(">") === lastSequenceKey);
+      lastSequenceKey = nextSequence.join(">");
+      return nextSequence;
+    };
+    let sequence = generateSequence();
+    grid.innerHTML = colors
+      .map(
+        (color, index) =>
+          `<button class="color-sequence-option color-sequence-${color}" data-color="${color}" type="button" aria-label="Couleur ${labels[color]}"><span>${String(index + 1).padStart(2, "0")}</span></button>`,
+      )
+      .join("");
+    const options = [...grid.querySelectorAll(".color-sequence-option")];
+    const progress = grid
+      .closest(".puzzle-panel")
+      .querySelector(".progress-readout");
+    const replayLabel =
+      document.documentElement.lang === "en"
+        ? "REPLAY SEQUENCE"
+        : "REJOUER LA SEQUENCE";
+    const successLabel =
+      document.documentElement.lang === "en"
+        ? "SEQUENCE COMPLETE"
+        : "SEQUENCE REUSSIE";
+
+    const clearStates = () => {
+      grid.classList.remove("is-complete");
+      replayButton.classList.remove("is-success");
+      replayButton.textContent = replayLabel;
+      replayButton.disabled = false;
+      options.forEach((option) =>
+        option.classList.remove("is-preview", "is-picked", "is-error"),
+      );
+    };
+
+    const playSequence = () => {
+      const token = ++playToken;
+      input = [];
+      showing = true;
+      replayButton.textContent = replayLabel;
+      replayButton.classList.remove("is-success");
+      replayButton.disabled = true;
+      clearStates();
+      setStatus("Observe la séquence de couleurs...");
+      sequence.forEach((color, index) => {
+        window.setTimeout(() => {
+          if (token !== playToken) return;
+          options.forEach((item) => item.classList.remove("is-preview"));
+          const option = grid.querySelector(`[data-color="${color}"]`);
+          option.classList.add("is-preview");
+          window.setTimeout(() => {
+            if (token === playToken) option.classList.remove("is-preview");
+          }, 500);
+          if (index === sequence.length - 1) {
+            window.setTimeout(() => {
+              if (token !== playToken) return;
+              showing = false;
+              replayButton.disabled = false;
+              setStatus("A toi. Reproduis la séquence de couleurs.");
+            }, 450);
+          }
+        }, index * 900);
+      });
+    };
+
+    registerStart(() => {
+      replayButton.hidden = false;
+      playSequence();
+    });
+
+    replayButton.addEventListener("click", () => {
+      if (!started() || showing) return;
+      sequence = generateSequence();
+      playSequence();
+    });
+
+    options.forEach((option) => {
+      option.addEventListener("click", () => {
+        if (!started() || showing) return;
+        const color = option.dataset.color;
+        const expected = sequence[input.length];
+        if (color !== expected) {
+          input = [];
+          options.forEach((item) => item.classList.remove("is-picked"));
+          option.classList.add("is-error");
+          setStatus(
+            "Mauvaise couleur. Observe puis recommence la séquence.",
+            "error",
+          );
+          return;
+        }
+        input.push(color);
+        option.classList.add("is-picked");
+        progress.textContent = `${input.length} / ${sequence.length}`;
+        if (input.length === sequence.length) {
+          grid.classList.add("is-complete");
+          options.forEach((item, index) => {
+            item.style.setProperty("--success-delay", `${index * 80}ms`);
+          });
+          replayButton.hidden = false;
+          replayButton.disabled = true;
+          replayButton.textContent = successLabel;
+          replayButton.classList.add("is-success");
+          finish();
+          return;
+        }
+        setStatus(`Couleur ${input.length} / ${sequence.length} confirmée.`);
       });
     });
-    update(false);
+    replayButton.hidden = true;
+    replayButton.textContent = replayLabel;
+    progress.textContent = "0 / 5";
+  });
+}
+
+function installOrderedGridLevel(
+  levelNumber,
+  gridId,
+  className,
+  count,
+  sequence,
+) {
+  installAdvancedLevel(levelNumber, ({ started, finish, setStatus }) => {
+    const grid = document.getElementById(gridId);
+    let step = 0;
+    grid.innerHTML = Array.from(
+      { length: count },
+      (_, index) =>
+        `<button class="future-puzzle-button ${className}-item tone-${(index % 5) + 1}" data-index="${index}" type="button" aria-label="Module ${index + 1}">${String(index + 1).padStart(2, "0")}</button>`,
+    ).join("");
+    const buttons = [...grid.querySelectorAll(".future-puzzle-button")];
+    const progress = grid
+      .closest(".puzzle-panel")
+      .querySelector(".progress-readout");
+    const resetStep = () => {
+      step = 0;
+      buttons.forEach((button) =>
+        button.classList.remove("is-correct", "is-error"),
+      );
+    };
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        if (!started()) return;
+        const index = Number(button.dataset.index);
+        if (index !== sequence[step]) {
+          resetStep();
+          button.classList.add("is-error");
+          setStatus("Mauvais module. La sequence recommence.", "error");
+          return;
+        }
+        step += 1;
+        button.classList.add("is-correct");
+        progress.textContent = `${step} / ${sequence.length}`;
+        if (step === sequence.length) {
+          finish();
+          return;
+        }
+        setStatus(`Module ${step} / ${sequence.length} confirme.`);
+      });
+    });
+    progress.textContent = `0 / ${sequence.length}`;
+  });
+}
+
+if (document.querySelector(".double-alignment-board")) {
+  installOrderedGridLevel(
+    11,
+    "doubleAlignmentGrid",
+    "double-alignment",
+    6,
+    [0, 3, 1, 4, 2, 5],
+  );
+}
+if (document.querySelector(".cross-light-board")) {
+  installOrderedGridLevel(
+    12,
+    "crossLightGrid",
+    "cross-light",
+    9,
+    [0, 4, 8, 1, 5],
+  );
+}
+if (document.querySelector(".combined-sequence-board")) {
+  installOrderedGridLevel(
+    14,
+    "combinedSequenceGrid",
+    "combined-sequence",
+    5,
+    [0, 2, 4, 1, 3],
+  );
+}
+if (document.querySelector(".energy-board")) {
+  installOrderedGridLevel(15, "energyGrid", "energy", 3, [1, 2, 0]);
+}
+
+if (document.querySelector(".fractal-board")) {
+  installAdvancedLevel(13, ({ started, finish, setStatus }) => {
+    const grid = document.getElementById("fractalGrid");
+    const target = new Set([0, 2, 4, 6, 8]);
+    const active = new Set();
+    grid.innerHTML = Array.from(
+      { length: 9 },
+      (_, index) =>
+        `<button class="future-puzzle-button fractal-item tone-${(index % 5) + 1}" data-index="${index}" type="button" aria-label="Panneau ${index + 1}">${String(index + 1).padStart(2, "0")}</button>`,
+    ).join("");
+    const buttons = [...grid.querySelectorAll(".future-puzzle-button")];
+    const progress = grid
+      .closest(".puzzle-panel")
+      .querySelector(".progress-readout");
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        if (!started()) return;
+        const index = Number(button.dataset.index);
+        if (active.has(index)) active.delete(index);
+        else active.add(index);
+        button.classList.toggle("is-correct", active.has(index));
+        const correct = [...active].filter((value) => target.has(value)).length;
+        progress.textContent = `${correct} / ${target.size}`;
+        if (
+          active.size === target.size &&
+          [...active].every((value) => target.has(value))
+        ) {
+          finish();
+          return;
+        }
+        setStatus(`${correct} / ${target.size} panneaux corrects.`);
+      });
+    });
+    progress.textContent = "0 / 5";
   });
 }
 

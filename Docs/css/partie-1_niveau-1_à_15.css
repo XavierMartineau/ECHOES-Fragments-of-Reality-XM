@@ -1375,6 +1375,35 @@ body.level-corruption .level-footer {
   cursor: wait;
   opacity: 0.55;
 }
+.sequence-replay-button {
+  padding: 10px 14px;
+  border: 1px solid var(--violet);
+  background: rgba(179, 108, 255, 0.1);
+  color: var(--violet);
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.58rem;
+  letter-spacing: 0.08rem;
+}
+.sequence-replay-button:hover,
+.sequence-replay-button:focus-visible {
+  background: rgba(179, 108, 255, 0.24);
+  box-shadow: 0 0 18px rgba(179, 108, 255, 0.34);
+  outline: none;
+}
+.sequence-replay-button:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+.sequence-replay-button.is-success,
+.sequence-replay-button.is-success:disabled {
+  border-color: var(--success);
+  background: rgba(128, 255, 207, 0.16);
+  color: var(--success);
+  cursor: default;
+  opacity: 1;
+  box-shadow: 0 0 18px rgba(128, 255, 207, 0.36);
+}
 
 @keyframes light-pulse {
   50% {
@@ -1405,6 +1434,31 @@ body.level-corruption .level-footer {
 }
 .puzzle-actions .puzzle-status {
   flex: 1 1 100%;
+}
+.sequence-progress-dots {
+  display: flex;
+  flex: 1 1 100%;
+  justify-content: center;
+  gap: 8px;
+  min-height: 10px;
+  order: 4;
+}
+.sequence-progress-dot {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border: 1px solid rgba(156, 171, 196, 0.7);
+  border-radius: 50%;
+  background: transparent;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.sequence-progress-dot.is-complete {
+  border-color: var(--success);
+  background: var(--success);
+  box-shadow: 0 0 10px rgba(128, 255, 207, 0.85);
 }
 .puzzle-status {
   margin: 0;
@@ -1734,11 +1788,235 @@ body.level-corruption .level-footer {
   font-size: 0.72rem;
   letter-spacing: 0.14rem;
 }
+.constellation-sequence-display .sequence-number {
+  display: inline-block;
+  min-width: 2.2em;
+  padding: 4px 5px;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  text-align: center;
+  text-shadow: 0 0 8px currentColor;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease,
+    opacity 0.2s ease;
+}
+.constellation-sequence-display .sequence-number.is-selected {
+  background: currentColor;
+  box-shadow:
+    0 0 16px currentColor,
+    inset 0 0 8px rgba(255, 255, 255, 0.45);
+  color: #050711;
+  text-shadow: none;
+  transform: translateY(-3px) scale(1.08);
+}
+.constellation-sequence-display .sequence-separator {
+  display: inline-block;
+  margin: 0 5px;
+  color: #ffffff;
+}
+.constellation-sequence-display .star-sequence-1 {
+  color: #79f7ff;
+}
+.constellation-sequence-display .star-sequence-2 {
+  color: #b36cff;
+}
+.constellation-sequence-display .star-sequence-3 {
+  color: #ff70c2;
+}
+.constellation-sequence-display .star-sequence-4 {
+  color: #ffd166;
+}
+.constellation-sequence-display .star-sequence-5 {
+  color: #80ffcf;
+}
+.constellation-sequence-display .star-sequence-6 {
+  color: #48b0ff;
+}
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-1 {
+  background: #79f7ff;
+  color: #050711;
+}
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-2 {
+  background: #b36cff;
+  color: #050711;
+}
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-3 {
+  background: #ff70c2;
+  color: #050711;
+}
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-4 {
+  background: #ffd166;
+  color: #050711;
+}
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-5 {
+  background: #80ffcf;
+  color: #050711;
+}
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-6 {
+  background: #48b0ff;
+  color: #050711;
+}
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-1,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-2,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-3,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-4,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-5,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-6 {
+  border-color: #ffffff;
+  background: #050711;
+  color: #ffffff;
+  box-shadow:
+    0 0 16px rgba(255, 255, 255, 0.9),
+    inset 0 0 8px rgba(255, 255, 255, 0.2);
+  text-shadow: 0 0 8px #ffffff;
+}
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-1,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-2,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-3,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-4,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-5,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-6 {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  color: #050711;
+  filter: blur(2.8px);
+  opacity: 0.16;
+  text-shadow: 0 0 8px #050711;
+  transform: none;
+}
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-1,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-2,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-3,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-4,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-5,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-6 {
+  border-color: #ffffff;
+  background: transparent;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.82);
+  color: #ffffff;
+  filter: none;
+  opacity: 1;
+  text-shadow: none;
+  transform: none;
+}
+.constellation-sequence-display .sequence-number.is-selected .sequence-label {
+  display: inline-block;
+  color: #050711;
+  filter: blur(2.8px);
+  opacity: 0.16;
+  text-shadow: 0 0 8px #050711;
+}
 .constellation-field[data-round="2"] .constellation-sequence-display strong {
   color: var(--violet);
 }
 .constellation-field[data-round="3"] .constellation-sequence-display strong {
   color: var(--success);
+}
+.constellation-space {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.flying-star {
+  position: absolute;
+  display: block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 10px 2px currentColor;
+  color: var(--cyan);
+  opacity: 0.7;
+  animation: constellation-flight 7s linear infinite;
+}
+.flying-star:nth-child(2n) {
+  width: 2px;
+  height: 2px;
+  color: var(--violet);
+  animation-duration: 9s;
+}
+.flying-star:nth-child(3n) {
+  color: #ff70c2;
+  animation-duration: 11s;
+}
+.flying-star-1 {
+  top: 12%;
+  left: 8%;
+  animation-delay: -1s;
+}
+.flying-star-2 {
+  top: 34%;
+  left: 31%;
+  animation-delay: -5s;
+}
+.flying-star-3 {
+  top: 18%;
+  left: 63%;
+  animation-delay: -3s;
+}
+.flying-star-4 {
+  top: 52%;
+  left: 9%;
+  animation-delay: -7s;
+}
+.flying-star-5 {
+  top: 76%;
+  left: 38%;
+  animation-delay: -2s;
+}
+.flying-star-6 {
+  top: 68%;
+  left: 70%;
+  animation-delay: -6s;
+}
+.flying-star-7 {
+  top: 42%;
+  left: 88%;
+  animation-delay: -4s;
+}
+.flying-star-8 {
+  top: 84%;
+  left: 84%;
+  animation-delay: -8s;
+}
+.flying-star-9 {
+  top: 8%;
+  left: 92%;
+  animation-delay: -10s;
+}
+.flying-star-10 {
+  top: 61%;
+  left: 52%;
+  animation-delay: -3.5s;
+}
+.flying-star-11 {
+  top: 29%;
+  left: 4%;
+  animation-delay: -6.5s;
+}
+.flying-star-12 {
+  top: 90%;
+  left: 18%;
+  animation-delay: -9s;
+}
+@keyframes constellation-flight {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.65);
+    opacity: 0.2;
+  }
+  45% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(-72px, 24px, 0) scale(1.3);
+    opacity: 0;
+  }
 }
 .constellation-star {
   position: absolute;
@@ -1747,65 +2025,225 @@ body.level-corruption .level-footer {
   width: 58px;
   height: 58px;
   place-items: center;
-  border: 1px solid var(--cyan);
-  border-radius: 50%;
-  background: rgba(121, 247, 255, 0.1);
+  border: 0;
+  background: transparent;
   color: var(--text);
   cursor: pointer;
   font-family: var(--font-display, "Orbitron", sans-serif);
   font-size: 0.65rem;
   transform: translate(-50%, -50%);
   transition: 0.2s ease;
-  box-shadow: 0 0 18px rgba(121, 247, 255, 0.28);
+  filter: drop-shadow(0 0 9px var(--star-glow, rgba(121, 247, 255, 0.38)));
 }
 .constellation-star::before {
   position: absolute;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: currentColor;
-  box-shadow: 0 0 16px currentColor;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  background: var(--star-background, rgba(5, 15, 30, 0.88));
+  clip-path: polygon(
+    50% 0,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 100%,
+    50% 73%,
+    21% 100%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
   content: "";
+  transition: background 0.2s ease;
 }
 .constellation-star span {
   position: relative;
-  top: 19px;
-  color: var(--muted);
-  font-size: 0.5rem;
+  z-index: 2;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+  line-height: 1;
+  text-shadow: 0 0 8px rgba(121, 247, 255, 0.9);
 }
 .constellation-star:hover,
 .constellation-star:focus-visible,
 .constellation-star.is-active,
 .constellation-star.is-confirmed {
-  border-color: var(--success);
-  background: rgba(128, 255, 207, 0.18);
+  background: transparent;
   color: var(--success);
   outline: none;
-  box-shadow: 0 0 28px rgba(128, 255, 207, 0.68);
+  filter: drop-shadow(0 0 15px var(--star-glow, rgba(128, 255, 207, 0.68)));
+}
+.constellation-star:hover::before,
+.constellation-star:focus-visible::before,
+.constellation-star.is-active::before,
+.constellation-star.is-confirmed::before {
+  background: var(--star-active-background, rgba(128, 255, 207, 0.3));
 }
 .star-1 {
   top: 28%;
   left: 18%;
+  --star-color: #79f7ff;
+  --star-background: rgba(25, 170, 205, 0.35);
+  --star-active-background: rgba(121, 247, 255, 0.45);
+  --star-glow: rgba(121, 247, 255, 0.62);
 }
 .star-2 {
   top: 18%;
   left: 42%;
+  --star-color: #b36cff;
+  --star-background: rgba(132, 61, 210, 0.38);
+  --star-active-background: rgba(179, 108, 255, 0.48);
+  --star-glow: rgba(179, 108, 255, 0.66);
 }
 .star-3 {
   top: 26%;
   left: 76%;
+  --star-color: #ff70c2;
+  --star-background: rgba(210, 66, 145, 0.35);
+  --star-active-background: rgba(255, 112, 194, 0.46);
+  --star-glow: rgba(255, 112, 194, 0.64);
 }
 .star-4 {
   top: 70%;
   left: 24%;
+  --star-color: #ffd166;
+  --star-background: rgba(201, 145, 39, 0.35);
+  --star-active-background: rgba(255, 209, 102, 0.46);
+  --star-glow: rgba(255, 209, 102, 0.62);
 }
 .star-5 {
   top: 78%;
   left: 57%;
+  --star-color: #80ffcf;
+  --star-background: rgba(44, 180, 137, 0.35);
+  --star-active-background: rgba(128, 255, 207, 0.46);
+  --star-glow: rgba(128, 255, 207, 0.64);
 }
 .star-6 {
   top: 62%;
   left: 82%;
+  --star-color: #48b0ff;
+  --star-background: rgba(37, 125, 207, 0.36);
+  --star-active-background: rgba(72, 176, 255, 0.46);
+  --star-glow: rgba(72, 176, 255, 0.64);
+}
+
+.color-sequence-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(70px, 1fr));
+  gap: 18px;
+  min-height: 390px;
+  padding: 48px 34px;
+  align-content: center;
+  background:
+    radial-gradient(circle at center, rgba(20, 63, 92, 0.25), transparent 62%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    );
+}
+.color-sequence-option {
+  min-height: 112px;
+  border: 2px solid currentColor;
+  border-radius: 8px;
+  background: var(--sequence-color);
+  color: var(--sequence-color);
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.72rem;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 0 22px var(--sequence-glow);
+}
+.color-sequence-option span {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  margin: auto;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.76);
+  border-radius: 50%;
+  background: rgba(5, 7, 17, 0.72);
+  color: #ffffff;
+}
+.color-sequence-option:hover,
+.color-sequence-option:focus-visible,
+.color-sequence-option.is-preview {
+  transform: translateY(-6px) scale(1.04);
+  outline: none;
+  filter: brightness(1.35);
+  box-shadow: 0 0 38px var(--sequence-glow);
+}
+.color-sequence-option.is-picked {
+  animation: color-sequence-settle 0.45s ease both;
+  filter: brightness(1.08);
+}
+.color-sequence-grid.is-complete .color-sequence-option {
+  animation: color-sequence-success 0.75s ease both;
+  animation-delay: var(--success-delay, 0ms);
+}
+.color-sequence-option.is-error {
+  border-color: var(--danger);
+  animation: puzzle-shake 0.25s linear 2;
+}
+.color-sequence-cyan {
+  --sequence-color: #079db7;
+  --sequence-glow: rgba(121, 247, 255, 0.68);
+}
+.color-sequence-pink {
+  --sequence-color: #c33c85;
+  --sequence-glow: rgba(255, 112, 194, 0.68);
+}
+.color-sequence-yellow {
+  --sequence-color: #c79424;
+  --sequence-glow: rgba(255, 209, 102, 0.68);
+}
+.color-sequence-violet {
+  --sequence-color: #7540bd;
+  --sequence-glow: rgba(179, 108, 255, 0.68);
+}
+.color-sequence-blue {
+  --sequence-color: #267fca;
+  --sequence-glow: rgba(72, 176, 255, 0.68);
+}
+@keyframes color-sequence-settle {
+  0% {
+    transform: translateY(-6px) scale(1.04);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes color-sequence-success {
+  0% {
+    transform: translateY(0) scale(1);
+    filter: brightness(1);
+  }
+  45% {
+    transform: translateY(-10px) scale(1.08);
+    filter: brightness(1.55);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    filter: brightness(1.18);
+  }
+}
+
+@media (max-width: 560px) {
+  .color-sequence-grid {
+    grid-template-columns: repeat(3, minmax(70px, 1fr));
+    padding-inline: 18px;
+  }
 }
 
 @media (max-width: 560px) {
