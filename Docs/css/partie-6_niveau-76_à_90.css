@@ -1,1 +1,61 @@
 /* Styles de la partie 6. */
+.level-back-button {
+  top: auto !important;
+  bottom: 52px !important;
+  left: 18px !important;
+}
+@media (max-width: 560px) {
+  .level-back-button {
+    top: auto !important;
+    bottom: 46px !important;
+    left: 14px !important;
+  }
+}
+.level-back-button {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 20;
+  padding: 9px 12px;
+  border: 1px solid rgba(121, 247, 255, 0.5);
+  background: rgba(5, 7, 17, 0.9);
+  color: #79f7ff;
+  cursor: pointer;
+  font: 0.58rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+.level-back-button:hover,
+.level-back-button:focus-visible {
+  background: rgba(121, 247, 255, 0.18);
+  box-shadow: 0 0 18px rgba(121, 247, 255, 0.32);
+  outline: none;
+}
+.level-shell {
+  width: min(1160px, calc(100% - 48px));
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 96px 0;
+  color: #edfaff;
+}
+.level-shell h1,
+.level-shell p {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 560px) {
+  .level-back-button {
+    top: 12px;
+    left: 14px;
+  }
+  .level-shell {
+    width: calc(100% - 28px);
+    padding: 92px 0 96px;
+  }
+  .level-header {
+    padding-top: 64px;
+  }
+  .level-meta {
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+}

@@ -1,3 +1,19 @@
+function installBackButton() {
+  if (document.querySelector(".level-back-button")) return;
+  const button = document.createElement("button");
+  button.className = "level-back-button";
+  button.type = "button";
+  button.textContent = "← RETOUR";
+  button.setAttribute("aria-label", "Retour à la page précédente");
+  button.addEventListener("click", () =>
+    window.history.length > 1
+      ? window.history.back()
+      : (window.location.href = "../../../../index.html"),
+  );
+  document.body.prepend(button);
+}
+installBackButton();
+
 const board = document.getElementById("puzzleBoard");
 let pieces = [];
 const slots = [...document.querySelectorAll(".sort-slot")];
@@ -95,6 +111,7 @@ function placePiece(piece, slot) {
     return;
   }
   slot.classList.add("is-filled");
+  slot.classList.remove("is-target");
   slot.appendChild(piece);
   piece.classList.remove("is-selected");
   piece.classList.add("is-placed");
@@ -121,6 +138,9 @@ function resetPuzzle() {
   pieces.forEach((piece) => {
     piece.disabled = false;
     piece.className = `sort-piece shape-${piece.dataset.shape}`;
+  });
+  slots.forEach((slot) => {
+    slot.classList.remove("is-target");
   });
   nextLevelButton.hidden = true;
   updateProgress();
@@ -150,6 +170,7 @@ solution.forEach((shape, index) => {
   slot.type = "button";
   slot.dataset.shape = shape;
   slot.dataset.slot = index;
+  slot.innerHTML = `<span class="sort-slot-label">${index + 1}</span>`;
   document.getElementById("sortSlots").appendChild(slot);
   const piece = document.createElement("button");
   piece.className = `sort-piece shape-${shape}`;
@@ -163,8 +184,12 @@ pieces.forEach((piece) => {
   piece.addEventListener("click", () => {
     if (piece.disabled) return;
     pieces.forEach((item) => item.classList.remove("is-selected"));
+    slots.forEach((slot) => slot.classList.remove("is-target"));
     selectedPiece = piece;
     piece.classList.add("is-selected");
+    document
+      .querySelector(`.sort-slot[data-shape="${piece.dataset.shape}"]`)
+      ?.classList.add("is-target");
     status.textContent = levelCopy.statusSelected;
   });
 });

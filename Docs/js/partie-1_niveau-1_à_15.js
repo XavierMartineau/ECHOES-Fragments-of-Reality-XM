@@ -1,3 +1,26 @@
+function installBackButton(fallbackHref = "../../../../index.html") {
+  if (document.querySelector(".level-back-button")) return;
+  const style = document.createElement("style");
+  style.textContent = `.level-back-button{position:fixed;top:auto;bottom:52px;left:18px;z-index:20;padding:9px 12px;border:1px solid rgba(121,247,255,.5);background:rgba(5,7,17,.9);color:#79f7ff;cursor:pointer;font:0.58rem var(--font-display,"Orbitron",sans-serif);letter-spacing:.08rem;text-transform:uppercase}.level-back-button:hover,.level-back-button:focus-visible{background:rgba(121,247,255,.18);box-shadow:0 0 18px rgba(121,247,255,.32);outline:none}@media(max-width:560px){.level-back-button{top:auto;bottom:46px;left:14px}.level-header{padding-top:64px}.level-shell{padding-bottom:96px}.level-meta{flex-wrap:wrap;max-width:100%}.level-meta strong,.level-meta span{overflow-wrap:anywhere}.level-description,.system-transmission p,.puzzle-status{overflow-wrap:anywhere}}`;
+  document.head.appendChild(style);
+  const button = document.createElement("button");
+  button.className = "level-back-button";
+  button.type = "button";
+  button.textContent = "← RETOUR";
+  button.setAttribute("aria-label", "Retour à la page précédente");
+  button.addEventListener("click", () => {
+    const referrer = document.referrer;
+    if (referrer && new URL(referrer).origin === window.location.origin) {
+      window.history.back();
+    } else {
+      window.location.href = fallbackHref;
+    }
+  });
+  document.body.prepend(button);
+}
+
+installBackButton();
+
 const board = document.getElementById("puzzleBoard");
 const pieces = [...document.querySelectorAll(".puzzle-piece")];
 const slots = [...document.querySelectorAll(".target-slot")];

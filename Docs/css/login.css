@@ -5,6 +5,39 @@
   --login-text: #edfaff;
   --login-muted: #9cabc4;
   --login-danger: #ff6884;
+  .page-back-button {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 5;
+    padding: 9px 12px;
+    border: 1px solid rgba(121, 247, 255, 0.5);
+    background: rgba(5, 7, 17, 0.9);
+    color: var(--login-cyan);
+    font-family: var(--font-display, "Orbitron", sans-serif);
+    font-size: 0.58rem;
+    letter-spacing: 0.08rem;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .page-back-button:hover,
+  .page-back-button:focus-visible {
+    background: rgba(121, 247, 255, 0.18);
+    box-shadow: 0 0 18px rgba(121, 247, 255, 0.32);
+    outline: none;
+  }
+}
+.page-back-button {
+  top: auto;
+  bottom: 22px;
+  left: 18px;
+}
+@media (max-width: 560px) {
+  .page-back-button {
+    top: auto;
+    bottom: 18px;
+    left: 14px;
+  }
 }
 
 * {
