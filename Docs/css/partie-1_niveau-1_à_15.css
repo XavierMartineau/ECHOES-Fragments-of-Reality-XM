@@ -58,6 +58,12 @@
 .pattern-board {
   min-height: 390px;
 }
+.level-shell:has(.pattern-board) .level-intro h1 {
+  font-size: clamp(1.8rem, 3.4vw, 3.4rem);
+}
+.pattern-board .panel-heading h2 {
+  font-size: clamp(1rem, 1.8vw, 1.45rem);
+}
 .pattern-grid {
   position: relative;
   z-index: 1;

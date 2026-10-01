@@ -43,9 +43,11 @@ if (activeLevelScript) {
       puzzleTitle: "Motifs caches",
       startPuzzle: "DEMARRER LE PUZZLE",
       statusReady: "Repere les trois symboles identiques.",
+      systemInput:
+        "SYSTEME:: OBJECTIF 006 // TROUVER 3 SYMBOLES IDENTIQUES SUR 20",
       statusSuccess: "Motif restaure.",
       statusError: "Ce symbole ne correspond pas.",
-      systemSuccess: "SYSTEME:: MOTIF 006 RESTAURE",
+      systemSuccess: "SYSTEME:: MOTIF 006 RESTAURE // MEMOIRE SYNCHRONISEE",
       systemError: "SYSTEME:: MOTIF INCOMPATIBLE",
       reset: "Reinitialiser",
       save: "SAUVEGARDER",
@@ -123,16 +125,15 @@ if (activeLevelScript) {
   };
   const installBackButton = () => {
     ensureLevelFooter();
+    const previousPage = `niveau-${String(levelNumber - 1).padStart(2, "0")}.html`;
     const button = document.createElement("button");
     button.className = "level-back-button";
     button.type = "button";
     button.textContent = "← RETOUR";
     button.setAttribute("aria-label", "Retour à la page précédente");
-    button.addEventListener("click", () =>
-      window.history.length > 1
-        ? window.history.back()
-        : (window.location.href = "../../../index.html"),
-    );
+    button.addEventListener("click", () => {
+      window.location.href = previousPage;
+    });
     document.body.prepend(button);
   };
   const renderProgress = () => {
@@ -686,6 +687,7 @@ if (activeLevelScript) {
     const status = document.getElementById("puzzleStatus");
     const readout = document.getElementById("progressReadout");
     const system = document.getElementById("systemMessage");
+    const transmission = document.querySelector(".system-transmission");
     let targetIndexes;
     let started = false;
     let found = 0;
@@ -713,6 +715,7 @@ if (activeLevelScript) {
       "⌁",
       "≈",
     ];
+    system.textContent = levelCopy.systemInput;
     const renderPattern = () => {
       targetIndexes = new Set(
         shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 3),
@@ -738,6 +741,8 @@ if (activeLevelScript) {
             if (found === 3) {
               status.textContent = levelCopy.statusSuccess;
               status.className = "puzzle-status success";
+              transmission.classList.add("success");
+              system.textContent = levelCopy.systemSuccess;
               saveCompletion();
               next.hidden = false;
             }
@@ -776,6 +781,7 @@ if (activeLevelScript) {
       readout.textContent = "0 / 3";
       status.className = "puzzle-status";
       status.textContent = levelCopy.statusReady;
+      transmission.classList.remove("success");
       system.textContent = levelCopy.systemInput;
       start.disabled = false;
       next.hidden = true;
