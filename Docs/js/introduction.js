@@ -1,3 +1,4 @@
+// INTRODUCTION // ECHO spectrum, dialogue flow, language, and mission start.
 const spectrumCanvas = document.getElementById("spectrumCanvas");
 const isDesktopDevice =
   /Windows|Macintosh|Linux/.test(navigator.userAgent) &&
@@ -35,6 +36,7 @@ const spectrumParticles = Array.from({ length: 130 }, (_, particleIndex) => ({
   hue: particleIndex % 3 === 0 ? 190 : particleIndex % 3 === 1 ? 205 : 275,
 }));
 
+// Applies translated interface labels and selects the dialogue collection.
 function applyLanguage(language) {
   currentLanguage = translations[language] ? language : "fr";
   const dictionary = translations[currentLanguage];
@@ -49,6 +51,7 @@ function applyLanguage(language) {
   localStorage.setItem("echoes-language", currentLanguage);
 }
 
+// Resizes the canvas for responsive layouts and high-density displays.
 function resizeSpectrum() {
   const pixelRatio = window.devicePixelRatio || 1;
   const bounds = spectrumCanvas.getBoundingClientRect();
@@ -58,6 +61,7 @@ function resizeSpectrum() {
   spectrumContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
 }
 
+// Draws the animated spectrum and its glitch response every frame.
 function drawSpectrum(timestamp) {
   const center = spectrumSize / 2;
   const innerRadius = spectrumSize * 0.24;
@@ -205,6 +209,7 @@ function keepDialogueInView() {
   });
 }
 
+// Types dialogue text progressively and advances the introduction sequence.
 function typeMessage(messageIndex = 0) {
   if (messageIndex >= dialogueMessages.length) {
     dialogueHint.textContent = translations[currentLanguage].introActive;

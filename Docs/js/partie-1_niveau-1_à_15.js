@@ -1,3 +1,19 @@
+/*
+ * PARTIE 1 // NIVEAUX 01-15
+ *
+ * Reference map:
+ * - Levels 01-07: legacy puzzle blocks below the active-level router.
+ * - Level 08: .advanced-sort-board -> color sorting.
+ * - Level 09: .constellation-board -> three star sequences.
+ * - Level 10: .color-sequence-board -> color memory sequence.
+ * - Level 11: .geometry-board -> four movable geometric shapes.
+ * - Level 12: .cross-light-board -> ordered light intersections.
+ * - Level 13: .fractal-board -> five-panel fractal pattern.
+ * - Level 14: .combined-sequence-board -> combined ordered sequence.
+ * - Level 15: reserved placeholder; intentionally not constructed yet.
+ *
+ * Each page identifies its controller through one marker in this table.
+ */
 const levelScriptByMarker = [
   [".light-sequence", 2],
   [".sort-board", 3],
@@ -29,6 +45,7 @@ function ensureLevelFooter() {
 }
 
 function installProgressDots() {
+  // Creates the small success indicators from each puzzle's readout (0 / N).
   document.querySelectorAll(".progress-readout").forEach((readout) => {
     const actions = readout
       .closest(".puzzle-panel")
@@ -76,6 +93,7 @@ const activeLevelScript = levelScriptByMarker.find(([marker]) =>
 );
 
 if (activeLevelScript) {
+  // Shared bootstrap for levels 2-14: language, save state, footer, and next link.
   const language =
     localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const accountId = window.EchoesSave?.getCurrentUser?.() || "guest";
@@ -271,6 +289,7 @@ if (activeLevelScript) {
     const remaining = sector * 15 - levelNumber;
     return `${message} // ${remaining} NIVEAUX AVANT SECTEUR ${nextSector}`;
   };
+  // Applies the selected language to the static labels of the active level.
   const applyCopy = () => {
     document.documentElement.lang = language;
     document.querySelectorAll("[data-i18n]").forEach((element) => {
@@ -1187,6 +1206,7 @@ if (activeLevelScript) {
     updateProgress();
   }
 
+  // Renders the 15-level progress strip shown in the level header.
   function renderProgress() {
     levelProgress.replaceChildren();
     for (let level = 1; level <= 15; level += 1) {
@@ -1201,6 +1221,7 @@ if (activeLevelScript) {
     }
   }
 
+  // Persists the current level and redraws its completed marker.
   function markCurrentLevelCompleted() {
     completedLevels.add(currentLevel);
     localStorage.setItem(
@@ -1216,6 +1237,7 @@ if (activeLevelScript) {
     renderProgress();
   }
 
+  // Updates the puzzle-local counter used by the progress dots.
   function updateProgress() {
     const correctPlacements = placedShapes.reduce(
       (count, shape, index) => count + (shape === solution[index] ? 1 : 0),
@@ -1419,6 +1441,9 @@ if (activeLevelScript) {
   });
 }
 
+// Shared controller for the newer puzzle pages (levels 8-14).
+// Each page supplies only its board builder; this function owns start, reset,
+// persistence, language-independent navigation, and completion feedback.
 function installAdvancedLevel(levelNumber, buildPuzzle) {
   const startButton = document.getElementById("startPuzzleButton");
   const resetButton = document.getElementById("resetButton");
@@ -1500,6 +1525,7 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
   }
 }
 
+// Level 08 // Advanced color sorting: select a symbol, then place it in its target.
 if (document.querySelector(".advanced-sort-board")) {
   installAdvancedLevel(8, ({ started, finish, setStatus }) => {
     const grid = document.getElementById("colorSortGrid");
@@ -1574,6 +1600,7 @@ if (document.querySelector(".advanced-sort-board")) {
   });
 }
 
+// Level 09 // Stellar sequence: reproduce three ordered constellations.
 if (document.querySelector(".constellation-board")) {
   installAdvancedLevel(9, ({ started, finish, setStatus }) => {
     const field = document.getElementById("constellationField");
@@ -1705,6 +1732,7 @@ if (document.querySelector(".constellation-board")) {
   });
 }
 
+// Level 10 // Color memory: watch one color at a time, then reproduce the sequence.
 if (document.querySelector(".color-sequence-board")) {
   installAdvancedLevel(10, ({ started, finish, setStatus, registerStart }) => {
     const grid = document.getElementById("colorSequenceGrid");
@@ -1846,6 +1874,7 @@ if (document.querySelector(".color-sequence-board")) {
   });
 }
 
+// Shared ordered-button puzzle used by levels 12 and 14.
 function installOrderedGridLevel(
   levelNumber,
   gridId,
@@ -1895,6 +1924,8 @@ function installOrderedGridLevel(
   });
 }
 
+// Level 11 // Geometry workshop: move points, keep the polyline connected,
+// and validate the shape against the visible example.
 if (document.querySelector(".geometry-board")) {
   installAdvancedLevel(11, ({ started, finish, setStatus }) => {
     const example = document.querySelector("#geometryExample polyline");
@@ -2004,7 +2035,7 @@ if (document.querySelector(".geometry-board")) {
       if (!started() || roundComplete) return;
       const accurate = points.every(
         (pointValue, pointIndex) =>
-          distance(pointValue, rounds[round][pointIndex]) < 15,
+          distance(pointValue, rounds[round][pointIndex]) < 30,
       );
       if (!accurate) {
         setStatus(
@@ -2031,6 +2062,7 @@ if (document.querySelector(".geometry-board")) {
     startRound();
   });
 }
+// Level 12 // Crossed light: activate the intersections in sequence.
 if (document.querySelector(".cross-light-board")) {
   installOrderedGridLevel(
     12,
@@ -2040,6 +2072,7 @@ if (document.querySelector(".cross-light-board")) {
     [0, 4, 8, 1, 5],
   );
 }
+// Level 14 // Combined protocol: reproduce the ordered mixed signal.
 if (document.querySelector(".combined-sequence-board")) {
   installOrderedGridLevel(
     14,
@@ -2050,6 +2083,7 @@ if (document.querySelector(".combined-sequence-board")) {
   );
 }
 
+// Level 13 // Fractal pattern: toggle the five target panels in the 3x3 grid.
 if (document.querySelector(".fractal-board")) {
   installAdvancedLevel(13, ({ started, finish, setStatus }) => {
     const grid = document.getElementById("fractalGrid");

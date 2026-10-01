@@ -1,3 +1,5 @@
+/* PARTIE 4 // NIVEAUX 46-60
+ * Shared page bootstrap: back navigation, current-level detection, and save. */
 function installBackButton() {
   let footer = document.querySelector(".level-footer");
   if (!footer) {

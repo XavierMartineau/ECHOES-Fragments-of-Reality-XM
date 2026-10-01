@@ -1,4 +1,5 @@
-﻿window.translations = {
+﻿// TRANSLATIONS // language dictionaries consumed by every page controller.
+window.translations = {
   fr: {
     systemLabel: "SYSTÈME",
     systemStatus: "EN LIGNE",

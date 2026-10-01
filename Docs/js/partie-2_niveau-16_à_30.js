@@ -1,3 +1,6 @@
+/* PARTIE 2 // NIVEAUX 16-30
+ * This file owns the shared back-navigation and autosave bootstrap for every
+ * page in this range. Add each future puzzle controller below this bootstrap. */
 function installBackButton() {
   let footer = document.querySelector(".level-footer");
   if (!footer) {

@@ -1,3 +1,4 @@
+// LOGIN PAGE // authenticates the player and routes to a new or saved game.
 const loginForm = document.getElementById("loginForm");
 const loginError = document.getElementById("loginError");
 const saveChoice = document.getElementById("saveChoice");
@@ -18,6 +19,7 @@ document.querySelectorAll("[data-i18n]").forEach((element) => {
   if (dictionary[key]) element.textContent = dictionary[key];
 });
 
+// Keeps the password control and its accessibility state synchronized.
 function updatePasswordToggle() {
   passwordToggle.textContent =
     dictionary[passwordVisible ? "hidePassword" : "showPassword"];
@@ -33,6 +35,7 @@ updatePasswordToggle();
 
 let currentUsername = null;
 
+// Maps a saved level number to the relative level HTML page.
 function destinationForSave(save) {
   const levelMatch = /^level-(\d+)$/.exec(save?.currentPage || "");
   if (levelMatch) {
@@ -54,6 +57,7 @@ function destinationForSave(save) {
   return "introduction.html";
 }
 
+// Displays the resume/new-game choice after successful authentication.
 function showSaveChoice(username) {
   currentUsername = username;
   const save = window.EchoesSave.getSave(username);

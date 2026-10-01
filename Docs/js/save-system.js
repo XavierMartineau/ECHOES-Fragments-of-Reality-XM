@@ -1,3 +1,4 @@
+// SAVE SYSTEM // local account, checkpoint, and progression persistence.
 window.EchoesSave = (() => {
   const currentUserKey = "echoes-current-user";
   const accountPrefix = "echoes-account-";
@@ -48,6 +49,7 @@ window.EchoesSave = (() => {
     return rawSave ? JSON.parse(rawSave) : null;
   }
 
+  // Merges the latest level state into the active account checkpoint.
   function saveProgress(progress, username = getCurrentUser()) {
     if (!username) return false;
     const previousSave = getSave(username) || {};
@@ -70,6 +72,7 @@ window.EchoesSave = (() => {
     return true;
   }
 
+  // Clears the old run before starting the introduction again.
   function startNewGame(username = getCurrentUser()) {
     if (username) {
       localStorage.removeItem(keyFor("echoes-completed-levels-", username));

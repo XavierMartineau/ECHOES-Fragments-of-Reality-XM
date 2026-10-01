@@ -1,4 +1,5 @@
 (() => {
+  // DEV MODE // shared authenticated navigator injected on every page.
   const script = document.currentScript;
   if (!script) {
     return;
@@ -136,6 +137,7 @@
   const levelPanel = menu.querySelector(".dev-mode-level-panel");
   const partToggles = menu.querySelectorAll(".dev-mode-part-toggle");
 
+  // Opens or closes the level navigator after authentication.
   const setOpen = (isOpen) => {
     panel.hidden = !isOpen;
     toggle.setAttribute("aria-expanded", String(isOpen));
@@ -167,6 +169,7 @@
     faceIdModal.classList.toggle("is-error", state === "error");
   };
 
+  // Verifies the enrolled Windows Hello credential without opening a camera.
   const requestFaceId = async () => {
     faceIdModal.hidden = false;
     const storedCredential = localStorage.getItem("echoes-dev-face-credential");
@@ -255,6 +258,7 @@
     faceIdModal.hidden = true;
   });
 
+  // Swaps the level column while keeping the six-part menu compact.
   const showLevels = (partNumber) => {
     levelPanel.hidden = false;
 
