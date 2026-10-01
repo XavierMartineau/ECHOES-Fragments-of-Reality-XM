@@ -39,6 +39,26 @@
     "/^\\(Get-Content 'Documentation\\\\Info-en\\.txt'\\)\\.Count; \\(Get-Item 'Documentation\\\\Info-en\\.txt'\\)\\.Length$/": {
       "approve": true,
       "matchCommandLine": true
+    },
+    "/^cd /c/ECHOES-Fragments-of-Reality-XM ; node -e \"const fs=require\\('fs'\\); const html=fs\\.readFileSync\\('docs/html/introduction\\.html','utf8'\\); const css=fs\\.readFileSync\\('docs/css/introduction\\.css','utf8'\\); const js=fs\\.readFileSync\\('docs/js/introduction\\.js','utf8'\\); console\\.log\\('html', html\\.includes\\('dialogueShell'\\) && html\\.includes\\('intro'\\)\\); console\\.log\\('css', css\\.includes\\('@keyframes shell-appear'\\) && css\\.includes\\('@keyframes line-in'\\)\\); console\\.log\\('js', js\\.includes\\('is-fading-out'\\) && js\\.includes\\('is-active'\\)\\);\"$/": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "/^cd /c/ECHOES-Fragments-of-Reality-XM ; node -e \"const fs=require\\('fs'\\); const js=fs\\.readFileSync\\('docs/js/introduction\\.js','utf8'\\); console\\.log\\(js\\.includes\\('window\\.innerWidth <= 700 \\? 38 : 26'\\) && js\\.includes\\('window\\.innerWidth <= 700 \\? 540 : 420'\\)\\);\"$/": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "/^cd 'C:\\\\ECHOES-Fragments-of-Reality-XM'; node -e \"const fs=require\\('fs'\\); const vm=require\\('vm'\\); const trans=fs\\.readFileSync\\('docs/js/translations\\.js','utf8'\\); const intro=fs\\.readFileSync\\('docs/js/introduction\\.js','utf8'\\); const ctx=\\{window:\\{\\}\\}; vm\\.runInNewContext\\(trans, ctx\\); new Function\\(intro\\); console\\.log\\('translations ok:', Object\\.keys\\(ctx\\.window\\.translations\\.fr\\.introMessages\\)\\.length, 'messages'\\); console\\.log\\('introduction syntax ok'\\);\"$/": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "/^cd 'C:\\\\ECHOES-Fragments-of-Reality-XM'; node --check docs/js/translations\\.js; node --check docs/js/introduction\\.js$/": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "/^cd 'C:\\\\ECHOES-Fragments-of-Reality-XM'; node -e \"const fs=require\\('fs'\\); const s=fs\\.readFileSync\\('docs/js/translations\\.js','utf8'\\); console\\.log\\(JSON\\.stringify\\(s\\.slice\\(0,120\\)\\)\\);\"$/": {
+      "approve": true,
+      "matchCommandLine": true
     }
   }
 }

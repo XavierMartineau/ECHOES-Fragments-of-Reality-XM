@@ -204,6 +204,7 @@ function keepDialogueInView() {
 function typeMessage(messageIndex = 0) {
   if (messageIndex >= dialogueMessages.length) {
     dialogueHint.textContent = translations[currentLanguage].introActive;
+    dialogueShell.classList.add("is-fading-out");
     setSpectrumActivity(
       false,
       document.body.classList.contains("simulation-failure"),
@@ -254,9 +255,43 @@ function typeMessage(messageIndex = 0) {
     keepDialogueInView();
 
     if (characterIndex < message.text.length) {
-      window.setTimeout(typeCharacter, 24);
+      const character = message.text[characterIndex - 1];
+      const isEchoError = message.failure === true;
+      const baseDelay = isEchoError
+        ? window.innerWidth <= 700
+          ? 30
+          : 22
+        : window.innerWidth <= 700
+          ? 92
+          : 68;
+      const punctuationDelay = ".!?".includes(character)
+        ? isEchoError
+          ? window.innerWidth <= 700
+            ? 90
+            : 65
+          : window.innerWidth <= 700
+            ? 420
+            : 320
+        : character === ","
+          ? isEchoError
+            ? window.innerWidth <= 700
+              ? 45
+              : 35
+            : window.innerWidth <= 700
+              ? 190
+              : 140
+          : 0;
+      const delay = baseDelay + punctuationDelay;
+      window.setTimeout(typeCharacter, delay);
     } else {
-      window.setTimeout(() => typeMessage(messageIndex + 1), 380);
+      const delay = message.failure
+        ? window.innerWidth <= 700
+          ? 360
+          : 280
+        : window.innerWidth <= 700
+          ? 1350
+          : 1050;
+      window.setTimeout(() => typeMessage(messageIndex + 1), delay);
     }
   }
 
@@ -267,6 +302,7 @@ function startTransmission() {
   if (hasStarted) return;
 
   hasStarted = true;
+  dialogueShell.classList.remove("is-fading-out");
   dialogueText.textContent = "";
   dialogueShell.classList.add("is-active");
   dialogueHint.textContent = translations[currentLanguage].introStarting;

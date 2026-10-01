@@ -571,10 +571,21 @@ body.simulation-failure .intro-title {
     inset 0 0 26px rgba(121, 247, 255, 0.035);
   text-align: left;
   cursor: pointer;
+  opacity: 0.96;
+  transform-origin: center top;
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.dialogue-shell.is-active {
+  animation: shell-appear 0.45s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+
+.dialogue-shell.is-fading-out {
+  animation: shell-fade-out 0.35s ease-in forwards;
 }
 .dialogue-shell:hover,
 .dialogue-shell:focus-visible {
@@ -627,7 +638,10 @@ body.simulation-failure .intro-title {
   display: flex;
   gap: 10px;
   margin: 0 0 10px;
-  animation: line-in 0.25s ease-out both;
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  filter: blur(2px);
+  animation: line-in 0.28s cubic-bezier(0.2, 0.9, 0.2, 1) both;
 }
 .dialogue-line:last-child {
   margin-bottom: 0;
@@ -905,14 +919,40 @@ body.simulation-failure .intro-title {
     opacity: 1;
   }
 }
-@keyframes line-in {
+@keyframes shell-appear {
   from {
     opacity: 0;
-    transform: translateY(5px);
+    transform: translateY(12px) scale(0.985);
+    filter: blur(2px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+@keyframes shell-fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0.2;
+    transform: translateY(-2px) scale(0.992);
+    filter: blur(1px);
+  }
+}
+@keyframes line-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 @keyframes dialogue-glitch {
