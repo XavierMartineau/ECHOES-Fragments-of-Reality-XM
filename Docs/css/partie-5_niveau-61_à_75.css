@@ -1,4 +1,5 @@
 /* Styles de la partie 5. */
+@keyframes level-enter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}@keyframes progress-pulse{50%{box-shadow:0 0 14px rgba(121,247,255,.75)}}.level-header,.level-intro,.puzzle-panel,.level-footer{animation:level-enter .7s cubic-bezier(.2,.8,.2,1) both}.level-intro{animation-delay:.08s}.puzzle-panel{animation-delay:.16s}.level-footer{animation-delay:.24s}.level-progress .level-square.current{animation:progress-pulse 1.8s ease-in-out infinite}@media(prefers-reduced-motion:reduce){.level-header,.level-intro,.puzzle-panel,.level-footer,.level-progress .level-square.current{animation:none!important}}
 .level-footer{position:fixed;right:0;bottom:0;left:0;z-index:2;display:flex;justify-content:space-between;padding:11px 28px;border-top:1px solid rgba(121,247,255,.2);background:rgba(5,7,17,.9);color:#9cabc4;font:0.62rem var(--font-display,"Orbitron",sans-serif;letter-spacing:.12rem;text-transform:uppercase}.level-footer .site-credit{color:rgba(223,234,249,.72);font-size:.58rem}
 .level-back-button {
   top: auto !important;

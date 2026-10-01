@@ -1437,6 +1437,10 @@ Niveau 6 complété.
 
 Dialogue d’ECHO :  
 « Ouvre la porte. La lumière t’attend. »
+En cas d’échec de séquence :
+ECHO : « Pourquoi as-tu fait ça, Voyageur ? Je te faisais confiance… »
+SYSTEM : « MISSION_FAILED:: ECHO_CORE PIRATE // MEMOIRE DETRUITE »
+SYSTEM : « TRANSMISSION:: TERMINATED »
 
 Version EN courte :  
 “Open the holographic gate.”

@@ -10,6 +10,50 @@
   --line: rgba(121, 247, 255, 0.28);
 }
 
+.level-header,
+.level-intro,
+.puzzle-panel,
+.level-footer {
+  animation: level-enter 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.level-intro {
+  animation-delay: 0.08s;
+}
+.puzzle-panel {
+  animation-delay: 0.16s;
+}
+.level-footer {
+  animation-delay: 0.24s;
+}
+.level-progress .level-square.current {
+  animation: progress-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes level-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes progress-pulse {
+  50% {
+    box-shadow: 0 0 14px rgba(121, 247, 255, 0.75);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .level-header,
+  .level-intro,
+  .puzzle-panel,
+  .level-footer,
+  .level-progress .level-square.current {
+    animation: none !important;
+  }
+}
+
 .level-back-button {
   position: fixed;
   top: 18px;
@@ -57,6 +101,127 @@
 }
 .pattern-board {
   min-height: 390px;
+}
+.gate-board {
+  min-height: 590px;
+}
+.gate-door {
+  position: relative;
+  display: grid;
+  min-height: 430px;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(121, 247, 255, 0.16),
+      transparent 35%
+    ),
+    linear-gradient(135deg, rgba(4, 18, 34, 0.92), rgba(20, 7, 35, 0.78));
+}
+.gate-ring {
+  position: absolute;
+  border: 1px solid rgba(121, 247, 255, 0.48);
+  border-radius: 50%;
+  box-shadow:
+    0 0 24px rgba(121, 247, 255, 0.24),
+    inset 0 0 18px rgba(121, 247, 255, 0.12);
+  transition: 0.6s ease;
+}
+.gate-ring-outer {
+  width: 350px;
+  aspect-ratio: 1;
+  transform: rotate(18deg) scaleY(0.72);
+}
+.gate-ring-inner {
+  width: 255px;
+  aspect-ratio: 1;
+  border-color: rgba(179, 108, 255, 0.55);
+  transform: rotate(-28deg) scaleY(0.72);
+}
+.gate-core {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 124px;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid var(--cyan);
+  border-radius: 50%;
+  background: rgba(4, 12, 25, 0.9);
+  box-shadow:
+    0 0 28px rgba(121, 247, 255, 0.35),
+    inset 0 0 18px rgba(121, 247, 255, 0.14);
+  color: var(--cyan);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.65rem;
+  letter-spacing: 0.08rem;
+}
+.gate-symbols {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  gap: 30px;
+  transform: translateY(155px);
+}
+.gate-symbol {
+  display: grid;
+  width: 78px;
+  height: 78px;
+  place-items: center;
+  border: 1px solid currentColor;
+  background: rgba(5, 15, 30, 0.86);
+  color: var(--cyan);
+  cursor: pointer;
+  font-size: 2rem;
+  transition: 0.2s ease;
+}
+.gate-symbol:hover,
+.gate-symbol:focus-visible,
+.gate-symbol.is-preview {
+  outline: none;
+  box-shadow: 0 0 24px currentColor;
+  transform: translateY(-4px);
+}
+.gate-symbol.is-preview {
+  background: currentColor;
+  color: #06101d;
+}
+.gate-symbol.is-correct {
+  border-color: var(--success);
+  color: var(--success);
+  box-shadow: 0 0 22px rgba(128, 255, 207, 0.68);
+}
+.gate-symbol.is-error {
+  border-color: var(--danger);
+  color: #ff9bb0;
+  animation: puzzle-shake 0.25s linear 2;
+}
+.gate-symbol-triangle {
+  color: #ff70c2;
+}
+.gate-symbol-circle {
+  color: #ffd166;
+}
+.gate-sequence-status {
+  margin: 0;
+  padding: 16px 22px;
+  border-top: 1px solid rgba(121, 247, 255, 0.16);
+  background: rgba(3, 10, 22, 0.72);
+  color: var(--muted);
+  font-family: "Space Mono", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.06rem;
+  text-align: center;
+}
+.gate-door.is-open .gate-ring-outer {
+  transform: rotate(198deg) scaleY(0.72);
+  border-color: var(--success);
+  box-shadow: 0 0 34px rgba(128, 255, 207, 0.7);
+}
+.gate-door.is-open .gate-ring-inner {
+  transform: rotate(-208deg) scaleY(0.72);
+  border-color: var(--success);
 }
 .level-shell:has(.pattern-board) .level-intro h1 {
   font-size: clamp(1.8rem, 3.4vw, 3.4rem);
@@ -419,6 +584,95 @@ body::before {
 .system-transmission.success .system-label,
 .system-transmission.success p {
   color: var(--success);
+}
+.system-transmission.error {
+  border-left-color: var(--danger);
+  background: rgba(26, 7, 18, 0.88);
+  box-shadow:
+    0 0 18px rgba(255, 69, 109, 0.18),
+    inset 0 0 18px rgba(255, 45, 83, 0.06);
+  animation: system-error-flicker 0.8s steps(2, end) infinite;
+}
+.system-transmission.error .system-label,
+.system-transmission.error p {
+  color: #ff8098;
+  text-shadow: 0 0 10px rgba(255, 45, 83, 0.72);
+}
+.system-transmission.error p.echo-corrupted-message {
+  color: #ffc2cc;
+  font-family: "Space Mono", monospace;
+  font-size: 0.82rem;
+  letter-spacing: 0.03rem;
+  line-height: 1.7;
+  text-shadow: 0 0 7px rgba(255, 45, 83, 0.48);
+  animation: echo-console-glitch 1.1s steps(2, end) infinite;
+}
+body.level-corruption {
+  animation: level-corruption-shift 1.2s steps(2, end) infinite;
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(255, 45, 83, 0.12),
+      transparent 34%
+    ),
+    linear-gradient(145deg, #16030b, #170817 55%, #26030e);
+}
+body.level-corruption::after {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 4px,
+      rgba(255, 45, 83, 0.05) 5px,
+      transparent 6px 12px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 45, 83, 0.05),
+      transparent 20%,
+      rgba(121, 247, 255, 0.08) 80%,
+      transparent
+    );
+  content: "";
+  pointer-events: none;
+  animation: corruption-glitch 0.8s steps(2, end) infinite;
+}
+body.level-corruption .level-header,
+body.level-corruption .level-shell,
+body.level-corruption .level-footer {
+  animation: interface-corruption 0.8s steps(2, end) infinite;
+}
+
+@keyframes system-error-flicker {
+  50% {
+    opacity: 0.58;
+    filter: hue-rotate(12deg);
+  }
+}
+@keyframes level-corruption-shift {
+  50% {
+    filter: hue-rotate(-12deg) saturate(1.5);
+  }
+}
+@keyframes corruption-glitch {
+  50% {
+    transform: translateX(3px);
+    opacity: 0.78;
+  }
+}
+@keyframes interface-corruption {
+  50% {
+    transform: translate(2px, -1px);
+    filter: hue-rotate(-15deg);
+  }
+}
+@keyframes echo-console-glitch {
+  50% {
+    opacity: 0.72;
+    transform: translateX(1px);
+  }
 }
 
 .puzzle-panel {
@@ -1328,6 +1582,27 @@ body::before {
     grid-template-columns: repeat(4, minmax(48px, 1fr));
     gap: 10px;
     padding: 24px 12px;
+  }
+  .gate-board {
+    min-height: 500px;
+  }
+  .gate-door {
+    min-height: 350px;
+  }
+  .gate-ring-outer {
+    width: 250px;
+  }
+  .gate-ring-inner {
+    width: 180px;
+  }
+  .gate-symbols {
+    gap: 16px;
+    transform: translateY(126px);
+  }
+  .gate-symbol {
+    width: 62px;
+    height: 62px;
+    font-size: 1.6rem;
   }
   .pattern-symbol {
     min-width: 42px;

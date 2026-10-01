@@ -1,68 +1,153 @@
 # Cheminement du projet
 
-Ce document sert à suivre l’avancement du projet et à noter l’état de chaque modification importante.
+Ce document suit l'avancement réel du projet ECHOES: Fragments of Reality.
+La référence narrative et fonctionnelle principale reste `documentation/Info-fr.txt`.
 
 ## État actuel
 
-- Date : 30/09/2026
+- Date : 01/10/2026
 - Projet : ECHOES: Fragments of Reality
-- Phase : accueil / introduction interactive / structure narrative
+- Phase : introduction interactive et niveaux 1 à 7 jouables
+- Déploiement visé : GitHub Pages
 
-## Progression
+## Progression actuelle
 
-### 📅 Progression d’aujourd’hui — 30/09/2026
+### ✅ Accueil, formulaire et introduction
 
-Pour l’instant, l’accueil et l’introduction interactive sont fonctionnels. Le projet dispose maintenant d’une identité visuelle complète, d’un dialogue narratif ECHO / Voyageur, d’un spectre audio animé, d’une gestion FR / EN persistante et d’un affichage responsive PC, tablette et téléphone.
+- Page d'accueil cyberpunk avec fond animé et sélecteur FR/EN.
+- Page de connexion avec création de compte, mot de passe et reprise de sauvegarde.
+- Introduction narrative ECHO / Voyageur avec spectre audio canvas.
+- Dialogue machine à écrire avec défilement automatique.
+- Panne de mémoire d'ECHO présentée comme un vrai log de code semi-corrompu.
+- Messages `ECHO_CORE`, `MISSION_FAILED` et `TRANSMISSION:: TERMINATED`.
+- Mission étendue à six clés et six fragments de mémoire : Origine, Résonance, Souvenir, Trace, Conscience et Silence.
+- Boutons retour présents à partir de la page formulaire.
 
-### ✅ Terminé
+### ✅ Système de comptes et progression
 
-- Création de la page d’accueil principale
-- Intégration du design cyberpunk futuriste
-- Ajout du système FR / EN
-- Ajout du footer avec droits réservés
-- Mise en place de la structure de dossiers dans docs/
-- Création de `introduction.html`, `introduction.js` et `introduction.css`
-- Création du spectre audio circulaire avec particules et animation canvas
-- Création du dialogue interactif ECHO / Voyageur avec effet machine à écrire
-- Ajout de la panne mémoire d’ECHO avec code d’erreur, fractures rouges et effet glitch
-- Ajout de l’objectif des six clés et du bouton de mission final
-- Ajout du défilement automatique de la page pendant les dialogues
-- Ajout du responsive PC, tablette et téléphone pour l’introduction
-- Ajout du footer principal sur tous les formats d’écran
-- Centralisation des polices dans `docs/css/fonts.css`
-- Conservation de la langue FR / EN entre l’accueil et l’introduction
+- Sauvegarde par compte utilisateur dans `localStorage`.
+- Progression des niveaux séparée par compte.
+- Points verts de navigation liés au compte actif.
+- Sauvegarde automatique du niveau courant à l'ouverture d'un niveau.
+- Reprise directe du dernier niveau sauvegardé.
+- Nouvelle partie qui efface la progression du compte avant de recommencer.
+- Niveaux terminés rejouables sans perdre les points verts.
+- Messages de réussite avec indication du secteur suivant et du nombre de niveaux restants.
 
-### 🔄 En cours
+### ✅ Responsive et GitHub Pages
 
-- Finalisation du style premium de la première page
-- Préparation de la première scène de récupération des six clés
-- Définition des prochaines pages interactives
+- Media queries centralisées dans `docs/css/responsive.css` pour l'accueil et l'introduction.
+- PC à partir de 1100 px, tablette de 651 à 1099 px, téléphone jusqu'à 650 px.
+- Détection desktop pour les petites fenêtres PC avec pointeur fin.
+- Interfaces tactiles adaptées et textes protégés contre les débordements.
+- Favicon corrigé vers `docs/assets/images/echoes-favicon.svg`.
+- Audit des références locales terminé : `NO_MISSING_LOCAL_REFERENCES`.
+- Chemins d'accueil des niveaux corrigés pour GitHub Pages.
 
-### ⏳ À venir
+## Niveaux jouables
 
-- Première scène de puzzle / niveau d’introduction
-- Ajout des fichiers de données JSON et contenus narratifs
-- Développement des mécaniques de jeu
+### ✅ Niveau 1 — Alignement primaire
 
-## Journal de modifications
+- Trois manches successives d'alignement.
+- Chaque manche possède un ordre de formes aléatoire.
+- Compteur de manches `1 / 3`, `2 / 3`, puis `3 / 3`.
+- Nouvelle manche lancée automatiquement après réussite.
+- Sauvegarde seulement après la troisième manche.
+- Bouton de lancement pour éviter les interactions avant le démarrage.
+
+### ✅ Niveau 2 — Séquence lumineuse
+
+- Quatre piliers lumineux.
+- Séquence aléatoire à mémoriser.
+- Lecture uniquement après clic sur le bouton de lancement.
+- Feedback de désynchronisation et replay.
+- Réussite persistante et bouton vers le niveau 3.
+
+### ✅ Niveau 3 — Formes géométriques
+
+- Six formes à classer dans six emplacements.
+- Ordre des cartes et des cibles mélangé à chaque partie.
+- Interface tactile sans dépendance au hover.
+- Cible correspondante mise en évidence après sélection.
+- Bouton de lancement et progression persistante.
+
+### ✅ Niveau 4 — Rotation holographique
+
+- Quatre manches avec la même forme visible.
+- Seule la ligne d'orientation change entre les manches.
+- Angles diagonaux aléatoires : `45°`, `135°`, `225°`, `315°`.
+- Compteur des quatre orientations et animation de stabilisation.
+- La forme ne disparaît pas pendant la progression.
+
+### ✅ Niveau 5 — Séquence sonore
+
+- Quatre notes générées avec Web Audio.
+- Message visible demandant d'activer le volume.
+- Séquence sonore aléatoire et bouton d'écoute manuel.
+- Aucun son automatique avant interaction utilisateur.
+- Feedback d'erreur et progression sauvegardée.
+
+### ✅ Niveau 6 — Observation des motifs
+
+- Mur holographique de 20 symboles.
+- Trois motifs identiques placés aléatoirement.
+- Toutes les cases sont bleues au départ pour ne pas révéler la solution.
+- La case devient verte uniquement après une bonne sélection.
+- Les formes cibles changent à chaque nouvelle partie ou réinitialisation.
+- SYSTEM LOG avec objectif initial et message de réussite personnalisé.
+- Reset qui recrée et remélange complètement la grille.
+
+### ✅ Niveau 7 — Porte lumineuse
+
+- Porte holographique avec anneaux, noyau et cinq symboles.
+- Trois stages de difficulté : 3 boutons, puis 4, puis 5 boutons actifs.
+- Séquences aléatoires à observer et à reproduire.
+- Compteur de stages `1 / 3`, `2 / 3`, puis `3 / 3`.
+- Animation d'ouverture de la porte à la réussite finale.
+- Erreur de séquence avec corruption rouge et glitch de la page.
+- Message semi-corrompu d'ECHO, `MISSION_FAILED` et fin de transmission.
+
+## Centralisation technique
+
+- Les niveaux 1 à 10 utilisent le script central `docs/js/partie-1_niveau-1_à_15.js`.
+- Les contrôleurs séparés des niveaux 2 à 5 ont été supprimés.
+- Des sections clairement identifiées existent pour les niveaux 6 à 15.
+- Les feuilles CSS de toutes les parties possèdent une base responsive et des animations d'entrée.
+- Les footers avec droits réservés sont présents sur toutes les pages de niveaux.
+
+## En cours
+
+- Finalisation des mécaniques détaillées des niveaux 8 à 15.
+- Ajout progressif des six fragments et des clés dans la progression narrative.
+- Harmonisation des contenus FR/EN des niveaux futurs.
+
+## À venir
+
+- Niveaux 8 à 15 entièrement jouables.
+- Système complet des six clés et des verrous associés.
+- Puzzles des dimensions Fractures et Éclipse.
+- Validation navigateur complète des parcours GitHub Pages.
+
+## Journal des modifications
+
+### 01/10/2026
+
+- Création et validation des niveaux 1 à 7.
+- Centralisation des scripts de la partie 1.
+- Ajout de la progression par compte et de la reprise automatique.
+- Ajout des animations communes aux pages de niveaux.
+- Correction des chemins GitHub Pages et des favicons.
+- Amélioration responsive PC, tablette et téléphone.
+- Ajout des footers de copyright sur les pages de niveaux.
+- Ajout des messages d'erreur semi-corrompus d'ECHO.
 
 ### 30/09/2026
 
-- Création de la landing page d’accueil
-- Ajout du bouton FR / EN avec vraie logique de langue
-- Ajout du footer et amélioration visuelle premium
-- Mise en place de la structure de dossiers docs/
-- Création de la feuille responsive pour mobile, tablette et PC
-- Vérification de l’affichage sur plusieurs tailles d’écran
-- Lancement et validation du projet sur le Live Server local
-- Création de l’introduction narrative interactive
-- Ajout du spectre audio ECHO et de son état de panne rouge
-- Ajout des échanges narratifs entre ECHO et le Voyageur
-- Ajout de la mission des six clés spéciales
-- Ajout du bouton ECHOES pour revenir à `index.html`
-- Renommage des fichiers de scène en fichiers `introduction`
-- Centralisation des polices et validation FR / EN sur PC, tablette et mobile
+- Création de l'accueil et de l'introduction narrative.
+- Ajout du système FR/EN.
+- Ajout du spectre audio et du dialogue machine à écrire.
+- Mise en place de la structure initiale dans `docs/`.
 
 ## Note
 
-À remplir à chaque modification importante pour garder une trace claire de l’avancement du projet.
+Mettre à jour ce document après chaque modification importante et consulter `Info-fr.txt` avant toute nouvelle mécanique ou évolution narrative.

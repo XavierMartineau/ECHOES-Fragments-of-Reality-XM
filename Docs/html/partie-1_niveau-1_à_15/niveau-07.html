@@ -33,17 +33,64 @@
         <p class="level-description" data-i18n="description">
           Active les trois symboles dans le bon ordre pour ouvrir la porte.
         </p>
+        <div class="system-transmission" aria-live="polite">
+          <span class="system-label">SYSTEM://LOG</span>
+          <p id="systemMessage">SYSTEME:: PORTE HOLOGRAPHIQUE EN ATTENTE</p>
+        </div>
       </section>
       <section class="puzzle-panel gate-board">
         <div class="panel-heading">
-          <h2 data-i18n="puzzleTitle">Séquence de la porte</h2>
+          <div>
+            <p class="panel-kicker">PORTE HOLOGRAPHIQUE // ACCÈS 007</p>
+            <h2 data-i18n="puzzleTitle">Séquence de la porte</h2>
+          </div>
           <span class="progress-readout" id="progressReadout">0 / 3</span>
         </div>
-        <div class="gate-symbols" id="gateSymbols">
-          <button type="button" data-gate="0">◇</button
-          ><button type="button" data-gate="1">△</button
-          ><button type="button" data-gate="2">○</button>
+        <div class="gate-door" id="gateDoor">
+          <div class="gate-ring gate-ring-outer"></div>
+          <div class="gate-ring gate-ring-inner"></div>
+          <div class="gate-core"><span>GATE://07</span></div>
+          <div class="gate-symbols" id="gateSymbols">
+            <button
+              class="gate-symbol gate-symbol-diamond"
+              type="button"
+              data-gate="0"
+            >
+              ◇
+            </button>
+            <button
+              class="gate-symbol gate-symbol-triangle"
+              type="button"
+              data-gate="1"
+            >
+              △
+            </button>
+            <button
+              class="gate-symbol gate-symbol-circle"
+              type="button"
+              data-gate="2"
+            >
+              ○
+            </button>
+            <button
+              class="gate-symbol gate-symbol-star"
+              type="button"
+              data-gate="3"
+            >
+              ✦
+            </button>
+            <button
+              class="gate-symbol gate-symbol-hexagon"
+              type="button"
+              data-gate="4"
+            >
+              ⬡
+            </button>
+          </div>
         </div>
+        <p class="gate-sequence-status" id="gateSequenceStatus">
+          SIGNAL:// EN ATTENTE DE SYNCHRONISATION
+        </p>
         <div class="puzzle-actions">
           <button
             class="sequence-start-button"

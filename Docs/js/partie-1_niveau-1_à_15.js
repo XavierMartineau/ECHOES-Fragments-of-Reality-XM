@@ -70,6 +70,8 @@ if (activeLevelScript) {
       puzzleTitle: "Sequence de la porte",
       startPuzzle: "DEMARRER LE PUZZLE",
       statusReady: "Active les symboles dans le bon ordre.",
+      systemInput:
+        "SYSTEME:: OBJECTIF 007 // ACTIVER LA PORTE DANS LE BON ORDRE",
       statusSuccess: "La porte est ouverte.",
       statusError: "La sequence est incorrecte.",
       systemSuccess: "SYSTEME:: PORTE 007 OUVERTE",
@@ -764,6 +766,9 @@ if (activeLevelScript) {
     };
     start.textContent = levelCopy.startPuzzle;
     start.addEventListener("click", () => {
+      document.body.classList.remove("level-corruption");
+      transmission.classList.remove("error");
+      system.classList.remove("echo-corrupted-message");
       started = true;
       start.disabled = true;
       grid
@@ -797,6 +802,137 @@ if (activeLevelScript) {
       found = 0;
       readout.textContent = "0 / 3";
     }
+  }
+
+  // ===== NIVEAU 7 // PORTE LUMINEUSE =====
+  if (document.querySelector(".gate-board")) {
+    const buttons = [...document.querySelectorAll("[data-gate]")];
+    const start = document.getElementById("startPuzzleButton");
+    const next = document.getElementById("nextLevelButton");
+    const reset = document.getElementById("resetButton");
+    const status = document.getElementById("puzzleStatus");
+    const readout = document.getElementById("progressReadout");
+    const system = document.getElementById("systemMessage");
+    const transmission = document.querySelector(".system-transmission");
+    const gateDoor = document.getElementById("gateDoor");
+    const sequenceStatus = document.getElementById("gateSequenceStatus");
+    const stageLengths = [3, 4, 5];
+    const difficultyLabels = ["FACILE", "MOYEN", "DIFFICILE"];
+    let order = [];
+    let input = [];
+    let started = false;
+    let watching = false;
+    const failureTransmission = `ECHO:: P0urqu0i as-tu f@it ça, Voyageur ?\nECHO:: Je te faisais c0nfiance... tr??st_failure = TRUE\nECHO_C0RE:: MEM0RY_LINK // c0herence: 07%\nMISSION_FAILED:: ECHO_CORE PIRATE // MEM0IRE DETRUITE\nTRANSMISSION:: TERM1NATED // s1gnal_l0st`;
+    const typeFailureTransmission = () => {
+      system.textContent = "";
+      let index = 0;
+      const typeCharacter = () => {
+        system.textContent += failureTransmission[index++];
+        if (index < failureTransmission.length)
+          window.setTimeout(typeCharacter, 18);
+      };
+      typeCharacter();
+    };
+    let stageIndex = 0;
+    system.textContent = levelCopy.systemInput;
+    buttons.forEach((button) => (button.disabled = true));
+    const loadStage = () => {
+      order = shuffle(
+        buttons
+          .slice(0, stageLengths[stageIndex])
+          .map((button) => Number(button.dataset.gate)),
+      );
+      input = [];
+      buttons.forEach((button, index) => {
+        button.disabled = index >= stageLengths[stageIndex];
+        button.classList.remove("is-correct", "is-error", "is-preview");
+      });
+      readout.textContent = `${stageIndex + 1} / 3`;
+      sequenceStatus.textContent = `SIGNAL:// ${difficultyLabels[stageIndex]} // ${stageLengths[stageIndex]} BOUTONS ACTIFS`;
+    };
+    const playStage = () => {
+      watching = true;
+      sequenceStatus.textContent = `SIGNAL:// LECTURE ${difficultyLabels[stageIndex]}`;
+      order.forEach((gate, index) =>
+        window.setTimeout(() => {
+          buttons[gate].classList.add("is-preview");
+          window.setTimeout(
+            () => buttons[gate].classList.remove("is-preview"),
+            420,
+          );
+        }, index * 700),
+      );
+      window.setTimeout(() => {
+        watching = false;
+        status.textContent = levelCopy.statusReady;
+        sequenceStatus.textContent = `SIGNAL:// ${difficultyLabels[stageIndex]} MÉMORISÉ`;
+      }, order.length * 700);
+    };
+    loadStage();
+    start.textContent = levelCopy.startPuzzle;
+    start.addEventListener("click", () => {
+      started = true;
+      start.disabled = true;
+      buttons
+        .slice(0, stageLengths[stageIndex])
+        .forEach((button) => (button.disabled = false));
+      playStage();
+    });
+    buttons.forEach((button) =>
+      button.addEventListener("click", () => {
+        if (
+          !started ||
+          watching ||
+          Number(button.dataset.gate) >= stageLengths[stageIndex]
+        )
+          return;
+        const value = Number(button.dataset.gate);
+        input.push(value);
+        readout.textContent = `${stageIndex + 1} / 3`;
+        if (value !== order[input.length - 1]) {
+          status.textContent = levelCopy.statusError;
+          status.className = "puzzle-status error";
+          system.textContent = levelCopy.systemError;
+          document.body.classList.add("level-corruption");
+          transmission.classList.add("error");
+          system.classList.add("echo-corrupted-message");
+          typeFailureTransmission();
+          input = [];
+          readout.textContent = `${stageIndex + 1} / 3`;
+          buttons.forEach((item) => item.classList.remove("is-correct"));
+          sequenceStatus.textContent =
+            "SIGNAL:// DÉSYNCHRONISATION // NOUVELLE LECTURE REQUISE";
+          return;
+        }
+        button.classList.add("is-correct");
+        if (input.length === order.length) {
+          stageIndex += 1;
+          if (stageIndex < stageLengths.length) {
+            buttons.forEach((item) => item.classList.remove("is-correct"));
+            status.textContent = `NIVEAU ${stageIndex + 1} CHARGÉ // ${difficultyLabels[stageIndex]}`;
+            start.disabled = true;
+            window.setTimeout(() => {
+              loadStage();
+              playStage();
+            }, 550);
+            return;
+          }
+          status.textContent = levelCopy.statusSuccess;
+          status.className = "puzzle-status success";
+          transmission.classList.add("success");
+          gateDoor.classList.add("is-open");
+          sequenceStatus.textContent = "GATE:// OUVERT // ACCÈS STABILISÉ";
+          saveCompletion();
+          system.textContent = successMessage(levelCopy.systemSuccess);
+          next.hidden = false;
+        }
+      }),
+    );
+    reset.addEventListener("click", () => window.location.reload());
+    next.addEventListener("click", () => {
+      window.location.href = "niveau-08.html";
+    });
+    if (completedLevels.has(7)) next.hidden = false;
   }
 } else {
   // ===== NIVEAU 1 =====
@@ -886,6 +1022,7 @@ if (activeLevelScript) {
   let selectedPiece = null;
   let placedShapes = [null, null, null];
   let puzzleStarted = false;
+  let roundIndex = 0;
 
   document.documentElement.lang = language;
   document.querySelectorAll("[data-i18n]").forEach((element) => {
@@ -929,6 +1066,36 @@ if (activeLevelScript) {
     shuffledPieces.forEach((piece) => pieceTray.appendChild(piece));
   }
 
+  function prepareRound() {
+    solution = shuffleArray(["circle", "triangle", "square"]);
+    targetByShape = Object.fromEntries(
+      solution.map((shape, index) => [shape, index]),
+    );
+    placedShapes = [null, null, null];
+    selectedPiece = null;
+    board.classList.remove("solved");
+    slots.forEach((slot) => {
+      slot.className = "target-slot";
+      slot.replaceChildren();
+    });
+    pieces.forEach((piece) => {
+      piece.className = `puzzle-piece ${piece.className
+        .split(" ")
+        .filter((name) => name.startsWith("piece-"))
+        .join(" ")}`;
+      piece.classList.remove("selected", "placed");
+      piece.removeAttribute("aria-disabled");
+    });
+    clearSlotPreviews();
+    shufflePieces();
+    systemMessages.input =
+      language === "en"
+        ? `SYSTEM:: ROUND ${roundIndex + 1} OF 3 // TARGET ORDER: ${solution.map((shape) => shapeLabels[shape].toUpperCase()).join(" > ")}`
+        : `SYSTEME:: MANCHE ${roundIndex + 1} SUR 3 // ORDRE CIBLES: ${solution.map((shape) => shapeLabels[shape].toUpperCase()).join(" > ")}`;
+    systemMessage.textContent = systemMessages.input;
+    updateProgress();
+  }
+
   function renderProgress() {
     levelProgress.replaceChildren();
     for (let level = 1; level <= 15; level += 1) {
@@ -959,8 +1126,7 @@ if (activeLevelScript) {
   }
 
   function updateProgress() {
-    const placedCount = placedShapes.filter(Boolean).length;
-    progressReadout.textContent = `${placedCount} / ${solution.length}`;
+    progressReadout.textContent = `${roundIndex} / 3`;
   }
 
   function typeSystemMessage(message, onComplete) {
@@ -1042,13 +1208,30 @@ if (activeLevelScript) {
       status.textContent = levelCopy.statusSuccess;
       status.className = "puzzle-status success";
       systemTransmission.classList.add("success");
-      markCurrentLevelCompleted();
-      typeSystemMessage(systemMessages.success, () => {
-        window.setTimeout(() => {
-          nextLevelButton.hidden = false;
-          nextLevelButton.focus();
-        }, 450);
-      });
+      roundIndex += 1;
+      updateProgress();
+      if (roundIndex < 3) {
+        typeSystemMessage(
+          language === "en"
+            ? `ROUND ${roundIndex} RESTORED // NEXT ROUND LOADING`
+            : `MANCHE ${roundIndex} RESTAUREE // MANCHE SUIVANTE`,
+          () =>
+            window.setTimeout(() => {
+              systemTransmission.classList.remove("success");
+              status.className = "puzzle-status";
+              status.textContent = levelCopy.statusReady;
+              prepareRound();
+            }, 500),
+        );
+      } else {
+        markCurrentLevelCompleted();
+        typeSystemMessage(systemMessages.success, () => {
+          window.setTimeout(() => {
+            nextLevelButton.hidden = false;
+            nextLevelButton.focus();
+          }, 450);
+        });
+      }
       return;
     }
 
@@ -1065,6 +1248,7 @@ if (activeLevelScript) {
   }
 
   function resetPuzzle() {
+    roundIndex = 0;
     placedShapes = [null, null, null];
     selectedPiece = null;
     puzzleStarted = false;
@@ -1084,7 +1268,7 @@ if (activeLevelScript) {
     startPuzzleButton.disabled = false;
     pieces.forEach((piece) => (piece.disabled = true));
     slots.forEach((slot) => (slot.disabled = true));
-    systemMessage.textContent = systemMessages.input;
+    prepareRound();
     systemTransmission.classList.remove("success");
     updateProgress();
   }
@@ -1145,8 +1329,7 @@ if (activeLevelScript) {
     startPuzzleButton.disabled = false;
     nextLevelButton.hidden = false;
   }
-  shufflePieces();
-  if (!completedLevels.has(1)) systemMessage.textContent = systemMessages.input;
+  prepareRound();
   updateProgress();
   renderProgress();
   window.EchoesSave?.saveProgress({
