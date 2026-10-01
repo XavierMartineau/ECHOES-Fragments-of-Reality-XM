@@ -71,6 +71,9 @@ window.EchoesSave = (() => {
   }
 
   function startNewGame(username = getCurrentUser()) {
+    if (username) {
+      localStorage.removeItem(keyFor("echoes-completed-levels-", username));
+    }
     return saveProgress(
       {
         currentPage: "introduction",

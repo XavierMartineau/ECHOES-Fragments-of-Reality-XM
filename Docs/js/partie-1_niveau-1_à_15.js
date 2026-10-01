@@ -30,7 +30,8 @@ const activeLevelScript = levelScriptByMarker.find(([marker]) =>
 if (activeLevelScript) {
   const language =
     localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
-  const progressStorageKey = "echoes-completed-levels";
+  const accountId = window.EchoesSave?.getCurrentUser?.() || "guest";
+  const progressStorageKey = `echoes-completed-levels-${encodeURIComponent(accountId)}`;
   const completedLevels = new Set(
     JSON.parse(localStorage.getItem(progressStorageKey) || "[]"),
   );
@@ -160,6 +161,8 @@ if (activeLevelScript) {
     });
     renderProgress();
   };
+  const successMessage = (message) =>
+    `${message} // PROGRESSION: ${completedLevels.size} / 90`;
   const applyCopy = () => {
     document.documentElement.lang = language;
     document.querySelectorAll("[data-i18n]").forEach((element) => {
@@ -176,10 +179,21 @@ if (activeLevelScript) {
     });
     document.getElementById("saveGameButton").textContent = levelCopy.save;
     document.getElementById("resetButton").textContent = levelCopy.reset;
+    const nextButton = document.getElementById("nextLevelButton");
+    if (nextButton) {
+      nextButton.textContent = language === "en"
+        ? `CONTINUE TO LEVEL ${levelNumber + 1}`
+        : `CONTINUER VERS LE NIVEAU ${levelNumber + 1}`;
+    }
   };
   installBackButton();
   applyCopy();
   renderProgress();
+  window.EchoesSave?.saveProgress({
+    currentPage: `level-${levelNumber}`,
+    currentLevel: levelNumber,
+    completedLevels: [...completedLevels].sort((a, b) => a - b),
+  });
 
   // ===== NIVEAU 2 // SEQUENCE LUMINEUSE =====
   if (document.querySelector(".light-sequence")) {
@@ -240,7 +254,7 @@ if (activeLevelScript) {
       status.className = "puzzle-status success";
       transmission.classList.add("success");
       saveCompletion();
-      system.textContent = levelCopy.systemSuccess;
+      system.textContent = successMessage(levelCopy.systemSuccess);
       window.setTimeout(() => {
         next.hidden = false;
         next.focus();
@@ -307,16 +321,8 @@ if (activeLevelScript) {
     });
     status.textContent = levelCopy.statusReady;
     if (completedLevels.has(2)) {
-      solved = true;
-      started = true;
-      board.classList.add("solved");
-      lights.forEach((_, index) => state(index, "correct"));
-      transmission.classList.add("success");
-      status.textContent = levelCopy.statusSuccess;
-      status.className = "puzzle-status success";
-      system.textContent = levelCopy.systemSuccess;
-      start.disabled = false;
       next.hidden = false;
+      start.disabled = false;
     }
     update();
   }
@@ -407,7 +413,7 @@ if (activeLevelScript) {
         status.className = "puzzle-status success";
         transmission.classList.add("success");
         saveCompletion();
-        system.textContent = levelCopy.systemSuccess;
+        system.textContent = successMessage(levelCopy.systemSuccess);
         window.setTimeout(() => {
           next.hidden = false;
           next.focus();
@@ -453,11 +459,6 @@ if (activeLevelScript) {
       window.location.href = "niveau-04.html";
     });
     if (completedLevels.has(3)) {
-      board.classList.add("solved");
-      transmission.classList.add("success");
-      status.textContent = levelCopy.statusSuccess;
-      status.className = "puzzle-status success";
-      system.textContent = levelCopy.systemSuccess;
       next.hidden = false;
       start.disabled = false;
     }
@@ -511,7 +512,7 @@ if (activeLevelScript) {
           status.className = "puzzle-status success";
           transmission.classList.add("success");
           saveCompletion();
-          system.textContent = levelCopy.systemSuccess;
+          system.textContent = successMessage(levelCopy.systemSuccess);
           next.hidden = false;
           next.focus();
         }, 450);
@@ -544,16 +545,9 @@ if (activeLevelScript) {
     });
     load();
     if (completedLevels.has(4)) {
-      solved = true;
-      started = true;
-      board.classList.add("solved");
-      transmission.classList.add("success");
-      status.textContent = levelCopy.statusSuccess;
-      status.className = "puzzle-status success";
-      system.textContent = levelCopy.systemSuccess;
+      next.hidden = false;
       start.disabled = false;
       rotate.disabled = true;
-      next.hidden = false;
     }
   }
 
@@ -620,7 +614,7 @@ if (activeLevelScript) {
       status.className = "puzzle-status success";
       transmission.classList.add("success");
       saveCompletion();
-      system.textContent = levelCopy.systemSuccess;
+      system.textContent = successMessage(levelCopy.systemSuccess);
       next.hidden = false;
       next.focus();
     };
@@ -665,16 +659,8 @@ if (activeLevelScript) {
     });
     status.textContent = levelCopy.statusReady;
     if (completedLevels.has(5)) {
-      solved = true;
-      started = true;
-      board.classList.add("solved");
-      notes.forEach((note) => note.classList.add("is-correct"));
-      transmission.classList.add("success");
-      status.textContent = levelCopy.statusSuccess;
-      status.className = "puzzle-status success";
-      system.textContent = levelCopy.systemSuccess;
-      start.disabled = false;
       next.hidden = false;
+      start.disabled = false;
     }
   }
 
@@ -742,8 +728,8 @@ if (activeLevelScript) {
               status.textContent = levelCopy.statusSuccess;
               status.className = "puzzle-status success";
               transmission.classList.add("success");
-              system.textContent = levelCopy.systemSuccess;
               saveCompletion();
+              system.textContent = successMessage(levelCopy.systemSuccess);
               next.hidden = false;
             }
           } else {
@@ -863,7 +849,8 @@ if (activeLevelScript) {
     error: levelCopy.systemError,
   };
   const currentLevel = 1;
-  const progressStorageKey = "echoes-completed-levels";
+  const accountId = window.EchoesSave?.getCurrentUser?.() || "guest";
+  const progressStorageKey = `echoes-completed-levels-${encodeURIComponent(accountId)}`;
   const completedLevels = new Set(
     JSON.parse(localStorage.getItem(progressStorageKey) || "[]"),
   );
@@ -938,6 +925,7 @@ if (activeLevelScript) {
       currentLevel: currentLevel,
       completedLevels: [...completedLevels].sort((a, b) => a - b),
     });
+    systemMessages.success = `${levelCopy.systemSuccess} // PROGRESSION: ${completedLevels.size} / 90`;
     renderProgress();
   }
 
@@ -1108,6 +1096,9 @@ if (activeLevelScript) {
     window.location.href = "niveau-02.html";
   });
   startPuzzleButton.textContent = levelCopy.startPuzzle;
+  nextLevelButton.textContent = language === "en"
+    ? "CONTINUE TO LEVEL 2"
+    : "CONTINUER VERS LE NIVEAU 2";
   pieces.forEach((piece) => (piece.disabled = true));
   slots.forEach((slot) => (slot.disabled = true));
   startPuzzleButton.addEventListener("click", () => {
@@ -1123,12 +1114,6 @@ if (activeLevelScript) {
   });
   if (completedLevels.has(1)) {
     puzzleStarted = false;
-    board.classList.add("solved");
-    slots.forEach((slot) => slot.classList.add("correct"));
-    systemTransmission.classList.add("success");
-    status.textContent = levelCopy.statusSuccess;
-    status.className = "puzzle-status success";
-    systemMessage.textContent = systemMessages.success;
     startPuzzleButton.disabled = false;
     nextLevelButton.hidden = false;
   }
@@ -1136,6 +1121,11 @@ if (activeLevelScript) {
   if (!completedLevels.has(1)) systemMessage.textContent = systemMessages.input;
   updateProgress();
   renderProgress();
+  window.EchoesSave?.saveProgress({
+    currentPage: "level-1",
+    currentLevel: 1,
+    completedLevels: [...completedLevels].sort((a, b) => a - b),
+  });
 }
 
 // ============================================================================
