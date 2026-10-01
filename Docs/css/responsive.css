@@ -1,4 +1,4 @@
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .content {
     width: min(900px, 82vw);
     padding: 64px 58px 46px;
@@ -9,7 +9,7 @@
   }
 }
 
-@media (min-width: 701px) and (max-width: 1199px) {
+@media (min-width: 651px) and (max-width: 1099px) {
   html,
   body {
     overflow: auto;
@@ -47,7 +47,7 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 650px) {
   html,
   body {
     min-height: 100%;
@@ -217,4 +217,215 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ===== INTRODUCTION RESPONSIVE ===== */
+.intro-page {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+html:has(.intro-page),
+.intro-page {
+  overflow-x: hidden;
+}
+
+@media (min-width: 1100px) {
+  .intro-page.desktop-layout .top-bar {
+    width: calc(100% - 48px);
+    padding: 30px 0;
+  }
+
+  .intro-page.desktop-layout .intro {
+    width: 100%;
+    max-width: none;
+    padding: clamp(54px, 7vh, 92px) 24px 48px;
+  }
+
+  .intro-page.desktop-layout .intro-title {
+    font-size: clamp(5rem, 9vw, 8rem);
+  }
+
+  .intro-page.desktop-layout .ai-stage {
+    width: min(430px, 32vw);
+    margin: 54px 0 42px;
+  }
+
+  .intro-page.desktop-layout .dialogue-shell {
+    width: 100%;
+    max-width: none;
+  }
+
+  .intro-page.desktop-layout .dialogue-body {
+    min-height: 190px;
+    padding: 28px;
+    font-size: 1.16rem;
+  }
+
+  .intro-page.desktop-layout .site-footer {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    margin: 0;
+    padding: 18px 20px 58px;
+  }
+
+  .intro-page.desktop-layout .page-back-button,
+  .intro-page.desktop-layout .save-game-button {
+    min-height: 40px;
+    padding: 10px 16px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .intro-page .top-bar {
+    width: min(1280px, calc(100% - 64px));
+    padding: 30px 0;
+  }
+
+  .intro-page .intro {
+    width: 100%;
+    max-width: none;
+    padding-top: clamp(54px, 7vh, 92px);
+  }
+
+  .intro-page .intro-title {
+    font-size: clamp(5rem, 9vw, 8rem);
+  }
+
+  .intro-page .ai-stage {
+    width: min(430px, 32vw);
+    margin-top: 54px;
+    margin-bottom: 42px;
+  }
+
+  .intro-page .dialogue-shell {
+    width: min(1080px, calc(100% - 96px));
+  }
+
+  .intro-page .dialogue-body {
+    min-height: 190px;
+    padding: 28px;
+    font-size: 1.16rem;
+  }
+}
+
+@media (min-width: 651px) and (max-width: 1099px) and (pointer: coarse) {
+  .intro-page .top-bar {
+    width: calc(100% - 56px);
+    padding: 24px 0;
+  }
+
+  .intro-page .intro {
+    padding-top: 52px;
+    padding-bottom: 150px;
+  }
+
+  .intro-page .intro-title {
+    font-size: clamp(4rem, 10vw, 7rem);
+  }
+
+  .intro-page .ai-stage {
+    width: min(330px, 42vw);
+    margin: 38px 0 28px;
+  }
+
+  .intro-page .dialogue-shell {
+    width: min(760px, calc(100% - 24px));
+  }
+
+  .intro-page .dialogue-body {
+    min-height: 170px;
+    padding: 24px;
+    font-size: 1.12rem;
+  }
+}
+
+@media (max-width: 650px) and (pointer: coarse) {
+  .intro-page {
+    overflow-x: hidden;
+  }
+
+  .intro-page .top-bar {
+    width: calc(100% - 28px);
+    padding: 17px 0;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .intro-page .intro {
+    min-height: calc(100vh - 66px);
+    padding: 30px 14px 160px;
+  }
+
+  .intro-page .intro-title {
+    letter-spacing: 0.1em;
+  }
+
+  .intro-page .ai-stage {
+    width: min(270px, 72vw);
+    margin: 24px 0 22px;
+  }
+
+  .intro-page .dialogue-shell {
+    width: 100%;
+  }
+
+  .intro-page .dialogue-body {
+    min-height: 138px;
+    padding: 17px;
+  }
+
+  .intro-page .dialogue-line-text {
+    overflow-wrap: anywhere;
+  }
+}
+
+/* A PC window can be narrower than 1100px while remaining a desktop device. */
+.intro-page.desktop-layout .top-bar {
+  width: calc(100% - 48px);
+  padding: 30px 0;
+}
+.intro-page.desktop-layout .intro {
+  width: 100%;
+  max-width: none;
+  padding: clamp(54px, 7vh, 92px) 24px 48px;
+}
+.intro-page.desktop-layout .intro-title {
+  font-size: clamp(5rem, 9vw, 8rem);
+}
+.intro-page.desktop-layout .ai-stage {
+  width: min(430px, 32vw);
+  margin: 36px 0 24px;
+}
+.intro-page.desktop-layout .dialogue-shell {
+  width: min(720px, calc(100% - 300px));
+  max-width: none;
+  margin-inline: auto;
+}
+.intro-page.desktop-layout .dialogue-body {
+  min-height: 120px;
+  padding: 20px 24px;
+  font-size: 1.16rem;
+}
+.intro-page.desktop-layout .dialogue-shell {
+  border-color: rgba(121, 247, 255, 0.22);
+  box-shadow:
+    0 0 18px rgba(121, 247, 255, 0.07),
+    inset 0 0 16px rgba(121, 247, 255, 0.025);
+}
+.intro-page.desktop-layout .dialogue-head {
+  border-bottom-color: rgba(121, 247, 255, 0.14);
+}
+.intro-page.desktop-layout .site-footer {
+  position: relative;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  width: 100%;
+  margin: 0;
+  padding: 18px 20px 58px;
 }

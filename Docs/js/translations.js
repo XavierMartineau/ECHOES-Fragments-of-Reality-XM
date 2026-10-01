@@ -219,7 +219,7 @@
     introFooter: "ÉCHO // TRANSMISSION ACTIVE",
     introFooterYear: "© 2026 Xavier Martineau",
     introFooterRights: "Tous droits réservés.",
-    introMissionButton: "RÉCUPÉRER LES 3 CLÉS",
+    introMissionButton: "RÉCUPÉRER LES 6 CLÉS",
     introMissionStarted:
       "Recherche des clés initialisée // objectif verrouillé",
     introMessages: [
@@ -302,7 +302,7 @@
         speaker: "ECHO:",
         className: "echo glitch-line",
         glitch: true,
-        text: "Trois clés. Chacune contient un fragment du code capable de dissoudre le virus et de restaurer ma mémoire morceau par morceau.",
+        text: "Six clés. Chacune contient un fragment du code capable de dissoudre le virus et de restaurer ma mémoire morceau par morceau.",
       },
       {
         speaker: "ECHO:",
@@ -548,7 +548,7 @@
     introFooter: "ECHO // ACTIVE TRANSMISSION",
     introFooterYear: "© 2026 Xavier Martineau",
     introFooterRights: "All rights reserved.",
-    introMissionButton: "RECOVER THE 3 KEYS",
+    introMissionButton: "RECOVER THE 6 KEYS",
     introMissionStarted: "Key search initialized // objective locked",
     introMessages: [
       {

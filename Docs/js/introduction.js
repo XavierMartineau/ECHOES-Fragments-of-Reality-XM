@@ -1,4 +1,8 @@
 const spectrumCanvas = document.getElementById("spectrumCanvas");
+const isDesktopDevice =
+  /Windows|Macintosh|Linux/.test(navigator.userAgent) &&
+  !/Android|iPhone|iPad|Mobile/.test(navigator.userAgent);
+document.body.classList.toggle("desktop-layout", isDesktopDevice);
 const spectrumContext = spectrumCanvas.getContext("2d");
 const dialogueShell = document.getElementById("dialogueShell");
 const dialogueText = document.getElementById("dialogueText");

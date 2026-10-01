@@ -25,7 +25,7 @@ Pour l’instant, l’accueil et l’introduction interactive sont fonctionnels.
 - Création du spectre audio circulaire avec particules et animation canvas
 - Création du dialogue interactif ECHO / Voyageur avec effet machine à écrire
 - Ajout de la panne mémoire d’ECHO avec code d’erreur, fractures rouges et effet glitch
-- Ajout de l’objectif des trois clés et du bouton de mission final
+- Ajout de l’objectif des six clés et du bouton de mission final
 - Ajout du défilement automatique de la page pendant les dialogues
 - Ajout du responsive PC, tablette et téléphone pour l’introduction
 - Ajout du footer principal sur tous les formats d’écran
@@ -35,7 +35,7 @@ Pour l’instant, l’accueil et l’introduction interactive sont fonctionnels.
 ### 🔄 En cours
 
 - Finalisation du style premium de la première page
-- Préparation de la première scène de récupération des trois clés
+- Préparation de la première scène de récupération des six clés
 - Définition des prochaines pages interactives
 
 ### ⏳ À venir
@@ -58,7 +58,7 @@ Pour l’instant, l’accueil et l’introduction interactive sont fonctionnels.
 - Création de l’introduction narrative interactive
 - Ajout du spectre audio ECHO et de son état de panne rouge
 - Ajout des échanges narratifs entre ECHO et le Voyageur
-- Ajout de la mission des trois clés spéciales
+- Ajout de la mission des six clés spéciales
 - Ajout du bouton ECHOES pour revenir à `index.html`
 - Renommage des fichiers de scène en fichiers `introduction`
 - Centralisation des polices et validation FR / EN sur PC, tablette et mobile

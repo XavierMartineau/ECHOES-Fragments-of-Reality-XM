@@ -731,6 +731,12 @@ if (activeLevelScript) {
       });
     };
     renderPattern();
+    const clearPatternState = () => {
+      grid.classList.remove("is-solved");
+      grid.querySelectorAll(".pattern-symbol").forEach((button) => {
+        button.classList.remove("is-correct", "is-error");
+      });
+    };
     start.textContent = levelCopy.startPuzzle;
     start.addEventListener("click", () => {
       started = true;
@@ -743,11 +749,11 @@ if (activeLevelScript) {
     reset.addEventListener("click", () => {
       started = false;
       found = 0;
+      clearPatternState();
       renderPattern();
       grid
         .querySelectorAll("button")
         .forEach((button) => (button.disabled = true));
-      grid.classList.remove("is-solved");
       readout.textContent = "0 / 3";
       status.className = "puzzle-status";
       status.textContent = levelCopy.statusReady;

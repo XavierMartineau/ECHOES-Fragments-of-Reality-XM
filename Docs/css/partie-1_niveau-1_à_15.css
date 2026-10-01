@@ -75,7 +75,9 @@
   transition: 0.2s ease;
 }
 .pattern-symbol:not(.pattern-target) {
-  color: rgba(205, 224, 244, 0.78);
+  border-color: rgba(255, 209, 102, 0.48);
+  color: #ffd166;
+  text-shadow: 0 0 8px rgba(255, 209, 102, 0.42);
 }
 .pattern-symbol.pattern-target {
   border-color: rgba(255, 209, 102, 0.62);
@@ -95,6 +97,27 @@
   background: rgba(128, 255, 207, 0.18);
   color: var(--success);
   box-shadow: 0 0 22px rgba(128, 255, 207, 0.7);
+}
+.pattern-symbol.pattern-target.is-correct {
+  border-color: rgba(255, 209, 102, 0.9);
+  background: rgba(255, 209, 102, 0.14);
+  color: #ffd166;
+  box-shadow: 0 0 24px rgba(255, 209, 102, 0.78);
+}
+.pattern-symbol,
+.pattern-symbol.pattern-target,
+.pattern-symbol.pattern-target.is-correct {
+  border-color: rgba(255, 209, 102, 0.62);
+  background: rgba(255, 209, 102, 0.08);
+  color: #ffd166;
+  font-size: 1.45rem;
+  text-shadow: 0 0 10px rgba(255, 209, 102, 0.58);
+  box-shadow: 0 0 14px rgba(255, 209, 102, 0.34);
+}
+.pattern-symbol.is-correct,
+.pattern-symbol.pattern-target.is-correct {
+  background: rgba(255, 209, 102, 0.08);
+  box-shadow: 0 0 18px rgba(255, 209, 102, 0.48);
 }
 .pattern-symbol.is-error {
   border-color: var(--danger);

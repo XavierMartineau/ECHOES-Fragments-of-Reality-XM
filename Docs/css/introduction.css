@@ -13,6 +13,13 @@
 }
 
 html,
+body {
+  width: 100%;
+  min-width: 0;
+  background-color: #040611;
+  overflow-x: hidden;
+}
+
 .page-back-button {
   position: fixed;
   top: 18px;
@@ -53,6 +60,7 @@ body {
 
 body {
   position: relative;
+  width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
@@ -313,9 +321,42 @@ body.simulation-failure .intro-title {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  max-width: none;
   min-height: calc(100vh - 78px);
   padding: clamp(24px, 5vh, 58px) 20px 142px;
   text-align: center;
+}
+
+@media (min-width: 1100px) {
+  .top-bar {
+    width: min(1280px, calc(100% - 64px));
+    padding: 30px 0;
+  }
+  .intro {
+    width: 100%;
+    padding-top: clamp(54px, 7vh, 92px);
+  }
+  .intro-title {
+    font-size: clamp(5rem, 9vw, 8rem);
+  }
+  .intro-subtitle {
+    margin-top: 20px;
+    font-size: 1.25rem;
+  }
+  .ai-stage {
+    width: min(430px, 32vw);
+    margin-top: 54px;
+    margin-bottom: 42px;
+  }
+  .dialogue-shell {
+    width: min(1080px, calc(100% - 96px));
+  }
+  .dialogue-body {
+    min-height: 190px;
+    padding: 28px;
+    font-size: 1.16rem;
+  }
 }
 
 .eyebrow {
@@ -1190,25 +1231,32 @@ body.simulation-failure .intro-title {
   }
 }
 
-@media (min-width: 651px) and (max-width: 1000px) {
+@media (min-width: 651px) and (max-width: 1099px) and (hover: none) {
   .top-bar {
     width: calc(100% - 56px);
-    padding: 20px 0;
+    padding: 24px 0;
   }
   .intro {
-    padding-top: 34px;
+    padding-top: 52px;
     padding-bottom: 150px;
   }
+  .intro-title {
+    font-size: clamp(4rem, 10vw, 7rem);
+  }
+  .intro-subtitle {
+    margin-top: 18px;
+  }
   .ai-stage {
-    width: min(270px, 38vw);
-    margin: 24px 0 18px;
+    width: min(330px, 42vw);
+    margin: 38px 0 28px;
   }
   .dialogue-shell {
-    width: min(700px, calc(100% - 24px));
+    width: min(760px, calc(100% - 24px));
   }
   .dialogue-body {
-    min-height: 140px;
-    font-size: 1.05rem;
+    min-height: 170px;
+    padding: 24px;
+    font-size: 1.12rem;
   }
   .dialogue-line-text {
     overflow-wrap: anywhere;
@@ -1223,7 +1271,7 @@ body.simulation-failure .intro-title {
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 650px) and (hover: none) {
   body {
     overflow-y: auto;
   }

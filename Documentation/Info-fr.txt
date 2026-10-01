@@ -5319,7 +5319,7 @@ Version EN courte :
 NIVEAU 86 — ACTIVATION DES CLÉS
 ===============================
 Objectif narratif :  
-Le Voyageur doit activer les trois clés :
+Le Voyageur doit activer les six clés :
 
 Clé de Résonance
 
@@ -5328,10 +5328,10 @@ Clé Fractale
 Clé de l’Œil (à venir)
 
 Objectif mécanique :  
-Activer les trois clés dans un ordre cosmique.
+Activer les six clés dans un ordre cosmique.
 
 Description du puzzle :  
-Les trois clés apparaissent.
+Les six clés apparaissent.
 Le joueur doit les activer selon une séquence cosmique.
 
 Interactions :
@@ -5361,7 +5361,7 @@ Condition de déblocage :
 Niveau 85 complété.
 
 Dialogue d’ECHO :  
-« Active les trois clés…
+« Active les six clés…
 Et le Miroir du Temps s’ouvrira. »
 
 Version EN courte :  
