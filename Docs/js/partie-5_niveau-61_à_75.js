@@ -7,7 +7,7 @@ function installBackButton() {
   button.addEventListener("click", () =>
     window.history.length > 1
       ? window.history.back()
-      : (window.location.href = "../../../../index.html"),
+      : (window.location.href = "../../../index.html"),
   );
   document.body.prepend(button);
 }

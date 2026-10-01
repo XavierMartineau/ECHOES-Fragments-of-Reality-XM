@@ -342,8 +342,8 @@ body::before {
   max-width: 100%;
   overflow-wrap: anywhere;
   font-family: var(--font-display, "Orbitron", sans-serif);
-  font-size: clamp(2.4rem, 5vw, 5rem);
-  line-height: 0.98;
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 1.05;
   text-transform: uppercase;
   text-shadow: 0 0 24px rgba(121, 247, 255, 0.28);
 }
@@ -1093,11 +1093,15 @@ body::before {
 
 .puzzle-actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
   padding: 16px 22px;
   border-top: 1px solid rgba(121, 247, 255, 0.16);
+}
+.puzzle-actions .puzzle-status {
+  flex: 1 1 100%;
 }
 .puzzle-status {
   margin: 0;

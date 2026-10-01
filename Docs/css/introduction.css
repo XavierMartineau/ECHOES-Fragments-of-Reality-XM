@@ -777,6 +777,40 @@ body.simulation-failure .intro-title {
 .alarm-line .dialogue-line-text {
   animation: alarm-text-flash 0.55s steps(2, end) infinite;
 }
+.error-code-line {
+  display: block;
+  margin: 18px 0 6px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 45, 83, 0.58);
+  border-left: 3px solid #ff2d53;
+  background:
+    linear-gradient(90deg, rgba(70, 5, 22, 0.72), rgba(18, 5, 18, 0.86)),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 21px,
+      rgba(255, 45, 83, 0.08) 22px
+    );
+  box-shadow:
+    0 0 18px rgba(255, 45, 83, 0.16),
+    inset 0 0 18px rgba(255, 45, 83, 0.06);
+  color: #ff8da3;
+  font-family: "Space Mono", monospace;
+  font-size: 0.82em;
+  line-height: 1.7;
+  text-align: left;
+}
+.error-code-line .speaker {
+  display: block;
+  margin-bottom: 5px;
+  color: #ff2d53;
+  font-family: "Space Mono", monospace;
+  font-size: 0.8em;
+  letter-spacing: 0.04rem;
+}
+.error-code-line .dialogue-line-text {
+  color: #ffd1d9;
+  text-shadow: 0 0 7px rgba(255, 45, 83, 0.42);
+}
 
 .mission-objective {
   width: min(740px, 94vw);

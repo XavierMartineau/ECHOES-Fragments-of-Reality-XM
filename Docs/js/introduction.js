@@ -239,6 +239,7 @@ function typeMessage(messageIndex = 0) {
   }
   if (message.failure) {
     document.body.classList.add("simulation-failure");
+    line.classList.add("error-code-line");
   }
   speaker.className = `speaker ${message.className}`;
   speaker.textContent = `${message.speaker} `;

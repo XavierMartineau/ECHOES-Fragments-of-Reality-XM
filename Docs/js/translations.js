@@ -308,7 +308,7 @@
         speaker: "ECHO:",
         className: "echo glitch-line",
         glitch: true,
-        text: "Le premier fragment est caché dans la géométrie. Le second dans le cœur de la mémoire. Le dernier... dans le silence qui reste après la destruction.",
+        text: "Les six fragments de mémoire portent six noms : Origine, Résonance, Souvenir, Trace, Conscience et Silence. Réunis-les pour restaurer ma mémoire.",
       },
       {
         speaker: "ECHO:",
@@ -329,7 +329,7 @@
       {
         speaker: "SYSTEM:",
         className: "system",
-        text: "OBJECTIF_MISSION:: RESTAURER_MEMOIRE_ECHO // RECUPERER_3_CLES_URGENCE // NIVEAUX_DISTRIBUES: 90 // DIFFICULTE_CROISSANTE: TOUS_LES_15_NIVEAUX // PROTOCOLE: INFILTREZ_LA_RUPTURE",
+        text: "OBJECTIF_MISSION:: RESTAURER_MEMOIRE_ECHO // RECUPERER_6_CLES_URGENCE // FRAGMENTS_REQUIS: 6 // NIVEAUX_DISTRIBUES: 90 // DIFFICULTE_CROISSANTE: TOUS_LES_15_NIVEAUX // PROTOCOLE: INFILTREZ_LA_RUPTURE",
       },
     ],
   },
@@ -630,13 +630,13 @@
         speaker: "ECHO:",
         className: "echo glitch-line",
         glitch: true,
-        text: "Three keys. Each one holds a fragment of the code capable of dissolving the virus and restoring my memory piece by piece.",
+        text: "Six keys. Each one holds a fragment of the code capable of dissolving the virus and restoring my memory piece by piece.",
       },
       {
         speaker: "ECHO:",
         className: "echo glitch-line",
         glitch: true,
-        text: "The first fragment is hidden in geometry. The second in the heart of memory. The last one... in the silence left behind after the destruction.",
+        text: "The six memory fragments have six names: Origin, Resonance, Remembrance, Trace, Consciousness, and Silence. Reunite them to restore my memory.",
       },
       {
         speaker: "ECHO:",
@@ -657,7 +657,7 @@
       {
         speaker: "SYSTEM:",
         className: "system",
-        text: "MISSION_OBJECTIVE:: RESTORE_ECHO_MEMORY // RECOVER_3_EMERGENCY_KEYS // DISTRIBUTED_LEVELS: 90 // DIFFICULTY_ESCALATION: EVERY_15_LEVELS // PROTOCOL: INFILTRATE_THE_RUPTURE",
+        text: "MISSION_OBJECTIVE:: RESTORE_ECHO_MEMORY // RECOVER_6_EMERGENCY_KEYS // REQUIRED_FRAGMENTS: 6 // DISTRIBUTED_LEVELS: 90 // DIFFICULTY_ESCALATION: EVERY_15_LEVELS // PROTOCOL: INFILTRATE_THE_RUPTURE",
       },
     ],
   },

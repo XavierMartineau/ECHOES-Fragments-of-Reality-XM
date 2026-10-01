@@ -116,7 +116,7 @@ if (activeLevelScript) {
     button.addEventListener("click", () =>
       window.history.length > 1
         ? window.history.back()
-        : (window.location.href = "../../../../index.html"),
+        : (window.location.href = "../../../index.html"),
     );
     document.body.prepend(button);
   };
@@ -401,27 +401,27 @@ if (activeLevelScript) {
     pieces.forEach((piece) => (piece.disabled = true));
     slots.forEach((slot) => (slot.disabled = true));
     start.textContent = levelCopy.startPuzzle;
-    start.addEventListener("click", () => {
-      if (completedLevels.has(3)) {
-        placed = 0;
-        selected = null;
-        board.classList.remove("solved");
-        transmission.classList.remove("success");
-        slots.forEach((slot) => {
-          slot.className = `sort-slot slot-${slot.dataset.shape}`;
-          const piece = slot.querySelector(".sort-piece");
-          if (piece) pieceTray.appendChild(piece);
-        });
-        pieces.forEach((piece) => {
-          piece.disabled = false;
-          piece.className = `sort-piece shape-${piece.dataset.shape}`;
-        });
-        update();
-      }
+    start.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      placed = 0;
+      selected = null;
+      board.classList.remove("solved");
+      transmission.classList.remove("success");
+      slots.forEach((slot) => {
+        slot.className = `sort-slot slot-${slot.dataset.shape}`;
+        const piece = slot.querySelector(".sort-piece");
+        if (piece) pieceTray.appendChild(piece);
+      });
+      pieces.forEach((piece) => {
+        piece.disabled = false;
+        piece.className = `sort-piece shape-${piece.dataset.shape}`;
+      });
+      update();
       started = true;
       pieces.forEach((piece) => (piece.disabled = false));
       slots.forEach((slot) => (slot.disabled = false));
-      start.disabled = false;
+      start.disabled = true;
       status.textContent = levelCopy.statusReady;
     });
     slots.forEach((slot) => slot.addEventListener("click", () => place(slot)));
@@ -674,6 +674,8 @@ if (activeLevelScript) {
     let targetIndexes;
     let started = false;
     let found = 0;
+    let targetGlyph = "★";
+    const targetGlyphs = ["★", "✚", "☾", "✹", "✪"];
     const symbols = [
       "◇",
       "○",
@@ -682,7 +684,7 @@ if (activeLevelScript) {
       "□",
       "✧",
       "✺",
-      "✹",
+      "✧",
       "⬢",
       "✣",
       "◈",
@@ -700,12 +702,13 @@ if (activeLevelScript) {
       targetIndexes = new Set(
         shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 3),
       );
+      targetGlyph = targetGlyphs[Math.floor(Math.random() * targetGlyphs.length)];
       grid.replaceChildren();
       symbols.forEach((symbol, index) => {
         const button = document.createElement("button");
         button.className = `pattern-symbol${targetIndexes.has(index) ? " pattern-target" : ""}`;
         button.type = "button";
-        button.textContent = targetIndexes.has(index) ? "★" : symbol;
+        button.textContent = targetIndexes.has(index) ? targetGlyph : symbol;
         button.dataset.match = targetIndexes.has(index) ? "true" : "false";
         button.disabled = true;
         grid.appendChild(button);
@@ -782,7 +785,7 @@ if (activeLevelScript) {
 } else {
   // ===== NIVEAU 1 =====
   // Le puzzle d'alignement est géré directement dans ce bloc.
-  function installBackButton(fallbackHref = "../../../../index.html") {
+  function installBackButton(fallbackHref = "../../../index.html") {
     if (document.querySelector(".level-back-button")) return;
     const style = document.createElement("style");
     style.textContent = `.level-back-button{position:fixed;top:auto;bottom:52px;left:18px;z-index:20;padding:9px 12px;border:1px solid rgba(121,247,255,.5);background:rgba(5,7,17,.9);color:#79f7ff;cursor:pointer;font:0.58rem var(--font-display,"Orbitron",sans-serif);letter-spacing:.08rem;text-transform:uppercase}.level-back-button:hover,.level-back-button:focus-visible{background:rgba(121,247,255,.18);box-shadow:0 0 18px rgba(121,247,255,.32);outline:none}@media(max-width:560px){.level-back-button{top:auto;bottom:46px;left:14px}.level-header{padding-top:64px}.level-shell{padding-bottom:96px}.level-meta{flex-wrap:wrap;max-width:100%}.level-meta strong,.level-meta span{overflow-wrap:anywhere}.level-description,.system-transmission p,.puzzle-status{overflow-wrap:anywhere}}`;
