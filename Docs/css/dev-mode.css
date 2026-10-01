@@ -55,6 +55,83 @@
   font-size: 0.9rem;
 }
 
+.face-id-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: rgba(2, 4, 12, 0.72);
+  backdrop-filter: blur(8px);
+}
+.face-id-card {
+  display: grid;
+  width: min(320px, calc(100vw - 32px));
+  gap: 9px;
+  padding: 26px 24px 20px;
+  border: 1px solid rgba(121, 247, 255, 0.52);
+  background: rgba(5, 7, 17, 0.98);
+  box-shadow: 0 0 36px rgba(121, 247, 255, 0.24);
+  text-align: center;
+}
+.face-id-logo {
+  display: grid;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 4px;
+  place-items: center;
+  border: 1px solid var(--cyan, #79f7ff);
+  border-radius: 50%;
+  color: var(--cyan, #79f7ff);
+  font-size: 2rem;
+  box-shadow: 0 0 24px rgba(121, 247, 255, 0.32);
+  animation: face-id-pulse 1.8s ease-in-out infinite;
+}
+.face-id-kicker {
+  color: #ff9cda;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.12rem;
+}
+.face-id-card strong {
+  color: #edfaff;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.08rem;
+}
+.face-id-status {
+  min-height: 38px;
+  margin: 2px 0 8px;
+  color: #9cabc4;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+.face-id-modal.is-error .face-id-status {
+  color: #ff9bb0;
+}
+.face-id-cancel {
+  justify-self: center;
+  padding: 8px 14px;
+  border: 1px solid rgba(121, 247, 255, 0.38);
+  background: transparent;
+  color: #79f7ff;
+  cursor: pointer;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.56rem;
+  letter-spacing: 0.1rem;
+}
+.face-id-cancel:hover,
+.face-id-cancel:focus-visible {
+  background: rgba(121, 247, 255, 0.12);
+  outline: none;
+}
+@keyframes face-id-pulse {
+  50% {
+    box-shadow: 0 0 34px rgba(255, 72, 184, 0.42);
+    color: #ff9cda;
+  }
+}
+
 .dev-mode-panel {
   position: absolute;
   left: 0;

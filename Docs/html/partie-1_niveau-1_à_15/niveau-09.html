@@ -28,22 +28,32 @@
     </header>
     <main class="level-shell" data-level-start="1" data-level-end="15">
       <section class="level-intro">
-        <p class="eyebrow">Fragment 009 // Miroirs simples</p>
+        <p class="eyebrow">Fragment 009 // Constellation fracturée</p>
         <h1 data-i18n="title">Miroirs simples</h1>
         <p class="level-description" data-i18n="description">
-          Oriente les miroirs pour guider le rayon vers le récepteur.
+          Recompose la constellation en activant les étoiles dans le bon ordre.
         </p>
+        <div class="system-transmission" aria-live="polite">
+          <span class="system-label" data-i18n="systemLabel">SYSTEM://LOG</span>
+          <p id="systemMessage" data-i18n="systemInput">
+            SYSTEME:: CONSTELLATION EN ATTENTE // SEQUENCE A RECALER
+          </p>
+        </div>
       </section>
-      <section class="puzzle-panel mirror-board">
+      <section class="puzzle-panel constellation-board">
         <div class="panel-heading">
           <h2 data-i18n="puzzleTitle">Réflexion holographique</h2>
           <span class="progress-readout" id="progressReadout">0 / 3</span>
         </div>
-        <div class="mirror-field" id="mirrorField">
-          <button class="mirror" data-mirror="0" type="button">╱</button
-          ><button class="mirror" data-mirror="1" type="button">╱</button
-          ><button class="mirror" data-mirror="2" type="button">╱</button
-          ><span class="receiver">◉</span>
+        <div class="constellation-field" id="constellationField">
+          <svg
+            class="constellation-lines"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <polyline points=""></polyline>
+          </svg>
         </div>
         <div class="puzzle-actions">
           <button
@@ -54,7 +64,7 @@
             DÉMARRER LE PUZZLE
           </button>
           <p class="puzzle-status" id="puzzleStatus">
-            Aligne les trois miroirs.
+            Active les étoiles dans l'ordre indiqué par la console.
           </p>
           <button
             class="next-level-button"
@@ -75,7 +85,7 @@
     </footer>
     <script src="../../js/translations.js"></script>
     <script src="../../js/save-system.js"></script>
-    <script src="../../js/partie-1_niveau-1_à_15.js?v=10"></script>
+    <script src="../../js/partie-1_niveau-1_à_15.js?v=15"></script>
     <script src="../../js/dev-mode.js"></script>
   </body>
 </html>

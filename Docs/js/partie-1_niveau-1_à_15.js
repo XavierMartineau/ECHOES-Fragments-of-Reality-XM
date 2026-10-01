@@ -6,7 +6,7 @@ const levelScriptByMarker = [
   [".pattern-board", 6],
   [".gate-board", 7],
   [".advanced-sort-board", 8],
-  [".mirror-board", 9],
+  [".constellation-board", 9],
   [".illusion-board", 10],
 ];
 function ensureLevelFooter() {
@@ -1327,6 +1327,302 @@ if (activeLevelScript) {
   });
 }
 
+function installAdvancedLevel(levelNumber, buildPuzzle) {
+  const startButton = document.getElementById("startPuzzleButton");
+  const resetButton = document.getElementById("resetButton");
+  const nextButton = document.getElementById("nextLevelButton");
+  const status = document.getElementById("puzzleStatus");
+  const systemMessage = document.getElementById("systemMessage");
+  const levelCopy =
+    window.translations?.[
+      localStorage.getItem("echoes-language") === "en" ? "en" : "fr"
+    ]?.[`level${levelNumber}`];
+  const language =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const accountId = window.EchoesSave?.getCurrentUser?.() || "guest";
+  const progressKey = `echoes-completed-levels-${encodeURIComponent(accountId)}`;
+  const completedLevels = new Set([
+    ...JSON.parse(localStorage.getItem("echoes-completed-levels") || "[]"),
+    ...JSON.parse(localStorage.getItem(progressKey) || "[]"),
+  ]);
+  let started = false;
+  let completed = false;
+
+  const setStatus = (message, state = "") => {
+    status.textContent = message;
+    status.className = `puzzle-status${state ? ` ${state}` : ""}`;
+    if (systemMessage) systemMessage.textContent = message.toUpperCase();
+  };
+
+  const finish = () => {
+    completed = true;
+    completedLevels.add(levelNumber);
+    const levels = [...completedLevels].sort((a, b) => a - b);
+    localStorage.setItem(progressKey, JSON.stringify(levels));
+    window.EchoesSave?.saveProgress({
+      currentPage: `level-${levelNumber}`,
+      currentLevel: levelNumber,
+      completedLevels: levels,
+    });
+    nextButton.hidden = false;
+    startButton.disabled = true;
+    setStatus(levelCopy?.statusSuccess || "Level stabilized.", "success");
+    nextButton.focus();
+  };
+
+  const reset = () => {
+    started = false;
+    completed = false;
+    startButton.disabled = false;
+    nextButton.hidden = true;
+    setStatus(levelCopy?.statusReady || "Ready.");
+    buildPuzzle({ started: () => started, finish, setStatus });
+  };
+
+  startButton.addEventListener("click", () => {
+    started = true;
+    startButton.disabled = true;
+    setStatus(levelCopy?.statusReady || "Choose a target.");
+  });
+  resetButton.addEventListener("click", reset);
+  nextButton.addEventListener("click", () => {
+    window.location.href = `niveau-${String(levelNumber + 1).padStart(2, "0")}.html`;
+  });
+
+  const wasCompleted = completedLevels.has(levelNumber);
+  reset();
+  if (wasCompleted) {
+    completed = true;
+    startButton.disabled = true;
+    nextButton.hidden = false;
+  }
+}
+
+if (document.querySelector(".advanced-sort-board")) {
+  installAdvancedLevel(8, ({ started, finish, setStatus }) => {
+    const grid = document.getElementById("colorSortGrid");
+    const colors = [
+      ["cyan", "CYAN"],
+      ["violet", "VIOLET"],
+      ["green", "VERT"],
+      ["pink", "ROSE"],
+      ["yellow", "JAUNE"],
+      ["blue", "BLEU"],
+    ];
+    let selected = null;
+    let placed = 0;
+    grid.innerHTML = `
+      <div class="color-sort-targets">
+        ${colors.map(([color, label]) => `<button class="color-target color-${color}" data-color="${color}" type="button">${label}</button>`).join("")}
+      </div>
+      <div class="color-sort-pieces">
+        ${[...colors]
+          .reverse()
+          .map(
+            ([color, label]) =>
+              `<button class="color-symbol color-${color}" data-color="${color}" type="button" draggable="true">${label}</button>`,
+          )
+          .join("")}
+      </div>
+    `;
+    const targets = [...grid.querySelectorAll(".color-target")];
+    const pieces = [...grid.querySelectorAll(".color-symbol")];
+    const update = () => {
+      grid
+        .closest(".puzzle-panel")
+        .querySelector(".progress-readout").textContent = `${placed} / 6`;
+    };
+    const choose = (piece) => {
+      if (!started() || piece.disabled) return;
+      pieces.forEach((item) => item.classList.remove("is-selected"));
+      selected = piece;
+      piece.classList.add("is-selected");
+    };
+    const place = (target) => {
+      if (!started() || !selected || target.classList.contains("is-filled"))
+        return;
+      if (selected.dataset.color !== target.dataset.color) {
+        setStatus("Mauvaise couleur. Essaie une autre zone.", "error");
+        return;
+      }
+      target.classList.add("is-filled");
+      selected.disabled = true;
+      selected.classList.remove("is-selected");
+      selected = null;
+      placed += 1;
+      update();
+      if (placed === colors.length) finish();
+    };
+    pieces.forEach((piece) => {
+      piece.addEventListener("click", () => choose(piece));
+      piece.addEventListener("dragstart", (event) => {
+        choose(piece);
+        event.dataTransfer.setData("text/plain", piece.dataset.color);
+      });
+    });
+    targets.forEach((target) => {
+      target.addEventListener("click", () => place(target));
+      target.addEventListener("dragover", (event) => event.preventDefault());
+      target.addEventListener("drop", (event) => {
+        event.preventDefault();
+        place(target);
+      });
+    });
+    update();
+  });
+}
+
+if (document.querySelector(".constellation-board")) {
+  installAdvancedLevel(9, ({ started, finish, setStatus }) => {
+    const field = document.getElementById("constellationField");
+    const sequences = [
+      [2, 5, 1, 6],
+      [4, 1, 6, 3],
+      [3, 6, 2, 5],
+    ];
+    const positions = [
+      [18, 28],
+      [42, 18],
+      [76, 26],
+      [24, 70],
+      [57, 78],
+      [82, 62],
+    ];
+    let round = 0;
+    let step = 0;
+    let acceptingInput = true;
+    field.innerHTML = `
+      <svg class="constellation-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <polyline points=""></polyline>
+      </svg>
+      ${positions.map((_, index) => `<button class="constellation-star star-${index + 1}" data-star="${index + 1}" type="button" aria-label="Etoile ${index + 1}"><span>${String(index + 1).padStart(2, "0")}</span></button>`).join("")}
+      <div class="constellation-sequence-display">
+        <span>SEQUENCE ACTIVE</span>
+        <strong></strong>
+      </div>
+    `;
+    const stars = [...field.querySelectorAll(".constellation-star")];
+    const line = field.querySelector("polyline");
+    const sequenceDisplay = field.querySelector(
+      ".constellation-sequence-display strong",
+    );
+    const panel = field.closest(".puzzle-panel");
+    const progress = panel.querySelector(".progress-readout");
+
+    const render = () => {
+      const activeStars = sequences[round]
+        .slice(0, step)
+        .map((value) => positions[value - 1]);
+      line.setAttribute(
+        "points",
+        activeStars.map(([x, y]) => `${x},${y}`).join(" "),
+      );
+      stars.forEach((star) => {
+        const value = Number(star.dataset.star);
+        star.classList.toggle(
+          "is-active",
+          activeStars.some(
+            ([x, y]) =>
+              positions[value - 1][0] === x && positions[value - 1][1] === y,
+          ),
+        );
+      });
+      field.dataset.round = String(round + 1);
+    };
+
+    const showSequence = () => {
+      const sequence = sequences[round]
+        .map((value) => String(value).padStart(2, "0"))
+        .join(" > ");
+      sequenceDisplay.textContent = sequence;
+      setStatus(`Manche ${round + 1} / 3 : active la séquence ${sequence}.`);
+    };
+
+    const nextRound = () => {
+      round += 1;
+      step = 0;
+      acceptingInput = true;
+      render();
+      showSequence();
+    };
+
+    stars.forEach((star) => {
+      star.addEventListener("click", () => {
+        if (!started() || !acceptingInput) return;
+        const selected = Number(star.dataset.star);
+        const expected = sequences[round][step];
+        if (selected !== expected) {
+          step = 0;
+          render();
+          setStatus("Mauvaise étoile. La séquence recommence.", "error");
+          return;
+        }
+        step += 1;
+        star.classList.add("is-confirmed");
+        render();
+        if (step < sequences[round].length) {
+          setStatus(`Étoile ${step} / ${sequences[round].length} confirmée.`);
+          return;
+        }
+        acceptingInput = false;
+        round += 1;
+        progress.textContent = `${round} / 3`;
+        if (round === sequences.length) {
+          finish();
+          return;
+        }
+        setStatus(
+          `Manche ${round} / 3 réussie. Nouvelle constellation en préparation...`,
+          "success",
+        );
+        window.setTimeout(() => {
+          step = 0;
+          acceptingInput = true;
+          render();
+          showSequence();
+        }, 700);
+      });
+    });
+    progress.textContent = "0 / 3";
+    render();
+    showSequence();
+  });
+}
+
+if (document.querySelector(".illusion-board")) {
+  installAdvancedLevel(10, ({ started, finish, setStatus }) => {
+    const grid = document.getElementById("illusionGrid");
+    const realIndex = Math.floor(Math.random() * 6);
+    grid.innerHTML = Array.from(
+      { length: 6 },
+      (_, index) =>
+        `<button class="hologram ${index === realIndex ? "is-real" : ""}" data-index="${index}" type="button" aria-label="Hologramme ${index + 1}"><span>◇</span></button>`,
+    ).join("");
+    const holograms = [...grid.querySelectorAll(".hologram")];
+    const update = (solved) => {
+      grid
+        .closest(".puzzle-panel")
+        .querySelector(".progress-readout").textContent = solved
+        ? "1 / 1"
+        : "0 / 1";
+    };
+    holograms.forEach((hologram) => {
+      hologram.addEventListener("click", () => {
+        if (!started()) return;
+        if (Number(hologram.dataset.index) === realIndex) {
+          hologram.classList.add("is-found");
+          update(true);
+          finish();
+        } else {
+          hologram.classList.add("is-flicker");
+          setStatus("Illusion détectée. Cherche l'hologramme réel.", "error");
+        }
+      });
+    });
+    update(false);
+  });
+}
+
 // ============================================================================
 // NIVEAUX 6 A 15 // BLOCS RESERVES
 // Ces sections documentent les prochains scripts de la dimension Initiation.
@@ -1338,15 +1634,6 @@ if (activeLevelScript) {
 
 // ===== NIVEAU 7 // PORTE LUMINEUSE =====
 // TODO: ajouter la séquence d'activation de la porte holographique.
-
-// ===== NIVEAU 8 // TRI DES SYMBOLES =====
-// TODO: ajouter le tri des symboles par forme et par couleur.
-
-// ===== NIVEAU 9 // MIROIRS SIMPLES =====
-// TODO: ajouter la rotation des miroirs et le guidage du rayon lumineux.
-
-// ===== NIVEAU 10 // PREMIERE ILLUSION =====
-// TODO: ajouter l'identification du véritable hologramme.
 
 // ===== NIVEAU 11 // DOUBLE ALIGNEMENT =====
 // TODO: ajouter l'alignement synchronise des deux lignes holographiques.

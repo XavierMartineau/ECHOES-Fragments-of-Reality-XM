@@ -1458,6 +1458,438 @@ body.level-corruption .level-footer {
   display: none !important;
 }
 
+.advanced-sort-board .color-sort-grid {
+  display: grid;
+  gap: 26px;
+  min-height: 390px;
+  padding: 38px 28px;
+  align-content: center;
+  background:
+    radial-gradient(circle at center, rgba(20, 63, 92, 0.25), transparent 62%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    );
+}
+.color-sort-targets,
+.color-sort-pieces {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(40px, 1fr));
+  gap: 10px;
+}
+.color-sort-targets::before,
+.color-sort-pieces::before {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.54rem;
+  letter-spacing: 0.1rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+.color-sort-targets::before {
+  content: "TARGET COLORS";
+}
+.color-sort-pieces::before {
+  content: "SYMBOLS TO SORT";
+}
+.color-target,
+.color-symbol {
+  min-height: 58px;
+  border: 1px solid currentColor;
+  background: rgba(5, 7, 17, 0.72);
+  color: var(--cyan);
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.52rem;
+  letter-spacing: 0.04rem;
+  transition: 0.2s ease;
+}
+.color-symbol {
+  border-style: solid;
+  box-shadow: 0 0 14px currentColor;
+  cursor: grab;
+}
+.color-target:hover,
+.color-target:focus-visible,
+.color-symbol:hover,
+.color-symbol.is-selected {
+  transform: translateY(-4px);
+  outline: none;
+  box-shadow: 0 0 22px currentColor;
+}
+.color-target.is-filled {
+  border-color: var(--success);
+  background: rgba(128, 255, 207, 0.16);
+  color: var(--success);
+}
+.color-symbol:disabled {
+  cursor: default;
+  opacity: 0.28;
+}
+.color-cyan {
+  color: var(--cyan);
+}
+.color-violet {
+  color: var(--violet);
+}
+.color-green {
+  color: var(--success);
+}
+.color-pink {
+  color: #ff70c2;
+}
+.color-yellow {
+  color: #ffd166;
+}
+.color-blue {
+  color: #48b0ff;
+}
+
+.mirror-board .mirror-field {
+  position: relative;
+  min-height: 390px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at center, rgba(20, 63, 92, 0.25), transparent 62%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    );
+}
+.mirror {
+  position: absolute;
+  z-index: 2;
+  width: 82px;
+  height: 82px;
+  border: 2px solid var(--violet);
+  background: rgba(179, 108, 255, 0.16);
+  color: #fff;
+  cursor: pointer;
+  font-size: 2.8rem;
+  transform: rotate(var(--mirror-angle, 0deg));
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 0 22px rgba(179, 108, 255, 0.48);
+}
+.mirror-glyph {
+  display: block;
+  line-height: 1;
+}
+.mirror-number {
+  position: absolute;
+  right: 7px;
+  bottom: 5px;
+  color: rgba(237, 250, 255, 0.72);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.48rem;
+  letter-spacing: 0.06rem;
+}
+.mirror-0 {
+  top: 42%;
+  left: 17%;
+}
+.mirror-1 {
+  top: 23%;
+  left: 46%;
+}
+.mirror-2 {
+  top: 52%;
+  left: 70%;
+}
+.mirror-projector {
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.mirror-projector-line {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-dasharray: 1.5 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 0.8;
+  filter: drop-shadow(0 0 5px var(--cyan));
+  transition: points 0.25s ease;
+}
+.mirror-field[data-round="2"] .mirror-projector-line {
+  stroke: var(--violet);
+  filter: drop-shadow(0 0 5px var(--violet));
+}
+.mirror-field[data-round="3"] .mirror-projector-line {
+  stroke: var(--success);
+  filter: drop-shadow(0 0 5px var(--success));
+}
+.mirror:hover,
+.mirror:focus-visible,
+.mirror.is-correct {
+  border-color: var(--success);
+  outline: none;
+  box-shadow: 0 0 26px rgba(128, 255, 207, 0.7);
+}
+.mirror-ray {
+  position: absolute;
+  top: 50%;
+  right: 12%;
+  left: 7%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--cyan),
+    var(--violet),
+    var(--success)
+  );
+  box-shadow: 0 0 14px var(--cyan);
+  transform: rotate(-8deg);
+}
+.mirror-field .receiver {
+  position: absolute;
+  top: 44%;
+  right: 7%;
+  z-index: 2;
+  color: var(--success);
+  font-size: 2.2rem;
+  text-shadow: 0 0 18px var(--success);
+}
+
+.constellation-field {
+  position: relative;
+  min-height: 390px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at center, rgba(20, 63, 92, 0.25), transparent 62%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    );
+}
+.constellation-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.constellation-lines polyline {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 0.8;
+  filter: drop-shadow(0 0 5px var(--cyan));
+  transition: points 0.2s ease;
+}
+.constellation-field[data-round="2"] .constellation-lines polyline {
+  stroke: var(--violet);
+  filter: drop-shadow(0 0 5px var(--violet));
+}
+.constellation-field[data-round="3"] .constellation-lines polyline {
+  stroke: var(--success);
+  filter: drop-shadow(0 0 5px var(--success));
+}
+.constellation-sequence-display {
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+  left: 16px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border: 1px solid rgba(121, 247, 255, 0.28);
+  background: rgba(5, 7, 17, 0.82);
+  color: var(--muted);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.54rem;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+.constellation-sequence-display strong {
+  color: var(--cyan);
+  font-size: 0.72rem;
+  letter-spacing: 0.14rem;
+}
+.constellation-field[data-round="2"] .constellation-sequence-display strong {
+  color: var(--violet);
+}
+.constellation-field[data-round="3"] .constellation-sequence-display strong {
+  color: var(--success);
+}
+.constellation-star {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border: 1px solid var(--cyan);
+  border-radius: 50%;
+  background: rgba(121, 247, 255, 0.1);
+  color: var(--text);
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.65rem;
+  transform: translate(-50%, -50%);
+  transition: 0.2s ease;
+  box-shadow: 0 0 18px rgba(121, 247, 255, 0.28);
+}
+.constellation-star::before {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 16px currentColor;
+  content: "";
+}
+.constellation-star span {
+  position: relative;
+  top: 19px;
+  color: var(--muted);
+  font-size: 0.5rem;
+}
+.constellation-star:hover,
+.constellation-star:focus-visible,
+.constellation-star.is-active,
+.constellation-star.is-confirmed {
+  border-color: var(--success);
+  background: rgba(128, 255, 207, 0.18);
+  color: var(--success);
+  outline: none;
+  box-shadow: 0 0 28px rgba(128, 255, 207, 0.68);
+}
+.star-1 {
+  top: 28%;
+  left: 18%;
+}
+.star-2 {
+  top: 18%;
+  left: 42%;
+}
+.star-3 {
+  top: 26%;
+  left: 76%;
+}
+.star-4 {
+  top: 70%;
+  left: 24%;
+}
+.star-5 {
+  top: 78%;
+  left: 57%;
+}
+.star-6 {
+  top: 62%;
+  left: 82%;
+}
+
+@media (max-width: 560px) {
+  .constellation-star {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+.illusion-board .illusion-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(80px, 1fr));
+  gap: 16px;
+  min-height: 390px;
+  padding: 42px 50px;
+  align-content: center;
+  background:
+    radial-gradient(circle at center, rgba(20, 63, 92, 0.25), transparent 62%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    );
+}
+.hologram {
+  min-height: 92px;
+  border: 1px solid rgba(121, 247, 255, 0.64);
+  background: rgba(121, 247, 255, 0.08);
+  color: var(--cyan);
+  cursor: pointer;
+  font-size: 3.4rem;
+  text-shadow: 0 0 18px currentColor;
+  transition: 0.2s ease;
+}
+.hologram:hover,
+.hologram:focus-visible {
+  transform: scale(1.04);
+  outline: none;
+  box-shadow: 0 0 24px currentColor;
+}
+.hologram.is-real {
+  color: var(--success);
+}
+.hologram.is-flicker {
+  animation: hologram-flicker 0.35s steps(2, end) 2;
+  border-color: var(--danger);
+  color: var(--danger);
+}
+.hologram.is-found {
+  background: rgba(128, 255, 207, 0.2);
+  box-shadow: 0 0 32px var(--success);
+}
+@keyframes hologram-flicker {
+  50% {
+    opacity: 0.25;
+    transform: translateX(5px);
+  }
+}
+
+@media (max-width: 560px) {
+  .color-sort-targets,
+  .color-sort-pieces {
+    grid-template-columns: repeat(3, minmax(54px, 1fr));
+  }
+  .advanced-sort-board .color-sort-grid,
+  .illusion-board .illusion-grid {
+    padding-inline: 16px;
+  }
+  .mirror-0 {
+    left: 9%;
+  }
+  .mirror-1 {
+    left: 39%;
+  }
+  .mirror-2 {
+    left: 68%;
+  }
+}
+
 .level-footer {
   position: fixed;
   right: 0;
