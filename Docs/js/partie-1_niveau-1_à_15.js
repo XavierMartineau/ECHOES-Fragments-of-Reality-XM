@@ -8,11 +8,10 @@ const levelScriptByMarker = [
   [".advanced-sort-board", 8],
   [".constellation-board", 9],
   [".color-sequence-board", 10],
-  [".double-alignment-board", 11],
+  [".geometry-board", 11],
   [".cross-light-board", 12],
   [".fractal-board", 13],
   [".combined-sequence-board", 14],
-  [".energy-board", 15],
 ];
 function ensureLevelFooter() {
   let footer = document.querySelector(".level-footer");
@@ -211,17 +210,6 @@ if (activeLevelScript) {
       statusReady: "Observe puis reproduis la combinaison.",
       statusSuccess: "Les signaux combines sont stabilises.",
       statusError: "Signal incorrect. La sequence recommence.",
-      reset: "Reinitialiser",
-      save: "SAUVEGARDER",
-    },
-    15: {
-      level: "NIVEAU 15",
-      title: "Trois points d'energie",
-      description: "Active les trois points d'energie pour ouvrir le seuil.",
-      puzzleTitle: "Seuil d'activation",
-      statusReady: "Active les trois points dans l'ordre indique.",
-      statusSuccess: "Le seuil d'initiation est ouvert.",
-      statusError: "Activation incorrecte. Recommence la sequence.",
       reset: "Reinitialiser",
       save: "SAUVEGARDER",
     },
@@ -1907,14 +1895,141 @@ function installOrderedGridLevel(
   });
 }
 
-if (document.querySelector(".double-alignment-board")) {
-  installOrderedGridLevel(
-    11,
-    "doubleAlignmentGrid",
-    "double-alignment",
-    6,
-    [0, 3, 1, 4, 2, 5],
-  );
+if (document.querySelector(".geometry-board")) {
+  installAdvancedLevel(11, ({ started, finish, setStatus }) => {
+    const example = document.querySelector("#geometryExample polyline");
+    const workspace = document.getElementById("geometryWorkspace");
+    const validateButton = document.getElementById("validateStructureButton");
+    const progress = workspace
+      .closest(".puzzle-panel")
+      .querySelector(".progress-readout");
+    const rounds = [
+      [
+        [20, 76],
+        [50, 20],
+        [80, 76],
+      ],
+      [
+        [22, 24],
+        [78, 24],
+        [78, 76],
+        [22, 76],
+      ],
+      [
+        [50, 16],
+        [82, 40],
+        [70, 78],
+        [30, 78],
+        [18, 40],
+      ],
+      [
+        [50, 12],
+        [84, 32],
+        [72, 76],
+        [28, 76],
+        [16, 32],
+        [50, 50],
+      ],
+    ];
+    let round = 0;
+    let points = [];
+    let connected = [];
+    let dragging = null;
+    let roundComplete = false;
+    const distance = (first, second) =>
+      Math.hypot(first[0] - second[0], first[1] - second[1]);
+    const render = () => {
+      example.setAttribute(
+        "points",
+        rounds[round].map(([x, y]) => `${x},${y}`).join(" "),
+      );
+      const line = workspace.querySelector("polyline");
+      line.setAttribute(
+        "points",
+        connected.map((index) => points[index].join(",")).join(" "),
+      );
+      workspace.querySelectorAll(".geometry-point").forEach((point) => {
+        const index = Number(point.dataset.index);
+        point.style.left = `${points[index][0]}%`;
+        point.style.top = `${points[index][1]}%`;
+        point.classList.toggle("is-connected", connected.includes(index));
+      });
+      workspace.dataset.round = String(round + 1);
+    };
+    const startRound = () => {
+      const scrambledPositions = [
+        [86, 18],
+        [16, 78],
+        [72, 82],
+        [28, 18],
+        [92, 56],
+        [52, 88],
+      ];
+      points = rounds[round].map((_, index) => scrambledPositions[index]);
+      connected = points.map((_, index) => index);
+      roundComplete = false;
+      workspace.innerHTML = `<svg viewBox="0 0 100 100" aria-hidden="true"><polyline></polyline></svg>${points.map((_, index) => `<button class="geometry-point" data-index="${index}" type="button" aria-label="Point ${index + 1}">${index + 1}</button>`).join("")}`;
+      workspace.querySelectorAll(".geometry-point").forEach((point) => {
+        point.addEventListener("pointerdown", (event) => {
+          if (!started()) return;
+          dragging = {
+            index: Number(point.dataset.index),
+            pointerId: event.pointerId,
+          };
+          point.setPointerCapture(event.pointerId);
+        });
+        point.addEventListener("pointermove", (event) => {
+          if (!dragging || dragging.index !== Number(point.dataset.index))
+            return;
+          const rect = workspace.getBoundingClientRect();
+          points[dragging.index] = [
+            Math.max(
+              4,
+              Math.min(96, ((event.clientX - rect.left) / rect.width) * 100),
+            ),
+            Math.max(
+              4,
+              Math.min(88, ((event.clientY - rect.top) / rect.height) * 100),
+            ),
+          ];
+          render();
+        });
+        point.addEventListener("pointerup", () => {
+          dragging = null;
+        });
+      });
+      render();
+    };
+    const validateRound = () => {
+      if (!started() || roundComplete) return;
+      const accurate = points.every(
+        (pointValue, pointIndex) =>
+          distance(pointValue, rounds[round][pointIndex]) < 15,
+      );
+      if (!accurate) {
+        setStatus(
+          "Les points doivent être plus proches de la forme exemple.",
+          "error",
+        );
+        return;
+      }
+      roundComplete = true;
+      round += 1;
+      progress.textContent = `${round} / 4`;
+      if (round === rounds.length) {
+        finish();
+        return;
+      }
+      setStatus(
+        `Forme ${round} / 4 réussie. Nouvelle forme chargée.`,
+        "success",
+      );
+      window.setTimeout(startRound, 650);
+    };
+    validateButton.addEventListener("click", validateRound);
+    progress.textContent = "0 / 4";
+    startRound();
+  });
 }
 if (document.querySelector(".cross-light-board")) {
   installOrderedGridLevel(
@@ -1933,9 +2048,6 @@ if (document.querySelector(".combined-sequence-board")) {
     5,
     [0, 2, 4, 1, 3],
   );
-}
-if (document.querySelector(".energy-board")) {
-  installOrderedGridLevel(15, "energyGrid", "energy", 3, [1, 2, 0]);
 }
 
 if (document.querySelector(".fractal-board")) {

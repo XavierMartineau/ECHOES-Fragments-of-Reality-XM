@@ -1490,6 +1490,24 @@ body.level-corruption .level-footer {
   color: var(--text);
   outline: none;
 }
+.validate-structure-button {
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  border: 1px solid var(--success);
+  background: rgba(128, 255, 207, 0.1);
+  color: var(--success);
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.58rem;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+.validate-structure-button:hover,
+.validate-structure-button:focus-visible {
+  background: rgba(128, 255, 207, 0.24);
+  box-shadow: 0 0 18px rgba(128, 255, 207, 0.34);
+  outline: none;
+}
 .next-level-button {
   flex: 0 0 auto;
   padding: 10px 14px;
@@ -2325,6 +2343,192 @@ body.level-corruption .level-footer {
   }
   .mirror-2 {
     left: 68%;
+  }
+}
+
+.geometry-board .geometry-example {
+  position: relative;
+  min-height: 130px;
+  padding: 12px 24px 18px;
+  border-bottom: 1px solid rgba(121, 247, 255, 0.18);
+  background: rgba(121, 247, 255, 0.04);
+}
+.geometry-example > span {
+  display: block;
+  color: var(--muted);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.54rem;
+  letter-spacing: 0.1rem;
+  text-align: center;
+}
+.geometry-example svg,
+.geometry-workspace svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.geometry-example polyline,
+.geometry-workspace polyline {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.2;
+  filter: drop-shadow(0 0 5px var(--cyan));
+}
+.geometry-workspace {
+  position: relative;
+  min-height: 360px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at center, rgba(20, 63, 92, 0.25), transparent 62%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    );
+}
+.geometry-point {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 2px solid var(--cyan);
+  border-radius: 50%;
+  background: rgba(5, 7, 17, 0.9);
+  color: #ffffff;
+  cursor: grab;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.65rem;
+  transform: translate(-50%, -50%);
+  touch-action: none;
+  transition:
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+.geometry-point:hover,
+.geometry-point:focus-visible,
+.geometry-point.is-connected {
+  border-color: var(--success);
+  background: rgba(128, 255, 207, 0.24);
+  box-shadow: 0 0 24px rgba(128, 255, 207, 0.76);
+  cursor: grabbing;
+  outline: none;
+}
+.geometry-workspace[data-round="2"] polyline {
+  stroke: var(--violet);
+  filter: drop-shadow(0 0 5px var(--violet));
+}
+.geometry-workspace[data-round="3"] polyline {
+  stroke: #ff70c2;
+  filter: drop-shadow(0 0 5px #ff70c2);
+}
+.geometry-workspace[data-round="4"] polyline {
+  stroke: var(--success);
+  filter: drop-shadow(0 0 5px var(--success));
+}
+
+.future-puzzle-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(54px, 1fr));
+  gap: 14px;
+  min-height: 390px;
+  padding: 48px 34px;
+  align-content: center;
+  background:
+    radial-gradient(circle at center, rgba(20, 63, 92, 0.25), transparent 62%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    );
+}
+.future-puzzle-button {
+  min-height: 70px;
+  border: 1px solid var(--tone-color, var(--cyan));
+  border-radius: 6px;
+  background: var(--tone-background, rgba(121, 247, 255, 0.12));
+  color: #ffffff;
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.68rem;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 0 16px var(--tone-glow, rgba(121, 247, 255, 0.3));
+}
+.future-puzzle-button:hover,
+.future-puzzle-button:focus-visible,
+.future-puzzle-button.is-correct {
+  transform: translateY(-5px);
+  background: var(--tone-active, rgba(128, 255, 207, 0.35));
+  outline: none;
+  box-shadow: 0 0 28px var(--tone-glow, rgba(128, 255, 207, 0.7));
+}
+.future-puzzle-button.is-error {
+  border-color: var(--danger);
+  animation: puzzle-shake 0.25s linear 2;
+}
+.tone-1 {
+  --tone-color: #79f7ff;
+  --tone-background: rgba(25, 170, 205, 0.3);
+  --tone-active: rgba(121, 247, 255, 0.48);
+  --tone-glow: rgba(121, 247, 255, 0.65);
+}
+.tone-2 {
+  --tone-color: #b36cff;
+  --tone-background: rgba(132, 61, 210, 0.3);
+  --tone-active: rgba(179, 108, 255, 0.48);
+  --tone-glow: rgba(179, 108, 255, 0.65);
+}
+.tone-3 {
+  --tone-color: #ff70c2;
+  --tone-background: rgba(210, 66, 145, 0.3);
+  --tone-active: rgba(255, 112, 194, 0.48);
+  --tone-glow: rgba(255, 112, 194, 0.65);
+}
+.tone-4 {
+  --tone-color: #ffd166;
+  --tone-background: rgba(201, 145, 39, 0.3);
+  --tone-active: rgba(255, 209, 102, 0.48);
+  --tone-glow: rgba(255, 209, 102, 0.65);
+}
+.tone-5 {
+  --tone-color: #80ffcf;
+  --tone-background: rgba(44, 180, 137, 0.3);
+  --tone-active: rgba(128, 255, 207, 0.48);
+  --tone-glow: rgba(128, 255, 207, 0.65);
+}
+.fractal-grid {
+  grid-template-columns: repeat(3, minmax(72px, 1fr));
+}
+.fractal-item {
+  min-height: 84px;
+  border-radius: 0;
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+@media (max-width: 560px) {
+  .future-puzzle-grid {
+    grid-template-columns: repeat(3, minmax(62px, 1fr));
+    padding-inline: 18px;
+  }
+  .fractal-grid {
+    grid-template-columns: repeat(3, minmax(62px, 1fr));
   }
 }
 

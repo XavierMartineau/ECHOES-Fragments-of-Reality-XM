@@ -3,20 +3,75 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="../../assets/images/echoes-favicon.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../../assets/images/echoes-favicon.svg"
+    />
     <title>ECHOES - Partie 1</title>
     <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_15.css" />
     <link rel="stylesheet" href="../../css/fonts.css" />
   </head>
   <body>
-    <main class="level-shell" data-level-part="1" data-level-range="1-15">
-      <p>Partie 1 // Initiation</p>
-      <h1>Niveau à construire</h1>
+    <header class="level-header">
+      <a class="brand" href="../../../index.html">ECHOES</a>
+      <div class="level-meta">
+        <span>PARTIE 1 // INITIATION</span>
+        <div class="level-progress" id="levelProgress"></div>
+        <strong>NIVEAU 13</strong>
+      </div>
+      <button class="save-game-button" id="saveGameButton" type="button">
+        SAUVEGARDER
+      </button>
+    </header>
+    <main class="level-shell">
+      <section class="level-intro">
+        <p class="eyebrow">Fragment 013 // Glissement holographique</p>
+        <h1>Glissement holographique</h1>
+        <p class="level-description">
+          Reconstruis le motif fractal dans les neuf panneaux.
+        </p>
+        <div class="system-transmission" aria-live="polite">
+          <span class="system-label">SYSTEM://LOG</span>
+          <p id="systemMessage">SYSTEME:: MOTIF FRACTAL EN ATTENTE</p>
+        </div>
+      </section>
+      <section class="puzzle-panel fractal-board">
+        <div class="panel-heading">
+          <h2>Motif fractal</h2>
+          <span class="progress-readout" id="progressReadout">0 / 5</span>
+        </div>
+        <div class="future-puzzle-grid fractal-grid" id="fractalGrid"></div>
+        <div class="puzzle-actions">
+          <button
+            class="sequence-start-button"
+            id="startPuzzleButton"
+            type="button"
+          >
+            DÉMARRER LE PUZZLE
+          </button>
+          <p class="puzzle-status" id="puzzleStatus">
+            Active les panneaux du motif lumineux.
+          </p>
+          <button
+            class="next-level-button"
+            id="nextLevelButton"
+            type="button"
+            hidden
+          >
+            CONTINUER</button
+          ><button class="reset-button" id="resetButton" type="button">
+            Réinitialiser
+          </button>
+        </div>
+      </section>
     </main>
-    <script src="../../js/partie-1_niveau-1_à_15.js"></script>
+    <footer class="level-footer">
+      <span>ÉCHO // INITIATION ACTIVE</span><span>13 / 90</span>
+    </footer>
+    <script src="../../js/translations.js"></script>
+    <script src="../../js/save-system.js"></script>
+    <script src="../../js/partie-1_niveau-1_à_15.js?v=16"></script>
     <script src="../../js/dev-mode.js"></script>
   </body>
 </html>
-
-
-

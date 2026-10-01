@@ -3,20 +3,92 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="../../assets/images/echoes-favicon.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../../assets/images/echoes-favicon.svg"
+    />
     <title>ECHOES - Partie 1</title>
     <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_15.css" />
     <link rel="stylesheet" href="../../css/fonts.css" />
   </head>
   <body>
-    <main class="level-shell" data-level-part="1" data-level-range="1-15">
-      <p>Partie 1 // Initiation</p>
-      <h1>Niveau à construire</h1>
+    <header class="level-header">
+      <a class="brand" href="../../../index.html">ECHOES</a>
+      <div class="level-meta">
+        <span>PARTIE 1 // INITIATION</span>
+        <div class="level-progress" id="levelProgress"></div>
+        <strong>NIVEAU 11</strong>
+      </div>
+      <button class="save-game-button" id="saveGameButton" type="button">
+        SAUVEGARDER
+      </button>
+    </header>
+    <main class="level-shell">
+      <section class="level-intro">
+        <p class="eyebrow">Fragment 011 // Formes géométriques</p>
+        <h1>Construction géométrique</h1>
+        <p class="level-description">
+          Déplace les points et relie-les pour reproduire chaque forme.
+        </p>
+        <div class="system-transmission" aria-live="polite">
+          <span class="system-label">SYSTEM://LOG</span>
+          <p id="systemMessage">SYSTEME:: FORME EXEMPLE EN ATTENTE</p>
+        </div>
+      </section>
+      <section class="puzzle-panel geometry-board">
+        <div class="panel-heading">
+          <h2>Atelier de formes</h2>
+          <span class="progress-readout" id="progressReadout">0 / 4</span>
+        </div>
+        <div class="geometry-example" id="geometryExample">
+          <span>FORME À REPRODUIRE</span
+          ><svg viewBox="0 0 100 100" aria-hidden="true">
+            <polyline></polyline>
+          </svg>
+        </div>
+        <div class="geometry-workspace" id="geometryWorkspace">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <polyline></polyline>
+          </svg>
+        </div>
+        <div class="puzzle-actions">
+          <button
+            class="sequence-start-button"
+            id="startPuzzleButton"
+            type="button"
+          >
+            DÉMARRER LE PUZZLE
+          </button>
+          <p class="puzzle-status" id="puzzleStatus">
+            Déplace les points : la ligne les relie automatiquement.
+          </p>
+          <button
+            class="validate-structure-button"
+            id="validateStructureButton"
+            type="button"
+          >
+            VALIDER LA STRUCTURE
+          </button>
+          <button
+            class="next-level-button"
+            id="nextLevelButton"
+            type="button"
+            hidden
+          >
+            CONTINUER</button
+          ><button class="reset-button" id="resetButton" type="button">
+            Réinitialiser
+          </button>
+        </div>
+      </section>
     </main>
-    <script src="../../js/partie-1_niveau-1_à_15.js"></script>
+    <footer class="level-footer">
+      <span>ÉCHO // INITIATION ACTIVE</span><span>11 / 90</span>
+    </footer>
+    <script src="../../js/translations.js?v=3"></script>
+    <script src="../../js/save-system.js"></script>
+    <script src="../../js/partie-1_niveau-1_à_15.js?v=23"></script>
     <script src="../../js/dev-mode.js"></script>
   </body>
 </html>
-
-
-
