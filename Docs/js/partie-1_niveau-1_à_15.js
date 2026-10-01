@@ -25,7 +25,7 @@ const levelScriptByMarker = [
   [".constellation-board", 9],
   [".color-sequence-board", 10],
   [".pairs-board", 11],
-  [".cross-light-board", 12],
+  [".ordering-board", 12],
   [".fractal-board", 13],
   [".combined-sequence-board", 14],
 ];
@@ -2081,9 +2081,102 @@ if (document.querySelector(".combined-sequence-board")) {
   );
 }
 
-// Level 13 // Fractal pattern: toggle the five target panels in the 3x3 grid.
+// Level 13 // Ordering workshop: select eight cards according to four rules.
+if (document.querySelector(".ordering-board")) {
+  installAdvancedLevel(12, ({ started, finish, setStatus, registerStart }) => {
+    const grid = document.getElementById("orderingGrid");
+    const ruleLabel = document.getElementById("orderingRule");
+    const progress = grid
+      .closest(".puzzle-panel")
+      .querySelector(".progress-readout");
+    const rounds = [
+      {
+        rule: "Nombres : du plus petit au plus grand",
+        items: [7, 2, 9, 1, 5, 3, 8, 4],
+        sort: (value) => value,
+      },
+      {
+        rule: "Dates : de la plus ancienne à la plus récente",
+        items: [2024, 2019, 2022, 2015, 2020, 2018, 2023, 2016],
+        sort: (value) => value,
+      },
+      {
+        rule: "Mots : ordre alphabétique",
+        items: [
+          "NEON",
+          "AUBE",
+          "RIFT",
+          "ECHO",
+          "ORBIT",
+          "FLUX",
+          "SONDE",
+          "DELTA",
+        ],
+        sort: (value) => value,
+      },
+      {
+        rule: "Valeurs : du plus petit au plus grand",
+        items: [42, 17, 63, 8, 35, 71, 24, 56],
+        sort: (value) => value,
+      },
+    ];
+    let round = 0;
+    let step = 0;
+    let order = [];
+
+    const loadRound = () => {
+      const current = rounds[round];
+      order = [...current.items].sort((first, second) =>
+        current.sort(first) > current.sort(second) ? 1 : -1,
+      );
+      step = 0;
+      ruleLabel.textContent = `MANCHE ${round + 1} / 4 // ${current.rule}`;
+      progress.textContent = `${round} / 4`;
+      grid.innerHTML = current.items
+        .map(
+          (item, index) =>
+            `<button class="ordering-card" data-value="${String(item)}" type="button"><span>${String(item)}</span></button>`,
+        )
+        .join("");
+      grid.querySelectorAll(".ordering-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          if (!started() || card.classList.contains("is-correct")) return;
+          const expected = String(order[step]);
+          if (card.dataset.value !== expected) {
+            card.classList.add("is-error");
+            setStatus(`Mauvais choix. Cherche ${expected} ensuite.`, "error");
+            window.setTimeout(() => card.classList.remove("is-error"), 450);
+            return;
+          }
+          card.classList.add("is-correct");
+          step += 1;
+          setStatus(`Carte ${step} / 8 correcte.`);
+          if (step === order.length) {
+            round += 1;
+            progress.textContent = `${round} / 4`;
+            if (round === rounds.length) {
+              finish();
+              return;
+            }
+            setStatus(
+              `Manche ${round} / 4 réussie. Nouvelle règle chargée.`,
+              "success",
+            );
+            window.setTimeout(loadRound, 650);
+          }
+        });
+      });
+    };
+    registerStart(() =>
+      setStatus(`Clique les 8 cartes en bas selon : ${rounds[round].rule}.`),
+    );
+    loadRound();
+  });
+}
+
+// Level 13 // Fractal pattern: toggle the five target panels in a 3x3 grid.
 if (document.querySelector(".fractal-board")) {
-  installAdvancedLevel(13, ({ started, finish, setStatus }) => {
+  installAdvancedLevel(13, ({ started, finish, setStatus, registerStart }) => {
     const grid = document.getElementById("fractalGrid");
     const target = new Set([0, 2, 4, 6, 8]);
     const active = new Set();
@@ -2100,6 +2193,12 @@ if (document.querySelector(".fractal-board")) {
       button.addEventListener("click", () => {
         if (!started()) return;
         const index = Number(button.dataset.index);
+        if (!target.has(index)) {
+          button.classList.add("is-error");
+          setStatus("Ce panneau ne fait pas partie du motif cible.", "error");
+          window.setTimeout(() => button.classList.remove("is-error"), 450);
+          return;
+        }
         if (active.has(index)) active.delete(index);
         else active.add(index);
         button.classList.toggle("is-correct", active.has(index));
@@ -2115,6 +2214,7 @@ if (document.querySelector(".fractal-board")) {
         setStatus(`${correct} / ${target.size} panneaux corrects.`);
       });
     });
+    registerStart(() => setStatus("Active les panneaux 01, 03, 05, 07 et 09."));
     progress.textContent = "0 / 5";
   });
 }

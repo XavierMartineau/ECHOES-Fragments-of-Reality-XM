@@ -26,22 +26,25 @@
     </header>
     <main class="level-shell">
       <section class="level-intro">
-        <p class="eyebrow">Fragment 012 // Lumière croisée</p>
-        <h1>Lumière croisée</h1>
+        <p class="eyebrow">Fragment 012 // Ordre fractal</p>
+        <h1>Ordre fractal</h1>
         <p class="level-description">
-          Active les intersections lumineuses dans le bon ordre.
+          Classe les huit cartes selon la règle affichée à chaque manche.
         </p>
         <div class="system-transmission" aria-live="polite">
           <span class="system-label">SYSTEM://LOG</span>
-          <p id="systemMessage">SYSTEME:: RESEAU DE LUMIERE EN ATTENTE</p>
+          <p id="systemMessage">SYSTEME:: ORDRE DES CARTES EN ATTENTE</p>
         </div>
       </section>
-      <section class="puzzle-panel cross-light-board">
+      <section class="puzzle-panel ordering-board">
         <div class="panel-heading">
-          <h2>Réseau de lumière</h2>
-          <span class="progress-readout" id="progressReadout">0 / 5</span>
+          <h2>Classement fractal</h2>
+          <span class="progress-readout" id="progressReadout">0 / 4</span>
         </div>
-        <div class="future-puzzle-grid" id="crossLightGrid"></div>
+        <div class="ordering-rule" id="orderingRule">
+          Ordre à suivre : nombres croissants
+        </div>
+        <div class="ordering-grid" id="orderingGrid"></div>
         <div class="puzzle-actions">
           <button
             class="sequence-start-button"
@@ -51,7 +54,7 @@
             DÉMARRER LE PUZZLE
           </button>
           <p class="puzzle-status" id="puzzleStatus">
-            Active les intersections dans l’ordre indiqué.
+            Clique les huit cartes en bas dans l’ordre demandé.
           </p>
           <button
             class="next-level-button"
@@ -69,10 +72,9 @@
     <footer class="level-footer">
       <span>ÉCHO // INITIATION ACTIVE</span><span>12 / 90</span>
     </footer>
-    <script src="../../js/translations.js"></script>
+    <script src="../../js/translations.js?v=7"></script>
     <script src="../../js/save-system.js"></script>
-    <script src="../../js/partie-1_niveau-1_à_15.js?v=16"></script>
+    <script src="../../js/partie-1_niveau-1_à_15.js?v=25"></script>
     <script src="../../js/dev-mode.js"></script>
   </body>
 </html>
-

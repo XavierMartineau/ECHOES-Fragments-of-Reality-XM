@@ -14,6 +14,10 @@
 .level-intro,
 .puzzle-panel,
 .level-footer {
+  animation: level-enter 0.7s cubic-bezier(0.2, 0.8, 0.4, 1) both;
+}
+
+.level-footer {
   animation: level-enter 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 .level-intro {
@@ -2740,6 +2744,41 @@ body.level-corruption .level-footer {
   border-radius: 0;
   clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 }
+.fractal-guide {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(121, 247, 255, 0.16);
+  background: rgba(5, 7, 17, 0.56);
+  color: var(--muted);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.54rem;
+  letter-spacing: 0.07rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+.fractal-guide strong {
+  color: var(--cyan);
+  font-size: 0.68rem;
+  letter-spacing: 0.12rem;
+}
+.fractal-mini-pattern {
+  display: grid;
+  grid-template-columns: repeat(3, 13px);
+  gap: 4px;
+}
+.fractal-mini-pattern i {
+  width: 13px;
+  height: 13px;
+  border: 1px solid rgba(156, 171, 196, 0.55);
+  background: rgba(156, 171, 196, 0.12);
+}
+.fractal-mini-pattern i.is-target {
+  border-color: var(--cyan);
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+}
 @media (max-width: 560px) {
   .future-puzzle-grid {
     grid-template-columns: repeat(3, minmax(62px, 1fr));
@@ -2747,6 +2786,145 @@ body.level-corruption .level-footer {
   }
   .fractal-grid {
     grid-template-columns: repeat(3, minmax(62px, 1fr));
+  }
+  .ordering-rule {
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(121, 247, 255, 0.18);
+    background: rgba(5, 7, 17, 0.62);
+    color: var(--cyan);
+    font-family: var(--font-display, "Orbitron", sans-serif);
+    font-size: 0.62rem;
+    letter-spacing: 0.07rem;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .ordering-grid {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(54px, 1fr));
+    gap: 12px;
+    min-height: 330px;
+    padding: 48px 24px;
+    align-content: center;
+    background:
+      radial-gradient(
+        circle at center,
+        rgba(20, 63, 92, 0.25),
+        transparent 62%
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 39px,
+        rgba(121, 247, 255, 0.05) 40px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0 39px,
+        rgba(121, 247, 255, 0.05) 40px
+      );
+  }
+  .ordering-card {
+    min-height: 94px;
+    border: 2px solid rgba(237, 250, 255, 0.75);
+    border-radius: 6px;
+    background: rgba(5, 7, 17, 0.9);
+    color: #ffffff;
+    cursor: pointer;
+    font-family: var(--font-display, "Orbitron", sans-serif);
+    font-size: 0.7rem;
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .ordering-card:hover,
+  .ordering-card:focus-visible {
+    transform: translateY(-5px);
+    background: rgba(121, 247, 255, 0.14);
+    outline: none;
+    box-shadow: 0 0 22px rgba(121, 247, 255, 0.4);
+  }
+  .ordering-card.is-correct {
+    border-color: var(--success);
+    background: rgba(128, 255, 207, 0.24);
+    box-shadow: 0 0 24px rgba(128, 255, 207, 0.7);
+    color: var(--success);
+  }
+  .ordering-card.is-error {
+    border-color: var(--danger);
+    animation: puzzle-shake 0.25s linear 2;
+  }
+  @media (max-width: 700px) {
+    .ordering-grid {
+      grid-template-columns: repeat(4, minmax(64px, 1fr));
+    }
+  }
+}
+
+.ordering-rule {
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(121, 247, 255, 0.18);
+  background: rgba(5, 7, 17, 0.62);
+  color: var(--cyan);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.62rem;
+  letter-spacing: 0.07rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+.ordering-grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(54px, 1fr));
+  gap: 12px;
+  min-height: 330px;
+  padding: 48px 24px;
+  align-content: center;
+  background:
+    radial-gradient(circle at center, rgba(20, 63, 92, 0.25), transparent 62%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    );
+}
+.ordering-card {
+  min-height: 94px;
+  border: 2px solid rgba(237, 250, 255, 0.75);
+  border-radius: 6px;
+  background: rgba(5, 7, 17, 0.9);
+  color: #ffffff;
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.7rem;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.ordering-card:hover,
+.ordering-card:focus-visible {
+  transform: translateY(-5px);
+  background: rgba(121, 247, 255, 0.14);
+  outline: none;
+  box-shadow: 0 0 22px rgba(121, 247, 255, 0.4);
+}
+.ordering-card.is-correct {
+  border-color: var(--success);
+  background: rgba(128, 255, 207, 0.24);
+  box-shadow: 0 0 24px rgba(128, 255, 207, 0.7);
+  color: var(--success);
+}
+.ordering-card.is-error {
+  border-color: var(--danger);
+  animation: puzzle-shake 0.25s linear 2;
+}
+@media (max-width: 700px) {
+  .ordering-grid {
+    grid-template-columns: repeat(4, minmax(64px, 1fr));
   }
 }
 
