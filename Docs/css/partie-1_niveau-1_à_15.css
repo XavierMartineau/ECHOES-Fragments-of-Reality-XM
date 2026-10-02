@@ -2815,6 +2815,18 @@ body.level-corruption .level-footer {
     text-align: center;
     text-transform: uppercase;
   }
+  .ordering-round,
+  .ordering-rule-detail {
+    display: block;
+  }
+  .ordering-rule-detail {
+    margin-top: 8px;
+    color: #ffffff;
+    font-size: 1.05em;
+    font-weight: 900;
+    letter-spacing: 0.08rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.45);
+  }
   .ordering-grid {
     display: grid;
     gap: 22px;
@@ -3639,6 +3651,45 @@ body.level-corruption .level-footer {
     }
   }
 
+  .ordering-card.ordering-word-card,
+  .ordering-placed-card.ordering-word-card {
+    font-size: clamp(0.7rem, 1.25vw, 0.9rem) !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.01rem;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .ordering-card.ordering-word-card,
+  .ordering-placed-card.ordering-word-card {
+    font-size: clamp(0.7rem, 1.25vw, 0.9rem) !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.01rem;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .ordering-rule .ordering-round,
+  .ordering-rule .ordering-rule-detail {
+    display: block;
+  }
+  .ordering-rule .ordering-rule-detail {
+    margin-top: 8px;
+    color: #ffffff;
+    font-size: 1.05em;
+    font-weight: 900;
+    letter-spacing: 0.08rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.45);
+  }
+  .ordering-card.ordering-word-card,
+  .ordering-placed-card.ordering-word-card {
+    font-size: clamp(0.7rem, 1.25vw, 0.9rem);
+    font-weight: 800;
+    letter-spacing: 0.01rem;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
   .brand {
     font-size: 0.86rem;
     letter-spacing: 0.16rem;
@@ -3674,9 +3725,23 @@ body.level-corruption .level-footer {
   }
 }
 
+.ordering-rule .ordering-round,
+.ordering-rule .ordering-rule-detail {
+  display: block !important;
+}
+.ordering-rule .ordering-rule-detail {
+  margin-top: 8px !important;
+  color: #ffffff !important;
+  font-size: 1.05em !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.08rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.45);
+}
+
 /* Keep the six-card Level 12 layout after the legacy responsive rules. */
 .ordering-card-tray {
   grid-template-columns: repeat(6, minmax(54px, 1fr));
+  margin-bottom: 26px;
 }
 .ordering-slot-tray {
   grid-template-columns: repeat(6, minmax(54px, 1fr));
@@ -3692,6 +3757,9 @@ body.level-corruption .level-footer {
   .ordering-card-tray,
   .ordering-slot-tray {
     grid-template-columns: repeat(3, minmax(64px, 1fr));
+  }
+  .ordering-card-tray {
+    margin-bottom: 22px;
   }
   .ordering-card,
   .ordering-slot {

@@ -1465,6 +1465,7 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
   let started = false;
   let completed = false;
   let onStart = () => {};
+  let resetCurrentRound = null;
 
   const setStatus = (message, state = "") => {
     status.textContent = message;
@@ -1491,6 +1492,7 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
   const reset = () => {
     started = false;
     completed = false;
+    resetCurrentRound = null;
     startButton.disabled = false;
     nextButton.hidden = true;
     resetButton.classList.remove("reset-error");
@@ -1503,6 +1505,9 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
       registerStart: (callback) => {
         onStart = callback;
       },
+      registerReset: (callback) => {
+        resetCurrentRound = callback;
+      },
     });
   };
 
@@ -1512,7 +1517,14 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
     setStatus(levelCopy?.statusReady || "Choose a target.");
     onStart();
   });
-  resetButton.addEventListener("click", reset);
+  resetButton.addEventListener("click", () => {
+    if (started && resetCurrentRound) {
+      resetButton.classList.remove("reset-error");
+      resetCurrentRound();
+      return;
+    }
+    reset();
+  });
   nextButton.addEventListener("click", () => {
     window.location.href = `niveau-${String(levelNumber + 1).padStart(2, "0")}.html`;
   });
@@ -1538,18 +1550,29 @@ if (document.querySelector(".advanced-sort-board")) {
       ["yellow", "JAUNE"],
       ["blue", "BLEU"],
     ];
+    let visualColors;
+    do {
+      visualColors = [...colors].sort(() => Math.random() - 0.5);
+    } while (
+      visualColors.some(
+        ([color], index) => color === colors[index][0],
+      )
+    );
+    const visualColorByName = Object.fromEntries(
+      colors.map(([color], index) => [color, visualColors[index][0]]),
+    );
     let selected = null;
     let placed = 0;
     grid.innerHTML = `
       <div class="color-sort-targets">
-        ${colors.map(([color, label]) => `<button class="color-target color-${color}" data-color="${color}" type="button">${label}</button>`).join("")}
+        ${colors.map(([color, label]) => `<button class="color-target color-${visualColorByName[color]}" data-color="${color}" type="button">${label}</button>`).join("")}
       </div>
       <div class="color-sort-pieces">
         ${[...colors]
           .reverse()
           .map(
             ([color, label]) =>
-              `<button class="color-symbol color-${color}" data-color="${color}" type="button" draggable="true">${label}</button>`,
+              `<button class="color-symbol color-${visualColorByName[color]}" data-color="${color}" type="button" draggable="true">${label}</button>`,
           )
           .join("")}
       </div>
@@ -2084,7 +2107,7 @@ if (document.querySelector(".combined-sequence-board")) {
 
 // Level 12 // Ordering workshop: select six cards and deposit them in order.
 if (document.querySelector(".ordering-board")) {
-  installAdvancedLevel(12, ({ started, finish, setStatus, registerStart }) => {
+  installAdvancedLevel(12, ({ started, finish, setStatus, registerStart, registerReset }) => {
     const cardCount = 6;
     const grid = document.getElementById("orderingGrid");
     const ruleLabel = document.getElementById("orderingRule");
@@ -2144,20 +2167,29 @@ if (document.querySelector(".ordering-board")) {
       "QUASAR",
       "RELAIS",
       "VORTEX",
-      "LUMIERE",
+      "LUMEN",
       "PHASE",
-      "PORTAIL",
+      "PORTE",
       "COSMOS",
-      "ECLIPSE",
-      "HORIZON",
+      "ECLAT",
+      "ZENITH",
     ];
     const makeWordRound = (index) => {
       const descending = index % 2 === 1;
+      const selectedWords = [];
+      const usedInitials = new Set();
+      for (const word of shuffle(wordBank)) {
+        const initial = word.charAt(0).toLocaleUpperCase("fr-FR");
+        if (usedInitials.has(initial)) continue;
+        selectedWords.push(word);
+        usedInitials.add(initial);
+        if (selectedWords.length === cardCount) break;
+      }
       return {
         rule: descending
           ? "Mots : ordre alphabétique inverse"
           : "Mots : ordre alphabétique",
-        items: shuffle(wordBank).slice(0, cardCount),
+        items: selectedWords,
         compare: descending
           ? (first, second) => second.localeCompare(first)
           : (first, second) => first.localeCompare(second),
@@ -2182,9 +2214,13 @@ if (document.querySelector(".ordering-board")) {
       const current = rounds[round];
       const items = current.items;
       order = [...items].sort(current.compare);
+      const isWordRound = current.rule.startsWith("Mots");
       step = 0;
       selectedCard = null;
-      ruleLabel.textContent = `MANCHE ${round + 1} / 4 // ${current.rule}`;
+      ruleLabel.innerHTML = `
+        <span class="ordering-round">MANCHE ${round + 1} / 4</span>
+        <strong class="ordering-rule-detail">${current.rule}</strong>
+      `;
       progress.textContent = `${round} / 4`;
       const shuffledItems = [...items].sort(() => Math.random() - 0.5);
       grid.innerHTML = `
@@ -2192,7 +2228,7 @@ if (document.querySelector(".ordering-board")) {
           ${shuffledItems
             .map(
               (item) =>
-                `<button class="ordering-card" data-value="${String(item)}" type="button"><span>${String(item)}</span></button>`,
+                `<button class="ordering-card${isWordRound ? " ordering-word-card" : ""}" data-value="${String(item)}" type="button" ${isWordRound ? 'style="font-size: 0.72rem; font-weight: 800;"' : ""}><span>${String(item)}</span></button>`,
             )
             .join("")}
         </div>
@@ -2228,6 +2264,33 @@ if (document.querySelector(".ordering-board")) {
           )
           .forEach((item) => cardTray.appendChild(item));
       };
+      const removeCardFromSlot = (value) => {
+        const sourceSlot = slots.find((item) => item.dataset.value === value);
+        if (!sourceSlot) return;
+        sourceSlot.replaceChildren();
+        sourceSlot.classList.remove("is-filled", "is-correct", "is-error");
+        delete sourceSlot.dataset.value;
+      };
+      const selectPlacedCard = (placedCard) => {
+        if (!started()) return;
+        const value = placedCard.textContent;
+        const card = cards.find((item) => item.dataset.value === value);
+        if (!card) return;
+        removeCardFromSlot(value);
+        card.classList.remove("is-placed");
+        card.disabled = false;
+        cards.forEach((item) => item.classList.remove("is-selected"));
+        slots.forEach((slot) => {
+          if (!slot.classList.contains("is-filled")) {
+            slot.classList.add("is-selectable");
+          }
+        });
+        selectedCard = card;
+        card.classList.add("is-selected");
+        setStatus(
+          `Carte ${value} sélectionnée. Choisis une autre case libre.`,
+        );
+      };
       cards.forEach((card) => {
         card.addEventListener("click", () => {
           if (!started() || card.classList.contains("is-placed")) return;
@@ -2259,8 +2322,33 @@ if (document.querySelector(".ordering-board")) {
           const previousCard = slot.dataset.value;
           if (previousCard) returnCardToTray(previousCard);
           const placedCard = document.createElement("span");
-          placedCard.className = "ordering-placed-card";
+          placedCard.className = `ordering-placed-card${isWordRound ? " ordering-word-card" : ""}`;
+          if (isWordRound) {
+            placedCard.style.fontSize = "0.72rem";
+            placedCard.style.fontWeight = "800";
+          }
           placedCard.textContent = selectedCard.dataset.value;
+          placedCard.draggable = true;
+          placedCard.tabIndex = 0;
+          placedCard.setAttribute("role", "button");
+          placedCard.setAttribute(
+            "aria-label",
+            `Déplacer la carte ${selectedCard.dataset.value}`,
+          );
+          placedCard.addEventListener("click", (event) => {
+            event.stopPropagation();
+            selectPlacedCard(placedCard);
+          });
+          placedCard.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              selectPlacedCard(placedCard);
+            }
+          });
+          placedCard.addEventListener("dragstart", (event) => {
+            selectPlacedCard(placedCard);
+            event.dataTransfer.setData("text/plain", placedCard.textContent);
+          });
           slot.replaceChildren(placedCard);
           slot.classList.remove("is-selectable");
           slot.classList.add("is-filled", "is-correct");
@@ -2306,6 +2394,10 @@ if (document.querySelector(".ordering-board")) {
     registerStart(() =>
       setStatus(`Dépose les ${cardCount} cartes selon : ${rounds[round].rule}.`),
     );
+    registerReset(() => {
+      loadRound();
+      setStatus(`La manche ${round + 1} / 4 recommence. Dépose les ${cardCount} cartes selon : ${rounds[round].rule}.`);
+    });
     loadRound();
   });
 }
