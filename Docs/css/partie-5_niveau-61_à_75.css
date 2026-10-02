@@ -61,3 +61,12 @@
     max-width: 100%;
   }
 }
+
+@media (max-width: 560px) {
+  .level-footer,
+  .level-footer span,
+  .level-footer .site-credit {
+    font-size: 0.42rem;
+    letter-spacing: 0.06rem;
+  }
+}

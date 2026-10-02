@@ -1,5 +1,5 @@
 (() => {
-  // DEV MODE // shared authenticated navigator injected on every page.
+  // DEV MODE // shared navigator injected on every page.
   const script = document.currentScript;
   if (!script) {
     return;
@@ -78,15 +78,6 @@
       <span class="dev-mode-icon" aria-hidden="true">☰</span>
       <span>DEV MODE</span>
     </button>
-    <div class="face-id-modal" hidden role="dialog" aria-modal="true" aria-labelledby="faceIdTitle">
-      <div class="face-id-card">
-        <span class="face-id-logo" aria-hidden="true">◉</span>
-        <span class="face-id-kicker">SECURITY CHECK</span>
-        <strong id="faceIdTitle">FACE ID REQUIRED</strong>
-        <p class="face-id-status">Windows Hello will verify your identity. No camera feed is shown here.</p>
-        <button class="face-id-cancel" type="button">CANCEL</button>
-      </div>
-    </div>
     <div class="dev-mode-panel" id="devModePanel" hidden>
       <div class="dev-mode-heading">
         <div>
@@ -137,125 +128,16 @@
   document.body.appendChild(menu);
 
   const toggle = menu.querySelector(".dev-mode-toggle");
-  const faceIdModal = menu.querySelector(".face-id-modal");
-  const faceIdTitle = menu.querySelector("#faceIdTitle");
-  const faceIdStatus = menu.querySelector(".face-id-status");
-  const faceIdCancel = menu.querySelector(".face-id-cancel");
   const panel = menu.querySelector(".dev-mode-panel");
   const close = menu.querySelector(".dev-mode-close");
   const levelPanel = menu.querySelector(".dev-mode-level-panel");
   const partToggles = menu.querySelectorAll(".dev-mode-part-toggle");
 
-  // Opens or closes the level navigator after authentication.
+  // Opens or closes the level navigator.
   const setOpen = (isOpen) => {
     panel.hidden = !isOpen;
     toggle.setAttribute("aria-expanded", String(isOpen));
     menu.classList.toggle("is-open", isOpen);
-  };
-
-  const toBase64 = (buffer) =>
-    btoa(String.fromCharCode(...new Uint8Array(buffer)))
-      .replace(/\+/g, "-")
-      .replace(/\//g, "_")
-      .replace(/=+$/, "");
-
-  const fromBase64 = (value) => {
-    const padded = value.replace(/-/g, "+").replace(/_/g, "/");
-    return Uint8Array.from(
-      atob(padded + "===".slice((padded.length + 3) % 4)),
-      (char) => char.charCodeAt(0),
-    );
-  };
-
-  const randomBytes = (length) => {
-    const bytes = new Uint8Array(length);
-    crypto.getRandomValues(bytes);
-    return bytes;
-  };
-
-  const setFaceIdStatus = (message, state = "") => {
-    faceIdStatus.textContent = message;
-    faceIdModal.classList.toggle("is-error", state === "error");
-  };
-
-  // Verifies the enrolled Windows Hello credential without opening a camera.
-  const requestFaceId = async () => {
-    faceIdModal.hidden = false;
-    const isLocalDevelopmentHost = /^(localhost|127\.0\.0\.1|::1)$/i.test(
-      window.location.hostname,
-    );
-    const storedCredential = localStorage.getItem("echoes-dev-face-credential");
-    faceIdTitle.textContent = storedCredential
-      ? "VERIFY OWNER FACE"
-      : "OWNER FACE SETUP";
-    setFaceIdStatus(
-      storedCredential
-        ? "Only the enrolled Windows Hello credential can unlock DEV MODE."
-        : "Enroll your face now. Do not use another person for the owner setup.",
-    );
-
-    try {
-      if (
-        (!window.isSecureContext && !isLocalDevelopmentHost) ||
-        !navigator.credentials ||
-        !window.PublicKeyCredential
-      ) {
-        throw new Error(
-          "Face ID requires HTTPS, localhost, or a local Live Server host with Windows Hello.",
-        );
-      }
-
-      let credential;
-      if (storedCredential) {
-        credential = await navigator.credentials.get({
-          publicKey: {
-            challenge: randomBytes(32),
-            allowCredentials: [
-              { id: fromBase64(storedCredential), type: "public-key" },
-            ],
-            userVerification: "required",
-            timeout: 60000,
-          },
-        });
-      } else {
-        credential = await navigator.credentials.create({
-          publicKey: {
-            challenge: randomBytes(32),
-            rp: { name: "ECHOES Developer Mode" },
-            user: {
-              id: randomBytes(16),
-              name: "echoes-owner",
-              displayName: "ECHOES Owner",
-            },
-            pubKeyCredParams: [
-              { type: "public-key", alg: -7 },
-              { type: "public-key", alg: -257 },
-            ],
-            authenticatorSelection: {
-              authenticatorAttachment: "platform",
-              residentKey: "required",
-              userVerification: "required",
-            },
-            timeout: 60000,
-            attestation: "none",
-          },
-        });
-        localStorage.setItem(
-          "echoes-dev-face-credential",
-          toBase64(credential.rawId),
-        );
-      }
-
-      if (!credential) throw new Error("Face ID verification was cancelled.");
-      faceIdModal.hidden = true;
-      setOpen(true);
-    } catch (error) {
-      const browserMessage = String(error.message || "");
-      const message = browserMessage.includes("Public-key credentials")
-        ? "Open ECHOES through Live Server on localhost or HTTPS to use Windows Hello."
-        : browserMessage || "Face ID verification failed.";
-      setFaceIdStatus(message, "error");
-    }
   };
 
   toggle.addEventListener("click", () => {
@@ -263,12 +145,9 @@
       setOpen(false);
       return;
     }
-    requestFaceId();
+    setOpen(true);
   });
   close.addEventListener("click", () => setOpen(false));
-  faceIdCancel.addEventListener("click", () => {
-    faceIdModal.hidden = true;
-  });
 
   // Swaps the level column while keeping the six-part menu compact.
   const showLevels = (partNumber) => {

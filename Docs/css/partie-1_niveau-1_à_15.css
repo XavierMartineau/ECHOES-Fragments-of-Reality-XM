@@ -2996,11 +2996,13 @@ body.level-corruption .level-footer {
     max-width: 100%;
   }
   .level-progress {
-    max-width: 180px;
+    max-width: none;
     justify-content: flex-end;
-    gap: 5px;
+    flex-wrap: nowrap;
+    gap: 4px;
   }
   .level-square {
+    flex: 0 0 auto;
     width: 8px;
     height: 8px;
   }
@@ -3172,8 +3174,13 @@ body.level-corruption .level-footer {
   }
   .level-footer {
     padding: 9px 13px;
-    font-size: 0.5rem;
-    letter-spacing: 0.08rem;
+    font-size: 0.42rem;
+    letter-spacing: 0.06rem;
+  }
+
+  .level-footer span,
+  .level-footer .site-credit {
+    font-size: 0.42rem;
   }
 }
 @keyframes triangle-hover {
@@ -3198,5 +3205,91 @@ body.level-corruption .level-footer {
     top: auto;
     bottom: 46px;
     left: 14px;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    min-width: 0;
+    overflow-x: hidden;
+  }
+
+  .level-header,
+  .level-shell {
+    max-width: 100%;
+  }
+
+  .level-header {
+    align-items: flex-start;
+  }
+
+  .brand,
+  .save-game-button,
+  .sequence-start-button,
+  .next-level-button,
+  .reset-button,
+  .target-slot,
+  .puzzle-piece,
+  .ordering-card {
+    touch-action: manipulation;
+  }
+
+  .save-game-button,
+  .sequence-start-button,
+  .next-level-button,
+  .reset-button {
+    min-height: 44px;
+  }
+
+  .panel-heading {
+    gap: 12px;
+  }
+
+  .panel-heading h2 {
+    overflow-wrap: anywhere;
+  }
+
+  .puzzle-panel {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 380px) {
+  .level-header {
+    gap: 9px;
+  }
+
+  .brand {
+    font-size: 0.86rem;
+    letter-spacing: 0.16rem;
+  }
+
+  .level-meta {
+    font-size: 0.46rem;
+  }
+
+  .level-meta strong {
+    padding: 7px 8px;
+  }
+
+  .level-progress {
+    flex-wrap: nowrap;
+    gap: 4px;
+  }
+
+  .level-square {
+    width: 7px;
+    height: 7px;
+  }
+
+  .ordering-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    padding-inline: 16px;
+  }
+
+  .ordering-card {
+    min-width: 0;
+    min-height: 82px;
   }
 }

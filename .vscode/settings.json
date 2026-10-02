@@ -63,6 +63,10 @@
     "/^node --check docs/js/niveau-03\\.js; node --check docs/js/niveau-04\\.js; node --check docs/js/niveau-05\\.js$/": {
       "approve": true,
       "matchCommandLine": true
+    },
+    "/^node --check \\.\\\\docs\\\\js\\\\dev-mode\\.js$/": {
+      "approve": true,
+      "matchCommandLine": true
     }
   }
 }
