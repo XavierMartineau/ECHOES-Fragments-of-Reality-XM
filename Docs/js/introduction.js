@@ -27,7 +27,9 @@ let spectrumGlitch = 0;
 let targetSpectrumGlitch = 0;
 
 let spectrumSize = 0;
-const spectrumParticles = Array.from({ length: 130 }, (_, particleIndex) => ({
+let lastSpectrumFrame = 0;
+let spectrumVisible = true;
+const spectrumParticles = Array.from({ length: 72 }, (_, particleIndex) => ({
   angle: (particleIndex / 130) * Math.PI * 2,
   radius: 0.54 + Math.random() * 0.42,
   phase: Math.random() * Math.PI * 2,
@@ -63,6 +65,12 @@ function resizeSpectrum() {
 
 // Draws the animated spectrum and its glitch response every frame.
 function drawSpectrum(timestamp) {
+  if (!spectrumVisible) return;
+  if (timestamp - lastSpectrumFrame < 33) {
+    window.requestAnimationFrame(drawSpectrum);
+    return;
+  }
+  lastSpectrumFrame = timestamp;
   const center = spectrumSize / 2;
   const innerRadius = spectrumSize * 0.24;
   const time = timestamp * 0.001;
@@ -85,8 +93,8 @@ function drawSpectrum(timestamp) {
   spectrumContext.fill();
   spectrumContext.shadowBlur = 0;
 
-  for (let barIndex = 0; barIndex < 96; barIndex += 1) {
-    const angle = (barIndex / 96) * Math.PI * 2 - Math.PI / 2;
+  for (let barIndex = 0; barIndex < 64; barIndex += 1) {
+    const angle = (barIndex / 64) * Math.PI * 2 - Math.PI / 2;
     const wave = Math.abs(
       Math.sin(time * (1.2 + (barIndex % 5) * 0.08) + barIndex * 0.48),
     );
@@ -115,8 +123,7 @@ function drawSpectrum(timestamp) {
     );
     spectrumContext.strokeStyle = `hsla(${hue}, 100%, 72%, ${0.04 + spectrumActivity * (0.45 + wave * 0.5)})`;
     spectrumContext.lineWidth = 0.5 + spectrumActivity * (1.5 + wave * 2.2);
-    spectrumContext.shadowColor = `hsla(${hue}, 100%, 66%, 0.8)`;
-    spectrumContext.shadowBlur = 8;
+    spectrumContext.shadowBlur = 0;
     spectrumContext.stroke();
   }
 
@@ -142,8 +149,7 @@ function drawSpectrum(timestamp) {
     );
     const particleHue = spectrumGlitch > 0.2 ? 350 : particle.hue;
     spectrumContext.fillStyle = `hsla(${particleHue}, 100%, 72%, ${spectrumActivity * (0.35 + (pulse + 1) * 0.28)})`;
-    spectrumContext.shadowColor = `hsla(${particle.hue}, 100%, 68%, 0.9)`;
-    spectrumContext.shadowBlur = 8;
+    spectrumContext.shadowBlur = 0;
     spectrumContext.fill();
   });
 
@@ -257,7 +263,9 @@ function typeMessage(messageIndex = 0) {
   );
   line.append(speaker, text);
   dialogueText.appendChild(line);
-  keepDialogueInView();
+  if (characterIndex % 3 === 0 || characterIndex === message.text.length) {
+    keepDialogueInView();
+  }
 
   function typeCharacter() {
     text.textContent += message.text[characterIndex];
@@ -348,6 +356,17 @@ saveGameButton.addEventListener("click", () => {
 });
 
 window.addEventListener("resize", resizeSpectrum);
+const spectrumObserver = new IntersectionObserver(
+  ([entry]) => {
+    spectrumVisible = entry.isIntersecting;
+    if (spectrumVisible) {
+      lastSpectrumFrame = 0;
+      window.requestAnimationFrame(drawSpectrum);
+    }
+  },
+  { threshold: 0.01 },
+);
+spectrumObserver.observe(spectrumCanvas);
 applyLanguage(currentLanguage);
 resizeSpectrum();
 window.requestAnimationFrame(drawSpectrum);
