@@ -2817,11 +2817,9 @@ body.level-corruption .level-footer {
   }
   .ordering-grid {
     display: grid;
-    grid-template-columns: repeat(8, minmax(54px, 1fr));
-    gap: 12px;
-    min-height: 330px;
+    gap: 22px;
+    min-height: 390px;
     padding: 48px 24px;
-    align-content: center;
     background:
       radial-gradient(
         circle at center,
@@ -2839,6 +2837,29 @@ body.level-corruption .level-footer {
         rgba(121, 247, 255, 0.05) 40px
       );
   }
+  .ordering-card-tray,
+  .ordering-slot-tray {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(54px, 1fr));
+    gap: 12px;
+  }
+  .ordering-card-tray {
+    align-items: end;
+  }
+  .ordering-slot-tray {
+    align-items: start;
+  }
+  .ordering-slot-hint {
+    grid-column: 1 / -1;
+    margin-top: -2px;
+    color: rgba(237, 250, 255, 0.7);
+    font-family: var(--font-display, "Orbitron", sans-serif);
+    font-size: 0.52rem;
+    letter-spacing: 0.06rem;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
   .ordering-card {
     min-height: 94px;
     border: 2px solid rgba(237, 250, 255, 0.75);
@@ -2852,6 +2873,46 @@ body.level-corruption .level-footer {
       transform 0.2s ease,
       background 0.2s ease,
       box-shadow 0.2s ease;
+  }
+  .ordering-card-tray .ordering-card:nth-child(8n + 1) {
+    border-color: #ff6b9d;
+    color: #ffb3ca;
+    box-shadow: 0 0 14px rgba(255, 107, 157, 0.3);
+  }
+  .ordering-card-tray .ordering-card:nth-child(8n + 2) {
+    border-color: #ffb347;
+    color: #ffd09b;
+    box-shadow: 0 0 14px rgba(255, 179, 71, 0.3);
+  }
+  .ordering-card-tray .ordering-card:nth-child(8n + 3) {
+    border-color: #ffe66d;
+    color: #fff2ad;
+    box-shadow: 0 0 14px rgba(255, 230, 109, 0.3);
+  }
+  .ordering-card-tray .ordering-card:nth-child(8n + 4) {
+    border-color: #80ffcf;
+    color: #b8ffe5;
+    box-shadow: 0 0 14px rgba(128, 255, 207, 0.3);
+  }
+  .ordering-card-tray .ordering-card:nth-child(8n + 5) {
+    border-color: #65d9ff;
+    color: #b9efff;
+    box-shadow: 0 0 14px rgba(101, 217, 255, 0.3);
+  }
+  .ordering-card-tray .ordering-card:nth-child(8n + 6) {
+    border-color: #9b8cff;
+    color: #d0caff;
+    box-shadow: 0 0 14px rgba(155, 140, 255, 0.3);
+  }
+  .ordering-card-tray .ordering-card:nth-child(8n + 7) {
+    border-color: #d77dff;
+    color: #edc2ff;
+    box-shadow: 0 0 14px rgba(215, 125, 255, 0.3);
+  }
+  .ordering-card-tray .ordering-card:nth-child(8n) {
+    border-color: #72f1d1;
+    color: #b9ffed;
+    box-shadow: 0 0 14px rgba(114, 241, 209, 0.3);
   }
   .ordering-card:hover,
   .ordering-card:focus-visible {
@@ -2870,8 +2931,92 @@ body.level-corruption .level-footer {
     border-color: var(--danger);
     animation: puzzle-shake 0.25s linear 2;
   }
+  .ordering-card.is-selected {
+    border-color: var(--cyan);
+    background: rgba(121, 247, 255, 0.2);
+    box-shadow: 0 0 24px rgba(121, 247, 255, 0.65);
+    transform: translateY(-5px);
+  }
+  .ordering-card.is-placed {
+    opacity: 0.35;
+    cursor: default;
+  }
+  .ordering-slot {
+    min-height: 94px;
+    border: 2px solid rgba(0, 0, 0, 0.95);
+    border-radius: 6px;
+    background: #020308;
+    color: rgba(237, 250, 255, 0.55);
+    cursor: pointer;
+    font-family: var(--font-display, "Orbitron", sans-serif);
+    font-size: 0.7rem;
+    transition:
+      border-color 0.2s ease,
+      background 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .ordering-slot:hover,
+  .ordering-slot:focus-visible {
+    border-color: #ffffff;
+    outline: none;
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.55);
+  }
+  .ordering-slot.is-selectable {
+    border-color: #ffffff;
+    box-shadow:
+      0 0 0 2px rgba(255, 255, 255, 0.18),
+      0 0 18px rgba(255, 255, 255, 0.45);
+  }
+  .ordering-slot.is-selectable:hover,
+  .ordering-slot.is-selectable:focus-visible {
+    border-color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow:
+      0 0 0 3px rgba(255, 255, 255, 0.22),
+      0 0 24px rgba(255, 255, 255, 0.7);
+  }
+  .ordering-slot.is-filled {
+    border-color: var(--success);
+    background: rgba(128, 255, 207, 0.16);
+    color: var(--success);
+    cursor: default;
+  }
+  .ordering-placed-card {
+    display: grid;
+    min-height: 90px;
+    place-items: center;
+  }
+  .ordering-slot.is-error {
+    border-color: var(--danger);
+    background: rgba(255, 20, 55, 0.42);
+    box-shadow:
+      0 0 12px rgba(255, 20, 55, 0.95),
+      0 0 30px rgba(255, 20, 55, 0.75),
+      inset 0 0 18px rgba(255, 20, 55, 0.5);
+    animation: puzzle-shake 0.25s linear 2, red-slot-pulse 0.9s ease-in-out infinite alternate;
+  }
+  .reset-button.reset-error {
+    border-color: #ff1437;
+    background: rgba(255, 20, 55, 0.2);
+    box-shadow:
+      0 0 0 2px rgba(255, 20, 55, 0.3),
+      0 0 18px rgba(255, 20, 55, 0.95),
+      0 0 42px rgba(255, 20, 55, 0.75);
+    color: #ff4763;
+    font-weight: 800;
+    text-shadow: 0 0 10px rgba(255, 20, 55, 0.9);
+    animation: red-slot-pulse 0.8s ease-in-out infinite alternate;
+  }
+  @keyframes red-slot-pulse {
+    from {
+      filter: brightness(1);
+    }
+    to {
+      filter: brightness(1.8);
+    }
+  }
   @media (max-width: 700px) {
-    .ordering-grid {
+    .ordering-card-tray {
       grid-template-columns: repeat(4, minmax(64px, 1fr));
     }
   }
@@ -2943,6 +3088,199 @@ body.level-corruption .level-footer {
   .ordering-grid {
     grid-template-columns: repeat(4, minmax(64px, 1fr));
   }
+}
+
+/* Level 12 uses a card tray above eight dark deposit slots. */
+.ordering-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  min-height: 390px;
+  padding: 48px 24px;
+  align-content: center;
+}
+.ordering-card-tray,
+.ordering-slot-tray {
+  display: grid;
+  gap: 12px;
+}
+.ordering-card-tray {
+  grid-template-columns: repeat(4, minmax(54px, 1fr));
+  align-items: end;
+}
+.ordering-slot-tray {
+  grid-template-columns: repeat(8, minmax(54px, 1fr));
+  align-items: start;
+}
+.ordering-slot-hint {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: max-content;
+  max-width: none;
+  margin-top: -2px;
+  color: rgba(237, 250, 255, 0.7);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.52rem;
+  letter-spacing: 0.06rem;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.ordering-card.is-selected {
+  border-color: var(--cyan);
+  background: rgba(121, 247, 255, 0.2);
+  box-shadow: 0 0 24px rgba(121, 247, 255, 0.65);
+  transform: translateY(-5px);
+}
+.ordering-card.is-placed {
+  opacity: 0.35;
+  cursor: default;
+}
+.ordering-card,
+.ordering-slot {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 48px;
+  min-width: 0;
+  padding: 4px 2px;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+.ordering-slot {
+  border: 2px solid rgba(0, 0, 0, 0.95);
+  border-radius: 6px;
+  background: #020308;
+  color: rgba(237, 250, 255, 0.55);
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.ordering-slot:hover,
+.ordering-slot:focus-visible {
+  border-color: var(--cyan);
+  outline: none;
+  box-shadow: 0 0 18px rgba(121, 247, 255, 0.45);
+}
+.ordering-slot.is-filled {
+  border-color: var(--success);
+  background: rgba(128, 255, 207, 0.16);
+  color: var(--success);
+  cursor: default;
+}
+.ordering-placed-card {
+  display: grid;
+  min-height: 54px;
+  place-items: center;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+.ordering-slot.is-error {
+  border-color: var(--danger);
+  animation: puzzle-shake 0.25s linear 2;
+}
+.ordering-slot.is-error .ordering-placed-card {
+  min-height: 54px;
+  border-radius: 4px;
+  background: rgba(255, 20, 55, 0.5);
+  color: #fff;
+  text-shadow: 0 0 9px #fff;
+  box-shadow:
+    0 0 14px rgba(255, 20, 55, 0.95),
+    inset 0 0 16px rgba(255, 20, 55, 0.65);
+}
+.ordering-card.is-error {
+  border-color: #ff1437;
+  background: rgba(255, 20, 55, 0.55);
+  color: #fff;
+  box-shadow:
+    0 0 14px rgba(255, 20, 55, 0.95),
+    inset 0 0 16px rgba(255, 20, 55, 0.65);
+}
+.reset-button.reset-error {
+  border: 2px solid #ff1437 !important;
+  background: rgba(255, 20, 55, 0.32) !important;
+  color: #fff !important;
+  font-weight: 900 !important;
+  text-shadow: 0 0 10px #fff;
+  box-shadow:
+    0 0 0 2px rgba(255, 20, 55, 0.4),
+    0 0 20px rgba(255, 20, 55, 1),
+    0 0 44px rgba(255, 20, 55, 0.8) !important;
+  animation: red-slot-pulse 0.8s ease-in-out infinite alternate;
+}
+@media (max-width: 700px) {
+  .ordering-grid {
+    min-height: 390px;
+    padding-inline: 16px;
+  }
+  .ordering-card-tray {
+    grid-template-columns: repeat(4, minmax(64px, 1fr));
+  }
+  .ordering-card,
+  .ordering-slot {
+    min-height: 62px;
+    font-size: clamp(0.82rem, 3.2vw, 1.05rem);
+  }
+  .ordering-card {
+    min-height: 48px;
+  }
+  .ordering-placed-card {
+    font-size: clamp(0.82rem, 3.2vw, 1.05rem);
+  }
+  .ordering-slot-hint {
+    font-size: clamp(0.36rem, 1.7vw, 0.52rem);
+  }
+}
+
+.ordering-card-tray .ordering-card:nth-child(8n + 1) {
+  border-color: #ff6b9d;
+  color: #ffb3ca;
+  background: rgba(255, 107, 157, 0.12);
+}
+.ordering-card-tray .ordering-card:nth-child(8n + 2) {
+  border-color: #ffb347;
+  color: #ffd09b;
+  background: rgba(255, 179, 71, 0.12);
+}
+.ordering-card-tray .ordering-card:nth-child(8n + 3) {
+  border-color: #ffe66d;
+  color: #fff2ad;
+  background: rgba(255, 230, 109, 0.12);
+}
+.ordering-card-tray .ordering-card:nth-child(8n + 4) {
+  border-color: #80ffcf;
+  color: #b8ffe5;
+  background: rgba(128, 255, 207, 0.12);
+}
+.ordering-card-tray .ordering-card:nth-child(8n + 5) {
+  border-color: #65d9ff;
+  color: #b9efff;
+  background: rgba(101, 217, 255, 0.12);
+}
+.ordering-card-tray .ordering-card:nth-child(8n + 6) {
+  border-color: #9b8cff;
+  color: #d0caff;
+  background: rgba(155, 140, 255, 0.12);
+}
+.ordering-card-tray .ordering-card:nth-child(8n + 7) {
+  border-color: #d77dff;
+  color: #edc2ff;
+  background: rgba(215, 125, 255, 0.12);
+}
+.ordering-card-tray .ordering-card:nth-child(8n) {
+  border-color: #72f1d1;
+  color: #b9ffed;
+  background: rgba(114, 241, 209, 0.12);
 }
 
 .level-footer {
@@ -3276,6 +3614,31 @@ body.level-corruption .level-footer {
     gap: 9px;
   }
 
+  /* Level 12 uses six cards and six deposit slots. */
+  .ordering-card-tray {
+    grid-template-columns: repeat(3, minmax(54px, 1fr));
+  }
+  .ordering-slot-tray {
+    grid-template-columns: repeat(6, minmax(54px, 1fr));
+  }
+  .ordering-card,
+  .ordering-slot {
+    min-height: 76px;
+  }
+  .ordering-placed-card {
+    min-height: 72px;
+  }
+  @media (max-width: 700px) {
+    .ordering-card-tray,
+    .ordering-slot-tray {
+      grid-template-columns: repeat(3, minmax(64px, 1fr));
+    }
+    .ordering-card,
+    .ordering-slot {
+      min-height: 76px;
+    }
+  }
+
   .brand {
     font-size: 0.86rem;
     letter-spacing: 0.16rem;
@@ -3308,5 +3671,30 @@ body.level-corruption .level-footer {
   .ordering-card {
     min-width: 0;
     min-height: 82px;
+  }
+}
+
+/* Keep the six-card Level 12 layout after the legacy responsive rules. */
+.ordering-card-tray {
+  grid-template-columns: repeat(6, minmax(54px, 1fr));
+}
+.ordering-slot-tray {
+  grid-template-columns: repeat(6, minmax(54px, 1fr));
+}
+.ordering-card,
+.ordering-slot {
+  min-height: 76px;
+}
+.ordering-placed-card {
+  min-height: 72px;
+}
+@media (max-width: 700px) {
+  .ordering-card-tray,
+  .ordering-slot-tray {
+    grid-template-columns: repeat(3, minmax(64px, 1fr));
+  }
+  .ordering-card,
+  .ordering-slot {
+    min-height: 76px;
   }
 }

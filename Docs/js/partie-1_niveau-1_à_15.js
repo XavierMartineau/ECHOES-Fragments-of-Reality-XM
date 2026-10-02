@@ -7,7 +7,7 @@
  * - Level 09: .constellation-board -> three star sequences.
  * - Level 10: .color-sequence-board -> color memory sequence.
  * - Level 11: .pairs-board -> memory matching, 6/12/21 cards.
- * - Level 12: .cross-light-board -> ordered light intersections.
+ * - Level 12: .ordering-board -> ordered card deposits.
  * - Level 13: .fractal-board -> five-panel fractal pattern.
  * - Level 14: .combined-sequence-board -> combined ordered sequence.
  * - Level 15: reserved placeholder; intentionally not constructed yet.
@@ -1493,6 +1493,7 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
     completed = false;
     startButton.disabled = false;
     nextButton.hidden = true;
+    resetButton.classList.remove("reset-error");
     setStatus(levelCopy?.statusReady || "Ready.");
     onStart = () => {};
     buildPuzzle({
@@ -2081,77 +2082,212 @@ if (document.querySelector(".combined-sequence-board")) {
   );
 }
 
-// Level 13 // Ordering workshop: select eight cards according to four rules.
+// Level 12 // Ordering workshop: select six cards and deposit them in order.
 if (document.querySelector(".ordering-board")) {
   installAdvancedLevel(12, ({ started, finish, setStatus, registerStart }) => {
+    const cardCount = 6;
     const grid = document.getElementById("orderingGrid");
     const ruleLabel = document.getElementById("orderingRule");
     const progress = grid
       .closest(".puzzle-panel")
       .querySelector(".progress-readout");
-    const rounds = [
-      {
-        rule: "Nombres : du plus petit au plus grand",
-        items: [7, 2, 9, 1, 5, 3, 8, 4],
-        sort: (value) => value,
-      },
-      {
-        rule: "Dates : de la plus ancienne à la plus récente",
-        items: [2024, 2019, 2022, 2015, 2020, 2018, 2023, 2016],
-        sort: (value) => value,
-      },
-      {
-        rule: "Mots : ordre alphabétique",
-        items: [
-          "NEON",
-          "AUBE",
-          "RIFT",
-          "ECHO",
-          "ORBIT",
-          "FLUX",
-          "SONDE",
-          "DELTA",
-        ],
-        sort: (value) => value,
-      },
-      {
-        rule: "Valeurs : du plus petit au plus grand",
-        items: [42, 17, 63, 8, 35, 71, 24, 56],
-        sort: (value) => value,
-      },
+    const uniqueRandomValues = (count, minimum, maximum) => {
+      const values = new Set();
+      while (values.size < count) {
+        values.add(
+          Math.floor(Math.random() * (maximum - minimum + 1)) + minimum,
+        );
+      }
+      return [...values];
+    };
+    const shuffle = (items) => [...items].sort(() => Math.random() - 0.5);
+    const makeNumericRound = (index) => {
+      const descending = index % 2 === 1;
+      return {
+        rule: descending
+          ? "Nombres : du plus grand au plus petit"
+          : "Nombres : du plus petit au plus grand",
+        items: uniqueRandomValues(cardCount, 1, 100),
+        compare: descending
+          ? (first, second) => second - first
+          : (first, second) => first - second,
+      };
+    };
+    const makeDateRound = (index) => {
+      const descending = index % 2 === 1;
+      return {
+        rule: descending
+          ? "Dates : de la plus récente à la plus ancienne"
+          : "Dates : de la plus ancienne à la plus récente",
+        items: uniqueRandomValues(cardCount, -1900, 2026),
+        compare: descending
+          ? (first, second) => second - first
+          : (first, second) => first - second,
+      };
+    };
+    const wordBank = [
+      "NEON",
+      "AUBE",
+      "RIFT",
+      "ECHO",
+      "ORBIT",
+      "FLUX",
+      "SONDE",
+      "DELTA",
+      "COMETE",
+      "NEXUS",
+      "SIGNAL",
+      "OMBRE",
+      "ASTRE",
+      "MIRAGE",
+      "PULSAR",
+      "QUASAR",
+      "RELAIS",
+      "VORTEX",
+      "LUMIERE",
+      "PHASE",
+      "PORTAIL",
+      "COSMOS",
+      "ECLIPSE",
+      "HORIZON",
     ];
+    const makeWordRound = (index) => {
+      const descending = index % 2 === 1;
+      return {
+        rule: descending
+          ? "Mots : ordre alphabétique inverse"
+          : "Mots : ordre alphabétique",
+        items: shuffle(wordBank).slice(0, cardCount),
+        compare: descending
+          ? (first, second) => second.localeCompare(first)
+          : (first, second) => first.localeCompare(second),
+      };
+    };
+    const roundFactories = [
+      ...Array.from({ length: 12 }, (_, index) => () =>
+        makeNumericRound(index),
+      ),
+      ...Array.from({ length: 10 }, (_, index) => () => makeDateRound(index)),
+      ...Array.from({ length: 10 }, (_, index) => () => makeWordRound(index)),
+    ];
+    const rounds = shuffle(roundFactories)
+      .slice(0, 4)
+      .map((createRound) => createRound());
     let round = 0;
     let step = 0;
     let order = [];
+    let selectedCard = null;
 
     const loadRound = () => {
       const current = rounds[round];
-      order = [...current.items].sort((first, second) =>
-        current.sort(first) > current.sort(second) ? 1 : -1,
-      );
+      const items = current.items;
+      order = [...items].sort(current.compare);
       step = 0;
+      selectedCard = null;
       ruleLabel.textContent = `MANCHE ${round + 1} / 4 // ${current.rule}`;
       progress.textContent = `${round} / 4`;
-      grid.innerHTML = current.items
-        .map(
-          (item, index) =>
-            `<button class="ordering-card" data-value="${String(item)}" type="button"><span>${String(item)}</span></button>`,
-        )
-        .join("");
-      grid.querySelectorAll(".ordering-card").forEach((card) => {
+      const shuffledItems = [...items].sort(() => Math.random() - 0.5);
+      grid.innerHTML = `
+        <div class="ordering-card-tray" aria-label="Cartes disponibles">
+          ${shuffledItems
+            .map(
+              (item) =>
+                `<button class="ordering-card" data-value="${String(item)}" type="button"><span>${String(item)}</span></button>`,
+            )
+            .join("")}
+        </div>
+        <div class="ordering-slot-tray" aria-label="Emplacements de dépôt">
+          ${items
+            .map(
+              (_, index) =>
+                `<button class="ordering-slot" data-slot="${index}" type="button" aria-label="Emplacement ${index + 1}"></button>`,
+            )
+            .join("")}
+          <div class="ordering-slot-hint">
+            Cases noires : dépose ou remplace une carte ici
+          </div>
+        </div>`;
+
+      const cards = [...grid.querySelectorAll(".ordering-card")];
+      const slots = [...grid.querySelectorAll(".ordering-slot")];
+      const cardTray = grid.querySelector(".ordering-card-tray");
+      cards.forEach((card, index) => {
+        card.dataset.startIndex = String(index);
+      });
+      const returnCardToTray = (value) => {
+        const card = cards.find((item) => item.dataset.value === value);
+        if (!card) return;
+        card.classList.remove("is-placed", "is-selected");
+        card.disabled = false;
+        cardTray.appendChild(card);
+        [...cardTray.querySelectorAll(".ordering-card")]
+          .sort(
+            (first, second) =>
+              Number(first.dataset.startIndex) -
+              Number(second.dataset.startIndex),
+          )
+          .forEach((item) => cardTray.appendChild(item));
+      };
+      cards.forEach((card) => {
         card.addEventListener("click", () => {
-          if (!started() || card.classList.contains("is-correct")) return;
-          const expected = String(order[step]);
-          if (card.dataset.value !== expected) {
-            card.classList.add("is-error");
-            setStatus(`Mauvais choix. Cherche ${expected} ensuite.`, "error");
-            window.setTimeout(() => card.classList.remove("is-error"), 450);
+          if (!started() || card.classList.contains("is-placed")) return;
+          cards.forEach((item) => item.classList.remove("is-selected"));
+          slots.forEach((slot) => {
+            if (!slot.classList.contains("is-filled")) {
+              slot.classList.add("is-selectable");
+            }
+          });
+          selectedCard = card;
+          card.classList.add("is-selected");
+          setStatus(
+            `Carte ${card.dataset.value} sélectionnée. Choisis n'importe quelle case libre.`,
+          );
+        });
+      });
+      slots.forEach((slot) => {
+        slot.addEventListener("click", () => {
+          if (!started()) return;
+          if (!selectedCard) {
+            setStatus(
+              slot.classList.contains("is-filled")
+                ? "Sélectionne une autre carte pour remplacer celle-ci."
+                : "Sélectionne d'abord une carte en haut.",
+              "error",
+            );
             return;
           }
-          card.classList.add("is-correct");
-          step += 1;
-          setStatus(`Carte ${step} / 8 correcte.`);
-          if (step === order.length) {
+          const previousCard = slot.dataset.value;
+          if (previousCard) returnCardToTray(previousCard);
+          const placedCard = document.createElement("span");
+          placedCard.className = "ordering-placed-card";
+          placedCard.textContent = selectedCard.dataset.value;
+          slot.replaceChildren(placedCard);
+          slot.classList.remove("is-selectable");
+          slot.classList.add("is-filled", "is-correct");
+          slot.dataset.value = selectedCard.dataset.value;
+          selectedCard.classList.remove("is-selected");
+          selectedCard.classList.add("is-placed");
+          selectedCard.disabled = true;
+          selectedCard = null;
+          slots.forEach((item) => item.classList.remove("is-selectable"));
+          const filledCount = slots.filter((item) => item.dataset.value).length;
+          progress.textContent = `${round} / 4`;
+          setStatus(`Carte déposée : ${filledCount} / ${cardCount}. Remplis toutes les cases.`);
+          if (filledCount === order.length) {
+            const placedOrder = slots.map((item) => item.dataset.value);
+            const isCorrect = placedOrder.every(
+              (value, index) => value === String(order[index]),
+            );
+            if (!isCorrect) {
+              slots.forEach((item) => item.classList.add("is-error"));
+              cards.forEach((item) => item.classList.add("is-error"));
+              resetButton.classList.add("reset-error");
+              setStatus(
+                "Ordre incorrect. Toutes les cases sont rouges : réinitialise pour recommencer.",
+                "error",
+              );
+              return;
+            }
             round += 1;
             progress.textContent = `${round} / 4`;
             if (round === rounds.length) {
@@ -2168,7 +2304,7 @@ if (document.querySelector(".ordering-board")) {
       });
     };
     registerStart(() =>
-      setStatus(`Clique les 8 cartes en bas selon : ${rounds[round].rule}.`),
+      setStatus(`Dépose les ${cardCount} cartes selon : ${rounds[round].rule}.`),
     );
     loadRound();
   });
