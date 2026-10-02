@@ -67,7 +67,7 @@
 
   const levelLink = (level) =>
     new URL(
-      `docs/html/${parts.find((part) => level >= part.start && level <= part.end).folder}/niveau-${String(level).padStart(2, "0")}.html`,
+      `Docs/html/${parts.find((part) => level >= part.start && level <= part.end).folder}/niveau-${String(level).padStart(2, "0")}.html`,
       rootUrl,
     ).href;
 

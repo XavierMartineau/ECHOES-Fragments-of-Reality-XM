@@ -169,7 +169,7 @@ startButton.addEventListener("click", () => {
     startButton.dataset.loading = "false";
     updateStartButton();
     startButton.disabled = false;
-    window.location.href = "docs/html/login.html";
+    window.location.href = "Docs/html/login.html";
   }, 1200);
 });
 
