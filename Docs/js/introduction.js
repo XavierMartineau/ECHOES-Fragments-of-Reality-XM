@@ -1,5 +1,8 @@
 // INTRODUCTION // ECHO spectrum, dialogue flow, language, and mission start.
 const spectrumCanvas = document.getElementById("spectrumCanvas");
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)",
+).matches;
 const isDesktopDevice =
   /Windows|Macintosh|Linux/.test(navigator.userAgent) &&
   !/Android|iPhone|iPad|Mobile/.test(navigator.userAgent);
@@ -29,8 +32,9 @@ let targetSpectrumGlitch = 0;
 let spectrumSize = 0;
 let lastSpectrumFrame = 0;
 let spectrumVisible = true;
+let spectrumAnimationFrame = 0;
 const spectrumParticles = Array.from({ length: 72 }, (_, particleIndex) => ({
-  angle: (particleIndex / 130) * Math.PI * 2,
+  angle: (particleIndex / 72) * Math.PI * 2,
   radius: 0.54 + Math.random() * 0.42,
   phase: Math.random() * Math.PI * 2,
   speed: 0.5 + Math.random() * 1.4,
@@ -65,9 +69,12 @@ function resizeSpectrum() {
 
 // Draws the animated spectrum and its glitch response every frame.
 function drawSpectrum(timestamp) {
+  spectrumAnimationFrame = 0;
   if (!spectrumVisible) return;
   if (timestamp - lastSpectrumFrame < 33) {
-    window.requestAnimationFrame(drawSpectrum);
+    if (!prefersReducedMotion) {
+      spectrumAnimationFrame = window.requestAnimationFrame(drawSpectrum);
+    }
     return;
   }
   lastSpectrumFrame = timestamp;
@@ -187,7 +194,7 @@ function drawSpectrum(timestamp) {
   }
 
   spectrumContext.restore();
-  window.requestAnimationFrame(drawSpectrum);
+  spectrumAnimationFrame = window.requestAnimationFrame(drawSpectrum);
 }
 
 function setSpectrumActivity(isEchoSpeaking, isGlitching = false) {
@@ -358,10 +365,12 @@ saveGameButton.addEventListener("click", () => {
 window.addEventListener("resize", resizeSpectrum);
 const spectrumObserver = new IntersectionObserver(
   ([entry]) => {
-    spectrumVisible = entry.isIntersecting;
+    spectrumVisible = entry.isIntersecting && !prefersReducedMotion;
     if (spectrumVisible) {
       lastSpectrumFrame = 0;
-      window.requestAnimationFrame(drawSpectrum);
+      if (!spectrumAnimationFrame) {
+        spectrumAnimationFrame = window.requestAnimationFrame(drawSpectrum);
+      }
     }
   },
   { threshold: 0.01 },
@@ -369,4 +378,8 @@ const spectrumObserver = new IntersectionObserver(
 spectrumObserver.observe(spectrumCanvas);
 applyLanguage(currentLanguage);
 resizeSpectrum();
-window.requestAnimationFrame(drawSpectrum);
+if (prefersReducedMotion) {
+  drawSpectrum(1000);
+} else {
+  spectrumAnimationFrame = window.requestAnimationFrame(drawSpectrum);
+}
