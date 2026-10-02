@@ -29,7 +29,9 @@
   }
 
   .dev-mode-panel {
-    right: 0;
+    position: fixed;
+    right: 12px;
+    bottom: 96px;
     left: auto;
     width: min(350px, calc(100vw - 24px));
     max-height: min(70dvh, 560px);
@@ -37,6 +39,17 @@
 
   .dev-mode-navigation {
     grid-template-columns: 1fr;
+  }
+
+  .dev-mode-panel {
+    position: fixed;
+    right: 12px;
+    bottom: 96px;
+    left: auto;
+    width: min(350px, calc(100vw - 24px));
+    max-height: min(70dvh, 560px);
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
 }
 
@@ -285,5 +298,41 @@
     right: auto;
     bottom: 46px;
     left: 116px;
+  }
+}
+
+@media (max-width: 560px) {
+  .dev-mode {
+    right: auto;
+    bottom: 46px;
+    left: 116px;
+  }
+
+  .dev-mode-panel {
+    position: fixed;
+    right: 12px;
+    bottom: 96px;
+    left: 12px;
+    width: auto;
+    max-height: min(68dvh, 540px);
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .dev-mode-navigation {
+    grid-template-columns: 1fr;
+  }
+
+  .dev-mode-parts {
+    gap: 7px;
+  }
+
+  .dev-mode-part-toggle {
+    min-height: 42px;
+  }
+
+  .dev-mode-levels {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
