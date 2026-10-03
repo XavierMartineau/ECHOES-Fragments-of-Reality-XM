@@ -215,6 +215,160 @@ svg {
     font-size: 0.56rem;
     letter-spacing: 0.08rem;
   }
+
+  /* ===== LEVEL PAGES: TABLET AND MOBILE ===== */
+  @media (max-width: 900px) {
+    .level-shell {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      width: min(720px, calc(100% - 40px));
+      padding-top: 36px;
+    }
+
+    .level-intro {
+      max-width: none;
+      text-align: center;
+    }
+
+    .system-transmission {
+      max-width: 620px;
+      margin-inline: auto;
+      text-align: left;
+    }
+
+    .puzzle-panel {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .level-header {
+      width: calc(100% - 28px);
+      align-items: flex-start;
+      padding-top: 64px;
+    }
+
+    .level-meta {
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+      max-width: 100%;
+      font-size: 0.5rem;
+    }
+
+    .level-progress {
+      max-width: none;
+      flex-wrap: nowrap;
+      justify-content: flex-end;
+      gap: 4px;
+    }
+
+    .level-square {
+      flex: 0 0 auto;
+      width: 8px;
+      height: 8px;
+    }
+
+    .level-shell {
+      width: calc(100% - 28px);
+      padding: 28px 0 72px;
+    }
+
+    .level-intro h1 {
+      font-size: clamp(1.8rem, 10vw, 2.7rem);
+    }
+
+    .level-description {
+      font-size: 1rem;
+    }
+
+    .puzzle-panel {
+      overflow: hidden;
+    }
+
+    .panel-heading,
+    .puzzle-actions {
+      padding-inline: 16px;
+    }
+
+    .puzzle-board,
+    .advanced-sort-board .color-sort-grid {
+      padding-inline: 14px;
+    }
+
+    .color-sort-targets,
+    .color-sort-pieces {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .level-footer {
+      padding: 9px 13px;
+    }
+  }
+
+  .construction-page {
+    display: grid;
+    min-height: 100svh;
+    place-items: center;
+    padding: 32px 20px;
+    background:
+      radial-gradient(circle at 50% 35%, rgba(121, 247, 255, 0.12), transparent 38%),
+      #030711;
+    color: #d9faff;
+    text-align: center;
+  }
+
+  .construction-card {
+    width: min(620px, 100%);
+    padding: clamp(28px, 6vw, 64px);
+    border: 1px solid rgba(121, 247, 255, 0.35);
+    background: rgba(5, 14, 29, 0.88);
+    box-shadow: 0 0 60px rgba(42, 153, 190, 0.16);
+  }
+
+  .construction-illustration {
+    width: min(260px, 70vw);
+    margin: 0 auto 22px;
+    overflow: visible;
+  }
+
+  .construction-crane {
+    transform-origin: 50% 85%;
+    animation: construction-sway 2.4s ease-in-out infinite;
+  }
+
+  .construction-weight {
+    animation: construction-weight 1.8s ease-in-out infinite;
+  }
+
+  .construction-light {
+    animation: construction-blink 1.1s steps(2, end) infinite;
+  }
+
+  .construction-card h1 {
+    margin: 0;
+    color: #79f7ff;
+    font-family: var(--font-display, "Orbitron", sans-serif);
+    font-size: clamp(1.4rem, 5vw, 2.5rem);
+    letter-spacing: 0.12rem;
+  }
+
+  .construction-card p {
+    color: #9db1c9;
+    line-height: 1.7;
+  }
+
+  @keyframes construction-sway {
+    50% { transform: rotate(1.5deg); }
+  }
+
+  @keyframes construction-weight {
+    50% { transform: translateY(15px); }
+  }
+
+  @keyframes construction-blink {
+    50% { opacity: 0.35; }
+  }
 }
 
 @media (max-width: 360px) {

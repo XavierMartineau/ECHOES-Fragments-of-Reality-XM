@@ -1,0 +1,381 @@
+.puzzle-panel.puzzle-completed {
+  position: relative;
+  isolation: isolate;
+  animation: puzzle-success-burst 2.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.puzzle-panel.puzzle-completed > * {
+  animation: victory-fall 1.05s cubic-bezier(0.55, 0.05, 0.8, 0.2) both;
+}
+
+.puzzle-panel.puzzle-completed > *:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.puzzle-panel.puzzle-completed > *:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.puzzle-panel.puzzle-completed > *:nth-child(4) {
+  animation-delay: 0.24s;
+}
+
+.puzzle-panel.puzzle-completed .color-target,
+.puzzle-panel.puzzle-completed .color-symbol,
+.puzzle-panel.puzzle-completed button,
+.puzzle-panel.puzzle-completed .pattern-symbol,
+.puzzle-panel.puzzle-completed .sequence-light {
+  animation: victory-card-fall 1.25s cubic-bezier(0.55, 0.05, 0.8, 0.2) both;
+}
+
+.puzzle-panel.puzzle-completed.puzzle-victory-sequence {
+  animation-name: victory-sequence-pulse;
+}
+
+.puzzle-panel.puzzle-completed.puzzle-victory-sorting {
+  animation-name: victory-sorting-sweep;
+}
+
+.puzzle-panel.puzzle-completed.puzzle-victory-sorting
+  .color-target {
+  animation-name: victory-target-slide;
+}
+
+.puzzle-panel.puzzle-completed.puzzle-victory-sorting
+  .color-symbol {
+  animation-name: victory-symbol-bounce;
+}
+
+.puzzle-panel.puzzle-completed.puzzle-victory-sequence
+  .sequence-light,
+.puzzle-panel.puzzle-completed.puzzle-victory-sequence
+  .color-sequence-option {
+  animation-name: victory-sequence-flip;
+}
+
+.puzzle-panel.puzzle-completed.puzzle-victory-pattern {
+  animation-name: victory-pattern-shatter;
+}
+
+.puzzle-panel.puzzle-completed.puzzle-victory-pattern
+  .pattern-symbol {
+  animation-name: victory-pattern-flip;
+}
+
+.puzzle-panel.puzzle-completed.puzzle-victory-gate {
+  animation-name: victory-gate-shake;
+}
+
+.puzzle-panel.puzzle-completed.puzzle-victory-gate button {
+  animation-name: victory-gate-drop;
+}
+
+.puzzle-panel.puzzle-completed.puzzle-victory-constellation {
+  animation-name: victory-constellation-flare;
+}
+
+.puzzle-panel.puzzle-completed.puzzle-victory-constellation
+  .constellation-star {
+  animation-name: victory-star-orbit;
+}
+
+.puzzle-panel.puzzle-completed.puzzle-victory-pairs {
+  animation-name: victory-pairs-pulse;
+}
+
+.puzzle-panel.puzzle-completed.puzzle-victory-pairs
+  .memory-card {
+  animation-name: victory-card-flip;
+}
+
+body.puzzle-completed.puzzle-victory-sequence::after {
+  border-color: rgba(121, 247, 255, 0.8);
+}
+
+body.puzzle-completed.puzzle-victory-pattern::after {
+  border-color: rgba(255, 142, 219, 0.8);
+}
+
+body.puzzle-completed.puzzle-victory-gate::after {
+  border-color: rgba(255, 209, 102, 0.8);
+}
+
+body.puzzle-completed.puzzle-victory-constellation::after {
+  border-color: rgba(179, 108, 255, 0.8);
+}
+
+body.puzzle-completed.puzzle-victory-pairs::after {
+  border-color: rgba(72, 176, 255, 0.8);
+}
+
+.puzzle-panel.puzzle-completed .color-target:nth-child(2),
+.puzzle-panel.puzzle-completed .color-symbol:nth-child(2),
+.puzzle-panel.puzzle-completed button:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.puzzle-panel.puzzle-completed .color-target:nth-child(3),
+.puzzle-panel.puzzle-completed .color-symbol:nth-child(3),
+.puzzle-panel.puzzle-completed button:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.puzzle-panel.puzzle-completed .color-target:nth-child(4),
+.puzzle-panel.puzzle-completed .color-symbol:nth-child(4),
+.puzzle-panel.puzzle-completed button:nth-child(4) {
+  animation-delay: 0.24s;
+}
+
+.puzzle-panel.puzzle-completed .color-target:nth-child(5),
+.puzzle-panel.puzzle-completed .color-symbol:nth-child(5),
+.puzzle-panel.puzzle-completed button:nth-child(5) {
+  animation-delay: 0.32s;
+}
+
+.puzzle-panel.puzzle-completed .color-target:nth-child(6),
+.puzzle-panel.puzzle-completed .color-symbol:nth-child(6),
+.puzzle-panel.puzzle-completed button:nth-child(6) {
+  animation-delay: 0.4s;
+}
+
+body.puzzle-completed::after {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  border: 3px solid rgba(128, 255, 207, 0.7);
+  box-shadow:
+    inset 0 0 70px rgba(128, 255, 207, 0.22),
+    0 0 35px rgba(128, 255, 207, 0.3);
+  content: "";
+  pointer-events: none;
+  animation: page-success-flash 1.4s ease both;
+}
+
+@keyframes puzzle-success-burst {
+  0% {
+    filter: brightness(1);
+    transform: scale(1);
+  }
+  12% {
+    filter: brightness(2.1) saturate(1.6);
+    transform: scale(1.035) rotate(0.4deg);
+    box-shadow:
+      0 0 90px rgba(128, 255, 207, 0.72),
+      inset 0 0 50px rgba(128, 255, 207, 0.32);
+  }
+  27% {
+    filter: brightness(1.25) saturate(1.2);
+    transform: scale(0.985) rotate(-0.35deg);
+  }
+  43% {
+    filter: brightness(1.65);
+    transform: scale(1.012) rotate(0.15deg);
+  }
+  100% {
+    filter: brightness(1);
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes victory-fall {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+  42% {
+    transform: translateY(18px) rotate(1deg);
+  }
+  72% {
+    transform: translateY(95px) rotate(-3deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+}
+
+@keyframes victory-card-fall {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0) scale(1);
+  }
+  48% {
+    opacity: 1;
+    transform: translateY(28px) rotate(3deg) scale(1.04);
+  }
+  76% {
+    opacity: 0.2;
+    transform: translateY(180px) rotate(14deg) scale(0.86);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0) scale(1);
+  }
+}
+
+@keyframes page-success-flash {
+  0% {
+    opacity: 0;
+  }
+
+  @keyframes victory-sequence-pulse {
+    0%, 100% { transform: scale(1); filter: brightness(1); }
+    20% { transform: scale(1.025); filter: brightness(1.9) hue-rotate(12deg); }
+    42% { transform: scale(0.99); }
+    65% { transform: scale(1.012); filter: brightness(1.35); }
+  }
+
+  @keyframes victory-sorting-sweep {
+    0%, 100% { transform: translateX(0); filter: brightness(1); }
+    20% { transform: translateX(-14px); filter: brightness(1.8) hue-rotate(-18deg); }
+    40% { transform: translateX(14px); }
+    60% { transform: translateX(-7px); filter: brightness(1.35); }
+  }
+
+  @keyframes victory-target-slide {
+    0% { transform: translateX(0) rotate(0); }
+    45% { transform: translateX(34px) rotate(5deg); opacity: 0.35; }
+    78% { transform: translateX(-12px) rotate(-2deg); opacity: 0.8; }
+    100% { transform: translateX(0) rotate(0); opacity: 1; }
+  }
+
+  @keyframes victory-symbol-bounce {
+    0% { transform: translateY(0) rotate(0); }
+    38% { transform: translateY(-42px) rotate(-8deg) scale(1.12); }
+    68% { transform: translateY(18px) rotate(5deg) scale(0.92); }
+    100% { transform: translateY(0) rotate(0) scale(1); }
+  }
+
+  @keyframes victory-sequence-flip {
+    0% { transform: perspective(500px) rotateX(0); }
+    45% { transform: perspective(500px) rotateX(180deg) translateY(-10px); }
+    75% { transform: perspective(500px) rotateX(340deg) translateY(20px); }
+    100% { transform: perspective(500px) rotateX(360deg); }
+  }
+
+  @keyframes victory-pattern-shatter {
+    0%, 100% { transform: translate(0); filter: brightness(1); }
+    25% { transform: translate(-8px, 4px) rotate(-0.8deg); filter: brightness(1.8); }
+    50% { transform: translate(8px, -3px) rotate(0.8deg); }
+    75% { transform: translate(-3px, 2px); filter: brightness(1.25); }
+  }
+
+  @keyframes victory-pattern-flip {
+    0% { transform: rotate(0) scale(1); }
+    45% { transform: rotate(180deg) scale(1.25); opacity: 0.45; }
+    100% { transform: rotate(360deg) scale(1); opacity: 1; }
+  }
+
+  @keyframes victory-gate-shake {
+    0%, 100% { transform: translateX(0); }
+    15%, 45%, 75% { transform: translateX(-9px); }
+    30%, 60%, 90% { transform: translateX(9px); }
+  }
+
+  @keyframes victory-gate-drop {
+    0% { transform: translateY(0) rotate(0); }
+    45% { transform: translateY(-38px) rotate(8deg); }
+    72% { transform: translateY(110px) rotate(-18deg); opacity: 0.35; }
+    100% { transform: translateY(0) rotate(0); opacity: 1; }
+  }
+
+  @keyframes victory-constellation-flare {
+    0%, 100% { filter: brightness(1); transform: scale(1); }
+    30% { filter: brightness(2.2) saturate(1.8); transform: scale(1.035); }
+    55% { filter: brightness(1.1); transform: scale(0.985); }
+  }
+
+  @keyframes victory-star-orbit {
+    0% { transform: rotate(0) translateX(0) scale(1); }
+    45% { transform: rotate(180deg) translateX(24px) scale(1.35); }
+    100% { transform: rotate(360deg) translateX(0) scale(1); }
+  }
+
+  @keyframes victory-pairs-pulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 transparent; }
+    30% { transform: scale(1.04); box-shadow: 0 0 55px rgba(72, 176, 255, 0.75); }
+    60% { transform: scale(0.98); }
+  }
+
+  @keyframes victory-card-flip {
+    0% { transform: perspective(600px) rotateY(0); }
+    45% { transform: perspective(600px) rotateY(180deg) translateY(-24px); }
+    75% { transform: perspective(600px) rotateY(340deg) translateY(70px); opacity: 0.35; }
+    100% { transform: perspective(600px) rotateY(360deg) translateY(0); opacity: 1; }
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.generic-demo {
+  display: grid;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.generic-demo .sequence-demo-button {
+  justify-self: start;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid rgba(255, 142, 219, 0.7);
+  background: rgba(255, 142, 219, 0.08);
+  color: #ffb6e7;
+  cursor: pointer;
+  font: 0.58rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+
+.generic-demo .sequence-demo-button:hover,
+.generic-demo .sequence-demo-button:focus-visible {
+  background: rgba(255, 142, 219, 0.18);
+  box-shadow: 0 0 18px rgba(255, 142, 219, 0.25);
+  outline: none;
+}
+
+.generic-demo .sequence-demo-panel {
+  display: grid;
+  gap: 0.7rem;
+  padding: 0.9rem;
+  border: 1px solid rgba(255, 142, 219, 0.25);
+  background: rgba(14, 8, 29, 0.72);
+}
+
+.generic-demo .sequence-demo-panel p {
+  margin: 0;
+  color: var(--muted, #9cabc4);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.generic-demo .sequence-demo-items {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(70px, 1fr));
+  gap: 0.65rem;
+}
+
+.generic-demo .demo-light {
+  padding: 0.8rem 0.4rem;
+  border: 1px solid currentColor;
+  text-align: center;
+  font-size: 0.58rem;
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+}
+
+.demo-green { color: #80ffcf; }
+.demo-gold { color: #ffc857; }
+.demo-sky { color: #6ed6ff; }
+.demo-red { color: #ff8f9f; }
+.demo-blue { color: #48b0ff; }
+.demo-violet { color: #b38cff; }
+.demo-pink { color: #ff70c2; }
+.demo-cyan { color: #79f7ff; }
+.demo-orange { color: #ffad70; }
+
+@media (max-width: 560px) {
+  .generic-demo .sequence-demo-items {
+    grid-template-columns: repeat(2, minmax(70px, 1fr));
+  }
+}

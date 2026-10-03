@@ -1390,3 +1390,250 @@ body.simulation-failure .intro-title {
     letter-spacing: 0.08rem;
   }
 }
+
+/* Final mobile overrides also apply when the page is opened in desktop-layout mode. */
+@media (max-width: 900px) {
+  .intro-page .top-bar,
+  .intro-page.desktop-layout .top-bar {
+    width: calc(100% - 32px);
+    max-width: 100%;
+    padding: 18px 0;
+  }
+
+  .intro-page .intro,
+  .intro-page.desktop-layout .intro {
+    width: 100%;
+    max-width: 100%;
+    min-height: auto;
+    padding: 42px 16px 150px;
+    overflow: hidden;
+  }
+
+  .intro-page .intro-title,
+  .intro-page.desktop-layout .intro-title {
+    max-width: 100%;
+    font-size: clamp(2.8rem, 11vw, 5.4rem);
+    letter-spacing: 0.08em;
+    overflow-wrap: anywhere;
+  }
+
+  .intro-page .intro-subtitle,
+  .intro-page.desktop-layout .intro-subtitle {
+    max-width: 100%;
+    font-size: clamp(0.72rem, 2.8vw, 1.15rem);
+    letter-spacing: 0.2rem;
+    overflow-wrap: anywhere;
+  }
+
+  .intro-page .ai-stage,
+  .intro-page.desktop-layout .ai-stage {
+    width: min(330px, 72vw) !important;
+    flex: none;
+    margin: 30px 0 26px;
+  }
+
+  .intro-page .dialogue-shell,
+  .intro-page.desktop-layout .dialogue-shell {
+    width: 100% !important;
+    max-width: 100%;
+    flex: none;
+    align-self: stretch;
+    margin-inline: auto;
+  }
+
+  .intro-page .dialogue-body,
+  .intro-page.desktop-layout .dialogue-body {
+    min-height: 0;
+    padding: 20px;
+    font-size: clamp(0.92rem, 2.5vw, 1.12rem);
+  }
+}
+
+@media (max-width: 560px) {
+  .intro-page .top-bar,
+  .intro-page.desktop-layout .top-bar {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 10px;
+    width: calc(100% - 24px);
+    padding: 14px 0;
+  }
+
+  .intro-page .brand,
+  .intro-page.desktop-layout .brand {
+    grid-column: 1 / -1;
+    justify-self: center;
+    gap: 7px;
+    font-size: 0.68rem;
+    letter-spacing: 0.11rem;
+    white-space: nowrap;
+  }
+
+  .intro-page .brand::before,
+  .intro-page.desktop-layout .brand::before {
+    width: 1rem;
+    height: 1rem;
+    font-size: 0.58rem;
+  }
+
+  .intro-page .top-controls,
+  .intro-page.desktop-layout .top-controls {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    width: 100%;
+    max-width: none;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: stretch;
+  }
+
+  .intro-page .status-pill,
+  .intro-page.desktop-layout .status-pill {
+    grid-column: 1;
+  }
+
+  .intro-page .save-game-button,
+  .intro-page.desktop-layout .save-game-button {
+    grid-column: 2;
+  }
+
+  .intro-page .status-pill,
+  .intro-page.desktop-layout .status-pill,
+  .intro-page .save-game-button,
+  .intro-page.desktop-layout .save-game-button {
+    min-width: 0;
+    width: 100%;
+    padding: 8px 6px;
+    font-size: 0.48rem;
+    letter-spacing: 0.045rem;
+    text-align: center;
+  }
+
+  .intro-page .intro,
+  .intro-page.desktop-layout .intro {
+    padding: 28px 12px 142px;
+  }
+
+  .intro-page .intro-title,
+  .intro-page.desktop-layout .intro-title {
+    font-size: clamp(2.35rem, 15vw, 4.5rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+
+  .intro-page .intro-subtitle,
+  .intro-page.desktop-layout .intro-subtitle {
+    font-size: clamp(0.68rem, 3.4vw, 0.92rem);
+    letter-spacing: 0.12rem;
+  }
+
+  .intro-page .ai-stage,
+  .intro-page.desktop-layout .ai-stage {
+    width: min(250px, 68vw) !important;
+    flex: none;
+    margin: 22px 0 20px;
+  }
+
+  .intro-page .dialogue-shell,
+  .intro-page.desktop-layout .dialogue-shell {
+    width: min(100%, 320px) !important;
+    flex: none;
+    align-self: stretch;
+  }
+
+  .intro-page .dialogue-head,
+  .intro-page.desktop-layout .dialogue-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.52rem;
+  }
+
+  .intro-page .dialogue-body,
+  .intro-page.desktop-layout .dialogue-body {
+    padding: 16px;
+  }
+
+  .intro-page .dialogue-line,
+  .intro-page.desktop-layout .dialogue-line {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .intro-page .dialogue-line-text,
+  .intro-page.desktop-layout .dialogue-line-text,
+  .intro-page .dialogue-placeholder,
+  .intro-page.desktop-layout .dialogue-placeholder {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .intro-page .site-footer,
+  .intro-page.desktop-layout .site-footer {
+    right: 12px;
+    bottom: 34px;
+    left: 12px;
+    width: auto;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* On phones, the audio core becomes a compact horizontal signal line. */
+@media (max-width: 560px) {
+  .intro-page .ai-stage,
+  .intro-page.desktop-layout .ai-stage {
+    display: block;
+    width: min(290px, 78vw) !important;
+    height: 78px;
+    aspect-ratio: auto;
+    margin: 24px 0 18px;
+  }
+
+  .intro-page .spectrum-label,
+  .intro-page.desktop-layout .spectrum-label {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    display: block;
+    width: auto;
+    height: auto;
+    transform: translateX(-50%);
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    color: #f4ffff;
+    font-size: 0.9rem;
+    letter-spacing: 0.14rem;
+    line-height: 1;
+    text-shadow: 0 0 10px rgba(121, 247, 255, 0.8);
+  }
+
+  .intro-page .spectrum-canvas,
+  .intro-page.desktop-layout .spectrum-canvas {
+    top: 38px;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    width: 100%;
+    height: 24px;
+    filter: drop-shadow(0 0 8px rgba(121, 247, 255, 0.65));
+  }
+
+  .intro-page .ai-stage::before,
+  .intro-page .ai-stage::after,
+  .intro-page.desktop-layout .ai-stage::before,
+  .intro-page.desktop-layout .ai-stage::after {
+    display: none;
+  }
+
+  .intro-page .particle-cloud,
+  .intro-page.desktop-layout .particle-cloud {
+    display: none;
+  }
+}

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css?v=4" />
     <link rel="stylesheet" href="../../css/responsive.css" />
     <link rel="stylesheet" href="../../css/fonts.css" />
+    <link rel="stylesheet" href="../../css/puzzle-demos.css" />
   </head>
   <body>
     <div class="background-glow"></div>
@@ -119,6 +120,31 @@
             Observe la séquence, puis reproduis-la dans le même ordre.
           </p>
         </div>
+        <div class="sequence-demo">
+          <button
+            class="sequence-demo-button"
+            id="sequenceDemoButton"
+            type="button"
+            data-i18n="exampleButton"
+            aria-expanded="false"
+            aria-controls="sequenceDemoPanel"
+          >
+            VOIR UN EXEMPLE
+          </button>
+          <div class="sequence-demo-panel" id="sequenceDemoPanel" hidden>
+            <strong data-i18n="exampleTitle">Exemple de séquence</strong>
+            <p data-i18n="exampleDescription">
+              Cette démonstration utilise d'autres couleurs et d'autres noms.
+              Elle ne change pas la séquence du puzzle.
+            </p>
+            <div class="sequence-demo-items" aria-label="Exemple de piliers">
+              <span class="demo-light demo-amber" data-i18n="exampleAmber">Ambre</span>
+              <span class="demo-light demo-mint" data-i18n="exampleMint">Menthe</span>
+              <span class="demo-light demo-coral" data-i18n="exampleCoral">Corail</span>
+              <span class="demo-light demo-indigo" data-i18n="exampleIndigo">Indigo</span>
+            </div>
+          </div>
+        </div>
         <div class="puzzle-actions">
           <button
             class="next-level-button"
@@ -144,5 +170,6 @@
     <script src="../../js/save-system.js"></script>
     <script src="../../js/partie-1_niveau-1_à_10.js?v=10"></script>
     <script src="../../js/dev-mode.js"></script>
+    <script src="../../js/puzzle-demos.js"></script>
   </body>
 </html>

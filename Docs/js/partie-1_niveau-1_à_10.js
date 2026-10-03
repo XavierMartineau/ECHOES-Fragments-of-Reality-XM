@@ -41,6 +41,46 @@ function ensureLevelFooter() {
   }
 }
 
+function playPuzzleSuccessAnimation() {
+  const panel = document.querySelector(".puzzle-panel");
+  if (!panel) return;
+
+  const animationTypes = [
+    ["sorting", ".advanced-sort-board"],
+    ["sequence", ".sequence-board, .sound-board, .combined-sequence-board"],
+    ["pattern", ".pattern-board, .fractal-board"],
+    ["gate", ".gate-board, .cross-light-board, .ordering-board"],
+    ["constellation", ".constellation-board"],
+    ["color", ".color-sequence-board"],
+    ["pairs", ".pairs-board"],
+  ];
+  const animationType =
+    animationTypes.find(([, selector]) => panel.matches(selector))?.[0] ||
+    "default";
+
+  document.body.classList.remove("puzzle-completed");
+  document.body.className = document.body.className.replace(
+    /\bpuzzle-victory-\S+/g,
+    "",
+  );
+  panel.className = panel.className.replace(
+    /\bpuzzle-victory-\S+/g,
+    "",
+  );
+  panel.classList.remove("puzzle-completed");
+  void panel.offsetWidth;
+  document.body.classList.add("puzzle-completed");
+  document.body.classList.add(`puzzle-victory-${animationType}`);
+  panel.classList.add("puzzle-completed");
+  panel.classList.add(`puzzle-victory-${animationType}`);
+  window.setTimeout(() => {
+    document.body.classList.remove("puzzle-completed");
+    document.body.classList.remove(`puzzle-victory-${animationType}`);
+    panel.classList.remove(`puzzle-victory-${animationType}`);
+    panel.classList.remove("puzzle-completed");
+  }, 2400);
+}
+
 function installProgressDots() {
   // Creates the small success indicators from each puzzle's readout (0 / N).
   document.querySelectorAll(".progress-readout").forEach((readout) => {
@@ -279,6 +319,7 @@ if (activeLevelScript) {
       completedLevels: levels,
     });
     renderProgress();
+    playPuzzleSuccessAnimation();
   };
   const successMessage = (message) => {
     const sector = Math.ceil(levelNumber / 10);
@@ -331,6 +372,8 @@ if (activeLevelScript) {
     const reset = document.getElementById("resetButton");
     const save = document.getElementById("saveGameButton");
     const next = document.getElementById("nextLevelButton");
+    const demoButton = document.getElementById("sequenceDemoButton");
+    const demoPanel = document.getElementById("sequenceDemoPanel");
     const transmission = document.querySelector(".system-transmission");
     const sequence = shuffle([0, 1, 2, 3]);
     let input = [];
@@ -338,6 +381,12 @@ if (activeLevelScript) {
     let solved = false;
     let started = false;
     start.textContent = levelCopy.watchSequence;
+    demoButton.textContent = levelCopy.exampleButton;
+    demoButton.addEventListener("click", () => {
+      const isOpen = demoPanel.hidden;
+      demoPanel.hidden = !isOpen;
+      demoButton.setAttribute("aria-expanded", String(isOpen));
+    });
     let token = 0;
     const update = () => {
       readout.textContent = `${input.length} / ${sequence.length}`;
@@ -1232,6 +1281,7 @@ if (activeLevelScript) {
     });
     systemMessages.success = sectorProgressMessage(levelCopy.systemSuccess);
     renderProgress();
+    playPuzzleSuccessAnimation();
   }
 
   // Updates the puzzle-local counter used by the progress dots.
@@ -1483,6 +1533,7 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
     nextButton.hidden = false;
     startButton.disabled = true;
     setStatus(levelCopy?.statusSuccess || "Level stabilized.", "success");
+    playPuzzleSuccessAnimation();
     nextButton.focus();
   };
 
@@ -1547,29 +1598,29 @@ if (document.querySelector(".advanced-sort-board")) {
       ["yellow", "JAUNE"],
       ["blue", "BLEU"],
     ];
-    let visualColors;
+    let targetVisualColors;
     do {
-      visualColors = [...colors].sort(() => Math.random() - 0.5);
+      targetVisualColors = [...colors].sort(() => Math.random() - 0.5);
     } while (
-      visualColors.some(
+      targetVisualColors.some(
         ([color], index) => color === colors[index][0],
       )
     );
-    const visualColorByName = Object.fromEntries(
-      colors.map(([color], index) => [color, visualColors[index][0]]),
+    const targetVisualColorByName = Object.fromEntries(
+      colors.map(([color], index) => [color, targetVisualColors[index][0]]),
     );
     let selected = null;
     let placed = 0;
     grid.innerHTML = `
       <div class="color-sort-targets">
-        ${colors.map(([color, label]) => `<button class="color-target color-${visualColorByName[color]}" data-color="${color}" type="button">${label}</button>`).join("")}
+        ${colors.map(([color, label]) => `<button class="color-target color-${targetVisualColorByName[color]}" data-color="${color}" type="button">${label}</button>`).join("")}
       </div>
       <div class="color-sort-pieces">
         ${[...colors]
           .reverse()
           .map(
             ([color, label]) =>
-              `<button class="color-symbol color-${visualColorByName[color]}" data-color="${color}" type="button" draggable="true">${label}</button>`,
+              `<button class="color-symbol color-${color}" data-color="${color}" type="button" draggable="true">${label}</button>`,
           )
           .join("")}
       </div>
@@ -2470,3 +2521,58 @@ if (document.querySelector(".fractal-board")) {
 
 // ===== NIVEAU 15 // ACTIVATION DE TROIS POINTS =====
 // TODO: ajouter l'activation logique des trois points d'energie.
+
+// Adds a separate, non-interactive example to each implemented puzzle.
+(() => {
+  const language =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const dictionary = window.translations?.[language] || {};
+  const examples = [
+    [".light-sequence", "Observe l'ordre des lumières, puis clique sur les mêmes piliers dans cet ordre.", "Watch the lights, then click the same pillars in that order.", [["Émeraude", "demo-green"], ["Or", "demo-gold"], ["Azur", "demo-sky"]], [["Emerald", "demo-green"], ["Gold", "demo-gold"], ["Azure", "demo-sky"]]],
+    [".puzzle-piece", "Aligne chaque forme avec l'emplacement qui correspond à sa couleur et à son symbole.", "Match each shape with the slot that corresponds to its color and symbol.", [["Triangle", "demo-gold"], ["Cercle", "demo-sky"], ["Carré", "demo-violet"]], [["Triangle", "demo-gold"], ["Circle", "demo-sky"], ["Square", "demo-violet"]]],
+    [".sort-board, .advanced-sort-board", "Place chaque forme dans la zone portant la même couleur.", "Place each shape in the area with the matching color.", [["Rouge → Rouge", "demo-red"], ["Bleu → Bleu", "demo-blue"], ["Vert → Vert", "demo-green"]], [["Red → Red", "demo-red"], ["Blue → Blue", "demo-blue"], ["Green → Green", "demo-green"]]],
+    [".rotation-board", "Fais pivoter l'objet jusqu'à ce qu'il corresponde à l'orientation cible.", "Rotate the object until it matches the target orientation.", [["Cible 90°", "demo-gold"], ["Objet ↻", "demo-violet"]], [["Target 90°", "demo-gold"], ["Object ↻", "demo-violet"]]],
+    [".sound-board, .color-sequence-board, .constellation-board, .combined-sequence-board", "Mémorise la séquence présentée, puis reproduis-la exactement.", "Memorize the shown sequence, then reproduce it exactly.", [["1", "demo-pink"], ["2", "demo-cyan"], ["3", "demo-orange"], ["4", "demo-violet"]], [["1", "demo-pink"], ["2", "demo-cyan"], ["3", "demo-orange"], ["4", "demo-violet"]]],
+    [".pattern-board, .fractal-board", "Active uniquement les symboles qui correspondent au motif cible.", "Activate only the symbols that match the target pattern.", [["✓", "demo-green"], ["×", "demo-red"], ["✓", "demo-green"]], [["✓", "demo-green"], ["×", "demo-red"], ["✓", "demo-green"]]],
+    [".gate-board, .cross-light-board, .ordering-board", "Suis l'ordre indiqué et active chaque élément une seule fois.", "Follow the shown order and activate each element once.", [["01", "demo-cyan"], ["02", "demo-gold"], ["03", "demo-pink"]], [["01", "demo-cyan"], ["02", "demo-gold"], ["03", "demo-pink"]]],
+    [".pairs-board", "Retourne deux cartes à la fois et retrouve les symboles identiques.", "Reveal two cards at a time and find the matching symbols.", [["◆ ◆", "demo-violet"], ["● ●", "demo-cyan"], ["★ ★", "demo-gold"]], [["◆ ◆", "demo-violet"], ["● ●", "demo-cyan"], ["★ ★", "demo-gold"]]],
+  ];
+
+  document.querySelectorAll(".puzzle-panel").forEach((panel) => {
+    if (panel.querySelector(".sequence-demo, .generic-demo")) return;
+    const example = examples.find(([selector]) => panel.querySelector(selector));
+    if (!example) return;
+    const actions = panel.querySelector(".puzzle-actions") || panel;
+    const wrapper = document.createElement("div");
+    wrapper.className = "generic-demo";
+    const button = document.createElement("button");
+    button.className = "sequence-demo-button";
+    button.type = "button";
+    button.textContent =
+      dictionary.demoButton || (language === "en" ? "VIEW AN EXAMPLE" : "VOIR UN EXEMPLE");
+    button.setAttribute("aria-expanded", "false");
+    const content = document.createElement("div");
+    content.className = "sequence-demo-panel";
+    content.hidden = true;
+    const title = document.createElement("strong");
+    title.textContent =
+      dictionary.demoTitle || (language === "en" ? "Demonstration" : "Démonstration");
+    const description = document.createElement("p");
+    description.textContent = language === "en" ? example[2] : example[1];
+    const items = document.createElement("div");
+    items.className = "sequence-demo-items";
+    (language === "en" ? example[4] : example[3]).forEach(([label, color]) => {
+      const item = document.createElement("span");
+      item.className = `demo-light ${color}`;
+      item.textContent = label;
+      items.appendChild(item);
+    });
+    content.append(title, description, items);
+    wrapper.append(button, content);
+    actions.prepend(wrapper);
+    button.addEventListener("click", () => {
+      content.hidden = !content.hidden;
+      button.setAttribute("aria-expanded", String(!content.hidden));
+    });
+  });
+})();

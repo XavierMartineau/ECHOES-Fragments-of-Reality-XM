@@ -35,6 +35,10 @@ window.translations = {
     saveFound: "Sauvegarde trouvée au niveau",
     saveEmpty: "Aucune sauvegarde trouvée. Crée une nouvelle partie.",
     loginError: "Nom du joueur ou mot de passe incorrect.",
+    demoButton: "VOIR UN EXEMPLE",
+    demoTitle: "Démonstration",
+    demoDescription:
+      "Cet exemple montre la méthode à suivre sans modifier le puzzle.",
     level1: {
       part: "PARTIE 1 // INITIATION",
       level: "NIVEAU 01",
@@ -84,6 +88,14 @@ window.translations = {
       lightsAria: "Piliers lumineux à activer",
       watchSequence: "OBSERVER LA SÉQUENCE",
       replaySequence: "REJOUER LA SÉQUENCE",
+      exampleButton: "VOIR UN EXEMPLE",
+      exampleTitle: "Exemple de séquence",
+      exampleDescription:
+        "Cette démonstration utilise d'autres couleurs et d'autres noms. Elle ne change pas la séquence du puzzle.",
+      exampleAmber: "Ambre",
+      exampleMint: "Menthe",
+      exampleCoral: "Corail",
+      exampleIndigo: "Indigo",
       statusReady: "Observe la séquence, puis reproduis-la dans le même ordre.",
       statusWatching: "La mémoire lumineuse se déploie...",
       statusPlaying: "À toi. Active les piliers dans le même ordre.",
@@ -495,6 +507,10 @@ window.translations = {
     saveFound: "Save found at level",
     saveEmpty: "No save found. Create a new game.",
     loginError: "Incorrect player name or password.",
+    demoButton: "VIEW AN EXAMPLE",
+    demoTitle: "Demonstration",
+    demoDescription:
+      "This example shows the method without changing the puzzle.",
     level1: {
       part: "PART 1 // INITIATION",
       level: "LEVEL 01",
@@ -541,6 +557,14 @@ window.translations = {
       lightsAria: "Light pillars to activate",
       watchSequence: "WATCH THE SEQUENCE",
       replaySequence: "REPLAY THE SEQUENCE",
+      exampleButton: "VIEW AN EXAMPLE",
+      exampleTitle: "Sequence example",
+      exampleDescription:
+        "This demonstration uses different colors and names. It does not change the puzzle sequence.",
+      exampleAmber: "Amber",
+      exampleMint: "Mint",
+      exampleCoral: "Coral",
+      exampleIndigo: "Indigo",
       statusReady: "Watch the sequence, then repeat it in the same order.",
       statusWatching: "The light memory is unfolding...",
       statusPlaying: "Your turn. Activate the pillars in the same order.",
