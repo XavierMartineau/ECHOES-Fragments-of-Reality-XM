@@ -621,6 +621,12 @@ html:has(.intro-page),
     padding: 18px 20px 58px;
   }
 
+  @media (max-width: 650px) {
+    .intro-page.desktop-layout .intro-title {
+      font-size: clamp(2rem, 12vw, 3.8rem) !important;
+    }
+  }
+
   .intro-page.desktop-layout .page-back-button,
   .intro-page.desktop-layout .save-game-button {
     min-height: 40px;

@@ -10,8 +10,19 @@
       href="../assets/images/echoes-favicon.svg"
     />
     <link rel="stylesheet" href="../css/introduction.css" />
-    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/responsive.css?v=3" />
     <link rel="stylesheet" href="../css/fonts.css?v=2" />
+    <style>
+      @media (max-width: 650px) {
+        body.intro-page.desktop-layout h1.intro-title {
+          width: 100%;
+          font-size: clamp(2.8rem, 14vw, 3.5rem) !important;
+          letter-spacing: 0.02em;
+          white-space: nowrap;
+          text-align: center;
+        }
+      }
+    </style>
   </head>
   <body class="intro-page">
     <div class="background-glow"></div>
@@ -98,4 +109,3 @@
     <script src="../js/dev-mode.js"></script>
   </body>
 </html>
-
