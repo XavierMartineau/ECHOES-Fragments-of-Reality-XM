@@ -79,6 +79,11 @@ svg {
 }
 
 @media (max-width: 650px) {
+  .intro-page .intro-title,
+  .intro-page.desktop-layout .intro-title {
+    font-size: clamp(2rem, 12vw, 3.8rem);
+  }
+
   html,
   body {
     min-height: 100%;

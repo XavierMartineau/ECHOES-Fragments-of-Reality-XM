@@ -911,6 +911,8 @@ body.simulation-failure .intro-title {
   left: 0;
   z-index: 2;
   display: flex;
+  align-items: center;
+  gap: 18px;
   justify-content: space-between;
   padding: 11px 28px;
   border-top: 1px solid rgba(121, 247, 255, 0.2);
@@ -919,6 +921,15 @@ body.simulation-failure .intro-title {
   font-size: 0.65rem;
   letter-spacing: 0.14rem;
   text-transform: uppercase;
+}
+.footer-credit,
+.footer-rights {
+  color: rgba(223, 234, 249, 0.72);
+  font-size: 0.58rem;
+  letter-spacing: 0.08rem;
+}
+.footer-rights {
+  margin-left: auto;
 }
 .pulse {
   color: var(--cyan);
@@ -1389,6 +1400,28 @@ body.simulation-failure .intro-title {
     font-size: 0.51rem;
     letter-spacing: 0.08rem;
   }
+  .footer-credit,
+  .footer-rights {
+    font-size: 0.48rem;
+    letter-spacing: 0.04rem;
+  }
+  .intro-page .console-footer,
+  .intro-page.desktop-layout .console-footer {
+    right: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    padding-right: 13px;
+    padding-left: 13px;
+    text-align: left;
+  }
+  .intro-page .footer-rights,
+  .intro-page.desktop-layout .footer-rights {
+    margin-left: 0;
+  }
 }
 
 /* Final mobile overrides also apply when the page is opened in desktop-layout mode. */
@@ -1518,7 +1551,7 @@ body.simulation-failure .intro-title {
 
   .intro-page .intro-title,
   .intro-page.desktop-layout .intro-title {
-    font-size: clamp(2.35rem, 15vw, 4.5rem);
+    font-size: clamp(2rem, 12vw, 3.8rem);
     letter-spacing: 0.04em;
     line-height: 1;
   }
@@ -1635,5 +1668,26 @@ body.simulation-failure .intro-title {
   .intro-page .particle-cloud,
   .intro-page.desktop-layout .particle-cloud {
     display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .intro-page .console-footer,
+  .intro-page.desktop-layout .console-footer {
+    right: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    padding-right: 13px;
+    padding-left: 13px;
+    text-align: left;
+  }
+
+  .intro-page .footer-rights,
+  .intro-page.desktop-layout .footer-rights {
+    margin-left: 0;
   }
 }
