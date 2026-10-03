@@ -1,0 +1,69 @@
+:root {
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(255, 94, 196, 0.2), transparent 34rem),
+    #050711;
+  color: #edfaff;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+}
+
+.bonus-shell {
+  box-sizing: border-box;
+  display: grid;
+  min-height: 100vh;
+  place-content: center;
+  justify-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.bonus-kicker {
+  margin: 0;
+  color: #79f7ff;
+  font-size: 0.72rem;
+  letter-spacing: 0.16rem;
+}
+
+.bonus-shell h1 {
+  margin: 0;
+  color: #ff8edb;
+  font-size: clamp(2.4rem, 8vw, 5.5rem);
+  text-shadow: 0 0 28px rgba(255, 142, 219, 0.5);
+}
+
+.bonus-description {
+  max-width: 38rem;
+  margin: 0;
+  color: #b8c6df;
+  line-height: 1.7;
+}
+
+.bonus-button {
+  margin-top: 1rem;
+  padding: 0.9rem 1.4rem;
+  border: 1px solid #79f7ff;
+  background: rgba(121, 247, 255, 0.08);
+  color: #edfaff;
+  cursor: pointer;
+  font: inherit;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+
+.bonus-button:hover,
+.bonus-button:focus-visible {
+  background: rgba(255, 142, 219, 0.18);
+  box-shadow: 0 0 24px rgba(255, 142, 219, 0.35);
+  outline: none;
+}
+
+.bonus-status {
+  min-height: 1.5rem;
+  color: #79f7ff;
+}

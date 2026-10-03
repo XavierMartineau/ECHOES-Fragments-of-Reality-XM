@@ -1,4 +1,4 @@
-﻿// TRANSLATIONS // language dictionaries consumed by every page controller.
+// TRANSLATIONS // language dictionaries consumed by every page controller.
 window.translations = {
   fr: {
     systemLabel: "SYSTÈME",
@@ -47,7 +47,7 @@ window.translations = {
         "SYSTEME:: ENTREE REQUISE // 3 FRAGMENTS DETECTES // ORDRE CIBLES: CERCLE > TRIANGLE > LOSANGE",
       puzzleKicker: "PUZZLE // ALIGNEMENT",
       puzzleTitle: "Résonance géométrique",
-      progressAria: "Progression des niveaux 1 à 15",
+      progressAria: "Progression des niveaux 1 à 10",
       slots: ["Emplacement 1", "Emplacement 2", "Emplacement 3"],
       trayAria: "Formes à aligner",
       trayHint: "Clique sur une forme, puis dépose-la dans la bonne couleur",
@@ -62,7 +62,7 @@ window.translations = {
       reset: "Réinitialiser",
       save: "SAUVEGARDER",
       footer: "ÉCHO // INITIATION ACTIVE",
-      counter: "1 / 90",
+      counter: "1 / 60",
       systemSuccess:
         "SYSTEME:: MEMOIRE FRAGMENT 001 RESTAUREE // 14 FRAGMENTS RESTANTS AVANT LA CLE 1 // PROTOCOLE SUIVANT DEBLOQUE",
       systemError:
@@ -80,7 +80,7 @@ window.translations = {
         "SYSTEME:: SEQUENCE ENREGISTREE // 4 PILIERS DETECTES // MEMOIRE EN ATTENTE",
       puzzleKicker: "PUZZLE // SEQUENCE",
       puzzleTitle: "Mémoire photique",
-      progressAria: "Progression des niveaux 1 à 15",
+      progressAria: "Progression des niveaux 1 à 10",
       lightsAria: "Piliers lumineux à activer",
       watchSequence: "OBSERVER LA SÉQUENCE",
       replaySequence: "REJOUER LA SÉQUENCE",
@@ -92,7 +92,7 @@ window.translations = {
       reset: "Réinitialiser",
       save: "SAUVEGARDER",
       footer: "ÉCHO // INITIATION ACTIVE",
-      counter: "2 / 90",
+      counter: "2 / 60",
       lightLabels: [
         "Pilier cyan",
         "Pilier bleu",
@@ -115,7 +115,7 @@ window.translations = {
       systemInput: "SYSTEME:: 6 SYMBOLES DETECTES // CLASSIFICATION REQUISE",
       puzzleKicker: "PUZZLE // CLASSIFICATION",
       puzzleTitle: "Lexique des formes",
-      progressAria: "Progression des niveaux 1 à 15",
+      progressAria: "Progression des niveaux 1 à 10",
       piecesAria: "Symboles géométriques à classer",
       slotsAria: "Emplacements de classification",
       slotLabels: [
@@ -142,7 +142,7 @@ window.translations = {
       reset: "Réinitialiser",
       save: "SAUVEGARDER",
       footer: "ÉCHO // INITIATION ACTIVE",
-      counter: "3 / 90",
+      counter: "3 / 60",
       systemSuccess:
         "SYSTEME:: CLASSIFICATION 003 RESTAUREE // 12 FRAGMENTS RESTANTS AVANT LA CLE 1",
       systemError: "SYSTEME:: ERREUR DE CLASSIFICATION // MOTIF INCOMPATIBLE",
@@ -159,7 +159,7 @@ window.translations = {
         "SYSTEME:: OBJET FRACTAL VERROUILLE // ORIENTATION REQUISE: 120°",
       puzzleKicker: "PUZZLE // ROTATION",
       puzzleTitle: "Résonance angulaire",
-      progressAria: "Progression des niveaux 1 à 15",
+      progressAria: "Progression des niveaux 1 à 10",
       rotateButton: "PIVOTER DE 45°",
       targetLabel: "Orientation cible",
       currentLabel: "Orientation actuelle",
@@ -171,7 +171,7 @@ window.translations = {
       reset: "Réinitialiser",
       save: "SAUVEGARDER",
       footer: "ÉCHO // INITIATION ACTIVE",
-      counter: "4 / 90",
+      counter: "4 / 60",
       systemSuccess:
         "SYSTEME:: ROTATION 004 STABILISEE // 11 FRAGMENTS RESTANTS AVANT LA CLE 1",
       systemError: "SYSTEME:: ORIENTATION INCOMPLETE // CONTINUE LA ROTATION",
@@ -188,7 +188,7 @@ window.translations = {
       systemInput: "SYSTEME:: CANAL SONORE OUVERT // 4 NOTES EN ATTENTE",
       puzzleKicker: "PUZZLE // SON",
       puzzleTitle: "Écho harmonique",
-      progressAria: "Progression des niveaux 1 à 15",
+      progressAria: "Progression des niveaux 1 à 10",
       notesAria: "Notes holographiques à jouer",
       watchSequence: "ÉCOUTER LA SÉQUENCE",
       statusReady:
@@ -200,7 +200,7 @@ window.translations = {
       reset: "Réinitialiser",
       save: "SAUVEGARDER",
       footer: "ÉCHO // INITIATION ACTIVE",
-      counter: "5 / 90",
+      counter: "5 / 60",
       noteLabels: ["Note grave", "Note médium", "Note aiguë", "Note claire"],
       systemSuccess:
         "SYSTEME:: SEQUENCE SONORE 005 RESTAUREE // 10 FRAGMENTS RESTANTS AVANT LA CLE 1",
@@ -222,7 +222,7 @@ window.translations = {
       reset: "Reinitialiser",
       save: "SAUVEGARDER",
       footer: "ECHO // INITIATION ACTIVE",
-      counter: "8 / 90",
+      counter: "8 / 60",
     },
     level9: {
       part: "PARTIE 1 // INITIATION",
@@ -240,7 +240,7 @@ window.translations = {
       reset: "Reinitialiser",
       save: "SAUVEGARDER",
       footer: "ECHO // INITIATION ACTIVE",
-      counter: "9 / 90",
+      counter: "9 / 60",
     },
     level10: {
       part: "PARTIE 1 // INITIATION",
@@ -260,7 +260,7 @@ window.translations = {
       reset: "Réinitialiser",
       save: "SAUVEGARDER",
       footer: "ECHO // INITIATION ACTIVE",
-      counter: "10 / 90",
+      counter: "10 / 60",
     },
     level11: {
       part: "PARTIE 1 // INITIATION",
@@ -277,7 +277,7 @@ window.translations = {
       reset: "Réinitialiser",
       save: "SAUVEGARDER",
       footer: "ÉCHO // INITIATION ACTIVE",
-      counter: "11 / 90",
+      counter: "11 / 60",
     },
     level12: {
       part: "PARTIE 1 // INITIATION",
@@ -296,7 +296,7 @@ window.translations = {
       reset: "Réinitialiser",
       save: "SAUVEGARDER",
       footer: "ÉCHO // INITIATION ACTIVE",
-      counter: "12 / 90",
+      counter: "12 / 60",
     },
     level13: {
       part: "PARTIE 1 // INITIATION",
@@ -313,7 +313,7 @@ window.translations = {
       reset: "Réinitialiser",
       save: "SAUVEGARDER",
       footer: "ÉCHO // INITIATION ACTIVE",
-      counter: "13 / 90",
+      counter: "13 / 60",
     },
     level14: {
       part: "PARTIE 1 // INITIATION",
@@ -330,7 +330,7 @@ window.translations = {
       reset: "Réinitialiser",
       save: "SAUVEGARDER",
       footer: "ÉCHO // INITIATION ACTIVE",
-      counter: "14 / 90",
+      counter: "14 / 60",
     },
     motionWarning: "AVERTISSEMENT : effets lumineux et stroboscopiques.",
     reduceStrobe: "Réduire les effets stroboscopiques",
@@ -457,7 +457,7 @@ window.translations = {
       {
         speaker: "SYSTEM:",
         className: "system",
-        text: "OBJECTIF_MISSION:: RESTAURER_MEMOIRE_ECHO // RECUPERER_6_CLES_URGENCE // FRAGMENTS_REQUIS: 6 // NIVEAUX_DISTRIBUES: 90 // DIFFICULTE_CROISSANTE: TOUS_LES_15_NIVEAUX // PROTOCOLE: INFILTREZ_LA_RUPTURE",
+        text: "OBJECTIF_MISSION:: RESTAURER_MEMOIRE_ECHO // RECUPERER_6_CLES_URGENCE // FRAGMENTS_REQUIS: 6 // NIVEAUX_DISTRIBUES: 60 // DIFFICULTE_CROISSANTE: TOUS_LES_10_NIVEAUX // PROTOCOLE: INFILTREZ_LA_RUPTURE",
       },
     ],
   },
@@ -507,7 +507,7 @@ window.translations = {
         "SYSTEM:: INPUT REQUIRED // 3 FRAGMENTS DETECTED // TARGET ORDER: CIRCLE > TRIANGLE > DIAMOND",
       puzzleKicker: "PUZZLE // ALIGNMENT",
       puzzleTitle: "Geometric resonance",
-      progressAria: "Progress for levels 1 to 15",
+      progressAria: "Progress for levels 1 to 10",
       slots: ["Slot 1", "Slot 2", "Slot 3"],
       trayAria: "Shapes to align",
       trayHint: "Click a shape, then drop it on the matching color",
@@ -519,7 +519,7 @@ window.translations = {
       reset: "Reset",
       save: "SAVE",
       footer: "ECHO // INITIATION ACTIVE",
-      counter: "1 / 90",
+      counter: "1 / 60",
       systemSuccess:
         "SYSTEM:: MEMORY FRAGMENT 001 RESTORED // 14 FRAGMENTS REMAIN BEFORE KEY 1 // NEXT PROTOCOL UNLOCKED",
       systemError:
@@ -537,7 +537,7 @@ window.translations = {
         "SYSTEM:: SEQUENCE RECORDED // 4 PILLARS DETECTED // MEMORY WAITING",
       puzzleKicker: "PUZZLE // SEQUENCE",
       puzzleTitle: "Photonic memory",
-      progressAria: "Progress for levels 1 to 15",
+      progressAria: "Progress for levels 1 to 10",
       lightsAria: "Light pillars to activate",
       watchSequence: "WATCH THE SEQUENCE",
       replaySequence: "REPLAY THE SEQUENCE",
@@ -549,7 +549,7 @@ window.translations = {
       reset: "Reset",
       save: "SAVE",
       footer: "ECHO // INITIATION ACTIVE",
-      counter: "2 / 90",
+      counter: "2 / 60",
       lightLabels: [
         "Cyan pillar",
         "Blue pillar",
@@ -572,7 +572,7 @@ window.translations = {
       systemInput: "SYSTEM:: 6 SYMBOLS DETECTED // CLASSIFICATION REQUIRED",
       puzzleKicker: "PUZZLE // CLASSIFICATION",
       puzzleTitle: "Shape lexicon",
-      progressAria: "Progress for levels 1 to 15",
+      progressAria: "Progress for levels 1 to 10",
       piecesAria: "Geometric symbols to sort",
       slotsAria: "Classification slots",
       slotLabels: [
@@ -599,7 +599,7 @@ window.translations = {
       reset: "Reset",
       save: "SAVE",
       footer: "ECHO // INITIATION ACTIVE",
-      counter: "3 / 90",
+      counter: "3 / 60",
       systemSuccess:
         "SYSTEM:: CLASSIFICATION 003 RESTORED // 12 FRAGMENTS REMAIN BEFORE KEY 1",
       systemError: "SYSTEM:: CLASSIFICATION ERROR // INCOMPATIBLE PATTERN",
@@ -616,7 +616,7 @@ window.translations = {
         "SYSTEM:: FRACTAL OBJECT LOCKED // REQUIRED ORIENTATION: 120°",
       puzzleKicker: "PUZZLE // ROTATION",
       puzzleTitle: "Angular resonance",
-      progressAria: "Progress for levels 1 to 15",
+      progressAria: "Progress for levels 1 to 10",
       rotateButton: "ROTATE 45°",
       targetLabel: "Target orientation",
       currentLabel: "Current orientation",
@@ -628,7 +628,7 @@ window.translations = {
       reset: "Reset",
       save: "SAVE",
       footer: "ECHO // INITIATION ACTIVE",
-      counter: "4 / 90",
+      counter: "4 / 60",
       systemSuccess:
         "SYSTEM:: ROTATION 004 STABILIZED // 11 FRAGMENTS REMAIN BEFORE KEY 1",
       systemError: "SYSTEM:: ORIENTATION INCOMPLETE // CONTINUE ROTATING",
@@ -645,7 +645,7 @@ window.translations = {
       systemInput: "SYSTEM:: SOUND CHANNEL OPEN // 4 NOTES WAITING",
       puzzleKicker: "PUZZLE // SOUND",
       puzzleTitle: "Harmonic echo",
-      progressAria: "Progress for levels 1 to 15",
+      progressAria: "Progress for levels 1 to 10",
       notesAria: "Holographic notes to play",
       watchSequence: "LISTEN TO THE SEQUENCE",
       statusReady: "Listen to the sequence, then replay the notes in order.",
@@ -656,7 +656,7 @@ window.translations = {
       reset: "Reset",
       save: "SAVE",
       footer: "ECHO // INITIATION ACTIVE",
-      counter: "5 / 90",
+      counter: "5 / 60",
       noteLabels: ["Low note", "Middle note", "High note", "Clear note"],
       systemSuccess:
         "SYSTEM:: SOUND SEQUENCE 005 RESTORED // 10 FRAGMENTS REMAIN BEFORE KEY 1",
@@ -677,7 +677,7 @@ window.translations = {
       reset: "RESET",
       save: "SAVE",
       footer: "ECHO // INITIATION ACTIVE",
-      counter: "8 / 90",
+      counter: "8 / 60",
     },
     level9: {
       part: "PART 1 // INITIATION",
@@ -694,7 +694,7 @@ window.translations = {
       reset: "RESET",
       save: "SAVE",
       footer: "ECHO // INITIATION ACTIVE",
-      counter: "9 / 90",
+      counter: "9 / 60",
     },
     level10: {
       part: "PART 1 // INITIATION",
@@ -712,7 +712,7 @@ window.translations = {
       reset: "RESET",
       save: "SAVE",
       footer: "ECHO // INITIATION ACTIVE",
-      counter: "10 / 90",
+      counter: "10 / 60",
     },
     level11: {
       part: "PART 1 // INITIATION",
@@ -729,7 +729,7 @@ window.translations = {
       reset: "RESET",
       save: "SAVE",
       footer: "ECHO // INITIATION ACTIVE",
-      counter: "11 / 90",
+      counter: "11 / 60",
     },
     level12: {
       part: "PART 1 // INITIATION",
@@ -747,7 +747,7 @@ window.translations = {
       reset: "RESET",
       save: "SAVE",
       footer: "ECHO // INITIATION ACTIVE",
-      counter: "12 / 90",
+      counter: "12 / 60",
     },
     level13: {
       part: "PART 1 // INITIATION",
@@ -764,7 +764,7 @@ window.translations = {
       reset: "RESET",
       save: "SAVE",
       footer: "ECHO // INITIATION ACTIVE",
-      counter: "13 / 90",
+      counter: "13 / 60",
     },
     level14: {
       part: "PART 1 // INITIATION",
@@ -781,7 +781,7 @@ window.translations = {
       reset: "RESET",
       save: "SAVE",
       footer: "ECHO // INITIATION ACTIVE",
-      counter: "14 / 90",
+      counter: "14 / 60",
     },
     motionWarning: "WARNING: flashing lights and stroboscopic effects.",
     reduceStrobe: "Reduce stroboscopic effects",
@@ -907,7 +907,7 @@ window.translations = {
       {
         speaker: "SYSTEM:",
         className: "system",
-        text: "MISSION_OBJECTIVE:: RESTORE_ECHO_MEMORY // RECOVER_6_EMERGENCY_KEYS // REQUIRED_FRAGMENTS: 6 // DISTRIBUTED_LEVELS: 90 // DIFFICULTY_ESCALATION: EVERY_15_LEVELS // PROTOCOL: INFILTRATE_THE_RUPTURE",
+        text: "MISSION_OBJECTIVE:: RESTORE_ECHO_MEMORY // RECOVER_6_EMERGENCY_KEYS // REQUIRED_FRAGMENTS: 6 // DISTRIBUTED_LEVELS: 60 // DIFFICULTY_ESCALATION: EVERY_10_LEVELS // PROTOCOL: INFILTRATE_THE_RUPTURE",
       },
     ],
   },

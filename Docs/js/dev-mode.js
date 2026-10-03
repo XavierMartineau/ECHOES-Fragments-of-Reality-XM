@@ -25,49 +25,58 @@
       number: 1,
       name: "Initiation",
       start: 1,
-      end: 15,
-      folder: "partie-1_niveau-1_à_15",
+      end: 10,
+      folder: "partie-1_niveau-1_à_10",
     },
     {
       number: 2,
       name: "Fractures",
-      start: 16,
-      end: 30,
-      folder: "partie-2_niveau-16_à_30",
+      start: 11,
+      end: 20,
+      folder: "partie-2_niveau-11_à_20",
     },
     {
       number: 3,
       name: "Éclipse",
-      start: 31,
-      end: 45,
-      folder: "partie-3_niveau-31_à_45",
+      start: 21,
+      end: 30,
+      folder: "partie-3_niveau-21_à_30",
     },
     {
       number: 4,
       name: "Resonance",
-      start: 46,
-      end: 60,
-      folder: "partie-4_niveau-46_à_60",
+      start: 31,
+      end: 40,
+      folder: "partie-4_niveau-31_à_40",
     },
     {
       number: 5,
       name: "Convergence",
-      start: 61,
-      end: 75,
-      folder: "partie-5_niveau-61_à_75",
+      start: 41,
+      end: 50,
+      folder: "partie-5_niveau-41_à_50",
     },
     {
       number: 6,
       name: "Last Echo",
-      start: 76,
-      end: 90,
-      folder: "partie-6_niveau-76_à_90",
+      start: 51,
+      end: 60,
+      folder: "partie-6_niveau-51_à_60",
     },
   ];
 
+  const folderForLevel = (level) => {
+    if (level <= 10) return "partie-1_niveau-1_à_10";
+    if (level <= 20) return "partie-2_niveau-11_à_20";
+    if (level <= 30) return "partie-3_niveau-21_à_30";
+    if (level <= 40) return "partie-4_niveau-31_à_40";
+    if (level <= 50) return "partie-5_niveau-41_à_50";
+    return "partie-6_niveau-51_à_60";
+  };
+
   const levelLink = (level) =>
     new URL(
-      `Docs/html/${parts.find((part) => level >= part.start && level <= part.end).folder}/niveau-${String(level).padStart(2, "0")}.html`,
+      `Docs/html/${folderForLevel(level)}/niveau-${String(level).padStart(2, "0")}.html`,
       rootUrl,
     ).href;
 
@@ -87,6 +96,7 @@
         <button class="dev-mode-close" type="button" aria-label="Close menu">×</button>
       </div>
       <a class="dev-mode-home" href="${new URL("index.html", rootUrl).href}">Home</a>
+      <a class="dev-mode-home" href="${new URL("Docs/html/partie-bonus/bonus-01.html", rootUrl).href}">Partie bonus</a>
       <div class="dev-mode-navigation">
         <div class="dev-mode-parts">
           ${parts

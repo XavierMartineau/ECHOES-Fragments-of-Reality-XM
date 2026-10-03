@@ -349,7 +349,7 @@ missionButton.addEventListener("click", () => {
   missionButton.disabled = true;
   window.EchoesSave.saveProgress({ currentPage: "level-1", currentLevel: 1 });
   window.setTimeout(() => {
-    window.location.href = "partie-1_niveau-1_à_15/niveau-01.html";
+    window.location.href = "partie-1_niveau-1_à_10/niveau-01.html";
   }, 650);
 });
 

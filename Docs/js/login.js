@@ -41,15 +41,15 @@ function destinationForSave(save) {
   if (levelMatch) {
     const level = Number(levelMatch[1]);
     const parts = [
-      { start: 1, end: 15, folder: "partie-1_niveau-1_à_15" },
-      { start: 16, end: 30, folder: "partie-2_niveau-16_à_30" },
-      { start: 31, end: 45, folder: "partie-3_niveau-31_à_45" },
-      { start: 46, end: 60, folder: "partie-4_niveau-46_à_60" },
-      { start: 61, end: 75, folder: "partie-5_niveau-61_à_75" },
-      { start: 76, end: 90, folder: "partie-6_niveau-76_à_90" },
+      { start: 1, end: 10, folder: "partie-1_niveau-1_à_10" },
+      { start: 11, end: 20, folder: "partie-2_niveau-11_à_20" },
+      { start: 21, end: 30, folder: "partie-3_niveau-21_à_30" },
+      { start: 31, end: 40, folder: "partie-4_niveau-31_à_40" },
+      { start: 41, end: 50, folder: "partie-5_niveau-41_à_50" },
+      { start: 51, end: 60, folder: "partie-6_niveau-51_à_60" },
     ];
     const part = parts.find(({ start, end }) => level >= start && level <= end);
-    if (part) {
+    if (part && level <= 60) {
       const encodedFolder = encodeURIComponent(part.folder);
       return `${encodedFolder}/niveau-${String(level).padStart(2, "0")}.html`;
     }

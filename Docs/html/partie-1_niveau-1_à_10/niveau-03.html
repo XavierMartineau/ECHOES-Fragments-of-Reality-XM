@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../../assets/images/echoes-favicon.svg"
+    />
+    <title>ECHOES - Niveau 03</title>
+    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css?v=5" />
+    <link rel="stylesheet" href="../../css/responsive.css" />
+    <link rel="stylesheet" href="../../css/fonts.css" />
+  </head>
+  <body>
+    <div class="background-glow"></div>
+    <div class="grid-overlay"></div>
+    <header class="level-header">
+      <a class="brand" href="../../../index.html">ECHOES</a>
+      <div class="level-meta">
+        <span data-i18n="part">PARTIE 1 // INITIATION</span>
+        <div class="level-progress" id="levelProgress"></div>
+        <strong data-i18n="level">NIVEAU 03</strong>
+      </div>
+      <button class="save-game-button" id="saveGameButton" type="button">
+        SAUVEGARDER
+      </button>
+    </header>
+    <main
+      id="partie-1"
+      class="level-shell"
+      data-level-start="1"
+      data-level-end="15"
+    >
+      <section class="level-intro" aria-labelledby="levelTitle">
+        <p class="eyebrow" data-i18n="eyebrow">
+          Fragment 003 // Langage géométrique
+        </p>
+        <h1 id="levelTitle" data-i18n="title">Formes géométriques</h1>
+        <p class="level-description" data-i18n="description">
+          Les anciens symboles se sont dispersés. Classe chaque forme
+          holographique dans son emplacement mémoire.
+        </p>
+        <div class="system-transmission" aria-live="polite">
+          <span class="system-label" data-i18n="systemLabel">SYSTEM://LOG</span>
+          <p id="systemMessage">
+            SYSTEME:: 6 SYMBOLES DETECTES // CLASSIFICATION REQUISE
+          </p>
+        </div>
+      </section>
+      <section class="puzzle-panel" aria-labelledby="puzzleTitle">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-kicker" data-i18n="puzzleKicker">
+              PUZZLE // CLASSIFICATION
+            </p>
+            <h2 id="puzzleTitle" data-i18n="puzzleTitle">Lexique des formes</h2>
+          </div>
+          <span class="progress-readout" id="progressReadout">0 / 6</span>
+        </div>
+        <div class="sort-board puzzle-board" id="puzzleBoard">
+          <div
+            class="sort-slots"
+            id="sortSlots"
+            data-i18n-aria="slotsAria"
+            aria-label="Emplacements de classification"
+          ></div>
+          <div
+            class="sort-pieces"
+            id="sortPieces"
+            data-i18n-aria="piecesAria"
+            aria-label="Symboles géométriques à classer"
+          ></div>
+        </div>
+        <div class="puzzle-actions">
+          <button
+            class="sequence-start-button"
+            id="startPuzzleButton"
+            type="button"
+          >
+            DÉMARRER LE PUZZLE
+          </button>
+          <p class="puzzle-status" id="puzzleStatus">
+            Sélectionne un symbole, puis son emplacement mémoire.
+          </p>
+          <button
+            class="next-level-button"
+            id="nextLevelButton"
+            type="button"
+            hidden
+          >
+            CONTINUER VERS LE NIVEAU 4</button
+          ><button class="reset-button" id="resetButton" type="button">
+            Réinitialiser
+          </button>
+        </div>
+      </section>
+    </main>
+    <footer class="level-footer">
+      <span data-i18n="footer">ÉCHO // INITIATION ACTIVE</span
+      ><span data-i18n="counter">3 / 60</span>
+    </footer>
+    <script src="../../js/translations.js"></script>
+    <script src="../../js/save-system.js"></script>
+    <script src="../../js/partie-1_niveau-1_à_10.js?v=10"></script>
+    <script src="../../js/dev-mode.js"></script>
+  </body>
+</html>
+

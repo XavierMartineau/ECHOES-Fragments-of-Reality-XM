@@ -109,7 +109,7 @@ La référence narrative et fonctionnelle principale reste `documentation/Info-f
 
 ## Centralisation technique
 
-- Les niveaux 1 à 10 utilisent le script central `docs/js/partie-1_niveau-1_à_15.js`.
+- Les niveaux 1 à 10 utilisent le script central `docs/js/partie-1_niveau-1_à_10.js`.
 - Les contrôleurs séparés des niveaux 2 à 5 ont été supprimés.
 - Des sections clairement identifiées existent pour les niveaux 6 à 15.
 - Les feuilles CSS de toutes les parties possèdent une base responsive et des animations d'entrée.

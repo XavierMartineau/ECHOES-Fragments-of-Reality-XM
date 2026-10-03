@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../../assets/images/echoes-favicon.svg"
+    />
+    <title>ECHOES - Niveau 11</title>
+    <link rel="stylesheet" href="../../css/partie-2_niveau-11_à_20.css" />
+    <link rel="stylesheet" href="../../css/responsive.css" />
+    <link rel="stylesheet" href="../../css/fonts.css" />
+  </head>
+  <body>
+    <header class="level-header">
+      <a class="brand" href="../../../index.html">ECHOES</a>
+      <div class="level-meta">
+        <span>PARTIE 1 // INITIATION</span>
+        <div class="level-progress" id="levelProgress"></div>
+        <strong>NIVEAU 11</strong>
+      </div>
+      <button class="save-game-button" id="saveGameButton" type="button">
+        SAUVEGARDER
+      </button>
+    </header>
+    <main class="level-shell">
+      <section class="level-intro">
+        <p class="eyebrow">Fragment 011 // Paires de résonance</p>
+        <h1>Paires de résonance</h1>
+        <p class="level-description">
+          Trouve les cartes qui portent le même symbole.
+        </p>
+        <div class="system-transmission" aria-live="polite">
+          <span class="system-label">SYSTEM://LOG</span>
+          <p id="systemMessage">SYSTEME:: PAIRES DE RESONANCE EN ATTENTE</p>
+        </div>
+      </section>
+      <section class="puzzle-panel pairs-board">
+        <div class="panel-heading">
+          <h2>Cartes de résonance</h2>
+          <span class="progress-readout" id="progressReadout">0 / 3</span>
+        </div>
+        <div class="resonance-guide">
+          Chaque manche contient des paires identiques : 6, 12 puis 20 cartes.
+        </div>
+        <div class="resonance-pairs-grid" id="resonancePairsGrid"></div>
+        <div class="puzzle-actions">
+          <button
+            class="sequence-start-button"
+            id="startPuzzleButton"
+            type="button"
+          >
+            DÉMARRER LE PUZZLE
+          </button>
+          <p class="puzzle-status" id="puzzleStatus">
+            Clique deux cartes pour révéler leur symbole.
+          </p>
+          <button
+            class="next-level-button"
+            id="nextLevelButton"
+            type="button"
+            hidden
+          >
+            CONTINUER</button
+          ><button class="reset-button" id="resetButton" type="button">
+            Réinitialiser
+          </button>
+        </div>
+      </section>
+    </main>
+    <footer class="level-footer">
+      <span>ÉCHO // INITIATION ACTIVE</span><span>11 / 60</span>
+    </footer>
+    <script src="../../js/translations.js?v=5"></script>
+    <script src="../../js/save-system.js"></script>
+    <script src="../../js/partie-2_niveau-11_à_20.js?v=34"></script>
+    <script src="../../js/dev-mode.js"></script>
+  </body>
+</html>
