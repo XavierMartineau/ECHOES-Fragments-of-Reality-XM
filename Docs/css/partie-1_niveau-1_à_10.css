@@ -1465,6 +1465,44 @@ body.level-corruption .level-footer {
   box-shadow: 0 0 10px rgba(128, 255, 207, 0.85);
 }
 .puzzle-status {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(121, 247, 255, 0.22);
+  background: rgba(5, 7, 17, 0.5);
+  color: var(--text, #edfaff);
+  line-height: 1.55;
+}
+
+.puzzle-status::before {
+  content: "CONSIGNE";
+  color: var(--cyan, #79f7ff);
+  font-size: 0.58rem;
+  letter-spacing: 0.14rem;
+  text-transform: uppercase;
+}
+
+html[lang="en"] .puzzle-status::before {
+  content: "INSTRUCTIONS";
+}
+
+.puzzle-status.success::before {
+  content: "RÉUSSITE";
+}
+
+html[lang="en"] .puzzle-status.success::before {
+  content: "SUCCESS";
+}
+
+.puzzle-status.error::before {
+  content: "ATTENTION";
+}
+
+html[lang="en"] .puzzle-status.error::before {
+  content: "WARNING";
+}
+
+.puzzle-status {
   margin: 0;
   color: var(--muted);
   font-size: 0.9rem;
@@ -1570,9 +1608,15 @@ body.level-corruption .level-footer {
   text-transform: uppercase;
 }
 .color-sort-targets::before {
-  content: "TARGET COLORS";
+  content: "COULEURS CIBLES";
 }
 .color-sort-pieces::before {
+  content: "SYMBOLES À CLASSER";
+}
+html[lang="en"] .color-sort-targets::before {
+  content: "TARGET COLORS";
+}
+html[lang="en"] .color-sort-pieces::before {
   content: "SYMBOLS TO SORT";
 }
 .color-target,
