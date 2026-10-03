@@ -6,11 +6,8 @@
  * - Level 08: .advanced-sort-board -> color sorting.
  * - Level 09: .constellation-board -> three star sequences.
  * - Level 10: .color-sequence-board -> color memory sequence.
- * - Level 11: .pairs-board -> memory matching, 6/12/21 cards.
- * - Level 12: .ordering-board -> ordered card deposits.
- * - Level 13: .fractal-board -> five-panel fractal pattern.
- * - Level 14: .combined-sequence-board -> combined ordered sequence.
- * - Level 15: reserved placeholder; intentionally not constructed yet.
+ * - Levels 11-14: legacy puzzle blocks retained while their pages transition
+ *   to the second ten-level part.
  *
  * Each page identifies its controller through one marker in this table.
  */
@@ -93,7 +90,7 @@ const activeLevelScript = levelScriptByMarker.find(([marker]) =>
 );
 
 if (activeLevelScript) {
-  // Shared bootstrap for levels 2-14: language, save state, footer, and next link.
+  // Shared bootstrap for active puzzle pages: language, save state, footer, and next link.
   const language =
     localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const accountId = window.EchoesSave?.getCurrentUser?.() || "guest";
@@ -263,7 +260,7 @@ if (activeLevelScript) {
     const progress = document.getElementById("levelProgress");
     if (!progress) return;
     progress.replaceChildren();
-    for (let level = 1; level <= 15; level += 1) {
+    for (let level = 1; level <= 10; level += 1) {
       const square = document.createElement("span");
       square.className = "level-square";
       square.setAttribute("aria-label", `${levelCopy.level} ${level}`);
@@ -284,9 +281,9 @@ if (activeLevelScript) {
     renderProgress();
   };
   const successMessage = (message) => {
-    const sector = Math.ceil(levelNumber / 15);
+    const sector = Math.ceil(levelNumber / 10);
     const nextSector = Math.min(sector + 1, 6);
-    const remaining = sector * 15 - levelNumber;
+    const remaining = sector * 10 - levelNumber;
     return `${message} // ${remaining} NIVEAUX AVANT SECTEUR ${nextSector}`;
   };
   // Applies the selected language to the static labels of the active level.
@@ -1111,7 +1108,7 @@ if (activeLevelScript) {
     error: levelCopy.systemError,
   };
   const sectorProgressMessage = (message) => {
-    const remaining = 15 - currentLevel;
+    const remaining = 10 - currentLevel;
     return `${message} // ${remaining} NIVEAUX AVANT SECTEUR 2`;
   };
   const currentLevel = 1;
@@ -1206,10 +1203,10 @@ if (activeLevelScript) {
     updateProgress();
   }
 
-  // Renders the 15-level progress strip shown in the level header.
+  // Renders the ten-level progress strip shown in the level header.
   function renderProgress() {
     levelProgress.replaceChildren();
-    for (let level = 1; level <= 15; level += 1) {
+    for (let level = 1; level <= 10; level += 1) {
       const square = document.createElement("span");
       square.className = "level-square";
       square.dataset.level = level;
