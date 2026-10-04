@@ -21,7 +21,7 @@ const levelScriptByMarker = [
   [".advanced-sort-board", 8],
   [".constellation-board", 9],
   [".color-sequence-board", 10],
-  [".pairs-board", 11],
+  [".boss-board", 11],
   [".ordering-board", 12],
   [".fractal-board", 13],
   [".combined-sequence-board", 14],
@@ -52,7 +52,7 @@ function playPuzzleSuccessAnimation() {
     ["gate", ".gate-board, .cross-light-board, .ordering-board"],
     ["constellation", ".constellation-board"],
     ["color", ".color-sequence-board"],
-    ["pairs", ".pairs-board"],
+    ["boss", ".boss-board"],
   ];
   const animationType =
     animationTypes.find(([, selector]) => panel.matches(selector))?.[0] ||
@@ -138,7 +138,23 @@ function readCompletedLevels(storageKey) {
   }
 }
 
+function installKeyHud() {
+  if (document.querySelector(".key-hud")) return;
+  const hud = document.createElement("aside");
+  hud.className = "key-hud";
+  hud.setAttribute("aria-live", "polite");
+  hud.innerHTML = `<span class="key-hud-label">CLEE:</span><span class="key-hud-value">0 / 1</span>`;
+  document.body.appendChild(hud);
+  const keys = window.EchoesSave?.getKeys?.() || [];
+  const value = hud.querySelector(".key-hud-value");
+  if (keys.includes("resonance-1")) {
+    value.textContent = "1 / 1";
+    hud.classList.add("is-unlocked");
+  }
+}
+
 installProgressDots();
+installKeyHud();
 
 const activeLevelScript = levelScriptByMarker.find(([marker]) =>
   document.querySelector(marker),
@@ -1541,6 +1557,14 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
       currentLevel: levelNumber,
       completedLevels: levels,
     });
+    if (levelNumber === 11) {
+      window.EchoesSave?.unlockKey?.("resonance-1");
+      const keyHud = document.querySelector(".key-hud");
+      if (keyHud) {
+        keyHud.querySelector(".key-hud-value").textContent = "1 / 1";
+        keyHud.classList.add("is-unlocked");
+      }
+    }
     nextButton.hidden = false;
     startButton.disabled = true;
     setStatus(levelCopy?.statusSuccess || "Level stabilized.", "success");
@@ -1585,7 +1609,12 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
     reset();
   });
   nextButton.addEventListener("click", () => {
-    window.location.href = `niveau-${String(levelNumber + 1).padStart(2, "0")}.html`;
+    window.location.href =
+      levelNumber === 10
+        ? "clee_01_boss_level.html"
+        : levelNumber === 11
+        ? "../partie-2_niveau-11_à_20/niveau-12.html"
+        : `niveau-${String(levelNumber + 1).padStart(2, "0")}.html`;
   });
 
   const wasCompleted = completedLevels.has(levelNumber);
@@ -2004,6 +2033,207 @@ function installOrderedGridLevel(
       });
     });
     progress.textContent = `0 / ${sequence.length}`;
+  });
+}
+
+// CLEE_01 BOSS LEVEL // three escalating phases.
+if (document.querySelector(".boss-board")) {
+  installAdvancedLevel(11, ({ started, finish, setStatus, registerStart, registerReset }) => {
+    const arena = document.getElementById("bossArena");
+    const targets = document.getElementById("bossTargets");
+    const core = document.getElementById("bossCore");
+    const phaseLabel = document.getElementById("bossPhase");
+    const mathPanel = document.getElementById("bossMath");
+    const mathQuestion = document.getElementById("bossMathQuestion");
+    const mathOptions = document.getElementById("bossMathOptions");
+    const livesReadout = document.getElementById("bossLives");
+    const progress = arena.closest(".puzzle-panel").querySelector(".progress-readout");
+    const phases = [
+      { name: "PHASE 1 // BRISER LE BOUCLIER", sequence: [2, 5, 1, 4, 0, 3] },
+      { name: "PHASE 2 // ESQUIVER LES FAILLES", sequence: [4, 1, 5, 2, 0, 3, 5, 1] },
+    ];
+    let phase = 0;
+    let step = 0;
+    let locked = false;
+    let rhythmClicks = 0;
+    let lastPulse = 0;
+    let mathStep = 0;
+    let bossLives = 6;
+    let greenHits = 0;
+    let timers = [];
+    const clearTimers = () => timers.splice(0).forEach((timer) => window.clearTimeout(timer));
+    const renderLives = () => {
+      livesReadout.innerHTML = Array.from({ length: 6 }, (_, index) =>
+        `<svg class="boss-heart${index >= bossLives ? " is-lost" : ""}" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 21.2 3.4 12.8A5.6 5.6 0 0 1 11 4.6l1 1 1-1a5.6 5.6 0 0 1 7.6 8.2L12 21.2Z"/></svg>`,
+      ).join("");
+      livesReadout.setAttribute("aria-label", `${bossLives} vies restantes`);
+    };
+    const loseLife = (message) => {
+      bossLives = Math.max(0, bossLives - 1);
+      renderLives();
+      setStatus(`${message} Vies restantes : ${bossLives}.`, "error");
+      if (!bossLives) {
+        window.location.href = "boss-recovery.html?boss-lives=0";
+        return true;
+      }
+      return false;
+    };
+    const makeTargets = () => {
+      targets.innerHTML = Array.from({ length: 6 }, (_, index) =>
+        `<button class="boss-target boss-target-${index}" data-index="${index}" type="button" aria-label="Frappe ${index + 1}">${String(index + 1).padStart(2, "0")}</button>`,
+      ).join("");
+      targets.querySelectorAll(".boss-target").forEach((target) => {
+        target.addEventListener("click", () => {
+          if (!started() || locked) return;
+          const expected = phases[phase].sequence[step];
+          if (Number(target.dataset.index) !== expected) {
+            target.classList.add("is-error");
+            if (loseLife("Le Gardien contre-attaque.")) return;
+            step = 0;
+            return;
+          }
+          target.classList.add("is-correct");
+          greenHits += 1;
+          target.style.setProperty("--green-level", String(Math.min(0.85, 0.18 + greenHits * 0.025)));
+          step += 1;
+          progress.textContent = `${phase} / 3 // ${step} / ${phases[phase].sequence.length}`;
+          if (step === phases[phase].sequence.length) {
+            locked = true;
+            if (phase === 0) {
+              phase = 1;
+              step = 0;
+              setStatus("Armure fissurée. La seconde phase est plus rapide.", "success");
+              timers.push(window.setTimeout(() => startPhase(), 700));
+            } else {
+              setStatus("Le noyau est exposé. Frappe au rythme de ses pulsations.");
+              timers.push(window.setTimeout(startRhythm, 700));
+            }
+          }
+        });
+      });
+    };
+    const startPhase = () => {
+      phaseLabel.textContent = phases[phase].name;
+      progress.textContent = `${phase} / 3 // 0 / ${phases[phase].sequence.length}`;
+      makeTargets();
+      locked = true;
+      const previewDelay = phase === 0 ? 820 : 660;
+      phases[phase].sequence.forEach((index, order) => {
+        timers.push(window.setTimeout(() => {
+          const target = targets.querySelector(`[data-index="${index}"]`);
+          target?.classList.add("is-preview");
+          timers.push(window.setTimeout(() => target?.classList.remove("is-preview"), 420));
+        }, order * previewDelay));
+      });
+      timers.push(window.setTimeout(() => {
+        locked = false;
+        setStatus("À toi. Reproduis l'attaque sans te tromper.");
+      }, phases[phase].sequence.length * previewDelay + 500));
+    };
+    const startMath = () => {
+      phaseLabel.textContent = "PHASE 4 // CALCUL DU NOYAU";
+      progress.textContent = "3 / 4 // 0 / 4";
+      targets.replaceChildren();
+      core.classList.remove("is-vulnerable", "is-pulse");
+      mathPanel.hidden = false;
+      mathStep = 0;
+      const questions = [
+        [7, 8, "+", 15],
+        [12, 3, "×", 36],
+        [81, 9, "÷", 9],
+        [42, 17, "-", 25],
+      ];
+      const showQuestion = () => {
+        const [left, right, operator, answer] = questions[mathStep];
+        const choices = [answer, answer + 3, answer - 4, answer + 7].sort(() => Math.random() - 0.5);
+        mathQuestion.textContent = `${left} ${operator} ${right} = ?`;
+        mathOptions.innerHTML = choices.map((choice) =>
+          `<button class="boss-math-option" type="button" data-answer="${choice}">${choice}</button>`,
+        ).join("");
+        mathOptions.querySelectorAll(".boss-math-option").forEach((option) => {
+          option.addEventListener("click", () => {
+            if (Number(option.dataset.answer) !== answer) {
+              if (loseLife("Réponse incorrecte.")) return;
+              showQuestion();
+              return;
+            }
+            mathStep += 1;
+            progress.textContent = `3 / 4 // ${mathStep} / 4`;
+            if (mathStep === questions.length) {
+              mathPanel.hidden = true;
+              core.classList.add("is-defeated");
+              phaseLabel.textContent = "GARDIEN VAINCU // CLEE_01 DEBLOQUEE";
+              setStatus("Calculs validés. Le Gardien est vaincu.", "success");
+              finish();
+              return;
+            }
+            setStatus("Calcul validé. Le Gardien lance le calcul suivant.", "success");
+            showQuestion();
+          });
+        });
+      };
+      setStatus("Réponds aux quatre calculs. Six vies sont disponibles.");
+      showQuestion();
+    };
+    const startRhythm = () => {
+      phaseLabel.textContent = "PHASE 3 // LE RYTHME DU NOYAU";
+      progress.textContent = "2 / 3 // 0 / 3";
+      targets.replaceChildren();
+      rhythmClicks = 0;
+      core.classList.add("is-vulnerable");
+      const pulse = () => {
+        if (rhythmClicks >= 3) return;
+        lastPulse = performance.now();
+        core.classList.remove("is-pulse");
+        void core.offsetWidth;
+        core.classList.add("is-pulse");
+        timers.push(window.setTimeout(pulse, 1500));
+      };
+      pulse();
+      core.onclick = () => {
+        const elapsed = performance.now() - lastPulse;
+        if (!started() || elapsed < 450 || elapsed > 1150) {
+          if (loseLife("Impact hors rythme.")) return;
+          rhythmClicks = 0;
+          return;
+        }
+        rhythmClicks += 1;
+        progress.textContent = `2 / 3 // ${rhythmClicks} / 3`;
+        if (rhythmClicks === 3) {
+          core.classList.remove("is-vulnerable");
+          core.classList.add("is-defeated");
+          setStatus("Le noyau est ouvert. La dernière épreuve mathématique commence.", "success");
+          timers.push(window.setTimeout(startMath, 700));
+        }
+      };
+    };
+    const reset = () => {
+      clearTimers();
+      core.onclick = null;
+      core.className = "boss-core";
+      mathPanel.hidden = true;
+      mathOptions.replaceChildren();
+      bossLives = 6;
+      greenHits = 0;
+      renderLives();
+      phase = 0;
+      step = 0;
+      locked = false;
+      phaseLabel.textContent = phases[0].name;
+      progress.textContent = "0 / 3";
+      makeTargets();
+    };
+    registerStart(() => {
+      if (new URLSearchParams(window.location.search).has("recovered")) {
+        setStatus("Protocole de récupération validé. Reprends à la phase 4.", "success");
+        startMath();
+      } else {
+        setStatus("Le bouclier révèle ses failles. Mémorise puis frappe.");
+        startPhase();
+      }
+    });
+    registerReset(reset);
+    reset();
   });
 }
 

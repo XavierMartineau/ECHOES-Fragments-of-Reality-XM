@@ -83,9 +83,20 @@ window.EchoesSave = (() => {
         currentPage: "introduction",
         currentLevel: 0,
         completedLevels: [],
+        keys: [],
       },
       username,
     );
+  }
+
+  function getKeys(username = getCurrentUser()) {
+    return getSave(username)?.keys || [];
+  }
+
+  function unlockKey(keyId, username = getCurrentUser()) {
+    if (!username || !keyId) return false;
+    const keys = [...new Set(getKeys(username).concat(keyId))];
+    return saveProgress({ keys }, username);
   }
 
   function logout() {
@@ -100,6 +111,8 @@ window.EchoesSave = (() => {
     saveProgress,
     deleteSave,
     startNewGame,
+    getKeys,
+    unlockKey,
     logout,
   };
 })();

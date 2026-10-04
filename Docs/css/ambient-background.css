@@ -1,0 +1,100 @@
+html {
+  background: #040611;
+}
+
+body.echo-ambient-page {
+  --ambient-hue: 190;
+  --ambient-accent: #79f7ff;
+  --ambient-secondary: #b36cff;
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 18% 22%, color-mix(in srgb, var(--ambient-accent) 11%, transparent), transparent 28%),
+    radial-gradient(circle at 82% 76%, color-mix(in srgb, var(--ambient-secondary) 10%, transparent), transparent 31%);
+}
+
+.echo-ambient-field {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, transparent 0 38%, rgba(255, 255, 255, 0.025) 38.1% 38.2%, transparent 38.3% 100%),
+    repeating-linear-gradient(90deg, transparent 0 84px, rgba(121, 247, 255, 0.025) 85px, transparent 86px),
+    repeating-linear-gradient(0deg, transparent 0 84px, rgba(179, 108, 255, 0.02) 85px, transparent 86px);
+  opacity: 0.72;
+  animation: echo-ambient-grid 24s linear infinite;
+}
+
+.echo-ambient-field::before,
+.echo-ambient-field::after {
+  position: absolute;
+  width: 42vmin;
+  height: 42vmin;
+  border: 1px solid color-mix(in srgb, var(--ambient-accent) 18%, transparent);
+  border-radius: 50%;
+  content: "";
+  filter: blur(0.2px);
+  opacity: 0.52;
+}
+
+.echo-ambient-field::before {
+  top: 12%;
+  left: 8%;
+  box-shadow:
+    0 0 70px color-mix(in srgb, var(--ambient-accent) 12%, transparent),
+    inset 0 0 70px color-mix(in srgb, var(--ambient-secondary) 8%, transparent);
+  animation: echo-ambient-orbit 18s ease-in-out infinite alternate;
+}
+
+.echo-ambient-field::after {
+  right: 7%;
+  bottom: 8%;
+  width: 30vmin;
+  height: 30vmin;
+  border-color: color-mix(in srgb, var(--ambient-secondary) 18%, transparent);
+  box-shadow: 0 0 60px color-mix(in srgb, var(--ambient-secondary) 11%, transparent);
+  animation: echo-ambient-orbit-reverse 22s ease-in-out infinite alternate;
+}
+
+.echo-ambient-scan {
+  position: absolute;
+  top: -20%;
+  right: 0;
+  left: 0;
+  height: 18%;
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--ambient-accent) 8%, transparent), transparent);
+  opacity: 0.35;
+  animation: echo-ambient-scan 11s linear infinite;
+}
+
+body.echo-ambient-page > *:not(.echo-ambient-field) {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes echo-ambient-grid {
+  to { background-position: 86px 0, 84px 0, 0 84px; }
+}
+
+@keyframes echo-ambient-orbit {
+  to { transform: translate(13vw, 8vh) rotate(18deg) scale(1.16); }
+}
+
+@keyframes echo-ambient-orbit-reverse {
+  to { transform: translate(-10vw, -7vh) rotate(-22deg) scale(0.84); }
+}
+
+@keyframes echo-ambient-scan {
+  to { transform: translateY(720%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .echo-ambient-field,
+  .echo-ambient-field::before,
+  .echo-ambient-field::after,
+  .echo-ambient-scan {
+    animation: none !important;
+  }
+}

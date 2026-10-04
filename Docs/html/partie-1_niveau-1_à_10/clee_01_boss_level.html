@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/echoes-favicon.svg" />
+    <title>ECHOES - CLEE 01 BOSS LEVEL</title>
+    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css" />
+    <link rel="stylesheet" href="../../css/responsive.css" />
+    <link rel="stylesheet" href="../../css/fonts.css" />
+  </head>
+  <body>
+    <div class="background-glow"></div>
+    <div class="grid-overlay"></div>
+    <header class="level-header">
+      <a class="brand" href="../../../index.html">ECHOES</a>
+      <div class="level-meta">
+        <span>PARTIE 1 // INITIATION</span>
+        <div class="level-progress" id="levelProgress"></div>
+        <strong>CLEE_01 // BOSS LEVEL</strong>
+      </div>
+      <button class="save-game-button" id="saveGameButton" type="button">SAUVEGARDER</button>
+    </header>
+    <main class="level-shell" data-level-start="1" data-level-end="10">
+      <section class="level-intro">
+        <p class="eyebrow">CLEE_01 // GARDIEN DE LA RUPTURE</p>
+        <h1>Le Gardien de la Résonance</h1>
+        <p class="level-description">
+          Quatre phases, trois checks autorisés et une seule chance de stabiliser le noyau. Observe les attaques, résous les calculs et frappe au rythme exact.
+        </p>
+        <div class="system-transmission" aria-live="polite">
+          <span class="system-label">SYSTEM://BOSS_PROTOCOL</span>
+          <p id="systemMessage">SYSTEME:: GARDIEN ACTIF // ARMURE 4 PHASES // 6 VIES</p>
+        </div>
+      </section>
+      <section class="puzzle-panel boss-board">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-kicker">COMBAT // PROTOCOLE ZERO</p>
+            <h2>Gardien de la Résonance</h2>
+          </div>
+          <div class="boss-status-readout">
+            <span class="progress-readout" id="progressReadout">0 / 4</span>
+            <span class="boss-lives-label">VIES</span>
+            <span class="boss-lives" id="bossLives" aria-label="6 vies restantes"></span>
+          </div>
+        </div>
+        <div class="boss-arena" id="bossArena">
+          <div class="boss-core" id="bossCore" aria-label="Noyau du gardien">ECHO</div>
+          <div class="boss-targets" id="bossTargets"></div>
+          <div class="boss-math" id="bossMath" hidden>
+            <p class="boss-math-question" id="bossMathQuestion"></p>
+            <div class="boss-math-options" id="bossMathOptions"></div>
+          </div>
+          <div class="boss-phase" id="bossPhase">PHASE 1 // BRISER LE BOUCLIER</div>
+        </div>
+        <div class="puzzle-actions">
+          <button class="sequence-start-button" id="startPuzzleButton" type="button">DÉMARRER LE COMBAT</button>
+          <p class="puzzle-status" id="puzzleStatus">Détruis les quatre phases du Gardien. Tu as 6 vies.</p>
+          <button class="next-level-button" id="nextLevelButton" type="button" hidden>CONTINUER</button>
+          <button class="reset-button" id="resetButton" type="button">Réinitialiser</button>
+        </div>
+      </section>
+    </main>
+    <footer class="level-footer"><span>ÉCHO // INITIATION ACTIVE</span><span>CLEE_01</span></footer>
+    <script src="../../js/translations.js"></script>
+    <script src="../../js/save-system.js"></script>
+    <script src="../../js/partie-1_niveau-1_à_10.js?v=35"></script>
+    <script src="../../js/dev-mode.js"></script>
+  </body>
+</html>

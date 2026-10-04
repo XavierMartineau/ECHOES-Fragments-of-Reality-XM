@@ -27,6 +27,16 @@
       start: 1,
       end: 10,
       folder: "partie-1_niveau-1_à_10",
+      special: [
+        {
+          label: "CLEE_01 // BOSS",
+          file: "clee_01_boss_level.html",
+        },
+        {
+          label: "RÉCUPÉRATION",
+          file: "boss-recovery.html",
+        },
+      ],
     },
     {
       number: 2,
@@ -76,9 +86,11 @@
 
   const levelLink = (level) =>
     new URL(
-      `Docs/html/${folderForLevel(level)}/niveau-${String(level).padStart(2, "0")}.html`,
+      `docs/html/${folderForLevel(level)}/niveau-${String(level).padStart(2, "0")}.html`,
       rootUrl,
     ).href;
+  const specialLink = (part, file) =>
+    new URL(`docs/html/${part.folder}/${file}`, rootUrl).href;
 
   const menu = document.createElement("aside");
   menu.className = "dev-mode";
@@ -92,6 +104,7 @@
         <div>
           <span class="dev-mode-kicker">ECHO // NAVIGATOR</span>
           <strong>Developer Access</strong>
+          <small class="dev-mode-hint">Choisis une partie, puis un niveau</small>
         </div>
         <button class="dev-mode-close" type="button" aria-label="Close menu">×</button>
       </div>
@@ -105,6 +118,7 @@
                 <button class="dev-mode-part-toggle" type="button" data-part="${part.number}" aria-expanded="false">
                   <span>PART ${part.number}</span>
                   <span class="dev-mode-part-name">${part.name}</span>
+                  <span class="dev-mode-part-count">${part.end - part.start + 1} niveaux</span>
                   <span class="dev-mode-chevron" aria-hidden="true">›</span>
                 </button>
               `,
@@ -116,7 +130,7 @@
             .map(
               (part) => `
                 <div class="dev-mode-level-group" data-levels-for="${part.number}" hidden>
-                  <span class="dev-mode-level-title">PART ${part.number} // LEVELS</span>
+                  <span class="dev-mode-level-title">PART ${part.number} // NIVEAUX ${part.start}–${part.end}</span>
                   <div class="dev-mode-levels">
                     ${Array.from(
                       { length: part.end - part.start + 1 },
@@ -126,6 +140,19 @@
                       },
                     ).join("")}
                   </div>
+                  ${
+                    part.special
+                      ? `<div class="dev-mode-specials">
+                          <span class="dev-mode-special-title">ACCÈS SPÉCIAUX</span>
+                          ${part.special
+                            .map(
+                              (item) =>
+                                `<a class="dev-mode-special-link" href="${specialLink(part, item.file)}">${item.label}</a>`,
+                            )
+                            .join("")}
+                        </div>`
+                      : ""
+                  }
                 </div>
               `,
             )
@@ -156,6 +183,7 @@
       return;
     }
     setOpen(true);
+    showLevels("1");
   });
   close.addEventListener("click", () => setOpen(false));
 
@@ -175,9 +203,6 @@
   };
 
   partToggles.forEach((partToggle) => {
-    partToggle.addEventListener("mouseenter", () => {
-      showLevels(partToggle.dataset.part);
-    });
     partToggle.addEventListener("focus", () => {
       showLevels(partToggle.dataset.part);
     });

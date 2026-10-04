@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ECHOES - Protocole de récupération</title>
+    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css" />
+    <link rel="stylesheet" href="../../css/responsive.css" />
+    <link rel="stylesheet" href="../../css/fonts.css" />
+  </head>
+  <body>
+    <div class="background-glow"></div>
+    <div class="grid-overlay"></div>
+    <header class="level-header">
+      <a class="brand" href="../../../index.html">ECHOES</a>
+      <div class="level-meta"><span>PARTIE 1 // INITIATION</span><strong>PROTOCOLE DE RÉCUPÉRATION</strong></div>
+    </header>
+    <main class="level-shell recovery-shell">
+      <section class="level-intro">
+        <p class="eyebrow">ÉCHEC DES 3 CHECKS // DERNIÈRE CHANCE</p>
+        <h1>Rythme chromatique</h1>
+        <p class="level-description">Appuie sur le chiffre coloré actif dès qu’il atteint la ligne. Utilise les chiffres 1 à 6 de ton clavier PC ou clique les touches. Obtiens au moins 45 réussites sur 60 pour retourner à la phase 4.</p>
+        <div class="system-transmission"><span class="system-label">SYSTEM://RECOVERY</span><p id="recoveryMessage">Le Gardien attend ta dernière preuve de synchronisation.</p></div>
+      </section>
+      <section class="puzzle-panel recovery-board">
+        <div class="panel-heading"><h2>Color guitar // ECHO</h2><span class="progress-readout" id="recoveryProgress">0 / 60</span></div>
+        <div class="recovery-lanes" id="recoveryLanes">
+          <div class="recovery-hit-line"></div>
+          <div class="recovery-countdown" id="recoveryCountdown" hidden></div>
+          <button class="recovery-lane recovery-red" data-color="red" data-key="1" type="button" aria-label="Touche 1">1</button>
+          <button class="recovery-lane recovery-orange" data-color="orange" data-key="2" type="button" aria-label="Touche 2">2</button>
+          <button class="recovery-lane recovery-yellow" data-color="yellow" data-key="3" type="button" aria-label="Touche 3">3</button>
+          <button class="recovery-lane recovery-green" data-color="green" data-key="4" type="button" aria-label="Touche 4">4</button>
+          <button class="recovery-lane recovery-blue" data-color="blue" data-key="5" type="button" aria-label="Touche 5">5</button>
+          <button class="recovery-lane recovery-violet" data-color="violet" data-key="6" type="button" aria-label="Touche 6">6</button>
+          <button class="recovery-note is-hidden" id="recoveryNote" type="button" aria-label="Touche descendante"></button>
+        </div>
+        <div class="puzzle-actions">
+          <button class="sequence-start-button" id="recoveryStart" type="button">DÉMARRER LA RÉCUPÉRATION</button>
+          <p class="puzzle-status" id="recoveryStatus">Minimum requis : 45 / 60. Une touche manquée fait continuer la séquence.</p>
+        </div>
+      </section>
+    </main>
+    <script>
+      (() => {
+        const colors = ["red", "orange", "yellow", "green", "blue", "violet"];
+        const sequence = Array.from({ length: 60 }, (_, index) => (index * 5 + Math.floor(index / 3) + 1) % colors.length);
+        const phaseSpeeds = [1450, 950, 560];
+        const countdown = document.getElementById("recoveryCountdown");
+        const start = document.getElementById("recoveryStart");
+        const note = document.getElementById("recoveryNote");
+        const status = document.getElementById("recoveryStatus");
+        const message = document.getElementById("recoveryMessage");
+        const progress = document.getElementById("recoveryProgress");
+        let index = 0;
+        let active = false;
+        let timer;
+        let phase = 0;
+        let countdownTimer;
+        let running = false;
+        let score = 0;
+        let missFrame;
+        const phaseForIndex = () => Math.floor(index / 20);
+        const hideNote = () => {
+          note.className = "recovery-note is-hidden";
+          note.style.removeProperty("animation-duration");
+        };
+        const showNote = (color, colorIndex, duration) => {
+          note.className = "recovery-note is-hidden";
+          void note.offsetWidth;
+          note.dataset.color = color;
+          note.textContent = colorIndex + 1;
+          note.setAttribute("aria-label", `Touche descendante ${colorIndex + 1}`);
+          note.style.setProperty("--note-left", `${((colorIndex + 0.5) / colors.length) * 100}%`);
+          note.style.animation = "none";
+          note.style.top = "-48px";
+          note.className = `recovery-note recovery-note-${color}`;
+        };
+        const showCountdown = (nextPhase, callback) => {
+          active = false;
+          countdown.hidden = false;
+          let remaining = 5;
+          countdown.textContent = `PHASE ${nextPhase} // ${remaining}`;
+          countdownTimer = window.setInterval(() => {
+            remaining -= 1;
+            countdown.textContent = `PHASE ${nextPhase} // ${remaining}`;
+            if (remaining === 0) {
+              window.clearInterval(countdownTimer);
+              countdown.hidden = true;
+              callback();
+            }
+          }, 1000);
+        };
+        const missCurrentNote = () => {
+          if (!active) return;
+          active = false;
+          if (missFrame) window.cancelAnimationFrame(missFrame);
+          status.textContent = `Touche manquée. Score : ${score} / 60.`;
+          hideNote();
+          index += 1;
+          timer = window.setTimeout(next, 80);
+        };
+        const animateNote = (startedAt, duration) => {
+          if (!active || !running) return;
+          const target = document.querySelector(`.recovery-lane[data-key="${sequence[index] + 1}"]`);
+          const lanes = document.getElementById("recoveryLanes");
+          if (!target || !lanes) return;
+          const elapsed = performance.now() - startedAt;
+          const progressRatio = Math.min(1, elapsed / duration);
+          const lanesBox = lanes.getBoundingClientRect();
+          const hitLine = document.querySelector(".recovery-hit-line").getBoundingClientRect();
+          const targetMiddle = hitLine.top - lanesBox.top + hitLine.height / 2;
+          const noteTop = targetMiddle - note.offsetHeight / 2;
+          note.style.top = `${-48 + (noteTop + 48) * progressRatio}px`;
+          if (progressRatio >= 1) {
+            missCurrentNote();
+            return;
+          }
+          missFrame = window.requestAnimationFrame(() => animateNote(startedAt, duration));
+        };
+        const next = () => {
+          if (index === sequence.length) {
+            running = false;
+            if (score < 45) {
+              message.textContent = `Synchronisation insuffisante : ${score} / 60.`;
+              status.textContent = "Échec. Il faut au moins 45 réussites pour continuer.";
+              start.disabled = false;
+              hideNote();
+              return;
+            }
+            localStorage.setItem("echoes-boss-recovery", "complete");
+            message.textContent = "Synchronisation restaurée. Retour vers la phase 4.";
+            status.textContent = `Récupération réussie : ${score} / 60.`;
+            window.setTimeout(() => { window.location.href = "clee_01_boss_level.html?recovered=1"; }, 800);
+            return;
+          }
+          phase = phaseForIndex();
+          const colorIndex = sequence[index];
+          const color = colors[colorIndex];
+          showNote(color, colorIndex, phaseSpeeds[phase]);
+          progress.textContent = `${index} / ${sequence.length} // RÉUSSITES ${score}`;
+          active = true;
+          missFrame = window.requestAnimationFrame(() => animateNote(performance.now(), phaseSpeeds[phase]));
+        };
+        start.addEventListener("click", () => {
+          start.disabled = true;
+          if (!running) {
+            running = true;
+            if (index === sequence.length) {
+              index = 0;
+              score = 0;
+            }
+            status.textContent = `PHASE 1 // Réussites : ${score} / 60. Les erreurs font continuer.`;
+            next();
+          }
+        });
+        const playLane = (lane) => {
+            if (!active || !running || countdown.hidden === false) return;
+            active = false;
+            if (missFrame) window.cancelAnimationFrame(missFrame);
+            window.clearTimeout(timer);
+            if (lane.dataset.color !== colors[sequence[index]]) {
+              status.textContent = `Mauvais chiffre. La séquence continue // ${score} / 60.`;
+              hideNote();
+              index += 1;
+              timer = window.setTimeout(next, 80);
+              return;
+            }
+            score += 1;
+            index += 1;
+            status.textContent = `Touche synchronisée // ${score} réussites / ${index} touches`;
+            if (index > 0 && index % 20 === 0 && index < 60) {
+              showCountdown(phase + 2, next);
+              return;
+            }
+            timer = window.setTimeout(next, Math.max(80, phaseSpeeds[phase] - 180));
+        };
+        document.querySelectorAll(".recovery-lane").forEach((lane) => {
+          lane.addEventListener("click", () => playLane(lane));
+        });
+        note.addEventListener("click", () => {
+          const lane = document.querySelector(`.recovery-lane[data-color="${note.dataset.color}"]`);
+          if (lane) playLane(lane);
+        });
+        window.addEventListener("keydown", (event) => {
+          const key = event.key >= "1" && event.key <= "6" ? event.key : event.code.replace("Numpad", "");
+          const lane = document.querySelector(`.recovery-lane[data-key="${key}"]`);
+          if (!lane) return;
+          event.preventDefault();
+          lane.classList.add("is-keyboard-active");
+          window.setTimeout(() => lane.classList.remove("is-keyboard-active"), 140);
+          playLane(lane);
+        });
+      })();
+    </script>
+    <script src="../../js/dev-mode.js"></script>
+  </body>
+</html>

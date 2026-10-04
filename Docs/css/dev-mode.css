@@ -1,8 +1,10 @@
 .dev-mode {
-  position: fixed;
-  bottom: 100px;
-  left: 18px;
-  z-index: 1000;
+  position: fixed !important;
+  top: auto !important;
+  right: 18px;
+  bottom: 100px !important;
+  left: auto;
+  z-index: 2147483647;
   color: #edfaff;
   font-family: "Rajdhani", sans-serif;
 }
@@ -10,7 +12,8 @@
 @media (max-width: 560px) {
   .dev-mode {
     right: 12px;
-    bottom: 54px;
+    top: auto !important;
+    bottom: 54px !important;
     left: auto;
   }
 
@@ -138,6 +141,13 @@
   font-size: 0.82rem;
   letter-spacing: 0.06rem;
 }
+.dev-mode-hint {
+  display: block;
+  margin-top: 6px;
+  color: #9cabc4;
+  font-size: 0.72rem;
+  font-weight: 400;
+}
 
 .dev-mode-kicker {
   color: #79f7ff;
@@ -183,7 +193,7 @@
 
 .dev-mode-part-toggle {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(80px, 1fr) auto auto;
   align-items: center;
   width: 100%;
   gap: 10px;
@@ -212,6 +222,12 @@
 .dev-mode-part-name {
   color: #9cabc4;
   font-size: 0.86rem;
+}
+.dev-mode-part-count {
+  color: #79f7ff;
+  font-family: "Space Mono", monospace;
+  font-size: 0.58rem;
+  white-space: nowrap;
 }
 
 .dev-mode-chevron {
@@ -254,6 +270,69 @@
   text-align: center;
   text-decoration: none;
 }
+.dev-mode-levels a:hover,
+.dev-mode-levels a:focus-visible {
+  background: rgba(121, 247, 255, 0.18);
+  color: #fff;
+  outline: none;
+}
+.dev-mode-specials {
+  display: grid;
+  gap: 6px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 72, 184, 0.26);
+}
+.dev-mode-special-title {
+  color: #ff9cda;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.54rem;
+  letter-spacing: 0.07rem;
+}
+.dev-mode-special-link {
+  display: block;
+  padding: 9px 10px;
+  border: 1px solid rgba(255, 72, 184, 0.42);
+  background: rgba(255, 72, 184, 0.08);
+  color: #ffd4ed;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.05rem;
+  text-decoration: none;
+}
+.dev-mode-special-link:hover,
+.dev-mode-special-link:focus-visible {
+  background: rgba(255, 72, 184, 0.2);
+  color: #fff;
+  outline: none;
+}
+
+@media (min-width: 900px) {
+  .dev-mode {
+    bottom: 108px;
+    left: 28px;
+  }
+
+  .dev-mode-panel {
+    width: min(720px, calc(100vw - 56px));
+    max-height: min(72vh, 680px);
+  }
+
+  .dev-mode-navigation {
+    grid-template-columns: minmax(230px, 0.8fr) minmax(320px, 1.2fr);
+    gap: 18px;
+  }
+
+  .dev-mode-levels {
+    grid-template-columns: repeat(5, minmax(42px, 1fr));
+    gap: 7px;
+  }
+
+  .dev-mode-levels a {
+    padding: 9px 4px;
+    font-size: 0.62rem;
+  }
+}
 
 @media (max-width: 520px) {
   .dev-mode {
@@ -281,37 +360,55 @@
 .level-back-button,
 .page-back-button {
   position: fixed !important;
-  top: auto !important;
-  bottom: 52px !important;
+  top: 18px !important;
+  right: auto !important;
+  bottom: auto !important;
   left: 18px !important;
-  z-index: 999 !important;
+  z-index: 2147483647 !important;
+}
+
+/* These navigation controls must stay anchored to the viewport while a level scrolls. */
+.dev-mode {
+  position: fixed !important;
+  top: auto !important;
+  bottom: 100px !important;
+  transform: none !important;
+}
+
+.level-back-button,
+.page-back-button {
+  position: fixed !important;
+  transform: none !important;
 }
 
 @media (max-width: 520px) {
   .level-back-button,
   .page-back-button {
-    bottom: 46px !important;
+    top: 14px !important;
     left: 14px !important;
   }
 
   .dev-mode {
     right: auto;
-    bottom: 46px;
-    left: 116px;
+    top: auto !important;
+    bottom: 100px !important;
+    left: auto;
+    right: 14px;
   }
 }
 
 @media (max-width: 560px) {
   .dev-mode {
-    right: auto;
-    bottom: 46px;
-    left: 116px;
+    right: 14px;
+    top: auto !important;
+    bottom: 54px !important;
+    left: auto;
   }
 
   .dev-mode-panel {
     position: fixed;
     right: 12px;
-    bottom: 96px;
+    bottom: 150px;
     left: 12px;
     width: auto;
     max-height: min(68dvh, 540px);
