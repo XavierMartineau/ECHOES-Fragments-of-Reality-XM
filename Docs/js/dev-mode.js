@@ -170,6 +170,21 @@
   const footer = document.querySelector(
     ".level-footer, .site-footer, .console-footer, footer",
   );
+  const footerAlreadyHasCopyright =
+    footer &&
+    (footer.querySelector(".site-copyright") ||
+      footer.querySelector('[data-i18n="footerYear"]') ||
+      footer.querySelector('[data-i18n="footerRights"]') ||
+      footer.textContent.includes("© 2026"));
+  if (footer && !footerAlreadyHasCopyright) {
+    const copyright = document.createElement("span");
+    copyright.className = "site-copyright";
+    copyright.textContent =
+      localStorage.getItem("echoes-language") === "en"
+        ? "© 2026 Xavier Martineau · All rights reserved."
+        : "© 2026 Xavier Martineau · Tous droits réservés.";
+    footer.appendChild(copyright);
+  }
   if (footer) {
     footer.insertAdjacentElement("beforebegin", menu);
   } else {
