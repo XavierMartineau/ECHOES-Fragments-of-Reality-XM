@@ -186,6 +186,60 @@ html body .dev-mode {
   text-transform: uppercase;
 }
 
+.dev-mode-accessibility {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 10px 0;
+  padding: 9px 10px;
+  border: 1px solid rgba(121, 247, 255, 0.22);
+  color: #edfaff;
+  cursor: pointer;
+  font-size: 0.68rem;
+  letter-spacing: 0.04rem;
+}
+
+.dev-mode-accessibility input {
+  width: 16px;
+  height: 16px;
+  accent-color: #79f7ff;
+}
+
+body.echo-color-assist .recovery-lane,
+body.echo-color-assist .recovery-note {
+  border-width: 2px;
+  box-shadow: inset 0 0 0 2px rgba(5, 7, 17, 0.45);
+}
+
+body.echo-color-assist .recovery-lane::after,
+body.echo-color-assist .recovery-note::after {
+  display: block;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+body.echo-color-assist .recovery-red::after,
+body.echo-color-assist .recovery-note-red::after { content: "●"; }
+body.echo-color-assist .recovery-orange::after,
+body.echo-color-assist .recovery-note-orange::after { content: "◆"; }
+body.echo-color-assist .recovery-yellow::after,
+body.echo-color-assist .recovery-note-yellow::after { content: "▲"; }
+body.echo-color-assist .recovery-green::after,
+body.echo-color-assist .recovery-note-green::after { content: "■"; }
+body.echo-color-assist .recovery-blue::after,
+body.echo-color-assist .recovery-note-blue::after { content: "✚"; }
+body.echo-color-assist .recovery-violet::after,
+body.echo-color-assist .recovery-note-violet::after { content: "★"; }
+
+body.echo-color-assist .sequence-light {
+  filter: grayscale(0.2) contrast(1.35);
+}
+
+body.echo-color-assist .light-cyan::after { content: "●"; }
+body.echo-color-assist .light-blue::after { content: "◆"; }
+body.echo-color-assist .light-violet::after { content: "★"; }
+body.echo-color-assist .light-pink::after { content: "▲"; }
+
 .dev-mode-navigation {
   display: grid;
   grid-template-columns: minmax(165px, 0.85fr) minmax(220px, 1.15fr);

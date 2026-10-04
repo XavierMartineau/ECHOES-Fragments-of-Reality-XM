@@ -94,6 +94,7 @@
 
   const menu = document.createElement("aside");
   menu.className = "dev-mode";
+  const colorAssistKey = "echoes-color-assist";
   menu.innerHTML = `
     <button class="dev-mode-toggle" type="button" aria-expanded="false" aria-controls="devModePanel">
       <span class="dev-mode-icon" aria-hidden="true">☰</span>
@@ -110,6 +111,10 @@
       </div>
       <a class="dev-mode-home" href="${new URL("index.html", rootUrl).href}">Home</a>
       <a class="dev-mode-home" href="${new URL("Docs/html/partie-bonus/bonus-01.html", rootUrl).href}">Partie bonus</a>
+      <label class="dev-mode-accessibility">
+        <input type="checkbox" data-color-assist />
+        <span>REPÈRES COULEURS ACCESSIBLES</span>
+      </label>
       <div class="dev-mode-navigation">
         <div class="dev-mode-parts">
           ${parts
@@ -163,6 +168,15 @@
   `;
 
   document.body.appendChild(menu);
+
+  const colorAssist = menu.querySelector("[data-color-assist]");
+  const setColorAssist = (enabled) => {
+    document.body.classList.toggle("echo-color-assist", enabled);
+    colorAssist.checked = enabled;
+    localStorage.setItem(colorAssistKey, String(enabled));
+  };
+  setColorAssist(localStorage.getItem(colorAssistKey) === "true");
+  colorAssist.addEventListener("change", () => setColorAssist(colorAssist.checked));
 
   const toggle = menu.querySelector(".dev-mode-toggle");
   const panel = menu.querySelector(".dev-mode-panel");

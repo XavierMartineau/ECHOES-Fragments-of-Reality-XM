@@ -1853,6 +1853,48 @@ body.level-corruption .level-footer {
   background: var(--success);
   box-shadow: 0 0 10px rgba(128, 255, 207, 0.85);
 }
+.primary-alignment-progress .sequence-progress-dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-width: 2px;
+}
+.primary-alignment-progress .sequence-progress-dot.is-complete {
+  animation: alignment-dot-activate 0.45s ease-out both;
+}
+.primary-alignment-progress .sequence-progress-dot.is-complete:nth-child(n + 2)::before {
+  position: absolute;
+  top: 2px;
+  right: 100%;
+  width: 8px;
+  height: 2px;
+  background: var(--success);
+  box-shadow: 0 0 8px rgba(128, 255, 207, 0.8);
+  content: "";
+  transform-origin: right center;
+  animation: alignment-line-draw 0.35s ease-out 0.16s both;
+}
+.puzzle-panel.puzzle-victory-primary .primary-alignment-progress .sequence-progress-dot {
+  animation: alignment-dot-complete 0.9s ease-in-out infinite alternate;
+}
+@keyframes alignment-dot-activate {
+  from {
+    opacity: 0.45;
+    transform: scale(0.55);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes alignment-line-draw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes alignment-dot-complete {
+  from { filter: drop-shadow(0 0 5px rgba(128, 255, 207, 0.5)); }
+  to { filter: drop-shadow(0 0 14px rgba(128, 255, 207, 1)); }
+}
 .puzzle-status {
   display: grid;
   gap: 0.45rem;

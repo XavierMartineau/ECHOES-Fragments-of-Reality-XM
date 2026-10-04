@@ -337,11 +337,6 @@ svg {
     overflow: visible;
   }
 
-  .construction-crane {
-    transform-origin: 50% 85%;
-    animation: construction-sway 2.4s ease-in-out infinite;
-  }
-
   .construction-card {
     color: #ffffff;
   }
@@ -350,14 +345,6 @@ svg {
   .construction-card h1,
   .construction-card p {
     color: #ffffff !important;
-  }
-
-  .construction-weight {
-    animation: construction-weight 1.8s ease-in-out infinite;
-  }
-
-  .construction-light {
-    animation: construction-blink 1.1s steps(2, end) infinite;
   }
 
   .construction-card h1 {
@@ -373,17 +360,6 @@ svg {
     line-height: 1.7;
   }
 
-  @keyframes construction-sway {
-    50% { transform: rotate(1.5deg); }
-  }
-
-  @keyframes construction-weight {
-    50% { transform: translateY(15px); }
-  }
-
-  @keyframes construction-blink {
-    50% { opacity: 0.35; }
-  }
 }
 
 @media (max-width: 360px) {
@@ -396,40 +372,6 @@ svg {
     .construction-card h1,
     .construction-card p {
       color: #ffffff !important;
-    }
-  }
-
-  /* Construction artwork remains animated on every viewport size. */
-  .construction-crane {
-    transform-origin: 50% 85%;
-    animation: construction-sway 2.4s ease-in-out infinite;
-  }
-
-  .construction-weight {
-    animation: construction-weight 1.8s ease-in-out infinite;
-  }
-
-  .construction-light {
-    animation: construction-blink 1.1s steps(2, end) infinite;
-  }
-
-  @keyframes construction-sway {
-    50% { transform: rotate(1.5deg); }
-  }
-
-  @keyframes construction-weight {
-    50% { transform: translateY(15px); }
-  }
-
-  @keyframes construction-blink {
-    50% { opacity: 0.35; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .construction-crane,
-    .construction-weight,
-    .construction-light {
-      animation: none;
     }
   }
 
@@ -456,6 +398,15 @@ svg {
   .construction-card h1,
   .construction-card p {
     color: #ffffff !important;
+  }
+
+  .construction-page .construction-illustration > path {
+    display: none;
+  }
+
+  .level-back-button,
+  .page-back-button {
+    display: none !important;
   }
 
 @media (prefers-reduced-motion: reduce) {
