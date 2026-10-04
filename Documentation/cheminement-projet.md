@@ -10,7 +10,7 @@ reste [Info-fr.txt](./Info-fr.txt).
 - **Projet :** ECHOES: Fragments of Reality
 - **Type :** expérience narrative et jeu de puzzles web statique
 - **Déploiement visé :** GitHub Pages
-- **Version de travail :** bêta v1
+- **Version de travail :** bêta v4
 - **Jalon actuel :** intégration du boss `CLEE_01` et du protocole de récupération
 - **Fondations disponibles :** accueil, connexion, introduction interactive, sauvegarde par compte,
   mode développeur, navigation partagée et responsive multi-écrans
