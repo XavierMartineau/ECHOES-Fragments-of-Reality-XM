@@ -65,17 +65,17 @@
                 <span class="recovery-example-result" aria-label="Oui, correct">✓</span>
                 <span class="recovery-example-lane">1</span>
                 <span class="recovery-example-note">1</span>
-                <strong>TOUCHE 1 : CORRECTE</strong>
+                <strong>NOTE 1 : CORRECTE</strong>
               </div>
               <div class="recovery-example-column recovery-example-wrong">
                 <span class="recovery-example-result" aria-label="Non, erreur">×</span>
                 <span class="recovery-example-lane">2</span>
-                <span class="recovery-example-note">1</span>
-                <strong>MAUVAIS CHIFFRE : LA TOUCHE SORT</strong>
+                <span class="recovery-example-note">2</span>
+                <strong>NOTE 2 : ERREUR</strong>
               </div>
             </div>
           </div>
-          <p class="sequence-demo-legend" aria-live="polite"><span class="legend-correct">● CORRECT</span> touche 1 dans la zone 1 <span class="legend-wrong">● ERREUR</span> touche 1 dans la zone 2</p>
+          <p class="sequence-demo-legend" aria-live="polite"><span class="legend-correct">● CORRECT</span> note 1 dans la zone 1 <span class="legend-wrong">● ERREUR</span> note 2 dans la zone 2 — deux notes visibles en même temps, avec 1 seconde de décalage</p>
           <p class="puzzle-status" id="recoveryStatus">Minimum requis : 90 / 120. Une touche manquée fait continuer la séquence.</p>
         </div>
       </section>
@@ -89,7 +89,15 @@
         const minimumScore = 90;
         const phaseLength = totalNotes / 3;
         const recoveryStateKey = `echoes-boss-recovery-progress-${isMobile ? "mobile" : "desktop"}`;
-        const sequence = Array.from({ length: totalNotes }, (_, index) => (index * 5 + Math.floor(index / 3) + 1) % activeColors.length);
+        const sequence = [];
+        for (let index = 0; index < totalNotes; index += activeColors.length) {
+          const cycle = activeColors.map((_, colorIndex) => colorIndex);
+          for (let cursor = cycle.length - 1; cursor > 0; cursor -= 1) {
+            const swapIndex = Math.floor(Math.random() * (cursor + 1));
+            [cycle[cursor], cycle[swapIndex]] = [cycle[swapIndex], cycle[cursor]];
+          }
+          sequence.push(...cycle);
+        }
         const phaseSpeeds = isMobile ? [725, 600, 480] : [1250, 950, 740];
         const countdown = document.getElementById("recoveryCountdown");
         const start = document.getElementById("recoveryStart");
@@ -193,11 +201,6 @@
           }
           index += 1;
           window.setTimeout(() => hideNote(state), 100);
-          if (index === sequence.length) {
-            window.setTimeout(next, 120);
-          } else {
-            window.setTimeout(next, 80);
-          }
         };
         const animateNote = (state, startedAt, duration) => {
           if (!state.active || !running) return;
@@ -231,34 +234,41 @@
             window.setTimeout(() => { window.location.href = "clee_01_boss_level.html?recovered=1"; }, 800);
             return;
           }
-          if (spawnCursor >= sequence.length || activeNotes >= noteStates.length) return;
+          if (spawnCursor >= sequence.length) return;
           phase = phaseForIndex();
           const sequenceIndex = spawnCursor;
           spawnCursor += 1;
           const colorIndex = sequence[sequenceIndex];
           const color = activeColors[colorIndex];
           const duration = durationForIndex(sequenceIndex);
-          const state = noteStates.find((candidate) => !candidate.active);
+          const state = noteStates.find((candidate) =>
+            !candidate.active || candidate.element.classList.contains("is-hidden"),
+          );
           if (!state) return;
           showNote(state, sequenceIndex, color, colorIndex, duration);
           progress.textContent = `${index} / ${sequence.length} // RÉUSSITES ${score}`;
           state.frame = window.requestAnimationFrame(() => animateNote(state, performance.now(), duration));
-          if (spawnCursor < sequence.length && activeNotes < noteStates.length) {
-            timer = window.setTimeout(next, Math.max(180, Math.round(duration * 0.5)));
+        };
+        const pumpNotes = () => {
+          if (countdown.hidden === false || index >= sequence.length) return;
+          next();
+          if (running && spawnCursor < sequence.length) {
+            const randomDelay = 600 + Math.floor(Math.random() * 1000);
+            timer = window.setTimeout(pumpNotes, randomDelay);
           }
         };
         start.addEventListener("click", () => {
           start.disabled = true;
           if (!running) {
-            running = true;
             if (index === sequence.length) {
               index = 0;
               score = 0;
               spawnCursor = 0;
               index = 0;
             }
+            running = true;
             status.textContent = `PHASE 1 // Réussites : ${scoreLabel()}. Les erreurs font continuer.`;
-            next();
+            pumpNotes();
           }
         });
         const resetRecovery = () => {
@@ -283,6 +293,10 @@
         const playLane = (lane, state = noteStates.find((candidate) =>
           candidate.active && candidate.element.dataset.color === activeColors[sequence[candidate.sequenceIndex]],
         )) => {
+          lane.classList.remove("is-click-pulse");
+          void lane.offsetWidth;
+          lane.classList.add("is-click-pulse");
+          window.setTimeout(() => lane.classList.remove("is-click-pulse"), 360);
           if (!state || !running || countdown.hidden === false) return;
           window.clearTimeout(timer);
           completeNote(
@@ -329,8 +343,6 @@
           const lane = document.querySelector(`.recovery-lane[data-key="${key}"]`);
           if (!lane) return;
           event.preventDefault();
-          lane.classList.add("is-keyboard-active");
-          window.setTimeout(() => lane.classList.remove("is-keyboard-active"), 140);
           const state = noteStates.find((candidate) =>
             candidate.active && candidate.element.textContent === key,
           );
