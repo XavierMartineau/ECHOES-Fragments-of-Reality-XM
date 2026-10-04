@@ -24,7 +24,7 @@
       <section class="level-intro">
         <p class="eyebrow">ÉCHEC DES 3 CHECKS // DERNIÈRE CHANCE</p>
         <h1>Rythme chromatique</h1>
-        <p class="level-description">Appuie sur le chiffre coloré actif dès qu’il atteint la ligne. Utilise les chiffres 1 à 6 de ton clavier PC ou clique les touches. Obtiens au moins 45 réussites sur 60 pour retourner à la phase 4.</p>
+        <p class="level-description">Appuie sur les touches 1, 2 ou 3 quand elles atteignent leur zone lumineuse. Sur PC : 120 touches, rythme légèrement accéléré. Obtiens au moins 90 réussites.</p>
         <div class="system-transmission"><span class="system-label">SYSTEM://RECOVERY</span><p id="recoveryMessage">Le Gardien attend ta dernière preuve de synchronisation.</p></div>
       </section>
       <section class="puzzle-panel recovery-board">
@@ -35,7 +35,6 @@
           </div>
         </div>
         <div class="recovery-lanes" id="recoveryLanes">
-          <div class="recovery-hit-line"></div>
           <div class="recovery-countdown" id="recoveryCountdown" hidden role="status" aria-live="assertive">
             <span class="recovery-countdown-warning">⚠ AVERTISSEMENT // SYNCHRONISATION</span>
             <strong class="recovery-countdown-phase">PHASE 2</strong>
@@ -48,11 +47,36 @@
           <button class="recovery-lane recovery-green" data-color="green" data-key="4" type="button" aria-label="Touche 4">4</button>
           <button class="recovery-lane recovery-blue" data-color="blue" data-key="5" type="button" aria-label="Touche 5">5</button>
           <button class="recovery-lane recovery-violet" data-color="violet" data-key="6" type="button" aria-label="Touche 6">6</button>
-          <button class="recovery-note is-hidden" id="recoveryNote" type="button" aria-label="Touche descendante"></button>
+          <button class="recovery-note is-hidden" data-note-slot="0" type="button" aria-label="Touche descendante"></button>
+          <button class="recovery-note is-hidden" data-note-slot="1" type="button" aria-label="Touche descendante"></button>
+          <button class="recovery-note is-hidden" data-note-slot="2" type="button" aria-label="Touche descendante"></button>
         </div>
         <div class="puzzle-actions">
           <button class="sequence-start-button" id="recoveryStart" type="button">DÉMARRER LA RÉCUPÉRATION</button>
-          <p class="puzzle-status" id="recoveryStatus">Minimum requis : 45 / 60. Une touche manquée fait continuer la séquence.</p>
+          <button class="sequence-reset-button" id="recoveryReset" type="button">RÉINITIALISER</button>
+          <button class="sequence-demo-button" id="recoveryExampleButton" type="button" aria-expanded="false" aria-controls="recoveryExample"><span>VOIR UN EXEMPLE</span><span class="sequence-demo-arrow" aria-hidden="true">⌄</span></button>
+          <div class="recovery-example" id="recoveryExample" hidden>
+            <div class="recovery-example-heading">
+              <p class="recovery-example-title">EXEMPLE // UNE BONNE TOUCHE ET UNE ERREUR</p>
+              <button class="recovery-example-close" id="recoveryExampleClose" type="button" aria-label="Fermer l’exemple">×</button>
+            </div>
+            <div class="recovery-example-stage" aria-label="Démonstration visuelle">
+              <div class="recovery-example-column recovery-example-correct">
+                <span class="recovery-example-result" aria-label="Oui, correct">✓</span>
+                <span class="recovery-example-lane">1</span>
+                <span class="recovery-example-note">1</span>
+                <strong>TOUCHE 1 : CORRECTE</strong>
+              </div>
+              <div class="recovery-example-column recovery-example-wrong">
+                <span class="recovery-example-result" aria-label="Non, erreur">×</span>
+                <span class="recovery-example-lane">2</span>
+                <span class="recovery-example-note">1</span>
+                <strong>MAUVAIS CHIFFRE : LA TOUCHE SORT</strong>
+              </div>
+            </div>
+          </div>
+          <p class="sequence-demo-legend" aria-live="polite"><span class="legend-correct">● CORRECT</span> touche 1 dans la zone 1 <span class="legend-wrong">● ERREUR</span> touche 1 dans la zone 2</p>
+          <p class="puzzle-status" id="recoveryStatus">Minimum requis : 90 / 120. Une touche manquée fait continuer la séquence.</p>
         </div>
       </section>
     </main>
@@ -69,7 +93,7 @@
         const phaseSpeeds = isMobile ? [725, 600, 480] : [1250, 950, 740];
         const countdown = document.getElementById("recoveryCountdown");
         const start = document.getElementById("recoveryStart");
-        const note = document.getElementById("recoveryNote");
+        const notes = [...document.querySelectorAll(".recovery-note")];
         const status = document.getElementById("recoveryStatus");
         const message = document.getElementById("recoveryMessage");
         const progress = document.getElementById("recoveryProgress");
@@ -83,44 +107,20 @@
           }
         });
         let index = 0;
-        let active = false;
+        const noteStates = notes.map((element) => ({
+          element,
+          active: false,
+          sequenceIndex: -1,
+          frame: null,
+        }));
+        let activeNotes = 0;
+        let spawnCursor = 0;
         let timer;
         let phase = 0;
         let countdownTimer;
         let running = false;
         let score = 0;
-        let missFrame;
-        const saveProgress = () => {
-          localStorage.setItem(recoveryStateKey, JSON.stringify({
-            index,
-            score,
-            totalNotes,
-          }));
-        };
-        const savedProgress = (() => {
-          try {
-            const saved = JSON.parse(localStorage.getItem(recoveryStateKey) || "null");
-            if (
-              saved &&
-              saved.totalNotes === totalNotes &&
-              Number.isInteger(saved.index) &&
-              Number.isInteger(saved.score) &&
-              saved.index >= 0 &&
-              saved.index <= totalNotes &&
-              saved.score >= 0 &&
-              saved.score <= totalNotes
-            ) {
-              return saved;
-            }
-          } catch {
-            localStorage.removeItem(recoveryStateKey);
-          }
-          return null;
-        })();
-        if (savedProgress) {
-          index = savedProgress.index;
-          score = savedProgress.score;
-        }
+        localStorage.removeItem(recoveryStateKey);
         const phaseForIndex = () => Math.floor(index / phaseLength);
         const durationForIndex = () => {
           const phaseDuration = phaseSpeeds[Math.min(phaseForIndex(), phaseSpeeds.length - 1)];
@@ -130,37 +130,41 @@
         const scoreLabel = () => `${score} / ${totalNotes}`;
         const updateInstructions = () => {
           progress.textContent = `${index} / ${totalNotes} // RÉUSSITES ${score}`;
-          status.textContent = savedProgress
-            ? `Progression restaurée : ${scoreLabel()} // touche ${index} sur ${totalNotes}.`
-            : `Minimum requis : ${minimumScore} / ${totalNotes}. Une touche manquée fait continuer la séquence.`;
-          if (savedProgress) {
-            start.textContent = "REPRENDRE LA RÉCUPÉRATION";
-          }
+          status.textContent = `Minimum requis : ${minimumScore} / ${totalNotes}. Une touche manquée fait continuer la séquence.`;
           if (description) {
             description.textContent = isMobile
-              ? `Appuie sur les touches 1, 2 ou 3 dès qu’elles atteignent la ligne. Sur mobile : ${totalNotes} touches, vitesse 2×. Obtiens au moins ${minimumScore} réussites.`
-              : `Appuie sur les touches 1, 2 ou 3 dès qu’elles atteignent la ligne. Sur PC : ${totalNotes} touches, rythme légèrement accéléré. Obtiens au moins ${minimumScore} réussites.`;
+              ? `Appuie sur les touches 1, 2 ou 3 quand elles atteignent leur zone lumineuse. Sur mobile : ${totalNotes} touches, vitesse 2×. Obtiens au moins ${minimumScore} réussites.`
+              : `Appuie sur les touches 1, 2 ou 3 quand elles atteignent leur zone lumineuse. Sur PC : ${totalNotes} touches, rythme légèrement accéléré. Obtiens au moins ${minimumScore} réussites.`;
           }
         };
         updateInstructions();
-        const hideNote = () => {
-          note.className = "recovery-note is-hidden";
-          note.style.removeProperty("animation-duration");
+        const hideNote = (state) => {
+          state.active = false;
+          state.sequenceIndex = -1;
+          state.element.className = "recovery-note is-hidden";
+          state.element.style.removeProperty("--fall-duration");
+          state.element.style.removeProperty("--note-left");
         };
-        const showNote = (color, colorIndex, duration) => {
+        const showNote = (state, sequenceIndex, color, colorIndex, duration) => {
+          const note = state.element;
           note.className = "recovery-note is-hidden";
           void note.offsetWidth;
           note.dataset.color = color;
+          note.dataset.sequenceIndex = String(sequenceIndex);
           note.textContent = colorIndex + 1;
           note.setAttribute("aria-label", `Touche descendante ${colorIndex + 1}`);
           note.style.setProperty("--note-left", `${((colorIndex + 0.5) / activeColors.length) * 100}%`);
-          note.style.animation = "none";
-          note.style.top = "-48px";
           note.style.setProperty("--fall-duration", `${duration}ms`);
+          note.style.top = "-48px";
           note.className = `recovery-note recovery-note-${color}`;
+          state.active = true;
+          state.sequenceIndex = sequenceIndex;
+          activeNotes += 1;
         };
         const showCountdown = (nextPhase, callback) => {
-          active = false;
+          running = false;
+          noteStates.forEach(hideNote);
+          activeNotes = 0;
           countdown.hidden = false;
           let remaining = 5;
           countdownPhase.textContent = `PHASE ${nextPhase}`;
@@ -175,32 +179,41 @@
             }
           }, 1000);
         };
-        const missCurrentNote = () => {
-          if (!active) return;
-          active = false;
-          if (missFrame) window.cancelAnimationFrame(missFrame);
-          status.textContent = `Touche manquée. Score : ${scoreLabel()}.`;
-          hideNote();
+        const completeNote = (state, successful) => {
+          if (!state.active) return;
+          state.active = false;
+          activeNotes = Math.max(0, activeNotes - 1);
+          if (state.frame) window.cancelAnimationFrame(state.frame);
+          if (successful) {
+            score += 1;
+            status.textContent = `Touche synchronisée // ${score} réussites / ${index + 1} touches`;
+          } else {
+            status.textContent = `Touche manquée. Score : ${scoreLabel()}.`;
+            state.element.classList.add("is-error");
+          }
           index += 1;
-          saveProgress();
-          timer = window.setTimeout(next, 80);
+          window.setTimeout(() => hideNote(state), 100);
+          if (index === sequence.length) {
+            window.setTimeout(next, 120);
+          } else {
+            window.setTimeout(next, 80);
+          }
         };
-        const animateNote = (startedAt, duration) => {
-          if (!active || !running) return;
+        const animateNote = (state, startedAt, duration) => {
+          if (!state.active || !running) return;
           const lanes = document.getElementById("recoveryLanes");
           if (!lanes) return;
           const elapsed = performance.now() - startedAt;
           const progressRatio = Math.min(1, elapsed / duration);
           const lanesBox = lanes.getBoundingClientRect();
-          const hitLine = document.querySelector(".recovery-hit-line").getBoundingClientRect();
-          const targetMiddle = hitLine.top - lanesBox.top + hitLine.height / 2;
-          const noteTop = targetMiddle - note.offsetHeight / 2;
+          const note = state.element;
+          const noteTop = lanesBox.height - 105 - note.offsetHeight / 2;
           note.style.top = `${-48 + (noteTop + 48) * progressRatio}px`;
           if (progressRatio >= 1) {
-            missCurrentNote();
+            completeNote(state, false);
             return;
           }
-          missFrame = window.requestAnimationFrame(() => animateNote(startedAt, duration));
+          state.frame = window.requestAnimationFrame(() => animateNote(state, startedAt, duration));
         };
         const next = () => {
           if (index === sequence.length) {
@@ -209,24 +222,30 @@
               message.textContent = `Synchronisation insuffisante : ${scoreLabel()}.`;
               status.textContent = `Échec. Il faut au moins ${minimumScore} réussites pour continuer.`;
               start.disabled = false;
-              hideNote();
+              noteStates.forEach(hideNote);
               return;
             }
-            localStorage.removeItem(recoveryStateKey);
             localStorage.setItem("echoes-boss-recovery", "complete");
             message.textContent = "Synchronisation restaurée. Retour vers la phase 4.";
             status.textContent = `Récupération réussie : ${scoreLabel()}.`;
             window.setTimeout(() => { window.location.href = "clee_01_boss_level.html?recovered=1"; }, 800);
             return;
           }
+          if (spawnCursor >= sequence.length || activeNotes >= noteStates.length) return;
           phase = phaseForIndex();
-          const colorIndex = sequence[index];
+          const sequenceIndex = spawnCursor;
+          spawnCursor += 1;
+          const colorIndex = sequence[sequenceIndex];
           const color = activeColors[colorIndex];
-          const duration = durationForIndex();
-          showNote(color, colorIndex, duration);
+          const duration = durationForIndex(sequenceIndex);
+          const state = noteStates.find((candidate) => !candidate.active);
+          if (!state) return;
+          showNote(state, sequenceIndex, color, colorIndex, duration);
           progress.textContent = `${index} / ${sequence.length} // RÉUSSITES ${score}`;
-          active = true;
-          missFrame = window.requestAnimationFrame(() => animateNote(performance.now(), duration));
+          state.frame = window.requestAnimationFrame(() => animateNote(state, performance.now(), duration));
+          if (spawnCursor < sequence.length && activeNotes < noteStates.length) {
+            timer = window.setTimeout(next, Math.max(180, Math.round(duration * 0.5)));
+          }
         };
         start.addEventListener("click", () => {
           start.disabled = true;
@@ -235,41 +254,74 @@
             if (index === sequence.length) {
               index = 0;
               score = 0;
-              localStorage.removeItem(recoveryStateKey);
+              spawnCursor = 0;
+              index = 0;
             }
             status.textContent = `PHASE 1 // Réussites : ${scoreLabel()}. Les erreurs font continuer.`;
             next();
           }
         });
-        const playLane = (lane) => {
-            if (!active || !running || countdown.hidden === false) return;
-            active = false;
-            if (missFrame) window.cancelAnimationFrame(missFrame);
-            window.clearTimeout(timer);
-            if (lane.dataset.color !== activeColors[sequence[index]]) {
-              status.textContent = `Mauvais chiffre. La séquence continue // ${scoreLabel()}.`;
-              hideNote();
-              index += 1;
-              saveProgress();
-              timer = window.setTimeout(next, 80);
-              return;
-            }
-            score += 1;
-            index += 1;
-            saveProgress();
-            status.textContent = `Touche synchronisée // ${score} réussites / ${index} touches`;
-            if (index > 0 && index % phaseLength === 0 && index < totalNotes) {
-              showCountdown(phase + 2, next);
-              return;
-            }
-            timer = window.setTimeout(next, 20);
+        const resetRecovery = () => {
+          running = false;
+          window.clearTimeout(timer);
+          window.clearTimeout(countdownTimer);
+          noteStates.forEach((state) => {
+            if (state.frame) window.cancelAnimationFrame(state.frame);
+            hideNote(state);
+          });
+          index = 0;
+          score = 0;
+          phase = 0;
+          spawnCursor = 0;
+          activeNotes = 0;
+          start.disabled = false;
+          start.textContent = "DÉMARRER LA RÉCUPÉRATION";
+          message.textContent = "";
+          updateInstructions();
+        };
+        document.getElementById("recoveryReset").addEventListener("click", resetRecovery);
+        const playLane = (lane, state = noteStates.find((candidate) =>
+          candidate.active && candidate.element.dataset.color === activeColors[sequence[candidate.sequenceIndex]],
+        )) => {
+          if (!state || !running || countdown.hidden === false) return;
+          window.clearTimeout(timer);
+          completeNote(
+            state,
+            lane.dataset.color === activeColors[sequence[state.sequenceIndex]],
+          );
         };
         document.querySelectorAll(".recovery-lane").forEach((lane) => {
           lane.addEventListener("click", () => playLane(lane));
         });
-        note.addEventListener("click", () => {
-          const lane = document.querySelector(`.recovery-lane[data-color="${note.dataset.color}"]`);
-          if (lane) playLane(lane);
+        const exampleButton = document.getElementById("recoveryExampleButton");
+        const example = document.getElementById("recoveryExample");
+        const exampleClose = document.getElementById("recoveryExampleClose");
+        const exampleArrow = exampleButton.querySelector(".sequence-demo-arrow");
+        let exampleScrollTop = 0;
+        const setExampleOpen = (open, restoreScroll = window.scrollY) => {
+          const scrollTop = restoreScroll;
+          example.hidden = !open;
+          exampleButton.setAttribute("aria-expanded", String(open));
+          exampleButton.querySelector("span").textContent = open ? "FERMER L’EXEMPLE" : "VOIR UN EXEMPLE";
+          exampleArrow.textContent = open ? "⌃" : "⌄";
+          window.scrollTo(0, scrollTop);
+          window.requestAnimationFrame(() => window.scrollTo(0, scrollTop));
+          if (open) {
+            example.querySelector(".recovery-example-stage").classList.remove("is-playing");
+            void example.offsetWidth;
+            example.querySelector(".recovery-example-stage").classList.add("is-playing");
+          }
+        };
+        exampleButton.addEventListener("click", () => {
+          exampleScrollTop = window.scrollY;
+          setExampleOpen(example.hidden, exampleScrollTop);
+        });
+        exampleClose.addEventListener("click", () => setExampleOpen(false, exampleScrollTop));
+        noteStates.forEach((state) => {
+          state.element.addEventListener("click", () => {
+            const lane = document.querySelector(`.recovery-lane[data-color="${state.element.dataset.color}"]`);
+            if (lane) playLane(lane, state);
+          });
         });
         window.addEventListener("keydown", (event) => {
           const maxKey = "3";
@@ -279,7 +331,10 @@
           event.preventDefault();
           lane.classList.add("is-keyboard-active");
           window.setTimeout(() => lane.classList.remove("is-keyboard-active"), 140);
-          playLane(lane);
+          const state = noteStates.find((candidate) =>
+            candidate.active && candidate.element.textContent === key,
+          );
+          playLane(lane, state);
         });
       })();
     </script>

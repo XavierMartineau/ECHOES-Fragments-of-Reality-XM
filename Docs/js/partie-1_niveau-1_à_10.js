@@ -1590,6 +1590,7 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
     completed = false;
     resetCurrentRound = null;
     startButton.disabled = false;
+    startButton.hidden = false;
     nextButton.hidden = true;
     resetButton.classList.remove("reset-error");
     setStatus(levelCopy?.statusReady || "Ready.");
@@ -1610,6 +1611,7 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
   startButton.addEventListener("click", () => {
     started = true;
     startButton.disabled = true;
+    startButton.hidden = true;
     setStatus(levelCopy?.statusReady || "Choose a target.");
     onStart();
   });
@@ -2052,6 +2054,13 @@ function installOrderedGridLevel(
 // CLEE_01 BOSS LEVEL // three escalating phases.
 if (document.querySelector(".boss-board")) {
   installAdvancedLevel(11, ({ started, finish, setStatus, registerStart, registerReset }) => {
+    if (new URLSearchParams(window.location.search).has("recovered")) {
+      window.history.replaceState(
+        {},
+        document.title,
+        window.location.pathname,
+      );
+    }
     const arena = document.getElementById("bossArena");
     const targets = document.getElementById("bossTargets");
     const core = document.getElementById("bossCore");
@@ -2247,13 +2256,8 @@ if (document.querySelector(".boss-board")) {
       makeTargets();
     };
     registerStart(() => {
-      if (new URLSearchParams(window.location.search).has("recovered")) {
-        setStatus("Protocole de récupération validé. Reprends à la phase 4.", "success");
-        startMath();
-      } else {
-        setStatus("Le bouclier révèle ses failles. Mémorise puis frappe.");
-        startPhase();
-      }
+      setStatus("Le bouclier révèle ses failles. Mémorise puis frappe.");
+      startPhase();
     });
     registerReset(reset);
     reset();

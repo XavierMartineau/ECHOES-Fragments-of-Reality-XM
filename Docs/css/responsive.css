@@ -1207,15 +1207,6 @@ html:has(.intro-page),
       display: none;
     }
 
-    .recovery-hit-line {
-      right: 14px;
-      bottom: 31%;
-      left: 14px;
-      height: 3px;
-      z-index: 2;
-      opacity: 0.9;
-    }
-
     .recovery-note {
       width: 36px;
       height: 36px;
@@ -1252,10 +1243,6 @@ html:has(.intro-page),
       min-height: 64px;
     }
 
-    .recovery-hit-line {
-      right: 10px;
-      left: 10px;
-    }
   }
 
   .intro-page .top-bar {
