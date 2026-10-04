@@ -1800,6 +1800,7 @@ body.level-corruption .level-footer {
   background: rgba(7, 18, 35, 0.72);
   color: var(--cyan);
   cursor: pointer;
+  appearance: none;
   font-family: var(--font-display, "Orbitron", sans-serif);
   font-size: 0.68rem;
   transition: 0.2s ease;
@@ -1819,6 +1820,13 @@ body.level-corruption .level-footer {
   outline: none;
   box-shadow: 0 0 22px currentColor;
 }
+
+.sound-note:focus:not(:focus-visible),
+.sound-note:active {
+  background: rgba(7, 18, 35, 0.72);
+  color: inherit;
+  outline: none;
+}
 .sound-note.is-active,
 .sound-note.is-correct {
   background: currentColor;
@@ -1827,6 +1835,14 @@ body.level-corruption .level-footer {
     0 0 26px currentColor,
     0 0 50px currentColor;
   animation: light-pulse 0.42s ease-out;
+}
+
+.sound-note.is-correct {
+  background:
+    linear-gradient(rgba(128, 255, 207, 0.18), rgba(128, 255, 207, 0.18)),
+    rgba(7, 18, 35, 0.72);
+  color: currentColor;
+  box-shadow: 0 0 22px currentColor;
 }
 .sound-note.is-error {
   border-color: var(--danger);
