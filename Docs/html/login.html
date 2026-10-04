@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
@@ -11,13 +11,22 @@
     <title>ECHOES - Connexion</title>
     <link rel="stylesheet" href="../css/fonts.css" />
     <link rel="stylesheet" href="../css/login.css" />
+    <link rel="stylesheet" href="../css/ambient-background.css" />
   </head>
   <body>
     <div class="login-background"></div>
-    <a class="page-back-button" href="../../index.html">← RETOUR</a>
     <main class="login-shell">
-      <a class="login-brand" href="../../index.html">ECHOES</a>
+      <a
+        class="login-brand"
+        href="../../index.html"
+        aria-label="Retour à l'accueil ECHOES"
+        >ECHOES</a
+      >
       <section class="login-card" aria-labelledby="loginTitle">
+        <div class="login-status" aria-label="Statut du système">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>SYSTÈME MÉMOIRE // EN ATTENTE</span>
+        </div>
         <p class="login-kicker" data-i18n="loginKicker">
           SECURE ACCESS // MEMORY SYSTEM
         </p>
@@ -36,6 +45,7 @@
             autocomplete="username"
             required
           />
+          <small class="field-hint">Identifiant de votre fragment de mémoire</small>
           <label for="password" data-i18n="passwordLabel">Mot de passe</label>
           <div class="password-field">
             <input
@@ -56,6 +66,7 @@
               Afficher
             </button>
           </div>
+          <small class="field-hint">Protégez l’accès à votre progression</small>
           <p class="login-error" id="loginError" role="alert" hidden></p>
           <button class="login-submit" type="submit" data-i18n="loginSubmit">
             Se connecter
@@ -89,8 +100,6 @@
     <script src="../js/save-system.js?v=2"></script>
     <script src="../js/login.js?v=2"></script>
     <script src="../js/dev-mode.js"></script>
+    <script src="../js/ambient-background.js"></script>
   </body>
 </html>
-<a class="page-back-button" href="../../index.html">← RETOUR</a>
-
-

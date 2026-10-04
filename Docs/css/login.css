@@ -6,40 +6,6 @@
   --login-muted: #9cabc4;
   --login-danger: #ff6884;
 }
-.page-back-button {
-  position: fixed;
-  top: auto;
-  bottom: 22px;
-  left: 18px;
-  z-index: 5;
-  display: inline-block;
-  width: fit-content;
-  height: auto;
-  padding: 9px 12px;
-  border: 1px solid rgba(121, 247, 255, 0.5);
-  background: rgba(5, 7, 17, 0.9);
-  color: var(--login-cyan);
-  font-family: var(--font-display, "Orbitron", sans-serif);
-  font-size: 0.58rem;
-  letter-spacing: 0.08rem;
-  line-height: 1.2;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-.page-back-button:hover,
-.page-back-button:focus-visible {
-  background: rgba(121, 247, 255, 0.18);
-  box-shadow: 0 0 18px rgba(121, 247, 255, 0.32);
-  outline: none;
-}
-@media (max-width: 560px) {
-  .page-back-button {
-    top: auto;
-    bottom: 18px;
-    left: 14px;
-  }
-}
-
 * {
   box-sizing: border-box;
 }
@@ -86,8 +52,8 @@ body {
 }
 .login-brand {
   position: absolute;
-  top: 28px;
-  left: 32px;
+  top: 24px;
+  left: max(24px, calc((100% - 1180px) / 2));
   display: flex;
   align-items: center;
   gap: 12px;
@@ -97,7 +63,18 @@ body {
   font-weight: 800;
   letter-spacing: 0.24rem;
   text-decoration: none;
-  text-shadow: 0 0 14px rgba(121, 247, 255, 0.5);
+  text-shadow: 0 0 12px rgba(121, 247, 255, 0.32);
+  transition:
+    color 0.2s ease,
+    text-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+.login-brand:hover,
+.login-brand:focus-visible {
+  color: #fff;
+  outline: none;
+  text-shadow: 0 0 18px rgba(121, 247, 255, 0.85);
+  transform: translateY(-1px);
 }
 .login-brand::before {
   display: grid;
@@ -110,15 +87,21 @@ body {
     inset 0 0 12px rgba(121, 247, 255, 0.16);
   content: "E";
   font-size: 0.78rem;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 .login-brand:hover::before,
 .login-brand:focus-visible::before {
   background: rgba(121, 247, 255, 0.14);
   box-shadow:
-    0 0 28px rgba(121, 247, 255, 0.82),
-    inset 0 0 16px rgba(121, 247, 255, 0.3);
+    0 0 24px rgba(121, 247, 255, 0.76),
+    inset 0 0 14px rgba(121, 247, 255, 0.28);
+  transform: rotate(8deg) scale(1.06);
 }
 .login-card {
+  position: relative;
   width: min(500px, 100%);
   padding: clamp(28px, 5vw, 48px);
   border: 1px solid rgba(121, 247, 255, 0.32);
@@ -127,6 +110,45 @@ body {
     0 0 60px rgba(121, 247, 255, 0.12),
     inset 0 0 30px rgba(121, 247, 255, 0.04);
   backdrop-filter: blur(14px);
+}
+.login-card::before,
+.login-card::after {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  border-color: var(--login-cyan);
+  content: "";
+  pointer-events: none;
+}
+.login-card::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+.login-card::after {
+  right: -1px;
+  bottom: -1px;
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+}
+.login-status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 28px;
+  color: rgba(237, 250, 255, 0.58);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.56rem;
+  letter-spacing: 0.1rem;
+}
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--login-cyan);
+  box-shadow: 0 0 12px var(--login-cyan);
+  animation: login-pulse 1.8s ease-in-out infinite;
 }
 @media (min-width: 701px) {
   .login-card {
@@ -180,6 +202,11 @@ input {
   color: var(--login-text);
   font-size: 1rem;
   outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+input:hover {
+  border-color: rgba(121, 247, 255, 0.52);
+  background: rgba(4, 14, 30, 0.94);
 }
 input:focus {
   border-color: var(--login-cyan);
@@ -209,7 +236,14 @@ input:focus {
 .password-toggle:hover,
 .password-toggle:focus-visible {
   background: rgba(121, 247, 255, 0.2);
+  box-shadow: 0 0 14px rgba(121, 247, 255, 0.18);
   outline: none;
+}
+.field-hint {
+  margin-top: -3px;
+  color: rgba(156, 171, 196, 0.72);
+  font-size: 0.75rem;
+  letter-spacing: 0.02rem;
 }
 .login-submit,
 .save-actions button {
@@ -230,6 +264,11 @@ input:focus {
 .save-actions button:hover {
   background: rgba(121, 247, 255, 0.24);
   box-shadow: 0 0 22px rgba(121, 247, 255, 0.24);
+}
+.login-submit:focus-visible,
+.save-actions button:focus-visible {
+  outline: 2px solid var(--login-violet);
+  outline-offset: 3px;
 }
 .login-error {
   margin: 8px 0 0;
@@ -270,6 +309,13 @@ input:focus {
 }
 [hidden] {
   display: none !important;
+}
+@keyframes login-pulse {
+  0%, 100% { opacity: 0.55; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-dot { animation: none; }
 }
 @media (max-width: 560px) {
   .login-brand {

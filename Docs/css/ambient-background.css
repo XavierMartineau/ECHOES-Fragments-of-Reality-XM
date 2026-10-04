@@ -6,6 +6,8 @@ body.echo-ambient-page {
   --ambient-hue: 190;
   --ambient-accent: #79f7ff;
   --ambient-secondary: #b36cff;
+  --ambient-level-shift: 0deg;
+  --ambient-speed: 24s;
   position: relative;
   isolation: isolate;
   background:
@@ -16,7 +18,7 @@ body.echo-ambient-page {
 .echo-ambient-field {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   overflow: hidden;
   pointer-events: none;
   background:
@@ -24,7 +26,8 @@ body.echo-ambient-page {
     repeating-linear-gradient(90deg, transparent 0 84px, rgba(121, 247, 255, 0.025) 85px, transparent 86px),
     repeating-linear-gradient(0deg, transparent 0 84px, rgba(179, 108, 255, 0.02) 85px, transparent 86px);
   opacity: 0.72;
-  animation: echo-ambient-grid 24s linear infinite;
+  filter: hue-rotate(var(--ambient-level-shift));
+  animation: echo-ambient-grid var(--ambient-speed) linear infinite;
 }
 
 .echo-ambient-field::before,
@@ -72,6 +75,48 @@ body.echo-ambient-page {
 body.echo-ambient-page > *:not(.echo-ambient-field) {
   position: relative;
   z-index: 1;
+}
+
+body.echo-special-boss {
+  --ambient-accent: #ff456d;
+  --ambient-secondary: #8d1dff;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(255, 69, 109, 0.16), transparent 32%),
+    radial-gradient(circle at 50% 85%, rgba(141, 29, 255, 0.14), transparent 38%);
+}
+
+body.echo-special-recovery {
+  --ambient-accent: #ff1744;
+  --ambient-secondary: #aa00ff;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 23, 68, 0.14), transparent 30%),
+    radial-gradient(circle at 50% 90%, rgba(170, 0, 255, 0.14), transparent 40%);
+}
+
+body.echo-special-boss .echo-ambient-field,
+body.echo-special-recovery .echo-ambient-field {
+  opacity: 0.92;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 58px, rgba(255, 69, 109, 0.055) 59px, transparent 60px),
+    repeating-linear-gradient(0deg, transparent 0 58px, rgba(170, 0, 255, 0.045) 59px, transparent 60px),
+    linear-gradient(135deg, rgba(255, 69, 109, 0.06), transparent 42%, rgba(170, 0, 255, 0.07));
+  animation-duration: 9s;
+}
+
+body.echo-special-boss .echo-ambient-field::before,
+body.echo-special-boss .echo-ambient-field::after,
+body.echo-special-recovery .echo-ambient-field::before,
+body.echo-special-recovery .echo-ambient-field::after {
+  border-width: 2px;
+  opacity: 0.72;
+  animation-duration: 7s;
+}
+
+body.echo-special-boss .echo-ambient-scan,
+body.echo-special-recovery .echo-ambient-scan {
+  height: 28%;
+  opacity: 0.6;
+  animation-duration: 5s;
 }
 
 @keyframes echo-ambient-grid {

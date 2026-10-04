@@ -56,6 +56,13 @@
   }
 }
 
+/* Keep navigation controls attached to the viewport while page content scrolls. */
+html body .level-back-button,
+html body .page-back-button,
+html body .dev-mode {
+  position: fixed !important;
+}
+
 .dev-mode-toggle,
 .dev-mode-close,
 .dev-mode-part-toggle,
