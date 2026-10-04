@@ -404,7 +404,10 @@ if (activeLevelScript) {
     const demoButton = document.getElementById("sequenceDemoButton");
     const demoPanel = document.getElementById("sequenceDemoPanel");
     const transmission = document.querySelector(".system-transmission");
-    const sequence = shuffle([0, 1, 2, 3]);
+    const sequence = Array.from(
+      { length: 6 },
+      () => Math.floor(Math.random() * lights.length),
+    );
     let input = [];
     let watching = false;
     let solved = false;
@@ -438,16 +441,16 @@ if (activeLevelScript) {
           state(index, "active");
           window.setTimeout(
             () => currentToken === token && state(index, null),
-            420,
+            300,
           );
-        }, order * 720),
+        }, order * 560),
       );
       window.setTimeout(() => {
         if (currentToken !== token) return;
         watching = false;
         start.disabled = false;
         status.textContent = levelCopy.statusPlaying;
-      }, sequence.length * 720);
+      }, sequence.length * 560);
     };
     const solve = () => {
       solved = true;
@@ -765,7 +768,10 @@ if (activeLevelScript) {
     const reset = document.getElementById("resetButton");
     const next = document.getElementById("nextLevelButton");
     const transmission = document.querySelector(".system-transmission");
-    const sequence = shuffle([0, 1, 2, 3]);
+    const sequence = Array.from(
+      { length: 6 },
+      () => Math.floor(Math.random() * notes.length),
+    );
     const frequencies = [196, 261.63, 392, 523.25];
     let input = [];
     let watching = false;
@@ -791,7 +797,7 @@ if (activeLevelScript) {
     const play = () => {
       watching = true;
       input = [];
-      readout.textContent = "0 / 4";
+      readout.textContent = `0 / ${sequence.length}`;
       start.disabled = true;
       sequence.forEach((index, order) =>
         window.setTimeout(() => {
@@ -799,15 +805,15 @@ if (activeLevelScript) {
           notes[index].classList.add("is-active");
           window.setTimeout(
             () => notes[index].classList.remove("is-active"),
-            420,
+            300,
           );
-        }, order * 720),
+        }, order * 560),
       );
       window.setTimeout(() => {
         watching = false;
         start.disabled = false;
         status.textContent = levelCopy.statusPlaying;
-      }, 2880);
+      }, sequence.length * 560);
     };
     const finish = () => {
       solved = true;
@@ -827,7 +833,7 @@ if (activeLevelScript) {
         const index = Number(note.dataset.note);
         tone(index);
         input.push(index);
-        readout.textContent = `${input.length} / 4`;
+        readout.textContent = `${input.length} / ${sequence.length}`;
         if (index !== sequence[input.length - 1]) {
           note.classList.add("is-error");
           status.textContent = levelCopy.statusError;
@@ -848,7 +854,7 @@ if (activeLevelScript) {
         );
         transmission.classList.remove("success");
         input = [];
-        readout.textContent = "0 / 4";
+        readout.textContent = `0 / ${sequence.length}`;
         status.className = "puzzle-status";
         status.textContent = levelCopy.statusReady;
         system.textContent = levelCopy.systemInput;
@@ -907,7 +913,7 @@ if (activeLevelScript) {
     system.textContent = levelCopy.systemInput;
     const renderPattern = () => {
       targetIndexes = new Set(
-        shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 3),
+      shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 5),
       );
       targetGlyph =
         targetGlyphs[Math.floor(Math.random() * targetGlyphs.length)];
@@ -926,8 +932,8 @@ if (activeLevelScript) {
             button.classList.add("is-correct");
             button.disabled = true;
             found += 1;
-            readout.textContent = `${found} / 3`;
-            if (found === 3) {
+            readout.textContent = `${found} / 5`;
+            if (found === 5) {
               status.textContent = levelCopy.statusSuccess;
               status.className = "puzzle-status success";
               transmission.classList.add("success");
@@ -970,7 +976,7 @@ if (activeLevelScript) {
       grid
         .querySelectorAll("button")
         .forEach((button) => (button.disabled = true));
-      readout.textContent = "0 / 3";
+      readout.textContent = "0 / 5";
       status.className = "puzzle-status";
       status.textContent = levelCopy.statusReady;
       transmission.classList.remove("success");
@@ -1717,9 +1723,9 @@ if (document.querySelector(".constellation-board")) {
   installAdvancedLevel(9, ({ started, finish, setStatus }) => {
     const field = document.getElementById("constellationField");
     const sequences = [
-      [2, 5, 1, 6],
-      [4, 1, 6, 3],
-      [3, 6, 2, 5],
+      [2, 5, 1, 6, 3],
+      [4, 1, 6, 3, 5],
+      [3, 6, 2, 5, 4],
     ];
     const positions = [
       [18, 28],
@@ -1865,7 +1871,7 @@ if (document.querySelector(".color-sequence-board")) {
       let nextSequence;
       do {
         nextSequence = [];
-        for (let index = 0; index < 5; index += 1) {
+        for (let index = 0; index < 7; index += 1) {
           const previousColor = nextSequence[index - 1];
           const available = colors.filter((color) => color !== previousColor);
           nextSequence.push(
@@ -1982,7 +1988,7 @@ if (document.querySelector(".color-sequence-board")) {
     });
     replayButton.hidden = true;
     replayButton.textContent = replayLabel;
-    progress.textContent = "0 / 5";
+    progress.textContent = "0 / 7";
   });
 }
 
@@ -2244,7 +2250,7 @@ if (document.querySelector(".pairs-board")) {
     const progress = grid
       .closest(".puzzle-panel")
       .querySelector(".progress-readout");
-    const roundCardCounts = [6, 12, 20];
+    const roundCardCounts = [8, 14, 20];
     const round = { index: 0, selected: [], found: 0, locked: false };
     const symbols = ["◇", "◈", "✦", "⬡", "✚", "✧", "✺", "★", "✥", "⬢"];
     const symbolTones = {
@@ -2380,7 +2386,7 @@ if (document.querySelector(".cross-light-board")) {
     "crossLightGrid",
     "cross-light",
     9,
-    [0, 4, 8, 1, 5],
+    [0, 4, 8, 1, 5, 7],
   );
 }
 // Level 14 // Combined protocol: reproduce the ordered mixed signal.
@@ -2389,8 +2395,8 @@ if (document.querySelector(".combined-sequence-board")) {
     14,
     "combinedSequenceGrid",
     "combined-sequence",
-    5,
-    [0, 2, 4, 1, 3],
+    6,
+    [0, 2, 4, 1, 3, 5],
   );
 }
 

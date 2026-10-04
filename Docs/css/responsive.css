@@ -342,6 +342,16 @@ svg {
     animation: construction-sway 2.4s ease-in-out infinite;
   }
 
+  .construction-card {
+    color: #ffffff;
+  }
+
+  .construction-card .eyebrow,
+  .construction-card h1,
+  .construction-card p {
+    color: #ffffff !important;
+  }
+
   .construction-weight {
     animation: construction-weight 1.8s ease-in-out infinite;
   }
@@ -381,6 +391,48 @@ svg {
     padding-inline: 10px;
   }
 
+  @media (min-width: 361px) {
+    .construction-card .eyebrow,
+    .construction-card h1,
+    .construction-card p {
+      color: #ffffff !important;
+    }
+  }
+
+  /* Construction artwork remains animated on every viewport size. */
+  .construction-crane {
+    transform-origin: 50% 85%;
+    animation: construction-sway 2.4s ease-in-out infinite;
+  }
+
+  .construction-weight {
+    animation: construction-weight 1.8s ease-in-out infinite;
+  }
+
+  .construction-light {
+    animation: construction-blink 1.1s steps(2, end) infinite;
+  }
+
+  @keyframes construction-sway {
+    50% { transform: rotate(1.5deg); }
+  }
+
+  @keyframes construction-weight {
+    50% { transform: translateY(15px); }
+  }
+
+  @keyframes construction-blink {
+    50% { opacity: 0.35; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .construction-crane,
+    .construction-weight,
+    .construction-light {
+      animation: none;
+    }
+  }
+
   .content {
     padding-inline: 15px;
   }
@@ -397,6 +449,14 @@ svg {
     display: none;
   }
 }
+
+  /* Keep construction copy readable outside the mobile media-query block. */
+  .construction-card,
+  .construction-card .eyebrow,
+  .construction-card h1,
+  .construction-card p {
+    color: #ffffff !important;
+  }
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -619,6 +679,14 @@ html:has(.intro-page),
     width: 100%;
     margin: 0;
     padding: 18px 20px 58px;
+  }
+
+  /* Keep construction copy readable on desktop and mobile. */
+  .construction-card,
+  .construction-card .eyebrow,
+  .construction-card h1,
+  .construction-card p {
+    color: #ffffff !important;
   }
 
   @media (max-width: 650px) {
