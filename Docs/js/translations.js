@@ -206,6 +206,8 @@ window.translations = {
       progressAria: "Progression des niveaux 1 à 10",
       notesAria: "Notes holographiques à jouer",
       watchSequence: "ÉCOUTER LA SÉQUENCE",
+      volumeLabel: "VOLUME DES NOTES",
+      volumeAria: "Volume des notes du puzzle",
       statusReady:
         "Écoute la séquence, puis rejoue les notes dans le même ordre.",
       statusWatching: "La mémoire sonore se rejoue...",
@@ -678,6 +680,8 @@ window.translations = {
       progressAria: "Progress for levels 1 to 10",
       notesAria: "Holographic notes to play",
       watchSequence: "LISTEN TO THE SEQUENCE",
+      volumeLabel: "NOTE VOLUME",
+      volumeAria: "Puzzle note volume",
       statusReady: "Listen to the sequence, then replay the notes in order.",
       statusWatching: "The sound memory is replaying...",
       statusPlaying: "Your turn. Repeat the notes you heard.",

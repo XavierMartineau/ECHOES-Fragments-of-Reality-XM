@@ -780,7 +780,7 @@ if (activeLevelScript) {
     const next = document.getElementById("nextLevelButton");
     const transmission = document.querySelector(".system-transmission");
     const sequence = Array.from(
-      { length: 6 },
+      { length: 4 },
       () => Math.floor(Math.random() * notes.length),
     );
     const frequencies = [196, 261.63, 392, 523.25];
@@ -818,13 +818,13 @@ if (activeLevelScript) {
             () => notes[index].classList.remove("is-active"),
             300,
           );
-        }, order * 560),
+        }, order * 700),
       );
       window.setTimeout(() => {
         watching = false;
         start.disabled = false;
         status.textContent = levelCopy.statusPlaying;
-      }, sequence.length * 560);
+      }, sequence.length * 700);
     };
     const finish = () => {
       solved = true;
@@ -2846,8 +2846,14 @@ if (document.querySelector(".fractal-board")) {
       items.appendChild(item);
     });
     content.append(closeButton, title, description, items);
-    const startButton = actions.querySelector("#startPuzzleButton");
-    wrapper.append(button, startButton, content);
+    const startButton = actions.querySelector(
+      "#startPuzzleButton, #sequenceStartButton",
+    );
+    if (startButton) {
+      wrapper.append(button, startButton, content);
+    } else {
+      wrapper.append(button, content);
+    }
     actions.prepend(wrapper);
     const setDemoOpen = (open) => {
       content.hidden = !open;
