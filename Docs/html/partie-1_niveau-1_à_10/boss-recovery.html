@@ -87,7 +87,8 @@
         const activeColors = colors.slice(0, 3);
         const totalNotes = 120;
         const minimumScore = 90;
-        const phaseLength = totalNotes / 3;
+        const phaseLength = totalNotes / 4;
+        const noteSpeedMultiplier = 1.5;
         const recoveryStateKey = `echoes-boss-recovery-progress-${isMobile ? "mobile" : "desktop"}`;
         const sequence = [];
         for (let index = 0; index < totalNotes; index += activeColors.length) {
@@ -98,7 +99,13 @@
           }
           sequence.push(...cycle);
         }
-        const phaseSpeeds = isMobile ? [725, 600, 480] : [1250, 950, 740];
+        const phaseSpeeds = isMobile ? [1200, 1100, 1025, 975] : [1200, 1100, 1025, 975];
+        const dropDelayRanges = [
+          [200, 1000],
+          [200, 700],
+          [200, 650],
+          [200, 450],
+        ];
         const countdown = document.getElementById("recoveryCountdown");
         const start = document.getElementById("recoveryStart");
         const notes = [...document.querySelectorAll(".recovery-note")];
@@ -129,11 +136,11 @@
         let running = false;
         let score = 0;
         localStorage.removeItem(recoveryStateKey);
-        const phaseForIndex = () => Math.floor(index / phaseLength);
-        const durationForIndex = () => {
-          const phaseDuration = phaseSpeeds[Math.min(phaseForIndex(), phaseSpeeds.length - 1)];
-          const acceleration = Math.pow(isMobile ? 0.998 : 0.998, index);
-          return Math.max(isMobile ? 390 : 680, phaseDuration * acceleration);
+        const phaseForIndex = (sequenceIndex = index) => Math.floor(sequenceIndex / phaseLength);
+        const durationForIndex = (sequenceIndex = index) => {
+          const phaseDuration = phaseSpeeds[Math.min(phaseForIndex(sequenceIndex), phaseSpeeds.length - 1)];
+          const acceleration = Math.pow(isMobile ? 0.998 : 0.998, sequenceIndex);
+          return Math.max((isMobile ? 390 : 680) / noteSpeedMultiplier, (phaseDuration * acceleration) / noteSpeedMultiplier);
         };
         const scoreLabel = () => `${score} / ${totalNotes}`;
         const updateInstructions = () => {
@@ -210,8 +217,20 @@
           const progressRatio = Math.min(1, elapsed / duration);
           const lanesBox = lanes.getBoundingClientRect();
           const note = state.element;
-          const noteTop = lanesBox.height - 105 - note.offsetHeight / 2;
-          note.style.top = `${-48 + (noteTop + 48) * progressRatio}px`;
+          const lane = document.querySelector(`.recovery-lane[data-color="${state.element.dataset.color}"]`);
+          const laneBox = lane ? lane.getBoundingClientRect() : null;
+          const noteHeight = note.getBoundingClientRect().height;
+          const startTop = -noteHeight;
+          const laneHeight = laneBox ? laneBox.height : 72;
+          const endTop = laneBox
+            ? laneBox.bottom - lanesBox.top + laneHeight
+            : lanesBox.height + laneHeight;
+          const nextTop = startTop + (endTop - startTop) * progressRatio;
+          note.style.top = `${nextTop}px`;
+          note.classList.toggle(
+            "is-below-lane",
+            Boolean(laneBox && nextTop >= laneBox.bottom - lanesBox.top),
+          );
           if (progressRatio >= 1) {
             completeNote(state, false);
             return;
@@ -235,9 +254,9 @@
             return;
           }
           if (spawnCursor >= sequence.length) return;
-          phase = phaseForIndex();
           const sequenceIndex = spawnCursor;
           spawnCursor += 1;
+          phase = phaseForIndex(sequenceIndex);
           const colorIndex = sequence[sequenceIndex];
           const color = activeColors[colorIndex];
           const duration = durationForIndex(sequenceIndex);
@@ -253,7 +272,8 @@
           if (countdown.hidden === false || index >= sequence.length) return;
           next();
           if (running && spawnCursor < sequence.length) {
-            const randomDelay = 600 + Math.floor(Math.random() * 1000);
+            const [minimumDelay, randomRange] = dropDelayRanges[Math.min(phase, dropDelayRanges.length - 1)];
+            const randomDelay = minimumDelay + Math.floor(Math.random() * randomRange);
             timer = window.setTimeout(pumpNotes, randomDelay);
           }
         };
@@ -298,7 +318,6 @@
           lane.classList.add("is-click-pulse");
           window.setTimeout(() => lane.classList.remove("is-click-pulse"), 360);
           if (!state || !running || countdown.hidden === false) return;
-          window.clearTimeout(timer);
           completeNote(
             state,
             lane.dataset.color === activeColors[sequence[state.sequenceIndex]],

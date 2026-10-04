@@ -213,6 +213,7 @@
   min-height: 390px;
   padding: 24px;
   contain: layout;
+  overflow: visible;
   background: linear-gradient(180deg, rgba(179, 108, 255, 0.12), rgba(5, 7, 17, 0.8));
 }
 .recovery-heading-copy {
@@ -286,6 +287,8 @@
   }
 }
 .recovery-lane {
+  position: relative;
+  z-index: 2;
   align-self: end;
   min-height: 72px;
   border: 1px solid currentColor;
@@ -337,11 +340,14 @@
   cursor: pointer;
   font: 700 0.9rem var(--font-display, "Orbitron", sans-serif);
   transform: translateX(-50%);
-  animation: recovery-drop 1s linear forwards;
+  animation: none;
   z-index: 3;
 }
 .recovery-note.is-hidden {
   display: none;
+}
+.recovery-note.is-below-lane {
+  z-index: 1;
 }
 .recovery-note:hover,
 .recovery-note:focus-visible {

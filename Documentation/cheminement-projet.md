@@ -5,9 +5,9 @@ La référence narrative et fonctionnelle principale reste `documentation/Info-f
 
 ## État actuel
 
-- Date : 01/10/2026
+- Date : 04/10/2026
 - Projet : ECHOES: Fragments of Reality
-- Phase : introduction interactive et niveaux 1 à 7 jouables
+- Phase : introduction interactive, niveaux 1 à 7 jouables et boss CLEE_01 en cours d'intégration
 - Déploiement visé : GitHub Pages
 
 ## Progression actuelle
@@ -107,6 +107,27 @@ La référence narrative et fonctionnelle principale reste `documentation/Info-f
 - Erreur de séquence avec corruption rouge et glitch de la page.
 - Message semi-corrompu d'ECHO, `MISSION_FAILED` et fin de transmission.
 
+### ✅ Niveau boss — CLEE_01 et protocole de récupération
+
+- Ajout du niveau `clee_01_boss_level` dans la partie 1 après le niveau 10.
+- Combat de boss en plusieurs phases avec attaques, vies et redémarrage en phase 1.
+- Déblocage de la première clé après la récupération, avec affichage dans le HUD `CLÉE : 0 / 1`.
+- Ajout de la page `boss-recovery.html` pour le mini-jeu de récupération.
+- Mini-jeu de 120 notes avec un minimum de 90 réussites.
+- Quatre phases de 30 notes, avec une vitesse qui augmente progressivement :
+  - Phase 1 : chute d'environ 800 ms.
+  - Phase 2 : chute d'environ 733 ms.
+  - Phase 3 : chute d'environ 683 ms.
+  - Phase 4 : chute d'environ 650 ms.
+- Vitesse globale des notes réglée à `1,5×`.
+- Ordre des touches mélangé aléatoirement à chaque nouveau test, avec les trois colonnes réparties dans chaque cycle.
+- Intervalle aléatoire entre les drops, à partir de 200 ms, avec une limite réduite progressivement par phase.
+- Notes animées linéairement sur toute la colonne, au-dessus des rectangles pendant leur traversée puis sous les rectangles après leur sortie complète.
+- Toute la surface de chaque rectangle coloré accepte le clic correspondant.
+- Les erreurs font continuer la séquence sans remettre le score à zéro.
+- Ajout d'un bouton de réinitialisation, sans pause et sans reprise automatique de la progression au rechargement.
+- Ajout d'un panneau d'exemple avec indications visuelles de réussite et d'erreur.
+
 ## Centralisation technique
 
 - Les niveaux 1 à 10 utilisent le script central `docs/js/partie-1_niveau-1_à_10.js`.
@@ -140,6 +161,16 @@ La référence narrative et fonctionnelle principale reste `documentation/Info-f
 - Amélioration responsive PC, tablette et téléphone.
 - Ajout des footers de copyright sur les pages de niveaux.
 - Ajout des messages d'erreur semi-corrompus d'ECHO.
+
+### 04/10/2026
+
+- Création et itérations du combat CLEE_01 après le niveau 10.
+- Ajout du protocole de récupération avec notes multiples, ordre aléatoire et intervalles variables.
+- Correction du scheduler pour maintenir les drops après les clics et les erreurs.
+- Ajustement de la trajectoire linéaire des notes sur toute la colonne.
+- Ajout du passage visuel des notes derrière les rectangles après leur sortie complète.
+- Progression de la vitesse sur quatre phases, de 800 ms à 650 ms avec une vitesse globale de `1,5×`.
+- Ajout de la réinitialisation complète et suppression de la reprise automatique du mini-jeu.
 
 ### 30/09/2026
 
