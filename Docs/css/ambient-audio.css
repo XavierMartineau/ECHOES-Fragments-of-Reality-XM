@@ -1,0 +1,57 @@
+.echo-audio-control {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 42px;
+  padding: 8px 13px;
+  border: 1px solid color-mix(in srgb, var(--ambient-accent, #73f3ff) 62%, transparent);
+  border-radius: 2px;
+  background: color-mix(in srgb, #07101e 86%, transparent);
+  color: var(--ambient-accent, #73f3ff);
+  box-shadow:
+    0 0 18px color-mix(in srgb, var(--ambient-accent, #73f3ff) 18%, transparent),
+    inset 0 0 12px rgba(115, 243, 255, 0.06);
+  font: 700 0.66rem/1 "Orbitron", sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+
+.echo-audio-control:hover,
+.echo-audio-control:focus-visible {
+  outline: none;
+  color: #fff;
+  background: color-mix(in srgb, var(--ambient-accent, #73f3ff) 16%, #07101e);
+  box-shadow:
+    0 0 26px color-mix(in srgb, var(--ambient-accent, #73f3ff) 38%, transparent),
+    inset 0 0 14px color-mix(in srgb, var(--ambient-accent, #73f3ff) 15%, transparent);
+}
+
+.echo-audio-control[aria-pressed="true"] .echo-audio-icon {
+  text-shadow: 0 0 10px currentColor;
+}
+
+.echo-audio-icon {
+  font-size: 0.95rem;
+}
+
+@media (max-width: 650px) {
+  .echo-audio-control {
+    right: 12px;
+    bottom: 14px;
+    min-height: 40px;
+    padding-inline: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .echo-audio-control {
+    transition: none;
+  }
+}

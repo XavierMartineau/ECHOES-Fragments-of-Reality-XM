@@ -49,6 +49,41 @@ body {
   background-attachment: fixed;
 }
 
+/* The landing page keeps its HUD content in the document flow so it scrolls normally. */
+html:has(body.index-page),
+body.index-page {
+  height: auto;
+  min-height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body.index-page .lang-switcher,
+body.index-page .hud {
+  position: absolute;
+}
+
+body.index-page .site-footer,
+body.index-page .console-footer {
+  position: relative;
+  left: auto;
+  right: auto;
+}
+
+body.index-page .site-footer {
+  top: auto;
+  bottom: auto;
+  margin-top: 14px;
+}
+
+body.index-page .console-footer {
+  top: auto;
+  bottom: auto;
+  margin-top: 18px;
+}
+
 body::before {
   content: "";
   position: fixed;

@@ -9,6 +9,15 @@
   font-family: "Rajdhani", sans-serif;
 }
 
+/* On the landing page DEV MODE is part of the normal page flow. */
+html body.index-page > .dev-mode {
+  position: absolute !important;
+  top: 18px !important;
+  right: 18px !important;
+  bottom: auto !important;
+  left: auto !important;
+}
+
 @media (max-width: 560px) {
   .dev-mode {
     right: 12px;
