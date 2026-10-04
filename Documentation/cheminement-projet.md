@@ -1,184 +1,202 @@
 # Cheminement du projet
 
-Ce document suit l'avancement réel du projet ECHOES: Fragments of Reality.
-La référence narrative et fonctionnelle principale reste `documentation/Info-fr.txt`.
+Ce document présente l'évolution réelle du projet **ECHOES: Fragments of Reality**.
+Il est maintenu à partir des fonctionnalités présentes dans le dépôt et des commits
+significatifs de l'historique Git. La référence narrative et fonctionnelle principale
+reste [Info-fr.txt](./Info-fr.txt).
 
-## État actuel
+## État du projet au 04/10/2026
 
-- Date : 04/10/2026
-- Projet : ECHOES: Fragments of Reality
-- Phase : introduction interactive, niveaux 1 à 7 jouables et boss CLEE_01 en cours d'intégration
-- Déploiement visé : GitHub Pages
+- **Projet :** ECHOES: Fragments of Reality
+- **Type :** expérience narrative et jeu de puzzles web statique
+- **Déploiement visé :** GitHub Pages
+- **Version de travail :** bêta v1
+- **Jalon actuel :** intégration du boss `CLEE_01` et du protocole de récupération
+- **Fondations disponibles :** accueil, connexion, introduction interactive, sauvegarde par compte,
+  mode développeur, navigation partagée et responsive multi-écrans
 
-## Progression actuelle
+## Fonctionnalités livrées
 
-### ✅ Accueil, formulaire et introduction
+### Accueil, connexion et introduction
 
-- Page d'accueil cyberpunk avec fond animé et sélecteur FR/EN.
-- Page de connexion avec création de compte, mot de passe et reprise de sauvegarde.
-- Introduction narrative ECHO / Voyageur avec spectre audio canvas.
-- Dialogue machine à écrire avec défilement automatique.
-- Panne de mémoire d'ECHO présentée comme un vrai log de code semi-corrompu.
-- Messages `ECHO_CORE`, `MISSION_FAILED` et `TRANSMISSION:: TERMINATED`.
-- Mission étendue à six clés et six fragments de mémoire : Origine, Résonance, Souvenir, Trace, Conscience et Silence.
-- Boutons retour présents à partir de la page formulaire.
+- Accueil cyberpunk avec sélection FR/EN, favicon et effets visuels.
+- Création de compte, connexion et sauvegarde locale par utilisateur.
+- Introduction narrative ECHO / Voyageur avec dialogue machine à écrire.
+- Spectre audio canvas, transitions, footer et messages système.
+- Mission structurée autour de six clés et six fragments de mémoire :
+  Origine, Résonance, Souvenir, Trace, Conscience et Silence.
 
-### ✅ Système de comptes et progression
+### Progression et navigation
 
-- Sauvegarde par compte utilisateur dans `localStorage`.
-- Progression des niveaux séparée par compte.
+- Progression séparée par compte dans `localStorage`.
 - Points verts de navigation liés au compte actif.
-- Sauvegarde automatique du niveau courant à l'ouverture d'un niveau.
-- Reprise directe du dernier niveau sauvegardé.
-- Nouvelle partie qui efface la progression du compte avant de recommencer.
-- Niveaux terminés rejouables sans perdre les points verts.
-- Messages de réussite avec indication du secteur suivant et du nombre de niveaux restants.
+- Sauvegarde automatique du niveau courant.
+- Reprise de la dernière progression sauvegardée.
+- Nouvelle partie avec effacement de la progression du compte.
+- Niveaux terminés rejouables sans supprimer les points verts.
+- Navigation partagée, boutons retour et liens vers les secteurs suivants.
+- Mode développeur pour faciliter les tests et la navigation locale.
 
-### ✅ Responsive et GitHub Pages
+### Responsive et qualité d'affichage
 
-- Media queries centralisées dans `docs/css/responsive.css` pour l'accueil et l'introduction.
-- PC à partir de 1100 px, tablette de 651 à 1099 px, téléphone jusqu'à 650 px.
-- Détection desktop pour les petites fenêtres PC avec pointeur fin.
-- Interfaces tactiles adaptées et textes protégés contre les débordements.
-- Favicon corrigé vers `docs/assets/images/echoes-favicon.svg`.
-- Audit des références locales terminé : `NO_MISSING_LOCAL_REFERENCES`.
-- Chemins d'accueil des niveaux corrigés pour GitHub Pages.
+- Responsive centralisé dans `docs/css/responsive.css`.
+- Adaptation pour téléphone, tablette et ordinateur.
+- Interfaces tactiles sans dépendance obligatoire au survol.
+- Détection des petites fenêtres PC avec pointeur fin.
+- Protection contre les débordements de texte.
+- Corrections des chemins sensibles à la casse pour GitHub Pages.
+- Audit des références locales réalisé : `NO_MISSING_LOCAL_REFERENCES`.
 
-## Niveaux jouables
+## Puzzles et niveaux
 
-### ✅ Niveau 1 — Alignement primaire
+### Partie 1 — Niveaux 1 à 10
 
-- Trois manches successives d'alignement.
-- Chaque manche possède un ordre de formes aléatoire.
-- Compteur de manches `1 / 3`, `2 / 3`, puis `3 / 3`.
-- Nouvelle manche lancée automatiquement après réussite.
-- Sauvegarde seulement après la troisième manche.
-- Bouton de lancement pour éviter les interactions avant le démarrage.
+- **Niveau 1 — Alignement primaire :** trois manches, formes mélangées et progression
+  après réussite de chaque manche.
+- **Niveau 2 — Séquence lumineuse :** quatre piliers, séquence aléatoire, replay et
+  feedback de désynchronisation.
+- **Niveau 3 — Formes géométriques :** six formes à classer dans six emplacements
+  mélangés.
+- **Niveau 4 — Rotation holographique :** quatre orientations diagonales aléatoires
+  (`45°`, `135°`, `225°`, `315°`).
+- **Niveau 5 — Séquence sonore :** quatre notes Web Audio, écoute manuelle et feedback
+  d'erreur.
+- **Niveau 6 — Observation des motifs :** grille de 20 symboles, motifs identiques
+  placés aléatoirement et reset complet.
+- **Niveau 7 — Porte lumineuse :** trois stages de difficulté et séquences à reproduire.
+- **Niveau 8 — Mécanique de couleur :** évolution du puzzle vers les séquences de couleurs.
+- **Niveau 9 — Mécanique de tri :** progression vers le classement et la constellation.
+- **Niveau 10 — Séquence de couleurs :** puzzle de séquence servant de transition vers
+  le combat de boss.
 
-### ✅ Niveau 2 — Séquence lumineuse
+### Niveaux 11 à 14
 
-- Quatre piliers lumineux.
-- Séquence aléatoire à mémoriser.
-- Lecture uniquement après clic sur le bouton de lancement.
-- Feedback de désynchronisation et replay.
-- Réussite persistante et bouton vers le niveau 3.
+Les bases HTML, CSS et JavaScript des niveaux suivants ont été ajoutées et plusieurs
+mécaniques sont en cours d'harmonisation :
 
-### ✅ Niveau 3 — Formes géométriques
+- Niveau 11 : paires de résonance.
+- Niveau 12 : classement de cartes et amélioration du puzzle de couleur.
+- Niveau 13 : mécanique géométrique et évolutions visuelles.
+- Niveau 14 : mécanique de lumière et intégration progressive à la partie suivante.
 
-- Six formes à classer dans six emplacements.
-- Ordre des cartes et des cibles mélangé à chaque partie.
-- Interface tactile sans dépendance au hover.
-- Cible correspondante mise en évidence après sélection.
-- Bouton de lancement et progression persistante.
+### Boss — `clee_01_boss_level`
 
-### ✅ Niveau 4 — Rotation holographique
+- Boss placé après le niveau 10 dans la partie 1.
+- Combat en plusieurs phases avec attaques, vies et redémarrage en phase 1.
+- Défaite du boss suivie d'un accès au protocole de récupération.
+- Réussite du protocole permettant de débloquer la première clé.
+- HUD de progression de clé : `CLÉE : 0 / 1`.
 
-- Quatre manches avec la même forme visible.
-- Seule la ligne d'orientation change entre les manches.
-- Angles diagonaux aléatoires : `45°`, `135°`, `225°`, `315°`.
-- Compteur des quatre orientations et animation de stabilisation.
-- La forme ne disparaît pas pendant la progression.
+## Protocole de récupération
 
-### ✅ Niveau 5 — Séquence sonore
+Page : `docs/html/partie-1_niveau-1_à_10/boss-recovery.html`
 
-- Quatre notes générées avec Web Audio.
-- Message visible demandant d'activer le volume.
-- Séquence sonore aléatoire et bouton d'écoute manuel.
-- Aucun son automatique avant interaction utilisateur.
-- Feedback d'erreur et progression sauvegardée.
-
-### ✅ Niveau 6 — Observation des motifs
-
-- Mur holographique de 20 symboles.
-- Trois motifs identiques placés aléatoirement.
-- Toutes les cases sont bleues au départ pour ne pas révéler la solution.
-- La case devient verte uniquement après une bonne sélection.
-- Les formes cibles changent à chaque nouvelle partie ou réinitialisation.
-- SYSTEM LOG avec objectif initial et message de réussite personnalisé.
-- Reset qui recrée et remélange complètement la grille.
-
-### ✅ Niveau 7 — Porte lumineuse
-
-- Porte holographique avec anneaux, noyau et cinq symboles.
-- Trois stages de difficulté : 3 boutons, puis 4, puis 5 boutons actifs.
-- Séquences aléatoires à observer et à reproduire.
-- Compteur de stages `1 / 3`, `2 / 3`, puis `3 / 3`.
-- Animation d'ouverture de la porte à la réussite finale.
-- Erreur de séquence avec corruption rouge et glitch de la page.
-- Message semi-corrompu d'ECHO, `MISSION_FAILED` et fin de transmission.
-
-### ✅ Niveau boss — CLEE_01 et protocole de récupération
-
-- Ajout du niveau `clee_01_boss_level` dans la partie 1 après le niveau 10.
-- Combat de boss en plusieurs phases avec attaques, vies et redémarrage en phase 1.
-- Déblocage de la première clé après la récupération, avec affichage dans le HUD `CLÉE : 0 / 1`.
-- Ajout de la page `boss-recovery.html` pour le mini-jeu de récupération.
-- Mini-jeu de 120 notes avec un minimum de 90 réussites.
-- Quatre phases de 30 notes, avec une vitesse qui augmente progressivement :
-  - Phase 1 : chute d'environ 800 ms.
-  - Phase 2 : chute d'environ 733 ms.
-  - Phase 3 : chute d'environ 683 ms.
-  - Phase 4 : chute d'environ 650 ms.
-- Vitesse globale des notes réglée à `1,5×`.
-- Ordre des touches mélangé aléatoirement à chaque nouveau test, avec les trois colonnes réparties dans chaque cycle.
-- Intervalle aléatoire entre les drops, à partir de 200 ms, avec une limite réduite progressivement par phase.
-- Notes animées linéairement sur toute la colonne, au-dessus des rectangles pendant leur traversée puis sous les rectangles après leur sortie complète.
+- 120 notes au total.
+- Minimum requis : 90 réussites.
+- Quatre phases de 30 notes.
+- Ordre des trois colonnes mélangé aléatoirement à chaque lancement, avec les trois
+  couleurs présentes dans chaque cycle.
+- Vitesse globale réglée à `1,5×`.
+- Durées de chute visées :
+  - Phase 1 : environ `800 ms`.
+  - Phase 2 : environ `733 ms`.
+  - Phase 3 : environ `683 ms`.
+  - Phase 4 : environ `650 ms`.
+- Intervalle des drops aléatoire à partir de `200 ms`, avec une limite qui diminue
+  selon la phase.
+- Trajectoire linéaire contrôlée par `requestAnimationFrame`.
+- Note visible au-dessus du rectangle pendant la traversée, puis sous le rectangle
+  après sa sortie complète.
 - Toute la surface de chaque rectangle coloré accepte le clic correspondant.
-- Les erreurs font continuer la séquence sans remettre le score à zéro.
-- Ajout d'un bouton de réinitialisation, sans pause et sans reprise automatique de la progression au rechargement.
-- Ajout d'un panneau d'exemple avec indications visuelles de réussite et d'erreur.
+- Les erreurs font avancer la séquence sans remettre le score à zéro.
+- Réinitialisation complète disponible.
+- Pas de pause et pas de reprise automatique de la progression du mini-jeu au rechargement.
+- Panneau d'exemple avec feedback correct/incorrect et bouton de fermeture.
 
-## Centralisation technique
+## Architecture technique
 
-- Les niveaux 1 à 10 utilisent le script central `docs/js/partie-1_niveau-1_à_10.js`.
-- Les contrôleurs séparés des niveaux 2 à 5 ont été supprimés.
-- Des sections clairement identifiées existent pour les niveaux 6 à 15.
-- Les feuilles CSS de toutes les parties possèdent une base responsive et des animations d'entrée.
-- Les footers avec droits réservés sont présents sur toutes les pages de niveaux.
+- Scripts centralisés des niveaux 1 à 10 dans
+  `docs/js/partie-1_niveau-1_à_10.js`.
+- Styles communs et styles de partie séparés dans `docs/css/`.
+- `save-system.js` gère les comptes et la progression persistante.
+- `dev-mode.js` fournit les outils de test et de navigation.
+- `ambient-background.js` et les feuilles d'ambiance gèrent les effets d'arrière-plan.
+- Les pages restent compatibles avec un déploiement statique GitHub Pages.
 
-## En cours
+## Validation réalisée
 
-- Finalisation des mécaniques détaillées des niveaux 8 à 15.
-- Ajout progressif des six fragments et des clés dans la progression narrative.
-- Harmonisation des contenus FR/EN des niveaux futurs.
+- Tests navigateur sur l'accueil, l'introduction, les niveaux et le protocole de récupération.
+- Vérification de l'ouverture et de la fermeture du panneau d'exemple.
+- Vérification de la stabilité de la colonne gauche lors de l'ouverture de l'exemple.
+- Vérification du reset, de l'absence de reprise automatique et du pulse au clic.
+- Vérification du scheduler après plusieurs clics, erreurs et notes simultanées.
+- Vérification de l'ordre aléatoire et des intervalles variables entre les drops.
+- Vérification de la trajectoire linéaire et du changement de profondeur sous les rectangles.
+- Vérification des références locales et des chemins GitHub Pages.
+- Vérification de syntaxe JavaScript et `git diff --check`.
 
-## À venir
+## Travail en cours
 
-- Niveaux 8 à 15 entièrement jouables.
-- Système complet des six clés et des verrous associés.
-- Puzzles des dimensions Fractures et Éclipse.
-- Validation navigateur complète des parcours GitHub Pages.
+- Finaliser et tester les niveaux 8 à 15.
+- Harmoniser les contenus FR/EN des niveaux futurs.
+- Relier complètement les six clés aux verrous et fragments narratifs.
+- Compléter les puzzles des dimensions Fractures et Éclipse.
+- Effectuer une validation complète des parcours sur GitHub Pages.
 
-## Journal des modifications
+## Journal des pushes Git significatifs
 
-### 01/10/2026
+### 30/09/2026 — Initialisation et fondations
 
-- Création et validation des niveaux 1 à 7.
-- Centralisation des scripts de la partie 1.
-- Ajout de la progression par compte et de la reprise automatique.
-- Ajout des animations communes aux pages de niveaux.
-- Correction des chemins GitHub Pages et des favicons.
-- Amélioration responsive PC, tablette et téléphone.
-- Ajout des footers de copyright sur les pages de niveaux.
-- Ajout des messages d'erreur semi-corrompus d'ECHO.
+- `17a3e7f` — Initialisation du projet ECHOES.
+- `5625be4` — Ajout du responsive CSS et réorganisation du dossier `docs`.
+- `d2f33f6` — Ajout de l'introduction interactive d'ECHOES.
+- `560f4a8` — Mise en place du système de connexion et de sauvegarde.
+- `792b545` — Amélioration du responsive, des effets visuels et ajout du favicon.
+- `6dbd0ea` — Création de la structure HTML, CSS et JavaScript des parties du jeu.
 
-### 04/10/2026
+### 01/10/2026 — Puzzles, progression et centralisation
 
-- Création et itérations du combat CLEE_01 après le niveau 10.
-- Ajout du protocole de récupération avec notes multiples, ordre aléatoire et intervalles variables.
-- Correction du scheduler pour maintenir les drops après les clics et les erreurs.
-- Ajustement de la trajectoire linéaire des notes sur toute la colonne.
-- Ajout du passage visuel des notes derrière les rectangles après leur sortie complète.
-- Progression de la vitesse sur quatre phases, de 800 ms à 650 ms avec une vitesse globale de `1,5×`.
-- Ajout de la réinitialisation complète et suppression de la reprise automatique du mini-jeu.
+- `3e4cb41` — Ajout des mécaniques du niveau 5.
+- `0e3609e` — Ajout des mécaniques des niveaux 6 à 10 et du système de sauvegarde.
+- `3d20b90` — Auto-sauvegarde et progression par utilisateur.
+- `c28050c` — Harmonisation de la version des scripts et de la sauvegarde.
+- `56e253d` — Ajout des animations et messages système des niveaux 2 à 7.
+- `0064a39` — Ajout des niveaux 11 à 14 et de leurs premières mécaniques.
+- `c69e70a` — Correction des chemins sensibles à la casse pour GitHub Pages.
 
-### 30/09/2026
+### 02/10/2026 — Performance et niveau 12
 
-- Création de l'accueil et de l'introduction narrative.
-- Ajout du système FR/EN.
-- Ajout du spectre audio et du dialogue machine à écrire.
-- Mise en place de la structure initiale dans `docs/`.
+- `d3d0553` — Passage du niveau 12 à six cartes de classement.
+- `daee6c3` — Amélioration du niveau 12, du reset et de l'interface.
+- `ced5f49` — Amélioration des performances et de la visibilité du spectre audio.
+- `fbdcd7a` — Optimisation responsive et prise en compte de la réduction des mouvements.
 
-## Note
+### 03/10/2026 — Bêta et expérience utilisateur
 
-Mettre à jour ce document après chaque modification importante et consulter `Info-fr.txt` avant toute nouvelle mécanique ou évolution narrative.
+- `4b4cea8` — Déploiement de la version bêta v1.
+- `60b7b42` — Ajustements responsive de l'animation de progression.
+- `77b538d` — Amélioration responsive de la page d'introduction.
+- `1da7959` — Styles de statut des puzzles et support de localisation.
+- `25128d1` — Nettoyage de niveaux inutilisés et amélioration des exemples de puzzles.
+
+### 04/10/2026 — Boss CLEE_01 et récupération
+
+- `923906f` — Création du niveau boss et du protocole de récupération CLEE_01.
+- `8a0c5fa` — Ajout des animations de victoire et amélioration des interactions d'exemple.
+- `a8a454b` — Amélioration de l'accessibilité et des animations.
+- `5f4f133` — Amélioration du gameplay et de l'interface de récupération.
+- `6250126` — Ajustements des mécaniques du boss et des éléments d'interface.
+- `a3c1a30` — Amélioration des animations et de l'accessibilité du protocole.
+- `dd73ea2` — Stabilisation des interactions, de la trajectoire des notes et du gameplay
+  de récupération.
+
+## Prochain jalon recommandé
+
+1. Terminer les tests prolongés du protocole de récupération sur desktop et mobile.
+2. Valider le déblocage de la première clé après une réussite complète.
+3. Finaliser les niveaux 8 à 15 et leurs traductions.
+4. Vérifier l'ensemble des liens et assets sur GitHub Pages.
+5. Préparer une nouvelle version bêta après validation des parcours complets.
+
+> Mettre à jour ce document après chaque jalon important. Les entrées du journal doivent
+> référencer les commits fonctionnels plutôt que les commits techniques intermédiaires.
