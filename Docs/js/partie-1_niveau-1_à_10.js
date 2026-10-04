@@ -156,8 +156,13 @@ function installKeyHud() {
   const hud = document.createElement("aside");
   hud.className = "key-hud";
   hud.setAttribute("aria-live", "polite");
-  hud.innerHTML = `<span class="key-hud-label">CLEE:</span><span class="key-hud-value">0 / 1</span>`;
-  document.body.appendChild(hud);
+  hud.innerHTML = `<span class="key-hud-label">CLÉE :</span><span class="key-hud-value">0 / 1</span>`;
+  const header = document.querySelector(".level-header, .top-bar");
+  if (header) {
+    header.insertAdjacentElement("afterend", hud);
+  } else {
+    document.body.appendChild(hud);
+  }
   const keys = window.EchoesSave?.getKeys?.() || [];
   const value = hud.querySelector(".key-hud-value");
   if (keys.includes("resonance-1")) {
@@ -179,10 +184,11 @@ if (activeLevelScript) {
     localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const accountId = window.EchoesSave?.getCurrentUser?.() || "guest";
   const progressStorageKey = `echoes-completed-levels-${encodeURIComponent(accountId)}`;
-  const legacyCompletedLevels = readCompletedLevels("echoes-completed-levels");
+  const legacyCompletedLevels =
+    accountId === "guest" ? [] : readCompletedLevels("echoes-completed-levels");
   const completedLevels = new Set([
     ...legacyCompletedLevels,
-    ...readCompletedLevels(progressStorageKey),
+    ...(accountId === "guest" ? [] : readCompletedLevels(progressStorageKey)),
   ]);
   if (accountId !== "guest" && completedLevels.size) {
     localStorage.setItem(
@@ -339,6 +345,11 @@ if (activeLevelScript) {
     }
   };
   const saveCompletion = () => {
+    if (accountId === "guest") {
+      renderProgress();
+      playPuzzleSuccessAnimation();
+      return;
+    }
     completedLevels.add(levelNumber);
     const levels = [...completedLevels].sort((a, b) => a - b);
     localStorage.setItem(progressStorageKey, JSON.stringify(levels));
@@ -371,7 +382,8 @@ if (activeLevelScript) {
           Array.isArray(value) ? value.join(" / ") : value,
         );
     });
-    document.getElementById("saveGameButton").textContent = levelCopy.save;
+    const saveGameButton = document.getElementById("saveGameButton");
+    if (saveGameButton) saveGameButton.textContent = levelCopy.save;
     document.getElementById("resetButton").textContent = levelCopy.reset;
     const nextButton = document.getElementById("nextLevelButton");
     if (nextButton) {
@@ -1173,11 +1185,14 @@ if (activeLevelScript) {
   const currentLevel = 1;
   const accountId = window.EchoesSave?.getCurrentUser?.() || "guest";
   const progressStorageKey = `echoes-completed-levels-${encodeURIComponent(accountId)}`;
-  const legacyCompletedLevels = readCompletedLevels("echoes-completed-levels");
-  const completedLevels = new Set([
-    ...legacyCompletedLevels,
-    ...readCompletedLevels(progressStorageKey),
-  ]);
+  const completedLevels = new Set(
+    accountId === "guest"
+      ? []
+      : [
+          ...readCompletedLevels("echoes-completed-levels"),
+          ...readCompletedLevels(progressStorageKey),
+        ],
+  );
   if (accountId !== "guest" && completedLevels.size) {
     localStorage.setItem(
       progressStorageKey,
@@ -1205,7 +1220,7 @@ if (activeLevelScript) {
       element.setAttribute("aria-label", values);
     }
   });
-  saveGameButton.textContent = levelCopy.save;
+  if (saveGameButton) saveGameButton.textContent = levelCopy.save;
   resetButton.textContent = levelCopy.reset;
   status.textContent = levelCopy.statusReady;
   const shapeLabels =
@@ -1277,6 +1292,11 @@ if (activeLevelScript) {
 
   // Persists the current level and redraws its completed marker.
   function markCurrentLevelCompleted() {
+    if (accountId === "guest") {
+      systemMessages.success = sectorProgressMessage(levelCopy.systemSuccess);
+      playPuzzleSuccessAnimation();
+      return;
+    }
     completedLevels.add(currentLevel);
     localStorage.setItem(
       progressStorageKey,
@@ -1513,10 +1533,14 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
     localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const accountId = window.EchoesSave?.getCurrentUser?.() || "guest";
   const progressKey = `echoes-completed-levels-${encodeURIComponent(accountId)}`;
-  const completedLevels = new Set([
-    ...readCompletedLevels("echoes-completed-levels"),
-    ...readCompletedLevels(progressKey),
-  ]);
+  const completedLevels = new Set(
+    accountId === "guest"
+      ? []
+      : [
+          ...readCompletedLevels("echoes-completed-levels"),
+          ...readCompletedLevels(progressKey),
+        ],
+  );
   let started = false;
   let completed = false;
   let onStart = () => {};
@@ -1530,6 +1554,14 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
 
   const finish = () => {
     completed = true;
+    if (accountId === "guest") {
+      nextButton.hidden = false;
+      startButton.disabled = true;
+      setStatus(levelCopy?.statusSuccess || "Level stabilized.", "success");
+      playPuzzleSuccessAnimation();
+      nextButton.focus();
+      return;
+    }
     completedLevels.add(levelNumber);
     const levels = [...completedLevels].sort((a, b) => a - b);
     localStorage.setItem(progressKey, JSON.stringify(levels));
@@ -2028,6 +2060,7 @@ if (document.querySelector(".boss-board")) {
     const mathQuestion = document.getElementById("bossMathQuestion");
     const mathOptions = document.getElementById("bossMathOptions");
     const livesReadout = document.getElementById("bossLives");
+    const replayShieldButton = document.getElementById("replayShieldButton");
     const progress = arena.closest(".puzzle-panel").querySelector(".progress-readout");
     const phases = [
       { name: "PHASE 1 // BRISER LE BOUCLIER", sequence: [2, 5, 1, 4, 0, 3] },
@@ -2093,10 +2126,8 @@ if (document.querySelector(".boss-board")) {
         });
       });
     };
-    const startPhase = () => {
-      phaseLabel.textContent = phases[phase].name;
-      progress.textContent = `${phase} / 3 // 0 / ${phases[phase].sequence.length}`;
-      makeTargets();
+    const previewCurrentSequence = () => {
+      clearTimers();
       locked = true;
       const previewDelay = phase === 0 ? 820 : 660;
       phases[phase].sequence.forEach((index, order) => {
@@ -2108,8 +2139,19 @@ if (document.querySelector(".boss-board")) {
       });
       timers.push(window.setTimeout(() => {
         locked = false;
-        setStatus("À toi. Reproduis l'attaque sans te tromper.");
+        setStatus("À toi. Reproduis l’attaque sans te tromper.");
       }, phases[phase].sequence.length * previewDelay + 500));
+    };
+    replayShieldButton?.addEventListener("click", () => {
+      if (!started() || phase > 1 || !targets.children.length) return;
+      previewCurrentSequence();
+    });
+    const startPhase = () => {
+      phaseLabel.textContent = phases[phase].name;
+      progress.textContent = `${phase} / 3 // 0 / ${phases[phase].sequence.length}`;
+      makeTargets();
+      replayShieldButton.hidden = false;
+      previewCurrentSequence();
     };
     const startMath = () => {
       phaseLabel.textContent = "PHASE 4 // CALCUL DU NOYAU";

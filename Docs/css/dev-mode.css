@@ -56,6 +56,145 @@
   }
 }
 
+@media (max-width: 650px) {
+  .dev-mode {
+    right: 12px;
+    bottom: max(18px, env(safe-area-inset-bottom)) !important;
+  }
+
+  .dev-mode-toggle {
+    min-height: 44px;
+    padding: 0 11px;
+    border-radius: 10px;
+    font-size: 0.56rem;
+  }
+
+  .dev-mode-panel {
+    right: 12px;
+    bottom: 74px;
+    width: min(360px, calc(100vw - 24px));
+    max-height: min(72dvh, 580px);
+    padding: 14px;
+    border-radius: 14px;
+  }
+}
+
+/* Final header placement overrides the legacy viewport positioning rules. */
+html body .level-header > .dev-mode,
+html body .top-bar > .dev-mode {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  flex: 0 0 auto;
+  max-width: none;
+  margin-left: 10px;
+  transform: none !important;
+  z-index: 2147483647 !important;
+}
+
+html body .level-header > .dev-mode .dev-mode-panel,
+html body .top-bar > .dev-mode .dev-mode-panel {
+  position: absolute !important;
+  top: calc(100% + 8px);
+  right: 0;
+  bottom: auto;
+  left: auto;
+  z-index: 2147483647 !important;
+}
+
+html body > .key-hud {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  z-index: 30 !important;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: min(1180px, calc(100% - 28px));
+  margin: 8px auto 0;
+}
+
+@media (max-width: 650px) {
+  html body > .key-hud {
+    width: calc(100% - 28px);
+    margin-top: 8px;
+  }
+
+  html body .level-header > .dev-mode,
+  html body .top-bar > .dev-mode {
+    margin-left: 8px;
+  }
+
+  html body .level-header {
+    flex-wrap: wrap;
+  }
+
+  html body .level-header > .brand {
+    order: 1;
+  }
+
+  html body .level-header > .dev-mode {
+    order: 2;
+  }
+
+  html body .level-header > .level-meta {
+    order: 3;
+    flex: 1 0 100%;
+    margin-left: 0;
+  }
+}
+
+/* The navigator belongs to the page header, beside the ECHOES brand. */
+html body .level-header > .dev-mode,
+html body .top-bar > .dev-mode {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  flex: 0 0 auto;
+  max-width: none;
+  margin-left: 10px;
+  transform: none !important;
+}
+
+html body .level-header > .dev-mode .dev-mode-panel,
+html body .top-bar > .dev-mode .dev-mode-panel {
+  position: absolute !important;
+  top: calc(100% + 8px);
+  right: 0;
+  bottom: auto;
+  left: auto;
+}
+
+html body > .key-hud {
+  position: fixed !important;
+  top: 92px !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: max(14px, calc((100vw - 1180px) / 2)) !important;
+  z-index: 2147483646 !important;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+@media (max-width: 650px) {
+  html body > .key-hud {
+    top: 78px !important;
+    left: 14px !important;
+  }
+
+  html body .level-header > .dev-mode,
+  html body .top-bar > .dev-mode {
+    margin-left: 8px;
+  }
+}
+
 /* Keep navigation controls attached to the viewport while page content scrolls. */
 html body .level-back-button,
 html body .page-back-button,
@@ -493,4 +632,118 @@ body.echo-color-assist .light-pink::after { content: "▲"; }
   .dev-mode-levels {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
+}
+
+/* DEV MODE scrolls with the document instead of being pinned to the viewport. */
+html body .dev-mode {
+  position: absolute !important;
+  top: 24px !important;
+  right: auto !important;
+  left: calc(100vw - 162px) !important;
+  bottom: auto !important;
+  left: auto !important;
+  z-index: 2147483647;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  max-width: calc(100vw - 24px);
+  box-sizing: border-box;
+}
+
+html body .dev-mode .dev-mode-panel {
+  position: absolute !important;
+  top: calc(100% + 10px);
+  right: 0;
+  bottom: auto;
+}
+
+html body .level-header > .dev-mode,
+html body .top-bar > .dev-mode {
+  top: 18px !important;
+  right: 0 !important;
+  left: auto !important;
+}
+
+@media (max-width: 650px) {
+  html body .level-header > .dev-mode,
+  html body .top-bar > .dev-mode {
+    top: 12px !important;
+    right: 0 !important;
+  }
+
+  html body .dev-mode {
+    top: 18px !important;
+    right: auto !important;
+    left: calc(100vw - 144px) !important;
+    max-width: calc(100vw - 24px);
+  }
+
+  html body .dev-mode .dev-mode-panel {
+    top: calc(100% + 10px);
+    right: 0;
+    bottom: auto;
+  }
+}
+
+/* Final header placement overrides the legacy viewport positioning rules. */
+html body .level-header > .dev-mode,
+html body .top-bar > .dev-mode {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  flex: 0 0 auto;
+  max-width: none;
+  margin-left: 10px;
+  transform: none !important;
+}
+
+html body .level-header > .dev-mode .dev-mode-panel,
+html body .top-bar > .dev-mode .dev-mode-panel {
+  position: absolute !important;
+  top: calc(100% + 8px);
+  right: 0;
+  bottom: auto;
+  left: auto;
+}
+
+html body > .key-hud {
+  position: fixed !important;
+  top: 92px !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: max(14px, calc((100vw - 1180px) / 2)) !important;
+  z-index: 2147483646 !important;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+@media (max-width: 650px) {
+  html body > .key-hud {
+    top: 78px !important;
+    left: 14px !important;
+  }
+
+  html body .level-header > .dev-mode,
+  html body .top-bar > .dev-mode {
+    margin-left: 8px;
+  }
+}
+
+/* Keep the key HUD in the document flow directly below the header. */
+html body > .key-hud {
+  position: relative !important;
+  inset: auto !important;
+  z-index: 30 !important;
+  width: max-content !important;
+  max-width: calc(100% - 28px);
+  margin: 8px 14px 0;
+}
+
+html body > .level-header,
+html body > .top-bar {
+  position: relative !important;
+  z-index: 2147483647 !important;
 }
