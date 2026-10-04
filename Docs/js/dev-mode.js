@@ -167,13 +167,13 @@
     </div>
   `;
 
-  const navigationHost =
-    document.querySelector(".level-header, .top-bar") || document.body;
-  const brand = navigationHost.querySelector(".brand");
-  if (brand) {
-    brand.insertAdjacentElement("afterend", menu);
+  const footer = document.querySelector(
+    ".level-footer, .site-footer, .console-footer, footer",
+  );
+  if (footer) {
+    footer.insertAdjacentElement("beforebegin", menu);
   } else {
-    navigationHost.appendChild(menu);
+    document.body.appendChild(menu);
   }
 
   const colorAssist = menu.querySelector("[data-color-assist]");
