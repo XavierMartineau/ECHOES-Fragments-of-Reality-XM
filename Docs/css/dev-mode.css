@@ -834,3 +834,13 @@ html body .dev-mode .dev-mode-panel {
   bottom: calc(100% + 8px) !important;
   left: auto !important;
 }
+
+/* Win over legacy high-specificity viewport rules: DEV MODE stays before the footer. */
+html body > aside.dev-mode {
+  position: relative !important;
+  inset: auto !important;
+  width: min(1180px, calc(100% - 28px)) !important;
+  max-width: none !important;
+  margin: 14px auto !important;
+  transform: none !important;
+}

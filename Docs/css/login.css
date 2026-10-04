@@ -323,7 +323,14 @@ input:focus {
     left: 18px;
   }
   .login-shell {
-    padding-top: 76px;
+    display: block;
+    min-height: 100dvh;
+    padding: 88px 18px 32px;
+  }
+  .login-card {
+    width: 100%;
+    margin: 18px auto 0;
+    padding: 28px 22px;
   }
   .save-actions {
     grid-template-columns: 1fr;

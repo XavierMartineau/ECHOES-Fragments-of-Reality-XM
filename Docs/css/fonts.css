@@ -88,3 +88,41 @@ select {
     line-height: 1.4;
   }
 }
+
+.global-language-switcher {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 100;
+  display: inline-flex;
+  gap: 5px;
+  padding: 5px;
+  border: 1px solid rgba(103, 228, 220, 0.35);
+  background: rgba(8, 13, 22, 0.86);
+}
+
+.global-lang-btn {
+  min-width: 38px;
+  min-height: 30px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #91a5ad;
+  cursor: pointer;
+  font: 600 0.68rem var(--font-display);
+  letter-spacing: 0.08em;
+}
+
+.global-lang-btn:hover,
+.global-lang-btn:focus-visible,
+.global-lang-btn.active {
+  border-color: #67e4dc;
+  color: #67e4dc;
+  outline: none;
+}
+
+@media (max-width: 650px) {
+  .global-language-switcher {
+    top: 10px;
+    right: 10px;
+  }
+}

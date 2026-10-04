@@ -1373,6 +1373,49 @@ html body > aside.dev-mode {
 .intro-page.desktop-layout .dialogue-head {
   border-bottom-color: rgba(121, 247, 255, 0.14);
 }
+
+/* Prevent wide panels and controls from forcing horizontal scrolling. */
+@media (max-width: 900px) {
+  .content,
+  .login-card,
+  .dialogue-shell,
+  .puzzle-panel,
+  .construction-card {
+    box-sizing: border-box;
+    max-width: calc(100vw - 28px);
+  }
+
+  .puzzle-board,
+  .puzzle-panel,
+  .system-transmission {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .level-header,
+  .top-bar {
+    max-width: 100%;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  .global-language-switcher {
+    top: 8px;
+    right: 8px;
+  }
+
+  .global-lang-btn {
+    min-width: 32px;
+    min-height: 28px;
+  }
+
+  .level-header .brand,
+  .top-bar .brand,
+  .login-brand {
+    max-width: 45vw;
+  }
+}
 .intro-page.desktop-layout .site-footer {
   position: relative;
   right: auto;

@@ -1,6 +1,9 @@
 // TRANSLATIONS // language dictionaries consumed by every page controller.
 window.translations = {
   fr: {
+    constructionTitle: "EN CONSTRUCTION",
+    constructionDescription:
+      "Ce niveau est en cours de création. Le puzzle et ses effets seront bientôt disponibles.",
     systemLabel: "SYSTÈME",
     systemStatus: "EN LIGNE",
     dimensionLabel: "DIMENSION",
@@ -474,6 +477,9 @@ window.translations = {
     ],
   },
   en: {
+    constructionTitle: "UNDER CONSTRUCTION",
+    constructionDescription:
+      "This level is still being created. The puzzle and its effects will be available soon.",
     systemLabel: "SYSTEM",
     systemStatus: "ONLINE",
     dimensionLabel: "DIMENSION",
