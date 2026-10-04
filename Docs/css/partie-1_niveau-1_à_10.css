@@ -17,7 +17,7 @@
   z-index: 30;
   display: flex;
   gap: 8px;
-  align-items: center;
+  align-items: flex-start;
   padding: 10px 14px;
   border: 1px solid rgba(121, 247, 255, 0.48);
   background: rgba(5, 7, 17, 0.9);
@@ -1819,11 +1819,17 @@ body.level-corruption .level-footer {
 .puzzle-actions {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start;
+  justify-content: flex-start;
   gap: 18px;
   padding: 16px 22px;
   border-top: 1px solid rgba(121, 247, 255, 0.16);
+}
+.puzzle-actions > .generic-demo {
+  align-self: flex-start;
+}
+.puzzle-actions > #startPuzzleButton {
+  margin-left: auto;
 }
 .puzzle-actions .puzzle-status {
   flex: 1 1 100%;
@@ -4010,6 +4016,12 @@ html[lang="en"] .color-sort-pieces::before {
     align-items: stretch;
     flex-direction: column;
     padding: 14px 16px;
+  }
+  .puzzle-actions > #startPuzzleButton {
+    margin-left: 0;
+  }
+  .generic-demo {
+    flex-direction: column;
   }
   .reset-button {
     width: 100%;

@@ -29,12 +29,19 @@ const levelScriptByMarker = [
 function playPuzzleSuccessAnimation() {
   const panel = document.querySelector(".puzzle-panel");
   if (!panel) return;
+  const levelMatch = window.location.pathname.match(/niveau-(\d+)\.html$/i);
+  const levelClass = levelMatch
+    ? `puzzle-victory-level-${String(Number(levelMatch[1])).padStart(2, "0")}`
+    : "";
 
   if (panel.querySelector(".target-slots")) {
+    document.body.classList.remove("puzzle-completed");
     panel.classList.remove("puzzle-completed");
-    panel.classList.add("puzzle-victory-primary");
+    document.body.classList.add("puzzle-completed", levelClass);
+    panel.classList.add("puzzle-victory-primary", levelClass);
     window.setTimeout(() => {
-      panel.classList.remove("puzzle-victory-primary");
+      document.body.classList.remove("puzzle-completed", levelClass);
+      panel.classList.remove("puzzle-victory-primary", levelClass);
     }, 1800);
     return;
   }
@@ -65,12 +72,16 @@ function playPuzzleSuccessAnimation() {
   void panel.offsetWidth;
   document.body.classList.add("puzzle-completed");
   document.body.classList.add(`puzzle-victory-${animationType}`);
+  if (levelClass) document.body.classList.add(levelClass);
   panel.classList.add("puzzle-completed");
   panel.classList.add(`puzzle-victory-${animationType}`);
+  if (levelClass) panel.classList.add(levelClass);
   window.setTimeout(() => {
     document.body.classList.remove("puzzle-completed");
     document.body.classList.remove(`puzzle-victory-${animationType}`);
+    if (levelClass) document.body.classList.remove(levelClass);
     panel.classList.remove(`puzzle-victory-${animationType}`);
+    if (levelClass) panel.classList.remove(levelClass);
     panel.classList.remove("puzzle-completed");
   }, 2400);
 }
@@ -2759,12 +2770,22 @@ if (document.querySelector(".fractal-board")) {
     const button = document.createElement("button");
     button.className = "sequence-demo-button";
     button.type = "button";
-    button.textContent =
+    const buttonLabel =
       dictionary.demoButton || (language === "en" ? "VIEW AN EXAMPLE" : "VOIR UN EXEMPLE");
+    button.append(buttonLabel, " ", Object.assign(document.createElement("span"), {
+      className: "demo-toggle-arrow",
+      textContent: "▾",
+      ariaHidden: "true",
+    }));
     button.setAttribute("aria-expanded", "false");
     const content = document.createElement("div");
     content.className = "sequence-demo-panel";
     content.hidden = true;
+    const closeButton = document.createElement("button");
+    closeButton.className = "sequence-demo-close";
+    closeButton.type = "button";
+    closeButton.textContent = "×";
+    closeButton.setAttribute("aria-label", language === "en" ? "Close example" : "Fermer l’exemple");
     const title = document.createElement("strong");
     title.textContent =
       dictionary.demoTitle || (language === "en" ? "Demonstration" : "Démonstration");
@@ -2778,12 +2799,18 @@ if (document.querySelector(".fractal-board")) {
       item.textContent = label;
       items.appendChild(item);
     });
-    content.append(title, description, items);
-    wrapper.append(button, content);
+    content.append(closeButton, title, description, items);
+    const startButton = actions.querySelector("#startPuzzleButton");
+    wrapper.append(button, startButton, content);
     actions.prepend(wrapper);
+    const setDemoOpen = (open) => {
+      content.hidden = !open;
+      button.setAttribute("aria-expanded", String(open));
+      wrapper.classList.toggle("is-open", open);
+    };
     button.addEventListener("click", () => {
-      content.hidden = !content.hidden;
-      button.setAttribute("aria-expanded", String(!content.hidden));
+      setDemoOpen(content.hidden);
     });
+    closeButton.addEventListener("click", () => setDemoOpen(false));
   });
 })();

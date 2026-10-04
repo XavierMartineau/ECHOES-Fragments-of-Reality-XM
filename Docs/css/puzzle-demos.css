@@ -4,6 +4,69 @@
   animation: puzzle-success-burst 2.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
+/* Each active puzzle gets a completion effect that matches its mechanic. */
+.puzzle-panel.puzzle-completed.puzzle-victory-level-01 .target-slot { animation: victory-align-slot 0.55s ease-out both; }
+.puzzle-panel.puzzle-completed.puzzle-victory-level-02 .sequence-light { animation: victory-light-sequence 0.75s ease-in-out both; }
+.puzzle-panel.puzzle-completed.puzzle-victory-level-03 .sort-piece { animation: victory-sort-place 0.7s ease-out both; }
+.puzzle-panel.puzzle-completed.puzzle-victory-level-04 .rotation-object { animation: victory-rotation-lock 1s ease-in-out both; }
+.puzzle-panel.puzzle-completed.puzzle-victory-level-05 .sound-note { animation: victory-sound-wave 0.7s ease-in-out both; }
+.puzzle-panel.puzzle-completed.puzzle-victory-level-06 .pattern-symbol { animation: victory-pattern-reveal 0.7s ease-out both; }
+.puzzle-panel.puzzle-completed.puzzle-victory-level-07 .gate-ring { animation: victory-gate-open 1s ease-in-out both; }
+.puzzle-panel.puzzle-completed.puzzle-victory-level-08 .color-sort-targets,
+.puzzle-panel.puzzle-completed.puzzle-victory-level-08 .color-sort-pieces { animation: victory-sort-sweep 0.8s ease-in-out both; }
+.puzzle-panel.puzzle-completed.puzzle-victory-level-09 .constellation-star { animation: victory-constellation-link 0.8s ease-out both; }
+.puzzle-panel.puzzle-completed.puzzle-victory-level-10 .color-sequence-option { animation: victory-color-cascade 0.8s ease-out both; }
+
+@keyframes victory-align-slot {
+  0% { opacity: 0.35; transform: scale(0.7); }
+  70% { box-shadow: 0 0 28px rgba(128, 255, 207, 0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes victory-light-sequence {
+  0% { filter: brightness(1); transform: scale(0.8); }
+  50% { filter: brightness(2.5) saturate(1.8); transform: scale(1.16); }
+  100% { filter: brightness(1.2); transform: scale(1); }
+}
+@keyframes victory-sort-place {
+  0% { opacity: 0.4; transform: translateY(-18px) rotate(-5deg); }
+  70% { box-shadow: 0 0 26px rgba(121, 247, 255, 0.9); }
+  100% { opacity: 1; transform: translateY(0) rotate(0); }
+}
+@keyframes victory-rotation-lock {
+  0% { transform: rotate(0) scale(0.8); }
+  70% { transform: rotate(360deg) scale(1.08); filter: brightness(1.8); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+@keyframes victory-sound-wave {
+  0%, 100% { transform: scaleY(0.7); }
+  45% { transform: scaleY(1.25) translateY(-7px); filter: brightness(1.8); }
+}
+@keyframes victory-pattern-reveal {
+  0% { opacity: 0.35; transform: rotate(-12deg) scale(0.7); }
+  60% { opacity: 1; transform: rotate(8deg) scale(1.12); }
+  100% { transform: rotate(0) scale(1); }
+}
+@keyframes victory-gate-open {
+  0% { transform: rotate(0) scale(0.8); }
+  65% { transform: rotate(180deg) scale(1.1); filter: brightness(1.7); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+@keyframes victory-sort-sweep {
+  0% { transform: translateX(-24px); filter: brightness(1); }
+  50% { transform: translateX(24px); filter: brightness(1.8); }
+  100% { transform: translateX(0); filter: brightness(1); }
+}
+@keyframes victory-constellation-link {
+  0% { opacity: 0.2; transform: scale(0.45); }
+  70% { opacity: 1; transform: scale(1.18); filter: brightness(2); }
+  100% { transform: scale(1); }
+}
+@keyframes victory-color-cascade {
+  0% { opacity: 0.2; transform: translateY(-24px) scale(0.8); }
+  65% { opacity: 1; transform: translateY(6px) scale(1.08); }
+  100% { transform: translateY(0) scale(1); }
+}
+
 .puzzle-panel.puzzle-completed > * {
   animation: victory-fall 1.05s cubic-bezier(0.55, 0.05, 0.8, 0.2) both;
 }
@@ -301,6 +364,7 @@ body.puzzle-completed::after {
     75% { transform: perspective(600px) rotateY(340deg) translateY(70px); opacity: 0.35; }
     100% { transform: perspective(600px) rotateY(360deg) translateY(0); opacity: 1; }
   }
+
   18% {
     opacity: 1;
   }
@@ -310,13 +374,18 @@ body.puzzle-completed::after {
 }
 
 .generic-demo {
-  display: grid;
-  gap: 0.8rem;
-  margin-bottom: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 18px;
+  width: 100%;
 }
 
 .generic-demo .sequence-demo-button {
   justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   padding: 0.65rem 0.9rem;
   border: 1px solid rgba(255, 142, 219, 0.7);
   background: rgba(255, 142, 219, 0.08);
@@ -325,6 +394,21 @@ body.puzzle-completed::after {
   font: 0.58rem var(--font-display, "Orbitron", sans-serif);
   letter-spacing: 0.08rem;
   text-transform: uppercase;
+}
+.generic-demo > #startPuzzleButton {
+  order: 2;
+  margin-left: auto;
+}
+.generic-demo .demo-toggle-arrow {
+  display: inline-block;
+  color: #ffd2f1;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+.generic-demo.is-open .demo-toggle-arrow {
+  transform: rotate(180deg);
 }
 
 .generic-demo .sequence-demo-button:hover,
@@ -336,10 +420,33 @@ body.puzzle-completed::after {
 
 .generic-demo .sequence-demo-panel {
   display: grid;
+  position: relative;
+  order: 3;
+  flex: 1 1 100%;
   gap: 0.7rem;
-  padding: 0.9rem;
+  width: 100%;
+  margin-top: 0.1rem;
+  padding: 1.1rem 1.2rem;
   border: 1px solid rgba(255, 142, 219, 0.25);
   background: rgba(14, 8, 29, 0.72);
+}
+.generic-demo .sequence-demo-close {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.55rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 1px solid rgba(255, 142, 219, 0.5);
+  background: transparent;
+  color: #ffb6e7;
+  cursor: pointer;
+  font: 1rem/1 var(--font-display, "Orbitron", sans-serif);
+}
+.generic-demo .sequence-demo-close:hover,
+.generic-demo .sequence-demo-close:focus-visible {
+  background: rgba(255, 142, 219, 0.16);
+  outline: none;
 }
 
 .generic-demo .sequence-demo-panel p {
@@ -375,6 +482,9 @@ body.puzzle-completed::after {
 .demo-orange { color: #ffad70; }
 
 @media (max-width: 560px) {
+  .generic-demo > #startPuzzleButton {
+    margin-left: 0;
+  }
   .generic-demo .sequence-demo-items {
     grid-template-columns: repeat(2, minmax(70px, 1fr));
   }
