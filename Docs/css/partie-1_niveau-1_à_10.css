@@ -62,6 +62,13 @@
   }
 }
 
+@media (max-width: 650px) {
+  .level-progress .level-square.current,
+  .sort-slot.is-target {
+    animation: none !important;
+  }
+}
+
 .level-back-button {
   position: fixed;
   top: 18px;

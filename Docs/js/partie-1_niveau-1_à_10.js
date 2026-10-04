@@ -123,6 +123,21 @@ function installProgressDots() {
   });
 }
 
+function readCompletedLevels(storageKey) {
+  const raw = localStorage.getItem(storageKey);
+  if (!raw) return [];
+
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed)
+      ? parsed.filter((level) => Number.isInteger(level) && level > 0)
+      : [];
+  } catch (error) {
+    console.warn(`Invalid progression data in "${storageKey}".`, error);
+    return [];
+  }
+}
+
 installProgressDots();
 
 const activeLevelScript = levelScriptByMarker.find(([marker]) =>
@@ -135,12 +150,10 @@ if (activeLevelScript) {
     localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const accountId = window.EchoesSave?.getCurrentUser?.() || "guest";
   const progressStorageKey = `echoes-completed-levels-${encodeURIComponent(accountId)}`;
-  const legacyCompletedLevels = JSON.parse(
-    localStorage.getItem("echoes-completed-levels") || "[]",
-  );
+  const legacyCompletedLevels = readCompletedLevels("echoes-completed-levels");
   const completedLevels = new Set([
     ...legacyCompletedLevels,
-    ...JSON.parse(localStorage.getItem(progressStorageKey) || "[]"),
+    ...readCompletedLevels(progressStorageKey),
   ]);
   if (accountId !== "guest" && completedLevels.size) {
     localStorage.setItem(
@@ -1163,12 +1176,10 @@ if (activeLevelScript) {
   const currentLevel = 1;
   const accountId = window.EchoesSave?.getCurrentUser?.() || "guest";
   const progressStorageKey = `echoes-completed-levels-${encodeURIComponent(accountId)}`;
-  const legacyCompletedLevels = JSON.parse(
-    localStorage.getItem("echoes-completed-levels") || "[]",
-  );
+  const legacyCompletedLevels = readCompletedLevels("echoes-completed-levels");
   const completedLevels = new Set([
     ...legacyCompletedLevels,
-    ...JSON.parse(localStorage.getItem(progressStorageKey) || "[]"),
+    ...readCompletedLevels(progressStorageKey),
   ]);
   if (accountId !== "guest" && completedLevels.size) {
     localStorage.setItem(
@@ -1506,8 +1517,8 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
   const accountId = window.EchoesSave?.getCurrentUser?.() || "guest";
   const progressKey = `echoes-completed-levels-${encodeURIComponent(accountId)}`;
   const completedLevels = new Set([
-    ...JSON.parse(localStorage.getItem("echoes-completed-levels") || "[]"),
-    ...JSON.parse(localStorage.getItem(progressKey) || "[]"),
+    ...readCompletedLevels("echoes-completed-levels"),
+    ...readCompletedLevels(progressKey),
   ]);
   let started = false;
   let completed = false;
