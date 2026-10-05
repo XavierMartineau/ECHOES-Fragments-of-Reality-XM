@@ -36,6 +36,10 @@
           label: "RÉCUPÉRATION",
           file: "boss-recovery.html",
         },
+        {
+          label: "CLÉE_01 // CINÉMATIQUE",
+          file: "clee_01_cinematic.html",
+        },
       ],
     },
     {
@@ -152,7 +156,7 @@
                           ${part.special
                             .map(
                               (item) =>
-                                `<a class="dev-mode-special-link" href="${specialLink(part, item.file)}">${item.label}</a>`,
+                                `<a class="dev-mode-special-link" href="${specialLink(part, item.file)}${item.file === "clee_01_cinematic.html" ? "?dev=1" : ""}">${item.label}</a>`,
                             )
                             .join("")}
                         </div>`

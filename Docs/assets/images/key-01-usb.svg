@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 260" role="img" aria-labelledby="title desc">
+  <title id="title">Clé de résonance 01</title>
+  <desc id="desc">Petite clé USB cyberpunk cyan et violette avec le symbole ECHO.</desc>
+  <defs>
+    <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#152d49"/>
+      <stop offset="0.55" stop-color="#081323"/>
+      <stop offset="1" stop-color="#321b58"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#79f7ff"/>
+      <stop offset="0.5" stop-color="#80ffcf"/>
+      <stop offset="1" stop-color="#b36cff"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(90 130) rotate(-12) translate(-90 -130)">
+    <path d="M48 24h84v35l18 20v110c0 19-15 34-34 34H64c-19 0-34-15-34-34V79l18-20V24Z" fill="url(#shell)" stroke="url(#edge)" stroke-width="4"/>
+    <path d="M48 59h84M48 79h84" fill="none" stroke="#79f7ff" stroke-width="2" opacity=".7"/>
+    <path d="M57 44h66" stroke="#b36cff" stroke-width="3" stroke-dasharray="8 8"/>
+    <rect x="57" y="96" width="66" height="83" rx="8" fill="#050b18" stroke="#79f7ff" stroke-width="2"/>
+    <path d="M73 112h34v7H73zm0 16h34v7H73zm0 16h22v7H73z" fill="#80ffcf" opacity=".7"/>
+    <text x="90" y="166" fill="#79f7ff" font-family="Arial, sans-serif" font-size="37" text-anchor="middle" filter="url(#glow)">E</text>
+    <circle cx="90" cy="198" r="7" fill="#80ffcf" filter="url(#glow)"/>
+    <path d="M64 228h52" stroke="#b36cff" stroke-width="3"/>
+  </g>
+</svg>

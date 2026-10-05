@@ -148,15 +148,16 @@ function readCompletedLevels(storageKey) {
 
 function installKeyHud() {
   const pagePath = window.location.pathname.toLowerCase();
+  const isGameplayPage = document.querySelector(".level-shell");
   const isBossFlowPage =
     pagePath.includes("clee_01_boss_level") ||
     pagePath.includes("boss-recovery");
-  if (!isBossFlowPage) return;
+  if (!isGameplayPage && !isBossFlowPage) return;
   if (document.querySelector(".key-hud")) return;
   const hud = document.createElement("aside");
   hud.className = "key-hud";
   hud.setAttribute("aria-live", "polite");
-  hud.innerHTML = `<span class="key-hud-label">CLÉE :</span><span class="key-hud-value">0 / 1</span>`;
+  hud.innerHTML = `<span class="key-hud-label">CLÉS :</span><span class="key-hud-value">0 / 6</span>`;
   const header = document.querySelector(".level-header, .top-bar");
   if (header) {
     header.insertAdjacentElement("afterend", hud);
@@ -165,8 +166,8 @@ function installKeyHud() {
   }
   const keys = window.EchoesSave?.getKeys?.() || [];
   const value = hud.querySelector(".key-hud-value");
-  if (keys.includes("resonance-1")) {
-    value.textContent = "1 / 1";
+  if (keys.length) {
+    value.textContent = `${Math.min(keys.length, 6)} / 6`;
     hud.classList.add("is-unlocked");
   }
 }
@@ -1570,14 +1571,6 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
       currentLevel: levelNumber,
       completedLevels: levels,
     });
-    if (levelNumber === 11) {
-      window.EchoesSave?.unlockKey?.("resonance-1");
-      const keyHud = document.querySelector(".key-hud");
-      if (keyHud) {
-        keyHud.querySelector(".key-hud-value").textContent = "1 / 1";
-        keyHud.classList.add("is-unlocked");
-      }
-    }
     nextButton.hidden = false;
     startButton.disabled = true;
     setStatus(levelCopy?.statusSuccess || "Level stabilized.", "success");
@@ -1624,12 +1617,15 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
     reset();
   });
   nextButton.addEventListener("click", () => {
-    window.location.href =
-      levelNumber === 10
-        ? "clee_01_boss_level.html"
-        : levelNumber === 11
-        ? "../partie-2_niveau-11_à_20/niveau-12.html"
-        : `niveau-${String(levelNumber + 1).padStart(2, "0")}.html`;
+  if (levelNumber === 10) {
+    window.location.href = "clee_01_boss_level.html";
+    return;
+  }
+  if (levelNumber === 11) {
+    window.location.href = "clee_01_cinematic.html";
+    return;
+  }
+  window.location.href = `niveau-${String(levelNumber + 1).padStart(2, "0")}.html`;
   });
 
   const wasCompleted = completedLevels.has(levelNumber);

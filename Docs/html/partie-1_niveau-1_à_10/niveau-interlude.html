@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/echoes-favicon.svg" />
+    <title>ECHOES - Transmission</title>
+    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css" />
+    <link rel="stylesheet" href="../../css/responsive.css" />
+    <link rel="stylesheet" href="../../css/fonts.css" />
+  </head>
+  <body class="interlude-page">
+    <div class="background-glow"></div>
+    <div class="grid-overlay"></div>
+
+    <header class="interlude-header">
+      <a class="brand" href="../../../index.html">ECHOES</a>
+      <div class="interlude-status">PARTIE 1 // TRANSMISSION</div>
+      <div class="interlude-code">CANAL 01.5 // STABLE</div>
+    </header>
+
+    <aside class="key-hud" aria-label="Progression des clés">
+      <span class="key-hud-label">CLÉS :</span>
+      <span class="key-hud-value">1 / 6</span>
+    </aside>
+
+    <main class="interlude-main">
+      <section class="transmission-scene" aria-labelledby="interludeTitle">
+        <div class="transmission-kicker">
+          <span>APRÈS-RÉSONANCE</span>
+          <strong>PROTOCOLE DE PASSAGE</strong>
+        </div>
+
+        <div class="signal-orb" aria-hidden="true">
+          <span class="signal-core">E</span>
+          <i class="signal-ring signal-ring-one"></i>
+          <i class="signal-ring signal-ring-two"></i>
+          <i class="signal-ring signal-ring-three"></i>
+        </div>
+
+        <p class="eyebrow">LA CLÉ 01 EST ENREGISTRÉE</p>
+        <h1 id="interludeTitle">TRANSMISSION ÉTABLIE</h1>
+        <p class="interlude-subtitle">Un message traverse les ruines.</p>
+
+        <div class="transmission-console" id="transmissionConsole" aria-live="polite">
+          <div class="console-topline">
+            <span><b>ECHO</b> // CANAL SÉCURISÉ</span>
+            <span id="transmissionStep">01 // 03</span>
+          </div>
+          <div class="console-screen" id="interludeDialogue">
+            <span class="console-placeholder">CLIQUE POUR OUVRIR LA TRANSMISSION</span>
+          </div>
+          <div class="console-bottomline">
+            <span class="console-cursor" aria-hidden="true"></span>
+            <span id="interludeHint">Interface en attente // entrée utilisateur requise</span>
+          </div>
+        </div>
+
+        <p class="interlude-status" id="interludeStatus">La fréquence attend ton signal.</p>
+        <button class="sequence-start-button" id="stabilizeSignal" type="button">
+          OUVRIR LA TRANSMISSION
+        </button>
+        <button class="next-level-button" id="continueToLevel5" type="button" hidden>
+          ENTRER DANS LA SUITE <span aria-hidden="true">→</span>
+        </button>
+      </section>
+    </main>
+
+    <script src="../../js/save-system.js"></script>
+    <script src="../../js/niveau-interlude.js"></script>
+    <script src="../../js/dev-mode.js"></script>
+  </body>
+</html>

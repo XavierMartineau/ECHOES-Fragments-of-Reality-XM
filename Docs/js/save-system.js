@@ -77,6 +77,8 @@ window.EchoesSave = (() => {
     if (username) {
       localStorage.removeItem(keyFor("echoes-completed-levels-", username));
       localStorage.removeItem("echoes-completed-levels");
+    } else {
+      localStorage.removeItem("echoes-guest-keys");
     }
     return saveProgress(
       {
@@ -90,11 +92,20 @@ window.EchoesSave = (() => {
   }
 
   function getKeys(username = getCurrentUser()) {
+    if (!username) {
+      return JSON.parse(localStorage.getItem("echoes-guest-keys") || "[]");
+    }
     return getSave(username)?.keys || [];
   }
 
   function unlockKey(keyId, username = getCurrentUser()) {
-    if (!username || !keyId) return false;
+    if (!keyId) return false;
+    if (!username) {
+      const guestKeys = JSON.parse(localStorage.getItem("echoes-guest-keys") || "[]");
+      const keys = [...new Set(guestKeys.concat(keyId))];
+      localStorage.setItem("echoes-guest-keys", JSON.stringify(keys));
+      return true;
+    }
     const keys = [...new Set(getKeys(username).concat(keyId))];
     return saveProgress({ keys }, username);
   }
