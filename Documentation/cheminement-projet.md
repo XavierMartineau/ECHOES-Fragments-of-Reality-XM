@@ -249,6 +249,17 @@ Page : `docs/html/partie-1_niveau-1_à_10/boss-recovery.html`
   d'entrée, particules, halo de souris, ondulation au clic, flash de statut, respect de
   `prefers-reduced-motion`) et nouvelle page « En construction » partagée
   (`construction.css`) corrigeant l'écran blanc des niveaux 14 à 60.
+
+### 06/10/2026 — Niveaux 14 à 16 et regroupement du JavaScript
+
+- `30978df` — Création des niveaux 14 (miroirs et faisceau) et 16 (réseau logique en trois
+  manches) avec leurs pages et textes FR/EN.
+- `a107dea` — Niveau 15 « Les veines de lumière » : routage de flux sur grille 14 × 14,
+  vingt paires de balises colorées, disposition aléatoire à chaque réinitialisation,
+  sans obligation de remplir toute la grille.
+- `095e959` — Mode développeur toujours rose (suppression des surcharges bleues de la
+  Partie 2), JavaScript des niveaux 11 à 16 regroupé dans `partie-2_niveau-11_à_20.js`
+  (scripts `niveau-1X.js` supprimés) et documentation du niveau 15 mise à jour.
 ## Prochain jalon recommandé
 
 1. Valider le parcours complet niveaux 1 à 10 → boss → Clé 01 sur desktop et mobile.
