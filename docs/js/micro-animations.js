@@ -13,6 +13,7 @@
   }
   if (reduced) return;
 
+  // Initialise les effets (ondulations, particules).
   const init = () => {
     const root = document.body;
 

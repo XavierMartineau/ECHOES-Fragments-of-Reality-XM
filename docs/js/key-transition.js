@@ -70,6 +70,7 @@
       text: "Suis le cercle brisé. Derrière lui se trouve la prochaine fracture de la réalité.",
     },
   ];
+  // Traduit un message de dialogue selon la langue choisie.
   const translateMessage = (message) => {
     const tr = window.echoesTranslate;
     if (tr) {
@@ -88,10 +89,12 @@
   let rewardIsAnimating = false;
   let postKeyIndex = 0;
 
+  // Change l'étape affichée de la séquence de récompense.
   const setStep = (step) => {
     rewardStep.textContent = `${String(step).padStart(2, "0")} // 05`;
   };
 
+  // Débloque la clé et met à jour le compteur de clés.
   const unlockReward = () => {
     if (rewardIsAnimating) return;
     rewardIsAnimating = true;
@@ -120,6 +123,7 @@
     }, 1900);
   };
 
+  // Termine la transmission qui suit l'obtention de la clé.
   const finishPostKeyTransmission = () => {
     setStep(5);
     terminalMessage.textContent = "TRANSMISSION COMPLÈTE // PASSAGE OUVERT";
@@ -129,6 +133,7 @@
     continueButton.focus();
   };
 
+  // Écrit le message post-clé lettre par lettre.
   const typePostKeyMessage = () => {
     if (postKeyIndex >= postKeyMessages.length) {
       window.setTimeout(finishPostKeyTransmission, 450);
@@ -163,6 +168,7 @@
     write();
   };
 
+  // Termine le dialogue en cours et passe à l'étape suivante.
   const finishDialogue = () => {
     setStep(4);
     terminalMessage.textContent = "RÉCOMPENSE DISPONIBLE // CONFIRMATION REQUISE";
@@ -172,6 +178,7 @@
     rewardAction.onclick = unlockReward;
   };
 
+  // Écrit un message de dialogue lettre par lettre.
   const typeMessage = (message) => {
     isTyping = true;
     const line = document.createElement("p");
@@ -215,6 +222,7 @@
     write();
   };
 
+  // Passe à la réplique suivante (ou termine l'écriture en cours).
   const advanceDialogue = () => {
     window.clearTimeout(autoAdvanceTimer);
     if (isTyping) {
@@ -237,6 +245,7 @@
     messageIndex += 1;
   };
 
+  // Démarre le dialogue de récompense.
   const startDialogue = () => {
     if (isStarted || alreadyUnlocked) return;
     isStarted = true;

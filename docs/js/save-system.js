@@ -4,24 +4,29 @@ window.EchoesSave = (() => {
   const accountPrefix = "echoes-account-";
   const savePrefix = "echoes-save-";
 
+  // Normalise le nom de joueur.
   function normalizeUsername(username) {
     return username.trim().toLowerCase();
   }
 
+  // Construit la clé de stockage local d'un joueur.
   function keyFor(prefix, username) {
     return `${prefix}${encodeURIComponent(normalizeUsername(username))}`;
   }
 
+  // Renvoie le joueur connecté.
   function getCurrentUser() {
     return localStorage.getItem(currentUserKey);
   }
 
+  // Lit le compte d'un joueur.
   function getAccount(username = getCurrentUser()) {
     if (!username) return null;
     const rawAccount = localStorage.getItem(keyFor(accountPrefix, username));
     return rawAccount ? JSON.parse(rawAccount) : null;
   }
 
+  // Connecte un joueur ou crée son compte.
   function loginOrCreate(username, password) {
     const normalizedUsername = normalizeUsername(username);
     const accountKey = keyFor(accountPrefix, normalizedUsername);
@@ -43,6 +48,7 @@ window.EchoesSave = (() => {
     return { ok: true, username: normalizedUsername, isNew: !existingAccount };
   }
 
+  // Lit la sauvegarde d'un joueur.
   function getSave(username = getCurrentUser()) {
     if (!username) return null;
     const rawSave = localStorage.getItem(keyFor(savePrefix, username));
@@ -66,6 +72,7 @@ window.EchoesSave = (() => {
     return true;
   }
 
+  // Supprime la sauvegarde d'un joueur.
   function deleteSave(username = getCurrentUser()) {
     if (!username) return false;
     localStorage.removeItem(keyFor(savePrefix, username));
@@ -91,6 +98,7 @@ window.EchoesSave = (() => {
     );
   }
 
+  // Lit les clés obtenues par un joueur.
   function getKeys(username = getCurrentUser()) {
     if (!username) {
       return JSON.parse(localStorage.getItem("echoes-guest-keys") || "[]");
@@ -98,6 +106,7 @@ window.EchoesSave = (() => {
     return getSave(username)?.keys || [];
   }
 
+  // Débloque une clé pour un joueur.
   function unlockKey(keyId, username = getCurrentUser()) {
     if (!keyId) return false;
     if (!username) {
@@ -110,6 +119,7 @@ window.EchoesSave = (() => {
     return saveProgress({ keys }, username);
   }
 
+  // Déconnecte le joueur.
   function logout() {
     localStorage.removeItem(currentUserKey);
   }

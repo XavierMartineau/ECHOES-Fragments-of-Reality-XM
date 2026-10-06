@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   // DEV MODE // shared navigator injected on every page.
   const script = document.currentScript;
   if (!script) {
@@ -79,6 +79,7 @@
     },
   ];
 
+  // Renvoie le dossier de partie correspondant à un numéro de niveau.
   const folderForLevel = (level) => {
     if (level <= 10) return "partie-1_niveau-1_à_10";
     if (level <= 20) return "partie-2_niveau-11_à_20";
@@ -88,11 +89,13 @@
     return "partie-6_niveau-51_à_60";
   };
 
+  // Construit le lien vers la page d'un niveau.
   const levelLink = (level) =>
     new URL(
       `docs/html/${folderForLevel(level)}/niveau-${String(level).padStart(2, "0")}.html`,
       rootUrl,
     ).href;
+  // Construit le lien vers une page spéciale (boss, cinématique, récupération).
   const specialLink = (part, file) =>
     new URL(`docs/html/${part.folder}/${file}`, rootUrl).href;
 
@@ -196,6 +199,7 @@
   }
 
   const colorAssist = menu.querySelector("[data-color-assist]");
+  // Active ou désactive le mode d'aide aux couleurs et le mémorise.
   const setColorAssist = (enabled) => {
     document.body.classList.toggle("echo-color-assist", enabled);
     colorAssist.checked = enabled;

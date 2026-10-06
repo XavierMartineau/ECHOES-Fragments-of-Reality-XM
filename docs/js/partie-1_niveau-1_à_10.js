@@ -97,6 +97,7 @@ function playPuzzleSuccessAnimation() {
   }, 2400);
 }
 
+// Crée les points de progression des niveaux.
 function installProgressDots() {
   // Crée les petits indicateurs de réussite à partir du compteur du puzzle (0 / N).
   document.querySelectorAll(".progress-readout").forEach((readout) => {
@@ -142,6 +143,7 @@ function installProgressDots() {
   });
 }
 
+// Lit dans le stockage local la liste des niveaux terminés.
 function readCompletedLevels(storageKey) {
   const raw = localStorage.getItem(storageKey);
   if (!raw) return [];
@@ -157,6 +159,7 @@ function readCompletedLevels(storageKey) {
   }
 }
 
+// Installe l'affichage du compteur de clés en haut de la page.
 function installKeyHud() {
   const pagePath = window.location.pathname.toLowerCase();
   const isBossPage =
@@ -338,6 +341,7 @@ if (activeLevelScript) {
   const levelCopy =
     window.translations?.[language]?.[`level${levelNumber}`] ||
     futureCopy[levelNumber];
+  // Mélange une liste au hasard.
   const shuffle = (items) => {
     const result = [...items];
     for (let index = result.length - 1; index > 0; index -= 1) {
@@ -349,6 +353,7 @@ if (activeLevelScript) {
     }
     return result;
   };
+  // Met à jour l'affichage de la progression.
   const renderProgress = () => {
     const progress = document.getElementById("levelProgress");
     if (!progress) return;
@@ -362,6 +367,7 @@ if (activeLevelScript) {
       progress.appendChild(square);
     }
   };
+  // Enregistre la réussite du niveau.
   const saveCompletion = () => {
     if (accountId === "guest") {
       renderProgress();
@@ -379,6 +385,7 @@ if (activeLevelScript) {
     renderProgress();
     playPuzzleSuccessAnimation();
   };
+  // Affiche le message de réussite.
   const successMessage = (message) => {
     const sector = Math.ceil(levelNumber / 10);
     const nextSector = Math.min(sector + 1, 6);
@@ -1186,6 +1193,7 @@ if (activeLevelScript) {
   const nextLevelButton = document.getElementById("nextLevelButton");
   const systemTransmission = document.querySelector(".system-transmission");
 
+  // Mélange un tableau au hasard.
   function shuffleArray(items) {
     const shuffled = [...items];
     for (let index = shuffled.length - 1; index > 0; index -= 1) {
@@ -1210,6 +1218,7 @@ if (activeLevelScript) {
     success: levelCopy.systemSuccess,
     error: levelCopy.systemError,
   };
+  // Affiche le message de progression du secteur.
   const sectorProgressMessage = (message) => {
     const remaining = 10 - currentLevel;
     return `${message} // ${remaining} NIVEAUX AVANT SECTEUR 2`;
@@ -1272,11 +1281,13 @@ if (activeLevelScript) {
     piece.setAttribute("aria-label", shapeLabels[piece.dataset.shape]);
   });
 
+  // Mélange les pièces à placer.
   function shufflePieces() {
     const shuffledPieces = [...pieces].sort(() => Math.random() - 0.5);
     shuffledPieces.forEach((piece) => pieceTray.appendChild(piece));
   }
 
+  // Prépare une nouvelle manche.
   function prepareRound() {
     solution = shuffleArray(["circle", "triangle", "square"]);
     targetByShape = Object.fromEntries(
@@ -1353,6 +1364,7 @@ if (activeLevelScript) {
     progressReadout.textContent = `${correctPlacements} / 3`;
   }
 
+  // Écrit un message système lettre par lettre.
   function typeSystemMessage(message, onComplete) {
     systemMessage.textContent = "";
     let characterIndex = 0;
@@ -1372,6 +1384,7 @@ if (activeLevelScript) {
     typeCharacter();
   }
 
+  // Sélectionne une pièce.
   function selectPiece(piece) {
     if (!puzzleStarted || piece.classList.contains("placed")) return;
     pieces.forEach((item) => item.classList.remove("selected"));
@@ -1383,6 +1396,7 @@ if (activeLevelScript) {
     status.className = "puzzle-status";
   }
 
+  // Efface les aperçus des emplacements.
   function clearSlotPreviews() {
     slots.forEach((slot) => {
       slot.classList.remove(
@@ -1393,6 +1407,7 @@ if (activeLevelScript) {
     });
   }
 
+  // Affiche l'aperçu de la forme sur un emplacement.
   function showSlotPreview(shape) {
     const targetSlot = slots[targetByShape[shape]];
     if (targetSlot && !targetSlot.classList.contains("filled")) {
@@ -1400,6 +1415,7 @@ if (activeLevelScript) {
     }
   }
 
+  // Place la pièce sélectionnée sur un emplacement.
   function placePiece(piece, slot) {
     if (!puzzleStarted || !piece || slot.classList.contains("filled")) return;
 
@@ -1421,6 +1437,7 @@ if (activeLevelScript) {
     if (placedShapes.every(Boolean)) checkSolution();
   }
 
+  // Vérifie si la solution est correcte.
   function checkSolution() {
     const isCorrect = placedShapes.every(
       (shape, index) => shape === solution[index],
@@ -1453,6 +1470,7 @@ if (activeLevelScript) {
     systemTransmission.classList.remove("success");
   }
 
+  // Réinitialise le puzzle.
   function resetPuzzle() {
     placedShapes = [null, null, null];
     selectedPiece = null;
@@ -1578,15 +1596,18 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
   );
   let started = false;
   let completed = false;
+  // Action exécutée au démarrage du puzzle (définie par chaque niveau).
   let onStart = () => {};
   let resetCurrentRound = null;
 
+  // Affiche un message d'état (réussite, erreur ou info).
   const setStatus = (message, state = "") => {
     status.textContent = message;
     status.className = `puzzle-status${state ? ` ${state}` : ""}`;
     if (systemMessage) systemMessage.textContent = message.toUpperCase();
   };
 
+  // Termine l'étape et active la suite.
   const finish = () => {
     completed = true;
     if (accountId === "guest") {
@@ -1612,6 +1633,7 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
     nextButton.focus();
   };
 
+  // Remet le puzzle à zéro.
   const reset = () => {
     started = false;
     completed = false;

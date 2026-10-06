@@ -312,6 +312,7 @@
     [/^Calcul (\d+) \/ (\d+)$/, (m) => `Calculation ${m[1]} / ${m[2]}`],
   ];
 
+  // Normalise les espaces et apostrophes avant de chercher une traduction.
   const normalize = (value) => value.replace(/\s+/g, " ").replace(/[’‘]/g, "'").trim();
   const exactNormalized = new Map(
     Object.entries(exact).map(([key, value]) => [normalize(key), value]),
@@ -321,6 +322,7 @@
     [...exactNormalized].map(([key, value]) => [key.toUpperCase(), value]),
   );
 
+  // Renvoie la traduction anglaise d'un texte français (ou le texte inchangé).
   function tr(text) {
     const core = normalize(text);
     if (!core) return text;
@@ -338,6 +340,7 @@
     return text;
   }
 
+  // Traduit un nœud de texte.
   const translateText = (node) => {
     const value = node.nodeValue;
     if (!value || !value.trim()) return;
@@ -349,6 +352,7 @@
   };
 
   const attributes = ["aria-label", "title", "placeholder", "alt"];
+  // Traduit les attributs textuels d'un élément (titre, placeholder…).
   const translateElement = (element) => {
     if (element.nodeType !== 1) return;
     if (["SCRIPT", "STYLE"].includes(element.tagName)) return;
@@ -360,6 +364,7 @@
     });
   };
 
+  // Parcourt le DOM pour tout traduire.
   const walk = (root) => {
     if (root.nodeType === 3) {
       translateText(root);
@@ -377,6 +382,7 @@
     }
   };
 
+  // Lance la traduction de la page.
   const run = () => {
     document.title = tr(document.title);
     walk(document.body);
@@ -394,6 +400,7 @@
     });
     observe();
   });
+  // Observe les changements du DOM pour traduire le contenu ajouté plus tard.
   const observe = () =>
     observer.observe(document.body, {
       childList: true,
@@ -404,6 +411,7 @@
     });
 
   window.echoesTranslate = tr;
+  // Démarre la traduction au chargement de la page.
   const start = () => {
     run();
     observe();

@@ -4,6 +4,7 @@
 const currentLevel = Number(
   window.location.pathname.match(/niveau-(\d+)/)?.[1] || 0,
 );
+// Sauvegarde automatiquement la progression de la page courante.
 const autoSave = () =>
   window.EchoesSave?.saveProgress({
     currentPage: `level-${currentLevel}`,
@@ -135,6 +136,7 @@ else {
   const TIMER_SECONDS = 30;
   const HINT_PENALTY_SECONDS = 5;
   const shapes = ["circle", "triangle", "diamond", "square"];
+  // Crée les pièces du puzzle.
   const createPieces = () =>
     shapes.flatMap((shape) =>
       [1, 2].map((copyNumber) => ({
@@ -143,6 +145,7 @@ else {
       })),
     );
   const pieces = createPieces();
+  // Identifiant d'un emplacement (ligne-position).
   const slotKey = (line, position) => `${line}-${position}`;
   const placed = new Map();
   let selectedPiece = null;
@@ -171,11 +174,13 @@ else {
   nextButton.textContent = copy.next;
   hintButton.textContent = copy.hintButton;
 
+  // Affiche un message d'état (réussite, erreur ou info).
   const setStatus = (message, state = "") => {
     status.textContent = message;
     status.className = `puzzle-status${state ? ` ${state}` : ""}`;
   };
 
+  // Mélange les formes.
   const shuffleShapes = () => {
     const row = [...shapes];
     for (let index = row.length - 1; index > 0; index -= 1) {
@@ -185,12 +190,14 @@ else {
     return row;
   };
 
+  // Met à jour le chronomètre affiché.
   const updateTimer = () => {
     const seconds = Math.max(0, Math.ceil(remainingMilliseconds / 1000));
     timerReadout.textContent = `00:${String(seconds).padStart(2, "0")}`;
     timerReadout.classList.toggle("is-warning", seconds <= 10);
   };
 
+  // Arrête le chronomètre.
   const stopTimer = () => {
     if (timerInterval !== null) {
       window.clearInterval(timerInterval);
@@ -198,6 +205,7 @@ else {
     }
   };
 
+  // Termine la manche chronométrée quand le temps est écoulé.
   const endTimedRound = () => {
     stopTimer();
     remainingMilliseconds = 0;
@@ -208,6 +216,7 @@ else {
     setStatus(copy.timerExpired, "error");
   };
 
+  // Démarre le chronomètre.
   const startTimer = () => {
     remainingMilliseconds = TIMER_SECONDS * 1000;
     timerDeadline = Date.now() + remainingMilliseconds;
@@ -220,6 +229,7 @@ else {
     }, 100);
   };
 
+  // Redessine le plateau selon l'état courant.
   const render = () => {
     board.replaceChildren();
     tray.replaceChildren();
@@ -296,6 +306,7 @@ else {
     readout.textContent = `${placed.size} / 8`;
   };
 
+  // Enregistre la réussite du niveau.
   const saveCompletion = () => {
     window.EchoesSave?.saveProgress({
       currentPage: "level-11",
@@ -303,6 +314,7 @@ else {
     });
   };
 
+  // Joue la séquence que le joueur doit retenir.
   const showSequence = async () => {
     playbackId += 1;
     const activePlayback = playbackId;
@@ -334,6 +346,7 @@ else {
     tray.querySelector(".resonance-piece")?.focus();
   };
 
+  // Place la pièce sélectionnée sur un emplacement.
   const placePiece = (key, pieceId = selectedPiece) => {
     if (!started || solved || !pieceId || placed.has(key)) return;
     const piece = pieces.find((item) => item.id === pieceId);
@@ -371,6 +384,7 @@ else {
     }
   };
 
+  // Remet le puzzle à zéro.
   const reset = () => {
     playbackId += 1;
     stopTimer();
@@ -399,6 +413,7 @@ else {
     render();
   };
 
+  // Affiche un indice.
   const showHint = () => {
     if (!started || solved || remainingMilliseconds <= 0) return;
     const availableSlots = [];
@@ -570,21 +585,25 @@ else {
   resetButton.textContent = copy.reset;
   nextButton.textContent = copy.next;
 
+  // Affiche un message d'état (réussite, erreur ou info).
   const setStatus = (message, state = "") => {
     status.textContent = message;
     status.className = `puzzle-status${state ? ` ${state}` : ""}`;
   };
 
+  // Met à jour l'affichage de la progression.
   const renderProgress = () => {
     readout.textContent = `${round} / ${patterns.length}`;
   };
 
+  // Active ou désactive l'état de lecture de la séquence.
   const setPlayback = (active) => {
     points.forEach((point) =>
       point.classList.toggle("is-lit", Number(point.dataset.index) === active),
     );
   };
 
+  // Enregistre la réussite du niveau.
   const saveCompletion = () => {
     window.EchoesSave?.saveProgress({
       currentPage: "level-12",
@@ -592,6 +611,7 @@ else {
     });
   };
 
+  // Joue la séquence lumineuse.
   const playSequence = async () => {
     if (solved) return;
     playbackId += 1;
@@ -625,6 +645,7 @@ else {
     points[0]?.focus();
   };
 
+  // Active un point d'énergie.
   const activatePoint = (pointIndex) => {
     if (!acceptingInput || solved) return;
     if (pointIndex !== patterns[round][inputIndex]) {
@@ -680,6 +701,7 @@ else {
     points.push(point);
   }
 
+  // Remet le puzzle à zéro.
   const reset = () => {
     playbackId += 1;
     round = 0;
@@ -824,22 +846,26 @@ else {
   board.setAttribute("aria-label", copy.board);
   $("levelProgress").setAttribute("aria-label", copy.progress);
 
+  // Affiche un message d'état (réussite, erreur ou info).
   const setStatus = (message, state = "") => {
     status.textContent = message;
     status.className = `puzzle-status${state ? ` ${state}` : ""}`;
   };
 
+  // Indique si deux cases sont voisines.
   const isNeighbor = (first, second) =>
     Math.abs(Math.floor(first / 3) - Math.floor(second / 3)) +
       Math.abs((first % 3) - (second % 3)) ===
     1;
 
+  // Met à jour le compteur de progression.
   const updateProgress = () => {
     const placed = tiles.filter((tile, index) => tile === goal[index] && tile !== 0).length;
     readout.textContent = `${placed} / 8`;
     return placed;
   };
 
+  // Redessine le plateau selon l'état courant.
   const render = () => {
     board.replaceChildren();
     tiles.forEach((tile, index) => {
@@ -873,6 +899,7 @@ else {
     });
   };
 
+  // Génère un plateau mélangé résoluble.
   const makeShuffledBoard = () => {
     const result = goal.slice();
     let emptyIndex = result.length - 1;
@@ -890,6 +917,7 @@ else {
     return result;
   };
 
+  // Enregistre la réussite du niveau.
   const saveCompletion = () => {
     window.EchoesSave?.saveProgress({
       currentPage: "level-13",
@@ -897,6 +925,7 @@ else {
     });
   };
 
+  // Déplace une tuile vers la case vide.
   function moveTile(index) {
     if (!started || solved) return;
     const emptyIndex = tiles.indexOf(0);
@@ -924,6 +953,7 @@ else {
     setStatus(copy.playing);
   }
 
+  // Remet le puzzle à zéro.
   const reset = () => {
     tiles = makeShuffledBoard();
     started = false;
@@ -1080,11 +1110,13 @@ else {
   nextButton.textContent = copy.next;
   saveButton.textContent = copy.save;
 
+  // Affiche un message d'état (réussite, erreur ou info).
   const setStatus = (message, state = "") => {
     status.textContent = message;
     status.className = `puzzle-status${state ? ` ${state}` : ""}`;
   };
 
+  // Calcule le trajet du faisceau à travers les miroirs.
   const traceBeam = () => {
     const path = [];
     const visited = new Set();
@@ -1111,6 +1143,7 @@ else {
     return { path, reached: false };
   };
 
+  // Redessine le plateau selon l'état courant.
   const render = () => {
     const { path, reached } = traceBeam();
     const litCells = new Set(path);
@@ -1155,15 +1188,18 @@ else {
     }
   };
 
+  // Met à jour le compteur de progression.
   const updateProgress = () => {
     const aligned = [...mirrors.values()].filter((mirror) => mirror.direction === mirror.target).length;
     readout.textContent = `${aligned} / ${mirrors.size}`;
   };
 
+  // Enregistre la réussite du niveau.
   const saveCompletion = () => {
     window.EchoesSave?.saveProgress({ currentPage: "level-14", currentLevel: 14 });
   };
 
+  // Termine le niveau.
   const complete = () => {
     if (solved) return;
     solved = true;
@@ -1177,6 +1213,7 @@ else {
     nextButton.focus();
   };
 
+  // Remet le puzzle à zéro.
   const reset = () => {
     mirrors.forEach((mirror) => {
       mirror.direction = "/";
@@ -1313,7 +1350,9 @@ else {
     const letters = label.normalize("NFD").replace(/[^a-zA-Z]/g, "").toUpperCase();
     symbols.push([...letters].find((letter) => !symbols.includes(letter)) ?? "?");
   });
+  // Renvoie un entier aléatoire entre 0 et max-1.
   const randomInt = (max) => Math.floor(Math.random() * max);
+  // Mélange une liste au hasard.
   const shuffle = (list) => {
     for (let i = list.length - 1; i > 0; i -= 1) {
       const j = randomInt(i + 1);
@@ -1321,6 +1360,7 @@ else {
     }
     return list;
   };
+  // Renvoie les cases voisines d'une case.
   const neighborsOf = (index) => {
     const row = Math.floor(index / size);
     const column = index % size;
@@ -1372,6 +1412,7 @@ else {
     return blocks.every((count) => count >= 1 && count <= 5);
   };
 
+  // Génère les chemins à relier.
   const generateRoutes = () => {
     for (;;) {
       const path = buildHamiltonianPath();
@@ -1406,11 +1447,13 @@ else {
   let activePath = [];
   let isDrawing = false;
 
+  // Choisit la couleur de texte lisible sur une couleur de fond.
   const inkFor = (hex) => {
     const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
     return 0.299 * r + 0.587 * g + 0.114 * b > 120 ? "#050c1d" : "#ffffff";
   };
 
+  // Génère la disposition de départ du plateau.
   const generateLayout = () => {
     const generated = generateRoutes();
     const order = shuffle(Array.from({ length: pairCount }, (_, i) => i));
@@ -1444,13 +1487,16 @@ else {
   nextButton.textContent = copy.next;
   saveButton.textContent = copy.save;
 
+  // Affiche un message d'état (réussite, erreur ou info).
   const setStatus = (message, variant = "") => {
     status.textContent = message;
     status.className = `puzzle-status${variant ? ` ${variant}` : ""}`;
   };
 
+  // Renvoie la couleur associée à un identifiant.
   const colorFor = (id) => colors.find((color) => color.id === id);
 
+  // Redessine le plateau selon l'état courant.
   const render = () => {
     cells.forEach((cell, index) => {
       const owner = owners[index];
@@ -1480,6 +1526,7 @@ else {
     readout.textContent = `${completedPaths.size} / ${colors.length}`;
   };
 
+  // Anime un chemin terminé.
   const celebratePath = (path) => {
     const step = Math.min(55, 900 / path.length);
     path.forEach((index, order) => {
@@ -1494,6 +1541,7 @@ else {
     }, path.length * step + 900);
   };
 
+  // Efface le chemin d'une couleur.
   const clearPath = (colorId) => {
     owners.forEach((owner, index) => {
       if (owner === colorId && !endpoints.has(index)) owners[index] = null;
@@ -1501,6 +1549,7 @@ else {
     completedPaths.delete(colorId);
   };
 
+  // Commence un chemin depuis un point de départ.
   const beginPath = (colorId, startIndex) => {
     if (!started || solved) return;
     clearPath(colorId);
@@ -1512,12 +1561,14 @@ else {
     setStatus(copy.connecting(colorFor(colorId).label));
   };
 
+  // Indique si deux cases sont voisines.
   const isNeighbor = (first, second) => {
     const rowDelta = Math.abs(Math.floor(first / size) - Math.floor(second / size));
     const columnDelta = Math.abs((first % size) - (second % size));
     return rowDelta + columnDelta === 1;
   };
 
+  // Prolonge le chemin vers la case suivante.
   const advancePath = (nextIndex) => {
     if (!activeColor || !started || solved) return;
     const lastIndex = activePath[activePath.length - 1];
@@ -1590,6 +1641,7 @@ else {
     setStatus(copy.connecting(colorFor(activeColor).label));
   };
 
+  // Réagit au clic sur une case.
   const activateCell = (index) => {
     const endpoint = endpoints.get(index);
     if (endpoint) {
@@ -1608,6 +1660,7 @@ else {
     }
   };
 
+  // Remet le puzzle à zéro.
   const reset = () => {
     generateLayout();
     owners.fill(null);
@@ -1789,11 +1842,13 @@ else {
   nextButton.textContent = copy.next;
   saveButton.textContent = copy.save;
 
+  // Affiche un message d'état (réussite, erreur ou info).
   const setStatus = (message, variant = "") => {
     status.textContent = message;
     status.className = `puzzle-status${variant ? ` ${variant}` : ""}`;
   };
 
+  // Redessine le plateau selon l'état courant.
   const render = () => {
     cells.forEach((cell, index) => {
       cell.classList.toggle("is-on", state[index]);
@@ -1806,11 +1861,13 @@ else {
     });
   };
 
+  // Met à jour les affichages chiffrés.
   const renderReadouts = () => {
     readout.textContent = `${round} / ${scrambles.length}`;
     moveReadout.textContent = `${copy.moves}: ${moves}`;
   };
 
+  // Active ou désactive une impulsion.
   const togglePulse = (index) => {
     const row = Math.floor(index / 3);
     const column = index % 3;
@@ -1823,10 +1880,12 @@ else {
     });
   };
 
+  // Enregistre la réussite du niveau.
   const saveCompletion = () => {
     window.EchoesSave?.saveProgress({ currentPage: "level-16", currentLevel: 16 });
   };
 
+  // Termine la manche et passe à la suivante ou au bouton Continuer.
   const completeRound = () => {
     round += 1;
     renderReadouts();
@@ -1853,6 +1912,7 @@ else {
     }, 900);
   };
 
+  // Construit la manche courante.
   const buildRound = () => {
     state = Array(9).fill(false);
     scrambles[round].forEach(togglePulse);
@@ -1861,6 +1921,7 @@ else {
     render();
   };
 
+  // Remet le puzzle à zéro.
   const reset = () => {
     window.clearTimeout(advanceTimer);
     round = 0;
@@ -2024,11 +2085,13 @@ else {
   nextButton.textContent = copy.next;
   saveButton.textContent = copy.save;
 
+  // Affiche un message d'état (réussite, erreur ou info).
   const setStatus = (message, variant = "") => {
     status.textContent = message;
     status.className = `puzzle-status${variant ? ` ${variant}` : ""}`;
   };
 
+  // Calcule les totaux utilisés pour la comparaison.
   const sums = () => {
     const result = [0, 0, 0];
     rounds[Math.min(round, rounds.length - 1)].forEach((weight, index) => {
@@ -2037,6 +2100,7 @@ else {
     return result;
   };
 
+  // Redessine le plateau selon l'état courant.
   const render = () => {
     containers.forEach((container) => container.replaceChildren());
     rounds[Math.min(round, rounds.length - 1)].forEach((weight, index) => {
@@ -2058,12 +2122,14 @@ else {
     moveReadout.textContent = `${copy.moves}: ${moves}`;
   };
 
+  // Construit la manche courante.
   const buildRound = () => {
     zones = rounds[round].map(() => 0);
     moves = 0;
     render();
   };
 
+  // Termine la manche et passe à la suivante ou au bouton Continuer.
   const completeRound = () => {
     round += 1;
     if (round === rounds.length) {
@@ -2088,6 +2154,7 @@ else {
     }, 1000);
   };
 
+  // Déplace une masse entre les plateaux.
   function moveWeight(index) {
     if (solved || locked) return;
     zones[index] = (zones[index] + 1) % 3;
@@ -2097,6 +2164,7 @@ else {
     if (tray === 0 && left === right) completeRound();
   }
 
+  // Remet le puzzle à zéro.
   const reset = () => {
     window.clearTimeout(advanceTimer);
     round = 0;
@@ -2228,11 +2296,13 @@ else {
   nextButton.textContent = copy.next;
   saveButton.textContent = copy.save;
 
+  // Affiche un message d'état (réussite, erreur ou info).
   const setStatus = (message, variant = "") => {
     status.textContent = message;
     status.className = `puzzle-status${variant ? ` ${variant}` : ""}`;
   };
 
+  // Redessine le plateau selon l'état courant.
   const render = () => {
     const count = discCounts[Math.min(round, discCounts.length - 1)];
     pegs.forEach((peg, index) => {
@@ -2254,6 +2324,7 @@ else {
     moveReadout.textContent = `${copy.moves}: ${moves}`;
   };
 
+  // Construit la manche courante.
   const buildRound = () => {
     const count = discCounts[round];
     towers = [Array.from({ length: count }, (_, i) => count - i), [], []];
@@ -2262,6 +2333,7 @@ else {
     render();
   };
 
+  // Termine la manche et passe à la suivante ou au bouton Continuer.
   const completeRound = () => {
     round += 1;
     selected = -1;
@@ -2286,6 +2358,7 @@ else {
     }, 1000);
   };
 
+  // Réagit au clic sur un piquet (déplacement d'un disque).
   const pressPeg = (index) => {
     if (solved || locked) return;
     if (selected === -1) {
@@ -2321,6 +2394,7 @@ else {
     if (towers[2].length === discCounts[round]) completeRound();
   };
 
+  // Remet le puzzle à zéro.
   const reset = () => {
     window.clearTimeout(advanceTimer);
     round = 0;
@@ -2458,11 +2532,13 @@ else {
   nextButton.textContent = copy.next;
   saveButton.textContent = copy.save;
 
+  // Affiche un message d'état (réussite, erreur ou info).
   const setStatus = (message, variant = "") => {
     status.textContent = message;
     status.className = `puzzle-status${variant ? ` ${variant}` : ""}`;
   };
 
+  // Tire un nouveau code secret.
   const newSecret = () => {
     const pool = symbols.map((_, index) => index);
     for (let i = pool.length - 1; i > 0; i -= 1) {
@@ -2472,6 +2548,7 @@ else {
     secret = pool.slice(0, codeLength);
   };
 
+  // Affiche la proposition en cours.
   const renderGuess = () => {
     guessRow.querySelectorAll(".code-slot").forEach((slot, index) => {
       const value = guess[index];
@@ -2484,6 +2561,7 @@ else {
     readout.textContent = `${copy.attempts}: ${attempts} / ${maxAttempts}`;
   };
 
+  // Compare une proposition au code secret (bien placé / mal placé).
   const evaluate = (attempt) => {
     let exact = 0;
     attempt.forEach((value, index) => {
@@ -2497,6 +2575,7 @@ else {
     return { exact, misplaced: common - exact };
   };
 
+  // Ajoute l'essai et ses indices à l'historique.
   const addHistoryRow = (attempt, result) => {
     const row = document.createElement("li");
     row.className = "code-row";
@@ -2528,6 +2607,7 @@ else {
     history.appendChild(row);
   };
 
+  // Valide la proposition en cours.
   const submit = () => {
     if (solved || locked) return;
     if (guess.includes(-1)) {
@@ -2560,6 +2640,7 @@ else {
     renderGuess();
   };
 
+  // Remet le puzzle à zéro.
   const reset = () => {
     window.clearTimeout(advanceTimer);
     newSecret();

@@ -278,11 +278,13 @@ function drawSpectrum(timestamp) {
   spectrumAnimationFrame = window.requestAnimationFrame(drawSpectrum);
 }
 
+// Anime le spectre audio quand ECHO parle ou glitche.
 function setSpectrumActivity(isEchoSpeaking, isGlitching = false) {
   targetSpectrumActivity = isEchoSpeaking ? 1 : 0;
   targetSpectrumGlitch = isGlitching ? 1 : 0;
 }
 
+// Fait défiler le dialogue pour garder la dernière ligne visible.
 function keepDialogueInView() {
   if (dialogueScrollFrame) return;
   dialogueScrollFrame = window.requestAnimationFrame(() => {
@@ -355,6 +357,7 @@ function typeMessage(messageIndex = 0) {
     keepDialogueInView();
   }
 
+  // Écrit le texte du dialogue lettre par lettre.
   function typeCharacter() {
     text.textContent += message.text[characterIndex];
     characterIndex += 1;
@@ -404,6 +407,7 @@ function typeMessage(messageIndex = 0) {
   typeCharacter();
 }
 
+// Lance la transmission d'introduction.
 function startTransmission() {
   if (hasStarted) return;
 

@@ -26,6 +26,7 @@
   let typeTimer = 0;
   let nextTimer = 0;
 
+  // Termine l'étape et active la suite.
   const finish = () => {
     step.textContent = "03 // 03";
     hint.textContent = "Transmission reçue // passage suivant disponible";
@@ -37,6 +38,7 @@
     continueButton.focus();
   };
 
+  // Écrit une ligne de dialogue lettre par lettre.
   const typeLine = (message) => {
     typing = true;
     const line = document.createElement("p");
@@ -67,6 +69,7 @@
     write();
   };
 
+  // Affiche la ligne de dialogue suivante.
   const nextLine = () => {
     window.clearTimeout(nextTimer);
     if (index >= messages.length) return;
@@ -75,6 +78,7 @@
     index += 1;
   };
 
+  // Démarre la séquence de transmission.
   const begin = () => {
     if (started) return;
     started = true;
