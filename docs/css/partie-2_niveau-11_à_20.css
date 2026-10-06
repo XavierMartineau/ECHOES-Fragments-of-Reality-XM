@@ -1420,6 +1420,23 @@ body.part-two-theme {
   outline-offset: 2px;
 }
 
+.scale-weight.is-selected {
+  border-color: #ffffff;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.7);
+}
+
+.scale-zone.is-target {
+  border-color: #80ffcf;
+  background: rgba(128, 255, 207, 0.12);
+  box-shadow: 0 0 18px rgba(128, 255, 207, 0.55), inset 0 0 14px rgba(128, 255, 207, 0.25);
+  cursor: pointer;
+  animation: scale-target-pulse 1.1s ease-in-out infinite;
+}
+
+@keyframes scale-target-pulse {
+  50% { box-shadow: 0 0 28px rgba(128, 255, 207, 0.9), inset 0 0 20px rgba(128, 255, 207, 0.4); }
+}
+
 .scale-weight:disabled {
   cursor: default;
 }

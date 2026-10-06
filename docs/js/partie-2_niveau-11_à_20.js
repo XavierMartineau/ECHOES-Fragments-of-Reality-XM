@@ -2001,7 +2001,7 @@ else {
       puzzleTitle: "Plateaux de la balance",
       next: "CONTINUER VERS LE NIVEAU 18",
       reset: "Réinitialiser",
-      ready: "Touche une masse pour la déplacer : réserve, plateau gauche, plateau droit.",
+      ready: "Touche une masse, puis touche le plateau gauche, la réserve ou le plateau droit qui s'illumine.",
       roundSuccess: "Équilibre atteint. Un nouvel ensemble de masses apparaît.",
       success: "Les trois balances sont équilibrées. Le vide se stabilise.",
       system: "SYSTEME:: BALANCE 017 DESEQUILIBREE // REPARTITION REQUISE",
@@ -2029,7 +2029,7 @@ else {
       puzzleTitle: "Scale pans",
       next: "CONTINUE TO LEVEL 18",
       reset: "Reset",
-      ready: "Tap a mass to move it: reserve, left pan, right pan.",
+      ready: "Tap a mass, then tap the glowing left pan, reserve or right pan.",
       roundSuccess: "Balance reached. A new set of masses appears.",
       success: "All three scales are balanced. The void settles.",
       system: "SYSTEM:: SCALE 017 UNBALANCED // DISTRIBUTION REQUIRED",
@@ -2071,6 +2071,8 @@ else {
   let solved = false;
   let locked = false;
   let advanceTimer = 0;
+  let selected = null;
+  const zoneElements = containers.map((container) => container.parentElement);
 
   document.documentElement.lang = language;
   document.querySelectorAll("[data-i18n]").forEach((element) => {
@@ -2106,12 +2108,20 @@ else {
     rounds[Math.min(round, rounds.length - 1)].forEach((weight, index) => {
       const button = document.createElement("button");
       button.type = "button";
-      button.className = `scale-weight zone-${zones[index]}`;
+      button.className = `scale-weight zone-${zones[index]}${selected === index ? " is-selected" : ""}`;
       button.textContent = String(weight);
       button.disabled = solved || locked;
       button.setAttribute("aria-label", `${copy.mass} ${weight}: ${zoneNames[zones[index]]}`);
-      button.addEventListener("click", () => moveWeight(index));
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
+        selected = selected === index ? null : index;
+        render();
+      });
       containers[zones[index]].appendChild(button);
+    });
+    zoneElements.forEach((zone, zoneIndex) => {
+      const targetable = selected !== null && !solved && !locked && zones[selected] !== zoneIndex;
+      zone.classList.toggle("is-target", targetable);
     });
     const [, left, right] = sums();
     totals[1].textContent = String(left);
@@ -2126,6 +2136,7 @@ else {
   const buildRound = () => {
     zones = rounds[round].map(() => 0);
     moves = 0;
+    selected = null;
     render();
   };
 
@@ -2154,19 +2165,27 @@ else {
     }, 1000);
   };
 
-  // Déplace une masse entre les plateaux.
-  function moveWeight(index) {
-    if (solved || locked) return;
-    zones[index] = (zones[index] + 1) % 3;
+  // Déplace la masse sélectionnée vers la zone choisie (réserve, plateau gauche ou droit).
+  function moveWeight(index, zoneIndex) {
+    if (solved || locked || index === null) return;
+    zones[index] = zoneIndex;
+    selected = null;
     moves += 1;
     render();
     const [tray, left, right] = sums();
     if (tray === 0 && left === right) completeRound();
   }
 
+  zoneElements.forEach((zone, zoneIndex) => {
+    zone.addEventListener("click", () => {
+      if (selected !== null && zones[selected] !== zoneIndex) moveWeight(selected, zoneIndex);
+    });
+  });
+
   // Remet le puzzle à zéro.
   const reset = () => {
     window.clearTimeout(advanceTimer);
+    selected = null;
     round = 0;
     solved = false;
     locked = false;
