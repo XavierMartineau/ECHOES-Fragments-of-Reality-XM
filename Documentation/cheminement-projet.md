@@ -69,15 +69,19 @@ reste [Info-fr.txt](./Info-fr.txt).
 - **Niveau 10 — Séquence de couleurs :** puzzle de séquence servant de transition vers
   le combat de boss.
 
-### Niveaux 11 à 14
+### Niveaux 11 à 16
 
-Les bases HTML, CSS et JavaScript des niveaux suivants ont été ajoutées et plusieurs
-mécaniques sont en cours d'harmonisation :
-
-- Niveau 11 : paires de résonance.
-- Niveau 12 : classement de cartes et amélioration du puzzle de couleur.
-- Niveau 13 : mécanique géométrique et évolutions visuelles.
-- Niveau 14 : mécanique de lumière et intégration progressive à la partie suivante.
+- Niveau 11 : alignement de plusieurs anneaux de résonance.
+- Niveau 12 : mémorisation puis répétition de séquences lumineuses croisées.
+- Niveau 13 : puzzle coulissant pour reconstruire un motif fractal.
+- Niveau 14 : orientation de miroirs pour guider un faisceau jusqu'à son récepteur.
+- Niveau 15 : puzzle de routage géant sur une grille 14 × 14 pour relier dix paires de
+  balises aux couleurs et tracés variés, en remplissant toutes les cellules sans croiser
+  les flux. La disposition (emplacement des balises, tracés, couleurs) est générée
+  aléatoirement à chaque chargement et réinitialisation (chemin hamiltonien aléatoire
+  découpé en dix routes) : bien plus de 100 configurations, toutes résolubles.
+- Niveau 16 : puzzle logique en trois manches, où chaque impulsion inverse une cellule
+  et ses voisines directes.
 
 ### Boss — `clee_01_boss_level`
 

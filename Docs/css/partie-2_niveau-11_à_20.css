@@ -376,6 +376,251 @@ body.part-two-theme {
   box-shadow: 0 0 18px rgba(128, 255, 207, 0.36);
 }
 
+/* NIVEAUX 14-16 // PRISME, MEMOIRE ET RESEAU */
+.level-14-shell,
+.level-15-shell,
+.level-16-shell {
+  padding-bottom: 110px;
+}
+
+.prism-board {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  width: min(100%, 390px);
+  aspect-ratio: 1;
+  gap: 6px;
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid rgba(75, 158, 255, 0.42);
+  border-radius: 14px;
+  background: rgba(5, 12, 29, 0.82);
+  box-shadow: inset 0 0 24px rgba(75, 158, 255, 0.08), 0 0 24px rgba(45, 113, 191, 0.14);
+}
+
+.prism-cell {
+  display: grid;
+  min-width: 0;
+  place-items: center;
+  border: 1px solid rgba(75, 158, 255, 0.16);
+  border-radius: 7px;
+  background: rgba(75, 158, 255, 0.035);
+  color: #d4dce7;
+  font: 1.55rem var(--font-display, "Orbitron", sans-serif);
+  transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease, color 160ms ease;
+}
+
+.prism-cell.is-beam {
+  border-color: rgba(128, 255, 207, 0.7);
+  background: rgba(128, 255, 207, 0.2);
+  box-shadow: 0 0 16px rgba(128, 255, 207, 0.38), inset 0 0 12px rgba(128, 255, 207, 0.16);
+}
+
+.prism-mirror {
+  padding: 0;
+  border-color: rgba(75, 158, 255, 0.62);
+  background: rgba(75, 158, 255, 0.12);
+  color: #d4dce7;
+  cursor: pointer;
+}
+
+.prism-mirror:hover:not(:disabled),
+.prism-mirror:focus-visible {
+  border-color: #80ffcf;
+  color: #80ffcf;
+  outline: 2px solid #80ffcf;
+  outline-offset: 2px;
+}
+
+.prism-mirror:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.prism-endpoint {
+  border-color: rgba(255, 209, 138, 0.75);
+  color: #ffd18a;
+  text-shadow: 0 0 12px currentColor;
+}
+
+.prism-receiver.is-beam {
+  border-color: #80ffcf;
+  color: #80ffcf;
+}
+
+.prism-board.is-solved .prism-cell.is-beam {
+  box-shadow: 0 0 22px rgba(128, 255, 207, 0.58), inset 0 0 16px rgba(128, 255, 207, 0.24);
+}
+
+.flow-board-wrap {
+  width: 100%;
+  overflow-x: auto;
+  padding: 2px 2px 10px;
+  overscroll-behavior-inline: contain;
+}
+
+.flow-board {
+  display: grid;
+  grid-template-columns: repeat(14, minmax(0, 1fr));
+  width: min(100%, 780px);
+  aspect-ratio: 1;
+  gap: 3px;
+  margin: 0 auto;
+  padding: 9px;
+  border: 1px solid rgba(75, 158, 255, 0.42);
+  border-radius: 13px;
+  background-color: rgba(5, 12, 29, 0.94);
+  box-shadow: inset 0 0 24px rgba(75, 158, 255, 0.08), 0 0 24px rgba(45, 113, 191, 0.14);
+  touch-action: none;
+  user-select: none;
+}
+
+.flow-cell {
+  position: relative;
+  min-width: 0;
+  padding: 0;
+  border: 1px solid rgba(110, 180, 255, 0.32);
+  border-radius: 3px;
+  background: rgba(110, 180, 255, 0.1);
+  cursor: crosshair;
+  touch-action: none;
+  transition: background-color 100ms ease, border-color 100ms ease, box-shadow 100ms ease;
+}
+
+.flow-cell.is-connected {
+  border-color: color-mix(in srgb, var(--flow-color) 68%, transparent);
+  background: color-mix(in srgb, var(--flow-color) 34%, rgba(5, 12, 29, 0.8));
+  box-shadow: inset 0 0 10px color-mix(in srgb, var(--flow-color) 40%, transparent);
+}
+
+.flow-cell.is-endpoint::after {
+  position: absolute;
+  inset: 17%;
+  border: 2px solid color-mix(in srgb, var(--flow-color) 72%, white);
+  border-radius: 50%;
+  background: var(--flow-color);
+  box-shadow: 0 0 13px var(--flow-color);
+  content: "";
+  pointer-events: none;
+}
+
+.flow-cell.is-complete {
+  box-shadow: inset 0 0 11px color-mix(in srgb, var(--flow-color) 52%, transparent);
+}
+
+.flow-cell:not(:disabled):focus-visible {
+  z-index: 1;
+  border-color: #fff;
+  outline: 2px solid #fff;
+  outline-offset: 1px;
+}
+
+.flow-cell:disabled {
+  cursor: default;
+}
+
+.flow-board.is-solved .flow-cell.is-connected {
+  box-shadow: 0 0 12px color-mix(in srgb, var(--flow-color) 42%, transparent);
+}
+
+.logic-readouts {
+  display: grid;
+  justify-items: end;
+  gap: 5px;
+}
+
+.logic-moves {
+  color: #acbacb;
+  font: 0.64rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.04em;
+  text-align: right;
+}
+
+.logic-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: min(100%, 360px);
+  aspect-ratio: 1;
+  gap: 9px;
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid rgba(75, 158, 255, 0.42);
+  border-radius: 14px;
+  background: rgba(5, 12, 29, 0.82);
+}
+
+.logic-cell {
+  min-width: 0;
+  padding: 0;
+  border: 1px solid rgba(75, 158, 255, 0.42);
+  border-radius: 9px;
+  background: rgba(75, 158, 255, 0.08);
+  cursor: pointer;
+  transition: background 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.logic-cell.is-on {
+  border-color: #80ffcf;
+  background: radial-gradient(circle, rgba(128, 255, 207, 0.85), rgba(75, 158, 255, 0.22) 70%);
+  box-shadow: 0 0 20px rgba(128, 255, 207, 0.48), inset 0 0 14px rgba(128, 255, 207, 0.32);
+}
+
+.logic-cell:not(:disabled):hover,
+.logic-cell:focus-visible {
+  outline: 2px solid #d4dce7;
+  outline-offset: 2px;
+}
+
+.logic-cell:disabled {
+  cursor: default;
+}
+
+.logic-board.is-solved .logic-cell {
+  border-color: rgba(128, 255, 207, 0.48);
+  box-shadow: 0 0 16px rgba(128, 255, 207, 0.2);
+}
+
+.level-14-shell .sequence-controls,
+.level-15-shell .sequence-controls,
+.level-16-shell .sequence-controls,
+.level-14-shell .puzzle-actions,
+.level-15-shell .puzzle-actions,
+.level-16-shell .puzzle-actions {
+  justify-content: center;
+}
+
+.level-14-shell .puzzle-status,
+.level-15-shell .puzzle-status,
+.level-16-shell .puzzle-status {
+  min-height: 1.5em;
+}
+
+.level-14-shell .puzzle-status.success,
+.level-15-shell .puzzle-status.success,
+.level-16-shell .puzzle-status.success {
+  color: #80ffcf;
+}
+
+@media (max-width: 560px) {
+  .prism-board,
+  .logic-board {
+    gap: 4px;
+    padding: 7px;
+  }
+
+  .flow-board {
+    gap: 2px;
+    padding: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prism-cell,
+  .flow-cell,
+  .logic-cell {
+    transition: none;
+  }
+}
+
 .level-11-readouts {
   display: flex;
   align-items: center;
