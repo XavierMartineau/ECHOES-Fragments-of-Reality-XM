@@ -165,7 +165,7 @@ Page : `docs/html/partie-1_niveau-1_à_10/boss-recovery.html`
 
 ## Travail en cours
 
-- Finaliser et tester les niveaux 8 à 15.
+- Finaliser et tester les niveaux 14 à 20 (les niveaux 11 à 13 sont créés).
 - Harmoniser les contenus FR/EN des niveaux futurs.
 - Relier complètement les six clés aux verrous et fragments narratifs.
 - Compléter les puzzles des dimensions Fractures et Éclipse.
@@ -225,6 +225,20 @@ Page : `docs/html/partie-1_niveau-1_à_10/boss-recovery.html`
 - Évolution fonctionnelle associée : dialogue automatique Voyageur/ECHO, compteur
   global `0 / 6`, animation de récompense et transition narrative vers la suite.
 
+### 05/10/2026 — Partie 2, traduction et micro-animations
+
+- `3bdcce3` — Création des niveaux 11 à 13 (Partie 2, thème bleu électrique et argent) :
+  double alignement (11), séquence de lumière croisée (12), puzzle coulissant fractal (13).
+  Pages élargies et formes identiques interchangeables au niveau 11.
+- `6475b3c` — Niveau 11 plus difficile (séquence aléatoire jouée 2 fois, chrono de 30 s,
+  indice à −5 s). Compteur de clés visible uniquement sur le boss et la récupération ;
+  progression centrée et `NIVEAU 0X` aligné à droite.
+- `ee7cf3f` — Traduction FR/EN complète via `page-i18n.js` (textes, attributs, titres,
+  dialogues de transition et d'interlude).
+- `a9cb58d` — Micro-animations sur toutes les pages (`micro-animations.css/js` : fondu
+  d'entrée, particules, halo de souris, ondulation au clic, flash de statut, respect de
+  `prefers-reduced-motion`) et nouvelle page « En construction » partagée
+  (`construction.css`) corrigeant l'écran blanc des niveaux 14 à 60.
 ## Prochain jalon recommandé
 
 1. Valider le parcours complet niveaux 1 à 10 → boss → Clé 01 sur desktop et mobile.
