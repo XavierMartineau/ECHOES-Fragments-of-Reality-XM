@@ -2451,67 +2451,92 @@ else {
 })();
 
 /* ===== NIVEAU 19 ===== */
-/* Sudoku de lettres (français, ou anglais si la langue choisie au départ est « en ») : 9 lettres au lieu de chiffres, la ligne en surbrillance révèle un mot caché (#sudokuBoard). */
+/* Mots mêlés codés (français, ou anglais si la langue choisie au départ est « en ») : trouver tous les mots de la liste, lire le mot caché avec les lettres restantes, puis saisir le code de chacune de ses lettres (A = n, Z = n, nombres de 0 à 100) (#sudokuBoard). */
 (() => {
   const board = document.getElementById("sudokuBoard");
   if (!board) return;
 
   const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
-  const hiddenWord = language === "en" ? "FRAGMENTS" : "BOUCLIERS";
+  const size = 8;
+  const dirs = [[0, 1], [1, 0], [1, 1], [-1, 1], [0, -1], [-1, 0], [-1, -1], [1, -1]];
+  const content = {
+    fr: {
+      pool: ["LUNE", "ETOILE", "COMETE", "ORBITE", "GALAXIE", "PLANETE", "SOLEIL", "AURORE", "METEORE", "ECLIPSE", "COSMOS", "FUSEE", "ASTRE", "NOVA", "ATOME", "TERRE", "MARS", "LASER", "SATURNE", "JUPITER", "NEBULEUSE", "VENUS", "PULSAR", "QUASAR", "ROBOT", "SIGNAL", "RADAR", "ECHO", "TEMPS", "ESPACE", "MONDE", "LUMIERE", "ENERGIE", "MIRAGE"],
+    },
+    en: {
+      pool: ["MOON", "STAR", "COMET", "ORBIT", "GALAXY", "PLANET", "SUNRISE", "AURORA", "METEOR", "ECLIPSE", "COSMOS", "ROCKET", "ATOM", "EARTH", "MARS", "LASER", "NOVA", "SOLAR", "SATURN", "JUPITER", "VENUS", "PULSAR", "QUASAR", "ROBOT", "SIGNAL", "RADAR", "ECHO", "TIME", "SPACE", "WORLD", "LIGHT", "ENERGY", "MIRAGE"],
+    },
+  }[language];
+  const hiddenLength = 6;
+  const wordCount = 8;
   const copy = {
     fr: {
       part: "PARTIE 2 // FRACTURES",
       level: "NIVEAU 19",
-      eyebrow: "Fragment 019 // Le sudoku des lettres",
-      title: "Le sudoku des lettres",
-      description: "Un sudoku où les chiffres sont remplacés par 9 lettres. Chaque lettre apparaît une seule fois par ligne, par colonne et par bloc de 3 x 3. Une fois la grille finie, la ligne en surbrillance révèle le mot caché.",
+      eyebrow: "Fragment 019 // Les mots mêlés codés",
+      title: "Les mots mêlés codés",
+      description: "Trouve tous les mots de la liste dans la grille : ils peuvent être à l'horizontale, à la verticale, en oblique ou à l'envers. Six lettres sont partagées par deux mots et numérotées de 1 à 6. Cherche leur code dans la table (A = nombre, Z = nombre, entre 0 et 100), puis saisis en haut les six nombres dans l'ordre des numéros : les lettres forment le mot caché.",
       systemLabel: "ECHO://LEXIQUE",
       puzzleKicker: "PUZZLE // LANGAGE",
-      puzzleTitle: "Grille de lettres",
+      puzzleTitle: "Mots mêlés",
       next: "CONTINUER VERS LE NIVEAU 20",
       reset: "Nouvelle grille",
       check: "VÉRIFIER",
-      wordTitle: "MOT CACHÉ",
-      ready: "Touche une case, tape une lettre ou choisis-en une plus bas. Pas d'accents.",
-      wrong: "Certaines lettres sont fausses : elles sont marquées en rouge.",
-      allGood: "Aucune erreur pour l'instant. Continue !",
-      success: "Grille complète. Le mot caché est révélé : ",
-      system: "SYSTEME:: LEXIQUE 019 VERROUILLE // GRILLE A COMPLETER",
+      wordTitle: "CODE DES LETTRES NUMÉROTÉES (1 À 6)",
+      cluesTitle: "MOTS À TROUVER",
+      legendTitle: "CODE DES LETTRES",
+      ready: "Trouve les mots (touche leur première puis leur dernière lettre), puis écris en haut le code des lettres numérotées.",
+      found: "Mot trouvé : ",
+      notAWord: "Ce n'est pas un mot de la liste.",
+      allFound: "Tous les mots sont trouvés ! Saisis en haut le code des six lettres dorées, dans l'ordre des numéros.",
+      keepSearching: "Il reste des mots à trouver.",
+      wrongCode: "Un code est faux. Vérifie la table des lettres en bas.",
+      incompleteCode: "Saisis les six codes.",
+      success: "Mots et code corrects. Le mot caché est : ",
+      system: "SYSTEME:: LEXIQUE 019 VERROUILLE // MOTS ET CODE A TROUVER",
       systemSuccess: "SYSTEME:: LEXIQUE 019 COMPLET // PROTOCOLE 020 DEBLOQUE",
-      words: "cases",
+      words: "mots",
       progress: "Progression de la Partie 2",
       save: "SAUVEGARDER",
       saved: "SAUVEGARDÉ",
       saveHint: "Progression sauvegardée.",
       footer: "ÉCHO // FRACTURES ACTIVES",
       counter: "19 / 60",
+      codeLabel: (n) => `Code de la lettre numéro ${n}`,
     },
     en: {
       part: "PART 2 // FRACTURES",
       level: "LEVEL 19",
-      eyebrow: "Fragment 019 // The letter sudoku",
-      title: "The letter sudoku",
-      description: "A sudoku where digits are replaced by 9 letters. Each letter appears once per row, per column and per 3 x 3 block. Once the grid is done, the highlighted row reveals the hidden word.",
+      eyebrow: "Fragment 019 // The coded word search",
+      title: "The coded word search",
+      description: "Find every word of the list in the grid: they can run horizontally, vertically, diagonally or backwards. Six letters are shared by two words and numbered 1 to 6. Look up their codes in the table (A = number, Z = number, between 0 and 100), then type the six numbers at the top in the order of the numbers: the letters spell the hidden word.",
       systemLabel: "ECHO://LEXICON",
       puzzleKicker: "PUZZLE // LANGUAGE",
-      puzzleTitle: "Letter grid",
+      puzzleTitle: "Word search",
       next: "CONTINUE TO LEVEL 20",
       reset: "New grid",
       check: "CHECK",
-      wordTitle: "HIDDEN WORD",
-      ready: "Tap a cell, type a letter or pick one below.",
-      wrong: "Some letters are wrong: they are marked in red.",
-      allGood: "No mistakes so far. Keep going!",
-      success: "Grid complete. The hidden word is revealed: ",
-      system: "SYSTEM:: LEXICON 019 LOCKED // GRID TO COMPLETE",
+      wordTitle: "CODES OF THE NUMBERED LETTERS (1 TO 6)",
+      cluesTitle: "WORDS TO FIND",
+      legendTitle: "LETTER CODES",
+      ready: "Find the words (tap their first then last letter), then type the codes of the numbered letters at the top.",
+      found: "Word found: ",
+      notAWord: "That is not a word from the list.",
+      allFound: "All words found! Type the codes of the six gold letters at the top, in numbered order.",
+      keepSearching: "Some words are still missing.",
+      wrongCode: "A code is wrong. Check the letter table below.",
+      incompleteCode: "Type all six codes.",
+      success: "Words and code are correct. The hidden word is: ",
+      system: "SYSTEM:: LEXICON 019 LOCKED // WORDS AND CODE REQUIRED",
       systemSuccess: "SYSTEM:: LEXICON 019 COMPLETE // PROTOCOL 020 UNLOCKED",
-      words: "cells",
+      words: "words",
       progress: "Part 2 progress",
       save: "SAVE",
       saved: "SAVED",
       saveHint: "Progress saved.",
       footer: "ECHO // ACTIVE FRACTURES",
       counter: "19 / 60",
+      codeLabel: (n) => `Code of numbered letter ${n}`,
     },
   }[language];
 
@@ -2526,12 +2551,17 @@ else {
   const grid = $("sdGrid");
   const wordBox = $("sdWord");
   const letterBox = $("sdLetters");
-  const letters = [...hiddenWord];
+  const clueBox = $("sdClues");
+  const alphabet = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
   const cells = [];
-  let solution = [];
-  let wordRow = 4;
+  const codeInputs = [];
+  let codes = {};
+  let words = [];
+  let foundWords = new Set();
+  let hiddenWord = "";
+  let crossings = [];
+  let selection = []; // cases choisies par clic
   let solved = false;
-  let activeCell = null;
 
   document.documentElement.lang = language;
   document.querySelectorAll("[data-i18n]").forEach((element) => {
@@ -2540,6 +2570,8 @@ else {
   });
   $("levelProgress").setAttribute("aria-label", copy.progress);
   $("sdWordTitle").textContent = copy.wordTitle;
+  $("sdCluesTitle").textContent = copy.cluesTitle;
+  $("sdLegendTitle").textContent = copy.legendTitle;
   resetButton.textContent = copy.reset;
   checkButton.textContent = copy.check;
   nextButton.textContent = copy.next;
@@ -2551,7 +2583,6 @@ else {
     status.className = `puzzle-status${variant ? ` ${variant}` : ""}`;
   };
 
-  // Tire un entier au hasard entre 0 et max - 1.
   const rand = (max) => Math.floor(Math.random() * max);
 
   // Mélange un tableau (Fisher-Yates).
@@ -2563,210 +2594,277 @@ else {
     return list;
   };
 
-  // Construit une solution valide dont une ligne (wordRow) se lit comme le mot caché.
-  const buildSolution = () => {
-    const rows = [];
-    const bands = shuffle([0, 1, 2]);
-    let hiddenIndex = 0;
-    bands.forEach((band) => {
-      shuffle([0, 1, 2]).forEach((offset) => {
-        const source = band * 3 + offset;
-        if (source === 4) hiddenIndex = rows.length;
-        rows.push(source);
-      });
+  // Attribue un nombre unique entre 0 et 100 à chaque lettre de l'alphabet.
+  const buildCodes = () => {
+    const pool = shuffle(Array.from({ length: 101 }, (_, i) => i));
+    codes = {};
+    alphabet.forEach((letter, index) => {
+      codes[letter] = pool[index];
     });
-    wordRow = hiddenIndex;
-    return rows.map((source) =>
-      Array.from({ length: 9 }, (_, col) => letters[((3 * (source % 3) + Math.floor(source / 3) + col) % 9 + 5) % 9]),
-    );
   };
 
-  // Compte les solutions d'une grille (s'arrête à 2) pour garantir qu'elle est unique.
-  const countSolutions = (values) => {
-    const work = values.map((row) => row.slice());
-    let count = 0;
-    const options = (r, c) => {
-      const used = new Set();
-      for (let i = 0; i < 9; i += 1) {
-        used.add(work[r][i]);
-        used.add(work[i][c]);
+  // Place des mots (8 directions) pour obtenir exactement 6 lettres partagées ; ces lettres, numérotées dans un ordre aléatoire, forment le mot caché.
+  const generate = () => {
+    const filler = "ABCDEFGHIJLMNOPRSTU";
+    for (let attempt = 0; attempt < 20000; attempt += 1) {
+      const letters = Array.from({ length: size }, () => Array(size).fill(""));
+      const shared = new Set();
+      const placed = [];
+      for (const word of shuffle(content.pool.filter((w) => w.length <= size)).slice(0, wordCount + 3)) {
+        if (placed.length === wordCount) break;
+        const options = [];
+        for (let r = 0; r < size; r += 1) {
+          for (let c = 0; c < size; c += 1) {
+            for (const [dr, dc] of dirs) {
+              let valid = true;
+              const overlap = [];
+              for (let i = 0; i < word.length && valid; i += 1) {
+                const rr = r + dr * i;
+                const cc = c + dc * i;
+                if (rr < 0 || cc < 0 || rr >= size || cc >= size) valid = false;
+                else if (letters[rr][cc] === word[i]) overlap.push(rr * size + cc);
+                else if (letters[rr][cc]) valid = false;
+              }
+              if (valid && overlap.length < word.length) options.push({ r, c, dr, dc, overlap });
+            }
+          }
+        }
+        const room = options.filter((o) => new Set([...shared, ...o.overlap]).size <= hiddenLength);
+        if (!room.length) continue;
+        const pick = room[rand(room.length)];
+        for (let i = 0; i < word.length; i += 1) letters[pick.r + pick.dr * i][pick.c + pick.dc * i] = word[i];
+        pick.overlap.forEach((index) => shared.add(index));
+        placed.push(word);
       }
-      const br = r - (r % 3);
-      const bc = c - (c % 3);
-      for (let i = 0; i < 3; i += 1) for (let j = 0; j < 3; j += 1) used.add(work[br + i][bc + j]);
-      return letters.filter((letter) => !used.has(letter));
-    };
-    const solve = () => {
-      let best = null;
-      for (let r = 0; r < 9 && best !== 0; r += 1) {
-        for (let c = 0; c < 9; c += 1) {
-          if (work[r][c]) continue;
-          const choice = options(r, c);
-          if (!best || choice.length < best.list.length) best = { r, c, list: choice };
-          if (choice.length === 0) return;
+      if (placed.length < wordCount || shared.size !== hiddenLength) continue;
+      const fillers = [];
+      for (let r = 0; r < size; r += 1) {
+        for (let c = 0; c < size; c += 1) {
+          if (letters[r][c]) continue;
+          letters[r][c] = filler[rand(filler.length)];
+          fillers.push(r * size + c);
         }
       }
-      if (!best) {
-        count += 1;
-        return;
-      }
-      for (const letter of best.list) {
-        work[best.r][best.c] = letter;
-        solve();
-        work[best.r][best.c] = "";
-        if (count > 1) return;
-      }
-    };
-    solve();
-    return count;
-  };
-
-  // Retire des cases tant que la grille garde une solution unique (la ligne du mot caché d'abord).
-  const buildPuzzle = () => {
-    const puzzle = solution.map((row) => row.slice());
-    const order = shuffle(Array.from({ length: 81 }, (_, i) => i));
-    order.sort((a, b) => (Math.floor(b / 9) === wordRow) - (Math.floor(a / 9) === wordRow));
-    let removed = 0;
-    for (const index of order) {
-      if (removed >= 52) break;
-      const r = Math.floor(index / 9);
-      const c = index % 9;
-      const keep = puzzle[r][c];
-      puzzle[r][c] = "";
-      if (countSolutions(puzzle) === 1) removed += 1;
-      else puzzle[r][c] = keep;
+      return { letters, placed, fillers, order: shuffle([...shared]) };
     }
-    return puzzle;
+    return null;
   };
-
-  // Construit les cases de la grille et la palette de lettres.
+  // Construit les cases de la grille, les cases de code et la table des lettres.
   const build = () => {
-    for (let row = 0; row < 9; row += 1) {
-      for (let col = 0; col < 9; col += 1) {
-        const box = document.createElement("div");
-        box.className = "sd-cell";
-        if (col % 3 === 2 && col < 8) box.classList.add("sd-right");
-        if (row % 3 === 2 && row < 8) box.classList.add("sd-bottom");
-        const input = document.createElement("input");
-        input.type = "text";
-        input.maxLength = 2;
-        input.autocomplete = "off";
-        input.autocapitalize = "characters";
-        input.spellcheck = false;
-        input.setAttribute("aria-label", `${row + 1}-${col + 1}`);
-        const cell = { row, col, box, input, given: false };
-        input.addEventListener("focus", () => {
-          activeCell = cell;
-          highlight();
-        });
-        input.addEventListener("input", () => typeLetter(cell));
-        input.addEventListener("keydown", (event) => handleKey(event, cell));
-        box.appendChild(input);
-        grid.appendChild(box);
-        cells.push(cell);
-      }
-    }
-    letters.forEach((letter) => {
+    grid.style.gridTemplateColumns = `repeat(${size}, var(--sd-cell))`;
+    for (let index = 0; index < size * size; index += 1) {
+      const box = document.createElement("div");
+      box.className = "sd-cell";
       const button = document.createElement("button");
       button.type = "button";
-      button.className = "sd-letter";
-      button.textContent = letter;
-      button.addEventListener("click", () => {
-        if (!activeCell || activeCell.given || solved) return;
-        activeCell.input.value = letter;
-        typeLetter(activeCell);
+      button.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          select(index);
+        }
       });
-      letterBox.appendChild(button);
-    });
-    letters.forEach(() => {
-      const slot = document.createElement("span");
-      slot.className = "sd-slot";
-      wordBox.appendChild(slot);
+      box.appendChild(button);
+      grid.appendChild(box);
+      cells.push({ index, row: Math.floor(index / size), col: index % size, box, button });
+    }
+    for (let index = 0; index < hiddenLength; index += 1) {
+      const input = document.createElement("input");
+      input.type = "text";
+      input.inputMode = "numeric";
+      input.maxLength = 3;
+      input.autocomplete = "off";
+      input.className = "sd-code-input";
+      input.placeholder = String(index + 1);
+      input.setAttribute("aria-label", copy.codeLabel(index + 1));
+      input.addEventListener("input", () => {
+        input.value = input.value.replace(/\D/g, "").slice(0, 3);
+        input.classList.remove("is-wrong");
+        refresh();
+      });
+      input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          check();
+        }
+      });
+      wordBox.appendChild(input);
+      codeInputs.push(input);
+    }
+    alphabet.forEach(() => {
+      const chip = document.createElement("span");
+      chip.className = "sd-letter";
+      letterBox.appendChild(chip);
     });
   };
 
-  // Renvoie la case aux coordonnées données.
-  const at = (row, col) => cells[row * 9 + col];
-
-  // Met en évidence la case active et sa ligne, sa colonne et son bloc.
-  const highlight = () => {
-    cells.forEach((cell) => {
-      const near =
-        activeCell &&
-        (cell.row === activeCell.row ||
-          cell.col === activeCell.col ||
-          (Math.floor(cell.row / 3) === Math.floor(activeCell.row / 3) &&
-            Math.floor(cell.col / 3) === Math.floor(activeCell.col / 3)));
-      cell.box.classList.toggle("is-word", Boolean(near));
-      cell.box.classList.toggle("is-active", cell === activeCell);
+  // Affiche la table « lettre = nombre ».
+  const renderLegend = () => {
+    [...letterBox.children].forEach((chip, index) => {
+      chip.textContent = `${alphabet[index]} = ${codes[alphabet[index]]}`;
     });
   };
 
-  // Déplace le focus avec les flèches.
-  const moveArrow = (cell, dRow, dCol) => {
-    const target = at(Math.min(8, Math.max(0, cell.row + dRow)), Math.min(8, Math.max(0, cell.col + dCol)));
-    target.input.focus();
+  // Renvoie les indices des cases entre deux cases alignées (ou null si elles ne sont pas alignées).
+  const line = (from, to) => {
+    const dr = to.row - from.row;
+    const dc = to.col - from.col;
+    if (dr !== 0 && dc !== 0 && Math.abs(dr) !== Math.abs(dc)) return null;
+    const steps = Math.max(Math.abs(dr), Math.abs(dc));
+    const path = [];
+    for (let i = 0; i <= steps; i += 1) {
+      path.push((from.row + Math.sign(dr) * i) * size + from.col + Math.sign(dc) * i);
+    }
+    return path;
   };
 
-  // Gère la saisie d'une lettre (majuscule, sans accent, limitée aux 9 lettres du puzzle).
-  const typeLetter = (cell) => {
-    if (cell.given) return;
-    const raw = cell.input.value.normalize("NFD").replace(/[^A-Za-z]/g, "").toUpperCase();
-    const last = raw.slice(-1);
-    cell.input.value = letters.includes(last) ? last : "";
-    cell.box.classList.remove("is-wrong");
+  const textOf = (path) => path.map((i) => cells[i].button.textContent).join("");
+
+  const matchWord = (path) => {
+    const text = textOf(path);
+    return words.find((entry) => !foundWords.has(entry) && (entry === text || [...entry].reverse().join("") === text));
+  };
+
+  // Met en évidence la sélection en cours.
+  const highlight = (path) => {
+    cells.forEach((cell) => cell.box.classList.remove("is-start"));
+    path.forEach((i) => cells[i].box.classList.add("is-start"));
+  };
+
+  const clearSelection = () => {
+    selection = [];
+    highlight([]);
+  };
+
+  // Valide un mot trouvé : colore les cases et révèle les croisements.
+  const accept = (path, word) => {
+    foundWords.add(word);
+    path.forEach((i) => {
+      cells[i].box.classList.add("is-found");
+      cells[i].hits += 1;
+      const order = crossings.indexOf(i);
+      if (order >= 0 && cells[i].hits >= 2) {
+        cells[i].box.classList.add("is-hidden-row");
+        cells[i].box.dataset.order = order + 1;
+      }
+    });
+    clueBox.querySelector(`[data-word="${word}"]`).classList.add("is-found");
+    setStatus(`${copy.found}${word}`, "success");
+    if (foundWords.size === words.length) setStatus(copy.allFound, "success");
     refresh();
   };
 
-  // Gère les touches de navigation et d'effacement.
-  const handleKey = (event, cell) => {
+  // Teste un chemin complet (glisser ou première/dernière lettre).
+  const submit = (path) => {
+    clearSelection();
+    if (!path || path.length < 2) return;
+    const word = matchWord(path);
+    if (word) accept(path, word);
+    else setStatus(copy.notAWord, "error");
+  };
+
+  // Clic : première + dernière lettre, ou lettre après lettre.
+  const select = (index) => {
     if (solved) return;
-    const arrows = { ArrowUp: [-1, 0], ArrowDown: [1, 0], ArrowLeft: [0, -1], ArrowRight: [0, 1] };
-    if (arrows[event.key]) {
-      event.preventDefault();
-      moveArrow(cell, ...arrows[event.key]);
-    } else if (event.key === "Enter") {
-      event.preventDefault();
-      check();
+    if (!selection.length) {
+      selection = [index];
+      highlight(selection);
+      return;
     }
+    const last = selection[selection.length - 1];
+    if (index === last) {
+      clearSelection();
+      return;
+    }
+    const ends = line(cells[selection[0]], cells[index]);
+    if (ends && matchWord(ends)) {
+      submit(ends);
+      return;
+    }
+    const near = Math.abs(cells[last].row - cells[index].row) <= 1 && Math.abs(cells[last].col - cells[index].col) <= 1;
+    const next = [...selection, index];
+    const straight = line(cells[next[0]], cells[index]);
+    if (near && !selection.includes(index) && straight && straight.length === next.length) {
+      if (matchWord(next)) submit(next);
+      else {
+        selection = next;
+        highlight(selection);
+      }
+      return;
+    }
+    submit(ends);
   };
 
-  // Met à jour les doublons, la progression, le mot caché et la victoire.
+  const cellFromPoint = (x, y) => {
+    const target = document.elementFromPoint(x, y)?.closest(".sd-cell");
+    return target ? cells.find((cell) => cell.box === target) : null;
+  };
+
+  // Glisser : de la première à la dernière lettre ; un simple appui se comporte comme un clic.
+  let dragFrom = null;
+  let dragPath = null;
+  grid.addEventListener("pointerdown", (event) => {
+    if (solved || event.button > 0) return;
+    const cell = cellFromPoint(event.clientX, event.clientY);
+    if (!cell) return;
+    dragFrom = cell;
+    dragPath = null;
+    event.preventDefault();
+  });
+  window.addEventListener("pointermove", (event) => {
+    if (!dragFrom) return;
+    const cell = cellFromPoint(event.clientX, event.clientY);
+    if (!cell || cell === dragFrom) {
+      if (cell === dragFrom && dragPath) {
+        dragPath = null;
+        highlight(selection);
+      }
+      return;
+    }
+    const path = line(dragFrom, cell);
+    if (!path) return;
+    dragPath = path;
+    highlight(path);
+  });
+  window.addEventListener("pointerup", () => {
+    if (!dragFrom) return;
+    const from = dragFrom;
+    const path = dragPath;
+    dragFrom = null;
+    dragPath = null;
+    if (path && path.length > 1) {
+      selection = [];
+      submit(path);
+    } else {
+      select(from.index);
+    }
+  });
+  window.addEventListener("pointercancel", () => {
+    dragFrom = null;
+    dragPath = null;
+    highlight(selection);
+  });
+  const codeCorrect = () => codeInputs.every((input, i) => input.value === String(codes[hiddenWord[i]]));
+
+  // Met à jour la progression et la victoire.
   const refresh = () => {
-    let filled = 0;
-    cells.forEach((cell) => {
-      if (cell.input.value) filled += 1;
-      const value = cell.input.value;
-      const clash =
-        value &&
-        cells.some(
-          (other) =>
-            other !== cell &&
-            other.input.value === value &&
-            (other.row === cell.row ||
-              other.col === cell.col ||
-              (Math.floor(other.row / 3) === Math.floor(cell.row / 3) &&
-                Math.floor(other.col / 3) === Math.floor(cell.col / 3))),
-        );
-      cell.box.classList.toggle("is-clash", Boolean(clash));
-    });
-    readout.textContent = `${filled} / 81 ${copy.words}`;
-    wordBox.querySelectorAll(".sd-slot").forEach((slot, index) => {
-      slot.textContent = at(wordRow, index).input.value;
-    });
-    if (cells.every((cell) => cell.input.value === solution[cell.row][cell.col])) win();
+    readout.textContent = `${foundWords.size} / ${words.length} ${copy.words}`;
+    if (!solved && foundWords.size === words.length && codeCorrect()) win();
   };
 
-  // Marque en rouge les lettres qui ne correspondent pas à la solution.
+  // Vérifie les mots trouvés puis les codes.
   const check = () => {
     if (solved) return;
-    let errors = 0;
-    cells.forEach((cell) => {
-      const bad = cell.input.value !== "" && cell.input.value !== solution[cell.row][cell.col];
-      cell.box.classList.toggle("is-wrong", bad);
-      if (bad) errors += 1;
+    let bad = false;
+    let missing = false;
+    codeInputs.forEach((input, i) => {
+      const wrong = input.value !== "" && input.value !== String(codes[hiddenWord[i]]);
+      input.classList.toggle("is-wrong", wrong);
+      if (wrong) bad = true;
+      if (input.value === "") missing = true;
     });
-    setStatus(errors ? copy.wrong : copy.allGood, errors ? "error" : "success");
+    if (bad) setStatus(copy.wrongCode, "error");
+    else if (missing) setStatus(copy.incompleteCode, "error");
+    else if (foundWords.size < words.length) setStatus(copy.keepSearching, "error");
   };
 
   // Termine le niveau : révèle le mot caché et débloque la suite.
@@ -2774,8 +2872,10 @@ else {
     solved = true;
     board.classList.add("is-solved");
     cells.forEach((cell) => {
-      cell.input.disabled = true;
-      cell.box.classList.remove("is-active", "is-word", "is-wrong", "is-clash");
+      cell.box.style.setProperty("--d", `${(cell.row + cell.col) * 55}ms`);
+    });
+    codeInputs.forEach((input) => {
+      input.disabled = true;
     });
     setStatus(`${copy.success}${hiddenWord}`, "success");
     systemMessage.textContent = copy.systemSuccess;
@@ -2784,23 +2884,38 @@ else {
     nextButton.focus();
   };
 
-  // Génère une nouvelle grille et remet l'état à zéro.
+  // Génère une nouvelle grille et une nouvelle table de codes.
   const reset = () => {
     solved = false;
-    activeCell = null;
+    selection = [];
+    foundWords = new Set();
     board.classList.remove("is-solved");
-    solution = buildSolution();
-    const puzzle = buildPuzzle();
+    buildCodes();
+    renderLegend();
+    const puzzle = generate();
+    words = puzzle.placed.slice().sort();
+    crossings = puzzle.order;
+    hiddenWord = crossings.map((index) => puzzle.letters[Math.floor(index / size)][index % size]).join("");
     cells.forEach((cell) => {
-      const value = puzzle[cell.row][cell.col];
-      cell.given = value !== "";
-      cell.input.value = value;
-      cell.input.disabled = false;
-      cell.input.readOnly = cell.given;
-      cell.input.tabIndex = cell.given ? -1 : 0;
-      cell.box.classList.toggle("is-given", cell.given);
-      cell.box.classList.toggle("is-hidden-row", cell.row === wordRow);
-      cell.box.classList.remove("is-active", "is-word", "is-wrong", "is-clash");
+      cell.hits = 0;
+      cell.button.textContent = puzzle.letters[cell.row][cell.col];
+      cell.box.className = "sd-cell";
+      cell.box.style.removeProperty("--d");
+      if (puzzle.fillers.includes(cell.index)) cell.box.classList.add("is-filler");
+      delete cell.box.dataset.order;
+    });
+
+    clueBox.textContent = "";
+    words.forEach((word) => {
+      const item = document.createElement("li");
+      item.textContent = word;
+      item.dataset.word = word;
+      clueBox.appendChild(item);
+    });
+    codeInputs.forEach((input) => {
+      input.value = "";
+      input.disabled = false;
+      input.classList.remove("is-wrong");
     });
     systemMessage.textContent = copy.system;
     nextButton.hidden = true;

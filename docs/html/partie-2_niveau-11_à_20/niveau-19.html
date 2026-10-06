@@ -24,9 +24,9 @@
     </header>
     <main class="level-shell level-19-shell">
       <section class="level-intro" aria-labelledby="levelTitle">
-        <p class="eyebrow" data-i18n="eyebrow">Fragment 019 // Le sudoku des lettres</p>
-        <h1 id="levelTitle" data-i18n="title">Le sudoku des lettres</h1>
-        <p class="level-description" data-i18n="description">Un sudoku où les chiffres sont remplacés par 9 lettres. Une fois la grille finie, la ligne en surbrillance révèle le mot caché.</p>
+        <p class="eyebrow" data-i18n="eyebrow">Fragment 019 // Les mots mêlés codés</p>
+        <h1 id="levelTitle" data-i18n="title">Les mots mêlés codés</h1>
+        <p class="level-description" data-i18n="description">Trouve tous les mots dans la grille, lis le mot caché avec les lettres restantes, puis saisis le code de ses lettres.</p>
         <div class="system-transmission" aria-live="polite">
           <span class="system-label" data-i18n="systemLabel">ECHO://LEXIQUE</span>
           <p id="systemMessage">SYSTEME:: LEXIQUE 019 VERROUILLE // GRILLE A COMPLETER</p>
@@ -39,14 +39,18 @@
             <h2 id="puzzleTitle" data-i18n="puzzleTitle">Grille de lettres</h2>
           </div>
           <div class="logic-readouts">
-            <span class="progress-readout" id="progressReadout" aria-live="polite">0 / 81 cases</span>
+            <span class="progress-readout" id="progressReadout" aria-live="polite">0 / 0 mots</span>
           </div>
         </div>
         <div class="sd-board" id="sudokuBoard">
-          <div class="sd-grid" id="sdGrid"></div>
-          <div class="sd-side">
-            <h3 id="sdWordTitle">MOT CACHÉ</h3>
+          <div class="sd-top">
+            <h3 id="sdWordTitle">CODE DES LETTRES NUMÉROTÉES</h3>
             <div class="sd-word" id="sdWord"></div>
+          </div>
+          <div class="sd-grid" id="sdGrid"></div>
+            <div class="sd-clues"><h3 id="sdCluesTitle">MOTS À TROUVER</h3><ul id="sdClues"></ul></div>
+          <div class="sd-side">
+            <h3 id="sdLegendTitle">CODE DES LETTRES</h3>
             <div class="sd-letters" id="sdLetters"></div>
           </div>
         </div>
