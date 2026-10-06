@@ -87,7 +87,8 @@ reste [Info-fr.txt](./Info-fr.txt).
 - Niveau 17 : balance du vide (répartir des masses sur deux plateaux pour égaliser les poids, 3 manches).
 - Niveau 18 : tour des échos (tours de Hanoï à 3, 4 puis 5 disques).
 - Niveau 19 : code fantôme (déduction d'un code de 4 symboles différents avec indices bien/mal placés).
-- Niveau 16 : puzzle logique en trois manches, où chaque impulsion inverse une cellule
+- Niveau 16 : cadenas des symboles, avec quatre équations par série et quatre chiffres à déduire.
+- Niveau 20 : puzzle logique en trois manches, où chaque impulsion inverse une cellule
   et ses voisines directes.
 
 ### Boss — `clee_01_boss_level`

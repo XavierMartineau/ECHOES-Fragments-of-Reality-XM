@@ -1738,7 +1738,7 @@ else {
   reset();
 })();
 
-/* ===== NIVEAU 16 ===== */
+/* ===== MÉCANIQUE DU NIVEAU 20 ===== */
 /* Réseau dormant : inversion logique 3 x 3 en trois manches, une impulsion inverse une cellule et ses voisines (#logicBoard). */
 (() => {
   const board = document.getElementById("logicBoard");
@@ -1748,22 +1748,22 @@ else {
   const copy = {
     fr: {
       part: "PARTIE 2 // FRACTURES",
-      level: "NIVEAU 16",
-      eyebrow: "Fragment 016 // Le réseau dormant",
+      level: "NIVEAU 20",
+      eyebrow: "Fragment 020 // Le réseau dormant",
       title: "Le réseau dormant",
       description: "Le réseau s'est éteint. Chaque impulsion inverse une cellule et ses voisines : éteins toute la grille.",
       systemLabel: "ECHO://RESEAU",
       puzzleKicker: "PUZZLE // INVERSION LOGIQUE",
       puzzleTitle: "Grille d'impulsions",
       start: "RÉVEILLER LE RÉSEAU",
-      next: "CONTINUER VERS LE NIVEAU 17",
+      next: "CONTINUER VERS LE NIVEAU 21",
       reset: "Réinitialiser",
       ready: "Réveille le réseau, puis éteins toutes les cellules.",
       playing: "Chaque impulsion inverse la cellule choisie et ses voisines directes.",
       roundSuccess: "Réseau stabilisé. Une nouvelle grille de plus grande complexité apparaît.",
       success: "Les trois réseaux sont stabilisés. La fracture s'apaise.",
-      system: "SYSTEME:: RESEAU 016 EN VEILLE // IMPULSION REQUISE",
-      systemSuccess: "SYSTEME:: RESEAU 016 STABILISE // PROTOCOLE 017 DEBLOQUE",
+      system: "SYSTEME:: RESEAU 020 EN VEILLE // IMPULSION REQUISE",
+      systemSuccess: "SYSTEME:: RESEAU 020 STABILISE // PROTOCOLE 021 DEBLOQUE",
       cell: "Cellule",
       on: "allumée",
       off: "éteinte",
@@ -1774,26 +1774,26 @@ else {
       saved: "SAUVEGARDÉ",
       saveHint: "Progression sauvegardée.",
       footer: "ÉCHO // FRACTURES ACTIVES",
-      counter: "16 / 60",
+      counter: "20 / 60",
     },
     en: {
       part: "PART 2 // FRACTURES",
-      level: "LEVEL 16",
-      eyebrow: "Fragment 016 // The dormant network",
+      level: "LEVEL 20",
+      eyebrow: "Fragment 020 // The dormant network",
       title: "The dormant network",
       description: "The network has gone dark. Each pulse toggles a cell and its neighbors: switch off the entire grid.",
       systemLabel: "ECHO://NETWORK",
       puzzleKicker: "PUZZLE // LOGIC INVERSION",
       puzzleTitle: "Pulse grid",
       start: "WAKE THE NETWORK",
-      next: "CONTINUE TO LEVEL 17",
+      next: "CONTINUE TO LEVEL 21",
       reset: "Reset",
       ready: "Wake the network, then switch off every cell.",
       playing: "Each pulse toggles the selected cell and its direct neighbors.",
       roundSuccess: "Network stabilized. A more complex grid appears.",
       success: "All three networks are stable. The fracture subsides.",
-      system: "SYSTEM:: NETWORK 016 STANDBY // PULSE REQUIRED",
-      systemSuccess: "SYSTEM:: NETWORK 016 STABILIZED // PROTOCOL 017 UNLOCKED",
+      system: "SYSTEM:: NETWORK 020 STANDBY // PULSE REQUIRED",
+      systemSuccess: "SYSTEM:: NETWORK 020 STABILIZED // PROTOCOL 021 UNLOCKED",
       cell: "Cell",
       on: "on",
       off: "off",
@@ -1804,7 +1804,7 @@ else {
       saved: "SAVED",
       saveHint: "Progress saved.",
       footer: "ECHO // ACTIVE FRACTURES",
-      counter: "16 / 60",
+      counter: "20 / 60",
     },
   }[language];
 
@@ -1882,7 +1882,7 @@ else {
 
   // Enregistre la réussite du niveau.
   const saveCompletion = () => {
-    window.EchoesSave?.saveProgress({ currentPage: "level-16", currentLevel: 16 });
+    window.EchoesSave?.saveProgress({ currentPage: "level-20", currentLevel: 20 });
   };
 
   // Termine la manche et passe à la suivante ou au bouton Continuer.
@@ -1961,10 +1961,10 @@ else {
   });
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
-    window.location.href = "niveau-17.html";
+    window.location.href = "niveau-21.html";
   });
   saveButton.addEventListener("click", () => {
-    if (!window.EchoesSave?.saveProgress({ currentPage: "level-16", currentLevel: 16 })) return;
+    if (!window.EchoesSave?.saveProgress({ currentPage: "level-20", currentLevel: 20 })) return;
     saveButton.textContent = copy.saved;
     setStatus(copy.saveHint);
     window.setTimeout(() => {
@@ -1974,7 +1974,7 @@ else {
 
   for (let level = 11; level <= 20; level += 1) {
     const marker = document.createElement("span");
-    marker.className = `level-square${level === 16 ? " current" : ""}`;
+    marker.className = `level-square${level === 20 ? " current" : ""}`;
     marker.setAttribute("aria-hidden", "true");
     $("levelProgress").appendChild(marker);
   }
@@ -2947,7 +2947,7 @@ else {
   build();
   reset();
 })();
-/* ===== NIVEAU 20 ===== */
+/* ===== MÉCANIQUE DU NIVEAU 16 ===== */
 /* Cadenas des symboles : déduire la valeur de chaque symbole, répondre à 4 opérations, puis régler un chiffre du cadenas avec la somme (#codeBoard). */
 (() => {
   const board = document.getElementById("codeBoard");
@@ -2957,14 +2957,14 @@ else {
   const copy = {
     fr: {
       part: "PARTIE 2 // FRACTURES",
-      level: "NIVEAU 20",
-      eyebrow: "Fragment 020 // Le cadenas des symboles",
+      level: "NIVEAU 16",
+      eyebrow: "Fragment 016 // Le cadenas des symboles",
       title: "Le cadenas des symboles",
       description: "Chaque symbole cache un chiffre. Déduis-les grâce aux indices, réponds aux quatre opérations, additionne les résultats : le dernier chiffre de la somme règle une molette du cadenas.",
       systemLabel: "ECHO://CADENAS",
       puzzleKicker: "PUZZLE // DÉCHIFFRAGE",
       puzzleTitle: "Cadenas à quatre chiffres",
-      next: "CONTINUER VERS LE NIVEAU 21",
+      next: "CONTINUER VERS LE NIVEAU 17",
       reset: "Réinitialiser",
       clues: "INDICES",
       questions: "À RÉSOUDRE",
@@ -2978,8 +2978,8 @@ else {
       badDigit: "Ce n'est pas le bon chiffre. Additionne les quatre résultats et garde le dernier chiffre.",
       stageDone: "Molette réglée. Nouvelle série de symboles.",
       success: "Le cadenas s'ouvre. Les quatre chiffres sont corrects.",
-      system: "SYSTEME:: CADENAS 020 VERROUILLE // QUATRE CHIFFRES REQUIS",
-      systemSuccess: "SYSTEME:: CADENAS 020 OUVERT // PROTOCOLE 021 DEBLOQUE",
+      system: "SYSTEME:: CADENAS 016 VERROUILLE // QUATRE CHIFFRES REQUIS",
+      systemSuccess: "SYSTEME:: CADENAS 016 OUVERT // PROTOCOLE 017 DEBLOQUE",
       wheel: "Molette",
       stage: "Série",
       progress: "Progression de la Partie 2",
@@ -2987,18 +2987,18 @@ else {
       saved: "SAUVEGARDÉ",
       saveHint: "Progression sauvegardée.",
       footer: "ÉCHO // FRACTURES ACTIVES",
-      counter: "20 / 60",
+      counter: "16 / 60",
     },
     en: {
       part: "PART 2 // FRACTURES",
-      level: "LEVEL 20",
-      eyebrow: "Fragment 020 // The symbol padlock",
+      level: "LEVEL 16",
+      eyebrow: "Fragment 016 // The symbol padlock",
       title: "The symbol padlock",
       description: "Each symbol hides a number. Deduce them from the clues, answer the four operations, add the results: the last digit of the sum sets one wheel of the padlock.",
       systemLabel: "ECHO://PADLOCK",
       puzzleKicker: "PUZZLE // DECODING",
       puzzleTitle: "Four-digit padlock",
-      next: "CONTINUE TO LEVEL 21",
+      next: "CONTINUE TO LEVEL 17",
       reset: "Reset",
       clues: "CLUES",
       questions: "TO SOLVE",
@@ -3012,8 +3012,8 @@ else {
       badDigit: "Wrong digit. Add the four results and keep the last digit.",
       stageDone: "Wheel set. A new series of symbols appears.",
       success: "The padlock opens. All four digits are correct.",
-      system: "SYSTEM:: PADLOCK 020 SEALED // FOUR DIGITS REQUIRED",
-      systemSuccess: "SYSTEM:: PADLOCK 020 OPEN // PROTOCOL 021 UNLOCKED",
+      system: "SYSTEM:: PADLOCK 016 SEALED // FOUR DIGITS REQUIRED",
+      systemSuccess: "SYSTEM:: PADLOCK 016 OPEN // PROTOCOL 017 UNLOCKED",
       wheel: "Wheel",
       stage: "Series",
       progress: "Part 2 progress",
@@ -3021,7 +3021,7 @@ else {
       saved: "SAVED",
       saveHint: "Progress saved.",
       footer: "ECHO // ACTIVE FRACTURES",
-      counter: "20 / 60",
+      counter: "16 / 60",
     },
   }[language];
 
@@ -3226,7 +3226,7 @@ else {
       setStatus(copy.success, "success");
       systemMessage.textContent = copy.systemSuccess;
       nextButton.hidden = false;
-      window.EchoesSave?.saveProgress({ currentPage: "level-20", currentLevel: 20 });
+      window.EchoesSave?.saveProgress({ currentPage: "level-16", currentLevel: 16 });
       nextButton.focus();
       return;
     }
@@ -3258,10 +3258,10 @@ else {
 
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
-    window.location.href = "niveau-21.html";
+    window.location.href = "niveau-17.html";
   });
   saveButton.addEventListener("click", () => {
-    if (!window.EchoesSave?.saveProgress({ currentPage: "level-20", currentLevel: 20 })) return;
+    if (!window.EchoesSave?.saveProgress({ currentPage: "level-16", currentLevel: 16 })) return;
     saveButton.textContent = copy.saved;
     setStatus(copy.saveHint, "success");
     window.setTimeout(() => {
@@ -3271,7 +3271,7 @@ else {
 
   for (let level = 11; level <= 20; level += 1) {
     const marker = document.createElement("span");
-    marker.className = `level-square${level === 20 ? " current" : ""}`;
+    marker.className = `level-square${level === 16 ? " current" : ""}`;
     marker.setAttribute("aria-hidden", "true");
     $("levelProgress").appendChild(marker);
   }

@@ -22,38 +22,33 @@
       </div>
       <button class="save-game-button" id="saveGameButton" type="button">SAUVEGARDER</button>
     </header>
-    <main class="level-shell level-20-shell">
+    <main class="level-shell level-16-shell">
       <section class="level-intro" aria-labelledby="levelTitle">
-        <p class="eyebrow" data-i18n="eyebrow">Fragment 020 // Le cadenas des symboles</p>
-        <h1 id="levelTitle" data-i18n="title">Le cadenas des symboles</h1>
-        <p class="level-description" data-i18n="description">Chaque symbole cache un chiffre. Déduis-les grâce aux indices, réponds aux quatre opérations, additionne les résultats : le dernier chiffre de la somme règle une molette du cadenas.</p>
+        <p class="eyebrow" data-i18n="eyebrow">Fragment 020 // Le réseau dormant</p>
+        <h1 id="levelTitle" data-i18n="title">Le réseau dormant</h1>
+        <p class="level-description" data-i18n="description">Le réseau s'est éteint. Chaque impulsion inverse une cellule et ses voisines : éteins toute la grille.</p>
         <div class="system-transmission" aria-live="polite">
-          <span class="system-label" data-i18n="systemLabel">ECHO://CADENAS</span>
-          <p id="systemMessage">SYSTEME:: CADENAS 020 VERROUILLE // QUATRE CHIFFRES REQUIS</p>
+          <span class="system-label" data-i18n="systemLabel">ECHO://RESEAU</span>
+          <p id="systemMessage">SYSTEME:: RESEAU 020 EN VEILLE // IMPULSION REQUISE</p>
         </div>
       </section>
       <section class="puzzle-panel" aria-labelledby="puzzleTitle">
         <div class="panel-heading">
           <div>
-            <p class="panel-kicker" data-i18n="puzzleKicker">PUZZLE // DÉCHIFFRAGE</p>
-            <h2 id="puzzleTitle" data-i18n="puzzleTitle">Cadenas à quatre chiffres</h2>
+            <p class="panel-kicker" data-i18n="puzzleKicker">PUZZLE // INVERSION LOGIQUE</p>
+            <h2 id="puzzleTitle" data-i18n="puzzleTitle">Grille d'impulsions</h2>
           </div>
           <div class="logic-readouts">
-            <span class="progress-readout" id="progressReadout" aria-live="polite">0 / 4</span>
+            <span class="progress-readout" id="progressReadout" aria-live="polite">0 / 3</span>
+            <span class="logic-moves" id="moveReadout" aria-live="polite">0</span>
           </div>
         </div>
-        <div class="code-board" id="codeBoard">
-          <p class="code-section-title" data-i18n="clues">INDICES</p>
-          <div class="code-block" id="codeClues"></div>
-          <p class="code-section-title" data-i18n="questions">À RÉSOUDRE</p>
-          <div class="code-block" id="codeQuestions"></div>
-          <p class="code-sum" id="codeSum" hidden></p>
-          <p class="code-section-title" data-i18n="padlock">CADENAS</p>
-          <div class="code-padlock" id="codePadlock"></div>
-        </div>
+        <div class="logic-board" id="logicBoard" role="group" aria-label="Grille logique"></div>
         <div class="sequence-controls">
-          <p class="puzzle-status" id="puzzleStatus" aria-live="polite"></p>
-        </div>        <div class="puzzle-actions">
+          <button class="sequence-start-button" id="startPuzzleButton" type="button" data-i18n="start">RÉVEILLER LE RÉSEAU</button>
+          <p class="puzzle-status" id="puzzleStatus" aria-live="polite">Réveille le réseau, puis éteins toutes les cellules.</p>
+        </div>
+        <div class="puzzle-actions">
           <button class="next-level-button" id="nextLevelButton" type="button" hidden data-i18n="next">CONTINUER VERS LE NIVEAU 21</button>
           <button class="reset-button" id="resetButton" type="button" data-i18n="reset">Réinitialiser</button>
         </div>

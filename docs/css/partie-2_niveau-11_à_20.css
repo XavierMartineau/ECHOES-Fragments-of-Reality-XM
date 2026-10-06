@@ -392,7 +392,7 @@ body.part-two-theme {
   box-shadow: 0 0 18px rgba(128, 255, 207, 0.36);
 }
 
-/* NIVEAUX 14-16 // MIROIRS (14), ROUTAGE DE FLUX (15) ET RÉSEAU LOGIQUE (16) : marges et contrôles communs. */
+/* NIVEAUX 14-16 // MIROIRS (14), ROUTAGE DE FLUX (15) ET CADENAS (16) : marges et contrôles communs. */
 .level-14-shell,
 .level-15-shell,
 .level-16-shell {
@@ -582,7 +582,7 @@ body.part-two-theme {
   text-align: right;
 }
 
-/* Niveau 16 // Réseau dormant : grille logique 3 x 3 (.logic-board) dont les cellules s'inversent par impulsion. */
+/* Niveau 20 // Réseau dormant : grille logique 3 x 3 (.logic-board) dont les cellules s'inversent par impulsion. */
 .logic-board {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1295,7 +1295,7 @@ body.part-two-theme {
   }
 }
 
-/* NIVEAUX 17-20 // BALANCE (17), TOUR DE HANOÏ (18), SUDOKU DE LETTRES (19) ET CADENAS (20) : marges et contrôles communs. */
+/* NIVEAUX 17-20 // BALANCE (17), TOUR DE HANOÏ (18), SUDOKU DE LETTRES (19) ET RÉSEAU LOGIQUE (20) : marges et contrôles communs. */
 .level-17-shell,
 .level-18-shell,
 .level-19-shell,
@@ -1327,7 +1327,7 @@ body.part-two-theme {
   color: #80ffcf;
 }
 
-/* Niveau 17 // balance (.scale-*), niveau 18 // tours (.tower-*), niveaux 19 // sudoku de lettres (.sd-*) et 20 // cadenas (.code-*) : cadre partagé. */
+/* Niveau 17 // balance (.scale-*), niveau 18 // tours (.tower-*), niveau 19 // sudoku de lettres (.sd-*) et niveau 16 // cadenas (.code-*) : cadre partagé. */
 .scale-board,
 .tower-board,
 .code-board {
@@ -1528,7 +1528,7 @@ body.part-two-theme {
   box-shadow: 0 0 18px rgba(128, 255, 207, 0.4);
 }
 
-/* Niveau 20 // équations de symboles, listes de réponses et molettes du cadenas. */
+/* Niveau 16 // équations de symboles, réponses numériques et molettes du cadenas. */
 .code-section-title {
   margin: 10px 0 6px;
   color: #acbacb;
