@@ -849,7 +849,7 @@ html body > aside.dev-mode {
 @media (min-width: 901px) {
   html body > aside.dev-mode {
     width: max-content !important;
-    margin: 14px 14px 14px 14px !important;
+    margin: 14px 14px 14px clamp(28px, 4vw, 72px) !important;
   }
 
   html body > aside.dev-mode .dev-mode-panel {

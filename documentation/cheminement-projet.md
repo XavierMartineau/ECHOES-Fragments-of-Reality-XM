@@ -35,7 +35,7 @@ reste [Info-fr.txt](./Info-fr.txt).
 - Nouvelle partie avec effacement de la progression du compte.
 - Niveaux terminés rejouables sans supprimer les points verts.
 - Navigation partagée, boutons retour et liens vers les secteurs suivants.
-- Mode développeur pour faciliter les tests et la navigation locale ; son bouton et son menu restent roses sur toutes les pages ; seuls les numéros de niveaux 11 à 20 et le sélecteur « PART 2 » du navigateur passent au bleu électrique ; sur PC, le bouton est collé au bord gauche de la fenêtre.
+- Mode développeur pour faciliter les tests et la navigation locale ; son bouton et son menu restent roses sur toutes les pages ; seuls les numéros de niveaux 11 à 20 et le sélecteur « PART 2 » du navigateur passent au bleu électrique ; sur PC, le bouton est à gauche de la fenêtre avec une marge de 28 à 72 px.
 
 ### Responsive et qualité d'affichage
 
@@ -271,7 +271,8 @@ Page : `docs/html/partie-1_niveau-1_à_10/boss-recovery.html`
   au bleu électrique (`#4b9eff`).
 - `e9a7b61` — Sélecteur « PART 2 » du navigateur également en bleu électrique ; les parties 3
   à 6 gardent les couleurs de base.
-- Ce commit — Règle de maintenance : chaque commit est ajouté à ce journal.
+- 6ec4399 — Règle de maintenance : chaque commit est ajouté à ce journal.
+- Ce commit — Mode développeur PC : marge gauche de 28 à 72 px (clamp) pour décoller le bouton du bord.
 
 ## Prochain jalon recommandé
 
