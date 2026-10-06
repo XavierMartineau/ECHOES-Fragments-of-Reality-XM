@@ -35,7 +35,7 @@ reste [Info-fr.txt](./Info-fr.txt).
 - Nouvelle partie avec effacement de la progression du compte.
 - Niveaux terminés rejouables sans supprimer les points verts.
 - Navigation partagée, boutons retour et liens vers les secteurs suivants.
-- Mode développeur pour faciliter les tests et la navigation locale.
+- Mode développeur pour faciliter les tests et la navigation locale ; son bouton et son menu restent roses sur toutes les pages, y compris la Partie 2.
 
 ### Responsive et qualité d'affichage
 
@@ -76,10 +76,14 @@ reste [Info-fr.txt](./Info-fr.txt).
 - Niveau 13 : puzzle coulissant pour reconstruire un motif fractal.
 - Niveau 14 : orientation de miroirs pour guider un faisceau jusqu'à son récepteur.
 - Niveau 15 : puzzle de routage géant sur une grille 14 × 14 pour relier vingt paires de
-  balises aux couleurs et tracés variés, sans obligation de remplir toute la grille et sans croiser
-  les flux. La disposition (emplacement des balises, tracés, couleurs) est générée
+  balises (40 cubes) sans croiser les flux, sans obligation de remplir toute la grille.
+  Chaque paire a une couleur très contrastée (20 teintes) et une lettre (initiale du nom
+  anglais de la couleur) affichée sur ses deux balises. La disposition est générée
   aléatoirement à chaque chargement et réinitialisation (chemin hamiltonien aléatoire
-  découpé en dix routes) : bien plus de 100 configurations, toutes résolubles.
+  découpé en vingt routes, balises éloignées d'au moins 5 cases et réparties dans les
+  16 blocs de la grille) : bien plus de 100 configurations, toutes résolubles. Un tracé peut
+  passer par-dessus un autre flux (celui-ci est alors effacé et la case prend la nouvelle
+  couleur) ; chaque paire reliée déclenche une vague néon vert cube par cube.
 - Niveau 16 : puzzle logique en trois manches, où chaque impulsion inverse une cellule
   et ses voisines directes.
 
@@ -152,6 +156,8 @@ Page : `docs/html/partie-1_niveau-1_à_10/boss-recovery.html`
 - Styles communs et styles de partie séparés dans `docs/css/`.
 - `save-system.js` gère les comptes et la progression persistante.
 - `dev-mode.js` fournit les outils de test et de navigation.
+- `partie-2_niveau-11_à_20.js` regroupe tout le JavaScript des niveaux 11 à 16 (sauvegarde,
+  navigation et contrôleurs de puzzle) ; il n'existe plus de script `niveau-1X.js` séparé.
 - `ambient-background.js` et les feuilles d'ambiance gèrent les effets d'arrière-plan.
 - Les pages restent compatibles avec un déploiement statique GitHub Pages.
 

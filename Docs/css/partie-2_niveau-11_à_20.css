@@ -522,6 +522,31 @@ body.part-two-theme {
   cursor: default;
 }
 
+.flow-cell.is-celebrating {
+  z-index: 2;
+  animation: flowNeonWave 760ms ease-out var(--wave-delay, 0ms) both;
+}
+
+@keyframes flowNeonWave {
+  0% {
+    transform: scale(1);
+    border-color: #39ff88;
+    box-shadow: 0 0 0 rgba(0, 255, 100, 0);
+  }
+
+  35% {
+    transform: scale(1.3);
+    background: #00c853;
+    border-color: #7dffb0;
+    box-shadow: 0 0 6px #00ff6a, 0 0 22px #00ff6a, 0 0 42px rgba(0, 255, 100, 0.8);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(0, 255, 100, 0);
+  }
+}
+
 .flow-board.is-solved .flow-cell.is-connected {
   box-shadow: 0 0 12px color-mix(in srgb, var(--flow-color) 42%, transparent);
 }
@@ -618,8 +643,12 @@ body.part-two-theme {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .prism-cell,
   .flow-cell,
+  .flow-cell.is-celebrating {
+    animation: none;
+    transition: none;
+  }
+  .prism-cell,
   .logic-cell {
     transition: none;
   }
@@ -779,82 +808,6 @@ body.part-two-theme {
   color: #d4dce7;
 }
 
-.part-two-theme .dev-mode-toggle {
-  border-color: rgba(75, 158, 255, 0.7);
-  background: rgba(5, 13, 28, 0.96);
-  color: #d4dce7;
-  box-shadow: 0 0 22px rgba(75, 158, 255, 0.2);
-}
-
-.part-two-theme .dev-mode-toggle:hover,
-.part-two-theme .dev-mode-toggle:focus-visible,
-.part-two-theme .dev-mode-close:hover,
-.part-two-theme .dev-mode-close:focus-visible,
-.part-two-theme .dev-mode-home:hover,
-.part-two-theme .dev-mode-home:focus-visible,
-.part-two-theme .dev-mode-levels a:hover,
-.part-two-theme .dev-mode-levels a:focus-visible {
-  border-color: rgba(75, 158, 255, 0.75);
-  background: rgba(75, 158, 255, 0.18);
-  box-shadow: 0 0 16px rgba(75, 158, 255, 0.3);
-}
-
-.part-two-theme .dev-mode-panel {
-  border-color: rgba(75, 158, 255, 0.42);
-  background: rgba(5, 10, 20, 0.98);
-  box-shadow: 0 0 30px rgba(45, 113, 191, 0.28), inset 0 0 28px rgba(75, 158, 255, 0.06);
-}
-
-.part-two-theme .dev-mode-heading strong,
-.part-two-theme .dev-mode-accessibility,
-.part-two-theme .dev-mode-part-toggle {
-  color: #d4dce7;
-}
-
-.part-two-theme .dev-mode-hint,
-.part-two-theme .dev-mode-part-name,
-.part-two-theme .dev-mode-level-title {
-  color: #acbacb;
-}
-
-.part-two-theme .dev-mode-kicker,
-.part-two-theme .dev-mode-close,
-.part-two-theme .dev-mode-home,
-.part-two-theme .dev-mode-part-count,
-.part-two-theme .dev-mode-chevron,
-.part-two-theme .dev-mode-levels a {
-  color: #4b9eff;
-}
-
-.part-two-theme .dev-mode-home,
-.part-two-theme .dev-mode-part-toggle,
-.part-two-theme .dev-mode-levels a {
-  border-color: rgba(75, 158, 255, 0.32);
-  background: rgba(75, 158, 255, 0.08);
-}
-
-.part-two-theme .dev-mode-accessibility {
-  border-color: rgba(75, 158, 255, 0.32);
-}
-
-.part-two-theme .dev-mode-accessibility input {
-  accent-color: #4b9eff;
-}
-
-.part-two-theme .dev-mode-part-toggle.is-active,
-.part-two-theme .dev-mode-part-toggle:hover,
-.part-two-theme .dev-mode-part-toggle:focus-visible {
-  border-color: rgba(75, 158, 255, 0.72);
-  background: rgba(75, 158, 255, 0.18);
-}
-
-.part-two-theme .dev-mode-part-toggle > span:first-child {
-  color: #d4dce7;
-}
-
-.part-two-theme .dev-mode-level-panel {
-  border-color: rgba(75, 158, 255, 0.28);
-}
 
 @media (prefers-reduced-motion: reduce) {
   .part-two-theme .level-progress .level-square.current {
