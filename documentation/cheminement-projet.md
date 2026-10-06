@@ -272,7 +272,8 @@ Page : `docs/html/partie-1_niveau-1_à_10/boss-recovery.html`
 - `e9a7b61` — Sélecteur « PART 2 » du navigateur également en bleu électrique ; les parties 3
   à 6 gardent les couleurs de base.
 - 6ec4399 — Règle de maintenance : chaque commit est ajouté à ce journal.
-- Ce commit — Mode développeur PC : marge gauche de 28 à 72 px (clamp) pour décoller le bouton du bord.
+- `fd6d447` — Mode développeur PC : marge gauche de 28 à 72 px (clamp) pour décoller le bouton du bord.
+- Ce commit — Mode développeur PC : le bouton s'aligne sur le bord gauche du contenu des pages (marge `max(28px, 50vw - 588px)`), à la même hauteur.
 
 ## Prochain jalon recommandé
 
