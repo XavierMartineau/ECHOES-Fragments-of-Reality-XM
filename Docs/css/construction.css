@@ -1,0 +1,14 @@
+﻿/* Page "En construction" partagee (parties 2 a 6). */
+html,body{min-height:100%}
+body{margin:0;background:#050711;color:#edfaff}
+.construction-page{display:grid;place-items:center;min-height:100vh;padding:32px 16px 72px;box-sizing:border-box;background:radial-gradient(circle at 50% 35%,rgba(121,247,255,.14),transparent 40%),#050711;color:#edfaff;font-family:var(--font-display,"Orbitron",sans-serif)}
+.construction-card{width:min(560px,100%);box-sizing:border-box;padding:32px 28px;border:1px solid rgba(121,247,255,.45);background:rgba(5,9,22,.9);box-shadow:0 0 50px rgba(121,247,255,.15);text-align:center}
+.construction-card .eyebrow{margin:18px 0 8px;color:#79f7ff;font-size:.7rem;letter-spacing:.2rem}
+.construction-card h1{margin:0 0 14px;color:#ffd166;font-size:clamp(1.4rem,5vw,2.2rem);letter-spacing:.12rem}
+.construction-card p{color:#c7d6ea;line-height:1.6;font-family:system-ui,sans-serif}
+.construction-illustration{display:block;width:min(260px,70%);height:auto;max-height:190px;margin:0 auto;color:#c7d6ea}
+.construction-weight{animation:construction-swing 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 0}
+.construction-light{animation:construction-blink 1.4s ease-in-out infinite}
+@keyframes construction-swing{50%{transform:translateX(6px)}}
+@keyframes construction-blink{50%{opacity:.25}}
+@media(prefers-reduced-motion:reduce){.construction-weight,.construction-light{animation:none}}

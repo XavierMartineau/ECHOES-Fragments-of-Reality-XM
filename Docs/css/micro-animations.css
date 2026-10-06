@@ -1,0 +1,100 @@
+@keyframes fx-page-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fx-rise-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes fx-ripple { from { opacity: .7; transform: translate(-50%, -50%) scale(.2); } to { opacity: 0; transform: translate(-50%, -50%) scale(1); } }
+@keyframes fx-flash { 0% { text-shadow: 0 0 0 transparent; filter: brightness(1.9); } 100% { text-shadow: none; filter: none; } }
+@keyframes fx-float { 0% { transform: translate3d(0, 0, 0); opacity: 0; } 15% { opacity: .55; } 85% { opacity: .35; } 100% { transform: translate3d(var(--fx-dx), -110vh, 0); opacity: 0; } }
+@keyframes fx-sweep { from { background-position: 220% 0; } to { background-position: -120% 0; } }
+@keyframes fx-pulse-dot { 0%, 100% { box-shadow: 0 0 0 0 currentColor; } 50% { box-shadow: 0 0 10px 1px currentColor; } }
+@keyframes fx-sparkle { 0% { opacity: .9; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(calc(-50% + var(--fx-x)), calc(-50% + var(--fx-y))) scale(.1); } }
+
+body { animation: fx-page-in .5s ease-out both; }
+
+.fx-rise { animation: fx-rise-in .6s cubic-bezier(.2, .7, .2, 1) backwards; animation-delay: calc(var(--fx-i, 0) * 70ms); }
+
+.fx-glow {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 340px;
+  height: 340px;
+  margin: -170px 0 0 -170px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle, rgba(120, 190, 255, .10), transparent 65%);
+  opacity: 0;
+  transition: opacity .4s;
+  will-change: transform;
+}
+.fx-glow.is-on { opacity: 1; }
+
+.fx-particles { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.fx-particles span {
+  position: absolute;
+  bottom: -12px;
+  left: var(--fx-left);
+  width: var(--fx-size);
+  height: var(--fx-size);
+  border-radius: 50%;
+  background: rgba(170, 215, 255, .8);
+  box-shadow: 0 0 8px rgba(120, 190, 255, .7);
+  opacity: 0;
+  animation: fx-float var(--fx-dur) linear var(--fx-delay) infinite;
+}
+
+.fx-ripple {
+  position: fixed;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid rgba(160, 215, 255, .75);
+  pointer-events: none;
+  z-index: 9999;
+  animation: fx-ripple .6s ease-out forwards;
+}
+.fx-spark {
+  position: fixed;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #bfe3ff;
+  box-shadow: 0 0 6px #7fc1ff;
+  pointer-events: none;
+  z-index: 9999;
+  animation: fx-sparkle .7s ease-out forwards;
+}
+
+button:not(:disabled), a.button, [role="button"], .level-square, .dev-mode-toggle {
+  transition: filter .2s ease, box-shadow .25s ease, border-color .25s ease, background-color .25s ease;
+}
+button:not(:disabled):hover, a.button:hover, [role="button"]:hover {
+  filter: brightness(1.18);
+  box-shadow: 0 0 16px rgba(120, 190, 255, .35);
+}
+button:not(:disabled):active { filter: brightness(.9); }
+
+.puzzle-panel, .system-transmission, .level-shell > section {
+  position: relative;
+}
+.puzzle-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 40%, rgba(160, 215, 255, .07) 50%, transparent 60%) 0 0 / 250% 100%;
+  animation: fx-sweep 7s linear infinite;
+}
+
+.fx-flash { animation: fx-flash .7s ease-out; }
+
+.level-meta .progress-dots span.is-current,
+.level-meta .progress-dots .current,
+.progress-dots [aria-current] { animation: fx-pulse-dot 1.8s ease-in-out infinite; }
+
+.global-site-footer, footer { transition: opacity .4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  body, .fx-rise, .puzzle-panel::after, .fx-particles span, .fx-flash { animation: none !important; }
+  .fx-glow, .fx-particles, .fx-ripple, .fx-spark { display: none !important; }
+}
