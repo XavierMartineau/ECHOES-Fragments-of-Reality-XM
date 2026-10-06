@@ -9,26 +9,26 @@
       level: "NIVEAU 15",
       eyebrow: "Fragment 015 // Les veines de lumière",
       title: "Les veines de lumière",
-      description: "Dix paires de balises se répondent dans cette grille de 14 par 14. Relie chaque paire par un tracé sinueux, sans croiser les flux, et remplis toutes les cellules.",
+      description: "Vingt paires de balises se répondent dans cette grille de 14 par 14. Relie chaque paire par un tracé sinueux, sans croiser les flux. Il n'est pas nécessaire de remplir toute la grille.",
       systemLabel: "ECHO://FLUX",
       puzzleKicker: "PUZZLE // ROUTAGE DE FLUX",
       puzzleTitle: "Réseau de résonance",
       start: "ACTIVER LE RÉSEAU",
       next: "CONTINUER VERS LE NIVEAU 16",
       reset: "Réinitialiser",
-      ready: "Maintiens une balise et trace son chemin sinueux jusqu'à la balise de même couleur. Remplis toute la grille.",
-      playing: "Relie les dix paires sans croiser les flux. Tu peux aussi toucher les cellules une à une.",
+      ready: "Maintiens une balise et trace son chemin sinueux jusqu'à la balise de même couleur. Rien ne t'oblige à remplir toute la grille.",
+      playing: "Relie les vingt paires sans croiser les flux. Tu peux aussi toucher les cellules une à une.",
       connecting: (color) => `Flux ${color} en cours. Continue jusqu'à sa balise jumelle.`,
       blocked: "Cette cellule est déjà occupée par un autre flux.",
       invalid: "Le chemin ne peut avancer que vers une cellule voisine.",
       lineComplete: (color) => `Paire ${color} reliée. Poursuis les autres flux.`,
-      fillRemaining: "Les dix paires sont reliées. Remplis les cellules encore vides pour terminer.",
-      success: "Les dix flux remplissent la grille sans croisement. Le réseau est rétabli.",
-      system: "SYSTEME:: 10 PAIRES DETECTEES // RESEAU EN ATTENTE",
+      fillRemaining: "Toutes les paires sont reliées.",
+      success: "Les vingt flux sont reliés sans croisement. Le réseau est rétabli.",
+      system: "SYSTEME:: 20 PAIRES DETECTEES // RESEAU EN ATTENTE",
       systemSuccess: "SYSTEME:: RESEAU 015 RESTAURE // PROTOCOLE 016 DEBLOQUE",
       cell: (row, column) => `Cellule ${row}, ${column}`,
       endpoint: (color, row, column) => `Balise ${color}, ligne ${row}, colonne ${column}`,
-      colors: ["rouge", "jaune", "violet", "cyan", "rose", "vert", "orange", "blanc", "turquoise", "magenta"],
+      colors: ["red", "orange", "yellow", "lime", "green", "teal", "cyan", "sky", "blue", "indigo", "purple", "magenta", "pink", "brown", "white", "slate", "khaki", "burgundy", "olive", "peach"],
       board: "Grille de connexion 14 par 14",
       progress: "Progression de la Partie 2",
       save: "SAUVEGARDER",
@@ -42,26 +42,26 @@
       level: "LEVEL 15",
       eyebrow: "Fragment 015 // Veins of light",
       title: "Veins of light",
-      description: "Ten pairs of beacons answer each other across this 14-by-14 grid. Connect every pair with a winding path, without crossing flows, and fill every cell.",
+      description: "Twenty pairs of beacons answer each other across this 14-by-14 grid. Connect every pair with a winding path, without crossing flows. You do not need to fill the whole grid.",
       systemLabel: "ECHO://FLOW",
       puzzleKicker: "PUZZLE // FLOW ROUTING",
       puzzleTitle: "Resonance network",
       start: "ACTIVATE THE NETWORK",
       next: "CONTINUE TO LEVEL 16",
       reset: "Reset",
-      ready: "Hold a beacon and trace a winding path to the beacon of the same color. Fill the entire grid.",
-      playing: "Connect all ten pairs without crossing flows. You can also tap cells one at a time.",
+      ready: "Hold a beacon and trace a winding path to the beacon of the same color. You do not have to fill the whole grid.",
+      playing: "Connect all twenty pairs without crossing flows. You can also tap cells one at a time.",
       connecting: (color) => `${color} flow in progress. Continue to its matching beacon.`,
       blocked: "That cell is already occupied by another flow.",
       invalid: "A path can only move into a neighboring cell.",
       lineComplete: (color) => `${color} pair connected. Continue with the other flows.`,
-      fillRemaining: "All ten pairs are connected. Fill the remaining cells to finish.",
-      success: "All ten flows fill the grid without crossing. The network is restored.",
-      system: "SYSTEM:: 10 PAIRS DETECTED // NETWORK STANDBY",
+      fillRemaining: "All pairs are connected.",
+      success: "All twenty flows are connected without crossing. The network is restored.",
+      system: "SYSTEM:: 20 PAIRS DETECTED // NETWORK STANDBY",
       systemSuccess: "SYSTEM:: NETWORK 015 RESTORED // PROTOCOL 016 UNLOCKED",
       cell: (row, column) => `Cell ${row}, ${column}`,
       endpoint: (color, row, column) => `${color} beacon, row ${row}, column ${column}`,
-      colors: ["red", "yellow", "purple", "cyan", "pink", "green", "orange", "white", "turquoise", "magenta"],
+      colors: ["red", "orange", "yellow", "lime", "green", "teal", "cyan", "sky", "blue", "indigo", "purple", "magenta", "pink", "brown", "white", "slate", "khaki", "burgundy", "olive", "peach"],
       board: "14 by 14 connection grid",
       progress: "Part 2 progress",
       save: "SAVE",
@@ -81,7 +81,12 @@
   const saveButton = $("saveGameButton");
   const systemMessage = $("systemMessage");
   const size = 14;
-  const palette = ["#ff3b5c", "#ffe047", "#a46bff", "#21d4fd", "#ff4d9a", "#48f05d", "#ff9f43", "#eef5ff", "#33dfcf", "#d94bff"];
+  const palette = ["#ff1744", "#ff8f00", "#ffea00", "#b2ff00", "#00c853", "#00897b", "#00e5ff", "#80b4ff", "#2962ff", "#5e35b1", "#c158ff", "#ff00d4", "#ff8ab8", "#8d4e2a", "#ffffff", "#78909c", "#e0c9a0", "#7b1030", "#8a8a00", "#ff6e5e"];
+  const symbols = [];
+  copy.colors.forEach((label) => {
+    const letters = label.normalize("NFD").replace(/[^a-zA-Z]/g, "").toUpperCase();
+    symbols.push([...letters].find((letter) => !symbols.includes(letter)) ?? "?");
+  });
   const randomInt = (max) => Math.floor(Math.random() * max);
   const shuffle = (list) => {
     for (let i = list.length - 1; i > 0; i -= 1) {
@@ -112,7 +117,7 @@
     const position = new Array(size * size);
     const refresh = () => path.forEach((cell, i) => { position[cell] = i; });
     refresh();
-    for (let iteration = 0; iteration < 6000; iteration += 1) {
+    for (let iteration = 0; iteration < 400; iteration += 1) {
       const atEnd = Math.random() < 0.5;
       if (!atEnd) path.reverse(), refresh();
       const head = path[path.length - 1];
@@ -127,22 +132,43 @@
     return path;
   };
 
+  const pairCount = 20;
+  // Chaque bloc 4x4 de la grille doit contenir des balises, sans surcharge.
+  const isSpread = (routes) => {
+    const blocks = Array(16).fill(0);
+    routes.forEach((route) => {
+      [route[0], route[route.length - 1]].forEach((cell) => {
+        const row = Math.floor(Math.floor(cell / size) * 4 / size);
+        const column = Math.floor((cell % size) * 4 / size);
+        blocks[row * 4 + column] += 1;
+      });
+    });
+    return blocks.every((count) => count >= 1 && count <= 5);
+  };
+
   const generateRoutes = () => {
     for (;;) {
       const path = buildHamiltonianPath();
-      const lengths = Array(10).fill(8);
-      for (let extra = size * size - 80; extra > 0; extra -= 1) lengths[randomInt(10)] += 1;
       const generated = [];
-      let offset = 0;
-      lengths.forEach((length) => {
-        generated.push(path.slice(offset, offset + length));
-        offset += length;
-      });
-      const apart = generated.every((route) => !neighborsOf(route[0]).includes(route[route.length - 1]));
-      if (apart) return generated;
+      let offset = randomInt(2);
+      while (generated.length < pairCount) {
+        let route = null;
+        for (let attempt = 0; attempt < 12 && !route; attempt += 1) {
+          const length = 6 + randomInt(8);
+          const candidate = path.slice(offset, offset + length);
+          if (candidate.length < length) break;
+          const first = candidate[0];
+          const last = candidate[length - 1];
+          const distance = Math.abs(Math.floor(first / size) - Math.floor(last / size)) + Math.abs((first % size) - (last % size));
+          if (distance >= 5) route = candidate;
+        }
+        if (!route) break;
+        generated.push(route);
+        offset += route.length + randomInt(2);
+      }
+      if (generated.length === pairCount && isSpread(generated)) return generated;
     }
   };
-
   const colors = [];
   const endpoints = new Map();
   const owners = Array(size * size).fill(null);
@@ -154,9 +180,14 @@
   let activePath = [];
   let isDrawing = false;
 
+  const inkFor = (hex) => {
+    const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+    return 0.299 * r + 0.587 * g + 0.114 * b > 120 ? "#050c1d" : "#ffffff";
+  };
+
   const generateLayout = () => {
     const generated = generateRoutes();
-    const order = shuffle(Array.from({ length: 10 }, (_, i) => i));
+    const order = shuffle(Array.from({ length: pairCount }, (_, i) => i));
     colors.length = 0;
     endpoints.clear();
     generated.forEach((route, index) => {
@@ -164,6 +195,8 @@
         id: `flow-${order[index]}`,
         label: copy.colors[order[index]],
         hex: palette[order[index]],
+        symbol: symbols[order[index]],
+        ink: inkFor(palette[order[index]]),
         start: route[0],
         end: route[route.length - 1],
       };
@@ -199,7 +232,12 @@
       cell.classList.toggle("is-connected", Boolean(color));
       cell.classList.toggle("is-endpoint", endpoints.has(index));
       cell.classList.toggle("is-complete", Boolean(color && completedPaths.has(owner)));
-      if (color) cell.style.setProperty("--flow-color", color.hex);
+      if (endpoints.has(index) && color) cell.dataset.symbol = color.symbol;
+      else delete cell.dataset.symbol;
+      if (color) {
+        cell.style.setProperty("--flow-color", color.hex);
+        cell.style.setProperty("--flow-ink", color.ink);
+      }
       else cell.style.removeProperty("--flow-color");
 
       const endpoint = endpoints.get(index);
@@ -259,7 +297,7 @@
       activePath = [];
       isDrawing = false;
       render();
-      if (completedPaths.size === colors.length && owners.every(Boolean)) {
+      if (completedPaths.size === colors.length) {
         solved = true;
         board.classList.add("is-solved");
         render();

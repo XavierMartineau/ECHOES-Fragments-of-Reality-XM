@@ -75,8 +75,8 @@ reste [Info-fr.txt](./Info-fr.txt).
 - Niveau 12 : mémorisation puis répétition de séquences lumineuses croisées.
 - Niveau 13 : puzzle coulissant pour reconstruire un motif fractal.
 - Niveau 14 : orientation de miroirs pour guider un faisceau jusqu'à son récepteur.
-- Niveau 15 : puzzle de routage géant sur une grille 14 × 14 pour relier dix paires de
-  balises aux couleurs et tracés variés, en remplissant toutes les cellules sans croiser
+- Niveau 15 : puzzle de routage géant sur une grille 14 × 14 pour relier vingt paires de
+  balises aux couleurs et tracés variés, sans obligation de remplir toute la grille et sans croiser
   les flux. La disposition (emplacement des balises, tracés, couleurs) est générée
   aléatoirement à chaque chargement et réinitialisation (chemin hamiltonien aléatoire
   découpé en dix routes) : bien plus de 100 configurations, toutes résolubles.

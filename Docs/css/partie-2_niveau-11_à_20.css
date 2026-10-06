@@ -499,7 +499,11 @@ body.part-two-theme {
   border-radius: 50%;
   background: var(--flow-color);
   box-shadow: 0 0 13px var(--flow-color);
-  content: "";
+  content: attr(data-symbol);
+  display: grid;
+  place-items: center;
+  color: #050c1d;
+  font: 800 0.62rem var(--font-display, "Orbitron", sans-serif);
   pointer-events: none;
 }
 
