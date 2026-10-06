@@ -5,13 +5,13 @@ Il est maintenu à partir des fonctionnalités présentes dans le dépôt et des
 significatifs de l'historique Git. La référence narrative et fonctionnelle principale
 reste [Info-fr.txt](./Info-fr.txt).
 
-## État du projet au 04/10/2026
+## État du projet au 05/10/2026
 
 - **Projet :** ECHOES: Fragments of Reality
 - **Type :** expérience narrative et jeu de puzzles web statique
 - **Déploiement visé :** GitHub Pages
 - **Version de travail :** bêta v4
-- **Jalon actuel :** intégration du boss `CLEE_01` et du protocole de récupération
+- **Jalon actuel :** boss `CLEE_01`, récupération et niveau cinématique de la Clé 01
 - **Fondations disponibles :** accueil, connexion, introduction interactive, sauvegarde par compte,
   mode développeur, navigation partagée et responsive multi-écrans
 
@@ -85,7 +85,35 @@ mécaniques sont en cours d'harmonisation :
 - Combat en plusieurs phases avec attaques, vies et redémarrage en phase 1.
 - Défaite du boss suivie d'un accès au protocole de récupération.
 - Réussite du protocole permettant de débloquer la première clé.
-- HUD de progression de clé : `CLÉE : 0 / 1`.
+- HUD de progression global : `CLÉS : 0 / 6`.
+
+### Niveau spécial — Clé 01
+
+Page : `docs/html/partie-1_niveau-1_à_10/clee_01_cinematic.html`
+
+Le niveau spécial regroupe désormais la récupération et la transmission narrative
+dans une seule scène, au lieu de séparer la récompense et l'interlude :
+
+- scène centrale de résonance avec noyau ECHO et orbites cyan, violette et verte ;
+- dialogue automatique entre Voyageur et ECHO ;
+- Voyageur lisible et ECHO volontairement glitché ;
+- clé USB cyberpunk en SVG avec le symbole `E` et l'identifiant `RESONANCE // 01` ;
+- apparition ponctuelle de la clé lorsque le Voyageur l'identifie ;
+- animation de la clé vers le HUD après confirmation ;
+- affichage du compteur `0 / 6`, puis `1 / 6` après la sauvegarde ;
+- emplacement HUD nommé `CLEE_01` ;
+- trois répliques post-récupération donnant l'indice du cercle brisé ;
+- bouton de continuation vers le niveau suivant après la fin de la transmission.
+
+Fichiers associés :
+
+- `docs/html/partie-1_niveau-1_à_10/clee_01_cinematic.html`
+- `docs/js/key-transition.js`
+- `docs/assets/images/key-01-usb.svg`
+- `docs/css/partie-1_niveau-1_à_10.css`
+
+L'ancien fichier `niveau-interlude.html` reste présent pour compatibilité et
+référence, mais le parcours principal passe maintenant par le niveau Clé 01 unifié.
 
 ## Protocole de récupération
 
@@ -190,13 +218,21 @@ Page : `docs/html/partie-1_niveau-1_à_10/boss-recovery.html`
 - `dd73ea2` — Stabilisation des interactions, de la trajectoire des notes et du gameplay
   de récupération.
 
+### 05/10/2026 — Clé 01 et niveau unifié
+
+- `40d9712` — Mise à jour des mécaniques du protocole de récupération et ajout de la
+  cinématique de récupération de la première clé.
+- Évolution fonctionnelle associée : dialogue automatique Voyageur/ECHO, compteur
+  global `0 / 6`, animation de récompense et transition narrative vers la suite.
+
 ## Prochain jalon recommandé
 
-1. Terminer les tests prolongés du protocole de récupération sur desktop et mobile.
-2. Valider le déblocage de la première clé après une réussite complète.
+1. Valider le parcours complet niveaux 1 à 10 → boss → Clé 01 sur desktop et mobile.
+2. Vérifier le rendu du SVG `key-01-usb.svg` et de son animation dans le HUD.
 3. Finaliser les niveaux 8 à 15 et leurs traductions.
-4. Vérifier l'ensemble des liens et assets sur GitHub Pages.
-5. Préparer une nouvelle version bêta après validation des parcours complets.
+4. Relier les cinq clés restantes aux verrous et fragments narratifs.
+5. Vérifier l'ensemble des liens et assets sur GitHub Pages.
+6. Préparer une nouvelle version bêta après validation des parcours complets.
 
 > Mettre à jour ce document après chaque jalon important. Les entrées du journal doivent
 > référencer les commits fonctionnels plutôt que les commits techniques intermédiaires.

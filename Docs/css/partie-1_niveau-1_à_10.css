@@ -358,6 +358,34 @@ body.key-reward-redesign .key-redesign-core.is-unlocked:not(.is-arriving) .rewar
   .traveler-key-display span { font-size: 0.32rem; }
   .key-redesign-dialogue .dialogue-line { grid-template-columns: 1fr; gap: 3px; }
 }
+
+@media (min-width: 651px) and (max-width: 1099px) {
+  body.key-reward-redesign .key-redesign-header {
+    width: calc(100% - 48px);
+  }
+
+  body.key-reward-redesign .key-redesign-hud {
+    width: calc(100% - 48px);
+    margin-inline: auto;
+  }
+
+  body.key-reward-redesign .key-redesign-main {
+    padding: 28px 24px 80px;
+  }
+
+  body.key-reward-redesign .key-redesign-scene {
+    min-height: 780px;
+    padding-inline: 28px;
+  }
+
+  body.key-reward-redesign .key-redesign-title h1 {
+    font-size: clamp(3rem, 7vw, 5.4rem);
+  }
+
+  body.key-reward-redesign .key-redesign-core {
+    height: 320px;
+  }
+}
 .key-hud-value { color: #fff; }
 .key-hud.is-unlocked {
   border-color: var(--success);
@@ -5818,6 +5846,66 @@ body.key-reward-page .reward-dialogue {
   background: rgba(4, 10, 22, 0.78);
   box-shadow: inset 0 0 22px rgba(121, 247, 255, 0.05);
 }
+
+/* Keep the Clé 01 navigation and key counter in the normal page flow. */
+body.key-reward-redesign .key-redesign-location {
+  padding: 9px 14px;
+  border: 1px solid rgba(179, 108, 255, 0.72);
+  background: rgba(18, 8, 40, 0.54);
+  color: #dec9ff;
+  box-shadow:
+    inset 0 0 16px rgba(179, 108, 255, 0.08),
+    0 0 18px rgba(179, 108, 255, 0.08);
+  text-shadow: 0 0 8px rgba(179, 108, 255, 0.38);
+}
+body.key-reward-redesign .key-redesign-location span {
+  color: var(--violet);
+}
+body.key-reward-redesign .key-redesign-hud {
+  position: relative;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  z-index: 8;
+  display: flex;
+  width: min(1440px, calc(100% - 72px));
+  min-height: 70px;
+  margin: 12px auto 0;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 18px;
+  border: 1px solid rgba(121, 247, 255, 0.34);
+  border-left: 2px solid var(--cyan);
+  background: rgba(3, 9, 22, 0.76);
+}
+body.key-reward-redesign .key-redesign-hud-label,
+body.key-reward-redesign .key-redesign-hud-note {
+  margin: 0;
+}
+body.key-reward-redesign .key-redesign-hud strong {
+  margin: 0;
+}
+body.key-reward-redesign .key-redesign-hud-line {
+  width: 1px;
+  height: 30px;
+  flex: 0 0 1px;
+  background: linear-gradient(180deg, var(--cyan), transparent);
+}
+body.key-reward-redesign .key-redesign-hud-slot {
+  display: flex;
+  width: auto;
+  margin: 0 0 0 auto;
+  padding: 0 0 0 18px;
+  align-items: center;
+  border-top: 0;
+  border-left: 1px solid rgba(121, 247, 255, 0.18);
+}
+body.key-reward-redesign .key-redesign-hud-slot img {
+  width: 22px;
+  height: 30px;
+}
+
 @media (max-width: 650px) {
   body.key-reward-page .reward-header {
     width: calc(100% - 28px);
@@ -5826,6 +5914,24 @@ body.key-reward-page .reward-dialogue {
     top: 82px !important;
     left: 14px !important;
   }
+
+  body.key-reward-redesign .key-redesign-hud {
+    width: calc(100% - 28px);
+    min-height: 58px;
+    margin: 12px 14px 0;
+    gap: 10px;
+    padding: 10px 12px;
+  }
+  body.key-reward-redesign .key-redesign-hud strong {
+    font-size: 1.05rem;
+  }
+  body.key-reward-redesign .key-redesign-hud-note {
+    max-width: 90px;
+  }
+  body.key-reward-redesign .key-redesign-hud-slot {
+    padding-left: 10px;
+  }
+
   body.key-reward-page .reward-main {
     padding-inline: 14px;
   }

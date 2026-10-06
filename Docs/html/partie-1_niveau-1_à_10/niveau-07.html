@@ -31,20 +31,20 @@
     </header>
     <main class="level-shell" data-level-start="1" data-level-end="15">
       <section class="level-intro">
-        <p class="eyebrow">Fragment 007 // Porte lumineuse</p>
+        <p class="eyebrow" data-i18n="eyebrow">Fragment 007 // Porte lumineuse</p>
         <h1 data-i18n="title">Porte lumineuse</h1>
         <p class="level-description" data-i18n="description">
           Active les trois symboles dans le bon ordre pour ouvrir la porte.
         </p>
         <div class="system-transmission" aria-live="polite">
-          <span class="system-label">SYSTEM://LOG</span>
-          <p id="systemMessage">SYSTEME:: PORTE HOLOGRAPHIQUE EN ATTENTE</p>
+          <span class="system-label" data-i18n="systemLabel">SYSTEM://LOG</span>
+          <p id="systemMessage" data-i18n="systemInput">SYSTEME:: PORTE HOLOGRAPHIQUE EN ATTENTE</p>
         </div>
       </section>
       <section class="puzzle-panel gate-board">
         <div class="panel-heading">
           <div>
-            <p class="panel-kicker">PORTE HOLOGRAPHIQUE // ACCÈS 007</p>
+            <p class="panel-kicker" data-i18n="puzzleKicker">PORTE HOLOGRAPHIQUE // ACCÈS 007</p>
             <h2 data-i18n="puzzleTitle">Séquence de la porte</h2>
           </div>
           <span class="progress-readout" id="progressReadout">0 / 3</span>
@@ -91,7 +91,7 @@
             </button>
           </div>
         </div>
-        <p class="gate-sequence-status" id="gateSequenceStatus">
+        <p class="gate-sequence-status" id="gateSequenceStatus" data-i18n="gateStatus">
           SIGNAL:// EN ATTENTE DE SYNCHRONISATION
         </p>
         <div class="puzzle-actions">
@@ -102,7 +102,7 @@
           >
             DÉMARRER LE PUZZLE
           </button>
-          <p class="puzzle-status" id="puzzleStatus">
+          <p class="puzzle-status" id="puzzleStatus" data-i18n="statusReady">
             Active les symboles dans le bon ordre.
           </p>
           <button
@@ -111,7 +111,7 @@
             type="button"
             hidden
           >
-            CONTINUER</button
+            <span data-i18n="continue">CONTINUER</span></button
           ><button class="reset-button" id="resetButton" type="button">
             Réinitialiser
           </button>
@@ -131,4 +131,3 @@
       <script src="../../js/ambient-background.js"></script>
   </body>
 </html>
-

@@ -76,6 +76,30 @@ svg {
   .description {
     max-width: 580px;
   }
+
+  /* Tablet level layout: preserve readable touch targets without desktop overflow. */
+  .level-header {
+    width: calc(100% - 48px);
+    gap: 20px;
+  }
+
+  .level-meta {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .level-shell {
+    width: min(820px, calc(100% - 48px));
+    padding-bottom: 88px;
+  }
+
+  .puzzle-board {
+    min-height: 330px;
+  }
+
+  .puzzle-actions button {
+    min-height: 48px;
+  }
 }
 
 @media (max-width: 650px) {
