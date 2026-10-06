@@ -11,6 +11,12 @@
     { speaker: "VOYAGEUR", className: "traveler", text: "La clé est en sécurité. Qu'est-ce que tu vois ?" },
     { speaker: "ECHO", className: "echo", text: "Merci de l'avoir récupérée. Cherche maintenant la porte marquée d'un cercle brisé." },
   ];
+  messages.forEach((message) => {
+    const tr = window.echoesTranslate;
+    if (!tr) return;
+    message.text = tr(message.text);
+    message.speaker = tr(message.speaker);
+  });
   let index = 0;
   let started = false;
   let typing = false;

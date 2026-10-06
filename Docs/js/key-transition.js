@@ -67,6 +67,15 @@
       text: "Suis le cercle brisé. Derrière lui se trouve la prochaine fracture de la réalité.",
     },
   ];
+  const translateMessage = (message) => {
+    const tr = window.echoesTranslate;
+    if (tr) {
+      message.text = tr(message.text);
+      message.speaker = tr(message.speaker);
+    }
+  };
+  messages.forEach(translateMessage);
+  postKeyMessages.forEach(translateMessage);
   let messageIndex = 0;
   let isStarted = false;
   let isTyping = false;
