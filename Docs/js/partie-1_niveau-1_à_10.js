@@ -148,26 +148,29 @@ function readCompletedLevels(storageKey) {
 
 function installKeyHud() {
   const pagePath = window.location.pathname.toLowerCase();
-  const isGameplayPage = document.querySelector(".level-shell");
-  const isBossFlowPage =
-    pagePath.includes("clee_01_boss_level") ||
+  const isBossPage =
+    document.querySelector(".boss-board") ||
     pagePath.includes("boss-recovery");
-  if (!isGameplayPage && !isBossFlowPage) return;
-  if (document.querySelector(".key-hud")) return;
-  const hud = document.createElement("aside");
-  hud.className = "key-hud";
-  hud.setAttribute("aria-live", "polite");
-  hud.innerHTML = `<span class="key-hud-label">CLÉS :</span><span class="key-hud-value">0 / 6</span>`;
-  const header = document.querySelector(".level-header, .top-bar");
-  if (header) {
-    header.insertAdjacentElement("afterend", hud);
-  } else {
-    document.body.appendChild(hud);
+  if (!isBossPage) return;
+
+  let hud = document.querySelector(".key-hud");
+  if (!hud) {
+    hud = document.createElement("aside");
+    hud.className = "key-hud";
+    hud.setAttribute("aria-label", "Progression des clés");
+    hud.innerHTML = `<span class="key-hud-label">CLÉS :</span><span class="key-hud-value">0 / 6</span>`;
+    const header = document.querySelector(".level-header, .top-bar");
+    if (header) {
+      header.insertAdjacentElement("afterend", hud);
+    } else {
+      document.body.appendChild(hud);
+    }
   }
+
   const keys = window.EchoesSave?.getKeys?.() || [];
   const value = hud.querySelector(".key-hud-value");
+  value.textContent = `${Math.min(keys.length, 6)} / 6`;
   if (keys.length) {
-    value.textContent = `${Math.min(keys.length, 6)} / 6`;
     hud.classList.add("is-unlocked");
   }
 }

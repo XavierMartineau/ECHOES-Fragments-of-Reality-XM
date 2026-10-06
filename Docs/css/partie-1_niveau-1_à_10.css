@@ -6008,3 +6008,38 @@ body.key-reward-redesign .key-redesign-hud-slot img {
     min-height: 76px;
   }
 }
+
+/* Center Part 1 progress while keeping the current level at the far right. */
+.level-header {
+  position: relative;
+}
+.level-meta {
+  position: absolute;
+  inset: 0;
+  justify-content: center;
+  pointer-events: none;
+}
+.level-meta strong {
+  position: absolute;
+  right: 0;
+}
+
+@media (max-width: 560px) {
+  .level-meta {
+    position: static;
+    inset: auto;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 8px;
+    transform: none;
+  }
+  .level-meta strong {
+    position: static;
+    justify-self: end;
+  }
+  .level-progress {
+    justify-content: center;
+  }
+}

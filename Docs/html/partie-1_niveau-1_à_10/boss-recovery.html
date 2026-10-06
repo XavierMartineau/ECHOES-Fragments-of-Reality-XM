@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ECHOES - Protocole de récupération</title>
-    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css" />
+    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css?v=10" />
     <link rel="stylesheet" href="../../css/responsive.css" />
     <link rel="stylesheet" href="../../css/fonts.css" />
       <link rel="stylesheet" href="../../css/ambient-background.css" />
@@ -80,7 +80,16 @@
         </div>
       </section>
     </main>
+    <script src="../../js/save-system.js"></script>
     <script>
+      const recoveredKeys = window.EchoesSave?.getKeys?.() || [];
+      const keyHud = document.querySelector(".key-hud");
+      const keyHudValue = keyHud?.querySelector(".key-hud-value");
+      if (keyHudValue) {
+        keyHudValue.textContent = `${Math.min(recoveredKeys.length, 6)} / 6`;
+        keyHud.classList.toggle("is-unlocked", recoveredKeys.length > 0);
+      }
+
       (() => {
         const colors = ["red", "orange", "yellow", "green", "blue", "violet"];
         const isMobile = window.matchMedia("(max-width: 650px)").matches;

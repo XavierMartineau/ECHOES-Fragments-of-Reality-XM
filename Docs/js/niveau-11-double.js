@@ -10,7 +10,7 @@
       eyebrow: "Fragment 011 // Résonance double",
       title: "Double alignement",
       description:
-        "Deux fragments vibrent en parallèle. Aligne les formes sur les deux lignes pour les harmoniser sans les désynchroniser.",
+        "Deux fragments vibrent en parallèle. Mémorise les formes affichées sur les deux lignes, puis reconstitue-les sans indice visuel.",
       systemLabel: "ECHO://RESONANCE",
       puzzleKicker: "PUZZLE // DOUBLE ALIGNEMENT",
       puzzleTitle: "Lignes de résonance",
@@ -25,14 +25,21 @@
         diamond: "losange",
         square: "carré",
       },
-      slot: (line, position, shape) =>
-        `${line}, emplacement ${position} : ${shape}`,
+      slot: (line, position) => `${line}, emplacement ${position}`,
       tray: "Fragments à aligner",
-      start: "DÉMARRER LE PUZZLE",
-      ready: "Glisse un fragment vers son emplacement ou sélectionne-le puis choisis une case.",
-      playing: "« Deux fragments… deux résonances. Harmonise-les. »",
-      selected: (shape) => `${shape} sélectionné. Choisis son emplacement dans la bonne ligne.`,
-      wrong: "Désynchronisation ! Les deux lignes se décalent. Recommence leur alignement.",
+      start: "OBSERVER LES DEUX LIGNES",
+      ready: "Observe les deux lignes, mémorise leur ordre, puis replace les fragments sans indice visuel.",
+      showing: (line, position, shape) =>
+        `${line}, emplacement ${position} : ${shape}`,
+      playing: "La séquence est masquée. Reproduis maintenant les deux lignes de mémoire.",
+      selected: (shape) => `${shape} sélectionné. Place-le sur n'importe quel emplacement de même forme.`,
+      wrong: "Cette forme ne correspond pas à l'emplacement. Choisis une forme identique.",
+      hintButton: "INDICE (-5 S)",
+      hintShowing: (line, position, shape) =>
+        `Indice : l'emplacement ${position} de ${line} contient un ${shape}.`,
+      hintNoSlots: "Toutes les formes visibles ont déjà été placées.",
+      timerExpired: "Temps écoulé. Réinitialise le niveau pour retenter la séquence.",
+      timeLeft: (seconds) => `Temps restant : ${seconds} secondes.`,
       success: "Les deux lignes vibrent à l'unisson. La résonance est stabilisée.",
       next: "CONTINUER VERS LE NIVEAU 12",
       reset: "Réinitialiser",
@@ -50,7 +57,7 @@
       eyebrow: "Fragment 011 // Double resonance",
       title: "Double alignment",
       description:
-        "Two fragments vibrate in parallel. Align the shapes on both lines and bring them into harmony without desynchronizing them.",
+        "Two fragments vibrate in parallel. Memorize the shapes shown on both lines, then rebuild them without visual hints.",
       systemLabel: "ECHO://RESONANCE",
       puzzleKicker: "PUZZLE // DOUBLE ALIGNMENT",
       puzzleTitle: "Resonance lines",
@@ -65,14 +72,21 @@
         diamond: "diamond",
         square: "square",
       },
-      slot: (line, position, shape) =>
-        `${line}, slot ${position}: ${shape}`,
+      slot: (line, position) => `${line}, slot ${position}`,
       tray: "Fragments to align",
-      start: "START PUZZLE",
-      ready: "Drag a fragment to its slot, or select it and choose a slot.",
-      playing: "“Two fragments… two resonances. Bring them into harmony.”",
-      selected: (shape) => `${shape} selected. Choose its slot on the matching line.`,
-      wrong: "Desynchronization! Both lines shift out of place. Align them again.",
+      start: "OBSERVE BOTH LINES",
+      ready: "Observe both lines and memorize their order, then place the fragments without visual hints.",
+      showing: (line, position, shape) =>
+        `${line}, slot ${position}: ${shape}`,
+      playing: "The sequence is hidden. Rebuild both lines from memory.",
+      selected: (shape) => `${shape} selected. Place it in any slot with the same shape.`,
+      wrong: "That shape does not match this slot. Choose an identical shape.",
+      hintButton: "HINT (-5 S)",
+      hintShowing: (line, position, shape) =>
+        `Hint: slot ${position} in ${line} contains a ${shape}.`,
+      hintNoSlots: "All visible shapes have already been placed.",
+      timerExpired: "Time is up. Reset the level to try the sequence again.",
+      timeLeft: (seconds) => `Time remaining: ${seconds} seconds.`,
       success: "Both lines now vibrate in unison. The resonance is stable.",
       next: "CONTINUE TO LEVEL 12",
       reset: "Reset",
@@ -94,22 +108,34 @@
   const resetButton = $("resetButton");
   const nextButton = $("nextLevelButton");
   const saveButton = $("saveGameButton");
+  const hintButton = $("hintButton");
+  const timerReadout = $("timerReadout");
   const systemMessage = $("systemMessage");
+  const TIMER_SECONDS = 30;
+  const HINT_PENALTY_SECONDS = 5;
   const shapes = ["circle", "triangle", "diamond", "square"];
-  const lineShapes = [shapes, ["triangle", "circle", "square", "diamond"]];
-  const pieces = lineShapes.flatMap((row, line) =>
-    row.map((shape, position) => ({
-      id: `${line}-${position}`,
-      shape,
-      line,
-      position,
-    })),
-  );
+  const createPieces = () =>
+    shapes.flatMap((shape) =>
+      [1, 2].map((copyNumber) => ({
+        id: `${shape}-${copyNumber}`,
+        shape,
+      })),
+    );
+  const pieces = createPieces();
   const slotKey = (line, position) => `${line}-${position}`;
   const placed = new Map();
   let selectedPiece = null;
   let started = false;
   let solved = false;
+  let lineShapes = [];
+  let previewSlot = null;
+  let previewType = "";
+  let playbackId = 0;
+  let trayOrder = [];
+  let remainingMilliseconds = TIMER_SECONDS * 1000;
+  let timerDeadline = 0;
+  let timerInterval = null;
+  let hintTimeout = null;
 
   document.documentElement.lang = language;
   document.querySelectorAll("[data-i18n]").forEach((element) => {
@@ -122,10 +148,55 @@
   startButton.textContent = copy.start;
   resetButton.textContent = copy.reset;
   nextButton.textContent = copy.next;
+  hintButton.textContent = copy.hintButton;
 
   const setStatus = (message, state = "") => {
     status.textContent = message;
     status.className = `puzzle-status${state ? ` ${state}` : ""}`;
+  };
+
+  const shuffleShapes = () => {
+    const row = [...shapes];
+    for (let index = row.length - 1; index > 0; index -= 1) {
+      const swapIndex = Math.floor(Math.random() * (index + 1));
+      [row[index], row[swapIndex]] = [row[swapIndex], row[index]];
+    }
+    return row;
+  };
+
+  const updateTimer = () => {
+    const seconds = Math.max(0, Math.ceil(remainingMilliseconds / 1000));
+    timerReadout.textContent = `00:${String(seconds).padStart(2, "0")}`;
+    timerReadout.classList.toggle("is-warning", seconds <= 10);
+  };
+
+  const stopTimer = () => {
+    if (timerInterval !== null) {
+      window.clearInterval(timerInterval);
+      timerInterval = null;
+    }
+  };
+
+  const endTimedRound = () => {
+    stopTimer();
+    remainingMilliseconds = 0;
+    updateTimer();
+    started = false;
+    hintButton.disabled = true;
+    render();
+    setStatus(copy.timerExpired, "error");
+  };
+
+  const startTimer = () => {
+    remainingMilliseconds = TIMER_SECONDS * 1000;
+    timerDeadline = Date.now() + remainingMilliseconds;
+    updateTimer();
+    stopTimer();
+    timerInterval = window.setInterval(() => {
+      remainingMilliseconds = Math.max(0, timerDeadline - Date.now());
+      updateTimer();
+      if (remainingMilliseconds === 0) endTimedRound();
+    }, 100);
   };
 
   const render = () => {
@@ -148,7 +219,7 @@
         const slot = document.createElement("button");
         slot.type = "button";
         slot.className = "resonance-slot";
-        slot.setAttribute("aria-label", copy.slot(copy.line[line], position + 1, copy.shape[shape]));
+        slot.setAttribute("aria-label", copy.slot(copy.line[line], position + 1));
         slot.dataset.line = String(line);
         slot.dataset.position = String(position);
         slot.addEventListener("click", () => placePiece(key));
@@ -164,8 +235,11 @@
           const piece = pieces.find((item) => item.id === currentPieceId);
           slot.classList.add("is-filled", `shape-${piece.shape}`);
           slot.innerHTML = `<span class="shape-icon shape-${piece.shape}" aria-hidden="true"></span>`;
+        } else if (previewSlot === key) {
+          slot.classList.add("is-preview", `is-${previewType}`, `shape-${shape}`);
+          slot.innerHTML = `<span class="shape-icon shape-${shape}" aria-hidden="true"></span>`;
         } else {
-          slot.innerHTML = `<span class="slot-hint" aria-hidden="true"><span class="shape-icon shape-${shape}"></span><span class="slot-index">0${position + 1}</span></span>`;
+          slot.innerHTML = `<span class="slot-index" aria-hidden="true">0${position + 1}</span>`;
         }
         slot.disabled = !started || solved;
         slots.appendChild(slot);
@@ -174,10 +248,8 @@
       board.appendChild(lane);
     }
 
-    const trayOrder = ["0-2", "1-1", "0-0", "1-0", "1-3", "0-1", "1-2", "0-3"];
-    trayOrder.forEach((id) => {
-      if ([...placed.values()].includes(id)) return;
-      const piece = pieces.find((item) => item.id === id);
+    trayOrder.forEach((piece) => {
+      if ([...placed.values()].includes(piece.id)) return;
       const button = document.createElement("button");
       button.type = "button";
       button.className = `resonance-piece shape-${piece.shape}`;
@@ -210,14 +282,45 @@
     });
   };
 
+  const showSequence = async () => {
+    playbackId += 1;
+    const activePlayback = playbackId;
+    started = false;
+    startButton.disabled = true;
+    nextButton.hidden = true;
+    for (let replay = 0; replay < 2; replay += 1) {
+      for (let line = 0; line < lineShapes.length; line += 1) {
+        for (let position = 0; position < lineShapes[line].length; position += 1) {
+          if (activePlayback !== playbackId || solved) return;
+          const shape = lineShapes[line][position];
+          previewSlot = slotKey(line, position);
+          previewType = "sequence";
+          setStatus(copy.showing(copy.line[line], position + 1, copy.shape[shape]));
+          render();
+          await new Promise((resolve) => window.setTimeout(resolve, 1000));
+        }
+      }
+    }
+    if (activePlayback !== playbackId || solved) return;
+    previewSlot = null;
+    previewType = "";
+    started = true;
+    startButton.textContent = language === "en" ? "SEQUENCE OBSERVED" : "SÉQUENCE OBSERVÉE";
+    render();
+    hintButton.disabled = false;
+    startTimer();
+    setStatus(copy.playing);
+    tray.querySelector(".resonance-piece")?.focus();
+  };
+
   const placePiece = (key, pieceId = selectedPiece) => {
     if (!started || solved || !pieceId || placed.has(key)) return;
     const piece = pieces.find((item) => item.id === pieceId);
     const [line, position] = key.split("-").map(Number);
     if (!piece) return;
 
-    if (piece.line !== line || piece.position !== position) {
-      placed.clear();
+    const expectedShape = lineShapes[line]?.[position];
+    if (!expectedShape || piece.shape !== expectedShape) {
       selectedPiece = null;
       board.classList.remove("is-desynchronized");
       void board.offsetWidth;
@@ -232,6 +335,8 @@
     render();
     if (placed.size === 8) {
       solved = true;
+      stopTimer();
+      hintButton.disabled = true;
       board.classList.add("is-synchronized");
       render();
       setStatus(copy.success, "success");
@@ -246,25 +351,72 @@
   };
 
   const reset = () => {
+    playbackId += 1;
+    stopTimer();
+    if (hintTimeout !== null) {
+      window.clearTimeout(hintTimeout);
+      hintTimeout = null;
+    }
     placed.clear();
     selectedPiece = null;
     started = false;
     solved = false;
+    previewSlot = null;
+    previewType = "";
+    lineShapes = [shuffleShapes(), shuffleShapes()];
+    trayOrder = [...pieces].sort(() => Math.random() - 0.5);
+    remainingMilliseconds = TIMER_SECONDS * 1000;
+    timerDeadline = 0;
+    updateTimer();
     board.classList.remove("is-synchronized", "is-desynchronized");
     systemMessage.textContent = copy.system;
     startButton.disabled = false;
+    startButton.textContent = copy.start;
+    hintButton.disabled = true;
     nextButton.hidden = true;
     setStatus(copy.ready);
     render();
   };
 
-  startButton.addEventListener("click", () => {
-    started = true;
-    startButton.disabled = true;
+  const showHint = () => {
+    if (!started || solved || remainingMilliseconds <= 0) return;
+    const availableSlots = [];
+    lineShapes.forEach((row, line) => {
+      row.forEach((shape, position) => {
+        const key = slotKey(line, position);
+        if (!placed.has(key)) availableSlots.push({ key, line, position, shape });
+      });
+    });
+
+    timerDeadline = Math.max(Date.now(), timerDeadline - HINT_PENALTY_SECONDS * 1000);
+    remainingMilliseconds = Math.max(0, timerDeadline - Date.now());
+    updateTimer();
+    if (remainingMilliseconds <= 0) {
+      endTimedRound();
+      return;
+    }
+    if (availableSlots.length === 0) {
+      setStatus(copy.hintNoSlots);
+      return;
+    }
+
+    if (hintTimeout !== null) window.clearTimeout(hintTimeout);
+    const hint = availableSlots[Math.floor(Math.random() * availableSlots.length)];
+    previewSlot = hint.key;
+    previewType = "hint";
     render();
-    setStatus(copy.playing);
-    tray.querySelector(".resonance-piece")?.focus();
-  });
+    setStatus(copy.hintShowing(copy.line[hint.line], hint.position + 1, copy.shape[hint.shape]));
+    hintTimeout = window.setTimeout(() => {
+      previewSlot = null;
+      previewType = "";
+      hintTimeout = null;
+      render();
+      if (started) setStatus(copy.timeLeft(Math.ceil(remainingMilliseconds / 1000)));
+    }, 1400);
+  };
+
+  startButton.addEventListener("click", showSequence);
+  hintButton.addEventListener("click", showHint);
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
     window.location.href = "niveau-12.html";
@@ -290,5 +442,5 @@
     progress.appendChild(marker);
   }
 
-  render();
+  reset();
 })();

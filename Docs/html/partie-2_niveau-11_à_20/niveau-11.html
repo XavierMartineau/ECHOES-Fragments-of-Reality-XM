@@ -29,7 +29,7 @@
         <p class="eyebrow" data-i18n="eyebrow">Fragment 011 // Résonance double</p>
         <h1 id="levelTitle" data-i18n="title">Double alignement</h1>
         <p class="level-description" data-i18n="description">
-          Deux fragments vibrent en parallèle. Aligne les formes sur les deux lignes pour les harmoniser sans les désynchroniser.
+          Deux fragments vibrent en parallèle. Mémorise les formes affichées sur les deux lignes, puis reconstitue-les sans indice visuel.
         </p>
         <div class="system-transmission" aria-live="polite">
           <span class="system-label" data-i18n="systemLabel">ECHO://RESONANCE</span>
@@ -43,7 +43,10 @@
             <p class="panel-kicker" data-i18n="puzzleKicker">PUZZLE // DOUBLE ALIGNEMENT</p>
             <h2 id="puzzleTitle" data-i18n="puzzleTitle">Lignes de résonance</h2>
           </div>
-          <span class="progress-readout" id="progressReadout" aria-live="polite">0 / 8</span>
+          <div class="level-11-readouts">
+            <span class="progress-readout" id="progressReadout" aria-live="polite">0 / 8</span>
+            <span class="level-11-timer" id="timerReadout" role="timer" aria-live="off">00:30</span>
+          </div>
         </div>
 
         <div class="alignment-board" id="alignmentBoard" aria-label="Alignement des deux lignes holographiques"></div>
@@ -53,12 +56,13 @@
         </section>
 
         <div class="sequence-controls level-11-controls">
-          <button class="sequence-start-button" id="startPuzzleButton" type="button">DÉMARRER LE PUZZLE</button>
+          <button class="sequence-start-button" id="startPuzzleButton" type="button">OBSERVER LES DEUX LIGNES</button>
           <p class="puzzle-status" id="puzzleStatus" aria-live="polite">
-            Glisse un fragment vers son emplacement ou sélectionne-le puis choisis une case.
+            Observe les deux lignes, mémorise leur ordre, puis replace les fragments sans indice visuel.
           </p>
         </div>
         <div class="puzzle-actions">
+          <button class="hint-button" id="hintButton" type="button" disabled>INDICE (-5 S)</button>
           <button class="next-level-button" id="nextLevelButton" type="button" hidden>CONTINUER VERS LE NIVEAU 12</button>
           <button class="reset-button" id="resetButton" type="button">Réinitialiser</button>
         </div>

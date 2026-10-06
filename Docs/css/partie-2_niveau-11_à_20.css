@@ -376,6 +376,66 @@ body.part-two-theme {
   box-shadow: 0 0 18px rgba(128, 255, 207, 0.36);
 }
 
+.level-11-readouts {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.level-11-timer {
+  min-width: 3.6em;
+  padding: 7px 9px;
+  border: 1px solid rgba(75, 158, 255, 0.44);
+  color: #d4dce7;
+  font: 0.78rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.08em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.level-11-timer.is-warning {
+  border-color: rgba(255, 190, 110, 0.86);
+  color: #ffd18a;
+  box-shadow: 0 0 15px rgba(255, 190, 110, 0.28);
+}
+
+.level-11-shell .hint-button {
+  padding: 10px 14px;
+  border: 1px solid rgba(75, 158, 255, 0.52);
+  background: rgba(75, 158, 255, 0.1);
+  color: #d4dce7;
+  cursor: pointer;
+  font: 0.58rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+
+.level-11-shell .hint-button:not(:disabled):hover,
+.level-11-shell .hint-button:not(:disabled):focus-visible {
+  border-color: #4b9eff;
+  background: rgba(75, 158, 255, 0.2);
+  box-shadow: 0 0 16px rgba(75, 158, 255, 0.32);
+  outline: none;
+}
+
+.level-11-shell .hint-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.resonance-slot.is-hint {
+  border-color: #fff;
+  background: radial-gradient(circle, rgba(212, 220, 231, 0.5), rgba(75, 158, 255, 0.34));
+  box-shadow: 0 0 34px rgba(75, 158, 255, 0.96), inset 0 0 18px rgba(212, 220, 231, 0.4);
+  transform: scale(1.14);
+}
+
+.resonance-slot.is-hint .shape-icon {
+  border-color: #fff;
+  background-color: rgba(212, 220, 231, 0.42);
+  box-shadow: 0 0 20px rgba(212, 220, 231, 0.78);
+}
+
 .part-two-theme .construction-page {
   background: radial-gradient(circle at 50% 35%, rgba(75, 158, 255, 0.16), transparent 38%), #050a14;
   color: #d4dce7;
@@ -643,6 +703,19 @@ body.part-two-theme {
   opacity: 1;
 }
 
+.resonance-slot.is-preview {
+  border-color: #fff;
+  background: radial-gradient(circle, rgba(212, 220, 231, 0.42), rgba(75, 158, 255, 0.32));
+  box-shadow: 0 0 30px rgba(75, 158, 255, 0.9), inset 0 0 18px rgba(212, 220, 231, 0.34);
+  transform: scale(1.12);
+}
+
+.resonance-slot.is-preview .shape-icon {
+  border-color: #fff;
+  background-color: rgba(212, 220, 231, 0.38);
+  box-shadow: 0 0 18px rgba(212, 220, 231, 0.7);
+}
+
 .resonance-slot:disabled,
 .resonance-piece:disabled {
   cursor: default;
@@ -899,6 +972,56 @@ body.part-two-theme {
   .resonance-piece,
   .cross-intersection {
     transition: none;
+  }
+}
+
+/* Give the first three playable levels more room without widening other acts. */
+.part-two-theme .level-11-shell,
+.part-two-theme .level-12-shell,
+.part-two-theme .level-13-shell {
+  width: min(1380px, calc(100% - 48px));
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(32px, 5vw, 76px);
+}
+
+.part-two-theme .level-11-shell .puzzle-panel,
+.part-two-theme .level-12-shell .puzzle-panel,
+.part-two-theme .level-13-shell .puzzle-panel {
+  width: 100%;
+  min-width: 0;
+}
+
+.part-two-theme .alignment-board,
+.part-two-theme .resonance-tray,
+.part-two-theme .level-13-layout {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .part-two-theme .level-11-shell,
+  .part-two-theme .level-12-shell,
+  .part-two-theme .level-13-shell {
+    width: min(840px, calc(100% - 40px));
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+    padding-top: 36px;
+  }
+
+  .part-two-theme .level-11-shell .level-intro,
+  .part-two-theme .level-12-shell .level-intro,
+  .part-two-theme .level-13-shell .level-intro {
+    max-width: none;
+    text-align: center;
+  }
+}
+
+@media (max-width: 560px) {
+  .part-two-theme .level-11-shell,
+  .part-two-theme .level-12-shell,
+  .part-two-theme .level-13-shell {
+    width: calc(100% - 28px);
+    padding: 28px 0 72px;
   }
 }
 .level-back-button {

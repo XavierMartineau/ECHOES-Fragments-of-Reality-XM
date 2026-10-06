@@ -6,7 +6,6 @@
   const startButton = document.getElementById("stabilizeSignal");
   const continueButton = document.getElementById("continueToLevel5");
   const step = document.getElementById("transmissionStep");
-  const keyValue = document.querySelector(".key-hud-value");
   const messages = [
     { speaker: "ECHO", className: "echo", text: "Voyageur... je reçois enfin ton signal." },
     { speaker: "VOYAGEUR", className: "traveler", text: "La clé est en sécurité. Qu'est-ce que tu vois ?" },
@@ -17,11 +16,6 @@
   let typing = false;
   let typeTimer = 0;
   let nextTimer = 0;
-
-  const updateKeyHud = () => {
-    const unlocked = window.EchoesSave?.getKeys?.()?.includes("resonance-1");
-    if (unlocked) keyValue.textContent = "1 / 6";
-  };
 
   const finish = () => {
     step.textContent = "03 // 03";
@@ -90,5 +84,4 @@
   continueButton.addEventListener("click", () => {
     window.location.href = "niveau-05.html";
   });
-  updateKeyHud();
 })();
