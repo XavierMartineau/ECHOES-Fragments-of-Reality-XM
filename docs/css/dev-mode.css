@@ -845,6 +845,18 @@ html body > aside.dev-mode {
   transform: none !important;
 }
 
+/* PC: DEV MODE sits at the far left of the window. */
+@media (min-width: 901px) {
+  html body > aside.dev-mode {
+    width: max-content !important;
+    margin: 14px 14px 14px 14px !important;
+  }
+
+  html body > aside.dev-mode .dev-mode-panel {
+    right: auto !important;
+    left: 0 !important;
+  }
+}
 html body > .global-site-footer {
   display: flex;
   justify-content: center;
