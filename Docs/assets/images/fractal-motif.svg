@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" fill="none">
+  <defs>
+    <linearGradient id="field" x1="16" y1="18" x2="282" y2="286" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0b1730"/>
+      <stop offset=".52" stop-color="#14243d"/>
+      <stop offset="1" stop-color="#1b2a3d"/>
+    </linearGradient>
+    <linearGradient id="line" x1="35" y1="48" x2="261" y2="255" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4b9eff"/>
+      <stop offset=".52" stop-color="#d4dce7"/>
+      <stop offset="1" stop-color="#f3f7fc"/>
+    </linearGradient>
+    <pattern id="grid" width="18" height="18" patternUnits="userSpaceOnUse">
+      <path d="M18 0H0v18" stroke="#4b9eff" stroke-opacity=".14"/>
+    </pattern>
+  </defs>
+  <rect width="300" height="300" rx="18" fill="url(#field)"/>
+  <rect width="300" height="300" rx="18" fill="url(#grid)"/>
+  <g stroke="url(#line)" stroke-width="3" opacity=".9">
+    <path d="M150 22 278 150 150 278 22 150 150 22Z"/>
+    <path d="m150 58 92 92-92 92-92-92 92-92Z"/>
+    <path d="m150 88 62 62-62 62-62-62 62-62Z"/>
+    <path d="M150 22v256M22 150h256M60 60l180 180M240 60 60 240"/>
+    <path d="m150 22 64 64-64 64-64-64 64-64Zm0 128 64 64-64 64-64-64 64-64Z"/>
+    <path d="m22 150 64-64 64 64-64 64-64-64Zm128 0 64-64 64 64-64 64-64-64Z"/>
+  </g>
+  <g fill="#f3f7fc">
+    <circle cx="150" cy="22" r="5"/>
+    <circle cx="278" cy="150" r="5"/>
+    <circle cx="150" cy="278" r="5"/>
+    <circle cx="22" cy="150" r="5"/>
+    <circle cx="150" cy="150" r="8"/>
+  </g>
+</svg>
