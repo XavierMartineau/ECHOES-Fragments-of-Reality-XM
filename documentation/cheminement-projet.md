@@ -98,7 +98,7 @@ reste [Info-fr.txt](./Info-fr.txt).
 - Six ancres à stabiliser en trois phases, huit unités de cohérence et deux boucliers.
 - Victoire débloquant la Clé 02 et le niveau 21.
 
-### Boss — `clee_01_boss_level`
+### Boss — `boss-01.html`
 
 - Boss placé après le niveau 10 dans la partie 1.
 - Nouvelle direction visuelle : gardien spectral, cœur lumineux et orbites de résonance cyan/violettes.

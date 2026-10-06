@@ -1672,7 +1672,7 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
   });
   nextButton.addEventListener("click", () => {
   if (levelNumber === 10) {
-    window.location.href = "clee_01_boss_level.html";
+    window.location.href = "boss-01.html";
     return;
   }
   if (levelNumber === 11) {

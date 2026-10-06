@@ -4,7 +4,7 @@
 (() => {
   const path = window.location.pathname;
   const levelMatch = path.match(/niveau-(\d+)\.html(?:$|[?#])/i);
-  const isBoss = path.includes("clee_01_boss_level");
+  const isBoss = path.includes("boss-01");
   const isSecondBoss = path.includes("boss-02");
   const level = levelMatch
     ? Number(levelMatch[1])

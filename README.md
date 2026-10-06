@@ -72,7 +72,7 @@ Les niveaux déjà terminés restent rejouables.
 ### Boss et Clé 01
 
 Après le niveau 10, le joueur affronte le Gardien du Signal dans
-`clee_01_boss_level.html`. Ce combat accessible comprend trois stages courts :
+`boss-01.html`. Ce combat accessible comprend trois stages courts :
 associer des sceaux, répéter une mélodie de trois symboles, puis cliquer le noyau
 pendant deux halos verts. Le joueur dispose de six unités d’énergie et peut
 recommencer sans passer par un niveau de récupération.

@@ -29,8 +29,8 @@
       folder: "partie-1_niveau-1_à_10",
       special: [
         {
-          label: "CLEE_01 // BOSS",
-          file: "clee_01_boss_level.html",
+          label: "BOSS 01 // CLEE_01",
+          file: "boss-01.html",
         },
         {
           label: "CLÉE_01 // CINÉMATIQUE",
