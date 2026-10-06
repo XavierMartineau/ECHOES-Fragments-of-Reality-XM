@@ -69,7 +69,7 @@ reste [Info-fr.txt](./Info-fr.txt).
 - **Niveau 10 — Séquence de couleurs :** puzzle de séquence servant de transition vers
   le combat de boss.
 
-### Niveaux 11 à 16
+### Niveaux 11 à 20
 
 - Niveau 11 : alignement de plusieurs anneaux de résonance.
 - Niveau 12 : mémorisation puis répétition de séquences lumineuses croisées.
@@ -84,28 +84,38 @@ reste [Info-fr.txt](./Info-fr.txt).
   16 blocs de la grille) : bien plus de 100 configurations, toutes résolubles. Un tracé peut
   passer par-dessus un autre flux (celui-ci est alors effacé et la case prend la nouvelle
   couleur) ; chaque paire reliée déclenche une vague néon vert cube par cube.
+- Niveau 16 : cadenas des symboles, avec quatre équations par série et quatre chiffres à déduire.
 - Niveau 17 : balance du vide (répartir des masses sur deux plateaux pour égaliser les poids, 3 manches).
 - Niveau 18 : tour des échos (tours de Hanoï à 3, 4 puis 5 disques).
-- Niveau 19 : code fantôme (déduction d'un code de 4 symboles différents avec indices bien/mal placés).
-- Niveau 16 : cadenas des symboles, avec quatre équations par série et quatre chiffres à déduire.
-- Niveau 20 : puzzle logique en trois manches, où chaque impulsion inverse une cellule
+- Niveau 19 : mots mêlés codés : retrouver les mots, relever les lettres partagées,
+  puis saisir le code numérique caché.
+- Niveau 20 : réseau logique en trois manches, où chaque impulsion inverse une cellule
   et ses voisines directes.
+- Les puzzles des niveaux 16 et 20 ont été échangés : le cadenas est au niveau 16 et
+  le réseau dormant au niveau 20. Le niveau 20 existait déjà ; ses mécaniques ont été
+  réaffectées plutôt que dupliquées.
 
 ### Boss — `boss-02.html`
 
 - Combat placé après le niveau 20 et avant l'entrée dans la partie 3.
 - Arène tactique 5 × 5, déplacements orthogonaux, murs et lignes de frappe télégraphiées.
 - Six ancres à stabiliser en trois phases, huit unités de cohérence et deux boucliers.
+- Les ancres stabilisées sont indiquées par un rond vert foncé dans le compteur de
+  cohérence, plutôt que par l'indicateur orange.
 - Victoire débloquant la Clé 02 et le niveau 21.
 
 ### Boss — `boss-01.html`
 
 - Boss placé après le niveau 10 dans la partie 1.
 - Nouvelle direction visuelle : gardien spectral, cœur lumineux et orbites de résonance cyan/violettes.
+- Page renommée `docs/html/partie-1_niveau-1_à_10/boss-01.html` ; le lien du niveau 10,
+  le menu développeur et l'ambiance visuelle utilisent ce nom.
 - Trois stages accessibles : trouver trois sceaux correspondants, répéter une mélodie de trois symboles et toucher le noyau pendant deux halos verts.
 - Difficulté visée : `1/6`, avec six unités d'énergie et une reprise par réinitialisation.
 - Contrôleur et styles isolés dans `docs/js/boss-01.js` et `docs/css/boss-01.css`.
-- La victoire mène à la cinématique de la Clé 01.
+- La victoire mène à la cinématique de la Clé 01, restaurée dans
+  `clee_01_cinematic.html`. Le protocole de récupération séparé et l'interlude ont été
+  supprimés ; la cinématique reste le parcours de récompense.
 
 ### Niveau spécial — Clé 01
 
@@ -136,6 +146,8 @@ cinématique et son parcours de récompense.
 
 ## Architecture technique
 
+- Le favicon commun est `docs/assets/images/echoes-favicon.svg` et est référencé par
+  toutes les pages HTML du site, y compris `404.html`.
 - Scripts centralisés des niveaux 1 à 10 dans
   `docs/js/partie-1_niveau-1_à_10.js`.
 - Styles communs et styles de partie séparés dans `docs/css/`.
@@ -148,14 +160,18 @@ cinématique et son parcours de récompense.
 
 ## Validation réalisée
 
-- Vérification navigateur des stages du boss et de la suite Clé 01.
-- Vérification des références locales et des chemins GitHub Pages.
+- Vérification navigateur des trois stages du boss 01, de la victoire, de la perte
+  d'énergie et de la réinitialisation ; test du boss 02 tactique.
+- Vérification des textes FR/EN et de l'absence de débordement horizontal sur mobile
+  pour la page du boss 01.
+- Vérification des références locales : les 68 pages HTML ont un favicon référencé
+  et tous les liens locaux vers le SVG existent.
 - Vérification de syntaxe JavaScript et `git diff --check`.
 
 ## Travail en cours
 
-- Finaliser et tester les niveaux 14 à 20 (les niveaux 11 à 13 sont créés).
-- Harmoniser les contenus FR/EN des niveaux futurs.
+- Valider complètement les parcours des niveaux 1 à 20 sur desktop et mobile.
+- Harmoniser et vérifier les contenus FR/EN des pages restantes.
 - Relier complètement les six clés aux verrous et fragments narratifs.
 - Compléter les puzzles des dimensions Fractures et Éclipse.
 - Effectuer une validation complète des parcours sur GitHub Pages.
@@ -229,7 +245,7 @@ cinématique et son parcours de récompense.
   `prefers-reduced-motion`) et nouvelle page « En construction » partagée
   (`construction.css`) corrigeant l'écran blanc des niveaux 14 à 60.
 
-### 06/10/2026 — Niveaux 14 à 16 et regroupement du JavaScript
+### 06/10/2026 — Niveaux 14 à 20 et regroupement du JavaScript
 
 - `30978df` — Création des niveaux 14 (miroirs et faisceau) et 16 (réseau logique en trois
   manches) avec leurs pages et textes FR/EN.
@@ -255,17 +271,56 @@ cinématique et son parcours de récompense.
 - `9b14ee1` — Mode développeur PC : le bouton s'aligne sur le bord gauche du contenu des pages (marge `max(28px, 50vw - 588px)`), à la même hauteur.
 - `bdf3449` — Nouveaux niveaux 17 (balance), 18 (tour de Hanoï) et 19 (code fantôme) avec leurs pages, styles et contrôleurs dans les fichiers de la partie 2. Commentaires en français ajoutés dans tous les JS et CSS de parties (carte des niveaux par fichier, un commentaire par bloc de niveau).
 - `4a1ab8a` — Commentaires de section en français devant chaque bloc de code : bandeaux par niveau (ou par rôle) dans le JS et le CSS de la partie 1, en-têtes ajoutés aux fichiers partagés (polices, connexion, micro-animations, langue, ambiance, interlude, bonus…).
-- `2a6140e` — Description en français de chaque fonction des JS (143 commentaires). Nettoyage : suppression des 4 JS des parties 3 à 6 (jamais chargés par les pages) et du lien mort vers mbient-background.css (fichier inexistant, 404) dans 53 pages.
+- `2a6140e` — Description en français de chaque fonction des JS (143 commentaires). Nettoyage : suppression des 4 JS des parties 3 à 6 (jamais chargés par les pages) et du lien mort vers `ambient-background.css` (fichier inexistant, 404) dans 53 pages.
 - 52db539 — Niveau 17 : on sélectionne une masse puis les zones de destination (plateau gauche et droit) s'illuminent et se cliquent directement, au lieu du cycle de clics réserve/gauche/droite.
+
+### 06/10/2026 — Commits poussés sur GitHub (complément)
+
+- `6a8e0e2` (00:30) — Mise à jour de l'état du projet pour les niveaux 14 à 16 et la
+  centralisation du JavaScript.
+- `7167ebf` (09:41) — Suppression du fichier de données inutilisé
+  `docs/data/game-data.json`.
+- `205d703` (10:14) — Première version des mots mêlés du niveau 19, cadenas numérique
+  au niveau 20 et création de la page 404.
+- `d863a0e` (10:43) — Remplacement temporaire du puzzle du niveau 19 par un sudoku de
+  lettres.
+- `24ed8e9` (11:47) — Évolution du niveau 19 en mots mêlés codés, avec lettres
+  partagées et saisie du code caché.
+- `e1396ad` (11:49) — Ajout des animations premium et intégration à l'introduction,
+  à la cinématique et aux pages de niveaux.
+- `2b85772` (11:58) — Harmonisation des scripts de pied de page pour charger les
+  animations premium sur les pages concernées.
+- `920697f` (13:11) — Échange des mécaniques des niveaux 16 et 20 et harmonisation
+  de leurs pages, styles et descriptions.
+- `8bcfce9` (13:28) — Création du combat CLEE_02 : interface tactique, déplacements,
+  actions, phases, traductions FR/EN, sauvegarde et récompense de Clé 02.
+- `f2edc18` (13:32) — Amélioration des visuels du combat CLEE_02, de l'état des
+  ancres stabilisées et des instructions de combat.
+- `a22f6fa` (14:00) — Refonte du boss CLEE_01 en trois stages accessibles ; suppression
+  du protocole de récupération et de l'interlude séparés.
+- `aa0066b` (14:13) — Renommage de la page CLEE_01 en `boss-01.html`, mise à jour des
+  liens et ajout du favicon à la page 404.
+
+### 06/10/2026 — Boss, niveaux et favicon
+
+- Échange des mécaniques des niveaux 16 et 20 : cadenas des
+  symboles au niveau 16, réseau dormant au niveau 20.
+- Refonte complète du boss CLEE_01 : nouvelle page
+  `boss-01.html`, contrôleur et styles dédiés, trois stages de difficulté `1/6`,
+  six unités d'énergie et accès à la cinématique restaurée de la Clé 01. Suppression
+  des références aux anciennes pages de récupération et d'interlude.
+- Boss CLEE_02 : les ancres stabilisées sont signalées par
+  un rond vert foncé dans l'indicateur de cohérence.
+- Favicon `echoes-favicon.svg` vérifié et référencé par
+  toutes les pages HTML, dont la page 404 ; vérification sans lien favicon local cassé.
 
 ## Prochain jalon recommandé
 
-1. Valider le parcours complet niveaux 1 à 10 → boss → Clé 01 sur desktop et mobile.
+1. Valider les parcours complets des parties 1 et 2 sur desktop et mobile.
 2. Vérifier le rendu du SVG `key-01-usb.svg` et de son animation dans le HUD.
-3. Finaliser les niveaux 8 à 15 et leurs traductions.
-4. Relier les cinq clés restantes aux verrous et fragments narratifs.
-5. Vérifier l'ensemble des liens et assets sur GitHub Pages.
-6. Préparer une nouvelle version bêta après validation des parcours complets.
+3. Relier les clés restantes aux verrous et fragments narratifs.
+4. Vérifier l'ensemble des liens et assets sur GitHub Pages.
+5. Préparer une nouvelle version bêta après validation des parcours complets.
 
 > Mettre à jour ce document à chaque commit : ajouter une entrée datée avec le hash du commit,
 > sa portée (fichiers ou fonctionnalités) et corriger les sections d'état si elles changent.
