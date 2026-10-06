@@ -24,29 +24,30 @@
     </header>
     <main class="level-shell level-19-shell">
       <section class="level-intro" aria-labelledby="levelTitle">
-        <p class="eyebrow" data-i18n="eyebrow">Fragment 019 // Les mots croisés d'ECHO</p>
-        <h1 id="levelTitle" data-i18n="title">Les mots croisés d'ECHO</h1>
-        <p class="level-description" data-i18n="description">Une grille géante de mots croisés. Touche une case, tape les lettres (sans accents) et suis les définitions. Re-touche la même case pour passer de l'horizontal au vertical.</p>
+        <p class="eyebrow" data-i18n="eyebrow">Fragment 019 // Le sudoku des lettres</p>
+        <h1 id="levelTitle" data-i18n="title">Le sudoku des lettres</h1>
+        <p class="level-description" data-i18n="description">Un sudoku où les chiffres sont remplacés par 9 lettres. Une fois la grille finie, la ligne en surbrillance révèle le mot caché.</p>
         <div class="system-transmission" aria-live="polite">
           <span class="system-label" data-i18n="systemLabel">ECHO://LEXIQUE</span>
-          <p id="systemMessage">SYSTEME:: LEXIQUE 019 INCOMPLET // MOTS A RETROUVER</p>
+          <p id="systemMessage">SYSTEME:: LEXIQUE 019 VERROUILLE // GRILLE A COMPLETER</p>
         </div>
       </section>
       <section class="puzzle-panel" aria-labelledby="puzzleTitle">
         <div class="panel-heading">
           <div>
             <p class="panel-kicker" data-i18n="puzzleKicker">PUZZLE // LANGAGE</p>
-            <h2 id="puzzleTitle" data-i18n="puzzleTitle">Grille de mots croisés</h2>
+            <h2 id="puzzleTitle" data-i18n="puzzleTitle">Grille de lettres</h2>
           </div>
           <div class="logic-readouts">
-            <span class="progress-readout" id="progressReadout" aria-live="polite">0 / 23 mots</span>
+            <span class="progress-readout" id="progressReadout" aria-live="polite">0 / 81 cases</span>
           </div>
         </div>
-        <div class="cw-board" id="crosswordBoard">
-          <div class="cw-scroll"><div class="cw-grid" id="cwGrid"></div></div>
-          <div class="cw-clues">
-            <div><h3 id="cwAcrossTitle">HORIZONTALEMENT</h3><ol id="cwAcross"></ol></div>
-            <div><h3 id="cwDownTitle">VERTICALEMENT</h3><ol id="cwDown"></ol></div>
+        <div class="sd-board" id="sudokuBoard">
+          <div class="sd-grid" id="sdGrid"></div>
+          <div class="sd-side">
+            <h3 id="sdWordTitle">MOT CACHÉ</h3>
+            <div class="sd-word" id="sdWord"></div>
+            <div class="sd-letters" id="sdLetters"></div>
           </div>
         </div>
         <div class="sequence-controls">

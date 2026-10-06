@@ -2451,37 +2451,34 @@ else {
 })();
 
 /* ===== NIVEAU 19 ===== */
-/* Mots croisés géants (français, ou anglais si la langue choisie au départ est « en ») : grille de 15 x 15 à remplir lettre par lettre (#crosswordBoard). */
+/* Sudoku de lettres (français, ou anglais si la langue choisie au départ est « en ») : 9 lettres au lieu de chiffres, la ligne en surbrillance révèle un mot caché (#sudokuBoard). */
 (() => {
-  const board = document.getElementById("crosswordBoard");
+  const board = document.getElementById("sudokuBoard");
   if (!board) return;
 
   const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
-  const puzzles = {"fr": {"rows": 15, "cols": 15, "words": [{"a": "CADENAS", "r": 0, "c": 0, "d": "D", "clue": "Il garde une porte fermée grâce à ses chiffres", "n": 1}, {"a": "TOUR", "r": 0, "c": 3, "d": "D", "clue": "Construction haute et étroite", "n": 2}, {"a": "TRIANGLE", "r": 0, "c": 5, "d": "A", "clue": "Forme à trois côtés", "n": 3}, {"a": "RUPTURE", "r": 0, "c": 6, "d": "D", "clue": "Cassure brutale", "n": 4}, {"a": "NIVEAU", "r": 0, "c": 9, "d": "D", "clue": "Étape du jeu", "n": 5}, {"a": "SON", "r": 1, "c": 2, "d": "A", "clue": "Ce que perçoit l'oreille", "n": 6}, {"a": "VIDE", "r": 2, "c": 9, "d": "A", "clue": "Absence totale de matière", "n": 7}, {"a": "FRACTURE", "r": 3, "c": 2, "d": "A", "clue": "Cassure d'un os ou d'une réalité", "n": 8}, {"a": "NOTE", "r": 3, "c": 13, "d": "D", "clue": "Élément d'une mélodie", "n": 9}, {"a": "PORTAIL", "r": 5, "c": 4, "d": "D", "clue": "Grande porte vers un autre monde", "n": 10}, {"a": "HOLOGRAMME", "r": 5, "c": 11, "d": "D", "clue": "Image lumineuse en trois dimensions", "n": 11}, {"a": "SYMBOLE", "r": 6, "c": 0, "d": "A", "clue": "Signe qui représente une idée", "n": 12}, {"a": "FRAGMENT", "r": 6, "c": 8, "d": "D", "clue": "Morceau détaché d'un tout", "n": 13}, {"a": "CODE", "r": 6, "c": 10, "d": "A", "clue": "Suite de signes secrets", "n": 14}, {"a": "ESPACE", "r": 7, "c": 14, "d": "D", "clue": "Étendue où se trouvent les astres", "n": 15}, {"a": "CONSTELLATION", "r": 8, "c": 0, "d": "A", "clue": "Groupe d'étoiles dessinant une figure", "n": 16}, {"a": "TEMPS", "r": 10, "c": 1, "d": "D", "clue": "Il s'écoule heure après heure", "n": 17}, {"a": "LUMIERE", "r": 10, "c": 6, "d": "A", "clue": "Elle chasse l'obscurité", "n": 18}, {"a": "CERCLE", "r": 11, "c": 0, "d": "A", "clue": "Forme ronde sans angle", "n": 19}, {"a": "CLE", "r": 12, "c": 6, "d": "D", "clue": "Elle ouvre une serrure", "n": 20}, {"a": "OMBRE", "r": 12, "c": 10, "d": "A", "clue": "Silhouette sombre projetée par un objet", "n": 21}, {"a": "REALITE", "r": 13, "c": 3, "d": "A", "clue": "Ce qui existe vraiment", "n": 22}, {"a": "ECHO", "r": 14, "c": 11, "d": "A", "clue": "Voix qui revient après avoir rebondi", "n": 23}]}, "en": {"rows": 15, "cols": 15, "words": [{"a": "LIGHT", "r": 0, "c": 1, "d": "A", "clue": "It chases away darkness", "n": 1}, {"a": "LEVEL", "r": 0, "c": 1, "d": "D", "clue": "Stage of the game", "n": 1}, {"a": "CODE", "r": 0, "c": 7, "d": "A", "clue": "String of secret signs", "n": 2}, {"a": "CLUE", "r": 0, "c": 7, "d": "D", "clue": "It helps you find the answer", "n": 2}, {"a": "TRIANGLE", "r": 1, "c": 14, "d": "D", "clue": "Shape with three sides", "n": 3}, {"a": "HOLOGRAM", "r": 2, "c": 3, "d": "D", "clue": "Three-dimensional image made of light", "n": 4}, {"a": "RUPTURE", "r": 2, "c": 6, "d": "A", "clue": "Sudden break", "n": 5}, {"a": "ECLIPSE", "r": 2, "c": 12, "d": "D", "clue": "One star hides another", "n": 6}, {"a": "MEMORY", "r": 3, "c": 0, "d": "A", "clue": "It keeps your past moments", "n": 7}, {"a": "CONSTELLATION", "r": 5, "c": 2, "d": "A", "clue": "Group of stars forming a figure", "n": 8}, {"a": "PADLOCK", "r": 7, "c": 0, "d": "D", "clue": "It keeps a door shut with its digits", "n": 9}, {"a": "FRAGMENT", "r": 7, "c": 2, "d": "A", "clue": "Piece broken off from a whole", "n": 10}, {"a": "NETWORK", "r": 7, "c": 8, "d": "D", "clue": "Set of points linked together", "n": 11}, {"a": "DIAMOND", "r": 9, "c": 0, "d": "A", "clue": "Four equal sides, tilted square", "n": 12}, {"a": "NOTE", "r": 9, "c": 5, "d": "D", "clue": "Element of a melody", "n": 13}, {"a": "TIME", "r": 9, "c": 8, "d": "A", "clue": "It flows hour after hour", "n": 14}, {"a": "STAR", "r": 10, "c": 14, "d": "D", "clue": "Body that shines at night", "n": 15}, {"a": "ECHO", "r": 11, "c": 3, "d": "D", "clue": "Voice that returns after bouncing back", "n": 16}, {"a": "SOUND", "r": 11, "c": 7, "d": "A", "clue": "What the ear perceives", "n": 17}, {"a": "DOOR", "r": 11, "c": 11, "d": "D", "clue": "You walk through it to enter a room", "n": 18}, {"a": "CIRCLE", "r": 12, "c": 0, "d": "A", "clue": "Round shape with no corners", "n": 19}, {"a": "TOWER", "r": 13, "c": 10, "d": "A", "clue": "Tall, narrow building", "n": 20}, {"a": "PORTAL", "r": 14, "c": 2, "d": "A", "clue": "Large gateway to another world", "n": 21}]}};
-  const puzzle = puzzles[language];
+  const hiddenWord = language === "en" ? "FRAGMENTS" : "BOUCLIERS";
   const copy = {
     fr: {
       part: "PARTIE 2 // FRACTURES",
       level: "NIVEAU 19",
-      eyebrow: "Fragment 019 // Les mots croisés d'ECHO",
-      title: "Les mots croisés d'ECHO",
-      description: "Une grille géante de mots croisés. Touche une case, tape les lettres (sans accents) et suis les définitions. Re-touche la même case pour passer de l'horizontal au vertical.",
+      eyebrow: "Fragment 019 // Le sudoku des lettres",
+      title: "Le sudoku des lettres",
+      description: "Un sudoku où les chiffres sont remplacés par 9 lettres. Chaque lettre apparaît une seule fois par ligne, par colonne et par bloc de 3 x 3. Une fois la grille finie, la ligne en surbrillance révèle le mot caché.",
       systemLabel: "ECHO://LEXIQUE",
       puzzleKicker: "PUZZLE // LANGAGE",
-      puzzleTitle: "Grille de mots croisés",
+      puzzleTitle: "Grille de lettres",
       next: "CONTINUER VERS LE NIVEAU 20",
-      reset: "Réinitialiser",
+      reset: "Nouvelle grille",
       check: "VÉRIFIER",
-      across: "HORIZONTALEMENT",
-      down: "VERTICALEMENT",
-      ready: "Choisis une case puis écris la réponse. Pas d'accents : É s'écrit E.",
+      wordTitle: "MOT CACHÉ",
+      ready: "Touche une case, tape une lettre ou choisis-en une plus bas. Pas d'accents.",
       wrong: "Certaines lettres sont fausses : elles sont marquées en rouge.",
       allGood: "Aucune erreur pour l'instant. Continue !",
-      full: "La grille est remplie mais contient des erreurs. Utilise VÉRIFIER.",
-      success: "Tous les mots sont trouvés. Le lexique d'ECHO est complet.",
-      system: "SYSTEME:: LEXIQUE 019 INCOMPLET // MOTS A RETROUVER",
+      success: "Grille complète. Le mot caché est révélé : ",
+      system: "SYSTEME:: LEXIQUE 019 VERROUILLE // GRILLE A COMPLETER",
       systemSuccess: "SYSTEME:: LEXIQUE 019 COMPLET // PROTOCOLE 020 DEBLOQUE",
-      words: "mots",
+      words: "cases",
       progress: "Progression de la Partie 2",
       save: "SAUVEGARDER",
       saved: "SAUVEGARDÉ",
@@ -2492,25 +2489,23 @@ else {
     en: {
       part: "PART 2 // FRACTURES",
       level: "LEVEL 19",
-      eyebrow: "Fragment 019 // ECHO's crossword",
-      title: "ECHO's crossword",
-      description: "A giant crossword grid. Tap a cell, type the letters and follow the clues. Tap the same cell again to switch between across and down.",
+      eyebrow: "Fragment 019 // The letter sudoku",
+      title: "The letter sudoku",
+      description: "A sudoku where digits are replaced by 9 letters. Each letter appears once per row, per column and per 3 x 3 block. Once the grid is done, the highlighted row reveals the hidden word.",
       systemLabel: "ECHO://LEXICON",
       puzzleKicker: "PUZZLE // LANGUAGE",
-      puzzleTitle: "Crossword grid",
+      puzzleTitle: "Letter grid",
       next: "CONTINUE TO LEVEL 20",
-      reset: "Reset",
+      reset: "New grid",
       check: "CHECK",
-      across: "ACROSS",
-      down: "DOWN",
-      ready: "Pick a cell, then type the answer.",
+      wordTitle: "HIDDEN WORD",
+      ready: "Tap a cell, type a letter or pick one below.",
       wrong: "Some letters are wrong: they are marked in red.",
       allGood: "No mistakes so far. Keep going!",
-      full: "The grid is full but contains mistakes. Use CHECK.",
-      success: "Every word is found. ECHO's lexicon is complete.",
-      system: "SYSTEM:: LEXICON 019 INCOMPLETE // WORDS TO RECOVER",
+      success: "Grid complete. The hidden word is revealed: ",
+      system: "SYSTEM:: LEXICON 019 LOCKED // GRID TO COMPLETE",
       systemSuccess: "SYSTEM:: LEXICON 019 COMPLETE // PROTOCOL 020 UNLOCKED",
-      words: "words",
+      words: "cells",
       progress: "Part 2 progress",
       save: "SAVE",
       saved: "SAVED",
@@ -2528,14 +2523,15 @@ else {
   const saveButton = $("saveGameButton");
   const checkButton = $("checkButton");
   const systemMessage = $("systemMessage");
-  const grid = $("cwGrid");
-  const acrossList = $("cwAcross");
-  const downList = $("cwDown");
-  const cells = new Map();
-  const wordItems = [];
-  let activeWord = null;
-  let activeCell = null;
+  const grid = $("sdGrid");
+  const wordBox = $("sdWord");
+  const letterBox = $("sdLetters");
+  const letters = [...hiddenWord];
+  const cells = [];
+  let solution = [];
+  let wordRow = 4;
   let solved = false;
+  let activeCell = null;
 
   document.documentElement.lang = language;
   document.querySelectorAll("[data-i18n]").forEach((element) => {
@@ -2543,8 +2539,7 @@ else {
     if (typeof value === "string") element.textContent = value;
   });
   $("levelProgress").setAttribute("aria-label", copy.progress);
-  $("cwAcrossTitle").textContent = copy.across;
-  $("cwDownTitle").textContent = copy.down;
+  $("sdWordTitle").textContent = copy.wordTitle;
   resetButton.textContent = copy.reset;
   checkButton.textContent = copy.check;
   nextButton.textContent = copy.next;
@@ -2556,45 +2551,102 @@ else {
     status.className = `puzzle-status${variant ? ` ${variant}` : ""}`;
   };
 
-  // Renvoie la clé de position d'une case.
-  const keyOf = (row, col) => `${row},${col}`;
+  // Tire un entier au hasard entre 0 et max - 1.
+  const rand = (max) => Math.floor(Math.random() * max);
 
-  // Renvoie la liste des cases d'un mot, dans l'ordre.
-  const cellsOf = (word) =>
-    [...word.a].map((_, index) =>
-      cells.get(word.d === "A" ? keyOf(word.r, word.c + index) : keyOf(word.r + index, word.c)),
-    );
+  // Mélange un tableau (Fisher-Yates).
+  const shuffle = (list) => {
+    for (let i = list.length - 1; i > 0; i -= 1) {
+      const j = rand(i + 1);
+      [list[i], list[j]] = [list[j], list[i]];
+    }
+    return list;
+  };
 
-  // Construit la grille, les cases et les listes de définitions.
-  const build = () => {
-    grid.style.setProperty("--cw-cols", String(puzzle.cols));
-    grid.style.setProperty("--cw-rows", String(puzzle.rows));
-    puzzle.words.forEach((word) => {
-      [...word.a].forEach((letter, index) => {
-        const row = word.d === "A" ? word.r : word.r + index;
-        const col = word.d === "A" ? word.c + index : word.c;
-        const key = keyOf(row, col);
-        if (!cells.has(key)) cells.set(key, { row, col, letter, words: {}, number: 0, input: null, box: null });
-        cells.get(key).words[word.d] = word;
-        if (index === 0) cells.get(key).number = word.n;
+  // Construit une solution valide dont une ligne (wordRow) se lit comme le mot caché.
+  const buildSolution = () => {
+    const rows = [];
+    const bands = shuffle([0, 1, 2]);
+    let hiddenIndex = 0;
+    bands.forEach((band) => {
+      shuffle([0, 1, 2]).forEach((offset) => {
+        const source = band * 3 + offset;
+        if (source === 4) hiddenIndex = rows.length;
+        rows.push(source);
       });
     });
-    for (let row = 0; row < puzzle.rows; row += 1) {
-      for (let col = 0; col < puzzle.cols; col += 1) {
-        const cell = cells.get(keyOf(row, col));
+    wordRow = hiddenIndex;
+    return rows.map((source) =>
+      Array.from({ length: 9 }, (_, col) => letters[((3 * (source % 3) + Math.floor(source / 3) + col) % 9 + 5) % 9]),
+    );
+  };
+
+  // Compte les solutions d'une grille (s'arrête à 2) pour garantir qu'elle est unique.
+  const countSolutions = (values) => {
+    const work = values.map((row) => row.slice());
+    let count = 0;
+    const options = (r, c) => {
+      const used = new Set();
+      for (let i = 0; i < 9; i += 1) {
+        used.add(work[r][i]);
+        used.add(work[i][c]);
+      }
+      const br = r - (r % 3);
+      const bc = c - (c % 3);
+      for (let i = 0; i < 3; i += 1) for (let j = 0; j < 3; j += 1) used.add(work[br + i][bc + j]);
+      return letters.filter((letter) => !used.has(letter));
+    };
+    const solve = () => {
+      let best = null;
+      for (let r = 0; r < 9 && best !== 0; r += 1) {
+        for (let c = 0; c < 9; c += 1) {
+          if (work[r][c]) continue;
+          const choice = options(r, c);
+          if (!best || choice.length < best.list.length) best = { r, c, list: choice };
+          if (choice.length === 0) return;
+        }
+      }
+      if (!best) {
+        count += 1;
+        return;
+      }
+      for (const letter of best.list) {
+        work[best.r][best.c] = letter;
+        solve();
+        work[best.r][best.c] = "";
+        if (count > 1) return;
+      }
+    };
+    solve();
+    return count;
+  };
+
+  // Retire des cases tant que la grille garde une solution unique (la ligne du mot caché d'abord).
+  const buildPuzzle = () => {
+    const puzzle = solution.map((row) => row.slice());
+    const order = shuffle(Array.from({ length: 81 }, (_, i) => i));
+    order.sort((a, b) => (Math.floor(b / 9) === wordRow) - (Math.floor(a / 9) === wordRow));
+    let removed = 0;
+    for (const index of order) {
+      if (removed >= 52) break;
+      const r = Math.floor(index / 9);
+      const c = index % 9;
+      const keep = puzzle[r][c];
+      puzzle[r][c] = "";
+      if (countSolutions(puzzle) === 1) removed += 1;
+      else puzzle[r][c] = keep;
+    }
+    return puzzle;
+  };
+
+  // Construit les cases de la grille et la palette de lettres.
+  const build = () => {
+    for (let row = 0; row < 9; row += 1) {
+      for (let col = 0; col < 9; col += 1) {
         const box = document.createElement("div");
-        if (!cell) {
-          box.className = "cw-block";
-          grid.appendChild(box);
-          continue;
-        }
-        box.className = "cw-cell";
-        if (cell.number) {
-          const number = document.createElement("span");
-          number.className = "cw-number";
-          number.textContent = String(cell.number);
-          box.appendChild(number);
-        }
+        box.className = "sd-cell";
+        if (col % 3 === 2 && col < 8) box.classList.add("sd-right");
+        if (row % 3 === 2 && row < 8) box.classList.add("sd-bottom");
         const input = document.createElement("input");
         input.type = "text";
         input.maxLength = 2;
@@ -2602,89 +2654,67 @@ else {
         input.autocapitalize = "characters";
         input.spellcheck = false;
         input.setAttribute("aria-label", `${row + 1}-${col + 1}`);
-        input.addEventListener("focus", () => selectCell(cell, false));
-        input.addEventListener("click", () => selectCell(cell, true));
+        const cell = { row, col, box, input, given: false };
+        input.addEventListener("focus", () => {
+          activeCell = cell;
+          highlight();
+        });
         input.addEventListener("input", () => typeLetter(cell));
         input.addEventListener("keydown", (event) => handleKey(event, cell));
         box.appendChild(input);
-        cell.input = input;
-        cell.box = box;
         grid.appendChild(box);
+        cells.push(cell);
       }
     }
-    puzzle.words.forEach((word) => {
-      const item = document.createElement("li");
+    letters.forEach((letter) => {
       const button = document.createElement("button");
       button.type = "button";
-      button.className = "cw-clue";
-      button.textContent = `${word.n}. ${word.clue} (${word.a.length})`;
+      button.className = "sd-letter";
+      button.textContent = letter;
       button.addEventListener("click", () => {
-        const target = cellsOf(word).find((cell) => !cell.input.value) || cellsOf(word)[0];
-        activeWord = word;
-        target.input.focus();
-        highlight(target);
+        if (!activeCell || activeCell.given || solved) return;
+        activeCell.input.value = letter;
+        typeLetter(activeCell);
       });
-      item.appendChild(button);
-      (word.d === "A" ? acrossList : downList).appendChild(item);
-      wordItems.push({ word, item });
+      letterBox.appendChild(button);
+    });
+    letters.forEach(() => {
+      const slot = document.createElement("span");
+      slot.className = "sd-slot";
+      wordBox.appendChild(slot);
     });
   };
 
-  // Met en évidence le mot et la case actifs.
-  const highlight = (cell) => {
-    activeCell = cell;
-    cells.forEach((other) => {
-      other.box.classList.remove("is-active", "is-word");
+  // Renvoie la case aux coordonnées données.
+  const at = (row, col) => cells[row * 9 + col];
+
+  // Met en évidence la case active et sa ligne, sa colonne et son bloc.
+  const highlight = () => {
+    cells.forEach((cell) => {
+      const near =
+        activeCell &&
+        (cell.row === activeCell.row ||
+          cell.col === activeCell.col ||
+          (Math.floor(cell.row / 3) === Math.floor(activeCell.row / 3) &&
+            Math.floor(cell.col / 3) === Math.floor(activeCell.col / 3)));
+      cell.box.classList.toggle("is-word", Boolean(near));
+      cell.box.classList.toggle("is-active", cell === activeCell);
     });
-    if (activeWord) cellsOf(activeWord).forEach((other) => other.box.classList.add("is-word"));
-    cell.box.classList.add("is-active");
-    wordItems.forEach(({ word, item }) => item.classList.toggle("is-current", word === activeWord));
   };
 
-  // Choisit le mot actif selon la case touchée (re-toucher change le sens).
-  const selectCell = (cell, fromClick) => {
-    if (solved) return;
-    const available = Object.values(cell.words);
-    if (fromClick && activeCell === cell && available.length > 1) {
-      activeWord = available.find((word) => word !== activeWord);
-    } else if (!activeWord || !available.includes(activeWord)) {
-      activeWord = cell.words.A || cell.words.D;
-    }
-    highlight(cell);
-  };
-
-  // Déplace le focus sur une case voisine du mot actif.
-  const moveWithin = (cell, step) => {
-    if (!activeWord) return;
-    const list = cellsOf(activeWord);
-    const target = list[list.indexOf(cell) + step];
-    if (target) target.input.focus();
-  };
-
-  // Déplace le focus d'une case dans une direction (flèches).
+  // Déplace le focus avec les flèches.
   const moveArrow = (cell, dRow, dCol) => {
-    let row = cell.row + dRow;
-    let col = cell.col + dCol;
-    while (row >= 0 && col >= 0 && row < puzzle.rows && col < puzzle.cols) {
-      const target = cells.get(keyOf(row, col));
-      if (target) {
-        if (dRow !== 0 && activeWord && activeWord.d === "A" && target.words.D) activeWord = target.words.D;
-        if (dCol !== 0 && activeWord && activeWord.d === "D" && target.words.A) activeWord = target.words.A;
-        target.input.focus();
-        highlight(target);
-        return;
-      }
-      row += dRow;
-      col += dCol;
-    }
+    const target = at(Math.min(8, Math.max(0, cell.row + dRow)), Math.min(8, Math.max(0, cell.col + dCol)));
+    target.input.focus();
   };
 
-  // Gère la saisie d'une lettre (majuscule, sans accent) et avance d'une case.
+  // Gère la saisie d'une lettre (majuscule, sans accent, limitée aux 9 lettres du puzzle).
   const typeLetter = (cell) => {
+    if (cell.given) return;
     const raw = cell.input.value.normalize("NFD").replace(/[^A-Za-z]/g, "").toUpperCase();
-    cell.input.value = raw.slice(-1);
+    const last = raw.slice(-1);
+    cell.input.value = letters.includes(last) ? last : "";
     cell.box.classList.remove("is-wrong");
-    if (cell.input.value) moveWithin(cell, 1);
     refresh();
   };
 
@@ -2695,72 +2725,86 @@ else {
     if (arrows[event.key]) {
       event.preventDefault();
       moveArrow(cell, ...arrows[event.key]);
-    } else if (event.key === "Backspace" && !cell.input.value) {
-      event.preventDefault();
-      moveWithin(cell, -1);
     } else if (event.key === "Enter") {
       event.preventDefault();
       check();
     }
   };
 
-  // Met à jour les mots terminés, la progression et la victoire.
+  // Met à jour les doublons, la progression, le mot caché et la victoire.
   const refresh = () => {
-    let done = 0;
     let filled = 0;
-    wordItems.forEach(({ word, item }) => {
-      const complete = cellsOf(word).every((cell, index) => cell.input.value === word.a[index]);
-      item.classList.toggle("is-done", complete);
-      if (complete) done += 1;
-    });
     cells.forEach((cell) => {
       if (cell.input.value) filled += 1;
+      const value = cell.input.value;
+      const clash =
+        value &&
+        cells.some(
+          (other) =>
+            other !== cell &&
+            other.input.value === value &&
+            (other.row === cell.row ||
+              other.col === cell.col ||
+              (Math.floor(other.row / 3) === Math.floor(cell.row / 3) &&
+                Math.floor(other.col / 3) === Math.floor(cell.col / 3))),
+        );
+      cell.box.classList.toggle("is-clash", Boolean(clash));
     });
-    readout.textContent = `${done} / ${puzzle.words.length} ${copy.words}`;
-    if (done === puzzle.words.length) {
-      solved = true;
-      board.classList.add("is-solved");
-      cells.forEach((cell) => {
-        cell.input.disabled = true;
-        cell.box.classList.remove("is-active", "is-word", "is-wrong");
-      });
-      setStatus(copy.success, "success");
-      systemMessage.textContent = copy.systemSuccess;
-      nextButton.hidden = false;
-      window.EchoesSave?.saveProgress({ currentPage: "level-19", currentLevel: 19 });
-      nextButton.focus();
-    } else if (filled === cells.size) {
-      setStatus(copy.full);
-    }
+    readout.textContent = `${filled} / 81 ${copy.words}`;
+    wordBox.querySelectorAll(".sd-slot").forEach((slot, index) => {
+      slot.textContent = at(wordRow, index).input.value;
+    });
+    if (cells.every((cell) => cell.input.value === solution[cell.row][cell.col])) win();
   };
 
-  // Marque en rouge les lettres fausses.
+  // Marque en rouge les lettres qui ne correspondent pas à la solution.
   const check = () => {
     if (solved) return;
     let errors = 0;
     cells.forEach((cell) => {
-      const bad = cell.input.value !== "" && cell.input.value !== cell.letter;
+      const bad = cell.input.value !== "" && cell.input.value !== solution[cell.row][cell.col];
       cell.box.classList.toggle("is-wrong", bad);
       if (bad) errors += 1;
     });
     setStatus(errors ? copy.wrong : copy.allGood, errors ? "error" : "success");
   };
 
-  // Remet le puzzle à zéro.
+  // Termine le niveau : révèle le mot caché et débloque la suite.
+  const win = () => {
+    solved = true;
+    board.classList.add("is-solved");
+    cells.forEach((cell) => {
+      cell.input.disabled = true;
+      cell.box.classList.remove("is-active", "is-word", "is-wrong", "is-clash");
+    });
+    setStatus(`${copy.success}${hiddenWord}`, "success");
+    systemMessage.textContent = copy.systemSuccess;
+    nextButton.hidden = false;
+    window.EchoesSave?.saveProgress({ currentPage: "level-19", currentLevel: 19 });
+    nextButton.focus();
+  };
+
+  // Génère une nouvelle grille et remet l'état à zéro.
   const reset = () => {
     solved = false;
-    activeWord = null;
     activeCell = null;
     board.classList.remove("is-solved");
+    solution = buildSolution();
+    const puzzle = buildPuzzle();
     cells.forEach((cell) => {
-      cell.input.value = "";
+      const value = puzzle[cell.row][cell.col];
+      cell.given = value !== "";
+      cell.input.value = value;
       cell.input.disabled = false;
-      cell.box.classList.remove("is-active", "is-word", "is-wrong");
+      cell.input.readOnly = cell.given;
+      cell.input.tabIndex = cell.given ? -1 : 0;
+      cell.box.classList.toggle("is-given", cell.given);
+      cell.box.classList.toggle("is-hidden-row", cell.row === wordRow);
+      cell.box.classList.remove("is-active", "is-word", "is-wrong", "is-clash");
     });
-    wordItems.forEach(({ item }) => item.classList.remove("is-done", "is-current"));
     systemMessage.textContent = copy.system;
     nextButton.hidden = true;
-    readout.textContent = `0 / ${puzzle.words.length} ${copy.words}`;
+    refresh();
     setStatus(copy.ready);
   };
 

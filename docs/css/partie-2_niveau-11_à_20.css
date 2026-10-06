@@ -9,7 +9,7 @@
  *  - Niveau 16 : inversion logique 3 x 3 (.logic-*)
  *  - Niveau 17 : balance du vide (.scale-*)
  *  - Niveau 18 : tour des échos / tours de Hanoï (.tower-*)
- *  - Niveau 19 : mots croisés géants (.cw-*)
+ *  - Niveau 19 : sudoku de lettres (.sd-*)
  *  - Niveau 20 : cadenas des symboles / équations (.code-*)
  * Les animations d'entrée et les styles génériques (en-tête, panneau, pied de
  * page) viennent d'abord ; les blocs propres à chaque niveau suivent.
@@ -1295,7 +1295,7 @@ body.part-two-theme {
   }
 }
 
-/* NIVEAUX 17-20 // BALANCE (17), TOUR DE HANOÏ (18), MOTS CROISÉS (19) ET CADENAS (20) : marges et contrôles communs. */
+/* NIVEAUX 17-20 // BALANCE (17), TOUR DE HANOÏ (18), SUDOKU DE LETTRES (19) ET CADENAS (20) : marges et contrôles communs. */
 .level-17-shell,
 .level-18-shell,
 .level-19-shell,
@@ -1327,7 +1327,7 @@ body.part-two-theme {
   color: #80ffcf;
 }
 
-/* Niveau 17 // balance (.scale-*), niveau 18 // tours (.tower-*), niveaux 19 // mots croisés (.cw-*) et 20 // cadenas (.code-*) : cadre partagé. */
+/* Niveau 17 // balance (.scale-*), niveau 18 // tours (.tower-*), niveaux 19 // sudoku de lettres (.sd-*) et 20 // cadenas (.code-*) : cadre partagé. */
 .scale-board,
 .tower-board,
 .code-board {
@@ -1638,148 +1638,150 @@ body.part-two-theme {
 .code-board.is-solved .code-wheel {
   border-color: #80ffcf;
 }
-/* Niveau 19 // mots croisés géants : grille de cases, numéros, mot actif et définitions. */
-.cw-board {
+/* Niveau 19 // sudoku de lettres : grille 9 x 9, blocs 3 x 3, ligne du mot caché et palette. */
+.sd-board {
   display: grid;
-  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
-  gap: 18px;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 22px;
   align-items: start;
-  padding: 14px;
+  padding: 16px;
   border: 1px solid rgba(75, 158, 255, 0.42);
   border-radius: 14px;
   background: rgba(5, 12, 29, 0.82);
   box-shadow: inset 0 0 24px rgba(75, 158, 255, 0.08);
 }
 
-.cw-scroll {
-  max-width: 100%;
-  overflow: auto;
-}
-
-.cw-grid {
-  --cw-cell: clamp(24px, 3.1vw, 36px);
+.sd-grid {
+  --sd-cell: clamp(34px, 4.4vw, 48px);
   display: grid;
-  grid-template-columns: repeat(var(--cw-cols), var(--cw-cell));
-  grid-template-rows: repeat(var(--cw-rows), var(--cw-cell));
-  gap: 2px;
-  width: max-content;
+  grid-template-columns: repeat(9, var(--sd-cell));
+  grid-auto-rows: var(--sd-cell);
+  border: 2px solid #4b9eff;
+  border-radius: 6px;
 }
 
-.cw-block {
-  background: transparent;
+.sd-cell {
+  border: 1px solid rgba(75, 158, 255, 0.28);
+  background: rgba(75, 158, 255, 0.05);
 }
 
-.cw-cell {
-  position: relative;
-  border: 1px solid rgba(75, 158, 255, 0.5);
-  border-radius: 4px;
-  background: rgba(75, 158, 255, 0.08);
+.sd-cell.sd-right {
+  border-right: 2px solid #4b9eff;
 }
 
-.cw-cell input {
+.sd-cell.sd-bottom {
+  border-bottom: 2px solid #4b9eff;
+}
+
+.sd-cell input {
   width: 100%;
   height: 100%;
   padding: 0;
   border: 0;
   background: transparent;
-  color: #d4dce7;
+  color: #80d4ff;
   caret-color: transparent;
-  font: 700 calc(var(--cw-cell) * 0.55) var(--font-display, "Orbitron", sans-serif);
+  font: 700 calc(var(--sd-cell) * 0.5) var(--font-display, "Orbitron", sans-serif);
   text-align: center;
   text-transform: uppercase;
 }
 
-.cw-cell input:focus {
+.sd-cell input:focus {
   outline: none;
 }
 
-.cw-number {
-  position: absolute;
-  top: 1px;
-  left: 3px;
-  z-index: 1;
-  color: #4b9eff;
-  font: 0.5rem var(--font-display, "Orbitron", sans-serif);
-  pointer-events: none;
+.sd-cell.is-given {
+  background: rgba(75, 158, 255, 0.16);
 }
 
-.cw-cell.is-word {
-  background: rgba(75, 158, 255, 0.24);
+.sd-cell.is-given input {
+  color: #ffffff;
 }
 
-.cw-cell.is-active {
-  border-color: #ffffff;
+.sd-cell.is-hidden-row:not(.is-given) {
+  box-shadow: inset 0 0 0 1px rgba(255, 209, 102, 0.45);
+}
+
+.sd-cell.is-word {
+  background: rgba(75, 158, 255, 0.2);
+}
+
+.sd-cell.is-active {
   background: rgba(75, 158, 255, 0.45);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.55);
 }
 
-.cw-cell.is-wrong {
-  border-color: #ff6b8a;
-  background: rgba(255, 107, 138, 0.2);
-}
-
-.cw-cell.is-wrong input {
+.sd-cell.is-clash input,
+.sd-cell.is-wrong input {
   color: #ff6b8a;
 }
 
-.cw-board.is-solved .cw-cell {
-  border-color: #80ffcf;
-  background: rgba(128, 255, 207, 0.12);
+.sd-cell.is-wrong {
+  background: rgba(255, 107, 138, 0.2);
 }
 
-.cw-clues {
-  display: grid;
-  gap: 12px;
-  max-height: 520px;
-  overflow: auto;
+.sd-board.is-solved .sd-cell {
+  background: rgba(128, 255, 207, 0.1);
 }
 
-.cw-clues h3 {
-  margin: 0 0 6px;
-  color: #acbacb;
+.sd-board.is-solved .sd-cell.is-hidden-row {
+  background: rgba(255, 209, 102, 0.25);
+}
+
+.sd-side h3 {
+  margin: 0 0 8px;
+  color: #ffd166;
   font: 0.6rem var(--font-display, "Orbitron", sans-serif);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
 }
 
-.cw-clues ol {
+.sd-word {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 18px;
+}
+
+.sd-slot {
   display: grid;
-  gap: 3px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  place-items: center;
+  width: 30px;
+  height: 36px;
+  border-bottom: 2px solid #ffd166;
+  color: #ffd166;
+  font: 700 1.1rem var(--font-display, "Orbitron", sans-serif);
 }
 
-.cw-clue {
-  width: 100%;
-  padding: 5px 8px;
-  border: 1px solid transparent;
+.sd-letters {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+  gap: 6px;
+}
+
+.sd-letter {
+  padding: 9px 0;
+  border: 1px solid rgba(75, 158, 255, 0.5);
   border-radius: 6px;
-  background: transparent;
+  background: rgba(75, 158, 255, 0.1);
   color: #d4dce7;
   cursor: pointer;
-  font: 0.85rem var(--font-body, "Rajdhani", sans-serif);
-  text-align: left;
+  font: 700 0.95rem var(--font-display, "Orbitron", sans-serif);
 }
 
-.cw-clues li.is-current .cw-clue {
-  border-color: #4b9eff;
-  background: rgba(75, 158, 255, 0.18);
-}
-
-.cw-clues li.is-done .cw-clue {
-  color: #80ffcf;
-  text-decoration: line-through;
+.sd-letter:hover {
+  background: rgba(75, 158, 255, 0.3);
 }
 
 @media (max-width: 900px) {
-  .cw-board {
+  .sd-board {
     grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
   }
-  .cw-grid {
-    --cw-cell: 26px;
+  .sd-grid {
+    --sd-cell: min(9.6vw, 44px);
   }
-  .cw-clues {
-    max-height: none;
+  .sd-side {
+    width: 100%;
   }
 }
 @media (max-width: 560px) {
