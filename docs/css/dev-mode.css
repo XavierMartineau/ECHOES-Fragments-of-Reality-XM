@@ -958,3 +958,15 @@ html body > .level-footer .site-copyright {
   background: rgba(75, 158, 255, 0.18);
   box-shadow: 0 0 16px rgba(75, 158, 255, 0.3);
 }
+
+/* Part 2 selector button in the navigator is electric blue too. */
+.dev-mode-part-toggle[data-part="2"].is-active,
+.dev-mode-part-toggle[data-part="2"]:hover,
+.dev-mode-part-toggle[data-part="2"]:focus-visible {
+  background: rgba(75, 158, 255, 0.16);
+  border-color: rgba(75, 158, 255, 0.7);
+}
+
+.dev-mode-part-toggle[data-part="2"] > span:first-child {
+  color: #4b9eff;
+}
