@@ -947,49 +947,14 @@ html body > .level-footer .site-copyright {
   }
 }
 
-/* Part 2 levels: DEV MODE uses the electric blue of the part instead of pink. */
-body.part-two-theme .dev-mode-toggle {
-  border-color: rgba(75, 158, 255, 0.7);
-  color: #9cc9ff;
-  box-shadow: 0 0 22px rgba(75, 158, 255, 0.22);
+/* Part 2 level numbers in the navigator use the electric blue of that part. */
+.dev-mode-level-group[data-levels-for="2"] .dev-mode-levels a {
+  border-color: rgba(75, 158, 255, 0.55);
+  color: #4b9eff;
 }
 
-body.part-two-theme .dev-mode-toggle:hover,
-body.part-two-theme .dev-mode-toggle:focus-visible,
-body.part-two-theme .dev-mode-close:hover,
-body.part-two-theme .dev-mode-close:focus-visible,
-body.part-two-theme .dev-mode-home:hover,
-body.part-two-theme .dev-mode-home:focus-visible,
-body.part-two-theme .dev-mode-levels a:hover,
-body.part-two-theme .dev-mode-levels a:focus-visible {
+.dev-mode-level-group[data-levels-for="2"] .dev-mode-levels a:hover,
+.dev-mode-level-group[data-levels-for="2"] .dev-mode-levels a:focus-visible {
   background: rgba(75, 158, 255, 0.18);
   box-shadow: 0 0 16px rgba(75, 158, 255, 0.3);
-}
-
-body.part-two-theme .dev-mode-part-toggle.is-active,
-body.part-two-theme .dev-mode-part-toggle:hover,
-body.part-two-theme .dev-mode-part-toggle:focus-visible {
-  background: rgba(75, 158, 255, 0.16);
-  border-color: rgba(75, 158, 255, 0.7);
-}
-
-body.part-two-theme .dev-mode-part-toggle > span:first-child,
-body.part-two-theme .dev-mode-special-title {
-  color: #9cc9ff;
-}
-
-body.part-two-theme .dev-mode-specials {
-  border-top-color: rgba(75, 158, 255, 0.28);
-}
-
-body.part-two-theme .dev-mode-special-link {
-  border-color: rgba(75, 158, 255, 0.45);
-  background: rgba(75, 158, 255, 0.09);
-  color: #d6e8ff;
-}
-
-body.part-two-theme .dev-mode-special-link:hover,
-body.part-two-theme .dev-mode-special-link:focus-visible {
-  background: rgba(75, 158, 255, 0.22);
-  color: #fff;
 }
