@@ -1,5 +1,10 @@
 /* PARTIE 6 // NIVEAUX 51-60
- * Shared page bootstrap: back navigation, current-level detection, and save. */
+ * Démarrage commun des pages de cette partie : retour en arrière, détection du
+ * niveau courant (d'après "niveau-NN" dans l'URL) et sauvegarde automatique.
+ * Les niveaux 51 à 60 sont encore des pages « En construction » : aucun contrôleur
+ * de puzzle n'existe pour l'instant. Chaque futur niveau ajoutera ici son propre
+ * bloc intitulé « NIVEAU N » (voir partie-2_niveau-11_à_20.js comme modèle).
+ */
 const currentLevel = Number(
   window.location.pathname.match(/niveau-(\d+)/)?.[1] || 0,
 );

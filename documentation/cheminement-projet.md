@@ -84,6 +84,9 @@ reste [Info-fr.txt](./Info-fr.txt).
   16 blocs de la grille) : bien plus de 100 configurations, toutes résolubles. Un tracé peut
   passer par-dessus un autre flux (celui-ci est alors effacé et la case prend la nouvelle
   couleur) ; chaque paire reliée déclenche une vague néon vert cube par cube.
+- Niveau 17 : balance du vide (répartir des masses sur deux plateaux pour égaliser les poids, 3 manches).
+- Niveau 18 : tour des échos (tours de Hanoï à 3, 4 puis 5 disques).
+- Niveau 19 : code fantôme (déduction d'un code de 4 symboles différents avec indices bien/mal placés).
 - Niveau 16 : puzzle logique en trois manches, où chaque impulsion inverse une cellule
   et ses voisines directes.
 
@@ -273,7 +276,8 @@ Page : `docs/html/partie-1_niveau-1_à_10/boss-recovery.html`
   à 6 gardent les couleurs de base.
 - 6ec4399 — Règle de maintenance : chaque commit est ajouté à ce journal.
 - `fd6d447` — Mode développeur PC : marge gauche de 28 à 72 px (clamp) pour décoller le bouton du bord.
-- Ce commit — Mode développeur PC : le bouton s'aligne sur le bord gauche du contenu des pages (marge `max(28px, 50vw - 588px)`), à la même hauteur.
+- `9b14ee1` — Mode développeur PC : le bouton s'aligne sur le bord gauche du contenu des pages (marge `max(28px, 50vw - 588px)`), à la même hauteur.
+- Ce commit — Nouveaux niveaux 17 (balance), 18 (tour de Hanoï) et 19 (code fantôme) avec leurs pages, styles et contrôleurs dans les fichiers de la partie 2. Commentaires en français ajoutés dans tous les JS et CSS de parties (carte des niveaux par fichier, un commentaire par bloc de niveau).
 
 ## Prochain jalon recommandé
 

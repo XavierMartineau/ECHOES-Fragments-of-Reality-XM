@@ -1,4 +1,7 @@
-/* Styles de la partie 4. */
+/* PARTIE 4 // NIVEAUX 31-40 — feuille de style.
+ * Animations d'entrée et styles communs des pages de niveau. Les niveaux 31 à 40
+ * sont encore en construction ; les styles propres à chaque niveau seront ajoutés
+ * ici sous forme de blocs commentés « NIVEAU N // nom du puzzle ». */
 @keyframes level-enter {
   from {
     opacity: 0;

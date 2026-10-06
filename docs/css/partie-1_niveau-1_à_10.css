@@ -1,3 +1,15 @@
+/* ============================================================================
+ * PARTIE 1 // INITIATION (niveaux 01 à 10) — feuille de style
+ * Cette feuille sert aussi de base commune aux pages des autres parties
+ * (en-tête, panneau de puzzle, pied de page, boutons, fonds animés).
+ * Carte des plateaux par niveau :
+ *  - Niveau 01 : alignement (.target-slots)      - Niveau 06 : motifs (.pattern-*)
+ *  - Niveau 02 : séquence lumineuse (.light-*)   - Niveau 07 : porte (.gate-*)
+ *  - Niveau 03 : tri des formes (.sort-board)    - Niveau 08 : tri couleurs (.advanced-sort-*)
+ *  - Niveau 04 : rotation (.rotation-*)          - Niveau 09 : constellation (.constellation-*)
+ *  - Niveau 05 : séquence sonore (.sound-*)      - Niveau 10 : couleurs (.color-sequence-*)
+ *  - Boss Clé 01 : (.boss-*) et scène de la clé (.key-*)
+ * ========================================================================== */
 :root {
   --void: #050711;
   --panel: rgba(8, 16, 31, 0.82);

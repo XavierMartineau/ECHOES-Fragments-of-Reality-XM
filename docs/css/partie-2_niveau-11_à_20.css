@@ -1,4 +1,19 @@
-/* Styles de la partie 2. */
+/* ============================================================================
+ * PARTIE 2 // FRACTURES (niveaux 11 à 20) — feuille de style
+ * Carte des niveaux :
+ *  - Niveau 11 : anneaux de résonance (.alignment-board, .resonance-tray, minuteur)
+ *  - Niveau 12 : lumière croisée (.cross-light-board)
+ *  - Niveau 13 : puzzle coulissant fractal (.fractal-*)
+ *  - Niveau 14 : miroirs et faisceau (.prism-*)
+ *  - Niveau 15 : routage de flux 14 x 14 (.flow-*)
+ *  - Niveau 16 : inversion logique 3 x 3 (.logic-*)
+ *  - Niveau 17 : balance du vide (.scale-*)
+ *  - Niveau 18 : tour des échos / tours de Hanoï (.tower-*)
+ *  - Niveau 19 : code fantôme / déduction (.code-*)
+ *  - Niveau 20 : page « En construction » (construction.css)
+ * Les animations d'entrée et les styles génériques (en-tête, panneau, pied de
+ * page) viennent d'abord ; les blocs propres à chaque niveau suivent.
+ * ========================================================================== */
 @keyframes level-enter {
   from {
     opacity: 0;
@@ -83,7 +98,7 @@
   }
 }
 
-/* NIVEAU 13 // GLISSEMENT HOLOGRAPHIQUE */
+/* NIVEAU 13 // GLISSEMENT HOLOGRAPHIQUE : mise en page de la page et du puzzle coulissant. */
 .level-13-shell {
   padding-bottom: 110px;
 }
@@ -103,6 +118,7 @@
   margin: 0 auto;
 }
 
+/* Niveau 13 // Cadre, tuiles et image de référence du puzzle coulissant fractal. */
 .fractal-frame {
   width: min(100%, 410px);
   margin: auto;
@@ -270,7 +286,7 @@
   }
 }
 
-/* PALETTE PARTIE 2 // BLEU ÉLECTRIQUE & ARGENT */
+/* PALETTE PARTIE 2 // BLEU ÉLECTRIQUE & ARGENT : couleurs communes à tous les niveaux 11 à 20 (body.part-two-theme). */
 body.part-two-theme {
   --cyan: #4b9eff;
   --violet: #d4dce7;
@@ -376,13 +392,14 @@ body.part-two-theme {
   box-shadow: 0 0 18px rgba(128, 255, 207, 0.36);
 }
 
-/* NIVEAUX 14-16 // PRISME, MEMOIRE ET RESEAU */
+/* NIVEAUX 14-16 // MIROIRS (14), ROUTAGE DE FLUX (15) ET RÉSEAU LOGIQUE (16) : marges et contrôles communs. */
 .level-14-shell,
 .level-15-shell,
 .level-16-shell {
   padding-bottom: 110px;
 }
 
+/* Niveau 14 // Miroirs : grille du prisme (.prism-board), miroirs orientables et récepteur du faisceau. */
 .prism-board {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -451,6 +468,7 @@ body.part-two-theme {
   box-shadow: 0 0 22px rgba(128, 255, 207, 0.58), inset 0 0 16px rgba(128, 255, 207, 0.24);
 }
 
+/* Niveau 15 // Veines de lumière : plateau de routage 14 x 14 (.flow-board) et ses paires de couleurs. */
 .flow-board-wrap {
   width: 100%;
   overflow-x: auto;
@@ -564,6 +582,7 @@ body.part-two-theme {
   text-align: right;
 }
 
+/* Niveau 16 // Réseau dormant : grille logique 3 x 3 (.logic-board) dont les cellules s'inversent par impulsion. */
 .logic-board {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -677,6 +696,7 @@ body.part-two-theme {
   box-shadow: 0 0 15px rgba(255, 190, 110, 0.28);
 }
 
+/* Niveau 11 // Anneaux de résonance : bouton d'indice et minuteur de 30 secondes. */
 .level-11-shell .hint-button {
   padding: 10px 14px;
   border: 1px solid rgba(75, 158, 255, 0.52);
@@ -815,7 +835,7 @@ body.part-two-theme {
   }
 }
 
-/* NIVEAUX 11-12 // DOUBLE ALIGNEMENT ET LUMIÈRE CROISÉE */
+/* NIVEAUX 11-12 // ANNEAUX DE RÉSONANCE (11) ET LUMIÈRE CROISÉE (12) : plateaux et zones de dépôt. */
 .level-11-shell .alignment-board,
 .level-11-shell .resonance-tray,
 .level-12-shell .cross-light-board {
@@ -1177,7 +1197,7 @@ body.part-two-theme {
   }
 }
 
-/* Give the first three playable levels more room without widening other acts. */
+/* Donne plus de place aux niveaux 11 à 13 sans élargir les autres niveaux. */
 .part-two-theme .level-11-shell,
 .part-two-theme .level-12-shell,
 .part-two-theme .level-13-shell {
@@ -1272,5 +1292,323 @@ body.part-two-theme {
   .level-meta {
     flex-wrap: wrap;
     max-width: 100%;
+  }
+}
+
+/* NIVEAUX 17-19 // BALANCE (17), TOUR DE HANOÏ (18) ET CODE FANTÔME (19) : marges et contrôles communs. */
+.level-17-shell,
+.level-18-shell,
+.level-19-shell {
+  padding-bottom: 110px;
+}
+
+.level-17-shell .sequence-controls,
+.level-18-shell .sequence-controls,
+.level-19-shell .sequence-controls,
+.level-17-shell .puzzle-actions,
+.level-18-shell .puzzle-actions,
+.level-19-shell .puzzle-actions {
+  justify-content: center;
+}
+
+.level-17-shell .puzzle-status,
+.level-18-shell .puzzle-status,
+.level-19-shell .puzzle-status {
+  min-height: 1.5em;
+}
+
+.level-17-shell .puzzle-status.success,
+.level-18-shell .puzzle-status.success,
+.level-19-shell .puzzle-status.success {
+  color: #80ffcf;
+}
+
+/* Niveau 17 // balance (.scale-*), niveau 18 // tours (.tower-*), niveau 19 // code (.code-*) : cadre partagé. */
+.scale-board,
+.tower-board,
+.code-board {
+  width: min(100%, 560px);
+  margin: 0 auto;
+  padding: 14px;
+  border: 1px solid rgba(75, 158, 255, 0.42);
+  border-radius: 14px;
+  background: rgba(5, 12, 29, 0.82);
+  box-shadow: inset 0 0 24px rgba(75, 158, 255, 0.08);
+}
+
+/* Niveau 17 // fléau de la balance, totaux des plateaux et masses. */
+.scale-beam-wrap {
+  display: grid;
+  grid-template-columns: 64px 1fr 64px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.scale-beam {
+  height: 8px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #4b9eff, #d4dce7, #4b9eff);
+  box-shadow: 0 0 14px rgba(75, 158, 255, 0.45);
+  transition: transform 260ms ease;
+}
+
+.scale-total {
+  padding: 8px 0;
+  border: 1px solid rgba(75, 158, 255, 0.5);
+  color: #d4dce7;
+  font: 0.9rem var(--font-display, "Orbitron", sans-serif);
+  text-align: center;
+}
+
+.scale-zones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.scale-zone {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-height: 150px;
+  padding: 8px;
+  border: 1px solid rgba(75, 158, 255, 0.3);
+  border-radius: 10px;
+  background: rgba(75, 158, 255, 0.05);
+}
+
+.scale-zone.is-tray {
+  border-style: dashed;
+}
+
+.scale-zone-label {
+  color: #acbacb;
+  font: 0.56rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.scale-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.scale-weight {
+  min-width: 42px;
+  padding: 9px 10px;
+  border: 1px solid rgba(75, 158, 255, 0.6);
+  border-radius: 8px;
+  background: rgba(75, 158, 255, 0.14);
+  color: #d4dce7;
+  cursor: pointer;
+  font: 0.85rem var(--font-display, "Orbitron", sans-serif);
+}
+
+.scale-weight.zone-1,
+.scale-weight.zone-2 {
+  border-color: #80ffcf;
+  background: rgba(128, 255, 207, 0.14);
+}
+
+.scale-weight:not(:disabled):hover,
+.scale-weight:focus-visible {
+  outline: 2px solid #d4dce7;
+  outline-offset: 2px;
+}
+
+.scale-weight:disabled {
+  cursor: default;
+}
+
+.scale-board.is-solved .scale-total {
+  border-color: #80ffcf;
+  color: #80ffcf;
+}
+
+/* Niveau 18 // trois tours, disques empilés et sélection. */
+.tower-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.tower-peg {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 230px;
+  padding: 0 4px 8px;
+  border: 1px solid rgba(75, 158, 255, 0.3);
+  border-radius: 10px;
+  background: rgba(75, 158, 255, 0.05);
+  cursor: pointer;
+}
+
+.tower-peg::before {
+  content: "";
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  width: 6px;
+  height: calc(100% - 24px);
+  border-radius: 4px;
+  background: rgba(212, 220, 231, 0.35);
+  transform: translateX(-50%);
+}
+
+.tower-peg:last-child {
+  border-color: rgba(128, 255, 207, 0.5);
+}
+
+.tower-peg.is-selected {
+  border-color: #4b9eff;
+  box-shadow: 0 0 18px rgba(75, 158, 255, 0.4);
+}
+
+.tower-peg:not(:disabled):hover,
+.tower-peg:focus-visible {
+  outline: 2px solid #d4dce7;
+  outline-offset: 2px;
+}
+
+.tower-peg:disabled {
+  cursor: default;
+}
+
+.tower-stack {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 3px;
+  width: 100%;
+}
+
+.tower-disc {
+  display: block;
+  height: 20px;
+  border-radius: 6px;
+  background: hsl(var(--disc-hue) 80% 58%);
+  box-shadow: 0 0 10px hsl(var(--disc-hue) 80% 58% / 0.5);
+  transition: transform 160ms ease;
+}
+
+.tower-disc.is-lifted {
+  transform: translateY(-14px);
+}
+
+.tower-board.is-solved .tower-peg:last-child {
+  box-shadow: 0 0 18px rgba(128, 255, 207, 0.4);
+}
+
+/* Niveau 19 // historique des essais, cases du code et indicateurs bien/mal placés. */
+.code-history {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+}
+
+.code-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 10px;
+  border: 1px solid rgba(75, 158, 255, 0.25);
+  border-radius: 8px;
+  background: rgba(75, 158, 255, 0.05);
+}
+
+.code-row-symbols {
+  display: flex;
+  gap: 8px;
+}
+
+.code-symbol,
+.code-slot {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(75, 158, 255, 0.5);
+  border-radius: 8px;
+  background: rgba(75, 158, 255, 0.08);
+  color: #d4dce7;
+  font-size: 1.15rem;
+}
+
+.code-slot {
+  width: 54px;
+  height: 54px;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.code-slot:not(:disabled):hover,
+.code-slot:focus-visible {
+  outline: 2px solid #d4dce7;
+  outline-offset: 2px;
+}
+
+[data-symbol="0"] { color: #ff8edb; }
+[data-symbol="1"] { color: #ffd166; }
+[data-symbol="2"] { color: #79f7ff; }
+[data-symbol="3"] { color: #80ffcf; }
+[data-symbol="4"] { color: #ff9f6b; }
+[data-symbol="5"] { color: #b9a4ff; }
+
+.code-guess {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.code-pips {
+  display: flex;
+  gap: 4px;
+  font-size: 1rem;
+}
+
+.code-pip.is-exact {
+  color: #80ffcf;
+}
+
+.code-pip.is-misplaced {
+  color: #ffd166;
+}
+
+.code-board.is-solved .code-slot {
+  border-color: #80ffcf;
+}
+
+@media (max-width: 560px) {
+  .scale-zones,
+  .tower-board {
+    gap: 5px;
+  }
+  .tower-peg {
+    min-height: 190px;
+  }
+  .tower-disc {
+    height: 16px;
+  }
+  .code-slot {
+    width: 46px;
+    height: 46px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scale-beam,
+  .tower-disc {
+    transition: none;
   }
 }

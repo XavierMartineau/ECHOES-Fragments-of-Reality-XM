@@ -18,6 +18,7 @@ else {
 }
 
 /* ===== NIVEAU 11 ===== */
+/* Anneaux de résonance : aligner les anneaux (#alignmentBoard), séquence aléatoire, indice et chrono de 30 s. */
 (() => {
   const board = document.getElementById("alignmentBoard");
   if (!board) return;
@@ -466,6 +467,7 @@ else {
 })();
 
 /* ===== NIVEAU 12 ===== */
+/* Lumière croisée : mémoriser puis rejouer les intersections lumineuses (#crossIntersections). */
 (() => {
   const board = document.getElementById("crossIntersections");
   if (!board) return;
@@ -728,6 +730,7 @@ else {
 })();
 
 /* ===== NIVEAU 13 ===== */
+/* Glissement holographique : puzzle coulissant pour reconstruire le motif fractal (#tileBoard). */
 (() => {
   const board = document.getElementById("tileBoard");
   if (!board) return;
@@ -976,6 +979,7 @@ else {
 })();
 
 /* ===== NIVEAU 14 ===== */
+/* Prisme : orienter des miroirs pour guider un faisceau jusqu'au récepteur (#prismBoard). */
 (() => {
   const board = document.getElementById("prismBoard");
   if (!board) return;
@@ -1219,6 +1223,7 @@ else {
 })();
 
 /* ===== NIVEAU 15 ===== */
+/* Veines de lumière : routage de vingt paires de flux sur une grille 14 x 14 (#flowBoard). */
 (() => {
   const board = document.getElementById("flowBoard");
   if (!board) return;
@@ -1681,6 +1686,7 @@ else {
 })();
 
 /* ===== NIVEAU 16 ===== */
+/* Réseau dormant : inversion logique 3 x 3 en trois manches, une impulsion inverse une cellule et ses voisines (#logicBoard). */
 (() => {
   const board = document.getElementById("logicBoard");
   if (!board) return;
@@ -1908,6 +1914,696 @@ else {
   for (let level = 11; level <= 20; level += 1) {
     const marker = document.createElement("span");
     marker.className = `level-square${level === 16 ? " current" : ""}`;
+    marker.setAttribute("aria-hidden", "true");
+    $("levelProgress").appendChild(marker);
+  }
+
+  reset();
+})();
+
+/* ===== NIVEAU 17 ===== */
+/* Balance du vide : répartir des masses sur deux plateaux pour obtenir le même poids, trois manches (#scaleBoard). */
+(() => {
+  const board = document.getElementById("scaleBoard");
+  if (!board) return;
+
+  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const copy = {
+    fr: {
+      part: "PARTIE 2 // FRACTURES",
+      level: "NIVEAU 17",
+      eyebrow: "Fragment 017 // La balance du vide",
+      title: "La balance du vide",
+      description: "Deux plateaux, un seul équilibre. Répartis chaque masse sur les plateaux pour que les deux côtés pèsent exactement pareil.",
+      systemLabel: "ECHO://EQUILIBRE",
+      puzzleKicker: "PUZZLE // ÉQUILIBRE",
+      puzzleTitle: "Plateaux de la balance",
+      next: "CONTINUER VERS LE NIVEAU 18",
+      reset: "Réinitialiser",
+      ready: "Touche une masse pour la déplacer : réserve, plateau gauche, plateau droit.",
+      roundSuccess: "Équilibre atteint. Un nouvel ensemble de masses apparaît.",
+      success: "Les trois balances sont équilibrées. Le vide se stabilise.",
+      system: "SYSTEME:: BALANCE 017 DESEQUILIBREE // REPARTITION REQUISE",
+      systemSuccess: "SYSTEME:: BALANCE 017 EQUILIBREE // PROTOCOLE 018 DEBLOQUE",
+      left: "Plateau gauche",
+      right: "Plateau droit",
+      tray: "Réserve",
+      mass: "Masse",
+      moves: "Déplacements",
+      progress: "Progression de la Partie 2",
+      save: "SAUVEGARDER",
+      saved: "SAUVEGARDÉ",
+      saveHint: "Progression sauvegardée.",
+      footer: "ÉCHO // FRACTURES ACTIVES",
+      counter: "17 / 60",
+    },
+    en: {
+      part: "PART 2 // FRACTURES",
+      level: "LEVEL 17",
+      eyebrow: "Fragment 017 // The void scale",
+      title: "The void scale",
+      description: "Two pans, one balance. Spread every mass across the pans so both sides weigh exactly the same.",
+      systemLabel: "ECHO://BALANCE",
+      puzzleKicker: "PUZZLE // BALANCE",
+      puzzleTitle: "Scale pans",
+      next: "CONTINUE TO LEVEL 18",
+      reset: "Reset",
+      ready: "Tap a mass to move it: reserve, left pan, right pan.",
+      roundSuccess: "Balance reached. A new set of masses appears.",
+      success: "All three scales are balanced. The void settles.",
+      system: "SYSTEM:: SCALE 017 UNBALANCED // DISTRIBUTION REQUIRED",
+      systemSuccess: "SYSTEM:: SCALE 017 BALANCED // PROTOCOL 018 UNLOCKED",
+      left: "Left pan",
+      right: "Right pan",
+      tray: "Reserve",
+      mass: "Mass",
+      moves: "Moves",
+      progress: "Part 2 progress",
+      save: "SAVE",
+      saved: "SAVED",
+      saveHint: "Progress saved.",
+      footer: "ECHO // ACTIVE FRACTURES",
+      counter: "17 / 60",
+    },
+  }[language];
+
+  const $ = (id) => document.getElementById(id);
+  const status = $("puzzleStatus");
+  const readout = $("progressReadout");
+  const moveReadout = $("moveReadout");
+  const resetButton = $("resetButton");
+  const nextButton = $("nextLevelButton");
+  const saveButton = $("saveGameButton");
+  const systemMessage = $("systemMessage");
+  const containers = [$("scaleTray"), $("scaleLeft"), $("scaleRight")];
+  const totals = [null, $("scaleLeftTotal"), $("scaleRightTotal")];
+  const beam = $("scaleBeam");
+  const zoneNames = [copy.tray, copy.left, copy.right];
+  const rounds = [
+    [3, 5, 7, 9, 4],
+    [2, 3, 5, 6, 8, 10],
+    [4, 7, 9, 11, 13, 6, 8],
+  ];
+  let zones = [];
+  let round = 0;
+  let moves = 0;
+  let solved = false;
+  let locked = false;
+  let advanceTimer = 0;
+
+  document.documentElement.lang = language;
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    const value = copy[element.dataset.i18n];
+    if (typeof value === "string") element.textContent = value;
+  });
+  $("levelProgress").setAttribute("aria-label", copy.progress);
+  $("scaleLeftLabel").textContent = copy.left;
+  $("scaleRightLabel").textContent = copy.right;
+  $("scaleTrayLabel").textContent = copy.tray;
+  resetButton.textContent = copy.reset;
+  nextButton.textContent = copy.next;
+  saveButton.textContent = copy.save;
+
+  const setStatus = (message, variant = "") => {
+    status.textContent = message;
+    status.className = `puzzle-status${variant ? ` ${variant}` : ""}`;
+  };
+
+  const sums = () => {
+    const result = [0, 0, 0];
+    rounds[Math.min(round, rounds.length - 1)].forEach((weight, index) => {
+      result[zones[index]] += weight;
+    });
+    return result;
+  };
+
+  const render = () => {
+    containers.forEach((container) => container.replaceChildren());
+    rounds[Math.min(round, rounds.length - 1)].forEach((weight, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = `scale-weight zone-${zones[index]}`;
+      button.textContent = String(weight);
+      button.disabled = solved || locked;
+      button.setAttribute("aria-label", `${copy.mass} ${weight}: ${zoneNames[zones[index]]}`);
+      button.addEventListener("click", () => moveWeight(index));
+      containers[zones[index]].appendChild(button);
+    });
+    const [, left, right] = sums();
+    totals[1].textContent = String(left);
+    totals[2].textContent = String(right);
+    const angle = Math.max(-9, Math.min(9, (right - left) * 1.4));
+    beam.style.transform = `rotate(${angle}deg)`;
+    readout.textContent = `${round} / ${rounds.length}`;
+    moveReadout.textContent = `${copy.moves}: ${moves}`;
+  };
+
+  const buildRound = () => {
+    zones = rounds[round].map(() => 0);
+    moves = 0;
+    render();
+  };
+
+  const completeRound = () => {
+    round += 1;
+    if (round === rounds.length) {
+      solved = true;
+      board.classList.add("is-solved");
+      setStatus(copy.success, "success");
+      systemMessage.textContent = copy.systemSuccess;
+      nextButton.hidden = false;
+      window.EchoesSave?.saveProgress({ currentPage: "level-17", currentLevel: 17 });
+      readout.textContent = `${round} / ${rounds.length}`;
+      render();
+      nextButton.focus();
+      return;
+    }
+    locked = true;
+    readout.textContent = `${round} / ${rounds.length}`;
+    setStatus(copy.roundSuccess, "success");
+    advanceTimer = window.setTimeout(() => {
+      locked = false;
+      buildRound();
+      setStatus(copy.ready);
+    }, 1000);
+  };
+
+  function moveWeight(index) {
+    if (solved || locked) return;
+    zones[index] = (zones[index] + 1) % 3;
+    moves += 1;
+    render();
+    const [tray, left, right] = sums();
+    if (tray === 0 && left === right) completeRound();
+  }
+
+  const reset = () => {
+    window.clearTimeout(advanceTimer);
+    round = 0;
+    solved = false;
+    locked = false;
+    board.classList.remove("is-solved");
+    systemMessage.textContent = copy.system;
+    nextButton.hidden = true;
+    setStatus(copy.ready);
+    buildRound();
+  };
+
+  resetButton.addEventListener("click", reset);
+  nextButton.addEventListener("click", () => {
+    window.location.href = "niveau-18.html";
+  });
+  saveButton.addEventListener("click", () => {
+    if (!window.EchoesSave?.saveProgress({ currentPage: "level-17", currentLevel: 17 })) return;
+    saveButton.textContent = copy.saved;
+    setStatus(copy.saveHint);
+    window.setTimeout(() => {
+      saveButton.textContent = copy.save;
+    }, 1800);
+  });
+
+  for (let level = 11; level <= 20; level += 1) {
+    const marker = document.createElement("span");
+    marker.className = `level-square${level === 17 ? " current" : ""}`;
+    marker.setAttribute("aria-hidden", "true");
+    $("levelProgress").appendChild(marker);
+  }
+
+  reset();
+})();
+
+/* ===== NIVEAU 18 ===== */
+/* Tour des échos : transférer une pile de 3, 4 puis 5 disques (tours de Hanoï, #towerBoard). */
+(() => {
+  const board = document.getElementById("towerBoard");
+  if (!board) return;
+
+  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const copy = {
+    fr: {
+      part: "PARTIE 2 // FRACTURES",
+      level: "NIVEAU 18",
+      eyebrow: "Fragment 018 // La tour des échos",
+      title: "La tour des échos",
+      description: "Déplace toute la pile de disques vers la tour de droite. Un seul disque à la fois, et jamais un grand disque sur un plus petit.",
+      systemLabel: "ECHO://TOUR",
+      puzzleKicker: "PUZZLE // TRANSFERT DE PILE",
+      puzzleTitle: "Tours d'écho",
+      next: "CONTINUER VERS LE NIVEAU 19",
+      reset: "Réinitialiser",
+      ready: "Choisis une tour source, puis une tour de destination.",
+      picked: "Disque sélectionné. Choisis la tour de destination.",
+      empty: "Cette tour est vide.",
+      illegal: "Impossible : un disque ne peut pas reposer sur un plus petit.",
+      roundSuccess: "Pile transférée. Une tour plus haute apparaît.",
+      success: "Les trois piles sont transférées. L'écho se stabilise.",
+      system: "SYSTEME:: TOUR 018 DESALIGNEE // TRANSFERT REQUIS",
+      systemSuccess: "SYSTEME:: TOUR 018 ALIGNEE // PROTOCOLE 019 DEBLOQUE",
+      tower: "Tour",
+      discs: "disques",
+      moves: "Coups",
+      progress: "Progression de la Partie 2",
+      save: "SAUVEGARDER",
+      saved: "SAUVEGARDÉ",
+      saveHint: "Progression sauvegardée.",
+      footer: "ÉCHO // FRACTURES ACTIVES",
+      counter: "18 / 60",
+    },
+    en: {
+      part: "PART 2 // FRACTURES",
+      level: "LEVEL 18",
+      eyebrow: "Fragment 018 // The echo tower",
+      title: "The echo tower",
+      description: "Move the whole stack of discs to the right tower. One disc at a time, and never a larger disc on a smaller one.",
+      systemLabel: "ECHO://TOWER",
+      puzzleKicker: "PUZZLE // STACK TRANSFER",
+      puzzleTitle: "Echo towers",
+      next: "CONTINUE TO LEVEL 19",
+      reset: "Reset",
+      ready: "Pick a source tower, then a destination tower.",
+      picked: "Disc selected. Pick the destination tower.",
+      empty: "This tower is empty.",
+      illegal: "Not allowed: a disc cannot rest on a smaller one.",
+      roundSuccess: "Stack transferred. A taller tower appears.",
+      success: "All three stacks are transferred. The echo settles.",
+      system: "SYSTEM:: TOWER 018 MISALIGNED // TRANSFER REQUIRED",
+      systemSuccess: "SYSTEM:: TOWER 018 ALIGNED // PROTOCOL 019 UNLOCKED",
+      tower: "Tower",
+      discs: "discs",
+      moves: "Moves",
+      progress: "Part 2 progress",
+      save: "SAVE",
+      saved: "SAVED",
+      saveHint: "Progress saved.",
+      footer: "ECHO // ACTIVE FRACTURES",
+      counter: "18 / 60",
+    },
+  }[language];
+
+  const $ = (id) => document.getElementById(id);
+  const status = $("puzzleStatus");
+  const readout = $("progressReadout");
+  const moveReadout = $("moveReadout");
+  const resetButton = $("resetButton");
+  const nextButton = $("nextLevelButton");
+  const saveButton = $("saveGameButton");
+  const systemMessage = $("systemMessage");
+  const pegs = [...board.querySelectorAll(".tower-peg")];
+  const discCounts = [3, 4, 5];
+  let towers = [[], [], []];
+  let selected = -1;
+  let round = 0;
+  let moves = 0;
+  let solved = false;
+  let locked = false;
+  let advanceTimer = 0;
+
+  document.documentElement.lang = language;
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    const value = copy[element.dataset.i18n];
+    if (typeof value === "string") element.textContent = value;
+  });
+  $("levelProgress").setAttribute("aria-label", copy.progress);
+  resetButton.textContent = copy.reset;
+  nextButton.textContent = copy.next;
+  saveButton.textContent = copy.save;
+
+  const setStatus = (message, variant = "") => {
+    status.textContent = message;
+    status.className = `puzzle-status${variant ? ` ${variant}` : ""}`;
+  };
+
+  const render = () => {
+    const count = discCounts[Math.min(round, discCounts.length - 1)];
+    pegs.forEach((peg, index) => {
+      const stack = peg.querySelector(".tower-stack");
+      stack.replaceChildren();
+      towers[index].forEach((size, position) => {
+        const disc = document.createElement("span");
+        disc.className = "tower-disc";
+        disc.style.width = `${26 + (size / count) * 66}%`;
+        disc.style.setProperty("--disc-hue", String(190 + size * 26));
+        if (selected === index && position === towers[index].length - 1) disc.classList.add("is-lifted");
+        stack.appendChild(disc);
+      });
+      peg.classList.toggle("is-selected", selected === index);
+      peg.disabled = solved || locked;
+      peg.setAttribute("aria-label", `${copy.tower} ${index + 1}: ${towers[index].length} ${copy.discs}`);
+    });
+    readout.textContent = `${round} / ${discCounts.length}`;
+    moveReadout.textContent = `${copy.moves}: ${moves}`;
+  };
+
+  const buildRound = () => {
+    const count = discCounts[round];
+    towers = [Array.from({ length: count }, (_, i) => count - i), [], []];
+    selected = -1;
+    moves = 0;
+    render();
+  };
+
+  const completeRound = () => {
+    round += 1;
+    selected = -1;
+    if (round === discCounts.length) {
+      solved = true;
+      board.classList.add("is-solved");
+      setStatus(copy.success, "success");
+      systemMessage.textContent = copy.systemSuccess;
+      nextButton.hidden = false;
+      window.EchoesSave?.saveProgress({ currentPage: "level-18", currentLevel: 18 });
+      render();
+      nextButton.focus();
+      return;
+    }
+    locked = true;
+    render();
+    setStatus(copy.roundSuccess, "success");
+    advanceTimer = window.setTimeout(() => {
+      locked = false;
+      buildRound();
+      setStatus(copy.ready);
+    }, 1000);
+  };
+
+  const pressPeg = (index) => {
+    if (solved || locked) return;
+    if (selected === -1) {
+      if (!towers[index].length) {
+        setStatus(copy.empty);
+        return;
+      }
+      selected = index;
+      setStatus(copy.picked);
+      render();
+      return;
+    }
+    if (selected === index) {
+      selected = -1;
+      setStatus(copy.ready);
+      render();
+      return;
+    }
+    const disc = towers[selected][towers[selected].length - 1];
+    const target = towers[index][towers[index].length - 1];
+    if (target !== undefined && target < disc) {
+      setStatus(copy.illegal);
+      selected = -1;
+      render();
+      return;
+    }
+    towers[selected].pop();
+    towers[index].push(disc);
+    selected = -1;
+    moves += 1;
+    setStatus(copy.ready);
+    render();
+    if (towers[2].length === discCounts[round]) completeRound();
+  };
+
+  const reset = () => {
+    window.clearTimeout(advanceTimer);
+    round = 0;
+    solved = false;
+    locked = false;
+    board.classList.remove("is-solved");
+    systemMessage.textContent = copy.system;
+    nextButton.hidden = true;
+    setStatus(copy.ready);
+    buildRound();
+  };
+
+  pegs.forEach((peg, index) => peg.addEventListener("click", () => pressPeg(index)));
+  resetButton.addEventListener("click", reset);
+  nextButton.addEventListener("click", () => {
+    window.location.href = "niveau-19.html";
+  });
+  saveButton.addEventListener("click", () => {
+    if (!window.EchoesSave?.saveProgress({ currentPage: "level-18", currentLevel: 18 })) return;
+    saveButton.textContent = copy.saved;
+    setStatus(copy.saveHint);
+    window.setTimeout(() => {
+      saveButton.textContent = copy.save;
+    }, 1800);
+  });
+
+  for (let level = 11; level <= 20; level += 1) {
+    const marker = document.createElement("span");
+    marker.className = `level-square${level === 18 ? " current" : ""}`;
+    marker.setAttribute("aria-hidden", "true");
+    $("levelProgress").appendChild(marker);
+  }
+
+  reset();
+})();
+
+/* ===== NIVEAU 19 ===== */
+/* Code fantôme : déduire un code de quatre symboles différents grâce aux indices bien/mal placés (#codeBoard). */
+(() => {
+  const board = document.getElementById("codeBoard");
+  if (!board) return;
+
+  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const copy = {
+    fr: {
+      part: "PARTIE 2 // FRACTURES",
+      level: "NIVEAU 19",
+      eyebrow: "Fragment 019 // Le code fantôme",
+      title: "Le code fantôme",
+      description: "Un code de quatre symboles tous différents est caché. Chaque essai indique combien de symboles sont bien placés et combien sont présents mais mal placés.",
+      systemLabel: "ECHO://CODE",
+      puzzleKicker: "PUZZLE // DÉDUCTION",
+      puzzleTitle: "Serrure fantôme",
+      submit: "VALIDER L'ESSAI",
+      next: "CONTINUER VERS LE NIVEAU 20",
+      reset: "Réinitialiser",
+      ready: "Touche chaque case pour changer son symbole. ● = bien placé, ○ = mal placé.",
+      incomplete: "Remplis les quatre cases avant de valider.",
+      lost: "Verrou activé. Un nouveau code est généré.",
+      success: "Code percé. La serrure fantôme s'ouvre.",
+      system: "SYSTEME:: SERRURE 019 VERROUILLEE // CODE REQUIS",
+      systemSuccess: "SYSTEME:: SERRURE 019 OUVERTE // PROTOCOLE 020 DEBLOQUE",
+      slot: "Case",
+      empty: "vide",
+      attempts: "Essais",
+      right: "bien placés",
+      wrong: "mal placés",
+      progress: "Progression de la Partie 2",
+      save: "SAUVEGARDER",
+      saved: "SAUVEGARDÉ",
+      saveHint: "Progression sauvegardée.",
+      footer: "ÉCHO // FRACTURES ACTIVES",
+      counter: "19 / 60",
+    },
+    en: {
+      part: "PART 2 // FRACTURES",
+      level: "LEVEL 19",
+      eyebrow: "Fragment 019 // The ghost code",
+      title: "The ghost code",
+      description: "A code of four different symbols is hidden. Each attempt tells you how many symbols are in the right place and how many are present but misplaced.",
+      systemLabel: "ECHO://CODE",
+      puzzleKicker: "PUZZLE // DEDUCTION",
+      puzzleTitle: "Ghost lock",
+      submit: "SUBMIT ATTEMPT",
+      next: "CONTINUE TO LEVEL 20",
+      reset: "Reset",
+      ready: "Tap each slot to change its symbol. ● = right place, ○ = misplaced.",
+      incomplete: "Fill all four slots before submitting.",
+      lost: "Lock engaged. A new code is generated.",
+      success: "Code broken. The ghost lock opens.",
+      system: "SYSTEM:: LOCK 019 SEALED // CODE REQUIRED",
+      systemSuccess: "SYSTEM:: LOCK 019 OPEN // PROTOCOL 020 UNLOCKED",
+      slot: "Slot",
+      empty: "empty",
+      attempts: "Attempts",
+      right: "right place",
+      wrong: "misplaced",
+      progress: "Part 2 progress",
+      save: "SAVE",
+      saved: "SAVED",
+      saveHint: "Progress saved.",
+      footer: "ECHO // ACTIVE FRACTURES",
+      counter: "19 / 60",
+    },
+  }[language];
+
+  const $ = (id) => document.getElementById(id);
+  const status = $("puzzleStatus");
+  const readout = $("progressReadout");
+  const submitButton = $("submitGuessButton");
+  const resetButton = $("resetButton");
+  const nextButton = $("nextLevelButton");
+  const saveButton = $("saveGameButton");
+  const systemMessage = $("systemMessage");
+  const history = $("codeHistory");
+  const guessRow = $("codeGuess");
+  const symbols = ["◆", "▲", "●", "■", "✚", "★"];
+  const codeLength = 4;
+  const maxAttempts = 10;
+  let secret = [];
+  let guess = Array(codeLength).fill(-1);
+  let attempts = 0;
+  let solved = false;
+  let locked = false;
+  let advanceTimer = 0;
+
+  document.documentElement.lang = language;
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    const value = copy[element.dataset.i18n];
+    if (typeof value === "string") element.textContent = value;
+  });
+  $("levelProgress").setAttribute("aria-label", copy.progress);
+  submitButton.textContent = copy.submit;
+  resetButton.textContent = copy.reset;
+  nextButton.textContent = copy.next;
+  saveButton.textContent = copy.save;
+
+  const setStatus = (message, variant = "") => {
+    status.textContent = message;
+    status.className = `puzzle-status${variant ? ` ${variant}` : ""}`;
+  };
+
+  const newSecret = () => {
+    const pool = symbols.map((_, index) => index);
+    for (let i = pool.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    secret = pool.slice(0, codeLength);
+  };
+
+  const renderGuess = () => {
+    guessRow.querySelectorAll(".code-slot").forEach((slot, index) => {
+      const value = guess[index];
+      slot.textContent = value === -1 ? "?" : symbols[value];
+      slot.dataset.symbol = String(value);
+      slot.disabled = solved || locked;
+      slot.setAttribute("aria-label", `${copy.slot} ${index + 1}: ${value === -1 ? copy.empty : symbols[value]}`);
+    });
+    submitButton.disabled = solved || locked;
+    readout.textContent = `${copy.attempts}: ${attempts} / ${maxAttempts}`;
+  };
+
+  const evaluate = (attempt) => {
+    let exact = 0;
+    attempt.forEach((value, index) => {
+      if (value === secret[index]) exact += 1;
+    });
+    const common = symbols.reduce((total, _, symbol) => {
+      const inSecret = secret.filter((value) => value === symbol).length;
+      const inAttempt = attempt.filter((value) => value === symbol).length;
+      return total + Math.min(inSecret, inAttempt);
+    }, 0);
+    return { exact, misplaced: common - exact };
+  };
+
+  const addHistoryRow = (attempt, result) => {
+    const row = document.createElement("li");
+    row.className = "code-row";
+    const cells = document.createElement("span");
+    cells.className = "code-row-symbols";
+    attempt.forEach((value) => {
+      const cell = document.createElement("span");
+      cell.className = "code-symbol";
+      cell.dataset.symbol = String(value);
+      cell.textContent = symbols[value];
+      cells.appendChild(cell);
+    });
+    const pips = document.createElement("span");
+    pips.className = "code-pips";
+    pips.setAttribute("aria-label", `${result.exact} ${copy.right}, ${result.misplaced} ${copy.wrong}`);
+    for (let i = 0; i < result.exact; i += 1) {
+      const pip = document.createElement("span");
+      pip.className = "code-pip is-exact";
+      pip.textContent = "●";
+      pips.appendChild(pip);
+    }
+    for (let i = 0; i < result.misplaced; i += 1) {
+      const pip = document.createElement("span");
+      pip.className = "code-pip is-misplaced";
+      pip.textContent = "○";
+      pips.appendChild(pip);
+    }
+    row.append(cells, pips);
+    history.appendChild(row);
+  };
+
+  const submit = () => {
+    if (solved || locked) return;
+    if (guess.includes(-1)) {
+      setStatus(copy.incomplete);
+      return;
+    }
+    const attempt = [...guess];
+    const result = evaluate(attempt);
+    attempts += 1;
+    addHistoryRow(attempt, result);
+    if (result.exact === codeLength) {
+      solved = true;
+      board.classList.add("is-solved");
+      setStatus(copy.success, "success");
+      systemMessage.textContent = copy.systemSuccess;
+      nextButton.hidden = false;
+      window.EchoesSave?.saveProgress({ currentPage: "level-19", currentLevel: 19 });
+      renderGuess();
+      nextButton.focus();
+      return;
+    }
+    if (attempts >= maxAttempts) {
+      locked = true;
+      setStatus(copy.lost);
+      renderGuess();
+      advanceTimer = window.setTimeout(reset, 1800);
+      return;
+    }
+    setStatus(copy.ready);
+    renderGuess();
+  };
+
+  const reset = () => {
+    window.clearTimeout(advanceTimer);
+    newSecret();
+    guess = Array(codeLength).fill(-1);
+    attempts = 0;
+    solved = false;
+    locked = false;
+    board.classList.remove("is-solved");
+    history.replaceChildren();
+    systemMessage.textContent = copy.system;
+    nextButton.hidden = true;
+    setStatus(copy.ready);
+    renderGuess();
+  };
+
+  for (let index = 0; index < codeLength; index += 1) {
+    const slot = document.createElement("button");
+    slot.type = "button";
+    slot.className = "code-slot";
+    slot.addEventListener("click", () => {
+      if (solved || locked) return;
+      guess[index] = (guess[index] + 1) % symbols.length;
+      renderGuess();
+    });
+    guessRow.appendChild(slot);
+  }
+
+  submitButton.addEventListener("click", submit);
+  resetButton.addEventListener("click", reset);
+  nextButton.addEventListener("click", () => {
+    window.location.href = "niveau-20.html";
+  });
+  saveButton.addEventListener("click", () => {
+    if (!window.EchoesSave?.saveProgress({ currentPage: "level-19", currentLevel: 19 })) return;
+    saveButton.textContent = copy.saved;
+    setStatus(copy.saveHint);
+    window.setTimeout(() => {
+      saveButton.textContent = copy.save;
+    }, 1800);
+  });
+
+  for (let level = 11; level <= 20; level += 1) {
+    const marker = document.createElement("span");
+    marker.className = `level-square${level === 19 ? " current" : ""}`;
     marker.setAttribute("aria-hidden", "true");
     $("levelProgress").appendChild(marker);
   }
