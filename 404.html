@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ECHOES - Signal perdu (404)</title>
+    <style>
+      html,body{margin:0;min-height:100%;background:#050711;color:#edf8ff}
+      body{display:grid;place-items:center;min-height:100vh;padding:24px;box-sizing:border-box;font-family:"Orbitron",system-ui,sans-serif;background:radial-gradient(circle at 50% 35%,rgba(115,243,255,.14),transparent 45%),#050711}
+      .card{width:min(520px,100%);padding:36px 28px;border:1px solid rgba(115,243,255,.45);background:rgba(5,9,22,.9);box-shadow:0 0 50px rgba(115,243,255,.15);text-align:center}
+      .code{margin:0;color:#ff4fd8;font-size:clamp(3rem,16vw,6rem);letter-spacing:.2rem;text-shadow:0 0 24px rgba(255,79,216,.6);animation:flicker 2.6s infinite}
+      .eyebrow{margin:8px 0;color:#73f3ff;font-size:.7rem;letter-spacing:.2rem}
+      p{color:#c7d6ea;line-height:1.6;font-family:system-ui,sans-serif}
+      a{display:inline-block;margin-top:12px;padding:12px 22px;border:1px solid #73f3ff;color:#73f3ff;text-decoration:none;letter-spacing:.12rem;font-size:.8rem}
+      a:hover{background:rgba(115,243,255,.15)}
+      @keyframes flicker{0%,92%,100%{opacity:1}94%{opacity:.4}96%{opacity:.9}98%{opacity:.3}}
+      @media(prefers-reduced-motion:reduce){.code{animation:none}}
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <p class="code">404</p>
+      <p class="eyebrow" id="eyebrow">ECHO://SIGNAL_PERDU</p>
+      <p id="text">Ce fragment de réalité n'existe pas ou a été effacé. Retourne à la base pour reprendre ta route.</p>
+      <a id="home" href="/">RETOUR À L'ACCUEIL</a>
+    </main>
+    <script>
+      (function () {
+        var host = location.hostname.indexOf("github.io") !== -1;
+        var seg = location.pathname.split("/")[1];
+        document.getElementById("home").href = host && seg ? "/" + seg + "/" : "/";
+        var lang = "fr";
+        try { lang = localStorage.getItem("echoes-language") || "fr"; } catch (e) {}
+        if (lang === "en") {
+          document.documentElement.lang = "en";
+          document.title = "ECHOES - Signal lost (404)";
+          document.getElementById("eyebrow").textContent = "ECHO://SIGNAL_LOST";
+          document.getElementById("text").textContent = "This fragment of reality does not exist or was erased. Head back to base and resume your route.";
+          document.getElementById("home").textContent = "BACK TO HOME";
+        }
+      })();
+    </script>
+  </body>
+</html>

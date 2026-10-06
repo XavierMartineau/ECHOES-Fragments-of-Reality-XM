@@ -5,34 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="../../assets/images/echoes-favicon.svg" />
     <title>ECHOES - Niveau 20</title>
+    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css" />
     <link rel="stylesheet" href="../../css/partie-2_niveau-11_à_20.css" />
     <link rel="stylesheet" href="../../css/responsive.css" />
-    <link rel="stylesheet" href="../../css/construction.css" />
     <link rel="stylesheet" href="../../css/fonts.css" />
-    <link rel="stylesheet" href="../../css/puzzle-demos.css" />
   </head>
   <body class="part-two-theme">
-    <main class="construction-page" aria-labelledby="constructionTitle">
-      <section class="construction-card">
-        <svg class="construction-illustration" viewBox="0 0 260 190" role="img" aria-label="Illustration de construction">
-          <g class="construction-crane" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M48 156V35h34l38 121M48 35h145M82 35l-34 45h145M192 35v121M28 156h190" />
-            <path d="M161 35v67" />
-          </g>
-          <rect class="construction-weight" x="148" y="101" width="27" height="34" rx="3" fill="#ffd166" stroke="#030711" stroke-width="4" />
-          <circle class="construction-light" cx="48" cy="35" r="7" fill="#79f7ff" stroke="none" />
-          <path d="M22 156h216" stroke="#ff8edb" stroke-width="5" />
-        </svg>
-        <p class="eyebrow">PARTIE 2 // NIVEAU 20</p>
-        <h1 id="constructionTitle" data-i18n="constructionTitle">EN CONSTRUCTION</h1>
-        <p data-i18n="constructionDescription">Ce niveau est en cours de création. Le puzzle et ses effets seront bientôt disponibles.</p>
+    <div class="background-glow" aria-hidden="true"></div>
+    <div class="grid-overlay" aria-hidden="true"></div>
+    <header class="level-header">
+      <a class="brand" href="../../../index.html">ECHOES</a>
+      <div class="level-meta">
+        <span data-i18n="part">PARTIE 2 // FRACTURES</span>
+        <div class="level-progress" id="levelProgress" aria-label="Progression de la Partie 2"></div>
+        <strong data-i18n="level">NIVEAU 20</strong>
+      </div>
+      <button class="save-game-button" id="saveGameButton" type="button">SAUVEGARDER</button>
+    </header>
+    <main class="level-shell level-20-shell">
+      <section class="level-intro" aria-labelledby="levelTitle">
+        <p class="eyebrow" data-i18n="eyebrow">Fragment 020 // Le cadenas des symboles</p>
+        <h1 id="levelTitle" data-i18n="title">Le cadenas des symboles</h1>
+        <p class="level-description" data-i18n="description">Chaque symbole cache un chiffre. Déduis-les grâce aux indices, réponds aux quatre opérations, additionne les résultats : le dernier chiffre de la somme règle une molette du cadenas.</p>
+        <div class="system-transmission" aria-live="polite">
+          <span class="system-label" data-i18n="systemLabel">ECHO://CADENAS</span>
+          <p id="systemMessage">SYSTEME:: CADENAS 020 VERROUILLE // QUATRE CHIFFRES REQUIS</p>
+        </div>
+      </section>
+      <section class="puzzle-panel" aria-labelledby="puzzleTitle">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-kicker" data-i18n="puzzleKicker">PUZZLE // DÉCHIFFRAGE</p>
+            <h2 id="puzzleTitle" data-i18n="puzzleTitle">Cadenas à quatre chiffres</h2>
+          </div>
+          <div class="logic-readouts">
+            <span class="progress-readout" id="progressReadout" aria-live="polite">0 / 4</span>
+          </div>
+        </div>
+        <div class="code-board" id="codeBoard">
+          <p class="code-section-title" data-i18n="clues">INDICES</p>
+          <div class="code-block" id="codeClues"></div>
+          <p class="code-section-title" data-i18n="questions">À RÉSOUDRE</p>
+          <div class="code-block" id="codeQuestions"></div>
+          <p class="code-sum" id="codeSum" hidden></p>
+          <p class="code-section-title" data-i18n="padlock">CADENAS</p>
+          <div class="code-padlock" id="codePadlock"></div>
+        </div>
+        <div class="sequence-controls">
+          <p class="puzzle-status" id="puzzleStatus" aria-live="polite"></p>
+        </div>        <div class="puzzle-actions">
+          <button class="next-level-button" id="nextLevelButton" type="button" hidden data-i18n="next">CONTINUER VERS LE NIVEAU 21</button>
+          <button class="reset-button" id="resetButton" type="button" data-i18n="reset">Réinitialiser</button>
+        </div>
       </section>
     </main>
-    <script src="../../js/translations.js"></script>
+    <footer class="level-footer">
+      <span data-i18n="footer">ÉCHO // FRACTURES ACTIVES</span>
+      <span data-i18n="counter">20 / 60</span>
+    </footer>
+    <script src="../../js/save-system.js"></script>
     <script src="../../js/language.js"></script>
-    <footer class="global-site-footer"><span>© 2026 Xavier Martineau</span><span>All rights reserved.</span></footer>    <script src="../../js/micro-animations.js"></script><script src="../../js/dev-mode.js"></script>
-      <script src="../../js/ambient-background.js"></script>
+    <script src="../../js/page-i18n.js"></script>
+    <script src="../../js/micro-animations.js"></script>
+    <script src="../../js/dev-mode.js"></script>
+    <script src="../../js/ambient-background.js"></script>
+    <script src="../../js/partie-2_niveau-11_à_20.js"></script>
   </body>
 </html>
-
-

@@ -9,8 +9,8 @@
  *  - Niveau 16 : inversion logique 3 x 3 (.logic-*)
  *  - Niveau 17 : balance du vide (.scale-*)
  *  - Niveau 18 : tour des échos / tours de Hanoï (.tower-*)
- *  - Niveau 19 : code fantôme / déduction (.code-*)
- *  - Niveau 20 : page « En construction » (construction.css)
+ *  - Niveau 19 : mots croisés géants (.cw-*)
+ *  - Niveau 20 : cadenas des symboles / équations (.code-*)
  * Les animations d'entrée et les styles génériques (en-tête, panneau, pied de
  * page) viennent d'abord ; les blocs propres à chaque niveau suivent.
  * ========================================================================== */
@@ -1295,16 +1295,18 @@ body.part-two-theme {
   }
 }
 
-/* NIVEAUX 17-19 // BALANCE (17), TOUR DE HANOÏ (18) ET CODE FANTÔME (19) : marges et contrôles communs. */
+/* NIVEAUX 17-20 // BALANCE (17), TOUR DE HANOÏ (18), MOTS CROISÉS (19) ET CADENAS (20) : marges et contrôles communs. */
 .level-17-shell,
 .level-18-shell,
-.level-19-shell {
+.level-19-shell,
+.level-20-shell {
   padding-bottom: 110px;
 }
 
 .level-17-shell .sequence-controls,
 .level-18-shell .sequence-controls,
 .level-19-shell .sequence-controls,
+.level-20-shell .sequence-controls,
 .level-17-shell .puzzle-actions,
 .level-18-shell .puzzle-actions,
 .level-19-shell .puzzle-actions {
@@ -1313,17 +1315,19 @@ body.part-two-theme {
 
 .level-17-shell .puzzle-status,
 .level-18-shell .puzzle-status,
-.level-19-shell .puzzle-status {
+.level-19-shell .puzzle-status,
+.level-20-shell .puzzle-status {
   min-height: 1.5em;
 }
 
 .level-17-shell .puzzle-status.success,
 .level-18-shell .puzzle-status.success,
-.level-19-shell .puzzle-status.success {
+.level-19-shell .puzzle-status.success,
+.level-20-shell .puzzle-status.success {
   color: #80ffcf;
 }
 
-/* Niveau 17 // balance (.scale-*), niveau 18 // tours (.tower-*), niveau 19 // code (.code-*) : cadre partagé. */
+/* Niveau 17 // balance (.scale-*), niveau 18 // tours (.tower-*), niveaux 19 // mots croisés (.cw-*) et 20 // cadenas (.code-*) : cadre partagé. */
 .scale-board,
 .tower-board,
 .code-board {
@@ -1524,55 +1528,105 @@ body.part-two-theme {
   box-shadow: 0 0 18px rgba(128, 255, 207, 0.4);
 }
 
-/* Niveau 19 // historique des essais, cases du code et indicateurs bien/mal placés. */
-.code-history {
-  display: grid;
-  gap: 6px;
-  margin: 0 0 14px;
-  padding: 0;
-  list-style: none;
+/* Niveau 20 // équations de symboles, listes de réponses et molettes du cadenas. */
+.code-section-title {
+  margin: 10px 0 6px;
+  color: #acbacb;
+  font: 0.58rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.12em;
 }
 
-.code-row {
+.code-block {
+  display: grid;
+  gap: 6px;
+}
+
+.code-equation {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+  justify-content: center;
+  gap: 8px;
   padding: 6px 10px;
   border: 1px solid rgba(75, 158, 255, 0.25);
   border-radius: 8px;
   background: rgba(75, 158, 255, 0.05);
-}
-
-.code-row-symbols {
-  display: flex;
-  gap: 8px;
-}
-
-.code-symbol,
-.code-slot {
-  display: inline-grid;
-  place-items: center;
-  width: 38px;
-  height: 38px;
-  border: 1px solid rgba(75, 158, 255, 0.5);
-  border-radius: 8px;
-  background: rgba(75, 158, 255, 0.08);
   color: #d4dce7;
-  font-size: 1.15rem;
+  font: 1rem var(--font-display, "Orbitron", sans-serif);
 }
 
-.code-slot {
-  width: 54px;
-  height: 54px;
-  cursor: pointer;
+.code-symbol {
   font-size: 1.5rem;
+  line-height: 1;
 }
 
-.code-slot:not(:disabled):hover,
-.code-slot:focus-visible {
+.code-result {
+  min-width: 2ch;
+  color: #4b9eff;
+}
+
+.code-answer,
+.code-wheel {
+  padding: 6px 8px;
+  border: 1px solid rgba(75, 158, 255, 0.6);
+  border-radius: 8px;
+  background: #07142b;
+  color: #d4dce7;
+  cursor: pointer;
+  font: 0.95rem var(--font-display, "Orbitron", sans-serif);
+}
+
+.code-answer {
+  width: 78px;
+  text-align: center;
+}
+
+.code-wheel {
+  width: 58px;
+  height: 58px;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+.code-answer.is-correct,
+.code-wheel.is-correct {
+  border-color: #80ffcf;
+  color: #80ffcf;
+  opacity: 1;
+}
+
+.code-answer.is-wrong {
+  border-color: #ff6b8a;
+  color: #ff6b8a;
+}
+
+.code-wheel.is-active {
+  border-color: #80ffcf;
+  box-shadow: 0 0 18px rgba(128, 255, 207, 0.6);
+  animation: scale-target-pulse 1.1s ease-in-out infinite;
+}
+
+.code-wheel:disabled:not(.is-correct) {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.code-answer:focus-visible,
+.code-wheel:focus-visible {
   outline: 2px solid #d4dce7;
   outline-offset: 2px;
+}
+
+.code-sum {
+  margin: 10px 0 0;
+  color: #80ffcf;
+  font: 0.8rem var(--font-display, "Orbitron", sans-serif);
+  text-align: center;
+}
+
+.code-padlock {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 [data-symbol="0"] { color: #ff8edb; }
@@ -1580,32 +1634,154 @@ body.part-two-theme {
 [data-symbol="2"] { color: #79f7ff; }
 [data-symbol="3"] { color: #80ffcf; }
 [data-symbol="4"] { color: #ff9f6b; }
-[data-symbol="5"] { color: #b9a4ff; }
 
-.code-guess {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.code-pips {
-  display: flex;
-  gap: 4px;
-  font-size: 1rem;
-}
-
-.code-pip.is-exact {
-  color: #80ffcf;
-}
-
-.code-pip.is-misplaced {
-  color: #ffd166;
-}
-
-.code-board.is-solved .code-slot {
+.code-board.is-solved .code-wheel {
   border-color: #80ffcf;
 }
+/* Niveau 19 // mots croisés géants : grille de cases, numéros, mot actif et définitions. */
+.cw-board {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  padding: 14px;
+  border: 1px solid rgba(75, 158, 255, 0.42);
+  border-radius: 14px;
+  background: rgba(5, 12, 29, 0.82);
+  box-shadow: inset 0 0 24px rgba(75, 158, 255, 0.08);
+}
 
+.cw-scroll {
+  max-width: 100%;
+  overflow: auto;
+}
+
+.cw-grid {
+  --cw-cell: clamp(24px, 3.1vw, 36px);
+  display: grid;
+  grid-template-columns: repeat(var(--cw-cols), var(--cw-cell));
+  grid-template-rows: repeat(var(--cw-rows), var(--cw-cell));
+  gap: 2px;
+  width: max-content;
+}
+
+.cw-block {
+  background: transparent;
+}
+
+.cw-cell {
+  position: relative;
+  border: 1px solid rgba(75, 158, 255, 0.5);
+  border-radius: 4px;
+  background: rgba(75, 158, 255, 0.08);
+}
+
+.cw-cell input {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #d4dce7;
+  caret-color: transparent;
+  font: 700 calc(var(--cw-cell) * 0.55) var(--font-display, "Orbitron", sans-serif);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.cw-cell input:focus {
+  outline: none;
+}
+
+.cw-number {
+  position: absolute;
+  top: 1px;
+  left: 3px;
+  z-index: 1;
+  color: #4b9eff;
+  font: 0.5rem var(--font-display, "Orbitron", sans-serif);
+  pointer-events: none;
+}
+
+.cw-cell.is-word {
+  background: rgba(75, 158, 255, 0.24);
+}
+
+.cw-cell.is-active {
+  border-color: #ffffff;
+  background: rgba(75, 158, 255, 0.45);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.cw-cell.is-wrong {
+  border-color: #ff6b8a;
+  background: rgba(255, 107, 138, 0.2);
+}
+
+.cw-cell.is-wrong input {
+  color: #ff6b8a;
+}
+
+.cw-board.is-solved .cw-cell {
+  border-color: #80ffcf;
+  background: rgba(128, 255, 207, 0.12);
+}
+
+.cw-clues {
+  display: grid;
+  gap: 12px;
+  max-height: 520px;
+  overflow: auto;
+}
+
+.cw-clues h3 {
+  margin: 0 0 6px;
+  color: #acbacb;
+  font: 0.6rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.12em;
+}
+
+.cw-clues ol {
+  display: grid;
+  gap: 3px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cw-clue {
+  width: 100%;
+  padding: 5px 8px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: #d4dce7;
+  cursor: pointer;
+  font: 0.85rem var(--font-body, "Rajdhani", sans-serif);
+  text-align: left;
+}
+
+.cw-clues li.is-current .cw-clue {
+  border-color: #4b9eff;
+  background: rgba(75, 158, 255, 0.18);
+}
+
+.cw-clues li.is-done .cw-clue {
+  color: #80ffcf;
+  text-decoration: line-through;
+}
+
+@media (max-width: 900px) {
+  .cw-board {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cw-grid {
+    --cw-cell: 26px;
+  }
+  .cw-clues {
+    max-height: none;
+  }
+}
 @media (max-width: 560px) {
   .scale-zones,
   .tower-board {
@@ -1617,9 +1793,9 @@ body.part-two-theme {
   .tower-disc {
     height: 16px;
   }
-  .code-slot {
-    width: 46px;
-    height: 46px;
+  .code-wheel {
+    width: 48px;
+    height: 48px;
   }
 }
 

@@ -2451,36 +2451,37 @@ else {
 })();
 
 /* ===== NIVEAU 19 ===== */
-/* Code fantôme : déduire un code de quatre symboles différents grâce aux indices bien/mal placés (#codeBoard). */
+/* Mots croisés géants (français, ou anglais si la langue choisie au départ est « en ») : grille de 15 x 15 à remplir lettre par lettre (#crosswordBoard). */
 (() => {
-  const board = document.getElementById("codeBoard");
+  const board = document.getElementById("crosswordBoard");
   if (!board) return;
 
   const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const puzzles = {"fr": {"rows": 15, "cols": 15, "words": [{"a": "CADENAS", "r": 0, "c": 0, "d": "D", "clue": "Il garde une porte fermée grâce à ses chiffres", "n": 1}, {"a": "TOUR", "r": 0, "c": 3, "d": "D", "clue": "Construction haute et étroite", "n": 2}, {"a": "TRIANGLE", "r": 0, "c": 5, "d": "A", "clue": "Forme à trois côtés", "n": 3}, {"a": "RUPTURE", "r": 0, "c": 6, "d": "D", "clue": "Cassure brutale", "n": 4}, {"a": "NIVEAU", "r": 0, "c": 9, "d": "D", "clue": "Étape du jeu", "n": 5}, {"a": "SON", "r": 1, "c": 2, "d": "A", "clue": "Ce que perçoit l'oreille", "n": 6}, {"a": "VIDE", "r": 2, "c": 9, "d": "A", "clue": "Absence totale de matière", "n": 7}, {"a": "FRACTURE", "r": 3, "c": 2, "d": "A", "clue": "Cassure d'un os ou d'une réalité", "n": 8}, {"a": "NOTE", "r": 3, "c": 13, "d": "D", "clue": "Élément d'une mélodie", "n": 9}, {"a": "PORTAIL", "r": 5, "c": 4, "d": "D", "clue": "Grande porte vers un autre monde", "n": 10}, {"a": "HOLOGRAMME", "r": 5, "c": 11, "d": "D", "clue": "Image lumineuse en trois dimensions", "n": 11}, {"a": "SYMBOLE", "r": 6, "c": 0, "d": "A", "clue": "Signe qui représente une idée", "n": 12}, {"a": "FRAGMENT", "r": 6, "c": 8, "d": "D", "clue": "Morceau détaché d'un tout", "n": 13}, {"a": "CODE", "r": 6, "c": 10, "d": "A", "clue": "Suite de signes secrets", "n": 14}, {"a": "ESPACE", "r": 7, "c": 14, "d": "D", "clue": "Étendue où se trouvent les astres", "n": 15}, {"a": "CONSTELLATION", "r": 8, "c": 0, "d": "A", "clue": "Groupe d'étoiles dessinant une figure", "n": 16}, {"a": "TEMPS", "r": 10, "c": 1, "d": "D", "clue": "Il s'écoule heure après heure", "n": 17}, {"a": "LUMIERE", "r": 10, "c": 6, "d": "A", "clue": "Elle chasse l'obscurité", "n": 18}, {"a": "CERCLE", "r": 11, "c": 0, "d": "A", "clue": "Forme ronde sans angle", "n": 19}, {"a": "CLE", "r": 12, "c": 6, "d": "D", "clue": "Elle ouvre une serrure", "n": 20}, {"a": "OMBRE", "r": 12, "c": 10, "d": "A", "clue": "Silhouette sombre projetée par un objet", "n": 21}, {"a": "REALITE", "r": 13, "c": 3, "d": "A", "clue": "Ce qui existe vraiment", "n": 22}, {"a": "ECHO", "r": 14, "c": 11, "d": "A", "clue": "Voix qui revient après avoir rebondi", "n": 23}]}, "en": {"rows": 15, "cols": 15, "words": [{"a": "LIGHT", "r": 0, "c": 1, "d": "A", "clue": "It chases away darkness", "n": 1}, {"a": "LEVEL", "r": 0, "c": 1, "d": "D", "clue": "Stage of the game", "n": 1}, {"a": "CODE", "r": 0, "c": 7, "d": "A", "clue": "String of secret signs", "n": 2}, {"a": "CLUE", "r": 0, "c": 7, "d": "D", "clue": "It helps you find the answer", "n": 2}, {"a": "TRIANGLE", "r": 1, "c": 14, "d": "D", "clue": "Shape with three sides", "n": 3}, {"a": "HOLOGRAM", "r": 2, "c": 3, "d": "D", "clue": "Three-dimensional image made of light", "n": 4}, {"a": "RUPTURE", "r": 2, "c": 6, "d": "A", "clue": "Sudden break", "n": 5}, {"a": "ECLIPSE", "r": 2, "c": 12, "d": "D", "clue": "One star hides another", "n": 6}, {"a": "MEMORY", "r": 3, "c": 0, "d": "A", "clue": "It keeps your past moments", "n": 7}, {"a": "CONSTELLATION", "r": 5, "c": 2, "d": "A", "clue": "Group of stars forming a figure", "n": 8}, {"a": "PADLOCK", "r": 7, "c": 0, "d": "D", "clue": "It keeps a door shut with its digits", "n": 9}, {"a": "FRAGMENT", "r": 7, "c": 2, "d": "A", "clue": "Piece broken off from a whole", "n": 10}, {"a": "NETWORK", "r": 7, "c": 8, "d": "D", "clue": "Set of points linked together", "n": 11}, {"a": "DIAMOND", "r": 9, "c": 0, "d": "A", "clue": "Four equal sides, tilted square", "n": 12}, {"a": "NOTE", "r": 9, "c": 5, "d": "D", "clue": "Element of a melody", "n": 13}, {"a": "TIME", "r": 9, "c": 8, "d": "A", "clue": "It flows hour after hour", "n": 14}, {"a": "STAR", "r": 10, "c": 14, "d": "D", "clue": "Body that shines at night", "n": 15}, {"a": "ECHO", "r": 11, "c": 3, "d": "D", "clue": "Voice that returns after bouncing back", "n": 16}, {"a": "SOUND", "r": 11, "c": 7, "d": "A", "clue": "What the ear perceives", "n": 17}, {"a": "DOOR", "r": 11, "c": 11, "d": "D", "clue": "You walk through it to enter a room", "n": 18}, {"a": "CIRCLE", "r": 12, "c": 0, "d": "A", "clue": "Round shape with no corners", "n": 19}, {"a": "TOWER", "r": 13, "c": 10, "d": "A", "clue": "Tall, narrow building", "n": 20}, {"a": "PORTAL", "r": 14, "c": 2, "d": "A", "clue": "Large gateway to another world", "n": 21}]}};
+  const puzzle = puzzles[language];
   const copy = {
     fr: {
       part: "PARTIE 2 // FRACTURES",
       level: "NIVEAU 19",
-      eyebrow: "Fragment 019 // Le code fantôme",
-      title: "Le code fantôme",
-      description: "Un code de quatre symboles tous différents est caché. Chaque essai indique combien de symboles sont bien placés et combien sont présents mais mal placés.",
-      systemLabel: "ECHO://CODE",
-      puzzleKicker: "PUZZLE // DÉDUCTION",
-      puzzleTitle: "Serrure fantôme",
-      submit: "VALIDER L'ESSAI",
+      eyebrow: "Fragment 019 // Les mots croisés d'ECHO",
+      title: "Les mots croisés d'ECHO",
+      description: "Une grille géante de mots croisés. Touche une case, tape les lettres (sans accents) et suis les définitions. Re-touche la même case pour passer de l'horizontal au vertical.",
+      systemLabel: "ECHO://LEXIQUE",
+      puzzleKicker: "PUZZLE // LANGAGE",
+      puzzleTitle: "Grille de mots croisés",
       next: "CONTINUER VERS LE NIVEAU 20",
       reset: "Réinitialiser",
-      ready: "Touche chaque case pour changer son symbole. ● = bien placé, ○ = mal placé.",
-      incomplete: "Remplis les quatre cases avant de valider.",
-      lost: "Verrou activé. Un nouveau code est généré.",
-      success: "Code percé. La serrure fantôme s'ouvre.",
-      system: "SYSTEME:: SERRURE 019 VERROUILLEE // CODE REQUIS",
-      systemSuccess: "SYSTEME:: SERRURE 019 OUVERTE // PROTOCOLE 020 DEBLOQUE",
-      slot: "Case",
-      empty: "vide",
-      attempts: "Essais",
-      right: "bien placés",
-      wrong: "mal placés",
+      check: "VÉRIFIER",
+      across: "HORIZONTALEMENT",
+      down: "VERTICALEMENT",
+      ready: "Choisis une case puis écris la réponse. Pas d'accents : É s'écrit E.",
+      wrong: "Certaines lettres sont fausses : elles sont marquées en rouge.",
+      allGood: "Aucune erreur pour l'instant. Continue !",
+      full: "La grille est remplie mais contient des erreurs. Utilise VÉRIFIER.",
+      success: "Tous les mots sont trouvés. Le lexique d'ECHO est complet.",
+      system: "SYSTEME:: LEXIQUE 019 INCOMPLET // MOTS A RETROUVER",
+      systemSuccess: "SYSTEME:: LEXIQUE 019 COMPLET // PROTOCOLE 020 DEBLOQUE",
+      words: "mots",
       progress: "Progression de la Partie 2",
       save: "SAUVEGARDER",
       saved: "SAUVEGARDÉ",
@@ -2491,26 +2492,25 @@ else {
     en: {
       part: "PART 2 // FRACTURES",
       level: "LEVEL 19",
-      eyebrow: "Fragment 019 // The ghost code",
-      title: "The ghost code",
-      description: "A code of four different symbols is hidden. Each attempt tells you how many symbols are in the right place and how many are present but misplaced.",
-      systemLabel: "ECHO://CODE",
-      puzzleKicker: "PUZZLE // DEDUCTION",
-      puzzleTitle: "Ghost lock",
-      submit: "SUBMIT ATTEMPT",
+      eyebrow: "Fragment 019 // ECHO's crossword",
+      title: "ECHO's crossword",
+      description: "A giant crossword grid. Tap a cell, type the letters and follow the clues. Tap the same cell again to switch between across and down.",
+      systemLabel: "ECHO://LEXICON",
+      puzzleKicker: "PUZZLE // LANGUAGE",
+      puzzleTitle: "Crossword grid",
       next: "CONTINUE TO LEVEL 20",
       reset: "Reset",
-      ready: "Tap each slot to change its symbol. ● = right place, ○ = misplaced.",
-      incomplete: "Fill all four slots before submitting.",
-      lost: "Lock engaged. A new code is generated.",
-      success: "Code broken. The ghost lock opens.",
-      system: "SYSTEM:: LOCK 019 SEALED // CODE REQUIRED",
-      systemSuccess: "SYSTEM:: LOCK 019 OPEN // PROTOCOL 020 UNLOCKED",
-      slot: "Slot",
-      empty: "empty",
-      attempts: "Attempts",
-      right: "right place",
-      wrong: "misplaced",
+      check: "CHECK",
+      across: "ACROSS",
+      down: "DOWN",
+      ready: "Pick a cell, then type the answer.",
+      wrong: "Some letters are wrong: they are marked in red.",
+      allGood: "No mistakes so far. Keep going!",
+      full: "The grid is full but contains mistakes. Use CHECK.",
+      success: "Every word is found. ECHO's lexicon is complete.",
+      system: "SYSTEM:: LEXICON 019 INCOMPLETE // WORDS TO RECOVER",
+      systemSuccess: "SYSTEM:: LEXICON 019 COMPLETE // PROTOCOL 020 UNLOCKED",
+      words: "words",
       progress: "Part 2 progress",
       save: "SAVE",
       saved: "SAVED",
@@ -2523,19 +2523,367 @@ else {
   const $ = (id) => document.getElementById(id);
   const status = $("puzzleStatus");
   const readout = $("progressReadout");
-  const submitButton = $("submitGuessButton");
+  const resetButton = $("resetButton");
+  const nextButton = $("nextLevelButton");
+  const saveButton = $("saveGameButton");
+  const checkButton = $("checkButton");
+  const systemMessage = $("systemMessage");
+  const grid = $("cwGrid");
+  const acrossList = $("cwAcross");
+  const downList = $("cwDown");
+  const cells = new Map();
+  const wordItems = [];
+  let activeWord = null;
+  let activeCell = null;
+  let solved = false;
+
+  document.documentElement.lang = language;
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    const value = copy[element.dataset.i18n];
+    if (typeof value === "string") element.textContent = value;
+  });
+  $("levelProgress").setAttribute("aria-label", copy.progress);
+  $("cwAcrossTitle").textContent = copy.across;
+  $("cwDownTitle").textContent = copy.down;
+  resetButton.textContent = copy.reset;
+  checkButton.textContent = copy.check;
+  nextButton.textContent = copy.next;
+  saveButton.textContent = copy.save;
+
+  // Affiche un message d'état (réussite, erreur ou info).
+  const setStatus = (message, variant = "") => {
+    status.textContent = message;
+    status.className = `puzzle-status${variant ? ` ${variant}` : ""}`;
+  };
+
+  // Renvoie la clé de position d'une case.
+  const keyOf = (row, col) => `${row},${col}`;
+
+  // Renvoie la liste des cases d'un mot, dans l'ordre.
+  const cellsOf = (word) =>
+    [...word.a].map((_, index) =>
+      cells.get(word.d === "A" ? keyOf(word.r, word.c + index) : keyOf(word.r + index, word.c)),
+    );
+
+  // Construit la grille, les cases et les listes de définitions.
+  const build = () => {
+    grid.style.setProperty("--cw-cols", String(puzzle.cols));
+    grid.style.setProperty("--cw-rows", String(puzzle.rows));
+    puzzle.words.forEach((word) => {
+      [...word.a].forEach((letter, index) => {
+        const row = word.d === "A" ? word.r : word.r + index;
+        const col = word.d === "A" ? word.c + index : word.c;
+        const key = keyOf(row, col);
+        if (!cells.has(key)) cells.set(key, { row, col, letter, words: {}, number: 0, input: null, box: null });
+        cells.get(key).words[word.d] = word;
+        if (index === 0) cells.get(key).number = word.n;
+      });
+    });
+    for (let row = 0; row < puzzle.rows; row += 1) {
+      for (let col = 0; col < puzzle.cols; col += 1) {
+        const cell = cells.get(keyOf(row, col));
+        const box = document.createElement("div");
+        if (!cell) {
+          box.className = "cw-block";
+          grid.appendChild(box);
+          continue;
+        }
+        box.className = "cw-cell";
+        if (cell.number) {
+          const number = document.createElement("span");
+          number.className = "cw-number";
+          number.textContent = String(cell.number);
+          box.appendChild(number);
+        }
+        const input = document.createElement("input");
+        input.type = "text";
+        input.maxLength = 2;
+        input.autocomplete = "off";
+        input.autocapitalize = "characters";
+        input.spellcheck = false;
+        input.setAttribute("aria-label", `${row + 1}-${col + 1}`);
+        input.addEventListener("focus", () => selectCell(cell, false));
+        input.addEventListener("click", () => selectCell(cell, true));
+        input.addEventListener("input", () => typeLetter(cell));
+        input.addEventListener("keydown", (event) => handleKey(event, cell));
+        box.appendChild(input);
+        cell.input = input;
+        cell.box = box;
+        grid.appendChild(box);
+      }
+    }
+    puzzle.words.forEach((word) => {
+      const item = document.createElement("li");
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "cw-clue";
+      button.textContent = `${word.n}. ${word.clue} (${word.a.length})`;
+      button.addEventListener("click", () => {
+        const target = cellsOf(word).find((cell) => !cell.input.value) || cellsOf(word)[0];
+        activeWord = word;
+        target.input.focus();
+        highlight(target);
+      });
+      item.appendChild(button);
+      (word.d === "A" ? acrossList : downList).appendChild(item);
+      wordItems.push({ word, item });
+    });
+  };
+
+  // Met en évidence le mot et la case actifs.
+  const highlight = (cell) => {
+    activeCell = cell;
+    cells.forEach((other) => {
+      other.box.classList.remove("is-active", "is-word");
+    });
+    if (activeWord) cellsOf(activeWord).forEach((other) => other.box.classList.add("is-word"));
+    cell.box.classList.add("is-active");
+    wordItems.forEach(({ word, item }) => item.classList.toggle("is-current", word === activeWord));
+  };
+
+  // Choisit le mot actif selon la case touchée (re-toucher change le sens).
+  const selectCell = (cell, fromClick) => {
+    if (solved) return;
+    const available = Object.values(cell.words);
+    if (fromClick && activeCell === cell && available.length > 1) {
+      activeWord = available.find((word) => word !== activeWord);
+    } else if (!activeWord || !available.includes(activeWord)) {
+      activeWord = cell.words.A || cell.words.D;
+    }
+    highlight(cell);
+  };
+
+  // Déplace le focus sur une case voisine du mot actif.
+  const moveWithin = (cell, step) => {
+    if (!activeWord) return;
+    const list = cellsOf(activeWord);
+    const target = list[list.indexOf(cell) + step];
+    if (target) target.input.focus();
+  };
+
+  // Déplace le focus d'une case dans une direction (flèches).
+  const moveArrow = (cell, dRow, dCol) => {
+    let row = cell.row + dRow;
+    let col = cell.col + dCol;
+    while (row >= 0 && col >= 0 && row < puzzle.rows && col < puzzle.cols) {
+      const target = cells.get(keyOf(row, col));
+      if (target) {
+        if (dRow !== 0 && activeWord && activeWord.d === "A" && target.words.D) activeWord = target.words.D;
+        if (dCol !== 0 && activeWord && activeWord.d === "D" && target.words.A) activeWord = target.words.A;
+        target.input.focus();
+        highlight(target);
+        return;
+      }
+      row += dRow;
+      col += dCol;
+    }
+  };
+
+  // Gère la saisie d'une lettre (majuscule, sans accent) et avance d'une case.
+  const typeLetter = (cell) => {
+    const raw = cell.input.value.normalize("NFD").replace(/[^A-Za-z]/g, "").toUpperCase();
+    cell.input.value = raw.slice(-1);
+    cell.box.classList.remove("is-wrong");
+    if (cell.input.value) moveWithin(cell, 1);
+    refresh();
+  };
+
+  // Gère les touches de navigation et d'effacement.
+  const handleKey = (event, cell) => {
+    if (solved) return;
+    const arrows = { ArrowUp: [-1, 0], ArrowDown: [1, 0], ArrowLeft: [0, -1], ArrowRight: [0, 1] };
+    if (arrows[event.key]) {
+      event.preventDefault();
+      moveArrow(cell, ...arrows[event.key]);
+    } else if (event.key === "Backspace" && !cell.input.value) {
+      event.preventDefault();
+      moveWithin(cell, -1);
+    } else if (event.key === "Enter") {
+      event.preventDefault();
+      check();
+    }
+  };
+
+  // Met à jour les mots terminés, la progression et la victoire.
+  const refresh = () => {
+    let done = 0;
+    let filled = 0;
+    wordItems.forEach(({ word, item }) => {
+      const complete = cellsOf(word).every((cell, index) => cell.input.value === word.a[index]);
+      item.classList.toggle("is-done", complete);
+      if (complete) done += 1;
+    });
+    cells.forEach((cell) => {
+      if (cell.input.value) filled += 1;
+    });
+    readout.textContent = `${done} / ${puzzle.words.length} ${copy.words}`;
+    if (done === puzzle.words.length) {
+      solved = true;
+      board.classList.add("is-solved");
+      cells.forEach((cell) => {
+        cell.input.disabled = true;
+        cell.box.classList.remove("is-active", "is-word", "is-wrong");
+      });
+      setStatus(copy.success, "success");
+      systemMessage.textContent = copy.systemSuccess;
+      nextButton.hidden = false;
+      window.EchoesSave?.saveProgress({ currentPage: "level-19", currentLevel: 19 });
+      nextButton.focus();
+    } else if (filled === cells.size) {
+      setStatus(copy.full);
+    }
+  };
+
+  // Marque en rouge les lettres fausses.
+  const check = () => {
+    if (solved) return;
+    let errors = 0;
+    cells.forEach((cell) => {
+      const bad = cell.input.value !== "" && cell.input.value !== cell.letter;
+      cell.box.classList.toggle("is-wrong", bad);
+      if (bad) errors += 1;
+    });
+    setStatus(errors ? copy.wrong : copy.allGood, errors ? "error" : "success");
+  };
+
+  // Remet le puzzle à zéro.
+  const reset = () => {
+    solved = false;
+    activeWord = null;
+    activeCell = null;
+    board.classList.remove("is-solved");
+    cells.forEach((cell) => {
+      cell.input.value = "";
+      cell.input.disabled = false;
+      cell.box.classList.remove("is-active", "is-word", "is-wrong");
+    });
+    wordItems.forEach(({ item }) => item.classList.remove("is-done", "is-current"));
+    systemMessage.textContent = copy.system;
+    nextButton.hidden = true;
+    readout.textContent = `0 / ${puzzle.words.length} ${copy.words}`;
+    setStatus(copy.ready);
+  };
+
+  resetButton.addEventListener("click", reset);
+  checkButton.addEventListener("click", check);
+  nextButton.addEventListener("click", () => {
+    window.location.href = "niveau-20.html";
+  });
+  saveButton.addEventListener("click", () => {
+    if (!window.EchoesSave?.saveProgress({ currentPage: "level-19", currentLevel: 19 })) return;
+    saveButton.textContent = copy.saved;
+    setStatus(copy.saveHint, "success");
+    window.setTimeout(() => {
+      saveButton.textContent = copy.save;
+    }, 1400);
+  });
+
+  for (let level = 11; level <= 20; level += 1) {
+    const marker = document.createElement("span");
+    marker.className = `level-square${level === 19 ? " current" : ""}`;
+    marker.setAttribute("aria-hidden", "true");
+    $("levelProgress").appendChild(marker);
+  }
+
+  build();
+  reset();
+})();
+/* ===== NIVEAU 20 ===== */
+/* Cadenas des symboles : déduire la valeur de chaque symbole, répondre à 4 opérations, puis régler un chiffre du cadenas avec la somme (#codeBoard). */
+(() => {
+  const board = document.getElementById("codeBoard");
+  if (!board) return;
+
+  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const copy = {
+    fr: {
+      part: "PARTIE 2 // FRACTURES",
+      level: "NIVEAU 20",
+      eyebrow: "Fragment 020 // Le cadenas des symboles",
+      title: "Le cadenas des symboles",
+      description: "Chaque symbole cache un chiffre. Déduis-les grâce aux indices, réponds aux quatre opérations, additionne les résultats : le dernier chiffre de la somme règle une molette du cadenas.",
+      systemLabel: "ECHO://CADENAS",
+      puzzleKicker: "PUZZLE // DÉCHIFFRAGE",
+      puzzleTitle: "Cadenas à quatre chiffres",
+      next: "CONTINUER VERS LE NIVEAU 21",
+      reset: "Réinitialiser",
+      clues: "INDICES",
+      questions: "À RÉSOUDRE",
+      padlock: "CADENAS",
+      choose: "?",
+      ready: "Déduis la valeur de chaque symbole, puis écris les résultats (chiffres uniquement).",
+      okAnswer: "Bonne réponse.",
+      badAnswer: "Ce résultat n'est pas bon. Recalcule avec la valeur des symboles.",
+      sumReady: "Les quatre résultats sont bons. Additionne-les puis règle la molette éclairée avec le dernier chiffre de la somme.",
+      sumLabel: "Somme",
+      badDigit: "Ce n'est pas le bon chiffre. Additionne les quatre résultats et garde le dernier chiffre.",
+      stageDone: "Molette réglée. Nouvelle série de symboles.",
+      success: "Le cadenas s'ouvre. Les quatre chiffres sont corrects.",
+      system: "SYSTEME:: CADENAS 020 VERROUILLE // QUATRE CHIFFRES REQUIS",
+      systemSuccess: "SYSTEME:: CADENAS 020 OUVERT // PROTOCOLE 021 DEBLOQUE",
+      wheel: "Molette",
+      stage: "Série",
+      progress: "Progression de la Partie 2",
+      save: "SAUVEGARDER",
+      saved: "SAUVEGARDÉ",
+      saveHint: "Progression sauvegardée.",
+      footer: "ÉCHO // FRACTURES ACTIVES",
+      counter: "20 / 60",
+    },
+    en: {
+      part: "PART 2 // FRACTURES",
+      level: "LEVEL 20",
+      eyebrow: "Fragment 020 // The symbol padlock",
+      title: "The symbol padlock",
+      description: "Each symbol hides a number. Deduce them from the clues, answer the four operations, add the results: the last digit of the sum sets one wheel of the padlock.",
+      systemLabel: "ECHO://PADLOCK",
+      puzzleKicker: "PUZZLE // DECODING",
+      puzzleTitle: "Four-digit padlock",
+      next: "CONTINUE TO LEVEL 21",
+      reset: "Reset",
+      clues: "CLUES",
+      questions: "TO SOLVE",
+      padlock: "PADLOCK",
+      choose: "?",
+      ready: "Deduce the value of each symbol, then type the results (digits only).",
+      okAnswer: "Correct answer.",
+      badAnswer: "That result is wrong. Recalculate with the symbol values.",
+      sumReady: "All four results are right. Add them up, then set the lit wheel to the last digit of the sum.",
+      sumLabel: "Sum",
+      badDigit: "Wrong digit. Add the four results and keep the last digit.",
+      stageDone: "Wheel set. A new series of symbols appears.",
+      success: "The padlock opens. All four digits are correct.",
+      system: "SYSTEM:: PADLOCK 020 SEALED // FOUR DIGITS REQUIRED",
+      systemSuccess: "SYSTEM:: PADLOCK 020 OPEN // PROTOCOL 021 UNLOCKED",
+      wheel: "Wheel",
+      stage: "Series",
+      progress: "Part 2 progress",
+      save: "SAVE",
+      saved: "SAVED",
+      saveHint: "Progress saved.",
+      footer: "ECHO // ACTIVE FRACTURES",
+      counter: "20 / 60",
+    },
+  }[language];
+
+  const $ = (id) => document.getElementById(id);
+  const status = $("puzzleStatus");
+  const readout = $("progressReadout");
   const resetButton = $("resetButton");
   const nextButton = $("nextLevelButton");
   const saveButton = $("saveGameButton");
   const systemMessage = $("systemMessage");
-  const history = $("codeHistory");
-  const guessRow = $("codeGuess");
-  const symbols = ["◆", "▲", "●", "■", "✚", "★"];
-  const codeLength = 4;
-  const maxAttempts = 10;
-  let secret = [];
-  let guess = Array(codeLength).fill(-1);
-  let attempts = 0;
+  const cluesBox = $("codeClues");
+  const questionsBox = $("codeQuestions");
+  const sumBox = $("codeSum");
+  const padlockBox = $("codePadlock");
+  const symbols = ["●", "◆", "▲", "■", "★"];
+  const stageCount = 4;
+  let stage = 0;
+  let values = [];
+  let questions = [];
+  let answered = 0;
+  let digits = Array(stageCount).fill(null);
   let solved = false;
   let locked = false;
   let advanceTimer = 0;
@@ -2546,7 +2894,6 @@ else {
     if (typeof value === "string") element.textContent = value;
   });
   $("levelProgress").setAttribute("aria-label", copy.progress);
-  submitButton.textContent = copy.submit;
   resetButton.textContent = copy.reset;
   nextButton.textContent = copy.next;
   saveButton.textContent = copy.save;
@@ -2557,153 +2904,215 @@ else {
     status.className = `puzzle-status${variant ? ` ${variant}` : ""}`;
   };
 
-  // Tire un nouveau code secret.
-  const newSecret = () => {
-    const pool = symbols.map((_, index) => index);
-    for (let i = pool.length - 1; i > 0; i -= 1) {
+  // Mélange une liste au hasard.
+  const shuffle = (list) => {
+    const copyList = [...list];
+    for (let i = copyList.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
-      [pool[i], pool[j]] = [pool[j], pool[i]];
+      [copyList[i], copyList[j]] = [copyList[j], copyList[i]];
     }
-    secret = pool.slice(0, codeLength);
+    return copyList;
   };
 
-  // Affiche la proposition en cours.
-  const renderGuess = () => {
-    guessRow.querySelectorAll(".code-slot").forEach((slot, index) => {
-      const value = guess[index];
-      slot.textContent = value === -1 ? "?" : symbols[value];
-      slot.dataset.symbol = String(value);
-      slot.disabled = solved || locked;
-      slot.setAttribute("aria-label", `${copy.slot} ${index + 1}: ${value === -1 ? copy.empty : symbols[value]}`);
+  // Tire quatre symboles avec des valeurs différentes et construit indices et questions de la série.
+  const buildStage = () => {
+    const symbolIds = shuffle([0, 1, 2, 3, 4]).slice(0, 4);
+    const nums = shuffle([1, 2, 3, 4, 5, 6]).slice(0, 4);
+    const [a, b, c, d] = symbolIds;
+    const [va, vb, vc, vd] = nums;
+    values = [];
+    symbolIds.forEach((id, index) => {
+      values[id] = nums[index];
     });
-    submitButton.disabled = solved || locked;
-    readout.textContent = `${copy.attempts}: ${attempts} / ${maxAttempts}`;
+    const useProduct = stage >= 1;
+    cluesBox.replaceChildren();
+    const clueLines = [
+      { terms: [a, a], op: "+", result: va + va },
+      { terms: [a, b], op: "+", result: va + vb },
+      { terms: [b, c], op: useProduct ? "×" : "+", result: useProduct ? vb * vc : vb + vc },
+      { terms: [c, d], op: "+", result: vc + vd },
+    ];
+    clueLines.forEach((line) => {
+      cluesBox.appendChild(buildLine(line.terms, line.op, String(line.result)));
+    });
+    questions = [
+      { terms: [a, b], op: "×", result: va * vb },
+      { terms: [b, c], op: "+", result: vb + vc },
+      { terms: [c, d], op: "×", result: vc * vd },
+      { terms: [d, a, b], op: "+", result: vd + va + vb },
+    ];
+    questionsBox.replaceChildren();
+    questions.forEach((question, index) => {
+      const select = document.createElement("input");
+      select.className = "code-answer";
+      select.type = "text";
+      select.inputMode = "numeric";
+      select.maxLength = 2;
+      select.autocomplete = "off";
+      select.placeholder = copy.choose;
+      select.setAttribute("aria-label", `${copy.questions} ${index + 1}`);
+      select.addEventListener("input", () => {
+        select.value = select.value.replace(/\D/g, "");
+        select.classList.remove("is-wrong");
+        if (select.value.length >= String(question.result).length) checkAnswer(select, question);
+      });
+      const line = buildLine(question.terms, question.op, null);
+      line.appendChild(select);
+      questionsBox.appendChild(line);
+    });
+    answered = 0;
+    sumBox.textContent = "";
+    sumBox.hidden = true;
   };
 
-  // Compare une proposition au code secret (bien placé / mal placé).
-  const evaluate = (attempt) => {
-    let exact = 0;
-    attempt.forEach((value, index) => {
-      if (value === secret[index]) exact += 1;
+  // Construit une ligne d'équation avec des symboles colorés.
+  const buildLine = (terms, op, result) => {
+    const line = document.createElement("div");
+    line.className = "code-equation";
+    terms.forEach((id, index) => {
+      if (index > 0) {
+        const sign = document.createElement("span");
+        sign.className = "code-op";
+        sign.textContent = op;
+        line.appendChild(sign);
+      }
+      const symbol = document.createElement("span");
+      symbol.className = "code-symbol";
+      symbol.dataset.symbol = String(id);
+      symbol.textContent = symbols[id];
+      line.appendChild(symbol);
     });
-    const common = symbols.reduce((total, _, symbol) => {
-      const inSecret = secret.filter((value) => value === symbol).length;
-      const inAttempt = attempt.filter((value) => value === symbol).length;
-      return total + Math.min(inSecret, inAttempt);
-    }, 0);
-    return { exact, misplaced: common - exact };
-  };
-
-  // Ajoute l'essai et ses indices à l'historique.
-  const addHistoryRow = (attempt, result) => {
-    const row = document.createElement("li");
-    row.className = "code-row";
-    const cells = document.createElement("span");
-    cells.className = "code-row-symbols";
-    attempt.forEach((value) => {
-      const cell = document.createElement("span");
-      cell.className = "code-symbol";
-      cell.dataset.symbol = String(value);
-      cell.textContent = symbols[value];
-      cells.appendChild(cell);
-    });
-    const pips = document.createElement("span");
-    pips.className = "code-pips";
-    pips.setAttribute("aria-label", `${result.exact} ${copy.right}, ${result.misplaced} ${copy.wrong}`);
-    for (let i = 0; i < result.exact; i += 1) {
-      const pip = document.createElement("span");
-      pip.className = "code-pip is-exact";
-      pip.textContent = "●";
-      pips.appendChild(pip);
+    const equal = document.createElement("span");
+    equal.className = "code-op";
+    equal.textContent = "=";
+    line.appendChild(equal);
+    if (result !== null) {
+      const value = document.createElement("strong");
+      value.className = "code-result";
+      value.textContent = result;
+      line.appendChild(value);
     }
-    for (let i = 0; i < result.misplaced; i += 1) {
-      const pip = document.createElement("span");
-      pip.className = "code-pip is-misplaced";
-      pip.textContent = "○";
-      pips.appendChild(pip);
-    }
-    row.append(cells, pips);
-    history.appendChild(row);
+    return line;
   };
 
-  // Valide la proposition en cours.
-  const submit = () => {
-    if (solved || locked) return;
-    if (guess.includes(-1)) {
-      setStatus(copy.incomplete);
+  // Vérifie le résultat choisi dans une liste déroulante.
+  const checkAnswer = (select, question) => {
+    if (solved || locked || select.value === "") return;
+    if (Number(select.value) !== question.result) {
+      select.classList.add("is-wrong");
+      setStatus(copy.badAnswer, "error");
       return;
     }
-    const attempt = [...guess];
-    const result = evaluate(attempt);
-    attempts += 1;
-    addHistoryRow(attempt, result);
-    if (result.exact === codeLength) {
+    select.classList.remove("is-wrong");
+    select.classList.add("is-correct");
+    select.disabled = true;
+    answered += 1;
+    if (answered < questions.length) {
+      setStatus(copy.okAnswer, "success");
+      return;
+    }
+    const total = questions.reduce((sum, item) => sum + item.result, 0);
+    sumBox.textContent = `${copy.sumLabel} = ${questions.map((item) => item.result).join(" + ")}`;
+    sumBox.hidden = false;
+    setStatus(copy.sumReady, "success");
+    renderPadlock();
+    sumBox.dataset.total = String(total);
+  };
+
+  // Dessine les molettes du cadenas et allume celle de la série en cours.
+  const renderPadlock = () => {
+    padlockBox.replaceChildren();
+    for (let index = 0; index < stageCount; index += 1) {
+      const select = document.createElement("input");
+      select.className = "code-wheel";
+      select.type = "text";
+      select.inputMode = "numeric";
+      select.maxLength = 1;
+      select.autocomplete = "off";
+      select.placeholder = copy.choose;
+      select.setAttribute("aria-label", `${copy.wheel} ${index + 1}`);
+      if (digits[index] !== null) {
+        select.value = String(digits[index]);
+        select.disabled = true;
+        select.classList.add("is-correct");
+      } else {
+        const active = index === stage && answered === questions.length && !solved;
+        select.disabled = !active;
+        select.classList.toggle("is-active", active);
+        select.addEventListener("input", () => {
+          select.value = select.value.replace(/\D/g, "");
+          checkDigit(select, index);
+        });
+      }
+      padlockBox.appendChild(select);
+    }
+    readout.textContent = `${digits.filter((digit) => digit !== null).length} / ${stageCount}`;
+  };
+
+  // Vérifie le chiffre choisi sur la molette (dernier chiffre de la somme).
+  const checkDigit = (select, index) => {
+    if (solved || locked || select.value === "") return;
+    const expected = Number(sumBox.dataset.total) % 10;
+    if (Number(select.value) !== expected) {
+      select.value = "";
+      setStatus(copy.badDigit, "error");
+      return;
+    }
+    digits[index] = expected;
+    stage += 1;
+    if (stage === stageCount) {
       solved = true;
       board.classList.add("is-solved");
+      renderPadlock();
       setStatus(copy.success, "success");
       systemMessage.textContent = copy.systemSuccess;
       nextButton.hidden = false;
-      window.EchoesSave?.saveProgress({ currentPage: "level-19", currentLevel: 19 });
-      renderGuess();
+      window.EchoesSave?.saveProgress({ currentPage: "level-20", currentLevel: 20 });
       nextButton.focus();
       return;
     }
-    if (attempts >= maxAttempts) {
-      locked = true;
-      setStatus(copy.lost);
-      renderGuess();
-      advanceTimer = window.setTimeout(reset, 1800);
-      return;
-    }
-    setStatus(copy.ready);
-    renderGuess();
+    locked = true;
+    renderPadlock();
+    setStatus(copy.stageDone, "success");
+    advanceTimer = window.setTimeout(() => {
+      locked = false;
+      buildStage();
+      renderPadlock();
+      setStatus(copy.ready);
+    }, 1200);
   };
 
   // Remet le puzzle à zéro.
   const reset = () => {
     window.clearTimeout(advanceTimer);
-    newSecret();
-    guess = Array(codeLength).fill(-1);
-    attempts = 0;
+    stage = 0;
+    digits = Array(stageCount).fill(null);
     solved = false;
     locked = false;
     board.classList.remove("is-solved");
-    history.replaceChildren();
     systemMessage.textContent = copy.system;
     nextButton.hidden = true;
+    buildStage();
+    renderPadlock();
     setStatus(copy.ready);
-    renderGuess();
   };
 
-  for (let index = 0; index < codeLength; index += 1) {
-    const slot = document.createElement("button");
-    slot.type = "button";
-    slot.className = "code-slot";
-    slot.addEventListener("click", () => {
-      if (solved || locked) return;
-      guess[index] = (guess[index] + 1) % symbols.length;
-      renderGuess();
-    });
-    guessRow.appendChild(slot);
-  }
-
-  submitButton.addEventListener("click", submit);
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
-    window.location.href = "niveau-20.html";
+    window.location.href = "niveau-21.html";
   });
   saveButton.addEventListener("click", () => {
-    if (!window.EchoesSave?.saveProgress({ currentPage: "level-19", currentLevel: 19 })) return;
+    if (!window.EchoesSave?.saveProgress({ currentPage: "level-20", currentLevel: 20 })) return;
     saveButton.textContent = copy.saved;
-    setStatus(copy.saveHint);
+    setStatus(copy.saveHint, "success");
     window.setTimeout(() => {
       saveButton.textContent = copy.save;
-    }, 1800);
+    }, 1400);
   });
 
   for (let level = 11; level <= 20; level += 1) {
     const marker = document.createElement("span");
-    marker.className = `level-square${level === 19 ? " current" : ""}`;
+    marker.className = `level-square${level === 20 ? " current" : ""}`;
     marker.setAttribute("aria-hidden", "true");
     $("levelProgress").appendChild(marker);
   }
