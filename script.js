@@ -1,4 +1,4 @@
-const canvas = document.getElementById("background");
+﻿const canvas = document.getElementById("background");
 const ctx = canvas.getContext("2d");
 
 let width = 0;
@@ -169,7 +169,7 @@ startButton.addEventListener("click", () => {
     startButton.dataset.loading = "false";
     updateStartButton();
     startButton.disabled = false;
-    window.location.href = "Docs/html/login.html";
+    window.location.href = "docs/html/login.html";
   }, 1200);
 });
 

@@ -1,4 +1,4 @@
-(() => {
+﻿(() => {
   // DEV MODE // shared navigator injected on every page.
   const script = document.currentScript;
   if (!script) {
@@ -114,7 +114,7 @@
         <button class="dev-mode-close" type="button" aria-label="Close menu">×</button>
       </div>
       <a class="dev-mode-home" href="${new URL("index.html", rootUrl).href}">Home</a>
-      <a class="dev-mode-home" href="${new URL("Docs/html/partie-bonus/bonus-01.html", rootUrl).href}">Partie bonus</a>
+      <a class="dev-mode-home" href="${new URL("docs/html/partie-bonus/bonus-01.html", rootUrl).href}">Partie bonus</a>
       <label class="dev-mode-accessibility">
         <input type="checkbox" data-color-assist />
         <span>REPÈRES COULEURS ACCESSIBLES</span>
