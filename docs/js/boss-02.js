@@ -23,7 +23,7 @@
       incoming: "PROCHAINE FRACTURE",
       helpTitle: "COMMENT COMBATTRE",
       helpStart: "Démarre le combat avec le bouton ci-dessous.",
-      helpMove: "Clique une case voisine ou utilise les flèches / WASD. Évite les murs ▩.",
+      helpMove: "Clique une case voisine pour te déplacer. Évite les murs ▩.",
       helpPulse: "Rejoins l'ancre active ◆ puis appuie sur « Pulser l'ancre ». Stabilise deux ancres dans chacune des trois phases.",
       helpThreat: "La rangée ou colonne rouge sera frappée quand le compteur arrive à zéro. Un déplacement ou une impulsion fait avancer le compteur.",
       helpShield: "Le bouclier annule le prochain impact sans consommer une action. Tu en as deux; tu as aussi huit unités de cohérence.",
@@ -85,7 +85,7 @@
       incoming: "INCOMING FRACTURE",
       helpTitle: "HOW TO FIGHT",
       helpStart: "Start the fight with the button below.",
-      helpMove: "Click an adjacent tile or use the arrow keys / WASD. Avoid ▩ walls.",
+      helpMove: "Click an adjacent tile to move. Avoid ▩ walls.",
       helpPulse: "Reach the active ◆ anchor, then press “Pulse anchor”. Stabilize two anchors in each of the three phases.",
       helpThreat: "The red row or column will be struck when the countdown reaches zero. Moving or pulsing advances the countdown.",
       helpShield: "A ward cancels the next impact without using an action. You have two wards and eight coherence units.",
@@ -217,7 +217,11 @@
     livesReadout.replaceChildren();
     for (let index = 0; index < maxCoherence; index += 1) {
       const life = document.createElement("span");
-      life.className = `boss02-life${index >= coherence ? " is-lost" : ""}`;
+      life.className = [
+        "boss02-life",
+        index >= coherence ? "is-lost" : "",
+        index < armorBroken && index < coherence ? "is-stabilized" : "",
+      ].filter(Boolean).join(" ");
       life.setAttribute("aria-hidden", "true");
       livesReadout.appendChild(life);
     }

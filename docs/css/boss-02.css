@@ -93,6 +93,12 @@
   box-shadow: 0 0 8px rgba(255, 189, 105, 0.58);
 }
 
+.boss02-life.is-stabilized {
+  border-color: #287a4b;
+  background: #14532d;
+  box-shadow: 0 0 8px rgba(40, 122, 75, 0.45);
+}
+
 .boss02-life.is-lost {
   background: transparent;
   box-shadow: none;

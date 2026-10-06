@@ -1,30 +1,56 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 260" role="img" aria-labelledby="title desc">
-  <title id="title">Clé de résonance 01</title>
-  <desc id="desc">Petite clé USB cyberpunk cyan et violette avec le symbole ECHO.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 260" role="img" aria-labelledby="key01Title key01Desc">
+  <title id="key01Title">Clé de résonance 01</title>
+  <desc id="key01Desc">Clé USB de résonance cyan et violette, marquée du premier sceau ECHO.</desc>
   <defs>
-    <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#152d49"/>
-      <stop offset="0.55" stop-color="#081323"/>
-      <stop offset="1" stop-color="#321b58"/>
+    <linearGradient id="key01Shell" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#24456b"/>
+      <stop offset=".48" stop-color="#101b35"/>
+      <stop offset="1" stop-color="#392154"/>
     </linearGradient>
-    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
+    <linearGradient id="key01Edge" x1="0" y1="0" x2="1" y2="1">
       <stop stop-color="#79f7ff"/>
-      <stop offset="0.5" stop-color="#80ffcf"/>
-      <stop offset="1" stop-color="#b36cff"/>
+      <stop offset=".48" stop-color="#80ffcf"/>
+      <stop offset="1" stop-color="#c08aff"/>
     </linearGradient>
-    <filter id="glow">
+    <linearGradient id="key01Metal" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#e3ffff"/>
+      <stop offset=".48" stop-color="#79f7ff"/>
+      <stop offset="1" stop-color="#5584c5"/>
+    </linearGradient>
+    <radialGradient id="key01Core">
+      <stop stop-color="#17344b"/>
+      <stop offset=".72" stop-color="#0a1426"/>
+      <stop offset="1" stop-color="#17142c"/>
+    </radialGradient>
+    <filter id="key01Glow" x="-.6" y="-.5" width="2.2" height="2">
       <feGaussianBlur stdDeviation="4" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
     </filter>
   </defs>
-  <g transform="translate(90 130) rotate(-12) translate(-90 -130)">
-    <path d="M48 24h84v35l18 20v110c0 19-15 34-34 34H64c-19 0-34-15-34-34V79l18-20V24Z" fill="url(#shell)" stroke="url(#edge)" stroke-width="4"/>
-    <path d="M48 59h84M48 79h84" fill="none" stroke="#79f7ff" stroke-width="2" opacity=".7"/>
-    <path d="M57 44h66" stroke="#b36cff" stroke-width="3" stroke-dasharray="8 8"/>
-    <rect x="57" y="96" width="66" height="83" rx="8" fill="#050b18" stroke="#79f7ff" stroke-width="2"/>
-    <path d="M73 112h34v7H73zm0 16h34v7H73zm0 16h22v7H73z" fill="#80ffcf" opacity=".7"/>
-    <text x="90" y="166" fill="#79f7ff" font-family="Arial, sans-serif" font-size="37" text-anchor="middle" filter="url(#glow)">E</text>
-    <circle cx="90" cy="198" r="7" fill="#80ffcf" filter="url(#glow)"/>
-    <path d="M64 228h52" stroke="#b36cff" stroke-width="3"/>
+
+  <g transform="rotate(-9 90 132)">
+    <circle cx="90" cy="145" r="77" fill="none" stroke="#79f7ff" stroke-width="1" opacity=".14"/>
+    <circle cx="90" cy="145" r="68" fill="none" stroke="#b36cff" stroke-width="1" stroke-dasharray="2 7" opacity=".55"/>
+
+    <path d="M66 19a9 9 0 0 1 9-9h30a9 9 0 0 1 9 9v38H66V19Z" fill="url(#key01Metal)" stroke="#d8ffff" stroke-width="2"/>
+    <path d="M76 19v25m28-25v25" stroke="#24466b" stroke-width="5" stroke-linecap="round"/>
+    <path d="M57 48h66l15 20v132a23 23 0 0 1-23 23H65a23 23 0 0 1-23-23V68l15-20Z" fill="url(#key01Shell)" stroke="url(#key01Edge)" stroke-width="3"/>
+    <path d="M57 62h66m-76 15h86" fill="none" stroke="#79f7ff" stroke-width="2" opacity=".6"/>
+    <path d="m68 52 8 5 8-5 8 5 8-5 8 5 8-5" fill="none" stroke="#c08aff" stroke-width="2" opacity=".9"/>
+
+    <path d="M90 82 132 106v48l-42 24-42-24v-48l42-24Z" fill="#070f20" stroke="#79f7ff" stroke-width="2"/>
+    <circle cx="90" cy="130" r="32" fill="url(#key01Core)" stroke="#b36cff" stroke-width="1.5"/>
+    <circle cx="90" cy="130" r="24" fill="none" stroke="#79f7ff" stroke-width="1" stroke-dasharray="3 5" opacity=".8"/>
+
+    <path d="M103 114H82a16 16 0 1 0 0 32h21M82 130h17" fill="none" stroke="url(#key01Edge)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(#key01Glow)"/>
+    <path d="M108 111v38" stroke="#c08aff" stroke-width="2" opacity=".8"/>
+
+    <path d="M68 178h44m-36 8h28" stroke="#79f7ff" stroke-width="2" stroke-linecap="round" opacity=".52"/>
+    <text x="90" y="207" fill="#dcefff" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 01</text>
+    <circle cx="90" cy="222" r="5" fill="#80ffcf" filter="url(#key01Glow)"/>
+    <path d="M77 239h26" stroke="#b36cff" stroke-width="2" stroke-linecap="round"/>
   </g>
 </svg>
