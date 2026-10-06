@@ -33,10 +33,6 @@
           file: "clee_01_boss_level.html",
         },
         {
-          label: "RÉCUPÉRATION",
-          file: "boss-recovery.html",
-        },
-        {
           label: "CLÉE_01 // CINÉMATIQUE",
           file: "clee_01_cinematic.html",
         },

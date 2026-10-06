@@ -4,72 +4,93 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="../../assets/images/echoes-favicon.svg" />
-    <title>ECHOES - CLEE 01 BOSS LEVEL</title>
-    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css?v=10" />
+    <title>ECHOES - CLEE_01 // GARDIEN DU SIGNAL</title>
+    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css?v=11" />
     <link rel="stylesheet" href="../../css/responsive.css" />
     <link rel="stylesheet" href="../../css/fonts.css" />
-    <link rel="stylesheet" href="../../css/boss-01.css" />
+    <link rel="stylesheet" href="../../css/boss-01.css?v=2" />
   </head>
-  <body>
-    <div class="background-glow"></div>
-    <div class="grid-overlay"></div>
+  <body class="boss01-page">
+    <div class="background-glow" aria-hidden="true"></div>
+    <div class="grid-overlay" aria-hidden="true"></div>
     <header class="level-header">
-      <a class="brand" href="../../../index.html">ECHOES</a>
+      <a class="brand" href="../../../index.html" aria-label="ECHOES">ECHOES</a>
       <div class="level-meta">
-        <span>PARTIE 1 // INITIATION</span>
-        <div class="level-progress" id="levelProgress"></div>
-        <strong>CLEE_01 // BOSS LEVEL</strong>
+        <span data-boss-copy="part">PARTIE 1 // INITIATION</span>
+        <div class="level-progress" id="levelProgress" aria-label="Progression de la Partie 1"></div>
+        <strong data-boss-copy="level">CLEE_01 // GARDIEN</strong>
       </div>
-      <button class="save-game-button" id="saveGameButton" type="button">SAUVEGARDER</button>
+      <button class="save-game-button" id="saveGameButton" type="button" data-boss-copy="save">SAUVEGARDER</button>
     </header>
-    <main class="level-shell" data-level-start="1" data-level-end="10">
-      <section class="level-intro">
-        <p class="eyebrow">CLEE_01 // GARDIEN DE LA RUPTURE</p>
-        <h1>Le Gardien de la Résonance</h1>
-        <p class="level-description">
-          Quatre phases, trois checks autorisés et une seule chance de stabiliser le noyau. Observe les attaques, résous les calculs et frappe au rythme exact.
-        </p>
-        <div class="system-transmission" aria-live="polite">
-          <span class="system-label">SYSTEM://BOSS_PROTOCOL</span>
-          <p id="systemMessage">SYSTEME:: GARDIEN ACTIF // ARMURE 4 PHASES // 6 VIES</p>
-        </div>
+
+    <aside class="key-hud boss01-key-hud" aria-label="Progression des clés">
+      <span class="key-hud-label">CLÉS :</span>
+      <span class="key-hud-value">0 / 6</span>
+    </aside>
+
+    <main class="boss01-shell">
+      <section class="boss01-intro">
+        <p class="boss01-eyebrow">CLEE_01 // ÉPREUVE DU SIGNAL</p>
+        <h1 data-boss-copy="title">Le Gardien du Signal</h1>
+        <p data-boss-copy="description">Trois petits défis pour accorder le signal : repère les sceaux, répète une courte mélodie, puis touche le noyau quand il s’illumine. Difficulté 1/6.</p>
       </section>
-      <section class="puzzle-panel boss-board">
-        <div class="panel-heading">
+
+      <section class="puzzle-panel boss-board boss01-panel" aria-labelledby="bossArenaTitle">
+        <div class="boss01-panel-heading">
           <div>
-            <p class="panel-kicker">COMBAT // PROTOCOLE ZERO</p>
-            <h2>Gardien de la Résonance</h2>
+            <p class="panel-kicker">COMBAT // RÉSONANCE 01</p>
+            <h2 id="bossArenaTitle" data-boss-copy="arenaTitle">Le cœur du signal</h2>
           </div>
-          <div class="boss-status-readout">
-            <span class="progress-readout" id="progressReadout">0 / 4</span>
-            <span class="boss-lives-label">VIES</span>
-            <span class="boss-lives" id="bossLives" aria-label="6 vies restantes"></span>
+          <div class="boss01-readouts">
+            <span class="progress-readout" id="progressReadout">0 / 3</span>
+            <span class="boss01-lives-label" data-boss-copy="lives">ÉNERGIE</span>
+            <span class="boss01-lives" id="bossLives" aria-label="6 unités d’énergie restantes"></span>
           </div>
         </div>
-        <div class="boss-arena" id="bossArena">
-          <div class="boss-core" id="bossCore" aria-label="Noyau du gardien">ECHO</div>
-          <div class="boss-targets" id="bossTargets"></div>
-          <div class="boss-math" id="bossMath" hidden>
-            <p class="boss-math-question" id="bossMathQuestion"></p>
-            <div class="boss-math-options" id="bossMathOptions"></div>
+
+        <div class="boss01-stage-strip" aria-label="Progression des trois épreuves">
+          <span class="boss01-stage-dot is-current" data-stage-dot="0">01</span>
+          <span class="boss01-stage-link"></span>
+          <span class="boss01-stage-dot" data-stage-dot="1">02</span>
+          <span class="boss01-stage-link"></span>
+          <span class="boss01-stage-dot" data-stage-dot="2">03</span>
+        </div>
+
+        <div class="boss01-arena">
+          <div class="boss01-guardian" aria-hidden="true">
+            <span class="boss01-orbit boss01-orbit-outer"></span>
+            <span class="boss01-orbit boss01-orbit-inner"></span>
+            <button class="boss01-guardian-core" id="bossCore" type="button" aria-label="Noyau du gardien, attends le signal vert"><span>E</span></button>
+            <span class="boss01-guardian-caption">ECHO // 01</span>
           </div>
-          <div class="boss-phase" id="bossPhase">PHASE 1 // BRISER LE BOUCLIER</div>
+          <div class="boss01-game">
+            <p class="boss01-stage-label" id="bossStageLabel">STAGE 1 // LES SCEAUX</p>
+            <h3 id="bossPrompt">Trouve le même sceau</h3>
+            <div class="boss01-target" id="bossTarget" aria-live="polite">◇</div>
+            <div class="boss01-choices" id="bossChoices" role="group" aria-label="Choix de sceaux"></div>
+            <button class="sequence-demo-button boss01-replay" id="replayButton" type="button" hidden>REVOIR LA SÉQUENCE</button>
+          </div>
         </div>
-        <div class="puzzle-actions">
-          <button class="sequence-start-button" id="startPuzzleButton" type="button">DÉMARRER LE COMBAT</button>
-          <button class="sequence-demo-button" id="replayShieldButton" type="button" hidden>REFAIRE LA SÉQUENCE</button>
-          <p class="puzzle-status" id="puzzleStatus">Détruis les quatre phases du Gardien. Tu as 6 vies.</p>
-          <button class="next-level-button" id="nextLevelButton" type="button" hidden>CONTINUER</button>
-          <button class="reset-button" id="resetButton" type="button">Réinitialiser</button>
+
+        <div class="boss01-actions">
+          <button class="sequence-start-button" id="startPuzzleButton" type="button" data-boss-copy="start">DÉMARRER L’ÉPREUVE</button>
+          <button class="next-level-button" id="nextLevelButton" type="button" data-boss-copy="next" hidden>RÉCUPÉRER LA CLÉ 01</button>
+          <button class="reset-button" id="resetButton" type="button" data-boss-copy="reset">Recommencer</button>
         </div>
+        <p class="puzzle-status boss01-status" id="puzzleStatus" aria-live="polite">Trois défis courts. Une erreur coûte une unité d’énergie; tu en as six.</p>
       </section>
     </main>
+
     <footer class="level-footer"><span>ÉCHO // INITIATION ACTIVE</span><span>CLEE_01</span></footer>
     <script src="../../js/translations.js"></script>
     <script src="../../js/save-system.js"></script>
-    <script src="../../js/partie-1_niveau-1_à_10.js?v=35"></script>
+    <script src="../../js/partie-1_niveau-1_à_10.js?v=36"></script>
     <script src="../../js/language.js"></script>
-    <script src="../../js/page-i18n.js"></script><script src="../../js/micro-animations.js"></script><script src="../../js/premium-animations.js"></script><script src="../../js/dev-mode.js"></script>
-      <script src="../../js/ambient-background.js"></script>
+    <script src="../../js/page-i18n.js"></script>
+    <script src="../../js/micro-animations.js"></script>
+    <script src="../../js/premium-animations.js"></script>
+    <script src="../../js/dev-mode.js"></script>
+    <script src="../../js/ambient-background.js"></script>
+    <script src="../../js/boss-01.js?v=2"></script>
   </body>
 </html>

@@ -931,23 +931,6 @@ html:has(.intro-page),
       width: min(180px, 52vw);
     }
 
-    .recovery-lanes {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
-      min-height: 420px;
-      padding: 14px;
-    }
-
-    .recovery-lane {
-      min-height: 58px;
-      font-size: 0.58rem;
-    }
-
-    .recovery-note {
-      width: 34px;
-      height: 34px;
-    }
-
     .construction-page {
       min-height: 100dvh;
       padding: 24px var(--mobile-gutter);
@@ -1108,132 +1091,6 @@ html:has(.intro-page),
     overflow-x: hidden;
   }
 
-  /* Recovery game: use the vertical space for two clear touch rows on phones. */
-  @media (max-width: 650px) {
-    body > .dev-mode {
-      position: fixed !important;
-      right: 12px !important;
-      bottom: max(18px, env(safe-area-inset-bottom)) !important;
-      left: auto !important;
-      top: auto !important;
-      z-index: 2147483647 !important;
-      transform: none !important;
-    }
-
-    .recovery-shell {
-      gap: 18px;
-      padding-top: 20px;
-    }
-
-    .recovery-shell .level-intro {
-      text-align: left;
-    }
-
-    .recovery-shell .level-description {
-      max-width: 42rem;
-    }
-
-    .recovery-board {
-      overflow: hidden;
-    }
-
-    .recovery-board .panel-heading {
-      align-items: center;
-      padding: 15px 16px;
-    }
-
-    .recovery-heading-copy {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 6px;
-      min-width: 0;
-    }
-
-    .recovery-board .panel-heading h2 {
-      font-size: clamp(0.92rem, 4.4vw, 1.15rem);
-      letter-spacing: 0.02rem;
-      white-space: nowrap;
-    }
-
-    .recovery-board .progress-readout {
-      margin-left: 0;
-      white-space: nowrap;
-    }
-
-    .recovery-lanes {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      grid-template-rows: 1fr;
-      gap: 10px;
-      min-height: 270px;
-      padding: 22px 14px;
-    }
-
-    .recovery-countdown {
-      min-height: 170px;
-      width: min(310px, calc(100% - 28px));
-      padding: 20px 14px;
-    }
-
-    .recovery-countdown-warning,
-    .recovery-countdown-hint {
-      font-size: 0.5rem;
-      letter-spacing: 0.08rem;
-    }
-
-    .recovery-lane {
-      align-self: center;
-      width: 100%;
-      min-height: 70px;
-      border-width: 2px;
-      font-size: 0.62rem;
-      letter-spacing: 0.04rem;
-    }
-
-    .recovery-lane[data-key="4"],
-    .recovery-lane[data-key="5"],
-    .recovery-lane[data-key="6"] {
-      display: none;
-    }
-
-    .recovery-note {
-      width: 36px;
-      height: 36px;
-      z-index: 3;
-    }
-
-    .recovery-board .puzzle-actions {
-      padding: 16px;
-    }
-
-    .recovery-board .sequence-start-button {
-      width: 100%;
-      min-height: 52px;
-      padding-inline: 12px;
-      font-size: 0.68rem;
-      letter-spacing: 0.08rem;
-    }
-
-    .recovery-board .puzzle-status {
-      padding: 14px;
-      border: 1px solid rgba(121, 247, 255, 0.16);
-      background: rgba(5, 7, 17, 0.46);
-    }
-  }
-
-  @media (max-width: 380px) {
-    .recovery-lanes {
-      min-height: 250px;
-      gap: 14px 7px;
-      padding-inline: 10px;
-    }
-
-    .recovery-lane {
-      min-height: 64px;
-    }
-
-  }
-
   .intro-page .top-bar {
     width: calc(100% - 28px);
     padding: 17px 0;
@@ -1301,19 +1158,6 @@ body > .dev-mode {
   transform: none !important;
 }
 
-@media (max-width: 650px) {
-  .recovery-board .recovery-lane[data-key="4"],
-  .recovery-board .recovery-lane[data-key="5"],
-  .recovery-board .recovery-lane[data-key="6"] {
-    display: none !important;
-  }
-
-  .recovery-board .recovery-lanes {
-    grid-template-rows: 1fr;
-    min-height: 270px;
-  }
-  margin-inline: auto;
-}
 .intro-page.desktop-layout .dialogue-body {
   min-height: 120px;
   padding: 20px 24px;

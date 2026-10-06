@@ -1,256 +1,417 @@
-/* Boss CLEE_01 : arena, targets, lives, phase feedback and responsive sizing. */
-.boss-board {
-  min-height: 590px;
+.boss01-page {
+  --boss-cyan: #79f7ff;
+  --boss-violet: #b36cff;
+  --boss-green: #80ffcf;
+  --boss-amber: #ffd166;
 }
 
-.boss-status-readout {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: flex-end;
-}
-
-.boss-lives-label {
-  color: #ff8098;
-  font-family: var(--font-display, "Orbitron", sans-serif);
-  font-size: 0.52rem;
-  letter-spacing: 0.08rem;
-}
-
-.boss-lives {
-  display: flex;
-  gap: 3px;
-  justify-content: flex-end;
-  max-width: 180px;
-  flex-wrap: wrap;
-}
-
-.boss-heart {
-  width: 15px;
-  height: 15px;
-  color: #ff456d;
-  filter: drop-shadow(0 0 4px rgba(255, 69, 109, 0.6));
-}
-
-.boss-heart.is-lost {
-  color: #050505;
-  filter: none;
-}
-
-.boss-arena {
+.boss01-key-hud {
   position: relative;
-  display: grid;
-  min-height: 420px;
-  place-items: center;
-  overflow: hidden;
-  background: radial-gradient(circle, rgba(179, 108, 255, 0.2), transparent 42%), #07101f;
+  top: auto;
+  left: auto;
+  display: flex;
+  width: min(1180px, calc(100% - 48px));
+  margin: 12px auto 0;
+  padding: 10px 16px;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(121, 247, 255, 0.25);
+  border-left: 2px solid var(--boss-cyan);
 }
 
-.boss-core {
-  position: relative;
-  z-index: 2;
+.boss01-key-hud .key-hud-value {
+  margin: 0;
+  color: #f0f7ff;
+}
+
+.boss01-key-hud.is-unlocked {
+  border-left-color: var(--boss-green);
+}
+
+.boss01-shell {
   display: grid;
-  width: 128px;
-  height: 128px;
-  place-items: center;
-  border: 2px solid var(--danger);
-  border-radius: 50%;
-  background: #160a20;
-  color: #ff8098;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  width: min(1180px, calc(100% - 48px));
+  min-height: calc(100vh - 230px);
+  margin: 0 auto;
+  padding: 44px 0 64px;
+  align-items: center;
+  gap: clamp(28px, 5vw, 68px);
+}
+
+.boss01-intro {
+  max-width: 430px;
+}
+
+.boss01-eyebrow,
+.boss01-stage-label,
+.boss01-lives-label {
+  color: var(--boss-cyan);
   font-family: var(--font-display, "Orbitron", sans-serif);
-  font-size: 0;
-  cursor: pointer;
-  box-shadow: 0 0 35px rgba(255, 69, 109, 0.5), inset 0 0 25px rgba(179, 108, 255, 0.35);
+  letter-spacing: 0.12em;
 }
 
-.boss-core::before,
-.boss-core::after {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  border-radius: inherit;
-  content: "ECHO";
-  pointer-events: none;
-  opacity: 0.45;
-  font-size: 0.65rem;
-  letter-spacing: 0.08rem;
+.boss01-eyebrow {
+  font-size: 0.66rem;
 }
 
-.boss-core::before {
-  color: #ff456d;
-  transform: translate(-3px, 1px);
-  animation: echo-glitch-red 0.72s steps(2, end) infinite;
+.boss01-intro h1 {
+  margin: 14px 0;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.05;
 }
 
-.boss-core::after {
-  color: var(--cyan);
-  transform: translate(3px, -1px);
-  animation: echo-glitch-cyan 0.58s steps(2, end) infinite;
-}
-
-.boss-core.is-vulnerable {
-  border-color: var(--success);
-  color: var(--success);
-}
-
-.boss-core.is-defeated {
-  border-color: var(--success);
-  box-shadow: 0 0 70px var(--success);
-}
-
-.boss-core.is-pulse {
-  animation: boss-pulse 1.1s ease-out;
-}
-
-.boss-targets {
-  position: absolute;
-  inset: 24px;
-}
-
-.boss-target {
-  position: absolute;
-  width: 58px;
-  height: 58px;
-  border: 1px solid var(--cyan);
-  background: rgba(5, 17, 34, 0.9);
-  color: var(--cyan);
-  cursor: pointer;
-  transition: 0.18s ease;
-}
-
-.boss-target-0 { top: 4%; left: 12%; }
-.boss-target-1 { top: 4%; right: 12%; }
-.boss-target-2 { top: 42%; left: 3%; }
-.boss-target-3 { top: 42%; right: 3%; }
-.boss-target-4 { bottom: 4%; left: 12%; }
-.boss-target-5 { right: 12%; bottom: 4%; }
-
-.boss-target:hover,
-.boss-target.is-preview {
-  background: var(--cyan);
-  color: #06101d;
-  box-shadow: 0 0 25px var(--cyan);
-}
-
-.boss-target.is-correct {
-  background:
-    linear-gradient(rgba(128, 255, 207, var(--green-level, 0.2)), rgba(128, 255, 207, var(--green-level, 0.2))),
-    rgba(5, 17, 34, 0.9);
-  border-color: var(--success);
-  color: var(--success);
-  box-shadow: 0 0 25px rgba(128, 255, 207, var(--green-level, 0.2));
-}
-
-.boss-target.is-error {
-  border-color: #ffd166;
-  color: #ffd166;
-  background: rgba(255, 209, 102, 0.12);
-  animation: puzzle-shake 0.25s linear 2;
-}
-
-.boss-phase {
-  position: absolute;
-  right: 16px;
-  bottom: 14px;
-  left: 16px;
+.boss01-intro > p:last-child {
   color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.boss01-panel {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(121, 247, 255, 0.32);
+  background:
+    radial-gradient(ellipse at 82% 42%, rgba(121, 247, 255, 0.08), transparent 38%),
+    rgba(5, 12, 28, 0.94);
+  box-shadow: 0 0 36px rgba(121, 247, 255, 0.08), inset 0 0 30px rgba(179, 108, 255, 0.035);
+}
+
+.boss01-panel-heading {
+  display: flex;
+  padding: 20px 24px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border-bottom: 1px solid rgba(121, 247, 255, 0.16);
+}
+
+.boss01-panel-heading h2 {
+  margin: 6px 0 0;
   font-family: var(--font-display, "Orbitron", sans-serif);
-  font-size: 0.68rem;
-  letter-spacing: 0.1rem;
-  text-align: center;
+  font-size: 1.2rem;
 }
 
-.boss-math {
-  position: relative;
-  z-index: 3;
-  width: min(430px, calc(100% - 34px));
-  padding: 22px;
-  border: 1px solid rgba(255, 209, 102, 0.58);
-  background: rgba(25, 17, 20, 0.94);
-  box-shadow: 0 0 30px rgba(255, 209, 102, 0.16);
-  text-align: center;
-}
-
-.boss-math-question {
-  margin: 0 0 18px;
-  color: #fff1be;
-  font-family: var(--font-display, "Orbitron", sans-serif);
-  font-size: 1.35rem;
-}
-
-.boss-math-options {
+.boss01-readouts {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  justify-items: end;
+  gap: 5px;
+}
+
+.boss01-lives-label {
+  color: #b9cbe0;
+  font-size: 0.52rem;
+}
+
+.boss01-lives {
+  display: flex;
+  gap: 4px;
+}
+
+.boss01-heart {
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--boss-green);
+  border-radius: 50%;
+  background: var(--boss-green);
+  box-shadow: 0 0 8px rgba(128, 255, 207, 0.5);
+}
+
+.boss01-heart.is-lost {
+  background: transparent;
+  box-shadow: none;
+  opacity: 0.3;
+}
+
+.boss01-stage-strip {
+  display: flex;
+  padding: 16px 24px 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.boss01-stage-dot {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid rgba(121, 247, 255, 0.28);
+  border-radius: 50%;
+  color: #8296ad;
+  font: 0.55rem var(--font-display, "Orbitron", sans-serif);
+}
+
+.boss01-stage-dot.is-current {
+  border-color: var(--boss-cyan);
+  background: rgba(121, 247, 255, 0.16);
+  color: #e8ffff;
+  box-shadow: 0 0 14px rgba(121, 247, 255, 0.35);
+}
+
+.boss01-stage-dot.is-complete {
+  border-color: var(--boss-green);
+  background: #14543e;
+  color: var(--boss-green);
+}
+
+.boss01-stage-link {
+  width: clamp(32px, 7vw, 84px);
+  height: 1px;
+  background: rgba(121, 247, 255, 0.24);
+}
+
+.boss01-arena {
+  display: grid;
+  grid-template-columns: minmax(130px, 0.75fr) minmax(0, 1.25fr);
+  min-height: 360px;
+  padding: 18px 26px 26px;
+  align-items: center;
+  gap: 20px;
+}
+
+.boss01-guardian {
+  position: relative;
+  display: grid;
+  min-height: 230px;
+  place-items: center;
+}
+
+.boss01-orbit {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border: 1px solid rgba(121, 247, 255, 0.3);
+  border-radius: 50%;
+}
+
+.boss01-orbit-outer {
+  border-style: dashed;
+  animation: boss01-orbit-spin 24s linear infinite;
+}
+
+.boss01-orbit-inner {
+  width: 142px;
+  height: 142px;
+  border-color: rgba(179, 108, 255, 0.48);
+  box-shadow: 0 0 30px rgba(121, 247, 255, 0.09), inset 0 0 28px rgba(179, 108, 255, 0.08);
+  animation: boss01-orbit-spin 18s linear infinite reverse;
+}
+
+.boss01-guardian-core {
+  z-index: 1;
+  display: grid;
+  width: 88px;
+  height: 88px;
+  padding: 0;
+  place-items: center;
+  border: 2px solid var(--boss-violet);
+  border-radius: 50%;
+  background: radial-gradient(circle, #18294c, #080d1d 72%);
+  color: #d9c1ff;
+  font: 2rem var(--font-display, "Orbitron", sans-serif);
+  cursor: pointer;
+  box-shadow: 0 0 26px rgba(179, 108, 255, 0.35);
+  transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.boss01-guardian-core.is-lit {
+  border-color: var(--boss-green);
+  background: radial-gradient(circle, #1c765a, #09261f 72%);
+  color: #eafff5;
+  box-shadow: 0 0 36px rgba(128, 255, 207, 0.65);
+  transform: scale(1.08);
+}
+
+.boss01-guardian-core:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 5px;
+}
+
+.boss01-guardian-caption {
+  position: absolute;
+  bottom: 6px;
+  color: #8ca0b9;
+  font: 0.55rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.12em;
+}
+
+.boss01-game {
+  min-width: 0;
+  text-align: center;
+}
+
+.boss01-stage-label {
+  margin: 0;
+  color: var(--boss-amber);
+  font-size: 0.58rem;
+}
+
+.boss01-game h3 {
+  margin: 10px 0 12px;
+  color: #eff8ff;
+  font-size: 1.08rem;
+}
+
+.boss01-target {
+  display: grid;
+  min-height: 62px;
+  margin: 0 auto 12px;
+  place-items: center;
+  color: #e9d8ff;
+  font-size: 2.3rem;
+}
+
+.boss01-target.is-preview {
+  color: var(--boss-green);
+  text-shadow: 0 0 20px rgba(128, 255, 207, 0.72);
+}
+
+.boss01-choices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
 }
 
-.boss-math-option {
-  padding: 12px;
-  border: 1px solid #ffd166;
-  background: rgba(255, 209, 102, 0.08);
-  color: #ffd166;
+.boss01-choice {
+  display: grid;
+  min-width: 0;
+  min-height: 64px;
+  place-items: center;
+  border: 1px solid rgba(121, 247, 255, 0.42);
+  border-radius: 8px;
+  background: rgba(121, 247, 255, 0.06);
+  color: var(--boss-cyan);
   cursor: pointer;
-  font: inherit;
+  font-size: 1.65rem;
+  transition: 150ms ease;
 }
 
-.boss-math-option:hover,
-.boss-math-option:focus-visible {
-  background: #ffd166;
-  color: #24170a;
-  outline: none;
+.boss01-choice:hover:not(:disabled),
+.boss01-choice:focus-visible {
+  border-color: #fff;
+  background: rgba(121, 247, 255, 0.18);
+  outline: 2px solid #fff;
+  outline-offset: 2px;
 }
 
-@keyframes boss-pulse {
-  50% { transform: scale(1.18); box-shadow: 0 0 70px var(--success); }
+.boss01-choice.is-correct {
+  border-color: var(--boss-green);
+  background: rgba(128, 255, 207, 0.16);
+  color: var(--boss-green);
 }
 
-@keyframes echo-glitch-red {
-  0%, 100% { clip-path: inset(0 0 72% 0); }
-  45% { clip-path: inset(42% 0 18% 0); transform: translate(-5px, 2px); }
+.boss01-choice.is-wrong {
+  border-color: #ff8098;
+  background: rgba(255, 69, 109, 0.14);
+  color: #ff8098;
 }
 
-@keyframes echo-glitch-cyan {
-  0%, 100% { clip-path: inset(68% 0 0 0); }
-  52% { clip-path: inset(12% 0 55% 0); transform: translate(5px, -2px); }
+.boss01-choice:disabled {
+  cursor: default;
 }
 
-@media (max-width: 650px) {
-  .boss-board {
+.boss01-replay {
+  margin-top: 12px;
+}
+
+.boss01-actions {
+  display: flex;
+  padding: 0 20px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.boss01-status {
+  min-height: 2.4em;
+  padding: 8px 20px 18px;
+  text-align: center;
+}
+
+.boss01-panel.is-victory .boss01-guardian-core {
+  border-color: var(--boss-green);
+  box-shadow: 0 0 45px rgba(128, 255, 207, 0.7);
+}
+
+@keyframes boss01-orbit-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 800px) {
+  .boss01-shell {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    padding-top: 28px;
+  }
+
+  .boss01-intro {
+    max-width: 650px;
+  }
+
+  .boss01-intro h1 {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+}
+
+@media (max-width: 560px) {
+  .boss01-shell,
+  .boss01-key-hud {
+    width: calc(100% - 28px);
+  }
+
+  .boss01-panel-heading {
+    padding: 16px;
+  }
+
+  .boss01-panel-heading h2 {
+    font-size: 1rem;
+  }
+
+  .boss01-arena {
+    grid-template-columns: minmax(0, 1fr);
     min-height: 0;
+    padding: 10px 16px 20px;
+    gap: 8px;
   }
 
-  .boss-arena {
-    min-height: 390px;
+  .boss01-guardian {
+    min-height: 170px;
   }
 
-  .boss-targets {
-    inset: 16px;
+  .boss01-orbit {
+    width: 145px;
+    height: 145px;
   }
 
-  .boss-target {
-    width: 52px;
-    height: 52px;
+  .boss01-orbit-inner {
+    width: 116px;
+    height: 116px;
   }
 
-  .boss-core {
-    width: 112px;
-    height: 112px;
+  .boss01-guardian-core {
+    width: 72px;
+    height: 72px;
+    font-size: 1.6rem;
   }
 
-  .boss-math {
-    width: calc(100% - 24px);
-    padding: 18px 14px;
+  .boss01-guardian-caption {
+    bottom: 0;
   }
 
-  .boss-math-question {
-    font-size: 1.1rem;
+  .boss01-game h3 {
+    font-size: 0.95rem;
+  }
+
+  .boss01-choice {
+    min-height: 56px;
   }
 }
 
-@media (max-width: 420px) {
-  .boss-target {
-    width: 46px;
-    height: 46px;
+@media (prefers-reduced-motion: reduce) {
+  .boss01-orbit {
+    animation: none;
   }
 }

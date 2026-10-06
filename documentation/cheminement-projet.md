@@ -101,17 +101,17 @@ reste [Info-fr.txt](./Info-fr.txt).
 ### Boss — `clee_01_boss_level`
 
 - Boss placé après le niveau 10 dans la partie 1.
-- Combat en plusieurs phases avec attaques, vies et redémarrage en phase 1.
-- Défaite du boss suivie d'un accès au protocole de récupération.
-- Réussite du protocole permettant de débloquer la première clé.
-- HUD de progression global : `CLÉS : 0 / 6`.
+- Nouvelle direction visuelle : gardien spectral, cœur lumineux et orbites de résonance cyan/violettes.
+- Trois stages accessibles : trouver trois sceaux correspondants, répéter une mélodie de trois symboles et toucher le noyau pendant deux halos verts.
+- Difficulté visée : `1/6`, avec six unités d'énergie et une reprise par réinitialisation.
+- Contrôleur et styles isolés dans `docs/js/boss-01.js` et `docs/css/boss-01.css`.
+- La victoire mène à la cinématique de la Clé 01.
 
 ### Niveau spécial — Clé 01
 
 Page : `docs/html/partie-1_niveau-1_à_10/clee_01_cinematic.html`
 
-Le niveau spécial regroupe désormais la récupération et la transmission narrative
-dans une seule scène, au lieu de séparer la récompense et l'interlude :
+Le niveau spécial présente la récompense et la transmission narrative dans une scène :
 
 - scène centrale de résonance avec noyau ECHO et orbites cyan, violette et verte ;
 - dialogue automatique entre Voyageur et ECHO ;
@@ -131,34 +131,8 @@ Fichiers associés :
 - `docs/assets/images/key-01-usb.svg`
 - `docs/css/partie-1_niveau-1_à_10.css`
 
-L'ancien fichier `niveau-interlude.html` reste présent pour compatibilité et
-référence, mais le parcours principal passe maintenant par le niveau Clé 01 unifié.
-
-## Protocole de récupération
-
-Page : `docs/html/partie-1_niveau-1_à_10/boss-recovery.html`
-
-- 120 notes au total.
-- Minimum requis : 90 réussites.
-- Quatre phases de 30 notes.
-- Ordre des trois colonnes mélangé aléatoirement à chaque lancement, avec les trois
-  couleurs présentes dans chaque cycle.
-- Vitesse globale réglée à `1,5×`.
-- Durées de chute visées :
-  - Phase 1 : environ `800 ms`.
-  - Phase 2 : environ `733 ms`.
-  - Phase 3 : environ `683 ms`.
-  - Phase 4 : environ `650 ms`.
-- Intervalle des drops aléatoire à partir de `200 ms`, avec une limite qui diminue
-  selon la phase.
-- Trajectoire linéaire contrôlée par `requestAnimationFrame`.
-- Note visible au-dessus du rectangle pendant la traversée, puis sous le rectangle
-  après sa sortie complète.
-- Toute la surface de chaque rectangle coloré accepte le clic correspondant.
-- Les erreurs font avancer la séquence sans remettre le score à zéro.
-- Réinitialisation complète disponible.
-- Pas de pause et pas de reprise automatique de la progression du mini-jeu au rechargement.
-- Panneau d'exemple avec feedback correct/incorrect et bouton de fermeture.
+L'ancien protocole de récupération du boss a été retiré; la Clé 01 conserve sa
+cinématique et son parcours de récompense.
 
 ## Architecture technique
 
@@ -174,13 +148,7 @@ Page : `docs/html/partie-1_niveau-1_à_10/boss-recovery.html`
 
 ## Validation réalisée
 
-- Tests navigateur sur l'accueil, l'introduction, les niveaux et le protocole de récupération.
-- Vérification de l'ouverture et de la fermeture du panneau d'exemple.
-- Vérification de la stabilité de la colonne gauche lors de l'ouverture de l'exemple.
-- Vérification du reset, de l'absence de reprise automatique et du pulse au clic.
-- Vérification du scheduler après plusieurs clics, erreurs et notes simultanées.
-- Vérification de l'ordre aléatoire et des intervalles variables entre les drops.
-- Vérification de la trajectoire linéaire et du changement de profondeur sous les rectangles.
+- Vérification navigateur des stages du boss et de la suite Clé 01.
 - Vérification des références locales et des chemins GitHub Pages.
 - Vérification de syntaxe JavaScript et `git diff --check`.
 

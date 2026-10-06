@@ -1,20 +1,17 @@
 // ============================================================================
-// Ambiance visuelle : choisit l'arrière-plan selon le niveau (déduit de l'URL niveau-NN), le boss ou la récupération.
+// Ambiance visuelle : choisit l'arrière-plan selon le niveau ou le boss.
 // ============================================================================
 (() => {
   const path = window.location.pathname;
   const levelMatch = path.match(/niveau-(\d+)\.html(?:$|[?#])/i);
   const isBoss = path.includes("clee_01_boss_level");
   const isSecondBoss = path.includes("boss-02");
-  const isRecovery = path.includes("boss-recovery");
   const level = levelMatch
     ? Number(levelMatch[1])
     : isBoss
       ? 10
       : isSecondBoss
         ? 20
-      : isRecovery
-        ? 11
         : 0;
   const part = level ? Math.ceil(level / 10) : path.includes("bonus") ? 7 : 0;
   const palettes = [
@@ -29,9 +26,8 @@
   let [accent, secondary] = palettes[Math.max(0, Math.min(part, palettes.length - 1))];
   if (isBoss) [accent, secondary] = ["#ff456d", "#8d1dff"];
   if (isSecondBoss) [accent, secondary] = ["#45e5d2", "#ffbd69"];
-  if (isRecovery) [accent, secondary] = ["#ff1744", "#aa00ff"];
   const root = document.body;
-  const specialMode = isBoss ? "boss" : isSecondBoss ? "boss-two" : isRecovery ? "recovery" : "";
+  const specialMode = isBoss ? "boss" : isSecondBoss ? "boss-two" : "";
   if (specialMode) root.classList.add(`echo-special-${specialMode}`);
   root.classList.add("echo-ambient-page");
   root.dataset.level = String(level || "intro");
