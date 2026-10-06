@@ -1756,7 +1756,7 @@ else {
       puzzleKicker: "PUZZLE // INVERSION LOGIQUE",
       puzzleTitle: "Grille d'impulsions",
       start: "RÉVEILLER LE RÉSEAU",
-      next: "CONTINUER VERS LE NIVEAU 21",
+      next: "AFFRONTER LE GARDIEN DE LA PARTIE 2",
       reset: "Réinitialiser",
       ready: "Réveille le réseau, puis éteins toutes les cellules.",
       playing: "Chaque impulsion inverse la cellule choisie et ses voisines directes.",
@@ -1786,7 +1786,7 @@ else {
       puzzleKicker: "PUZZLE // LOGIC INVERSION",
       puzzleTitle: "Pulse grid",
       start: "WAKE THE NETWORK",
-      next: "CONTINUE TO LEVEL 21",
+      next: "FACE THE PART 2 WARDEN",
       reset: "Reset",
       ready: "Wake the network, then switch off every cell.",
       playing: "Each pulse toggles the selected cell and its direct neighbors.",
@@ -1961,7 +1961,7 @@ else {
   });
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
-    window.location.href = "niveau-21.html";
+    window.location.href = "boss-02.html";
   });
   saveButton.addEventListener("click", () => {
     if (!window.EchoesSave?.saveProgress({ currentPage: "level-20", currentLevel: 20 })) return;

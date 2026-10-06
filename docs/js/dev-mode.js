@@ -48,6 +48,12 @@
       start: 11,
       end: 20,
       folder: "partie-2_niveau-11_à_20",
+      special: [
+        {
+          label: "CLEE_02 // BOSS",
+          file: "boss-02.html",
+        },
+      ],
     },
     {
       number: 3,

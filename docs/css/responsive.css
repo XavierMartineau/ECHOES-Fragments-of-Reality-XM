@@ -931,37 +931,6 @@ html:has(.intro-page),
       width: min(180px, 52vw);
     }
 
-    .boss-board {
-      min-height: 0;
-    }
-
-    .boss-arena {
-      min-height: 390px;
-    }
-
-    .boss-targets {
-      inset: 16px;
-    }
-
-    .boss-target {
-      width: 52px;
-      height: 52px;
-    }
-
-    .boss-core {
-      width: 112px;
-      height: 112px;
-    }
-
-    .boss-math {
-      width: calc(100% - 24px);
-      padding: 18px 14px;
-    }
-
-    .boss-math-question {
-      font-size: 1.1rem;
-    }
-
     .recovery-lanes {
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 8px;
@@ -1046,10 +1015,6 @@ html:has(.intro-page),
       height: 54px;
     }
 
-    .boss-target {
-      width: 46px;
-      height: 46px;
-    }
   }
 
   /* Keep construction copy readable on desktop and mobile. */

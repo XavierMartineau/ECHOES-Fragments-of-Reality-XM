@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/echoes-favicon.svg" />
+    <title>ECHOES - CLEE 02 // BOSS</title>
+    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css" />
+    <link rel="stylesheet" href="../../css/partie-2_niveau-11_à_20.css" />
+    <link rel="stylesheet" href="../../css/responsive.css" />
+    <link rel="stylesheet" href="../../css/fonts.css" />
+    <link rel="stylesheet" href="../../css/boss-02.css" />
+  </head>
+  <body class="part-two-theme">
+    <div class="background-glow" aria-hidden="true"></div>
+    <div class="grid-overlay" aria-hidden="true"></div>
+    <header class="level-header">
+      <a class="brand" href="../../../index.html">ECHOES</a>
+      <div class="level-meta">
+        <span data-i18n="part">PARTIE 2 // FRACTURES</span>
+        <div class="level-progress" id="levelProgress" aria-label="Progression de la Partie 2"></div>
+        <strong data-i18n="level">CLÉE_02 // GARDIEN</strong>
+      </div>
+      <button class="save-game-button" id="bossSaveButton" type="button" data-i18n="save">SAUVEGARDER</button>
+    </header>
+    <aside class="key-redesign-hud boss02-key-hud" id="keyHud" aria-label="Progression des clés">
+      <span class="key-redesign-hud-label" data-i18n="keyLabel">RÉSONANCES</span>
+      <strong class="key-hud-value" id="keyCount">0 / 6</strong>
+      <span class="key-redesign-hud-line" aria-hidden="true"></span>
+      <span class="key-redesign-hud-note" id="keyHudNote" data-i18n="keyNote">CLÉ 02 // À RÉCUPÉRER</span>
+      <span class="key-redesign-hud-slot" id="keyHudSlot" aria-label="Clé 02 récupérée" aria-hidden="true">
+        <img src="../../assets/images/key-02-usb.svg" alt="" />
+        <b>CLEE_02</b>
+      </span>
+    </aside>
+    <main class="level-shell fracture-boss-shell">
+      <section class="level-intro" aria-labelledby="bossTitle">
+        <p class="eyebrow" data-i18n="eyebrow">CLEE_02 // ARCHONTE DES FRACTURES</p>
+        <h1 id="bossTitle" data-i18n="title">L'Architecte du Néant</h1>
+        <p class="level-description" data-i18n="description">
+          À chaque phase, l'arène change. Traverse ses lignes de frappe, atteins les ancres et brise ses trois armures avant que ta cohérence ne cède.
+        </p>
+        <div class="system-transmission" aria-live="polite">
+          <span class="system-label" data-i18n="systemLabel">ECHO://PROTOCOLE_02</span>
+          <p id="systemMessage">SYSTEME:: ARCHONTE ACTIF // TROIS COUCHES D'ARMURE</p>
+        </div>
+      </section>
+      <section class="puzzle-panel boss02-panel" aria-labelledby="arenaTitle">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-kicker" data-i18n="kicker">COMBAT // NAVIGATION TACTIQUE</p>
+            <h2 id="arenaTitle" data-i18n="arenaTitle">L'arène fracturée</h2>
+          </div>
+          <div class="boss02-readouts">
+            <span class="progress-readout" id="armorReadout" aria-live="polite">0 / 6</span>
+            <span class="boss02-lives-label" data-i18n="coherence">COHÉRENCE</span>
+            <span class="boss02-lives" id="livesReadout" aria-label="8 unités de cohérence"></span>
+          </div>
+        </div>
+        <details class="boss02-help" open>
+          <summary data-i18n="helpTitle">COMMENT COMBATTRE</summary>
+          <ol>
+            <li data-i18n="helpStart">Démarre le combat avec le bouton ci-dessous.</li>
+            <li data-i18n="helpMove">Clique une case voisine ou utilise les flèches / WASD. Évite les murs ▩.</li>
+            <li data-i18n="helpPulse">Rejoins l'ancre active ◆ puis appuie sur « Pulser l'ancre ». Stabilise deux ancres dans chacune des trois phases.</li>
+            <li data-i18n="helpThreat">La rangée ou colonne rouge sera frappée quand le compteur arrive à zéro. Un déplacement ou une impulsion fait avancer le compteur.</li>
+            <li data-i18n="helpShield">Le bouclier annule le prochain impact sans consommer une action. Tu en as deux; tu as aussi huit unités de cohérence.</li>
+          </ol>
+        </details>
+        <div class="boss02-arena">
+          <div class="boss02-core" id="bossCore" aria-hidden="true">
+            <span class="boss02-core-ring"></span>
+            <img class="boss02-reward-key" id="bossRewardKey" src="../../assets/images/key-02-usb.svg" alt="" aria-hidden="true" />
+            <span class="boss02-core-label">CLEE_02</span>
+          </div>
+          <p class="boss02-phase" id="phaseReadout" aria-live="polite">PHASE 1 // CARTOGRAPHIER L'IMPACT</p>
+          <div class="boss02-forecast">
+            <span data-i18n="incoming">PROCHAINE FRACTURE</span>
+            <strong id="strikeReadout">RANGÉE 5</strong>
+            <span id="actionsReadout">Impact dans 4 actions</span>
+          </div>
+          <div class="boss02-grid" id="tacticalBoard" role="group" aria-label="Arène tactique 5 par 5"></div>
+        </div>
+        <div class="boss02-actions">
+          <button class="sequence-start-button" id="startBossButton" type="button" data-i18n="start">ENTRER DANS L'ARÈNE</button>
+          <button class="boss02-action-button" id="pulseButton" type="button" disabled data-i18n="pulse">PULSER L'ANCRE</button>
+          <button class="boss02-action-button boss02-shield-button" id="shieldButton" type="button" data-i18n="shield">BOUCLIER (2)</button>
+          <button class="next-level-button" id="nextLevelButton" type="button" hidden data-i18n="next">CONTINUER VERS LE NIVEAU 21</button>
+          <button class="reset-button" id="resetButton" type="button" data-i18n="reset">Réinitialiser</button>
+        </div>
+        <p class="puzzle-status" id="puzzleStatus" aria-live="polite">Déplace-toi d'une case à la fois. Les cases menacées indiquent la prochaine frappe.</p>
+      </section>
+    </main>
+    <footer class="level-footer">
+      <span data-i18n="footer">ÉCHO // FRACTURES ACTIVES</span>
+      <span data-i18n="counter">BOSS // 02</span>
+    </footer>
+    <script src="../../js/save-system.js"></script>
+    <script src="../../js/language.js"></script>
+    <script src="../../js/page-i18n.js"></script>
+    <script src="../../js/micro-animations.js"></script>
+    <script src="../../js/premium-animations.js"></script>
+    <script src="../../js/dev-mode.js"></script>
+    <script src="../../js/ambient-background.js"></script>
+    <script src="../../js/boss-02.js"></script>
+  </body>
+</html>

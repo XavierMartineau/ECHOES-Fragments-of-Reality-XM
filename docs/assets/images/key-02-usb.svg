@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 260" role="img" aria-labelledby="key02Title key02Desc">
+  <title id="key02Title">Clé de résonance 02</title>
+  <desc id="key02Desc">Clé USB angulaire turquoise et dorée portant le sigle CLEE 02.</desc>
+  <defs>
+    <linearGradient id="key02Shell" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#163b43"/>
+      <stop offset="0.56" stop-color="#071722"/>
+      <stop offset="1" stop-color="#5a3920"/>
+    </linearGradient>
+    <linearGradient id="key02Edge" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#45e5d2"/>
+      <stop offset="0.52" stop-color="#e4f7b0"/>
+      <stop offset="1" stop-color="#ffbd69"/>
+    </linearGradient>
+    <filter id="key02Glow">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(90 130) rotate(9) translate(-90 -130)">
+    <path d="M58 22h64v32l18 21v111a34 34 0 0 1-34 34H74a34 34 0 0 1-34-34V75l18-21V22Z" fill="url(#key02Shell)" stroke="url(#key02Edge)" stroke-width="4"/>
+    <path d="M58 54h64m-64 18h64" fill="none" stroke="#45e5d2" stroke-width="2" opacity=".8"/>
+    <path d="m68 39 10 7 10-7 10 7 10-7 10 7" fill="none" stroke="#ffbd69" stroke-width="3"/>
+    <rect x="55" y="91" width="70" height="91" rx="11" fill="#06111b" stroke="#45e5d2" stroke-width="2"/>
+    <path d="M67 107h46m-46 12h30m-30 12h46" fill="none" stroke="#45e5d2" stroke-width="3" opacity=".62"/>
+    <path d="M72 151h36l-18 17H72z" fill="#173d40" stroke="#ffbd69" stroke-width="2"/>
+    <text x="90" y="163" fill="#fff0c6" font-family="Arial, sans-serif" font-size="26" font-weight="700" text-anchor="middle" filter="url(#key02Glow)">02</text>
+    <circle cx="90" cy="198" r="7" fill="#ffbd69" filter="url(#key02Glow)"/>
+    <path d="M68 222h44m-36 8h28" stroke="#45e5d2" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

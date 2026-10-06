@@ -1309,7 +1309,8 @@ body.part-two-theme {
 .level-20-shell .sequence-controls,
 .level-17-shell .puzzle-actions,
 .level-18-shell .puzzle-actions,
-.level-19-shell .puzzle-actions {
+.level-19-shell .puzzle-actions,
+.level-20-shell .puzzle-actions {
   justify-content: center;
 }
 

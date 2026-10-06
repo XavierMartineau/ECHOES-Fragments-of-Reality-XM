@@ -11,7 +11,7 @@ reste [Info-fr.txt](./Info-fr.txt).
 - **Type :** expérience narrative et jeu de puzzles web statique
 - **Déploiement visé :** GitHub Pages
 - **Version de travail :** bêta v4
-- **Jalon actuel :** boss `CLEE_01`, récupération et niveau cinématique de la Clé 01
+- **Jalon actuel :** boss `CLEE_01` / Clé 01 et combat tactique `CLEE_02` après le niveau 20
 - **Fondations disponibles :** accueil, connexion, introduction interactive, sauvegarde par compte,
   mode développeur, navigation partagée et responsive multi-écrans
 
@@ -90,6 +90,13 @@ reste [Info-fr.txt](./Info-fr.txt).
 - Niveau 16 : cadenas des symboles, avec quatre équations par série et quatre chiffres à déduire.
 - Niveau 20 : puzzle logique en trois manches, où chaque impulsion inverse une cellule
   et ses voisines directes.
+
+### Boss — `boss-02.html`
+
+- Combat placé après le niveau 20 et avant l'entrée dans la partie 3.
+- Arène tactique 5 × 5, déplacements orthogonaux, murs et lignes de frappe télégraphiées.
+- Six ancres à stabiliser en trois phases, huit unités de cohérence et deux boucliers.
+- Victoire débloquant la Clé 02 et le niveau 21.
 
 ### Boss — `clee_01_boss_level`
 

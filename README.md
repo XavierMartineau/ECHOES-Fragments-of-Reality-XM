@@ -12,7 +12,7 @@ dimensions instables pour retrouver six clés de résonance.
 
 - **Version de travail :** bêta v4
 - **Partie jouable principale :** Partie 1, niveaux 1 à 10
-- **Jalon narratif :** boss `CLEE_01` et récupération de la première clé
+- **Jalons narratifs :** boss `CLEE_01` / Clé 01 et boss `CLEE_02` / Clé 02
 - **Déploiement prévu :** GitHub Pages
 - **Technologies :** HTML, CSS et JavaScript sans framework ni serveur obligatoire
 
@@ -85,6 +85,13 @@ Ce niveau rassemble en une seule scène :
 - la sauvegarde de `resonance-1` ;
 - le passage du compteur `0 / 6` à `1 / 6` ;
 - l'indice final qui ouvre la suite du voyage.
+
+### Boss de la Partie 2 — `boss-02.html`
+
+Après le niveau 20, le joueur affronte l'Archonte des Fractures dans une arène
+tactique à cases : il faut naviguer entre les murs, éviter les lignes d'impact
+télégraphiées, stabiliser six ancres et gérer deux boucliers sur trois phases.
+La victoire débloque la Clé 02 et ouvre le niveau 21.
 
 ## Organisation du dépôt
 
