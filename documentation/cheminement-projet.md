@@ -277,7 +277,8 @@ Page : `docs/html/partie-1_niveau-1_à_10/boss-recovery.html`
 - 6ec4399 — Règle de maintenance : chaque commit est ajouté à ce journal.
 - `fd6d447` — Mode développeur PC : marge gauche de 28 à 72 px (clamp) pour décoller le bouton du bord.
 - `9b14ee1` — Mode développeur PC : le bouton s'aligne sur le bord gauche du contenu des pages (marge `max(28px, 50vw - 588px)`), à la même hauteur.
-- Ce commit — Nouveaux niveaux 17 (balance), 18 (tour de Hanoï) et 19 (code fantôme) avec leurs pages, styles et contrôleurs dans les fichiers de la partie 2. Commentaires en français ajoutés dans tous les JS et CSS de parties (carte des niveaux par fichier, un commentaire par bloc de niveau).
+- `bdf3449` — Nouveaux niveaux 17 (balance), 18 (tour de Hanoï) et 19 (code fantôme) avec leurs pages, styles et contrôleurs dans les fichiers de la partie 2. Commentaires en français ajoutés dans tous les JS et CSS de parties (carte des niveaux par fichier, un commentaire par bloc de niveau).
+- Ce commit — Commentaires de section en français devant chaque bloc de code : bandeaux par niveau (ou par rôle) dans le JS et le CSS de la partie 1, en-têtes ajoutés aux fichiers partagés (polices, connexion, micro-animations, langue, ambiance, interlude, bonus…).
 
 ## Prochain jalon recommandé
 

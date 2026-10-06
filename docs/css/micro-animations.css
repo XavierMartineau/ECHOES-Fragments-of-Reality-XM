@@ -1,3 +1,6 @@
+/* ---------------------------------------------------------------------------
+ * Animations d'effets partagées : apparition de page, ondulation, éclat, flottement, balayage.
+ * ------------------------------------------------------------------------- */
 @keyframes fx-page-in { from { opacity: 0; } to { opacity: 1; } }
 @keyframes fx-rise-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @keyframes fx-ripple { from { opacity: .7; transform: translate(-50%, -50%) scale(.2); } to { opacity: 0; transform: translate(-50%, -50%) scale(1); } }

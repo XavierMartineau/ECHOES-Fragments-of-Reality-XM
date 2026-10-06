@@ -1,3 +1,6 @@
+// ============================================================================
+// Traduction automatique FR vers EN du texte des pages quand la langue enregistrée est « en ».
+// ============================================================================
 (() => {
   if (localStorage.getItem("echoes-language") !== "en") return;
   document.documentElement.lang = "en";

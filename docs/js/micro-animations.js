@@ -1,3 +1,6 @@
+// ============================================================================
+// Micro-animations : charge la feuille d'effets, ondulations au clic et particules (désactivé si mouvement réduit).
+// ============================================================================
 (() => {
   const script = document.currentScript;
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

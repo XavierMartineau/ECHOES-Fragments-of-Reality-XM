@@ -22,6 +22,10 @@
   --line: rgba(121, 247, 255, 0.28);
 }
 
+
+/* ---------------------------------------------------------------------------
+ * COMMUN // Compteur de clés (HUD) affiché sur les pages de niveau.
+ * ------------------------------------------------------------------------- */
 .key-hud {
   position: fixed;
   top: 92px;
@@ -412,6 +416,10 @@ body.interlude-page {
 body.interlude-page .key-hud {
   top: 92px;
 }
+
+/* ---------------------------------------------------------------------------
+ * INTERLUDE // Écran de transmission entre deux niveaux (orbe de signal, console, texte tapé).
+ * ------------------------------------------------------------------------- */
 .interlude-header {
   position: relative;
   z-index: 5;
@@ -558,6 +566,10 @@ body.interlude-page .key-hud {
   .transmission-line { grid-template-columns: 1fr; gap: 3px; }
   .console-topline { font-size: 0.5rem; }
 }
+
+/* ---------------------------------------------------------------------------
+ * CINÉMATIQUE DE LA CLÉ // Dialogue d'ECHO, anneaux et clé révélée.
+ * ------------------------------------------------------------------------- */
 .key-cinematic-shell,
 .interlude-shell {
   min-height: 560px;
@@ -1252,6 +1264,10 @@ body.interlude-page .key-hud {
     transform: none;
   }
 }
+
+/* ---------------------------------------------------------------------------
+ * BOSS CLÉ 01 // Arène, noyau, cibles, vies et phases du combat après le niveau 10.
+ * ------------------------------------------------------------------------- */
 .boss-board { min-height: 590px; }
 .boss-status-readout { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
 .boss-lives-label {
@@ -1407,6 +1423,10 @@ body.interlude-page .key-hud {
   0%, 100% { clip-path: inset(68% 0 0 0); }
   52% { clip-path: inset(12% 0 55% 0); transform: translate(5px, -2px); }
 }
+
+/* ---------------------------------------------------------------------------
+ * CLÉ 01 // Niveau de récupération : couloirs de couleurs et compte à rebours.
+ * ------------------------------------------------------------------------- */
 .recovery-shell { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
 @media (min-width: 901px) {
   .recovery-shell {
@@ -1773,6 +1793,10 @@ body.interlude-page .key-hud {
     .recovery-example-stage { grid-template-columns: 1fr; }
     .recovery-example-column { min-height: 150px; }
   }
+
+/* ---------------------------------------------------------------------------
+ * EXEMPLES DE DÉMONSTRATION // Séquence d'exemple non interactive et légende réussite/échec.
+ * ------------------------------------------------------------------------- */
 .sequence-demo-legend {
   flex: 1 1 100%;
   order: 4;
@@ -1812,6 +1836,10 @@ body.interlude-page .key-hud {
 
 }
 
+
+/* ---------------------------------------------------------------------------
+ * BASE COMMUNE DES PAGES DE NIVEAU // En-tête, intro, panneau, pied de page, retour et statut.
+ * ------------------------------------------------------------------------- */
 .level-header,
 .level-intro,
 .puzzle-panel,
@@ -1921,6 +1949,10 @@ body.interlude-page .key-hud {
   min-height: 390px;
 }
 
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 7 // PORTE LUMINEUSE : porte, anneaux, noyau et symboles de la séquence (.gate-*).
+ * ------------------------------------------------------------------------- */
 .gate-board {
   min-height: 590px;
 }
@@ -2045,6 +2077,10 @@ body.interlude-page .key-hud {
 .level-shell:has(.pattern-board) .level-intro h1 {
   font-size: clamp(1.7rem, 3.1vw, 3.1rem);
 }
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 6 // OBSERVATION DES MOTIFS : mur de symboles à comparer (.pattern-*).
+ * ------------------------------------------------------------------------- */
 .pattern-board .panel-heading h2 {
   font-size: clamp(1rem, 1.8vw, 1.45rem);
 }
@@ -2188,6 +2224,10 @@ body::before {
   pointer-events: none;
 }
 
+
+/* ---------------------------------------------------------------------------
+ * FOND ET EN-TÊTE COMMUNS // Lueurs, grille, marque ECHOES, progression et zone d'introduction.
+ * ------------------------------------------------------------------------- */
 .background-glow,
 .grid-overlay {
   position: fixed;
@@ -2496,6 +2536,10 @@ body.level-corruption .level-footer {
   }
 }
 
+
+/* ---------------------------------------------------------------------------
+ * PANNEAU DE PUZZLE COMMUN // Titre, compteur de progression et zone de jeu.
+ * ------------------------------------------------------------------------- */
 .puzzle-panel {
   border: 1px solid var(--line);
   background: var(--panel);
@@ -2531,6 +2575,10 @@ body.level-corruption .level-footer {
   white-space: nowrap;
 }
 
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 1 // ALIGNEMENT PRIMAIRE : cibles et pièces triangle, cercle, carré (.target-slots, .puzzle-piece).
+ * ------------------------------------------------------------------------- */
 .puzzle-board {
   position: relative;
   min-height: 330px;
@@ -2745,6 +2793,10 @@ body.level-corruption .level-footer {
   pointer-events: none;
 }
 
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 3 // CLASSIFICATION DES FORMES : six formes à ranger dans six emplacements (.sort-*).
+ * ------------------------------------------------------------------------- */
 .sort-board {
   display: grid;
   gap: 28px;
@@ -2896,6 +2948,10 @@ body.level-corruption .level-footer {
   color: #ffd166;
 }
 
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 4 // ROTATION HOLOGRAPHIQUE : objet à orienter vers sa cible (.rotation-*).
+ * ------------------------------------------------------------------------- */
 .rotation-board {
   display: grid;
   min-height: 390px;
@@ -2982,6 +3038,10 @@ body.level-corruption .level-footer {
   border-top: 1px solid rgba(121, 247, 255, 0.16);
 }
 
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 5 // SÉQUENCE SONORE : ondes et notes à rejouer (.sound-*, .note-*).
+ * ------------------------------------------------------------------------- */
 .sound-board {
   display: grid;
   min-height: 360px;
@@ -3074,6 +3134,10 @@ body.level-corruption .level-footer {
   color: #ff70c2;
 }
 
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 2 // SÉQUENCE LUMINEUSE : piliers lumineux et boutons de lecture (.sequence-*, .light-*).
+ * ------------------------------------------------------------------------- */
 .sequence-board {
   min-height: 360px;
   display: grid;
@@ -3207,6 +3271,10 @@ body.level-corruption .level-footer {
   box-shadow: 0 0 18px rgba(121, 247, 255, 0.3);
   outline: none;
 }
+
+/* ---------------------------------------------------------------------------
+ * EXEMPLES DE DÉMONSTRATION // Aperçus animés des puzzles (.sequence-demo, .demo-*).
+ * ------------------------------------------------------------------------- */
 .sequence-demo {
   display: grid;
   gap: 0.8rem;
@@ -3350,6 +3418,10 @@ body.level-corruption .level-footer {
   }
 }
 
+
+/* ---------------------------------------------------------------------------
+ * ACTIONS ET STATUTS COMMUNS // Boutons réinitialiser, valider, niveau suivant et messages de statut.
+ * ------------------------------------------------------------------------- */
 .puzzle-actions {
   display: flex;
   flex-wrap: wrap;
@@ -3544,6 +3616,10 @@ html[lang="en"] .puzzle-status.error::before {
   display: none !important;
 }
 
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 8 // TRI DE COULEURS : symboles à placer sur leur cible (.advanced-sort-*, .color-*).
+ * ------------------------------------------------------------------------- */
 .advanced-sort-board .color-sort-grid {
   display: grid;
   gap: 26px;
@@ -3644,6 +3720,10 @@ html[lang="en"] .color-sort-pieces::before {
   color: #48b0ff;
 }
 
+
+/* ---------------------------------------------------------------------------
+ * MIROIRS // Puzzle de miroirs, projecteur et rayons (.mirror-*).
+ * ------------------------------------------------------------------------- */
 .mirror-board .mirror-field {
   position: relative;
   min-height: 390px;
@@ -3760,6 +3840,10 @@ html[lang="en"] .color-sort-pieces::before {
   text-shadow: 0 0 18px var(--success);
 }
 
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 9 // SÉQUENCE STELLAIRE : champ d'étoiles et constellations à reproduire (.constellation-*, .star).
+ * ------------------------------------------------------------------------- */
 .constellation-field {
   position: relative;
   min-height: 390px;
@@ -4168,6 +4252,10 @@ html[lang="en"] .color-sort-pieces::before {
   --star-glow: rgba(72, 176, 255, 0.64);
 }
 
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 10 // SÉQUENCE DE COULEURS : mémoriser puis reproduire les couleurs (.color-sequence-*).
+ * ------------------------------------------------------------------------- */
 .color-sequence-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(70px, 1fr));
@@ -4291,6 +4379,10 @@ html[lang="en"] .color-sort-pieces::before {
   }
 }
 
+
+/* ---------------------------------------------------------------------------
+ * ILLUSION // Plateau d'illusion et hologramme (.illusion-board, .hologram).
+ * ------------------------------------------------------------------------- */
 .illusion-board .illusion-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(80px, 1fr));
@@ -4366,6 +4458,10 @@ html[lang="en"] .color-sort-pieces::before {
   }
 }
 
+
+/* ---------------------------------------------------------------------------
+ * ANCIEN NIVEAU 11 // PAIRES DE MÉMOIRE : cartes de résonance à associer (.pairs-board, .resonance-*).
+ * ------------------------------------------------------------------------- */
 .pairs-board .resonance-guide {
   padding: 12px 20px;
   border-bottom: 1px solid rgba(121, 247, 255, 0.16);
@@ -4553,6 +4649,10 @@ html[lang="en"] .color-sort-pieces::before {
   }
 }
 
+
+/* ---------------------------------------------------------------------------
+ * GÉOMÉTRIE // Plateau géométrique et points à relier (.geometry-*).
+ * ------------------------------------------------------------------------- */
 .geometry-board .geometry-example {
   position: relative;
   min-height: 130px;
@@ -4675,6 +4775,10 @@ html[lang="en"] .color-sort-pieces::before {
   filter: drop-shadow(0 0 5px var(--success));
 }
 
+
+/* ---------------------------------------------------------------------------
+ * PUZZLES À VENIR // Motif fractal (ancien niveau 13) et blocs réservés (.future-puzzle, .fractal-*).
+ * ------------------------------------------------------------------------- */
 .future-puzzle-grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(54px, 1fr));
@@ -5050,6 +5154,10 @@ html[lang="en"] .color-sort-pieces::before {
   }
 }
 
+
+/* ---------------------------------------------------------------------------
+ * ANCIEN NIVEAU 12 // ATELIER D'ORDRE : cartes à déposer dans l'ordre (.ordering-*).
+ * ------------------------------------------------------------------------- */
 .ordering-rule {
   padding: 14px 20px;
   border-bottom: 1px solid rgba(121, 247, 255, 0.18);

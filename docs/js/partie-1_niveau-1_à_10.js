@@ -34,6 +34,9 @@ const levelScriptByMarker = [
   [".fractal-board", 13],
   [".combined-sequence-board", 14],
 ];
+// ============================================================================
+// OUTILS COMMUNS // Animation de réussite, points de progression, niveaux terminés et compteur de clés.
+// ============================================================================
 function playPuzzleSuccessAnimation() {
   const panel = document.querySelector(".puzzle-panel");
   if (!panel) return;
@@ -186,6 +189,9 @@ function installKeyHud() {
 installProgressDots();
 installKeyHud();
 
+// ============================================================================
+// ROUTEUR DE NIVEAU // Choisit le contrôleur à lancer selon le marqueur présent sur la page.
+// ============================================================================
 const activeLevelScript = levelScriptByMarker.find(([marker]) =>
   document.querySelector(marker),
 );
@@ -413,7 +419,9 @@ if (activeLevelScript) {
     completedLevels: [...completedLevels].sort((a, b) => a - b),
   });
 
-  // ===== NIVEAU 2 // SEQUENCE LUMINEUSE =====
+  // ============================================================================
+  // NIVEAU 2 // SÉQUENCE LUMINEUSE : quatre piliers, séquence aléatoire à rejouer.
+  // ============================================================================
   if (document.querySelector(".light-sequence")) {
     const board = document.getElementById("puzzleBoard");
     const lights = [...document.querySelectorAll(".sequence-light")];
@@ -556,7 +564,9 @@ if (activeLevelScript) {
     update();
   }
 
-  // ===== NIVEAU 3 // CLASSIFICATION DES FORMES =====
+  // ============================================================================
+  // NIVEAU 3 // CLASSIFICATION DES FORMES : six formes à ranger dans six emplacements.
+  // ============================================================================
   if (document.querySelector(".sort-board")) {
     const board = document.getElementById("puzzleBoard");
     const pieceTray = document.getElementById("sortPieces");
@@ -694,7 +704,9 @@ if (activeLevelScript) {
     update();
   }
 
-  // ===== NIVEAU 4 // ROTATION HOLOGRAPHIQUE =====
+  // ============================================================================
+  // NIVEAU 4 // ROTATION HOLOGRAPHIQUE : orienter l'objet vers la cible.
+  // ============================================================================
   if (document.querySelector(".rotation-board")) {
     const board = document.getElementById("puzzleBoard");
     const object = document.getElementById("rotationObject");
@@ -780,7 +792,9 @@ if (activeLevelScript) {
     }
   }
 
-  // ===== NIVEAU 5 // SEQUENCE SONORE =====
+  // ============================================================================
+  // NIVEAU 5 // SÉQUENCE SONORE : quatre notes Web Audio à écouter puis reproduire.
+  // ============================================================================
   if (document.querySelector(".sound-board")) {
     const board = document.getElementById("puzzleBoard");
     const notes = [...document.querySelectorAll(".sound-note")];
@@ -896,7 +910,9 @@ if (activeLevelScript) {
     }
   }
 
-  // ===== NIVEAU 6 // OBSERVATION DES MOTIFS =====
+  // ============================================================================
+  // NIVEAU 6 // OBSERVATION DES MOTIFS : repérer les symboles identiques dans la grille.
+  // ============================================================================
   if (document.querySelector(".pattern-board")) {
     const grid = document.getElementById("patternGrid");
     const start = document.getElementById("startPuzzleButton");
@@ -1019,7 +1035,9 @@ if (activeLevelScript) {
     }
   }
 
-  // ===== NIVEAU 7 // PORTE LUMINEUSE =====
+  // ============================================================================
+  // NIVEAU 7 // PORTE LUMINEUSE : séquences à reproduire en trois étapes de difficulté.
+  // ============================================================================
   if (document.querySelector(".gate-board")) {
     const buttons = [...document.querySelectorAll("[data-gate]")];
     const start = document.getElementById("startPuzzleButton");
@@ -1150,7 +1168,9 @@ if (activeLevelScript) {
     if (completedLevels.has(7)) next.hidden = false;
   }
 } else {
-  // ===== NIVEAU 1 =====
+  // ============================================================================
+  // NIVEAU 1 // ALIGNEMENT PRIMAIRE : trois manches, formes mélangées à placer sur leurs cibles.
+  // ============================================================================
   // Niveau 1 : alignement primaire, géré directement dans ce bloc.
   const board = document.getElementById("puzzleBoard");
   const pieces = [...document.querySelectorAll(".puzzle-piece")];
@@ -1528,6 +1548,9 @@ if (activeLevelScript) {
   });
 }
 
+// ============================================================================
+// OUTIL COMMUN DES NIVEAUX 8 À 14 // Démarrage, réinitialisation, sauvegarde et feedback de réussite.
+// ============================================================================
 // Contrôleur commun aux pages de puzzle plus récentes (niveaux 8 à 14).
 // Each page supplies only its board builder; this function owns start, reset,
 // persistence, language-independent navigation, and completion feedback.
@@ -1648,6 +1671,9 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
   }
 }
 
+// ============================================================================
+// NIVEAU 8 // TRI DE COULEURS
+// ============================================================================
 // Niveau 8 // Tri de couleurs : sélectionner un symbole puis le placer sur sa cible.
 if (document.querySelector(".advanced-sort-board")) {
   installAdvancedLevel(8, ({ started, finish, setStatus }) => {
@@ -1734,6 +1760,9 @@ if (document.querySelector(".advanced-sort-board")) {
   });
 }
 
+// ============================================================================
+// NIVEAU 9 // SÉQUENCE STELLAIRE
+// ============================================================================
 // Niveau 9 // Séquence stellaire : reproduire trois constellations dans l'ordre.
 if (document.querySelector(".constellation-board")) {
   installAdvancedLevel(9, ({ started, finish, setStatus }) => {
@@ -1866,6 +1895,9 @@ if (document.querySelector(".constellation-board")) {
   });
 }
 
+// ============================================================================
+// NIVEAU 10 // SÉQUENCE DE COULEURS
+// ============================================================================
 // Niveau 10 // Mémoire des couleurs : observer une couleur à la fois puis reproduire la séquence.
 if (document.querySelector(".color-sequence-board")) {
   installAdvancedLevel(10, ({ started, finish, setStatus, registerStart }) => {
@@ -2008,6 +2040,9 @@ if (document.querySelector(".color-sequence-board")) {
   });
 }
 
+// ============================================================================
+// OUTIL COMMUN // Puzzle de boutons ordonnés (anciens niveaux 12 et 14).
+// ============================================================================
 // Puzzle de boutons ordonnés partagé par les niveaux 12 et 14.
 function installOrderedGridLevel(
   levelNumber,
@@ -2058,6 +2093,9 @@ function installOrderedGridLevel(
   });
 }
 
+// ============================================================================
+// BOSS CLÉ 01 // Combat en trois phases, après le niveau 10.
+// ============================================================================
 // BOSS CLÉ 01 // trois phases de difficulté croissante (après le niveau 10).
 if (document.querySelector(".boss-board")) {
   installAdvancedLevel(11, ({ started, finish, setStatus, registerStart, registerReset }) => {
@@ -2271,6 +2309,9 @@ if (document.querySelector(".boss-board")) {
   });
 }
 
+// ============================================================================
+// ANCIEN NIVEAU 11 // PAIRES DE MÉMOIRE
+// ============================================================================
 // Niveau 11 (ancien) // Paires de mémoire : associer toutes les cartes par couleur et symbole.
 if (document.querySelector(".pairs-board")) {
   installAdvancedLevel(11, ({ started, finish, setStatus, registerStart }) => {
@@ -2407,6 +2448,9 @@ if (document.querySelector(".pairs-board")) {
     createRound(true);
   });
 }
+// ============================================================================
+// ANCIEN NIVEAU 12 // LUMIÈRE CROISÉE
+// ============================================================================
 // Niveau 12 (ancien) // Lumière croisée : activer les intersections dans l'ordre.
 if (document.querySelector(".cross-light-board")) {
   installOrderedGridLevel(
@@ -2417,6 +2461,9 @@ if (document.querySelector(".cross-light-board")) {
     [0, 4, 8, 1, 5, 7],
   );
 }
+// ============================================================================
+// ANCIEN NIVEAU 14 // PROTOCOLE COMBINÉ
+// ============================================================================
 // Niveau 14 (ancien) // Protocole combiné : reproduire le signal mixte ordonné.
 if (document.querySelector(".combined-sequence-board")) {
   installOrderedGridLevel(
@@ -2428,6 +2475,9 @@ if (document.querySelector(".combined-sequence-board")) {
   );
 }
 
+// ============================================================================
+// ANCIEN NIVEAU 12 // ATELIER D'ORDRE
+// ============================================================================
 // Niveau 12 (ancien) // Atelier d'ordre : choisir six cartes et les déposer dans l'ordre.
 if (document.querySelector(".ordering-board")) {
   installAdvancedLevel(12, ({ started, finish, setStatus, registerStart, registerReset }) => {
@@ -2725,6 +2775,9 @@ if (document.querySelector(".ordering-board")) {
   });
 }
 
+// ============================================================================
+// ANCIEN NIVEAU 13 // MOTIF FRACTAL
+// ============================================================================
 // Niveau 13 (ancien) // Motif fractal : activer les cinq panneaux cibles d'une grille 3 x 3.
 if (document.querySelector(".fractal-board")) {
   installAdvancedLevel(13, ({ started, finish, setStatus, registerStart }) => {
@@ -2797,6 +2850,9 @@ if (document.querySelector(".fractal-board")) {
 // ===== NIVEAU 15 // ACTIVATION DE TROIS POINTS =====
 // TODO: ajouter l'activation logique des trois points d'energie.
 
+// ============================================================================
+// EXEMPLES DE DÉMONSTRATION // Un aperçu non interactif pour chaque puzzle implémenté.
+// ============================================================================
 // Ajoute un exemple séparé et non interactif à chaque puzzle déjà implémenté.
 (() => {
   const language =

@@ -1,3 +1,6 @@
+// ============================================================================
+// Interlude de transmission : console de dialogue et bouton de stabilisation avant la cinématique de clé.
+// ============================================================================
 (() => {
   const consolePanel = document.getElementById("transmissionConsole");
   const dialogue = document.getElementById("interludeDialogue");

@@ -1,3 +1,6 @@
+// ============================================================================
+// Transition de clé : dialogue de récompense et mise à jour du compteur de clés après le boss de la Clé 01.
+// ============================================================================
 (() => {
   const keyHud = document.querySelector(".key-hud, .key-redesign-hud");
   const keyValue = keyHud?.querySelector(".key-hud-value");

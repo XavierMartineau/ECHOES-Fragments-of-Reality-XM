@@ -1,3 +1,6 @@
+// ============================================================================
+// Sélecteur de langue FR/EN : construit le bouton et mémorise le choix dans localStorage.
+// ============================================================================
 (() => {
   const translations = window.translations || {};
   const availableLanguages = Object.keys(translations);

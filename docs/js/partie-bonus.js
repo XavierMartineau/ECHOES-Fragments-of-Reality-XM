@@ -1,3 +1,6 @@
+// ============================================================================
+// Partie bonus : réveil du fragment bonus au clic sur le bouton.
+// ============================================================================
 const bonusButton = document.getElementById("bonusButton");
 const bonusStatus = document.getElementById("bonusStatus");
 

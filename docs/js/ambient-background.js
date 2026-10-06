@@ -1,3 +1,6 @@
+// ============================================================================
+// Ambiance visuelle : choisit l'arrière-plan selon le niveau (déduit de l'URL niveau-NN), le boss ou la récupération.
+// ============================================================================
 (() => {
   const path = window.location.pathname;
   const levelMatch = path.match(/niveau-(\d+)\.html(?:$|[?#])/i);
