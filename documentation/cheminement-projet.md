@@ -5,7 +5,7 @@ Il est maintenu à partir des fonctionnalités présentes dans le dépôt et des
 significatifs de l'historique Git. La référence narrative et fonctionnelle principale
 reste [Info-fr.txt](./Info-fr.txt).
 
-## État du projet au 05/10/2026
+## État du projet au 06/10/2026
 
 - **Projet :** ECHOES: Fragments of Reality
 - **Type :** expérience narrative et jeu de puzzles web statique
@@ -35,7 +35,7 @@ reste [Info-fr.txt](./Info-fr.txt).
 - Nouvelle partie avec effacement de la progression du compte.
 - Niveaux terminés rejouables sans supprimer les points verts.
 - Navigation partagée, boutons retour et liens vers les secteurs suivants.
-- Mode développeur pour faciliter les tests et la navigation locale ; son bouton et son menu restent roses sur toutes les pages, y compris la Partie 2.
+- Mode développeur pour faciliter les tests et la navigation locale ; son bouton et son menu restent roses sur toutes les pages ; seuls les numéros de niveaux 11 à 20 et le sélecteur « PART 2 » du navigateur passent au bleu électrique ; sur PC, le bouton est collé au bord gauche de la fenêtre.
 
 ### Responsive et qualité d'affichage
 
@@ -44,7 +44,7 @@ reste [Info-fr.txt](./Info-fr.txt).
 - Interfaces tactiles sans dépendance obligatoire au survol.
 - Détection des petites fenêtres PC avec pointeur fin.
 - Protection contre les débordements de texte.
-- Corrections des chemins sensibles à la casse pour GitHub Pages.
+- Corrections des chemins sensibles à la casse pour GitHub Pages : dossiers docs/ et documentation/ en minuscules dans Git (GitHub Pages distingue la casse).
 - Audit des références locales réalisé : `NO_MISSING_LOCAL_REFERENCES`.
 
 ## Puzzles et niveaux
@@ -260,6 +260,19 @@ Page : `docs/html/partie-1_niveau-1_à_10/boss-recovery.html`
 - `095e959` — Mode développeur toujours rose (suppression des surcharges bleues de la
   Partie 2), JavaScript des niveaux 11 à 16 regroupé dans `partie-2_niveau-11_à_20.js`
   (scripts `niveau-1X.js` supprimés) et documentation du niveau 15 mise à jour.
+- `fd5e9b6` — Correctif GitHub Pages : renommage de `Docs/` et `Documentation/` en
+  `docs/` et `documentation/` dans l'index Git (Windows ignore la casse, GitHub Pages non) ;
+  chemins mis à jour dans `index.html`, `script.js` et `dev-mode.js`.
+- `f945865` — Mode développeur : sur PC (> 900 px), bouton et panneau alignés à gauche de
+  la fenêtre (`dev-mode.css`).
+- `c622ed3` — Essai de thème bleu pour tout le mode développeur de la Partie 2, remplacé
+  par les deux commits suivants (le mode développeur doit rester rose).
+- `f98fe07` — Mode développeur rose rétabli ; seuls les numéros des niveaux 11 à 20 passent
+  au bleu électrique (`#4b9eff`).
+- `e9a7b61` — Sélecteur « PART 2 » du navigateur également en bleu électrique ; les parties 3
+  à 6 gardent les couleurs de base.
+- Ce commit — Règle de maintenance : chaque commit est ajouté à ce journal.
+
 ## Prochain jalon recommandé
 
 1. Valider le parcours complet niveaux 1 à 10 → boss → Clé 01 sur desktop et mobile.
@@ -269,5 +282,5 @@ Page : `docs/html/partie-1_niveau-1_à_10/boss-recovery.html`
 5. Vérifier l'ensemble des liens et assets sur GitHub Pages.
 6. Préparer une nouvelle version bêta après validation des parcours complets.
 
-> Mettre à jour ce document après chaque jalon important. Les entrées du journal doivent
-> référencer les commits fonctionnels plutôt que les commits techniques intermédiaires.
+> Mettre à jour ce document à chaque commit : ajouter une entrée datée avec le hash du commit,
+> sa portée (fichiers ou fonctionnalités) et corriger les sections d'état si elles changent.
