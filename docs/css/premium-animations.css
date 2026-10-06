@@ -1,0 +1,112 @@
+/* ---------------------------------------------------------------------------
+ * Couche « premium » : titres animés, bordures lumineuses, relief 3D, révélation au défilement, confettis.
+ * ------------------------------------------------------------------------- */
+@property --fx-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+@keyframes fx-spin { to { --fx-angle: 360deg; } }
+@keyframes fx-title-shine { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@keyframes fx-breathe { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+@keyframes fx-scan { from { transform: translateY(-120px); } to { transform: translateY(100vh); } }
+@keyframes fx-confetti {
+  0% { opacity: 1; transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--fx-x)), calc(-50% + var(--fx-y))) rotate(var(--fx-r)) scale(.6); }
+}
+@keyframes fx-shake { 0%, 100% { transform: none; } 20% { transform: translateX(-6px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(2px); } }
+@keyframes fx-pop-in { 0% { transform: scale(.85); opacity: 0; } 60% { transform: scale(1.06); opacity: 1; } 100% { transform: none; } }
+@keyframes fx-beam { 0% { opacity: 0; transform: scaleX(0); } 40% { opacity: 1; } 100% { opacity: 0; transform: scaleX(1); } }
+
+.level-intro h1 {
+  background: linear-gradient(100deg, #ffffff 30%, #8fd0ff 45%, #ffffff 55%, #ffffff 70%) 0 0 / 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fx-title-shine 9s linear infinite;
+}
+
+.fx-scanline {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 120px;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(to bottom, transparent, rgba(120, 190, 255, .045), transparent);
+  animation: fx-scan 11s linear infinite;
+}
+
+.puzzle-panel {
+  transition: transform .25s ease-out, box-shadow .4s ease;
+}
+.puzzle-panel::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: conic-gradient(from var(--fx-angle), transparent 0deg, rgba(120, 190, 255, .9) 40deg, transparent 90deg, transparent 180deg, rgba(255, 209, 102, .55) 230deg, transparent 280deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: .7;
+  animation: fx-spin 8s linear infinite;
+}
+.puzzle-panel:hover { box-shadow: 0 18px 50px rgba(30, 90, 170, .28); }
+
+.fx-reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1); transition-delay: var(--fx-d, 0ms); }
+.fx-reveal.is-in { opacity: 1; transform: none; }
+
+.sequence-start-button, .next-level-button, .reset-button, .save-game-button { position: relative; overflow: hidden; }
+.sequence-start-button::before, .next-level-button::before, .reset-button::before, .save-game-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .28) 50%, transparent 65%);
+  transform: translateX(-120%);
+  transition: transform .6s ease;
+}
+.sequence-start-button:hover::before, .next-level-button:hover::before, .reset-button:hover::before, .save-game-button:hover::before { transform: translateX(120%); }
+.sequence-start-button:not(:disabled):hover, .next-level-button:not(:disabled):hover, .reset-button:not(:disabled):hover, .save-game-button:not(:disabled):hover { transform: translateY(-2px); }
+.sequence-start-button:not(:disabled):active, .next-level-button:not(:disabled):active, .reset-button:not(:disabled):active, .save-game-button:not(:disabled):active { transform: scale(.97); }
+
+.next-level-button:not([hidden]) { animation: fx-pop-in .7s cubic-bezier(.2, 1.4, .4, 1) both, fx-pulse-dot 1.8s ease-in-out .7s infinite; }
+
+input:not([type="checkbox"]):not([type="radio"]), textarea, select { transition: box-shadow .25s ease, border-color .25s ease, transform .2s ease; }
+input:not([type="checkbox"]):not([type="radio"]):focus, textarea:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(120, 190, 255, .55), 0 0 22px rgba(120, 190, 255, .45);
+  transform: translateY(-1px);
+}
+input.is-wrong { animation: fx-shake .45s ease; }
+
+.level-square.current { animation: fx-pulse-dot 1.6s ease-in-out infinite; }
+.system-transmission { position: relative; overflow: hidden; }
+.system-transmission::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  transform-origin: left;
+  background: linear-gradient(90deg, transparent, #8fd0ff, transparent);
+  animation: fx-beam 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.fx-confetti {
+  position: fixed;
+  width: 8px;
+  height: 14px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 10000;
+  animation: fx-confetti var(--fx-t, 1.4s) cubic-bezier(.15, .7, .3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .level-intro h1, .puzzle-panel::before, .fx-scanline, .system-transmission::after, input.is-wrong, .next-level-button { animation: none !important; }
+  .fx-reveal { opacity: 1; transform: none; transition: none; }
+  .fx-confetti { display: none !important; }
+}
