@@ -339,3 +339,30 @@ input:focus {
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 650px) {
+  html body .login-brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    font-size: 0.82rem;
+  }
+
+  html body .login-kicker,
+  html body .login-form label,
+  html body label {
+    font-size: max(0.72rem, 11.5px);
+  }
+
+  html body .password-toggle,
+  html body #passwordToggle {
+    min-height: 40px;
+    padding-inline: 12px;
+    font-size: max(0.72rem, 12px);
+  }
+
+  html body .login-submit {
+    min-height: 48px;
+    font-size: max(0.78rem, 12.5px);
+  }
+}

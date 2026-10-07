@@ -1258,3 +1258,182 @@ html body > aside.dev-mode {
   margin: 0;
   padding: 18px 20px 58px;
 }
+
+/* Mobile : tailles de texte lisibles et cibles tactiles confortables */
+@media (max-width: 650px) {
+  html body .brand,
+  html body .login-brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    font-size: 0.82rem;
+  }
+
+  html body .level-meta span,
+  html body .level-meta strong,
+  html body .key-redesign-hud-slot b,
+  html body .dialogue-head span,
+  html body .dialogue-head strong,
+  html body .boss02-forecast span,
+  html body .constellation-sequence-display span,
+  html body .dev-mode-toggle span,
+  html body .top-bar .status-pill,
+  html body .top-bar .brand,
+  html body .sd-top h3,
+  html body .sd-side h3,
+  html body .status-pill,
+  html body .status-pill b,
+  html body .status-pill strong,
+  html body .save-game-button,
+  html body #saveGameButton,
+  html body #bossSaveButton,
+  html body .eyebrow,
+  html body #eyebrow,
+  html body .panel-kicker,
+  html body #kicker,
+  html body #bossEyebrow,
+  html body #bossKicker,
+  html body .boss01-eyebrow,
+  html body .system-label,
+  html body .login-kicker,
+  html body .login-form label,
+  html body label,
+  html body summary,
+  html body .volume-notice,
+  html body #dialogueHint,
+  html body .piece-tray-hint,
+  html body .generic-demo h3,
+  html body .generic-demo p,
+  html body .alignment-label,
+  html body #partLabel,
+  html body #levelLabel,
+  html body #bossPart,
+  html body #bossLevel,
+  html body #keyLabel,
+  html body .key-redesign-hud-label,
+  html body .key-redesign-hud-note,
+  html body #keyHudNote,
+  html body .boss01-lives-label,
+  html body .boss02-lives-label,
+  html body .boss03-lives-label,
+  html body .boss01-guardian-caption,
+  html body #bossStageLabel,
+  html body #phaseReadout,
+  html body #actionsReadout,
+  html body #moveReadout,
+  html body .progress-readout,
+  html body .kf-label,
+  html body .kf-count,
+  html body #assemblyLabel,
+  html body #assemblyCount {
+    font-size: max(0.72rem, 11.5px) !important;
+    letter-spacing: 0.08em;
+  }
+
+  html body .level-footer span,
+  html body .level-footer strong,
+  html body .level-footer .site-credit,
+  html body .console-footer span,
+  html body .site-copyright,
+  html body .footer-credit,
+  html body .footer-rights,
+  html body #bossFooter,
+  html body #footerLabel {
+    font-size: max(0.68rem, 11px) !important;
+    line-height: 1.4;
+  }
+
+  html body .boss01-stage-dot {
+    font-size: 0.7rem !important;
+  }
+
+  html body .ladder-square {
+    font-size: 0.66rem !important;
+  }
+
+  html body button,
+  html body .sequence-demo-button,
+  html body .generic-demo .sequence-demo-button,
+  html body .sequence-start-button,
+  html body .reset-button,
+  html body .next-level-button,
+  html body .login-submit,
+  html body #passwordToggle,
+  html body #startPuzzleButton,
+  html body #sequenceStartButton,
+  html body #checkButton,
+  html body #resetButton,
+  html body #startBossButton,
+  html body #pulseButton,
+  html body #shieldButton,
+  html body #lockButton,
+  html body #slowButton {
+    font-size: max(0.76rem, 12px) !important;
+  }
+
+  html body .save-game-button,
+  html body #saveGameButton,
+  html body #bossSaveButton,
+  html body #passwordToggle,
+  html body .sequence-demo-button,
+  html body .sequence-start-button,
+  html body .reset-button,
+  html body .next-level-button,
+  html body .login-submit,
+  html body .boss03-action-button,
+  html body .boss02-actions button,
+  html body .boss01-actions button {
+    min-height: 44px;
+  }
+
+  html body .boss03-timer-box .boss03-timer {
+    font-size: 1.25rem;
+  }
+
+  html body .boss03-error-title {
+    font-size: clamp(2rem, 14vw, 3.2rem);
+    letter-spacing: 0.08em;
+  }
+}
+@media (max-width: 650px) {
+  html body .level-footer span,
+  html body .site-copyright,
+  html body .footer-credit,
+  html body .footer-rights {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: center;
+  }
+
+  html body .key-redesign-hud {
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 6px;
+    max-width: calc(100vw - 24px);
+  }
+
+  html body .key-redesign-hud-slot {
+    flex: 0 1 auto;
+    width: auto;
+    max-width: 100%;
+    margin-top: 0;
+  }
+
+  html body .kf-assembly,
+  html body .boss03-assembly {
+    flex-wrap: wrap;
+    gap: 8px 14px;
+  }
+
+  html body .kf-label,
+  html body .kf-count,
+  html body .boss03-assembly-label,
+  html body .boss03-assembly-count {
+    white-space: nowrap;
+  }
+
+  html body .puzzle-status::before {
+    font-size: 0.7rem !important;
+  }
+}
