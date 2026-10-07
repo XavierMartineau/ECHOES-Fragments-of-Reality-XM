@@ -112,6 +112,11 @@
     { gap: 24, speeds: [80, 105, 135, 165, 195], twist: "flip" },
     { gap: 18, speeds: [90, 120, 150, 185, 220, 255], twist: "flip" },
   ];
+  const palettes = [
+    ["#38f2ff", "#4d8bff", "#a56bff", "#ff4fd8"],
+    ["#ffd24d", "#ff9f43", "#ff6b4a", "#ff4f8b", "#c44dff"],
+    ["#ff2d4a", "#ff7a2d", "#ffd24d", "#ff4fd8", "#7a5cff", "#38f2ff"],
+  ];
   const maxLives = 4;
   const phaseTime = 45;
   const slowCost = 10;
@@ -275,6 +280,7 @@
       const radius = count === 1 ? 120 : 170 - (100 * index) / (count - 1);
       const group = document.createElementNS(NS, "g");
       group.setAttribute("class", "boss03-ring");
+      group.style.setProperty("--ring-color", palettes[phase][index % palettes[phase].length]);
       const track = document.createElementNS(NS, "circle");
       track.setAttribute("r", radius);
       track.setAttribute("class", "boss03-ring-track");

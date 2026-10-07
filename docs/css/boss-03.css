@@ -150,19 +150,21 @@
 
 .boss03-ring-arc {
   fill: none;
-  stroke: #6b2a8f;
+  stroke: var(--ring-color, #6b2a8f);
+  stroke-opacity: 0.55;
   stroke-linecap: round;
   transition: stroke 200ms, filter 200ms;
 }
 
 .boss03-ring-edge {
-  fill: #ff4fd8;
-  opacity: 0.55;
+  fill: var(--ring-color, #ff4fd8);
+  opacity: 0.7;
 }
 
 .boss03-ring.is-active .boss03-ring-arc {
-  stroke: #ff4fd8;
-  filter: drop-shadow(0 0 7px rgba(255, 79, 216, 0.85));
+  stroke: var(--ring-color, #ff4fd8);
+  stroke-opacity: 1;
+  filter: drop-shadow(0 0 8px var(--ring-color, #ff4fd8));
 }
 
 .boss03-ring.is-active .boss03-ring-edge {
@@ -172,6 +174,7 @@
 
 .boss03-ring.is-locked .boss03-ring-arc {
   stroke: #c6ff4d;
+  stroke-opacity: 1;
   filter: drop-shadow(0 0 6px rgba(198, 255, 77, 0.7));
 }
 
@@ -638,6 +641,7 @@
 
 .boss03-arena.is-meltdown .boss03-ring-arc {
   stroke: #ff2d4a;
+  stroke-opacity: 1;
   opacity: calc(0.55 + 0.45 * var(--melt, 0));
   filter: drop-shadow(0 0 calc(2px + 12px * var(--melt, 0)) #ff2d4a);
   transition: none;
