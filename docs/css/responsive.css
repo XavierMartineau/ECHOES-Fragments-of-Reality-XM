@@ -1437,3 +1437,178 @@ html body > aside.dev-mode {
     font-size: 0.7rem !important;
   }
 }
+/* Tablette : une seule colonne en portrait, textes et boutons plus confortables */
+@media (min-width: 651px) and (max-width: 900px) {
+  html body .level-shell,
+  html body.part-three-theme .level-shell,
+  html body.part-two-theme .level-shell,
+  html body .boss01-shell {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    width: min(760px, calc(100% - 48px));
+    min-height: 0;
+    padding-top: 36px;
+  }
+
+  html body .level-intro,
+  html body .boss01-intro {
+    max-width: none;
+    text-align: center;
+  }
+
+  html body .system-transmission {
+    max-width: 640px;
+    margin-inline: auto;
+    text-align: left;
+  }
+
+  html body .puzzle-panel {
+    width: 100%;
+  }
+}
+
+@media (min-width: 651px) and (max-width: 1099px) {
+  html body .brand,
+  html body .login-brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+  }
+
+  html body .level-meta {
+    gap: 14px;
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+
+  html body .boss01-lives-label,
+  html body .boss02-lives-label,
+  html body .boss01-guardian-caption,
+  html body .boss01-stage-dot,
+  html body summary,
+  html body .piece-tray-hint,
+  html body .alignment-label,
+  html body .reference-label,
+  html body .slot-index,
+  html body .sorting-target-label,
+  html body .code-section-title,
+  html body .resonance-lane-title,
+  html body #trayTitle,
+  html body #sdWordTitle,
+  html body #sdLegendTitle,
+  html body #phaseReadout,
+  html body #roundReadout,
+  html body #moveReadout,
+  html body #dialogueHint,
+  html body #scaleLeftLabel,
+  html body #scaleRightLabel,
+  html body #scaleTrayLabel,
+  html body .status-pill,
+  html body .save-game-button,
+  html body #saveGameButton,
+  html body #bossSaveButton,
+  html body .eyebrow,
+  html body #eyebrow,
+  html body .panel-kicker,
+  html body #kicker,
+  html body #bossEyebrow,
+  html body #bossKicker,
+  html body .boss01-eyebrow,
+  html body .login-kicker,
+  html body label,
+  html body .volume-notice,
+  html body .level-meta span,
+  html body .level-meta strong,
+  html body .key-redesign-hud-label,
+  html body .key-redesign-hud-note,
+  html body #keyHudNote,
+  html body #keyLabel,
+  html body .key-redesign-hud-slot b,
+  html body .dialogue-head span,
+  html body .dialogue-head strong,
+  html body .kf-label,
+  html body .kf-count,
+  html body #assemblyLabel,
+  html body #assemblyCount {
+    font-size: max(0.7rem, 11px) !important;
+  }
+
+  html body .level-footer span,
+  html body .level-footer strong,
+  html body .console-footer span,
+  html body .site-copyright {
+    font-size: max(0.64rem, 10.5px) !important;
+  }
+
+  html body .color-target {
+    font-size: 0.66rem;
+  }
+
+  html body button,
+  html body .sequence-demo-button,
+  html body .color-symbol {
+    font-size: max(0.7rem, 11.5px) !important;
+  }
+
+  html body .save-game-button,
+  html body #saveGameButton,
+  html body #bossSaveButton,
+  html body #passwordToggle,
+  html body .sequence-demo-button,
+  html body .sequence-start-button,
+  html body .reset-button,
+  html body .next-level-button,
+  html body .login-submit,
+  html body #startPuzzleButton,
+  html body #resetButton,
+  html body #checkButton,
+  html body #submitCodeButton,
+  html body #sequenceStartButton,
+  html body #rotateButton,
+  html body .boss03-action-button,
+  html body .puzzle-actions button {
+    min-height: 44px;
+  }
+
+  html body .puzzle-status::before {
+    font-size: 0.7rem !important;
+  }
+}
+@media (min-width: 651px) and (max-width: 1099px) {
+  html body .dialogue-shell p#dialogueHint,
+  html body .dialogue-shell .dialogue-hint,
+  html body #bossStageLabel,
+  html body .boss02-forecast span,
+  html body #actionsReadout,
+  html body .rotation-readout span,
+  html body .constellation-sequence-display span,
+  html body .login-status span,
+  html body .global-site-footer span,
+  html body .dev-mode-toggle span {
+    font-size: max(0.66rem, 10.5px) !important;
+  }
+}
+@media (min-width: 651px) and (max-width: 900px) {
+  html body .level-header {
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+
+  html body .level-header .level-meta {
+    position: static;
+    flex: 1 1 100%;
+    order: 3;
+    inset: auto;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    height: auto;
+  }
+
+  html body .level-header .level-meta > strong {
+    position: static;
+    inset: auto;
+    transform: none;
+  }
+}

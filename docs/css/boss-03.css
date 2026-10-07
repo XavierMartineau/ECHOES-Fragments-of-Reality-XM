@@ -735,3 +735,6 @@ html[lang="en"] .boss03-panel > .puzzle-status.error::before {
 .boss03-timer-box .boss03-timer-bar {
   width: 100%;
 }
+.boss03-panel {
+  overflow: clip;
+}
