@@ -529,4 +529,84 @@ body.part-three-theme {
     animation: none !important;
     transition: none !important;
   }
+
+  .snake-captcha-board {
+    width: min(100% - 20px, 600px);
+    padding: clamp(8px, 2vw, 16px);
+  }
+
+  .snake-rules {
+    width: min(100% - 32px, 600px);
+    margin: 0 auto 20px;
+    padding: 13px 16px;
+    border-left: 2px solid #c6ff4d;
+    background: rgba(198, 255, 77, 0.055);
+    color: #e4d1e1;
+    font: 0.7rem/1.7 "Space Mono", monospace;
+  }
+
+  .snake-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--snake-grid-size), minmax(0, 1fr));
+    width: 100%;
+    gap: clamp(3px, 0.8vw, 7px);
+    aspect-ratio: 1;
+  }
+
+  .snake-cell {
+    display: grid;
+    min-width: 0;
+    min-height: 0;
+    place-items: center;
+    border: 1px solid rgba(255, 79, 216, 0.34);
+    border-radius: 5px;
+    background: rgba(14, 9, 21, 0.88);
+    color: #f9e8f6;
+    cursor: pointer;
+    font: clamp(0.72rem, 2.2vw, 1.1rem) "Space Mono", monospace;
+    transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease, transform 120ms ease;
+  }
+
+  .snake-cell:disabled { cursor: default; }
+
+  .snake-cell.is-wall {
+    border-color: rgba(255, 79, 216, 0.18);
+    background: repeating-linear-gradient(135deg, rgba(255, 79, 216, 0.11) 0 5px, rgba(8, 4, 13, 0.96) 5px 10px);
+    color: rgba(255, 131, 227, 0.65);
+  }
+
+  .snake-cell.is-checkpoint {
+    border-color: rgba(198, 255, 77, 0.65);
+    color: #d6ff85;
+  }
+
+  .snake-cell.is-path {
+    border-color: #ff4fd8;
+    background: rgba(255, 79, 216, 0.25);
+    box-shadow: inset 0 0 13px rgba(255, 79, 216, 0.16);
+  }
+
+  .snake-cell.is-current {
+    border-color: #c6ff4d;
+    background: rgba(198, 255, 77, 0.28);
+    box-shadow: 0 0 15px rgba(198, 255, 77, 0.55), inset 0 0 10px rgba(198, 255, 77, 0.2);
+    color: #f2ffd1;
+    transform: scale(1.04);
+  }
+
+  .snake-cell:focus-visible {
+    outline: 2px solid #fff0fc;
+    outline-offset: 2px;
+    z-index: 1;
+  }
+
+  .snake-board.is-solved .snake-cell.is-path {
+    border-color: #c6ff4d;
+    background: rgba(198, 255, 77, 0.2);
+  }
+
+  @media (max-width: 480px) {
+    .snake-captcha-board { width: calc(100% - 12px); }
+    .snake-rules { width: calc(100% - 20px); }
+  }
 }

@@ -1,7 +1,7 @@
-// PARTIE 3 // puzzles et progression des niveaux 21 à 25.
+// PARTIE 3 // puzzles et progression des niveaux 21 à 30.
 (() => {
   const level = Number(document.body.dataset.level);
-  if (level < 21 || level > 25) return;
+  if (level < 21 || level > 30) return;
 
   const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const dictionary = window.translations?.[language];
@@ -84,6 +84,7 @@
     if (solved) return;
     solved = true;
     board.classList.add("is-solved");
+    board.querySelectorAll("button").forEach((button) => { button.disabled = true; });
     completedLevels.add(level);
     renderProgress();
     const saved = saveProgress();
@@ -631,11 +632,227 @@
     setStatus(strings.ready);
   }
 
+  function setupSnakeCaptcha() {
+    const configs = {
+      26: {
+        size: 5,
+        waypoints: [[0, 0], [0, 4], [4, 4]],
+        checkpoints: [2, 14],
+        walls: [5, 6, 8, 10, 12, 15, 17, 20, 22],
+      },
+      27: {
+        size: 6,
+        waypoints: [[5, 0], [0, 0], [0, 5], [5, 5]],
+        checkpoints: [18, 3, 17, 29],
+        walls: [7, 9, 13, 15, 19, 21, 25, 27, 31, 33],
+      },
+      28: {
+        size: 7,
+        waypoints: [[6, 0], [0, 0], [0, 5], [4, 5], [4, 1], [2, 1], [2, 4]],
+        checkpoints: [28, 4, 26, 30, 17],
+        walls: [8, 10, 13, 23, 24, 27, 34, 36, 39, 41, 45, 47],
+      },
+      29: {
+        size: 7,
+        waypoints: [[6, 0], [6, 6], [0, 6], [0, 0], [4, 0], [4, 4], [5, 4]],
+        checkpoints: [45, 3, 28, 32],
+        walls: [8, 10, 12, 16, 18, 22, 24, 26, 36, 38, 40],
+      },
+      30: {
+        size: 8,
+        waypoints: [[7, 0], [2, 0], [2, 7], [5, 7], [5, 1], [3, 1], [3, 6]],
+        checkpoints: [40, 22, 46, 25, 29],
+        walls: [1, 3, 6, 9, 11, 14, 34, 37, 50, 55, 61],
+      },
+    };
+    const config = configs[level];
+    const rows = config.size;
+    const checkpoints = config.checkpoints;
+    const walls = new Set(config.walls);
+    const route = [config.waypoints[0][0] * rows + config.waypoints[0][1]];
+    config.waypoints.slice(1).forEach(([targetRow, targetColumn], segmentIndex) => {
+      let [row, column] = config.waypoints[segmentIndex];
+      while (row !== targetRow || column !== targetColumn) {
+        if (row !== targetRow) row += Math.sign(targetRow - row);
+        else column += Math.sign(targetColumn - column);
+        route.push(row * rows + column);
+      }
+    });
+    const steps = route.length - 1;
+    const requiredTurns = config.waypoints.length - 2;
+    const start = route[0];
+    const finish = route[route.length - 1];
+    const grid = document.createElement("div");
+    grid.className = "snake-grid";
+    grid.style.setProperty("--snake-grid-size", rows);
+    grid.setAttribute("role", "group");
+    const cells = [];
+    let started = false;
+    let path = [];
+    let nextCheckpoint = 0;
+
+    function coordinates(index) {
+      return [Math.floor(index / rows), index % rows];
+    }
+
+    function refreshBoard() {
+      cells.forEach((cell, index) => {
+        cell.classList.toggle("is-path", path.includes(index));
+        cell.classList.toggle("is-current", path.at(-1) === index);
+        cell.classList.toggle("is-checkpoint", checkpoints.includes(index));
+        cell.classList.toggle("is-wall", walls.has(index));
+        cell.disabled = !started || solved || walls.has(index);
+        cell.setAttribute("aria-pressed", String(path.includes(index)));
+      });
+      progressReadout.textContent = `${Math.max(0, path.length - 1)} / ${steps}`;
+    }
+
+    function resetPath(message = strings.ready) {
+      path = [start];
+      nextCheckpoint = 0;
+      refreshBoard();
+      setStatus(message, message === strings.failed ? "error" : "");
+    }
+
+    function rejectPath() {
+      started = true;
+      startButton.hidden = true;
+      resetPath(strings.failed);
+      cells[start].focus();
+    }
+
+    function tryStep(index) {
+      if (!started || solved) return;
+      const current = path.at(-1);
+      if (walls.has(index)) {
+        setStatus(strings.wall, "error");
+        return;
+      }
+      const [row, column] = coordinates(current);
+      const [nextRow, nextColumn] = coordinates(index);
+      if (Math.abs(row - nextRow) + Math.abs(column - nextColumn) !== 1) {
+        setStatus(strings.adjacent, "error");
+        return;
+      }
+      if (index === path.at(-2)) {
+        path.pop();
+        nextCheckpoint = checkpoints.filter((point) => path.includes(point)).length;
+        refreshBoard();
+        setStatus(strings.playing);
+        return;
+      }
+      if (path.includes(index)) {
+        setStatus(strings.revisit, "error");
+        return;
+      }
+      if (index === finish) {
+        const completedPath = [...path, index];
+        let turns = 0;
+        let previousDirection = null;
+        for (let position = 1; position < completedPath.length; position += 1) {
+          const previous = coordinates(completedPath[position - 1]);
+          const currentPoint = coordinates(completedPath[position]);
+          const direction = [currentPoint[0] - previous[0], currentPoint[1] - previous[1]];
+          if (previousDirection &&
+              (previousDirection[0] !== direction[0] || previousDirection[1] !== direction[1])) {
+            turns += 1;
+          }
+          previousDirection = direction;
+        }
+        if (completedPath.length - 1 !== steps || turns !== requiredTurns ||
+            nextCheckpoint !== checkpoints.length) {
+          rejectPath();
+          return;
+        }
+        path.push(index);
+        refreshBoard();
+        completeLevel();
+        return;
+      }
+      if (checkpoints.includes(index) && index !== checkpoints[nextCheckpoint]) {
+        rejectPath();
+        return;
+      }
+      path.push(index);
+      if (index === checkpoints[nextCheckpoint]) nextCheckpoint += 1;
+      refreshBoard();
+      setStatus(strings.playing);
+    }
+
+    for (let index = 0; index < rows * rows; index += 1) {
+      const cell = document.createElement("button");
+      const checkpointNumber = checkpoints.indexOf(index);
+      cell.type = "button";
+      cell.className = "snake-cell";
+      cell.dataset.cell = String(index);
+      if (walls.has(index)) {
+        cell.textContent = "×";
+        cell.setAttribute("aria-label", format(strings.blockedCell, {
+          row: coordinates(index)[0] + 1,
+          column: coordinates(index)[1] + 1,
+        }));
+      } else if (index === start) {
+        cell.textContent = "S";
+        cell.setAttribute("aria-label", strings.startCell);
+      } else if (index === finish) {
+        cell.textContent = "E";
+        cell.setAttribute("aria-label", strings.finishCell);
+      } else if (checkpointNumber !== -1) {
+        cell.textContent = String(checkpointNumber + 1);
+        cell.setAttribute("aria-label", format(strings.checkpointCell, {
+          number: checkpointNumber + 1,
+        }));
+      } else {
+        cell.textContent = "";
+        cell.setAttribute("aria-label", format(strings.openCell, {
+          row: coordinates(index)[0] + 1,
+          column: coordinates(index)[1] + 1,
+        }));
+      }
+      cell.addEventListener("click", () => tryStep(index));
+      cell.addEventListener("keydown", (event) => {
+        const current = path.at(-1) ?? start;
+        const [row, column] = coordinates(current);
+        const moves = {
+          ArrowUp: row > 0 ? current - rows : -1,
+          ArrowDown: row < rows - 1 ? current + rows : -1,
+          ArrowLeft: column > 0 ? current - 1 : -1,
+          ArrowRight: column < rows - 1 ? current + 1 : -1,
+        };
+        const destination = moves[event.key];
+        if (destination !== undefined) {
+          event.preventDefault();
+          tryStep(destination);
+          cells[destination]?.focus();
+        }
+      });
+      cells.push(cell);
+      grid.appendChild(cell);
+    }
+    board.replaceChildren(grid);
+    board.setAttribute("aria-label", strings.boardAria);
+    startButton.addEventListener("click", () => {
+      if (solved || started) return;
+      started = true;
+      startButton.hidden = true;
+      resetPath(strings.playing);
+      cells[start].focus();
+    });
+    resetButton.addEventListener("click", () => {
+      resetCommon();
+      started = false;
+      resetPath(strings.ready);
+      startButton.focus();
+    });
+    resetPath(strings.ready);
+  }
+
   if (level === 21) setupReverseCipher();
   if (level === 22) setupMultipleAlignment();
   if (level === 23) setupRhythm();
   if (level === 24) setupMirrorPuzzle();
   if (level === 25) setupDynamicSort();
+  if (level >= 26) setupSnakeCaptcha();
 
   nextButton.addEventListener("click", () => {
     if (!solved) return;
