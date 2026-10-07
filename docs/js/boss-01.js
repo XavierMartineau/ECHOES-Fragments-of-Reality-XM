@@ -5,6 +5,14 @@
   const english = localStorage.getItem("echoes-language") === "en";
   const text = (fr, en) => english ? en : fr;
   const symbols = ["◇", "✦", "⬡"];
+  const pads = [
+    { color: "#79f7ff", name: text("cyan", "cyan") },
+    { color: "#c08aff", name: text("violet", "violet") },
+    { color: "#80ffcf", name: text("vert", "green") },
+    { color: "#ffbd69", name: text("ambre", "amber") },
+  ];
+  const melodyLength = 4;
+  let melody = [];
   const levels = document.getElementById("levelProgress");
   const panel = document.querySelector(".boss01-panel");
   const progress = document.getElementById("progressReadout");
@@ -50,8 +58,8 @@
       "Good job. The Guardian sends a short melody.",
     ),
     stageTwoHint: text(
-      "Mémorise les trois symboles, puis répète-les dans le même ordre.",
-      "Remember the three symbols, then repeat them in the same order.",
+      "Observe les couleurs qui s’allument, puis répète-les dans le même ordre.",
+      "Watch the colors light up, then repeat them in the same order.",
     ),
     sequenceHint: text("À toi : reproduis la mélodie.", "Your turn: repeat the melody."),
     sequenceError: text(
@@ -79,7 +87,8 @@
     stageOne: text("STAGE 1 // LES SCEAUX", "STAGE 1 // THE SEALS"),
     stageOnePrompt: text("Trouve le même sceau", "Find the matching seal"),
     stageTwo: text("STAGE 2 // LA MÉLODIE", "STAGE 2 // THE MELODY"),
-    stageTwoPrompt: text("Observe, puis répète", "Watch, then repeat"),
+    stageTwoPrompt: text("Observe les couleurs, puis répète", "Watch the colors, then repeat"),
+    padLabel: (name) => text(`Pastille ${name}`, `${name} pad`),
     stageThree: text("STAGE 3 // LE NOYAU", "STAGE 3 // THE CORE"),
     stageThreePrompt: text("Clique quand le noyau est vert", "Click when the core turns green"),
     stageThreeWait: text("ATTENDS LE SIGNAL", "WAIT FOR THE SIGNAL"),
@@ -172,6 +181,27 @@
     });
   };
 
+  const setPads = (onPad) => {
+    choices.replaceChildren();
+    pads.forEach((pad, index) => {
+      const button = document.createElement("button");
+      button.className = "boss01-choice boss01-pad";
+      button.type = "button";
+      button.style.setProperty("--pad", pad.color);
+      button.setAttribute("aria-label", copy.padLabel(pad.name));
+      button.dataset.pad = String(index);
+      button.addEventListener("click", () => onPad(index, button));
+      choices.appendChild(button);
+    });
+  };
+
+  const flashPad = (index, duration = 420) => {
+    const button = choices.querySelector(`[data-pad="${index}"]`);
+    if (!button) return;
+    button.classList.add("is-flash");
+    window.setTimeout(() => button.classList.remove("is-flash"), duration);
+  };
+
   const loseEnergy = () => {
     energy = Math.max(0, energy - 1);
     updateLives();
@@ -186,6 +216,7 @@
 
   const enterStage = (index) => {
     clearTimers();
+    target.style.color = "";
     stage = index;
     stageStep = 0;
     updateProgress();
@@ -223,18 +254,28 @@
       target.classList.remove("is-preview");
       target.textContent = "· · ·";
       replayButton.hidden = false;
-      setChoices((symbol, button) => {
+      melody = [];
+      while (melody.length < melodyLength) {
+        const next = Math.floor(Math.random() * pads.length);
+        if (next !== melody[melody.length - 1]) melody.push(next);
+      }
+      setPads((index, button) => {
         if (!active || inputLocked) return;
-        if (symbol !== symbols[stageStep]) {
+        flashPad(index, 260);
+        if (index !== melody[stageStep]) {
           button.classList.add("is-wrong");
+          window.setTimeout(() => button.classList.remove("is-wrong"), 420);
           if (loseEnergy()) return;
           stageStep = 0;
+          target.textContent = "· · ·";
+          target.style.color = "";
           setStatus(copy.sequenceError, "error");
           return;
         }
-        button.classList.add("is-correct");
         stageStep += 1;
-        if (stageStep === symbols.length) {
+        target.textContent = "●".repeat(stageStep);
+        target.style.color = pads[index].color;
+        if (stageStep === melody.length) {
           inputLocked = true;
           setStatus(copy.stageTwoWin, "success");
           window.setTimeout(() => enterStage(2), 650);
@@ -260,24 +301,32 @@
     stageStep = 0;
     inputLocked = true;
     target.textContent = "· · ·";
+    target.style.color = "";
     choices.querySelectorAll(".boss01-choice").forEach((button) => {
-      button.classList.remove("is-correct", "is-wrong");
+      button.classList.remove("is-correct", "is-wrong", "is-flash");
     });
     replayButton.disabled = true;
-    symbols.forEach((symbol, index) => {
+    melody.forEach((padIndex, index) => {
       sequenceTimers.push(window.setTimeout(() => {
-        target.textContent = symbol;
+        flashPad(padIndex, 520);
+        target.textContent = "●";
+        target.style.color = pads[padIndex].color;
         target.classList.add("is-preview");
-        sequenceTimers.push(window.setTimeout(() => target.classList.remove("is-preview"), 430));
-      }, 720 * index + 450));
+        sequenceTimers.push(window.setTimeout(() => {
+          target.classList.remove("is-preview");
+          target.textContent = "· · ·";
+          target.style.color = "";
+        }, 520));
+      }, 800 * index + 450));
     });
     sequenceTimers.push(window.setTimeout(() => {
       if (!active || stage !== 1) return;
       target.textContent = "· · ·";
+      target.style.color = "";
       inputLocked = false;
       replayButton.disabled = false;
       setStatus(copy.sequenceHint);
-    }, 720 * symbols.length + 500));
+    }, 800 * melody.length + 500));
   }
 
   function schedulePulse() {

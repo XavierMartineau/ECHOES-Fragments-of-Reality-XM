@@ -453,3 +453,49 @@
     animation: none;
   }
 }
+
+.boss01-choices:has(.boss01-pad) {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.boss01-pad {
+  position: relative;
+  border-color: color-mix(in srgb, var(--pad) 70%, transparent);
+  background: color-mix(in srgb, var(--pad) 16%, #050b18);
+  color: var(--pad);
+}
+
+.boss01-pad::after {
+  content: "";
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--pad);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--pad) 70%, transparent);
+  opacity: 0.55;
+  transition: opacity 150ms, transform 150ms, box-shadow 150ms;
+}
+
+.boss01-pad:hover:not(:disabled),
+.boss01-pad:focus-visible {
+  border-color: var(--pad);
+  background: color-mix(in srgb, var(--pad) 26%, #050b18);
+  outline-color: var(--pad);
+}
+
+.boss01-pad.is-flash {
+  border-color: #fff;
+  background: color-mix(in srgb, var(--pad) 45%, #050b18);
+  box-shadow: 0 0 26px var(--pad), inset 0 0 18px color-mix(in srgb, var(--pad) 60%, transparent);
+}
+
+.boss01-pad.is-flash::after {
+  opacity: 1;
+  transform: scale(1.35);
+  box-shadow: 0 0 26px var(--pad);
+}
+
+.boss01-pad.is-wrong {
+  border-color: #ff8098;
+  background: rgba(255, 69, 109, 0.18);
+}
