@@ -19,10 +19,16 @@
         "Entre dans l'éclipse : les anneaux se mettent à tourner autour du soleil.",
         "Appuie sur « Aligner » (ou sur Espace) quand la brèche de l'anneau brillant passe sous le repère ▼ vert. Les anneaux se verrouillent du plus extérieur au plus intérieur.",
         "Une erreur coûte 1 cohérence et libère l'anneau précédent.",
+        "Chaque phase dure 45 secondes. « Ralentir » retire 10 secondes mais ralentit fortement les anneaux pendant 3 secondes.",
         "Phase 1 : chaque verrouillage accélère les anneaux restants. Phases 2 et 3 : chaque verrouillage inverse leur sens, et en phase 3 les anneaux changent de sens au hasard.",
       ],
       start: "ENTRER DANS L'ÉCLIPSE",
       lock: "ALIGNER (ESPACE)",
+      slow: "RALENTIR (−10 s)",
+      timeUp: "Temps écoulé. L'éclipse t'a englouti.",
+      slowed: "Anneaux ralentis pendant 3 secondes (−10 s).",
+      errorTitle: "ERREUR",
+      errorSub: "SÉQUENCE TERMINÉE",
       next: "CONTINUER VERS LE NIVEAU 31",
       reset: "Réinitialiser",
       save: "SAUVEGARDER",
@@ -63,10 +69,16 @@
         "Enter the eclipse: the rings start spinning around the sun.",
         "Press “Align” (or Space) when the gap of the glowing ring passes under the green ▼ marker. Rings lock from outermost to innermost.",
         "A mistake costs 1 coherence and frees the previous ring.",
+        "Each phase lasts 45 seconds. “Slow down” removes 10 seconds but greatly slows the rings for 3 seconds.",
         "Phase 1: every lock speeds up the remaining rings. Phases 2 and 3: every lock reverses their direction, and in phase 3 rings randomly change direction.",
       ],
       start: "ENTER THE ECLIPSE",
       lock: "ALIGN (SPACE)",
+      slow: "SLOW DOWN (−10 s)",
+      timeUp: "Time's up. The eclipse swallowed you.",
+      slowed: "Rings slowed for 3 seconds (−10 s).",
+      errorTitle: "ERROR",
+      errorSub: "SEQUENCE TERMINATED",
       next: "CONTINUE TO LEVEL 31",
       reset: "Reset",
       save: "SAVE",
@@ -101,12 +113,22 @@
     { gap: 18, speeds: [90, 120, 150, 185, 220, 255], twist: "flip" },
   ];
   const maxLives = 4;
+  const phaseTime = 45;
+  const slowCost = 10;
+  const slowDuration = 3;
+  const slowFactor = 0.25;
+  const meltdownDuration = 3.4;
   const ringStroke = 15;
   const NS = "http://www.w3.org/2000/svg";
 
   const status = $("puzzleStatus");
   const startButton = $("startBossButton");
   const lockButton = $("lockButton");
+  const slowButton = $("slowButton");
+  const timerReadout = $("timerReadout");
+  const timerFill = $("timerFill");
+  const errorOverlay = $("errorOverlay");
+  const errorReset = $("errorResetButton");
   const nextButton = $("nextLevelButton");
   const resetButton = $("resetButton");
   const saveButton = $("bossSaveButton");
@@ -150,6 +172,9 @@
   let lastTime = 0;
   let frame = 0;
   let speedBoost = 1;
+  let timeLeft = phaseTime;
+  let slowLeft = 0;
+  let meltdown = null;
 
   const setText = (id, value) => { $(id).textContent = value; };
   document.documentElement.lang = language;
@@ -161,6 +186,10 @@
   setText("bossKicker", text.kicker);
   setText("arenaTitle", text.arena);
   setText("livesLabel", text.lives);
+  setText("errorTitle", text.errorTitle);
+  setText("errorSub", text.errorSub);
+  errorReset.textContent = text.reset;
+  slowButton.textContent = text.slow;
   setText("helpTitle", text.helpTitle);
   setText("keyLabel", text.keyLabel);
   setText("bossFooter", text.footer);
@@ -216,6 +245,15 @@
       keyHudSlot.querySelector("img").alt = text.keyAlt;
     }
     return owned;
+  };
+
+  const renderTimer = () => {
+    const shown = Math.max(0, timeLeft);
+    timerReadout.textContent = `${shown.toFixed(1)} s`;
+    timerFill.style.transform = `scaleX(${shown / phaseTime})`;
+    timerReadout.classList.toggle("is-low", shown <= 10);
+    timerReadout.classList.toggle("is-slowed", slowLeft > 0);
+    arena.classList.toggle("is-slowed", slowLeft > 0);
   };
 
   const renderLives = () => {
@@ -283,6 +321,8 @@
     slots.forEach((slot, index) => slot.classList.toggle("is-earned", index < earned));
     setText("assemblyCount", `${earned} / 3`);
     lockButton.disabled = !running;
+    slowButton.disabled = !running || slowLeft > 0 || timeLeft <= slowCost;
+    renderTimer();
     renderLives();
   };
 
@@ -290,7 +330,14 @@
     if (!running) return;
     const dt = Math.min((now - lastTime) / 1000, 0.05);
     lastTime = now;
-    const factor = speedBoost;
+    timeLeft -= dt;
+    if (slowLeft > 0) slowLeft = Math.max(0, slowLeft - dt);
+    if (timeLeft <= 0) {
+      timeLeft = 0;
+      startMeltdown();
+      return;
+    }
+    const factor = speedBoost * (slowLeft > 0 ? slowFactor : 1);
     rings.forEach((ring) => {
       if (phase === 2 && !ring.locked && Math.random() < dt / 2.2) ring.dir *= -1;
       if (!ring.locked) ring.angle = normalize(ring.angle + ring.dir * ring.speed * factor * dt);
@@ -307,6 +354,8 @@
 
   const startPhase = () => {
     buildRings();
+    timeLeft = phaseTime;
+    slowLeft = 0;
     running = true;
     lastTime = performance.now();
     setStatus(text.go(phase + 1));
@@ -387,12 +436,13 @@
     }, 1500);
   };
 
-  const lose = () => {
+  const lose = (message = text.defeated) => {
     running = false;
     ended = true;
+    slowLeft = 0;
     cancelAnimationFrame(frame);
     panel.classList.add("is-defeat");
-    setStatus(text.defeated, "error");
+    setStatus(message, "error");
     draw();
   };
 
@@ -436,8 +486,70 @@
     draw();
   };
 
+  const meltdownTick = (now) => {
+    if (!meltdown) return;
+    const dt = Math.min((now - lastTime) / 1000, 0.05);
+    lastTime = now;
+    meltdown.elapsed += dt;
+    const progress = Math.min(meltdown.elapsed / meltdownDuration, 1);
+    const frequency = 1.5 + 14 * progress * progress;
+    meltdown.pulse += dt * frequency * Math.PI * 2;
+    arena.style.setProperty("--melt", (0.5 + 0.5 * Math.sin(meltdown.pulse)).toFixed(3));
+    arena.style.setProperty("--melt-level", progress.toFixed(3));
+    const factor = 1 + 28 * progress * progress;
+    rings.forEach((ring) => {
+      ring.angle = normalize(ring.angle + ring.dir * ring.speed * factor * dt);
+    });
+    draw();
+    if (progress >= 1) {
+      showError();
+      return;
+    }
+    frame = requestAnimationFrame(meltdownTick);
+  };
+
+  const startMeltdown = () => {
+    running = false;
+    ended = true;
+    slowLeft = 0;
+    cancelAnimationFrame(frame);
+    meltdown = { elapsed: 0, pulse: 0 };
+    rings.forEach((ring) => { ring.locked = false; });
+    arena.classList.add("is-meltdown");
+    setStatus(text.timeUp, "error");
+    lastTime = performance.now();
+    draw();
+    frame = requestAnimationFrame(meltdownTick);
+  };
+
+  const showError = () => {
+    meltdown = null;
+    arena.classList.remove("is-meltdown");
+    arena.classList.add("is-error");
+    panel.classList.add("is-error");
+    errorOverlay.hidden = false;
+    errorReset.focus();
+    draw();
+  };
+
+  const slow = () => {
+    if (!running || slowLeft > 0 || timeLeft <= slowCost) return;
+    timeLeft -= slowCost;
+    slowLeft = slowDuration;
+    setStatus(text.slowed);
+    draw();
+  };
+
   const reset = () => {
     cancelAnimationFrame(frame);
+    meltdown = null;
+    arena.classList.remove("is-meltdown", "is-error");
+    arena.style.removeProperty("--melt");
+    arena.style.removeProperty("--melt-level");
+    panel.classList.remove("is-error");
+    errorOverlay.hidden = true;
+    timeLeft = phaseTime;
+    slowLeft = 0;
     phase = 0;
     earned = 0;
     cinematic.hidden = true;
@@ -448,7 +560,7 @@
     panel.classList.remove("is-victory", "is-defeat", "is-strike", "is-hit", "is-lock");
     const owned = updateKeyHud();
     startButton.hidden = false;
-    nextButton.hidden = !owned;
+    nextButton.hidden = true;
     startButton.textContent = text.start;
     lockButton.textContent = text.lock;
     buildRings();
@@ -462,7 +574,9 @@
     startPhase();
   });
   lockButton.addEventListener("click", align);
+  slowButton.addEventListener("click", slow);
   resetButton.addEventListener("click", reset);
+  errorReset.addEventListener("click", reset);
   $("cineContinue").addEventListener("click", () => {
     window.location.href = "../partie-4_niveau-31_à_40/niveau-31.html";
   });
