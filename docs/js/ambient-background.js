@@ -19,11 +19,12 @@
   const part = level ? Math.ceil(level / 10) : path.includes("bonus") ? 7 : 0;
   const palettes = [
     ["#79f7ff", "#b36cff"],
-    ["#ff5c8a", "#ffb347"],
-    ["#8dff6a", "#44b8ff"],
-    ["#ffdf6b", "#ff6bd6"],
-    ["#38d6ff", "#ff4fd8"],
-    ["#d46bff", "#56f0d2"],
+    ["#79f7ff", "#b36cff"],
+    ["#4b9eff", "#d4dce7"],
+    ["#ff4fd8", "#ffe39a"],
+    ["#38d6ff", "#bd63ff"],
+    ["#ff5a6e", "#ffd0a8"],
+    ["#ffd24d", "#fff6c8"],
     ["#ff79d1", "#79a8ff"],
   ];
   let [accent, secondary] = palettes[Math.max(0, Math.min(part, palettes.length - 1))];
