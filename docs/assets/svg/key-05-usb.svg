@@ -29,10 +29,12 @@
     <style>
       .k5-net { animation: k5-net 3s ease-in-out infinite; }
       .k5-node { animation: k5-node 2.4s ease-in-out infinite; }
+      .k5-core { transform-box: fill-box; transform-origin: center; animation: k5-core 1.8s ease-in-out infinite; }
       .k5-node.n1 { animation-delay: .4s; } .k5-node.n2 { animation-delay: .8s; } .k5-node.n3 { animation-delay: 1.2s; } .k5-node.n4 { animation-delay: 1.6s; }
       @keyframes k5-net { 50% { opacity: .45; } }
       @keyframes k5-node { 50% { opacity: .3; } }
-      @media (prefers-reduced-motion: reduce) { .k5-net, .k5-node { animation: none; } }
+      @keyframes k5-core { 50% { opacity: .55; transform: scale(.72); } }
+      @media (prefers-reduced-motion: reduce) { .k5-net, .k5-node, .k5-core { animation: none; } }
     </style>
   </defs>
   <g transform="translate(90 130) rotate(6) translate(-90 -130)">
@@ -59,7 +61,7 @@
     <circle class="k5-node n3" cx="72.37" cy="154.27" r="2.5" fill="#ff6b7e" filter="url(#key05Glow)"/>
     <circle cx="61.47" cy="120.73" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
     <circle class="k5-node n4" cx="61.47" cy="120.73" r="2.5" fill="#ff6b7e" filter="url(#key05Glow)"/>
-    <circle cx="90" cy="130" r="7" fill="#ffd0a8" filter="url(#key05Glow)"/>
+    <circle class="k5-core" cx="90" cy="130" r="7" fill="#ffd0a8" filter="url(#key05Glow)"/>
     <text x="90" y="190" fill="#ffe6dc" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 05</text>
     <circle cx="90" cy="203" r="4" fill="#ff6b7e" filter="url(#key05Glow)"/>
   </g>

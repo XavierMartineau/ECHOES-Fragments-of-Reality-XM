@@ -1,26 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 260" role="img" aria-labelledby="key04Title key04Desc">
   <title id="key04Title">Clé de résonance 04</title>
-  <desc id="key04Desc">Clé USB du recycleur, émeraude et lime, au cœur circulaire traversé de trois flèches de recyclage et marqué du sigle KEY 04.</desc>
+  <desc id="key04Desc">Clé USB du recycleur, en violet électrique, rose néon et bleu, au cœur circulaire traversé de trois flèches de recyclage et marqué du sigle KEY 04.</desc>
   <defs>
     <linearGradient id="key04Shell" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#0f4a3a"/>
-      <stop offset="0.55" stop-color="#06161a"/>
-      <stop offset="1" stop-color="#244a16"/>
+      <stop stop-color="#20204f"/>
+      <stop offset="0.55" stop-color="#080b20"/>
+      <stop offset="1" stop-color="#42164a"/>
     </linearGradient>
     <linearGradient id="key04Edge" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#3dffb0"/>
-      <stop offset="0.5" stop-color="#b6ff5a"/>
-      <stop offset="1" stop-color="#38e1f0"/>
+      <stop stop-color="#38d6ff"/>
+      <stop offset="0.5" stop-color="#bd63ff"/>
+      <stop offset="1" stop-color="#ff4fd8"/>
     </linearGradient>
     <linearGradient id="key04Metal" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#f1fff4"/>
-      <stop offset="0.5" stop-color="#9fe8c0"/>
-      <stop offset="1" stop-color="#3f8a6a"/>
+      <stop stop-color="#f1f5ff"/>
+      <stop offset="0.5" stop-color="#9db6f5"/>
+      <stop offset="1" stop-color="#55538f"/>
     </linearGradient>
     <radialGradient id="key04Core" cx="0.5" cy="0.5" r="0.5">
-      <stop stop-color="#0e3a30"/>
-      <stop offset="0.75" stop-color="#05120f"/>
-      <stop offset="1" stop-color="#0a1f16"/>
+      <stop stop-color="#211b4f"/>
+      <stop offset="0.75" stop-color="#09091d"/>
+      <stop offset="1" stop-color="#17102d"/>
     </radialGradient>
     <filter id="key04Glow" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur stdDeviation="3.5" result="blur"/>
@@ -35,24 +35,24 @@
     </style>
   </defs>
   <g transform="translate(90 130) rotate(-5) translate(-90 -130)">
-    <rect x="62" y="6" width="56" height="40" rx="5" fill="url(#key04Metal)" stroke="#eafff2" stroke-width="2"/>
-    <rect x="70" y="13" width="40" height="18" rx="3" fill="#06201a"/>
-    <rect x="76" y="18" width="8" height="9" rx="1.5" fill="#b6ff5a"/>
-    <rect x="96" y="18" width="8" height="9" rx="1.5" fill="#b6ff5a"/>
+    <rect x="62" y="6" width="56" height="40" rx="5" fill="url(#key04Metal)" stroke="#edf3ff" stroke-width="2"/>
+    <rect x="70" y="13" width="40" height="18" rx="3" fill="#11102b"/>
+    <rect x="76" y="18" width="8" height="9" rx="1.5" fill="#ff4fd8"/>
+    <rect x="96" y="18" width="8" height="9" rx="1.5" fill="#38d6ff"/>
     <path d="M44 44h92q10 0 10 10v20l-8 8v30l8 8v70a28 28 0 0 1-28 28H62a28 28 0 0 1-28-28v-70l8-8V82l-8-8V54q0-10 10-10Z" fill="url(#key04Shell)" stroke="url(#key04Edge)" stroke-width="3.5" stroke-linejoin="round"/>
-    <path d="M50 58h80M50 66h80" stroke="#3dffb0" stroke-width="1.5" opacity="0.45"/>
-    <circle cx="90" cy="130" r="44" fill="url(#key04Core)" stroke="#3dffb0" stroke-width="2"/>
-    <circle cx="90" cy="130" r="37" fill="none" stroke="#b6ff5a" stroke-width="1" stroke-dasharray="2 6" opacity="0.7"/>
+    <path d="M50 58h80M50 66h80" stroke="#38d6ff" stroke-width="1.5" opacity="0.55"/>
+    <circle cx="90" cy="130" r="44" fill="url(#key04Core)" stroke="#38d6ff" stroke-width="2"/>
+    <circle cx="90" cy="130" r="37" fill="none" stroke="#ff4fd8" stroke-width="1" stroke-dasharray="2 6" opacity="0.8"/>
     <g class="k4-cycle" filter="url(#key04Glow)">
     <path d="M98.03,105.27 A26 26 0 0 1 115.86,132.72" fill="none" stroke="url(#key04Edge)" stroke-width="5" stroke-linecap="round"/>
-    <path d="M114.43,138.89 L122.92,132.3 L108.95,131.33 Z" fill="#d8ff7a" stroke="#d8ff7a" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M114.43,138.89 L122.92,132.3 L108.95,131.33 Z" fill="#ff4fd8" stroke="#ff4fd8" stroke-width="1" stroke-linejoin="round"/>
     <path d="M107.4,149.32 A26 26 0 0 1 74.72,151.03" fill="none" stroke="url(#key04Edge)" stroke-width="5" stroke-linecap="round"/>
-    <path d="M70.08,146.71 L71.55,157.36 L79.38,145.75 Z" fill="#d8ff7a" stroke="#d8ff7a" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M70.08,146.71 L71.55,157.36 L79.38,145.75 Z" fill="#38d6ff" stroke="#38d6ff" stroke-width="1" stroke-linejoin="round"/>
     <path d="M64.57,135.41 A26 26 0 0 1 79.42,106.25" fill="none" stroke="url(#key04Edge)" stroke-width="5" stroke-linecap="round"/>
-    <path d="M85.49,104.39 L75.53,100.34 L81.67,112.92 Z" fill="#d8ff7a" stroke="#d8ff7a" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M85.49,104.39 L75.53,100.34 L81.67,112.92 Z" fill="#bd63ff" stroke="#bd63ff" stroke-width="1" stroke-linejoin="round"/>
     </g>
-    <circle cx="90" cy="130" r="6" fill="#d8ff7a" filter="url(#key04Glow)"/>
-    <text x="90" y="192" fill="#e6ffe8" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 04</text>
-    <circle class="k4-led" cx="90" cy="206" r="4.5" fill="#b6ff5a" filter="url(#key04Glow)"/>
+    <circle cx="90" cy="130" r="6" fill="#ff4fd8" filter="url(#key04Glow)"/>
+    <text x="90" y="192" fill="#e6eaff" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 04</text>
+    <circle class="k4-led" cx="90" cy="206" r="4.5" fill="#38d6ff" filter="url(#key04Glow)"/>
   </g>
 </svg>

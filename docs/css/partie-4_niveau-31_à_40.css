@@ -135,26 +135,26 @@
 }
 
 
-/* PARTIE 4 // RÉSONANCE — émeraude et lime, assortis à la clé 04. */
+/* PARTIE 4 // RÉSONANCE — bleu électrique, violet et rose néon. */
 body.part-four-theme {
-  --cyan: #3dffb0;
-  --violet: #38e1f0;
-  --text: #eafff4;
-  --muted: #9cc4b4;
-  --line: rgba(61, 255, 176, 0.36);
-  --panel: rgba(5, 22, 18, 0.9);
-  --success: #b6ff5a;
+  --cyan: #38d6ff;
+  --violet: #bd63ff;
+  --text: #edf0ff;
+  --muted: #aeb5dc;
+  --line: rgba(56, 214, 255, 0.36);
+  --panel: rgba(11, 12, 32, 0.9);
+  --success: #ff4fd8;
   background:
-    radial-gradient(ellipse at 78% 18%, rgba(20, 110, 78, 0.3), transparent 42%),
-    radial-gradient(ellipse at 15% 80%, rgba(80, 130, 20, 0.16), transparent 45%),
-    #04100c;
+    radial-gradient(ellipse at 78% 18%, rgba(99, 48, 151, 0.3), transparent 42%),
+    radial-gradient(ellipse at 15% 80%, rgba(23, 86, 150, 0.2), transparent 45%),
+    #08091c;
   color: var(--text);
 }
 
 .part-four-theme .grid-overlay {
   background-image:
-    linear-gradient(rgba(61, 255, 176, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(182, 255, 90, 0.045) 1px, transparent 1px);
+    linear-gradient(rgba(56, 214, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 79, 216, 0.045) 1px, transparent 1px);
   background-size: 38px 38px;
   mask-image: radial-gradient(circle at center, black 8%, transparent 88%);
 }
@@ -162,7 +162,7 @@ body.part-four-theme {
 .part-four-theme .level-header,
 .part-four-theme .level-footer,
 .part-four-theme .panel-heading {
-  border-color: rgba(61, 255, 176, 0.3);
+  border-color: rgba(56, 214, 255, 0.3);
 }
 
 .part-four-theme .brand,
@@ -170,98 +170,98 @@ body.part-four-theme {
 .part-four-theme .panel-kicker,
 .part-four-theme .system-label,
 .part-four-theme .progress-readout {
-  color: #3dffb0;
+  color: #38d6ff;
 }
 
 .part-four-theme .brand,
 .part-four-theme .brand::before {
-  border-color: #3dffb0;
+  border-color: #38d6ff;
 }
 
 .part-four-theme .brand,
 .part-four-theme .level-intro h1 {
-  text-shadow: 0 0 18px rgba(61, 255, 176, 0.5);
+  text-shadow: 0 0 18px rgba(56, 214, 255, 0.5);
 }
 
 .part-four-theme .level-meta strong {
-  border-color: rgba(182, 255, 90, 0.62);
-  color: #d4ff8a;
+  border-color: rgba(255, 79, 216, 0.62);
+  color: #ffb8ee;
 }
 
 .part-four-theme .level-description,
 .part-four-theme .puzzle-status {
-  color: #a9cdbd;
+  color: #b7bedf;
 }
 
 .part-four-theme .echo-dialogue {
   margin: 20px 0 0;
   padding-left: 14px;
-  border-left: 2px solid #38e1f0;
-  color: #b6f0dc;
+  border-left: 2px solid #bd63ff;
+  color: #d4c7ff;
   font-family: "Space Mono", monospace;
   font-size: 0.88rem;
   font-style: italic;
   line-height: 1.7;
-  text-shadow: 0 0 12px rgba(56, 225, 240, 0.3);
+  text-shadow: 0 0 12px rgba(189, 99, 255, 0.3);
 }
 
 .part-four-theme .system-transmission {
-  border-color: #b6ff5a;
-  box-shadow: inset 0 0 22px rgba(182, 255, 90, 0.08);
+  border-color: #ff4fd8;
+  box-shadow: inset 0 0 22px rgba(255, 79, 216, 0.08);
 }
 
-.part-four-theme .system-transmission p { color: #e0ffb0; }
+.part-four-theme .system-transmission p { color: #ffd3f5; }
 
 .part-four-theme .puzzle-panel {
-  border-color: rgba(61, 255, 176, 0.4);
-  box-shadow: 0 0 60px rgba(30, 200, 130, 0.14), inset 0 0 28px rgba(61, 255, 176, 0.05);
+  border-color: rgba(56, 214, 255, 0.4);
+  box-shadow: 0 0 60px rgba(117, 63, 190, 0.16), inset 0 0 28px rgba(56, 214, 255, 0.05);
 }
 
-.part-four-theme .panel-kicker { color: #b6ff5a; }
+.part-four-theme .panel-kicker { color: #ff4fd8; }
 
 .part-four-theme .level-progress .level-square {
-  border-color: rgba(61, 255, 176, 0.48);
-  background: rgba(61, 255, 176, 0.1);
+  border-color: rgba(56, 214, 255, 0.48);
+  background: rgba(56, 214, 255, 0.1);
 }
 
 .part-four-theme .level-progress .level-square.current {
-  border-color: #3dffb0;
-  background: rgba(61, 255, 176, 0.38);
-  box-shadow: 0 0 15px rgba(61, 255, 176, 0.7);
+  border-color: #38d6ff;
+  background: rgba(56, 214, 255, 0.38);
+  box-shadow: 0 0 15px rgba(56, 214, 255, 0.7);
 }
 
 .part-four-theme .level-progress .level-square.completed {
-  border-color: #b6ff5a;
-  background: #b6ff5a;
-  box-shadow: 0 0 14px rgba(182, 255, 90, 0.8);
+  border-color: #ff4fd8;
+  background: #ff4fd8;
+  box-shadow: 0 0 14px rgba(255, 79, 216, 0.8);
 }
 
 .part-four-theme .next-level-button {
-  border-color: #b6ff5a;
-  background: rgba(182, 255, 90, 0.12);
-  color: #d4ff8a;
+  border-color: #ff4fd8;
+  background: rgba(255, 79, 216, 0.12);
+  color: #ffb8ee;
 }
 
 .part-four-theme .next-level-button:hover,
 .part-four-theme .next-level-button:focus-visible {
-  background: rgba(182, 255, 90, 0.24);
-  box-shadow: 0 0 18px rgba(182, 255, 90, 0.38);
+  background: rgba(255, 79, 216, 0.24);
+  box-shadow: 0 0 18px rgba(255, 79, 216, 0.38);
 }
 
-.part-four-theme .level-footer { border-color: rgba(61, 255, 176, 0.25); }
+.part-four-theme .level-footer { border-color: rgba(56, 214, 255, 0.25); }
 
 body.part-four-theme .construction-page {
-  background: radial-gradient(circle at 50% 35%, rgba(61, 255, 176, 0.14), transparent 40%), #04100c;
+  background: radial-gradient(circle at 50% 35%, rgba(56, 214, 255, 0.14), transparent 40%), #08091c;
 }
 
 body.part-four-theme .construction-card {
-  border-color: rgba(61, 255, 176, 0.45);
-  background: rgba(4, 18, 14, 0.9);
-  box-shadow: 0 0 50px rgba(61, 255, 176, 0.15);
+  border-color: rgba(56, 214, 255, 0.45);
+  background: rgba(10, 11, 30, 0.9);
+  box-shadow: 0 0 50px rgba(56, 214, 255, 0.15);
 }
 
-body.part-four-theme .construction-card .eyebrow { color: #3dffb0; }
-body.part-four-theme .construction-card h1 { color: #d4ff8a; }
+body.part-four-theme .construction-card .eyebrow { color: #38d6ff; }
+body.part-four-theme .construction-card h1 { color: #ffb8ee; }
 /* ---------------------------------------------------------------------------
  * NIVEAU 31 // Le recycleur (plateau incliné)
  * ------------------------------------------------------------------------- */
@@ -270,8 +270,8 @@ body.part-four-theme .construction-card h1 { color: #d4ff8a; }
 }
 
 .tilt-panel {
-  border-color: rgba(61, 255, 176, 0.4);
-  box-shadow: 0 0 40px rgba(61, 255, 176, 0.14), inset 0 0 40px rgba(125, 255, 196, 0.03);
+  border-color: rgba(56, 214, 255, 0.4);
+  box-shadow: 0 0 40px rgba(56, 214, 255, 0.14), inset 0 0 40px rgba(153, 125, 255, 0.05);
 }
 
 .tilt-readouts {
@@ -282,7 +282,7 @@ body.part-four-theme .construction-card h1 { color: #d4ff8a; }
 
 .tilt-rules {
   margin: 0 0 16px;
-  color: #cfe6d9;
+  color: #ced4f0;
   font-size: 0.86rem;
   line-height: 1.55;
 }
@@ -292,12 +292,12 @@ body.part-four-theme .construction-card h1 { color: #d4ff8a; }
   display: grid;
   place-items: center;
   padding: 14px;
-  border: 1px solid rgba(61, 255, 176, 0.35);
+  border: 1px solid rgba(56, 214, 255, 0.35);
   border-radius: 18px;
   background:
-    radial-gradient(circle at 50% 0%, rgba(125, 255, 196, 0.1), transparent 55%),
-    linear-gradient(180deg, #07160f, #030a07);
-  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.6), 0 0 28px rgba(61, 255, 176, 0.1);
+    radial-gradient(circle at 50% 0%, rgba(189, 99, 255, 0.12), transparent 55%),
+    linear-gradient(180deg, #10112b, #060713);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.6), 0 0 28px rgba(56, 214, 255, 0.1);
 }
 
 .tilt-stage canvas {
@@ -311,8 +311,8 @@ body.part-four-theme .construction-card h1 { color: #d4ff8a; }
 }
 
 .tilt-stage.is-solved {
-  border-color: #c6ff4d;
-  box-shadow: 0 0 40px rgba(198, 255, 77, 0.3), inset 0 0 30px rgba(198, 255, 77, 0.08);
+  border-color: #ff4fd8;
+  box-shadow: 0 0 40px rgba(255, 79, 216, 0.3), inset 0 0 30px rgba(255, 79, 216, 0.08);
 }
 
 .tilt-stage.is-dead {
@@ -327,7 +327,7 @@ body.part-four-theme .construction-card h1 { color: #d4ff8a; }
   margin: 16px 0 0;
   padding: 0;
   list-style: none;
-  color: #a9c9b8;
+  color: #b4b9da;
   font-size: 0.74rem;
 }
 
@@ -361,10 +361,10 @@ body.part-four-theme .construction-card h1 { color: #d4ff8a; }
 .tilt-arrow {
   width: 84px;
   height: 60px;
-  border: 1px solid rgba(61, 255, 176, 0.7);
+  border: 1px solid rgba(56, 214, 255, 0.7);
   border-radius: 14px;
-  background: linear-gradient(180deg, rgba(61, 255, 176, 0.18), rgba(61, 255, 176, 0.06));
-  color: #a8ffd4;
+  background: linear-gradient(180deg, rgba(56, 214, 255, 0.18), rgba(189, 99, 255, 0.06));
+  color: #d5cbff;
   cursor: pointer;
   font-size: 1.5rem;
   touch-action: none;
@@ -375,7 +375,7 @@ body.part-four-theme .construction-card h1 { color: #d4ff8a; }
 .tilt-arrow.is-held,
 .tilt-arrow:focus-visible {
   border-color: #fff;
-  background: rgba(61, 255, 176, 0.4);
+  background: rgba(56, 214, 255, 0.4);
   outline: none;
 }
 
@@ -386,7 +386,7 @@ body.part-four-theme .construction-card h1 { color: #d4ff8a; }
 }
 
 .tilt-panel > .puzzle-status.success {
-  color: #c6ff4d;
+  color: #ff4fd8;
 }
 
 .tilt-panel > .puzzle-status.error {
