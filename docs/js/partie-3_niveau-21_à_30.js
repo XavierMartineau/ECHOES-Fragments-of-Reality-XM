@@ -1745,11 +1745,11 @@
   nextButton.addEventListener("click", () => {
     if (!solved) return;
     const nextLevel = level + 1;
-    if (!saveProgress(nextLevel)) {
+    if (!saveProgress(level === 30 ? level : nextLevel)) {
       setStatus(part.saveError, "error");
       return;
     }
-    window.location.href = `niveau-${String(nextLevel).padStart(2, "0")}.html`;
+    window.location.href = level === 30 ? "boss-03.html" : `niveau-${String(nextLevel).padStart(2, "0")}.html`;
   });
   saveButton.addEventListener("click", () => {
     const saved = saveProgress();

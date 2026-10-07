@@ -6,13 +6,16 @@
   const levelMatch = path.match(/niveau-(\d+)\.html(?:$|[?#])/i);
   const isBoss = path.includes("boss-01");
   const isSecondBoss = path.includes("boss-02");
+  const isThirdBoss = path.includes("boss-03");
   const level = levelMatch
     ? Number(levelMatch[1])
     : isBoss
       ? 10
       : isSecondBoss
         ? 20
-        : 0;
+        : isThirdBoss
+          ? 30
+          : 0;
   const part = level ? Math.ceil(level / 10) : path.includes("bonus") ? 7 : 0;
   const palettes = [
     ["#79f7ff", "#b36cff"],
@@ -26,6 +29,7 @@
   let [accent, secondary] = palettes[Math.max(0, Math.min(part, palettes.length - 1))];
   if (isBoss) [accent, secondary] = ["#ff456d", "#8d1dff"];
   if (isSecondBoss) [accent, secondary] = ["#45e5d2", "#ffbd69"];
+  if (isThirdBoss) [accent, secondary] = ["#ff4fd8", "#ffd24d"];
   const root = document.body;
   const specialMode = isBoss ? "boss" : isSecondBoss ? "boss-two" : "";
   if (specialMode) root.classList.add(`echo-special-${specialMode}`);

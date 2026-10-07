@@ -96,6 +96,15 @@ tactique à cases : il faut naviguer entre les murs, éviter les lignes d'impact
 télégraphiées, stabiliser six ancres et gérer deux boucliers sur trois phases.
 La victoire débloque la Clé 02 et ouvre le niveau 21.
 
+### Boss de la Partie 3 — `boss-03.html`
+
+Après le niveau 30, le joueur affronte l'Occulteur : trois phases d'anneaux
+d'éclipse qui tournent autour du soleil. Il faut verrouiller chaque brèche sous
+le rayon au bon instant (de l'anneau extérieur à l'intérieur). Une erreur coûte
+de la cohérence et libère l'anneau précédent ; la phase 2 accélère les anneaux
+restants à chaque verrouillage, la phase 3 inverse leur sens. La victoire
+débloque la Clé 03 (SVG animé `key-03-usb.svg`) et ouvre le niveau 31.
+
 ## Organisation du dépôt
 
 ```text

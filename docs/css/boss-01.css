@@ -8,24 +8,62 @@
 .boss01-key-hud {
   position: relative;
   top: auto;
+  right: auto;
+  bottom: auto;
   left: auto;
+  z-index: 8;
   display: flex;
   width: min(1180px, calc(100% - 48px));
+  min-height: 70px;
   margin: 12px auto 0;
   padding: 10px 16px;
   align-items: center;
-  gap: 12px;
-  border: 1px solid rgba(121, 247, 255, 0.25);
+  gap: 16px;
+  border: 1px solid rgba(121, 247, 255, 0.3);
   border-left: 2px solid var(--boss-cyan);
+  background: rgba(3, 9, 22, 0.76);
+  color: var(--boss-cyan);
+}
+
+.boss01-key-hud .key-redesign-hud-label,
+.boss01-key-hud .key-redesign-hud-note,
+.boss01-key-hud .key-hud-value {
+  margin: 0;
 }
 
 .boss01-key-hud .key-hud-value {
-  margin: 0;
   color: #f0f7ff;
+}
+
+.boss01-key-hud .key-redesign-hud-line {
+  width: 1px;
+  height: 30px;
+  flex: 0 0 1px;
+  background: linear-gradient(180deg, var(--boss-cyan), transparent);
+}
+
+.boss01-key-hud .key-redesign-hud-slot {
+  display: flex;
+  width: auto;
+  margin: 0 0 0 auto;
+  padding: 0 0 0 16px;
+  align-items: center;
+  border-top: 0;
+  border-left: 1px solid rgba(121, 247, 255, 0.2);
+}
+
+.boss01-key-hud .key-redesign-hud-slot img {
+  width: 22px;
+  height: 30px;
 }
 
 .boss01-key-hud.is-unlocked {
   border-left-color: var(--boss-green);
+  box-shadow: 0 0 24px rgba(128, 255, 207, 0.18);
+}
+
+.boss01-key-hud.is-unlocked .key-redesign-hud-note {
+  color: var(--boss-green);
 }
 
 .boss01-shell {

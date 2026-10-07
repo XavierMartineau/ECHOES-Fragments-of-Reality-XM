@@ -143,7 +143,15 @@
     );
   };
 
+  const fragments = window.EchoesKeyFragments.mount({
+    keyNumber: 1,
+    src: "../../assets/images/key-01-usb.svg",
+    core,
+    before: document.querySelector(".boss01-actions"),
+  });
+
   const updateProgress = () => {
+    fragments.set(won ? 3 : stage);
     progress.textContent = `${won ? 3 : stage} / 3`;
     stageDots.forEach((dot, index) => {
       dot.classList.toggle("is-current", !won && index === stage);
@@ -378,6 +386,17 @@
     });
   };
 
+  const showKeyOwned = () => {
+    const hud = document.getElementById("keyHud");
+    if (!hud || !window.EchoesSave?.getKeys?.().includes("resonance-1")) return;
+    hud.classList.add("is-unlocked");
+    document.getElementById("keyHudNote").textContent = "CLÉ 01 // RÉCUPÉRÉE";
+    const slot = document.getElementById("keyHudSlot");
+    slot.removeAttribute("aria-hidden");
+    slot.classList.add("is-visible");
+  };
+
+  showKeyOwned();
   updateLives();
   updateProgress();
   enterStage(0);

@@ -1,0 +1,586 @@
+.boss03-key-hud {
+  position: relative;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  z-index: 8;
+  display: flex;
+  width: min(1100px, calc(100% - 48px));
+  min-height: 70px;
+  margin: 12px auto 0;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  border: 1px solid rgba(255, 79, 216, 0.3);
+  border-left: 2px solid #ff4fd8;
+  background: rgba(10, 4, 22, 0.78);
+  color: #ff8fe8;
+}
+
+.boss03-key-hud .key-redesign-hud-label,
+.boss03-key-hud .key-redesign-hud-note,
+.boss03-key-hud .key-hud-value {
+  margin: 0;
+}
+
+.boss03-key-hud .key-redesign-hud-line {
+  width: 1px;
+  height: 30px;
+  flex: 0 0 1px;
+  background: linear-gradient(180deg, #ff4fd8, transparent);
+}
+
+.boss03-key-hud .key-redesign-hud-slot {
+  display: flex;
+  width: auto;
+  margin: 0 0 0 auto;
+  padding: 0 0 0 16px;
+  align-items: center;
+  border-top: 0;
+  border-left: 1px solid rgba(255, 79, 216, 0.25);
+}
+
+.boss03-key-hud .key-redesign-hud-slot img {
+  width: 22px;
+  height: 30px;
+}
+
+.boss03-key-hud.is-unlocked {
+  border-left-color: #c6ff4d;
+  box-shadow: 0 0 24px rgba(198, 255, 77, 0.2);
+}
+
+.boss03-key-hud.is-unlocked .key-redesign-hud-note {
+  color: #c6ff4d;
+}
+
+.boss03-shell {
+  width: min(1100px, calc(100% - 48px));
+}
+
+.boss03-panel {
+  border-color: rgba(255, 79, 216, 0.36);
+  box-shadow: 0 0 34px rgba(168, 85, 247, 0.16), inset 0 0 30px rgba(255, 79, 216, 0.04);
+}
+
+.boss03-readouts {
+  display: grid;
+  justify-items: end;
+  gap: 5px;
+}
+
+.boss03-lives-label {
+  color: #ffd24d;
+  font: 0.54rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.09em;
+}
+
+.boss03-lives {
+  display: flex;
+  gap: 4px;
+}
+
+.boss03-life {
+  width: 11px;
+  height: 11px;
+  border: 1px solid #ffd24d;
+  border-radius: 50%;
+  background: #ffd24d;
+  box-shadow: 0 0 8px rgba(255, 210, 77, 0.6);
+  transition: opacity 200ms, background 200ms;
+}
+
+.boss03-life.is-lost {
+  background: transparent;
+  box-shadow: none;
+  opacity: 0.35;
+}
+
+.boss03-help {
+  margin: 0 0 14px;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 79, 216, 0.22);
+  border-radius: 10px;
+  background: rgba(10, 4, 22, 0.6);
+  color: #d8c8ee;
+  font-size: 0.84rem;
+}
+
+.boss03-help summary {
+  cursor: pointer;
+  color: #ff8fe8;
+  font: 0.62rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.08em;
+}
+
+.boss03-help ol {
+  margin: 10px 0 0;
+  padding-left: 20px;
+  line-height: 1.55;
+}
+
+.boss03-arena {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 79, 216, 0.2);
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 210, 77, 0.1), transparent 46%),
+    radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.16), transparent 40%),
+    linear-gradient(135deg, #0b0518, #05030d);
+}
+
+.boss03-svg {
+  width: min(100%, 440px);
+  height: auto;
+  aspect-ratio: 1;
+  overflow: visible;
+}
+
+.boss03-ring-track {
+  fill: none;
+  stroke: rgba(255, 79, 216, 0.1);
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+}
+
+.boss03-ring-arc {
+  fill: none;
+  stroke: #6b2a8f;
+  stroke-linecap: round;
+  transition: stroke 200ms, filter 200ms;
+}
+
+.boss03-ring-edge {
+  fill: #ff4fd8;
+  opacity: 0.55;
+}
+
+.boss03-ring.is-active .boss03-ring-arc {
+  stroke: #ff4fd8;
+  filter: drop-shadow(0 0 7px rgba(255, 79, 216, 0.85));
+}
+
+.boss03-ring.is-active .boss03-ring-edge {
+  fill: #fff;
+  opacity: 1;
+}
+
+.boss03-ring.is-locked .boss03-ring-arc {
+  stroke: #c6ff4d;
+  filter: drop-shadow(0 0 6px rgba(198, 255, 77, 0.7));
+}
+
+.boss03-ring.is-locked .boss03-ring-edge {
+  fill: #c6ff4d;
+}
+
+.boss03-marker {
+  animation: boss03-marker 1.2s ease-in-out infinite;
+}
+
+.boss03-beam {
+  opacity: 0.18;
+  transform-origin: 0 0;
+}
+
+.boss03-beam.is-firing {
+  animation: boss03-beam 1.4s ease-out both;
+}
+
+.boss03-corona {
+  animation: boss03-corona 3.4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.boss03-moon {
+  animation: boss03-moon 6s ease-in-out infinite;
+}
+
+.boss03-reward-key {
+  position: absolute;
+  width: 46px;
+  height: 68px;
+  object-fit: contain;
+  opacity: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 0 12px rgba(255, 79, 216, 0.85));
+}
+
+.boss03-arena.is-arriving .boss03-reward-key {
+  animation: boss03-key-to-hud 1.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.boss03-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 18px 0 26px;
+}
+
+.boss03-actions > button {
+  min-height: 44px;
+}
+
+.boss03-action-button {
+  min-height: 42px;
+  padding: 9px 15px;
+  border: 1px solid rgba(255, 79, 216, 0.58);
+  border-radius: 8px;
+  background: rgba(255, 79, 216, 0.1);
+  color: #ffb3f0;
+  cursor: pointer;
+  font: 0.66rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.04em;
+}
+
+.boss03-lock-button {
+  border-color: rgba(198, 255, 77, 0.7);
+  background: rgba(198, 255, 77, 0.12);
+  color: #d9ff8a;
+}
+
+.boss03-action-button:not(:disabled):hover,
+.boss03-action-button:focus-visible {
+  border-color: #fff;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.boss03-action-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.boss03-panel > .puzzle-status {
+  min-height: 1.5em;
+  text-align: center;
+}
+
+.boss03-panel > .puzzle-status.success {
+  color: #c6ff4d;
+}
+
+.boss03-panel > .puzzle-status.error {
+  color: #ff8098;
+}
+
+.boss03-panel.is-hit .boss03-arena {
+  animation: boss03-hit 320ms ease-out;
+}
+
+.boss03-panel.is-lock .boss03-arena {
+  animation: boss03-lock 300ms ease-out;
+}
+
+.boss03-panel.is-strike .boss03-arena {
+  animation: boss03-strike 700ms ease-out;
+}
+
+.boss03-panel.is-defeat .boss03-arena {
+  filter: grayscale(0.8) brightness(0.6);
+}
+
+.boss03-panel.is-victory .boss03-arena {
+  border-color: #c6ff4d;
+  box-shadow: 0 0 60px rgba(198, 255, 77, 0.35);
+}
+
+@keyframes boss03-marker {
+  50% { transform: translateY(5px); }
+}
+
+@keyframes boss03-corona {
+  50% { transform: scale(1.12); opacity: 0.7; }
+}
+
+@keyframes boss03-moon {
+  50% { transform: translateX(5px); }
+}
+
+@keyframes boss03-beam {
+  0% { opacity: 1; transform: scaleX(3); }
+  100% { opacity: 0.18; transform: scaleX(1); }
+}
+
+@keyframes boss03-hit {
+  25% { transform: translateX(-7px); box-shadow: inset 0 0 40px rgba(255, 70, 100, 0.5); }
+  75% { transform: translateX(7px); }
+}
+
+@keyframes boss03-lock {
+  40% { box-shadow: inset 0 0 40px rgba(198, 255, 77, 0.4); }
+}
+
+@keyframes boss03-strike {
+  0% { filter: brightness(2.2); }
+  100% { filter: brightness(1); }
+}
+
+@keyframes boss03-key-to-hud {
+  0% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0); }
+  55% { opacity: 1; transform: translate(-18vw, -10vh) scale(0.8) rotate(360deg); }
+  100% { opacity: 0; transform: translate(-40vw, -42vh) scale(0.35) rotate(720deg); }
+}
+
+@media (max-width: 650px) {
+  .boss03-key-hud,
+  .boss03-shell {
+    width: calc(100% - 24px);
+  }
+
+  .boss03-actions > * {
+    flex: 1 1 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boss03-marker,
+  .boss03-corona,
+  .boss03-moon,
+  .boss03-beam.is-firing,
+  .boss03-panel .boss03-arena,
+  .boss03-arena.is-arriving .boss03-reward-key {
+    animation: none;
+  }
+}
+
+.boss03-core-key {
+  overflow: hidden;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 6px rgba(255, 210, 77, 0.8));
+  animation: boss03-core-float 3s ease-in-out infinite;
+}
+
+.boss03-core-key.is-hit {
+  animation: boss03-core-hit 900ms ease-out, boss03-core-float 3s ease-in-out 900ms infinite;
+}
+
+.boss03-assembly {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 14px;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 79, 216, 0.3);
+  border-radius: 12px;
+  background: rgba(10, 4, 22, 0.7);
+}
+
+.boss03-assembly-label,
+.boss03-assembly-count {
+  color: #ffb3f0;
+  font: 0.6rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.09em;
+}
+
+.boss03-assembly-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 70px;
+}
+
+.boss03-slot {
+  display: block;
+  width: 70px;
+  height: 34px;
+  overflow: hidden;
+}
+
+.boss03-slot-piece {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: grayscale(1) brightness(0.7) opacity(0.28);
+  transition: filter 500ms;
+}
+
+.boss03-slot.is-earned .boss03-slot-piece {
+  filter: drop-shadow(0 0 5px rgba(255, 210, 77, 0.8));
+}
+
+.boss03-slot.is-pop {
+  animation: boss03-slot-pop 800ms cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+
+.boss03-cinematic {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 14px;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 45%, rgba(40, 8, 55, 0.96), rgba(3, 1, 10, 0.98) 70%);
+  text-align: center;
+}
+
+.boss03-cinematic[hidden] {
+  display: none;
+}
+
+.boss03-cine-rays {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160vmax;
+  height: 160vmax;
+  margin: -80vmax 0 0 -80vmax;
+  background: repeating-conic-gradient(from 0deg, rgba(255, 210, 77, 0.2) 0 6deg, transparent 6deg 18deg);
+  -webkit-mask-image: radial-gradient(circle, #000 0, transparent 45%);
+  mask-image: radial-gradient(circle, #000 0, transparent 45%);
+  opacity: 0;
+}
+
+.boss03-cinematic.is-playing .boss03-cine-rays {
+  animation: boss03-cine-rays-in 1s 3s ease-out forwards, boss03-spin 24s 3s linear infinite;
+}
+
+.boss03-cine-rings span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 2px solid #ffd24d;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.boss03-cinematic.is-playing .boss03-cine-rings span {
+  animation: boss03-cine-ring 2.4s 3s ease-out infinite;
+}
+
+.boss03-cine-rings span:nth-child(2) { animation-delay: 3.5s; border-color: #ff4fd8; }
+.boss03-cine-rings span:nth-child(3) { animation-delay: 4s; border-color: #c6ff4d; }
+
+.boss03-cine-key {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  width: min(46vw, 230px);
+  filter: drop-shadow(0 0 22px rgba(255, 79, 216, 0.7));
+}
+
+.boss03-cinematic.is-playing .boss03-cine-key {
+  animation: boss03-cine-key-glow 1.6s 3.2s ease-in-out infinite;
+}
+
+.boss03-cine-piece {
+  display: block;
+  width: 100%;
+  aspect-ratio: 180 / 87;
+  opacity: 0;
+}
+
+.boss03-cinematic.is-playing .piece-0 { --fx: -70vw; --fy: -40vh; --fr: -240deg; animation: boss03-cine-piece 1.3s 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+.boss03-cinematic.is-playing .piece-1 { --fx: 70vw; --fy: 0vh; --fr: 300deg; animation: boss03-cine-piece 1.3s 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+.boss03-cinematic.is-playing .piece-2 { --fx: -40vw; --fy: 70vh; --fr: 200deg; animation: boss03-cine-piece 1.3s 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+
+.boss03-cine-sparks i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--hue);
+  box-shadow: 0 0 10px var(--hue);
+  opacity: 0;
+}
+
+.boss03-cinematic.is-playing .boss03-cine-sparks i {
+  animation: boss03-cine-spark 1.6s var(--delay) ease-out forwards;
+}
+
+.boss03-cine-title,
+.boss03-cine-sub,
+.boss03-cine-button {
+  position: relative;
+  z-index: 3;
+  opacity: 0;
+}
+
+.boss03-cine-title {
+  margin: 10px 0 0;
+  color: #ffe9bd;
+  font: 1.5rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 20px rgba(255, 210, 77, 0.8);
+}
+
+.boss03-cine-sub {
+  margin: 0;
+  color: #e2c9f2;
+}
+
+.boss03-cinematic.is-playing .boss03-cine-title { animation: boss03-fade-up 0.9s 3.3s ease-out forwards; }
+.boss03-cinematic.is-playing .boss03-cine-sub { animation: boss03-fade-up 0.9s 3.7s ease-out forwards; }
+.boss03-cinematic.is-playing .boss03-cine-button:not([hidden]) { animation: boss03-fade-up 0.7s ease-out forwards; }
+
+@keyframes boss03-core-float {
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes boss03-core-hit {
+  0% { filter: drop-shadow(0 0 30px #c6ff4d) brightness(2.2); }
+  100% { filter: drop-shadow(0 0 6px rgba(255, 210, 77, 0.8)) brightness(1); }
+}
+
+@keyframes boss03-slot-pop {
+  0% { transform: scale(0.4); filter: brightness(3); }
+  100% { transform: scale(1); }
+}
+
+@keyframes boss03-cine-piece {
+  0% { opacity: 0; transform: translate(var(--fx), var(--fy)) rotate(var(--fr)) scale(0.4); }
+  20% { opacity: 1; }
+  100% { opacity: 1; transform: translate(0, 0) rotate(0) scale(1); }
+}
+
+@keyframes boss03-cine-key-glow {
+  50% { filter: drop-shadow(0 0 46px rgba(255, 210, 77, 0.95)) brightness(1.25); transform: scale(1.05) rotate(-2deg); }
+}
+
+@keyframes boss03-cine-rays-in {
+  to { opacity: 1; }
+}
+
+@keyframes boss03-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes boss03-cine-ring {
+  0% { opacity: 0.9; transform: scale(1); }
+  100% { opacity: 0; transform: scale(18); }
+}
+
+@keyframes boss03-cine-spark {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.3); }
+}
+
+@keyframes boss03-fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boss03-core-key,
+  .boss03-core-key.is-hit,
+  .boss03-cinematic.is-playing * {
+    animation-duration: 1ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+  }
+}

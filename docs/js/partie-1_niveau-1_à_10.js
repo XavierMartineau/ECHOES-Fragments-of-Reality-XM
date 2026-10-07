@@ -165,6 +165,7 @@ function installKeyHud() {
     document.querySelector(".boss-board");
   if (!isBossPage) return;
 
+  if (document.querySelector(".key-redesign-hud")) return;
   let hud = document.querySelector(".key-hud");
   if (!hud) {
     hud = document.createElement("aside");

@@ -57,6 +57,12 @@
       start: 21,
       end: 30,
       folder: "partie-3_niveau-21_à_30",
+      special: [
+        {
+          label: "CLEE_03 // BOSS",
+          file: "boss-03.html",
+        },
+      ],
     },
     {
       number: 4,

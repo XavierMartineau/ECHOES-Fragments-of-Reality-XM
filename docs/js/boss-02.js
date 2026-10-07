@@ -195,7 +195,7 @@
 
   const updateKeyHud = () => {
     const keys = window.EchoesSave?.getKeys?.() || [];
-    keyCount.textContent = `${Math.min(keys.length, 6)} / 6`;
+    keyCount.textContent = "2 / 6";
     if (!keys.includes("resonance-2")) return;
     keyHud.classList.add("is-unlocked");
     keyHudNote.textContent = copy.keyRecovered;
@@ -228,7 +228,15 @@
     livesReadout.setAttribute("aria-label", copy.hitCount(coherence));
   };
 
+  const fragments = window.EchoesKeyFragments.mount({
+    keyNumber: 2,
+    src: "../../assets/images/key-02-usb.svg",
+    core,
+    before: document.querySelector(".boss02-actions"),
+  });
+
   const render = () => {
+    fragments.set(panel.classList.contains("is-victory") ? 3 : phase);
     const activeAnchor = phases[phase].anchors[anchorIndex];
     const strike = currentStrike();
     const walls = phases[phase].walls;
@@ -290,6 +298,7 @@
     ended = true;
     started = false;
     panel.classList.add("is-victory");
+    fragments.set(3);
     $("systemMessage").textContent = copy.victory.toUpperCase();
     const rewardUnlocked = window.EchoesSave?.unlockKey?.("resonance-2");
     if (!rewardUnlocked) {
@@ -300,7 +309,7 @@
     }
     window.EchoesSave?.saveProgress({ currentPage: "level-21", currentLevel: 21 });
     const keys = window.EchoesSave?.getKeys?.() || [];
-    keyCount.textContent = `${Math.min(keys.length, 6)} / 6`;
+    keyCount.textContent = "2 / 6";
     keyHud.classList.add("is-unlocked");
     keyHudNote.textContent = copy.keyRecovered;
     keyHudSlot.setAttribute("aria-label", copy.keySlotAria);
