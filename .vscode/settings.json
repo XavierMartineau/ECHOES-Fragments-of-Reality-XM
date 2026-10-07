@@ -67,6 +67,10 @@
     "/^node --check \\.\\\\docs\\\\js\\\\dev-mode\\.js$/": {
       "approve": true,
       "matchCommandLine": true
+    },
+    "/^node -e \"const s=\\['00100','01110','11111','10101','10001'\\]; const clues=a=>a\\.map\\(r=>\\{let out=\\[\\],n=0;for\\(const v of r\\)\\{if\\(v==='1'\\)n\\+\\+;else if\\(n\\)\\{out\\.push\\(n\\);n=0\\}\\}if\\(n\\)out\\.push\\(n\\);return out\\.length\\?out:\\[0\\]\\}\\); const cols=clues\\(Array\\.from\\(\\{length:5\\},\\(_,c\\)=>s\\.map\\(r=>r\\[c\\]\\)\\.join\\(''\\)\\)\\); const row=clues\\(s\\); const opts=row\\.map\\(c=>Array\\.from\\(\\{length:32\\},\\(_,m\\)=>m\\)\\.filter\\(m=>JSON\\.stringify\\(clues\\(\\[m\\.toString\\(2\\)\\.padStart\\(5,'0'\\)\\]\\)\\[0\\]\\)===JSON\\.stringify\\(c\\)\\)\\); let count=0,sol=\\[\\]; const rec=\\(i,rows\\)=>\\{if\\(i===5\\)\\{const got=clues\\(Array\\.from\\(\\{length:5\\},\\(_,c\\)=>rows\\.map\\(m=>\\(m>>c\\)&1\\)\\.join\\(''\\)\\)\\);if\\(JSON\\.stringify\\(got\\)===JSON\\.stringify\\(cols\\)\\)\\{count\\+\\+;sol=rows\\.slice\\(\\)\\}return\\}for\\(const m of opts\\[i\\]\\)rec\\(i\\+1,\\[\\.\\.\\.rows,m\\]\\)\\};rec\\(0,\\[\\]\\);console\\.log\\(JSON\\.stringify\\(\\{row,col:cols,count,sol:sol\\.map\\(n=>n\\.toString\\(2\\)\\.padStart\\(5,'0'\\)\\)\\}\\)\\);\"$/": {
+      "approve": true,
+      "matchCommandLine": true
     }
   }
 }

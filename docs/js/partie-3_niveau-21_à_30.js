@@ -639,9 +639,10 @@
       3: 22, 8: 30, 20: 41, 28: 55, 36: 67, 51: 72, 63: 84, 80: 99,
       97: 61, 92: 75, 88: 47, 70: 49, 58: 17, 45: 24, 33: 13, 26: 6, 74: 53,
     };
-    const snakeColors = ["#38f2ff", "#c6ff4d", "#ff4fd8", "#a78bff", "#ffd24d"];
+    const snakeColors = ["#ff5a7a", "#38f2ff", "#ff9a3c", "#b78bff", "#ff4fd8"];
     const rand = (max) => Math.floor(Math.random() * max);
     const shuffle = (list) => [...list].sort(() => Math.random() - 0.5);
+    const shapeGlyphs = ["●", "▲", "■", "◆", "★"];
     const stage = document.createElement("div");
     const grid = document.createElement("div");
     const lines = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -669,7 +670,7 @@
       for (let col = 0; col < size; col += 1) {
         const number = row * size + (row % 2 === 0 ? col : size - 1 - col) + 1;
         const square = document.createElement("div");
-        square.className = "ladder-square";
+        square.className = (row + col) % 2 ? "ladder-square is-alt" : "ladder-square";
         square.textContent = String(number);
         const target = jumps[number];
         if (target) {
@@ -808,59 +809,53 @@
     }
 
     function buildPuzzle() {
-      const kind = ["sequence", "calc", "odd", "reverse"][rand(4)];
-      const choices = (answer, spread) => {
+      const kind = ["match", "pattern", "odd", "place"][rand(4)];
+      const choices = (answer) => {
         const options = new Set([answer]);
-        while (options.size < 4) options.add(answer + (rand(2) ? 1 : -1) * (1 + rand(spread)));
+        while (options.size < 4) options.add(rand(shapeGlyphs.length));
         return shuffle([...options]);
       };
-      if (kind === "sequence") {
-        const mode = rand(4);
-        const terms = [];
-        if (mode === 0) {
-          const first = 1 + rand(5);
-          const step = 2 + rand(4);
-          for (let index = 0; index < 6; index += 1) terms[index] = first + step * index + (index * (index - 1) / 2) * (step - 1);
-        } else if (mode === 1) {
-          terms.push(1 + rand(4), 2 + rand(5));
-          for (let index = 2; index < 6; index += 1) terms.push(terms[index - 1] + terms[index - 2]);
-        } else if (mode === 2) {
-          const up = 2 + rand(4);
-          const down = 2 + rand(4);
-          const high = 30 + rand(20);
-          for (let index = 0; index < 6; index += 1) terms.push(index % 2 ? high - down * (index - 1) / 2 * 3 : 3 + up * index / 2 * 2);
-        } else {
-          const first = 2 + rand(4);
-          const ratio = 2 + rand(2);
-          const add = 1 + rand(4);
-          terms.push(first);
-          for (let index = 1; index < 6; index += 1) terms.push(terms[index - 1] * ratio + add);
-        }
-        const answer = terms[5];
+      if (kind === "match") {
+        const answer = rand(shapeGlyphs.length);
         return {
-          prompt: strings.puzzleSequence,
-          display: `${terms.slice(0, 5).join("  ·  ")}  ·  ?`,
-          options: choices(answer, 4).map(String),
-          answer: String(answer),
+          type: kind,
+          prompt: strings.matchPrompt,
+          display: shapeGlyphs[answer],
+          options: choices(answer),
+          answer,
         };
       }
-      if (kind === "calc") {
-        const a = 6 + rand(8);
-        const b = 6 + rand(8);
-        const c = 4 + rand(9);
-        const d = 4 + rand(9);
-        const e = 11 + rand(40);
-        return { prompt: strings.puzzleCalc, display: `${a} × ${b} − ${c} × ${d} + ${e}`, input: "numeric", answer: String(a * b - c * d + e) };
+      if (kind === "pattern") {
+        const first = rand(shapeGlyphs.length);
+        let second = rand(shapeGlyphs.length - 1);
+        if (second >= first) second += 1;
+        return {
+          type: kind,
+          prompt: strings.patternPrompt,
+          display: [first, second, first, second, null]
+            .map((shape) => shape === null ? "?" : shapeGlyphs[shape])
+            .join("  "),
+          options: choices(first),
+          answer: first,
+        };
       }
       if (kind === "odd") {
-        const pairs = [["8", "B"], ["O", "Q"], ["E", "F"], ["M", "N"], ["5", "S"], ["l", "I"], ["0", "O"], ["Z", "2"]];
-        const [common, intruder] = pairs[rand(pairs.length)];
-        return { prompt: strings.puzzleOdd, odd: { common, intruder, index: rand(9) }, answer: "odd" };
+        const common = rand(shapeGlyphs.length);
+        let intruder = rand(shapeGlyphs.length - 1);
+        if (intruder >= common) intruder += 1;
+        return {
+          type: kind,
+          prompt: strings.oddPrompt,
+          odd: { common, intruder, index: rand(9) },
+        };
       }
-      const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-      let code = "";
-      for (let index = 0; index < 8; index += 1) code += alphabet[rand(alphabet.length)];
-      return { prompt: strings.puzzleReverse, display: code, input: "text", answer: [...code].reverse().join("") };
+      const targets = shuffle(Array.from({ length: shapeGlyphs.length }, (_, index) => index)).slice(0, 3);
+      return {
+        type: kind,
+        prompt: strings.placePrompt,
+        targets,
+        pieces: shuffle(targets),
+      };
     }
     function openPuzzle(kind, target) {
       return new Promise((resolve) => {
@@ -911,7 +906,10 @@
             const button = document.createElement("button");
             button.type = "button";
             button.className = "ladder-choice";
-            button.textContent = option;
+            button.textContent = shapeGlyphs[option];
+            button.setAttribute("aria-label", format(strings.shapeChoice, {
+              name: strings.shapeNames[option],
+            }));
             button.addEventListener("click", () => answer(option === puzzle.answer));
             body.appendChild(button);
           });
@@ -921,34 +919,74 @@
             const button = document.createElement("button");
             button.type = "button";
             button.className = "ladder-choice ladder-glyph";
-            button.textContent = index === puzzle.odd.index ? puzzle.odd.intruder : puzzle.odd.common;
-            button.setAttribute("aria-label", format(strings.glyphLabel, { number: index + 1 }));
+            const shape = index === puzzle.odd.index ? puzzle.odd.intruder : puzzle.odd.common;
+            button.textContent = shapeGlyphs[shape];
+            button.setAttribute("aria-label", format(strings.shapeChoice, {
+              name: strings.shapeNames[shape],
+            }));
             button.addEventListener("click", () => answer(index === puzzle.odd.index));
             body.appendChild(button);
           }
         } else {
-          const form = document.createElement("form");
-          const input = document.createElement("input");
-          const submit = document.createElement("button");
-          input.className = "ladder-input";
-          input.autocomplete = "off";
-          input.spellcheck = false;
-          input.inputMode = puzzle.input === "numeric" ? "numeric" : "text";
-          input.setAttribute("aria-label", strings.inputLabel);
-          submit.type = "submit";
-          submit.className = "ladder-choice";
-          submit.textContent = strings.submit;
-          form.append(input, submit);
-          form.addEventListener("submit", (event) => {
-            event.preventDefault();
-            answer(input.value.trim().toUpperCase() === puzzle.answer);
+          body.classList.add("is-placement");
+          const targetRow = document.createElement("div");
+          targetRow.className = "ladder-shape-row";
+          const pieceRow = document.createElement("div");
+          pieceRow.className = "ladder-shape-row";
+          let selectedPiece = null;
+          const pieceButtons = new Map();
+          const placedShapes = new Set();
+          puzzle.targets.forEach((shape) => {
+            const targetButton = document.createElement("button");
+            targetButton.type = "button";
+            targetButton.className = "ladder-choice ladder-shape-target";
+            targetButton.textContent = shapeGlyphs[shape];
+            targetButton.setAttribute("aria-label", format(strings.shapeTarget, {
+              name: strings.shapeNames[shape],
+            }));
+            targetButton.addEventListener("click", () => {
+              if (selectedPiece === null || placedShapes.has(shape)) return;
+              if (selectedPiece !== shape) {
+                answer(false);
+                return;
+              }
+              placedShapes.add(shape);
+              targetButton.textContent = shapeGlyphs[shape];
+              targetButton.classList.add("is-placed");
+              targetButton.disabled = true;
+              pieceButtons.get(shape).disabled = true;
+              pieceButtons.get(shape).classList.remove("is-selected");
+              selectedPiece = null;
+              if (placedShapes.size === puzzle.targets.length) answer(true);
+            });
+            targetRow.appendChild(targetButton);
           });
-          body.appendChild(form);
+
+          puzzle.pieces.forEach((shape) => {
+            const pieceButton = document.createElement("button");
+            pieceButton.type = "button";
+            pieceButton.className = "ladder-choice ladder-piece";
+            pieceButton.textContent = shapeGlyphs[shape];
+            pieceButton.setAttribute("aria-label", format(strings.shapePiece, {
+              name: strings.shapeNames[shape],
+            }));
+            pieceButton.addEventListener("click", () => {
+              if (pieceButton.disabled) return;
+              selectedPiece = selectedPiece === shape ? null : shape;
+              pieceButtons.forEach((piece, pieceShape) => {
+                piece.classList.toggle("is-selected", pieceShape === selectedPiece);
+              });
+            });
+            pieceButtons.set(shape, pieceButton);
+            pieceRow.appendChild(pieceButton);
+          });
+
+          body.append(targetRow, pieceRow);
         }
         overlay.appendChild(dialog);
         document.body.appendChild(overlay);
         modal = overlay;
-        (dialog.querySelector("input, .ladder-choice") || dialog).focus();
+        (dialog.querySelector(".ladder-piece") || dialog.querySelector(".ladder-choice") || dialog).focus();
       });
     }
 
@@ -1047,7 +1085,7 @@
     const total = 3;
     const rand = (max) => Math.floor(Math.random() * max);
     const shuffle = (list) => [...list].sort(() => Math.random() - 0.5);
-    const palette = ["#38f2ff", "#c6ff4d", "#ff4fd8", "#a78bff", "#ffd24d"];
+    const palette = ["#ff5a7a", "#38f2ff", "#ff9a3c", "#b78bff", "#ff4fd8"];
     const alphabet = "ABCDEFGHJKMNPRTUWXY347";
     const svgNS = "http://www.w3.org/2000/svg";
     const shapeDrawers = [
@@ -1304,95 +1342,107 @@
     setStatus(strings.ready);
   }
 
-  function setupKnightEcho() {
-    const size = 4;
-    const cellCount = size * size;
-    const full = (1 << cellCount) - 1;
-    const knightMoves = [[1, 2], [2, 1], [-1, 2], [-2, 1], [1, -2], [2, -1], [-1, -2], [-2, -1]];
-    const masks = Array.from({ length: cellCount }, (_, index) => {
-      const row = Math.floor(index / size);
-      const column = index % size;
-      let mask = 1 << index;
-      knightMoves.forEach(([dr, dc]) => {
-        const r = row + dr;
-        const c = column + dc;
-        if (r >= 0 && c >= 0 && r < size && c < size) mask |= 1 << (r * size + c);
-      });
-      return mask;
-    });
-    const rand = (max) => Math.floor(Math.random() * max);
-    const shuffle = (list) => [...list].sort(() => Math.random() - 0.5);
-    const par = 7 + rand(3);
-    let solution = 0;
-    shuffle(Array.from({ length: cellCount }, (_, index) => index)).slice(0, par).forEach((index) => {
-      solution ^= masks[index];
-    });
-    const initial = full ^ solution;
-    let lights = initial;
-    let moves = 0;
+  function setupMemoryNonogram() {
+    const size = 5;
+    const solution = ["01110", "11111", "11111", "01110", "00100"]
+      .join("")
+      .split("")
+      .map((pixel) => pixel === "1");
+    const rowClues = [[3], [5], [5], [3], [1]];
+    const columnClues = [[2], [4], [5], [4], [2]];
+    const targetCount = solution.filter(Boolean).length;
+    const marks = Array(solution.length).fill(0);
     let started = false;
 
+    const puzzle = document.createElement("div");
+    puzzle.className = "memory-nonogram";
+    puzzle.setAttribute("role", "group");
+    const columnClueList = document.createElement("div");
+    columnClueList.className = "memory-column-clues";
+    const rowClueList = document.createElement("div");
+    rowClueList.className = "memory-row-clues";
     const grid = document.createElement("div");
-    grid.className = "snake-grid echo-grid";
-    grid.style.setProperty("--snake-grid-size", size);
-    grid.setAttribute("role", "group");
+    grid.className = "memory-grid";
     const cells = [];
+
+    columnClues.forEach((clues, column) => {
+      const clue = document.createElement("div");
+      clue.className = "memory-clue";
+      clue.textContent = clues.join(" ");
+      clue.setAttribute("aria-label", format(strings.columnClue, {
+        column: column + 1,
+        clues: clues.join(", "),
+      }));
+      columnClueList.appendChild(clue);
+    });
+
+    rowClues.forEach((clues, row) => {
+      const clue = document.createElement("div");
+      clue.className = "memory-clue";
+      clue.textContent = clues.join(" ");
+      clue.setAttribute("aria-label", format(strings.rowClue, {
+        row: row + 1,
+        clues: clues.join(", "),
+      }));
+      rowClueList.appendChild(clue);
+    });
 
     function refresh() {
       cells.forEach((cell, index) => {
-        const lit = Boolean(lights & (1 << index));
-        cell.classList.toggle("is-lit", lit);
+        const state = marks[index];
+        cell.classList.toggle("is-filled", state === 1);
         cell.disabled = !started || solved;
-        cell.setAttribute("aria-label", format(lit ? strings.cellOn : strings.cellOff, {
+        cell.setAttribute("aria-pressed", String(state === 1));
+        cell.setAttribute("aria-label", format(strings.cellLabel, {
           row: Math.floor(index / size) + 1,
           column: (index % size) + 1,
+          state: strings.cellStates[state],
         }));
       });
-      progressReadout.textContent = `${moves} / ${par}`;
+      progressReadout.textContent = `${marks.filter((mark) => mark === 1).length} / ${targetCount}`;
     }
 
-    function preview(index, active) {
-      cells.forEach((cell, target) => {
-        cell.classList.toggle("is-echo", active && Boolean(masks[index] & (1 << target)));
-      });
-    }
-
-    function press(index) {
+    function updateCell(index) {
       if (!started || solved) return;
-      lights ^= masks[index];
-      moves += 1;
+      marks[index] = marks[index] === 1 ? 0 : 1;
       refresh();
-      if (lights === full) completeLevel();
-      else setStatus(strings.playing);
+      const matchesSolution = marks.every((mark, pixel) =>
+        (mark === 1) === solution[pixel],
+      );
+      if (matchesSolution) {
+        completeLevel();
+      } else if (marks.filter((mark) => mark === 1).length >= targetCount) {
+        setStatus(strings.checkClues);
+      } else {
+        setStatus(strings.playing);
+      }
     }
 
-    for (let index = 0; index < cellCount; index += 1) {
+    for (let index = 0; index < solution.length; index += 1) {
       const cell = document.createElement("button");
       cell.type = "button";
-      cell.className = "snake-cell echo-cell";
-      cell.addEventListener("click", () => press(index));
-      cell.addEventListener("mouseenter", () => preview(index, true));
-      cell.addEventListener("mouseleave", () => preview(index, false));
-      cell.addEventListener("focus", () => preview(index, true));
-      cell.addEventListener("blur", () => preview(index, false));
+      cell.className = "memory-cell";
+      cell.addEventListener("click", () => updateCell(index));
       cell.addEventListener("keydown", (event) => {
         const row = Math.floor(index / size);
         const column = index % size;
-        const moves2 = {
+        const destinations = {
           ArrowUp: row > 0 ? index - size : -1,
           ArrowDown: row < size - 1 ? index + size : -1,
           ArrowLeft: column > 0 ? index - 1 : -1,
           ArrowRight: column < size - 1 ? index + 1 : -1,
         };
-        if (moves2[event.key] !== undefined) {
+        if (destinations[event.key] !== undefined) {
           event.preventDefault();
-          cells[moves2[event.key]]?.focus();
+          cells[destinations[event.key]]?.focus();
         }
       });
       cells.push(cell);
       grid.appendChild(cell);
     }
-    board.replaceChildren(grid);
+
+    puzzle.append(columnClueList, rowClueList, grid);
+    board.replaceChildren(puzzle);
     startButton.addEventListener("click", () => {
       if (solved || started) return;
       started = true;
@@ -1404,8 +1454,7 @@
     resetButton.addEventListener("click", () => {
       resetCommon();
       started = false;
-      lights = initial;
-      moves = 0;
+      marks.fill(0);
       refresh();
       setStatus(strings.ready);
       startButton.focus();
@@ -1626,7 +1675,7 @@
   if (level === 26) setupSnakesAndLadders();
   if (level === 27 || level === 30) setupSnakeCaptcha();
   if (level === 28) setupCaptcha();
-  if (level === 29) setupKnightEcho();
+  if (level === 29) setupMemoryNonogram();
 
   nextButton.addEventListener("click", () => {
     if (!solved) return;

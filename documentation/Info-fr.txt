@@ -2242,47 +2242,58 @@ Version EN courte :
 “Sort the moving holographic symbols.”
 
 ===============================
-NIVEAU 26 — ILLUSION GÉOMÉTRIQUE
+NIVEAU 26 — SERPENTS ET ÉCHELLES
 ===============================
 Objectif narratif :  
-ECHO montre que la géométrie peut mentir.
+ECHO mêle hasard et observation sur un plateau détourné par le réseau.
+Chaque arrêt présente une courte énigme visuelle, sans calcul.
 
 Objectif mécanique :  
-Identifier la forme correcte dans une illusion.
+Lancer le dé pour atteindre la case 100 et résoudre un mini-puzzle à chaque arrivée.
+Réussir sur une échelle permet de grimper ; réussir sur un serpent permet d'y échapper.
 
 Description du puzzle :  
-5 formes semblent identiques.
-Le joueur doit trouver celle qui n’est pas une illusion.
+Les mini-puzzles sont tirés parmi quatre défis de formes :
+
+Choisir la forme identique au modèle.
+
+Compléter un motif simple de formes alternées.
+
+Repérer une forme différente parmi les autres.
+
+Sélectionner une pièce puis sa silhouette correspondante.
+
+Les cases ordinaires font reculer le pion de deux cases en cas d'erreur.
+Un lancer au-delà de la case 100 fait rebondir le pion.
+Aucun calcul ni équation n'est demandé.
 
 Interactions :
 
-Clic
+Lancer le dé
+
+Choisir ou placer des formes
 
 Feedback
 
-Animations :
-
-Glitch
-
-Distorsion
+Réussite ou échec du mini-puzzle
 
 Ambiance visuelle :  
-Illusion géométrique.
+Plateau de serpents et échelles, mini-puzzles colorés de formes.
 
 Ambiance sonore :  
-Synth glitch.
+Synth cyberpunk discret.
 
 Illusions :  
-Duplication.
+Les serpents et les échelles modifient le déplacement du pion.
 
 Condition de déblocage :  
 Niveau 25 complété.
 
 Dialogue d’ECHO :  
-« La géométrie… peut tromper. Trouve la vraie forme. »
+« Le hasard décide où tu tombes. Ton esprit décide ce qui arrive ensuite. »
 
 Version EN courte :  
-“Identify the true geometric hologram.”
+“Roll the die and solve simple visual shape puzzles.”
 
 ===============================
 NIVEAU 27 — SÉQUENCE COMPLEXE
@@ -2373,107 +2384,62 @@ Version EN courte :
 (À mettre dans ton fichier .txt final)
 
 ===============================
-NIVEAU 29 — PUZZLE FINAL DE SYNTHÈSE
+NIVEAU 29 — RECONSTRUCTION DU FRAGMENT MÉMOIRE
 ===============================
 Objectif narratif :  
-ECHO teste la maîtrise totale du Voyageur sur les fondations de la réalité.
-Ce niveau représente la dernière barrière avant la stabilisation complète de la Rupture.
+ECHO tente de retrouver une partie de sa mémoire perdue.
+Le Voyageur reconstitue le cœur du fragment avant l'épreuve finale de la Rupture.
 
 Objectif mécanique :  
-Combiner toutes les mécaniques apprises dans les niveaux 1 à 28 :
-
-alignements
-
-séquences lumineuses
-
-séquences sonores
-
-illusions géométriques
-
-rotation
-
-tri
-
-activation multi‑zones
-
-profondeur holographique
+Déduire un motif de 5 × 5 cases grâce aux indices de lignes et de colonnes.
+Chaque indice donne, dans l'ordre, la longueur des groupes de cases remplies.
+Une case alterne simplement entre vide et active.
 
 Description du puzzle :  
-Le puzzle se compose de trois couches holographiques superposées, chacune représentant un type de mécanique :
-
-Couche 1 — Géométrie & Alignement
-
-5 formes doivent être alignées sur une ligne fractale.
-
-Chaque forme correctement alignée active un symbole sur la couche 2.
-
-Couche 2 — Séquences combinées (lumière + son)
-
-Une séquence lumineuse et sonore se joue.
-
-Le joueur doit la reproduire.
-
-Chaque séquence correcte active une zone sur la couche 3.
-
-Couche 3 — Illusion & Profondeur
-
-4 objets holographiques flottent dans une illusion de profondeur.
-
-Le joueur doit identifier l’objet réel (non illusoire).
-
-Une fois trouvé, l’objet révèle un symbole final.
-
-Lorsque les 3 couches sont complétées, un cœur holographique apparaît au centre :
-→ Le joueur doit cliquer dessus pour stabiliser la Rupture.
+Les cinq indices de lignes sont 3, 5, 5, 3 et 1.
+Les cinq indices de colonnes sont 2, 4, 5, 4 et 2.
+Le motif unique révèle un cœur de mémoire composé de 17 cases.
+Le niveau est validé lorsque les cases remplies correspondent exactement à ce motif.
 
 Interactions :
 
-Drag & drop
+Lecture des indices de lignes et de colonnes
 
-Rotation
+Activation ou désactivation des cases par clic
 
-Clic rythmique
-
-Sélection d’objets
-
-Activation multi‑zones
-
-Navigation entre couches holographiques
+Navigation au clavier avec les flèches
 
 Animations :
 
-Transition entre couches (fragmentation holographique)
+Apparition du motif reconstitué en cyan
 
-Pulsation du cœur final
-
-Effet de stabilisation totale (explosion de néons)
+Pulsation du cœur final en vert acide
 
 Ambiance visuelle :  
-Superposition holographique, néons doux, fractales légères.
+Indices cyan, cellules holographiques et cœur de mémoire lumineux.
 
 Ambiance sonore :  
-Synth combiné (grave + aigu), pulsations profondes.
+Pulsations synthétiques discrètes pendant la reconstruction.
 
 Illusions :  
-Parallaxe multi‑couches, duplication, profondeur dynamique.
+Chaque case activée révèle une partie du cœur en pixels.
 
 Condition de déblocage :  
 Niveau 28 complété.
 
 Dialogue d’ECHO :  
-« Tu as appris chaque fragment… chaque lumière… chaque illusion.
-Maintenant, réunis-les.
-Stabilise la Rupture.
-Montre-moi que tu es prêt. »
+« Tu as retrouvé une forme que j'avais oubliée.
+Ma mémoire s'éveille.
+Il ne reste qu'un pas. »
 
 Version EN courte :  
-“Combine all learned mechanics. Stabilize the rupture.”
+“Rebuild ECHO's memory from the row and column clues.”
 
 Lien narratif :  
-Prépare l’obtention de la Clé de Résonance au niveau 30.
+Prépare la dernière épreuve de la Partie 3 au niveau 30.
 
 Notes IA VS Code :  
-Puzzle complexe, multi‑couches, animations avancées, transitions holographiques.
+Nonogramme 5 × 5 à solution unique, avec 17 cases à activer et commandes accessibles au clavier.
 
 ===============================
 NIVEAU 30 — OBTENTION DE LA CLÉ DE RÉSONANCE
