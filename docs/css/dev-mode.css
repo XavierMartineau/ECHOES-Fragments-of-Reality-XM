@@ -1082,12 +1082,12 @@ body.echo-ambient-page[data-part="6"] .construction-card {
 
 body.echo-ambient-page[data-part="5"] .construction-card .eyebrow,
 body.echo-ambient-page[data-part="6"] .construction-card .eyebrow {
-  color: var(--ambient-accent);
+  color: var(--ambient-accent) !important;
 }
 
 body.echo-ambient-page[data-part="5"] .construction-card h1,
 body.echo-ambient-page[data-part="6"] .construction-card h1 {
-  color: var(--ambient-secondary);
+  color: var(--ambient-secondary) !important;
   text-shadow: 0 0 18px color-mix(in srgb, var(--ambient-accent) 40%, transparent);
 }
 
