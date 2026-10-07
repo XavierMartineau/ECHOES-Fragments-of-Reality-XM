@@ -126,7 +126,7 @@ Fichiers importants :
 - `docs/js/partie-1_niveau-1_à_10.js` : progression et routage de la Partie 1 ;
 - `docs/js/key-transition.js` : dialogue, récupération et animation de Clé 01 ;
 - `docs/js/dev-mode.js` : accès développeur aux niveaux et scènes spéciales ;
-- `docs/assets/images/key-01-usb.svg` : visuel cyberpunk de la première clé ;
+- `docs/assets/svg/key-01-usb.svg` : visuel cyberpunk de la première clé ;
 - `documentation/cheminement-projet.md` : historique fonctionnel et cheminement détaillé.
 
 ## Sauvegarde et développement

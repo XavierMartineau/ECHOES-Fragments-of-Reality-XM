@@ -2,62 +2,76 @@
   <title>Les six clés de résonance ECHO</title>
   <svg x="30" y="30" width="180" height="260" viewBox="0 0 180 260" overflow="visible">
   <title id="key01Title">Clé de résonance 01</title>
-  <desc id="key01Desc">Clé USB du signal, cyan et violette, au cœur hexagonal marqué du sceau ECHO et du sigle KEY 01.</desc>
+  <desc id="key01Desc">Clé USB du signal, en verre cyan et violet, au cœur marqué d'un cercle brisé traversé d'une impulsion et du sigle KEY 01.</desc>
   <defs>
     <linearGradient id="key01Shell" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#1f4a78"/>
-      <stop offset="0.5" stop-color="#0b1530"/>
-      <stop offset="1" stop-color="#3a1f5e"/>
+      <stop stop-color="#17406a"/>
+      <stop offset="0.5" stop-color="#0a1330"/>
+      <stop offset="1" stop-color="#2e1a5a"/>
     </linearGradient>
     <linearGradient id="key01Edge" x1="0" y1="0" x2="1" y2="1">
       <stop stop-color="#79f7ff"/>
-      <stop offset="0.5" stop-color="#80ffcf"/>
+      <stop offset="0.5" stop-color="#7aa8ff"/>
       <stop offset="1" stop-color="#c08aff"/>
     </linearGradient>
     <linearGradient id="key01Metal" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#f2ffff"/>
-      <stop offset="0.45" stop-color="#8fdcf0"/>
-      <stop offset="1" stop-color="#4a7fb8"/>
+      <stop stop-color="#ffffff"/>
+      <stop offset="0.45" stop-color="#a8e4f5"/>
+      <stop offset="1" stop-color="#4f86bd"/>
+    </linearGradient>
+    <linearGradient id="key01Gloss" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffffff" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
     </linearGradient>
     <radialGradient id="key01Core" cx="0.5" cy="0.5" r="0.5">
-      <stop stop-color="#1b4a66"/>
-      <stop offset="0.7" stop-color="#091226"/>
-      <stop offset="1" stop-color="#150f2c"/>
+      <stop stop-color="#12395a"/>
+      <stop offset="0.75" stop-color="#060d20"/>
+      <stop offset="1" stop-color="#0d0a24"/>
     </radialGradient>
+    <clipPath id="key01Clip"><path d="M46 44h76l24 24v128a26 26 0 0 1-26 26H60a26 26 0 0 1-26-26V56q0-12 12-12Z"/></clipPath>
     <filter id="key01Glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
     <style>
-      .k1-wave { transform-origin: 90px 130px; animation: k1-wave 3.2s ease-out infinite; }
-      .k1-wave.b { animation-delay: 1.6s; }
-      .k1-orbit { transform-origin: 90px 130px; animation: k1-spin 7s linear infinite; }
-      .k1-led { animation: k1-led 2.4s ease-in-out infinite; }
-      @keyframes k1-wave { 0% { opacity: .9; transform: scale(.45); } 100% { opacity: 0; transform: scale(1.35); } }
+      .k1-ring { transform-origin: 90px 130px; animation: k1-spin 14s linear infinite; }
+      .k1-pulse { stroke-dasharray: 10 6; animation: k1-flow 1.6s linear infinite; }
+      .k1-echo { transform-origin: 90px 130px; animation: k1-echo 3s ease-out infinite; }
+      .k1-bar { animation: k1-bar 2.4s ease-in-out infinite; }
+      .k1-bar.b2 { animation-delay: .3s; } .k1-bar.b3 { animation-delay: .6s; } .k1-bar.b4 { animation-delay: .9s; }
       @keyframes k1-spin { to { transform: rotate(360deg); } }
-      @keyframes k1-led { 50% { opacity: .35; } }
-      @media (prefers-reduced-motion: reduce) { .k1-wave, .k1-orbit, .k1-led { animation: none; } }
+      @keyframes k1-flow { to { stroke-dashoffset: -32; } }
+      @keyframes k1-echo { 0% { opacity: .8; transform: scale(.55); } 100% { opacity: 0; transform: scale(1.25); } }
+      @keyframes k1-bar { 50% { opacity: .35; } }
+      @media (prefers-reduced-motion: reduce) { .k1-ring, .k1-pulse, .k1-echo, .k1-bar { animation: none; } }
     </style>
   </defs>
   <g transform="translate(90 130) rotate(-6) translate(-90 -130)">
-    <rect x="60" y="6" width="60" height="42" rx="7" fill="url(#key01Metal)" stroke="#e8ffff" stroke-width="2"/>
-    <rect x="69" y="13" width="42" height="20" rx="3" fill="#0a1a30"/>
-    <rect x="75" y="19" width="9" height="9" rx="1.5" fill="#80ffcf"/>
-    <rect x="96" y="19" width="9" height="9" rx="1.5" fill="#80ffcf"/>
-    <path d="M70 40h40" stroke="#3a6a9a" stroke-width="2" stroke-linecap="round"/>
-    <path d="M50 44h80l17 19v147a26 26 0 0 1-26 26H59a26 26 0 0 1-26-26V63l17-19Z" fill="url(#key01Shell)" stroke="url(#key01Edge)" stroke-width="3.5"/>
-    <path d="M52 58h76M44 70h92" fill="none" stroke="#79f7ff" stroke-width="1.5" opacity="0.5"/>
-    <path d="M42 80v18m96-18v18" stroke="#c08aff" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
-    <path d="M90 85l39 22v46l-39 22-39-22v-46l39-22Z" fill="url(#key01Core)" stroke="#79f7ff" stroke-width="2"/>
-    <circle cx="90" cy="130" r="31" fill="none" stroke="#c08aff" stroke-width="1.2" opacity="0.7"/>
-    <circle cx="90" cy="130" r="23" fill="none" stroke="#79f7ff" stroke-width="1" stroke-dasharray="3 5" opacity="0.8"/>
-    <circle class="k1-wave" cx="90" cy="130" r="31" fill="none" stroke="#79f7ff" stroke-width="2"/>
-    <circle class="k1-wave b" cx="90" cy="130" r="31" fill="none" stroke="#c08aff" stroke-width="2"/>
-    <g class="k1-orbit"><circle cx="90" cy="99" r="3.5" fill="#80ffcf" filter="url(#key01Glow)"/></g>
-    <path d="M104 114H82v32h22M82 130h18" fill="none" stroke="url(#key01Edge)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(#key01Glow)"/>
-    <text x="90" y="198" fill="#dcefff" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 01</text>
-    <path d="M68 205h44m-34 7h24" stroke="#79f7ff" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
-    <circle class="k1-led" cx="90" cy="224" r="5" fill="#80ffcf" filter="url(#key01Glow)"/>
+    <rect x="62" y="6" width="56" height="42" rx="6" fill="url(#key01Metal)" stroke="#f2ffff" stroke-width="2"/>
+    <rect x="70" y="13" width="40" height="20" rx="3" fill="#081426"/>
+    <rect x="74" y="18" width="7" height="10" rx="1.5" fill="#79f7ff"/>
+    <rect x="86.5" y="18" width="7" height="10" rx="1.5" fill="#7aa8ff"/>
+    <rect x="99" y="18" width="7" height="10" rx="1.5" fill="#c08aff"/>
+    <path d="M72 41h36" stroke="#3a6aa0" stroke-width="2" stroke-linecap="round"/>
+    <path d="M46 44h76l24 24v128a26 26 0 0 1-26 26H60a26 26 0 0 1-26-26V56q0-12 12-12Z" fill="url(#key01Shell)" stroke="url(#key01Edge)" stroke-width="3.5" stroke-linejoin="round"/>
+    <g clip-path="url(#key01Clip)">
+      <path d="M20 40L110 40L20 170Z" fill="url(#key01Gloss)"/>
+    </g>
+    <path d="M44 62v26l8 8v22M136 62v20l-8 8v30" fill="none" stroke="#79f7ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+    <circle cx="44" cy="62" r="2.5" fill="#79f7ff"/><circle cx="136" cy="62" r="2.5" fill="#c08aff"/>
+    <circle cx="90" cy="130" r="44" fill="url(#key01Core)" stroke="#79f7ff" stroke-width="1.5" opacity="0.95"/>
+    <circle class="k1-echo" cx="90" cy="130" r="34" fill="none" stroke="#79f7ff" stroke-width="2"/>
+    <circle cx="90" cy="130" r="25" fill="none" stroke="#7aa8ff" stroke-width="1" stroke-dasharray="3 5" opacity="0.7"/>
+    <g class="k1-ring" filter="url(#key01Glow)">
+      <path d="M117.85 110.5A34 34 0 1 1 98.8 97.16" fill="none" stroke="url(#key01Edge)" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="109.5" cy="102.1" r="3.5" fill="#ffffff"/>
+    </g>
+    <path class="k1-pulse" d="M62 132h14l6-15 8 30 8-24 6 9h20" fill="none" stroke="#e8ffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#key01Glow)"/>
+    <text x="90" y="192" fill="#dcefff" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 01</text>
+    <rect class="k1-bar" x="72" y="208" width="6" height="6" rx="1" fill="#79f7ff"/>
+    <rect class="k1-bar b2" x="82" y="204" width="6" height="10" rx="1" fill="#79f7ff"/>
+    <rect class="k1-bar b3" x="92" y="200" width="6" height="14" rx="1" fill="#7aa8ff"/>
+    <rect class="k1-bar b4" x="102" y="196" width="6" height="18" rx="1" fill="#c08aff"/>
   </g>
 </svg>
   <svg x="240" y="30" width="180" height="260" viewBox="0 0 180 260" overflow="visible">

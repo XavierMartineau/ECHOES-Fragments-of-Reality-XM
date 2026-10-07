@@ -138,7 +138,7 @@ Fichiers associés :
 
 - `docs/html/partie-1_niveau-1_à_10/clee_01_cinematic.html`
 - `docs/js/key-transition.js`
-- `docs/assets/images/key-01-usb.svg`
+- `docs/assets/svg/key-01-usb.svg`
 - `docs/css/partie-1_niveau-1_à_10.css`
 
 L'ancien protocole de récupération du boss a été retiré; la Clé 01 conserve sa
@@ -146,7 +146,7 @@ cinématique et son parcours de récompense.
 
 ## Architecture technique
 
-- Le favicon commun est `docs/assets/images/echoes-favicon.svg` et est référencé par
+- Le favicon commun est `docs/assets/svg/echoes-favicon.svg` et est référencé par
   toutes les pages HTML du site, y compris `404.html`.
 - Scripts centralisés des niveaux 1 à 10 dans
   `docs/js/partie-1_niveau-1_à_10.js`.

@@ -151,7 +151,7 @@
     holder.setAttribute("class", className);
     holder.setAttribute("aria-hidden", "true");
     const image = document.createElementNS(NS, "image");
-    image.setAttribute("href", "../../assets/images/key-03-usb.svg");
+    image.setAttribute("href", "../../assets/svg/key-03-usb.svg");
     image.setAttribute("width", "180");
     image.setAttribute("height", "260");
     holder.appendChild(image);

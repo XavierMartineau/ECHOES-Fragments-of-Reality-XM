@@ -152,7 +152,7 @@
   position: relative;
   padding: 0;
   background-color: #111b3b;
-  background-image: url("../assets/images/fractal-motif.svg");
+  background-image: url("../assets/svg/fractal-motif.svg");
   background-repeat: no-repeat;
   background-size: 300% 300%;
   cursor: pointer;
