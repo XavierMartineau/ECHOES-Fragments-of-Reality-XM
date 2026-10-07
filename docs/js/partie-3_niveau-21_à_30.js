@@ -1116,13 +1116,13 @@
       path = [start];
       nextCheckpoint = 0;
       refreshBoard();
-      setStatus(message, message === strings.failed ? "error" : "");
+      setStatus(message, message === strings.ready || message === strings.playing ? "" : "error");
     }
 
-    function rejectPath() {
+    function rejectPath(reason) {
       started = true;
       startButton.hidden = true;
-      resetPath(strings.failed);
+      resetPath(reason || strings.failed);
       cells[start].focus();
     }
 
@@ -1164,9 +1164,16 @@
           }
           previousDirection = direction;
         }
-        if (completedPath.length - 1 !== steps || turns !== requiredTurns ||
-            nextCheckpoint !== checkpoints.length) {
-          rejectPath();
+        if (nextCheckpoint !== checkpoints.length) {
+          rejectPath(strings.failedCheckpoints);
+          return;
+        }
+        if (completedPath.length - 1 !== steps) {
+          rejectPath(format(strings.failedLength, { moves: completedPath.length - 1, steps }));
+          return;
+        }
+        if (turns !== requiredTurns) {
+          rejectPath(format(strings.failedTurns, { turns, required: requiredTurns }));
           return;
         }
         path.push(index);
@@ -1175,7 +1182,7 @@
         return;
       }
       if (checkpoints.includes(index) && index !== checkpoints[nextCheckpoint]) {
-        rejectPath();
+        rejectPath(strings.failedOrder);
         return;
       }
       path.push(index);
