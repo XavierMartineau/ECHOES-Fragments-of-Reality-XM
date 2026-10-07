@@ -10,16 +10,15 @@
       level: "CLÉE_03 // OCCULTEUR",
       eyebrow: "CLEE_03 // GARDIEN DE L'ÉCLIPSE",
       title: "L'Occulteur",
-      description: "Trois couronnes d'ombre étouffent le soleil. Aligne leurs brèches sur le rayon, au bon instant, avant que ta cohérence ne s'éteigne.",
+      description: "Trois couronnes d'ombre étouffent le soleil. Aligne leurs brèches sur le rayon, au bon instant, avant que le temps ne s'écoule.",
       kicker: "COMBAT // TIMING ORBITAL",
       arena: "La couronne noire",
-      lives: "COHÉRENCE",
       helpTitle: "COMMENT COMBATTRE",
       help: [
         "Entre dans l'éclipse : les anneaux se mettent à tourner autour du soleil.",
         "Appuie sur « Aligner » (ou sur Espace) quand la brèche de l'anneau brillant passe sous le repère ▼ vert. Les anneaux se verrouillent du plus extérieur au plus intérieur.",
-        "Une erreur coûte 1 cohérence et libère l'anneau précédent.",
-        "Chaque phase dure 45 secondes. « Ralentir » retire 10 secondes mais ralentit fortement les anneaux pendant 3 secondes.",
+        "Une erreur retire 5 secondes et libère l'anneau précédent. Les anneaux sont mauves ; celui que tu dois verrouiller prend sa couleur quand vient son tour. Un anneau réussi devient vert.",
+        "La phase 1 dure 45 secondes, les phases 2 et 3 durent 5 minutes. « Ralentir » retire 10 secondes mais ralentit fortement les anneaux pendant 3 secondes.",
         "Phase 1 : chaque verrouillage accélère les anneaux restants. Phases 2 et 3 : chaque verrouillage inverse leur sens, et en phase 3 les anneaux changent de sens au hasard.",
       ],
       start: "ENTRER DANS L'ÉCLIPSE",
@@ -45,13 +44,12 @@
       ready: "Observe la rotation, puis aligne chaque brèche sur le repère vert.",
       go: (n) => `Phase ${n} : à toi de jouer.`,
       locked: "Anneau verrouillé.",
-      missed: "Raté ! L'ombre se resserre : −1 cohérence.",
-      missedUnlock: "Raté ! −1 cohérence, l'anneau précédent se libère.",
+      missed: "Raté ! L'ombre se resserre : −5 secondes.",
+      missedUnlock: "Raté ! −5 secondes, l'anneau précédent se libère.",
       twistSpeed: "Les anneaux restants accélèrent.",
       twistFlip: "Les anneaux restants s'inversent.",
       phaseDone: (n) => `Couronne ${n} brisée.`,
       victory: "L'éclipse se dissipe. La clé 03 est à toi.",
-      defeated: "Cohérence épuisée. L'éclipse t'a englouti.",
       saveError: "Impossible de sauvegarder la clé.",
       system: "SYSTEME:: ÉCLIPSE TOTALE // TROIS COURONNES",
     },
@@ -60,16 +58,15 @@
       level: "KEY_03 // OCCULTER",
       eyebrow: "KEY_03 // WARDEN OF THE ECLIPSE",
       title: "The Occulter",
-      description: "Three crowns of shadow smother the sun. Align their gaps with the beam at the right moment before your coherence fades.",
+      description: "Three crowns of shadow smother the sun. Align their gaps with the beam at the right moment before time runs out.",
       kicker: "COMBAT // ORBITAL TIMING",
       arena: "The black crown",
-      lives: "COHERENCE",
       helpTitle: "HOW TO FIGHT",
       help: [
         "Enter the eclipse: the rings start spinning around the sun.",
         "Press “Align” (or Space) when the gap of the glowing ring passes under the green ▼ marker. Rings lock from outermost to innermost.",
-        "A mistake costs 1 coherence and frees the previous ring.",
-        "Each phase lasts 45 seconds. “Slow down” removes 10 seconds but greatly slows the rings for 3 seconds.",
+        "A mistake removes 5 seconds and frees the previous ring. Rings are purple; the one you must lock lights up in its own color when its turn comes. A locked ring turns green.",
+        "Phase 1 lasts 45 seconds, phases 2 and 3 last 5 minutes. “Slow down” removes 10 seconds but greatly slows the rings for 3 seconds.",
         "Phase 1: every lock speeds up the remaining rings. Phases 2 and 3: every lock reverses their direction, and in phase 3 rings randomly change direction.",
       ],
       start: "ENTER THE ECLIPSE",
@@ -95,13 +92,12 @@
       ready: "Watch the rotation, then align each gap with the green marker.",
       go: (n) => `Phase ${n}: your move.`,
       locked: "Ring locked.",
-      missed: "Missed! The shadow tightens: −1 coherence.",
-      missedUnlock: "Missed! −1 coherence, the previous ring is freed.",
+      missed: "Missed! The shadow tightens: −5 seconds.",
+      missedUnlock: "Missed! −5 seconds, the previous ring is freed.",
       twistSpeed: "The remaining rings speed up.",
       twistFlip: "The remaining rings reverse.",
       phaseDone: (n) => `Crown ${n} broken.`,
       victory: "The eclipse lifts. Key 03 is yours.",
-      defeated: "Coherence depleted. The eclipse swallowed you.",
       saveError: "Unable to save the key.",
       system: "SYSTEM:: TOTAL ECLIPSE // THREE CROWNS",
     },
@@ -113,15 +109,16 @@
     { gap: 18, speeds: [90, 120, 150, 185, 220, 255], twist: "flip" },
   ];
   const palettes = [
-    ["#38f2ff", "#4d8bff", "#a56bff", "#ff4fd8"],
-    ["#ffd24d", "#ff9f43", "#ff6b4a", "#ff4f8b", "#c44dff"],
-    ["#ff2d4a", "#ff7a2d", "#ffd24d", "#ff4fd8", "#7a5cff", "#38f2ff"],
+    ["#6fa8ff", "#8f8bff", "#c084fc", "#f08ad0"],
+    ["#f2c66b", "#f09a5a", "#e8736f", "#e07aa8", "#b58cf0"],
+    ["#e8566a", "#ee8a4f", "#e6c15a", "#d97ac0", "#8f84ee", "#7fb3c9"],
   ];
-  const maxLives = 4;
-  const phaseTime = 45;
+  const phaseTimes = [45, 300, 300];
+  const missPenalty = 5;
   const slowCost = 10;
   const slowDuration = 3;
   const slowFactor = 0.25;
+  const slowTimerFactor = 0.5;
   const meltdownDuration = 3.4;
   const ringStroke = 15;
   const NS = "http://www.w3.org/2000/svg";
@@ -171,13 +168,12 @@
   let phase = 0;
   let earned = 0;
   let rings = [];
-  let lives = maxLives;
   let running = false;
   let ended = false;
   let lastTime = 0;
   let frame = 0;
   let speedBoost = 1;
-  let timeLeft = phaseTime;
+  let timeLeft = phaseTimes[0];
   let slowLeft = 0;
   let meltdown = null;
 
@@ -190,7 +186,6 @@
   setText("bossDescription", text.description);
   setText("bossKicker", text.kicker);
   setText("arenaTitle", text.arena);
-  setText("livesLabel", text.lives);
   setText("errorTitle", text.errorTitle);
   setText("errorSub", text.errorSub);
   errorReset.textContent = text.reset;
@@ -254,22 +249,13 @@
 
   const renderTimer = () => {
     const shown = Math.max(0, timeLeft);
-    timerReadout.textContent = `${shown.toFixed(1)} s`;
-    timerFill.style.transform = `scaleX(${shown / phaseTime})`;
+    timerReadout.textContent = shown >= 60
+      ? `${Math.floor(shown / 60)}:${String(Math.floor(shown % 60)).padStart(2, "0")}`
+      : `${shown.toFixed(1)} s`;
+    timerFill.style.transform = `scaleX(${shown / phaseTimes[Math.min(phase, phaseTimes.length - 1)]})`;
     timerReadout.classList.toggle("is-low", shown <= 10);
     timerReadout.classList.toggle("is-slowed", slowLeft > 0);
     arena.classList.toggle("is-slowed", slowLeft > 0);
-  };
-
-  const renderLives = () => {
-    const holder = $("livesReadout");
-    holder.replaceChildren();
-    for (let index = 0; index < maxLives; index += 1) {
-      const life = document.createElement("span");
-      life.className = `boss03-life${index >= lives ? " is-lost" : ""}`;
-      holder.appendChild(life);
-    }
-    holder.setAttribute("aria-label", `${lives} / ${maxLives}`);
   };
 
   const buildRings = () => {
@@ -329,14 +315,13 @@
     lockButton.disabled = !running;
     slowButton.disabled = !running || slowLeft > 0 || timeLeft <= slowCost;
     renderTimer();
-    renderLives();
   };
 
   const tick = (now) => {
     if (!running) return;
     const dt = Math.min((now - lastTime) / 1000, 0.05);
     lastTime = now;
-    timeLeft -= dt;
+    timeLeft -= dt * (slowLeft > 0 ? slowTimerFactor : 1);
     if (slowLeft > 0) slowLeft = Math.max(0, slowLeft - dt);
     if (timeLeft <= 0) {
       timeLeft = 0;
@@ -360,7 +345,7 @@
 
   const startPhase = () => {
     buildRings();
-    timeLeft = phaseTime;
+    timeLeft = phaseTimes[phase];
     slowLeft = 0;
     running = true;
     lastTime = performance.now();
@@ -442,16 +427,6 @@
     }, 1500);
   };
 
-  const lose = (message = text.defeated) => {
-    running = false;
-    ended = true;
-    slowLeft = 0;
-    cancelAnimationFrame(frame);
-    panel.classList.add("is-defeat");
-    setStatus(message, "error");
-    draw();
-  };
-
   const align = () => {
     if (!running) return;
     const index = activeIndex();
@@ -474,10 +449,12 @@
       draw();
       return;
     }
-    lives -= 1;
     flash("is-hit");
-    if (lives <= 0) {
-      lose();
+    timeLeft -= missPenalty;
+    if (timeLeft <= 0) {
+      timeLeft = 0;
+      draw();
+      startMeltdown();
       return;
     }
     const previous = index - 1;
@@ -554,13 +531,12 @@
     arena.style.removeProperty("--melt-level");
     panel.classList.remove("is-error");
     errorOverlay.hidden = true;
-    timeLeft = phaseTime;
+    timeLeft = phaseTimes[0];
     slowLeft = 0;
     phase = 0;
     earned = 0;
     cinematic.hidden = true;
     cinematic.classList.remove("is-playing");
-    lives = maxLives;
     running = false;
     ended = false;
     panel.classList.remove("is-victory", "is-defeat", "is-strike", "is-hit", "is-lock");
