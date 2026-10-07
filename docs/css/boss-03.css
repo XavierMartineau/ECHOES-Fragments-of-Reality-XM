@@ -220,7 +220,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
-  margin: 18px 0 26px;
+  margin: 0 0 34px;
 }
 
 .boss03-actions > button {
@@ -364,9 +364,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  margin-top: 14px;
-  padding: 12px 16px;
+  flex-wrap: wrap;
+  gap: 14px 28px;
+  margin: 26px 0 44px;
+  padding: 22px 26px;
   border: 1px solid rgba(255, 79, 216, 0.3);
   border-radius: 12px;
   background: rgba(10, 4, 22, 0.7);
@@ -375,7 +376,7 @@
 .boss03-assembly-label,
 .boss03-assembly-count {
   color: #ffb3f0;
-  font: 0.6rem var(--font-display, "Orbitron", sans-serif);
+  font: 0.7rem var(--font-display, "Orbitron", sans-serif);
   letter-spacing: 0.09em;
 }
 
@@ -383,13 +384,14 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  width: 70px;
+  width: 120px;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
 }
 
 .boss03-slot {
   display: block;
-  width: 70px;
-  height: 34px;
+  width: 120px;
+  height: 58px;
   overflow: hidden;
 }
 
@@ -397,7 +399,7 @@
   display: block;
   width: 100%;
   height: 100%;
-  filter: grayscale(1) brightness(0.7) opacity(0.28);
+  filter: grayscale(0.85) brightness(0.9) opacity(0.5);
   transition: filter 500ms;
 }
 
@@ -737,4 +739,21 @@ html[lang="en"] .boss03-panel > .puzzle-status.error::before {
 }
 .boss03-panel {
   overflow: clip;
+}
+
+@media (max-width: 650px) {
+  .boss03-assembly {
+    margin: 20px 0 34px;
+    padding: 18px 16px;
+    gap: 12px 18px;
+  }
+
+  .boss03-assembly-slots,
+  .boss03-slot {
+    width: 104px;
+  }
+
+  .boss03-slot {
+    height: 50px;
+  }
 }

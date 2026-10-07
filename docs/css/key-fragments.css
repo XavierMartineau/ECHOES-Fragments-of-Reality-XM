@@ -1,10 +1,11 @@
-﻿.kf-assembly {
+.kf-assembly {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  margin: 14px 0 22px;
-  padding: 12px 16px;
+  flex-wrap: wrap;
+  gap: 14px 28px;
+  margin: 26px 20px 44px;
+  padding: 22px 26px;
   border: 1px solid var(--kf-accent, rgba(121, 247, 255, 0.3));
   border-radius: 12px;
   background: rgba(3, 9, 22, 0.7);
@@ -13,20 +14,21 @@
 .kf-label,
 .kf-count {
   color: var(--kf-accent, #79f7ff);
-  font: 0.6rem var(--font-display, "Orbitron", sans-serif);
+  font: 0.7rem var(--font-display, "Orbitron", sans-serif);
   letter-spacing: 0.09em;
 }
 
 .kf-slots {
   display: flex;
   flex-direction: column;
-  width: 70px;
+  width: 120px;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
 }
 
 .kf-slot {
   display: block;
-  width: 70px;
-  height: 34px;
+  width: 120px;
+  height: 58px;
   overflow: hidden;
 }
 
@@ -34,7 +36,7 @@
   display: block;
   width: 100%;
   height: 100%;
-  filter: grayscale(1) brightness(0.7) opacity(0.28);
+  filter: grayscale(0.85) brightness(0.9) opacity(0.5);
   transition: filter 500ms;
 }
 
@@ -238,4 +240,26 @@
 @media (prefers-reduced-motion: reduce) {
   .kf-cine *, .kf-cine { animation-duration: 0.01ms !important; animation-delay: 0s !important; }
   .kf-cine-piece, .kf-cine-title, .kf-cine-sub, .kf-cine-actions { opacity: 1 !important; }
+}
+
+.kf-assembly + [class*="-actions"] {
+  margin-top: 0;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 650px) {
+  .kf-assembly {
+    margin: 20px 12px 34px;
+    padding: 18px 16px;
+    gap: 12px 18px;
+  }
+
+  .kf-slots,
+  .kf-slot {
+    width: 104px;
+  }
+
+  .kf-slot {
+    height: 50px;
+  }
 }
