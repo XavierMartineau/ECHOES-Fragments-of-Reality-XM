@@ -2253,13 +2253,17 @@ Lancer le dé pour atteindre la case 100 et résoudre un mini-puzzle à chaque a
 Réussir sur une échelle permet de grimper ; réussir sur un serpent permet d'y échapper.
 
 Description du puzzle :  
-Les mini-puzzles sont tirés parmi quatre défis de formes :
+Les mini-puzzles sont tirés parmi six défis de formes colorées (jamais le même deux fois de suite) :
 
-Choisir la forme identique au modèle.
+Choisir la forme identique au modèle (même forme et même couleur).
 
-Compléter un motif simple de formes alternées.
+Continuer une suite répétitive (ABAB, AAB AAB, ABC ABC).
 
-Repérer une forme différente parmi les autres.
+Repérer la case différente (forme ou couleur) dans une grille 3×3.
+
+Trouver le groupe de formes de même quantité que le modèle (sans chiffre).
+
+Trouver la forme absente d'une rangée.
 
 Sélectionner une pièce puis sa silhouette correspondante.
 

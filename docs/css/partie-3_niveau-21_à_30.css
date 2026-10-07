@@ -851,6 +851,7 @@ body.part-three-theme {
   }
 
   .ladder-glyph { padding: 14px 0; font-size: 1.7rem; }
+  .ladder-group { padding: 14px 6px; font-size: 1.3rem; letter-spacing: 0.12em; text-shadow: 0 0 8px currentColor; }
   .ladder-choice:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 0 14px rgba(255, 79, 216, 0.5); }
   .ladder-choice:focus-visible { outline: 2px solid #c6ff4d; outline-offset: 2px; }
   .ladder-result { min-height: 1.4em; margin: 14px 0 0; font-weight: 700; }

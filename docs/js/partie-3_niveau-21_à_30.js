@@ -808,45 +808,100 @@
       }
     }
 
+    const shapeColors = ["#ff5a9e", "#38f2ff", "#c6ff4d", "#ffd24d"];
+    const puzzleKinds = ["match", "pattern", "odd", "count", "missing", "place"];
+    let lastPuzzleKind = null;
+    const pickOther = (count, exclude) => {
+      let value = rand(count - 1);
+      if (value >= exclude) value += 1;
+      return value;
+    };
+    const glyphToken = (shape, color) => ({ shape, color });
+    const paintGlyph = (element, item) => {
+      element.textContent = shapeGlyphs[item.shape];
+      element.style.color = shapeColors[item.color];
+    };
+    const glyphLabel = (item) => `${strings.shapeNames[item.shape]} ${strings.colorNames[item.color]}`;
+
     function buildPuzzle() {
-      const kind = ["match", "pattern", "odd", "place"][rand(4)];
-      const choices = (answer) => {
-        const options = new Set([answer]);
-        while (options.size < 4) options.add(rand(shapeGlyphs.length));
-        return shuffle([...options]);
-      };
+      const pool = puzzleKinds.filter((item) => item !== lastPuzzleKind);
+      const kind = pool[rand(pool.length)];
+      lastPuzzleKind = kind;
+      const shapeCount = shapeGlyphs.length;
+      const colorCount = shapeColors.length;
       if (kind === "match") {
-        const answer = rand(shapeGlyphs.length);
+        const model = glyphToken(rand(shapeCount), rand(colorCount));
+        const options = [model];
+        options.push(glyphToken(pickOther(shapeCount, model.shape), model.color));
+        options.push(glyphToken(model.shape, pickOther(colorCount, model.color)));
+        options.push(glyphToken(pickOther(shapeCount, model.shape), pickOther(colorCount, model.color)));
         return {
           type: kind,
           prompt: strings.matchPrompt,
-          display: shapeGlyphs[answer],
-          options: choices(answer),
-          answer,
+          display: [model],
+          options: shuffle(options).map((item) => ({ ...item, ok: item === model })),
         };
       }
       if (kind === "pattern") {
-        const first = rand(shapeGlyphs.length);
-        let second = rand(shapeGlyphs.length - 1);
-        if (second >= first) second += 1;
+        const color = rand(colorCount);
+        const [a, b, c] = shuffle([0, 1, 2, 3, 4]);
+        const variant = rand(3);
+        const sequences = [
+          { seq: [a, b, a, b, a, b], hidden: 5 },
+          { seq: [a, a, b, a, a, b, a, a], hidden: 7 },
+          { seq: [a, b, c, a, b, c, a, b], hidden: 7 },
+        ];
+        const { seq, hidden } = sequences[variant];
+        const answer = seq[hidden];
+        const others = shuffle([a, b, c, ...[0, 1, 2, 3, 4].filter((n) => ![a, b, c].includes(n))]
+          .filter((n) => n !== answer)).slice(0, 3);
         return {
           type: kind,
           prompt: strings.patternPrompt,
-          display: [first, second, first, second, null]
-            .map((shape) => shape === null ? "?" : shapeGlyphs[shape])
-            .join("  "),
-          options: choices(first),
-          answer: first,
+          display: seq.map((shape, index) => (index === hidden ? { text: "?" } : glyphToken(shape, color))),
+          options: shuffle([answer, ...others]).map((shape) => ({ ...glyphToken(shape, color), ok: shape === answer })),
         };
       }
       if (kind === "odd") {
-        const common = rand(shapeGlyphs.length);
-        let intruder = rand(shapeGlyphs.length - 1);
-        if (intruder >= common) intruder += 1;
+        const common = glyphToken(rand(shapeCount), rand(colorCount));
+        const intruder = rand(2) === 0
+          ? glyphToken(pickOther(shapeCount, common.shape), common.color)
+          : glyphToken(common.shape, pickOther(colorCount, common.color));
         return {
           type: kind,
           prompt: strings.oddPrompt,
           odd: { common, intruder, index: rand(9) },
+        };
+      }
+      if (kind === "count") {
+        const color = rand(colorCount);
+        const target = rand(shapeCount);
+        const total = 2 + rand(4);
+        const group = (amount) => Array.from({ length: amount }, () => glyphToken(target, color));
+        const amounts = new Set([total]);
+        while (amounts.size < 4) amounts.add(1 + rand(7));
+        return {
+          type: kind,
+          prompt: strings.countPrompt,
+          display: group(total),
+          options: shuffle([...amounts]).map((amount) => ({
+            text: shapeGlyphs[target].repeat(amount),
+            color,
+            ok: amount === total,
+          })),
+        };
+      }      if (kind === "missing") {
+        const color = rand(colorCount);
+        const order = shuffle([0, 1, 2, 3, 4]);
+        const absent = order[0];
+        const present = order.slice(1);
+        const row = shuffle([...present, present[rand(4)], present[rand(4)]]);
+        const options = shuffle([absent, ...present.slice(0, 3)]);
+        return {
+          type: kind,
+          prompt: strings.missingPrompt,
+          display: row.map((shape) => glyphToken(shape, color)),
+          options: options.map((shape) => ({ ...glyphToken(shape, color), ok: shape === absent })),
         };
       }
       const targets = shuffle(Array.from({ length: shapeGlyphs.length }, (_, index) => index)).slice(0, 3);
@@ -857,6 +912,7 @@
         pieces: shuffle(targets),
       };
     }
+
     function openPuzzle(kind, target) {
       return new Promise((resolve) => {
         const puzzle = buildPuzzle();
@@ -884,7 +940,13 @@
         if (puzzle.display) {
           const display = document.createElement("div");
           display.className = "ladder-display";
-          display.textContent = puzzle.display;
+          puzzle.display.forEach((item) => {
+            const glyph = document.createElement("span");
+            glyph.className = "ladder-display-item";
+            if (item.text) glyph.textContent = item.text;
+            else paintGlyph(glyph, item);
+            display.appendChild(glyph);
+          });
           dialog.appendChild(display);
         }
         dialog.append(body, result);
@@ -906,11 +968,16 @@
             const button = document.createElement("button");
             button.type = "button";
             button.className = "ladder-choice";
-            button.textContent = shapeGlyphs[option];
-            button.setAttribute("aria-label", format(strings.shapeChoice, {
-              name: strings.shapeNames[option],
-            }));
-            button.addEventListener("click", () => answer(option === puzzle.answer));
+            if (option.text) {
+              button.textContent = option.text;
+              button.style.color = shapeColors[option.color];
+              button.classList.add("ladder-group");
+            } else {
+              paintGlyph(button, option);
+              button.classList.add("ladder-glyph");
+              button.setAttribute("aria-label", format(strings.shapeChoice, { name: glyphLabel(option) }));
+            }
+            button.addEventListener("click", () => answer(option.ok));
             body.appendChild(button);
           });
         } else if (puzzle.odd) {
@@ -919,11 +986,9 @@
             const button = document.createElement("button");
             button.type = "button";
             button.className = "ladder-choice ladder-glyph";
-            const shape = index === puzzle.odd.index ? puzzle.odd.intruder : puzzle.odd.common;
-            button.textContent = shapeGlyphs[shape];
-            button.setAttribute("aria-label", format(strings.shapeChoice, {
-              name: strings.shapeNames[shape],
-            }));
+            const item = index === puzzle.odd.index ? puzzle.odd.intruder : puzzle.odd.common;
+            paintGlyph(button, item);
+            button.setAttribute("aria-label", format(strings.shapeChoice, { name: glyphLabel(item) }));
             button.addEventListener("click", () => answer(index === puzzle.odd.index));
             body.appendChild(button);
           }
