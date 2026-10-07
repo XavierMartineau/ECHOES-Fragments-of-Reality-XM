@@ -455,14 +455,14 @@
       .k7-orbit.orbit-4 { animation-delay: -12s; }
       .k7-orbit.orbit-5 { animation-delay: -16s; }
       .k7-orbit.orbit-6 { animation-delay: -20s; }
-      .k7-spin { transform-box: fill-box; transform-origin: center; transform-style: preserve-3d; backface-visibility: hidden; animation: k7-spin 6s linear infinite; }
+      .k7-spin { transform-box: fill-box; transform-origin: center; animation: k7-spin 5.5s linear infinite; }
       .k7-ring { transform-box: fill-box; transform-origin: center; animation: k7-ring 13s linear infinite reverse; }
       .k7-contour { stroke-dasharray: 14 86; animation: k7-flow 2.4s linear infinite, k7-contour-pulse 1.4s ease-in-out infinite; }
       .k7-lock-body { animation: k7-lock-pulse 2.2s ease-in-out infinite; }
       .k7-lock-shackle { transform-box: fill-box; transform-origin: center; animation: k7-shackle 2.2s ease-in-out infinite; }
       .k7-lock-spark { animation: k7-spark 1.6s ease-in-out infinite; }
       @keyframes k7-orbit { to { transform: rotate(360deg); } }
-      @keyframes k7-spin { to { transform: perspective(72px) rotateY(360deg); } }
+      @keyframes k7-spin { to { transform: rotate(360deg); } }
       @keyframes k7-ring { to { transform: rotate(360deg); } }
       @keyframes k7-flow { to { stroke-dashoffset: -100; } }
       @keyframes k7-contour-pulse { 0%, 100% { stroke-width: 3.5; opacity: .62; } 50% { stroke-width: 7; opacity: 1; } }
@@ -491,11 +491,13 @@
     <circle class="k7-ring" cx="90" cy="132" r="61" fill="none" stroke="url(#key07Prism)" stroke-width="2" stroke-dasharray="3 5" filter="url(#key07Glow)"/>
     <circle cx="90" cy="132" r="57" fill="none" stroke="#dce7ff" stroke-opacity=".32" stroke-width=".8"/>
     <g class="k7-orbit orbit-1">
-      <g transform="translate(90 82) rotate(180)">
-        <rect x="-12.5" y="-17.5" width="25" height="35" rx="5" fill="#0a0d20" stroke="url(#key07Prism)" stroke-width="1.2" opacity=".92"/>
-        <rect x="-10.5" y="-15.5" width="21" height="31" rx="4" fill="none" stroke="#dce7ff" stroke-opacity=".22" stroke-width=".7"/>
+      <g transform="translate(90 77) rotate(180)">
+        <rect x="-15.5" y="-22" width="31" height="44" rx="7" fill="#090c20" stroke="url(#key07Prism)" stroke-width="2" opacity=".98"/>
+        <rect x="-12.5" y="-19" width="25" height="38" rx="5" fill="none" stroke="#dce7ff" stroke-opacity=".36" stroke-width=".8"/>
+        <circle cx="0" cy="-17.5" r="1.2" fill="#d9ff70"/>
+        <circle cx="0" cy="17.5" r="1.2" fill="#55f2d1"/>
       </g>
-      <svg x="81" y="69" width="18" height="26" transform="rotate(180 90 82)" viewBox="0 0 180 260" overflow="visible">
+      <svg x="77.5" y="59" width="25" height="36.11" transform="rotate(180 90 77)" viewBox="0 0 180 260" overflow="visible">
         <g class="k7-spin">
           <title id="key01Title">Clé de résonance 01</title>
             <desc id="key01Desc">Clé USB du signal, en verre cyan et violet, au cœur marqué d'un cercle brisé traversé d'une impulsion et du sigle KEY 01.</desc>
@@ -573,11 +575,13 @@
       </svg>
     </g>
     <g class="k7-orbit orbit-2">
-      <g transform="translate(133.3 107) rotate(240)">
-        <rect x="-12.5" y="-17.5" width="25" height="35" rx="5" fill="#0a0d20" stroke="url(#key07Prism)" stroke-width="1.2" opacity=".92"/>
-        <rect x="-10.5" y="-15.5" width="21" height="31" rx="4" fill="none" stroke="#dce7ff" stroke-opacity=".22" stroke-width=".7"/>
+      <g transform="translate(137.63 104.5) rotate(240)">
+        <rect x="-15.5" y="-22" width="31" height="44" rx="7" fill="#090c20" stroke="url(#key07Prism)" stroke-width="2" opacity=".98"/>
+        <rect x="-12.5" y="-19" width="25" height="38" rx="5" fill="none" stroke="#dce7ff" stroke-opacity=".36" stroke-width=".8"/>
+        <circle cx="0" cy="-17.5" r="1.2" fill="#d9ff70"/>
+        <circle cx="0" cy="17.5" r="1.2" fill="#55f2d1"/>
       </g>
-      <svg x="124.3" y="94" width="18" height="26" transform="rotate(240 133.3 107)" viewBox="0 0 180 260" overflow="visible">
+      <svg x="125.13" y="86.5" width="25" height="36.11" transform="rotate(240 137.63 104.5)" viewBox="0 0 180 260" overflow="visible">
         <g class="k7-spin">
           <title id="key02Title">Clé de résonance 02</title>
             <desc id="key02Desc">Clé USB fracturée, turquoise et ambre, au cœur en losange traversé d'une faille lumineuse et marqué du sigle 02.</desc>
@@ -639,11 +643,13 @@
       </svg>
     </g>
     <g class="k7-orbit orbit-3">
-      <g transform="translate(133.3 157) rotate(300)">
-        <rect x="-12.5" y="-17.5" width="25" height="35" rx="5" fill="#0a0d20" stroke="url(#key07Prism)" stroke-width="1.2" opacity=".92"/>
-        <rect x="-10.5" y="-15.5" width="21" height="31" rx="4" fill="none" stroke="#dce7ff" stroke-opacity=".22" stroke-width=".7"/>
+      <g transform="translate(137.63 159.5) rotate(300)">
+        <rect x="-15.5" y="-22" width="31" height="44" rx="7" fill="#090c20" stroke="url(#key07Prism)" stroke-width="2" opacity=".98"/>
+        <rect x="-12.5" y="-19" width="25" height="38" rx="5" fill="none" stroke="#dce7ff" stroke-opacity=".36" stroke-width=".8"/>
+        <circle cx="0" cy="-17.5" r="1.2" fill="#d9ff70"/>
+        <circle cx="0" cy="17.5" r="1.2" fill="#55f2d1"/>
       </g>
-      <svg x="124.3" y="144" width="18" height="26" transform="rotate(300 133.3 157)" viewBox="0 0 180 260" overflow="visible">
+      <svg x="125.13" y="141.5" width="25" height="36.11" transform="rotate(300 137.63 159.5)" viewBox="0 0 180 260" overflow="visible">
         <g class="k7-spin">
           <title id="key03Title">Clé de résonance 03</title>
             <desc id="key03Desc">Clé USB de l'éclipse, magenta, or et lime, au cœur marqué d'une éclipse solaire avec couronne et anneau de diamant, et du sigle 03.</desc>
@@ -729,11 +735,13 @@
       </svg>
     </g>
     <g class="k7-orbit orbit-4">
-      <g transform="translate(90 182) rotate(0)">
-        <rect x="-12.5" y="-17.5" width="25" height="35" rx="5" fill="#0a0d20" stroke="url(#key07Prism)" stroke-width="1.2" opacity=".92"/>
-        <rect x="-10.5" y="-15.5" width="21" height="31" rx="4" fill="none" stroke="#dce7ff" stroke-opacity=".22" stroke-width=".7"/>
+      <g transform="translate(90 187) rotate(0)">
+        <rect x="-15.5" y="-22" width="31" height="44" rx="7" fill="#090c20" stroke="url(#key07Prism)" stroke-width="2" opacity=".98"/>
+        <rect x="-12.5" y="-19" width="25" height="38" rx="5" fill="none" stroke="#dce7ff" stroke-opacity=".36" stroke-width=".8"/>
+        <circle cx="0" cy="-17.5" r="1.2" fill="#d9ff70"/>
+        <circle cx="0" cy="17.5" r="1.2" fill="#55f2d1"/>
       </g>
-      <svg x="81" y="169" width="18" height="26" transform="rotate(0 90 182)" viewBox="0 0 180 260" overflow="visible">
+      <svg x="77.5" y="169" width="25" height="36.11" transform="rotate(0 90 187)" viewBox="0 0 180 260" overflow="visible">
         <g class="k7-spin">
           <title id="key04Title">Clé de résonance 04</title>
             <desc id="key04Desc">Clé USB du recycleur, en violet électrique, rose néon et bleu, au cœur circulaire traversé de trois flèches de recyclage et marqué du sigle KEY 04.</desc>
@@ -795,11 +803,13 @@
       </svg>
     </g>
     <g class="k7-orbit orbit-5">
-      <g transform="translate(46.7 157) rotate(60)">
-        <rect x="-12.5" y="-17.5" width="25" height="35" rx="5" fill="#0a0d20" stroke="url(#key07Prism)" stroke-width="1.2" opacity=".92"/>
-        <rect x="-10.5" y="-15.5" width="21" height="31" rx="4" fill="none" stroke="#dce7ff" stroke-opacity=".22" stroke-width=".7"/>
+      <g transform="translate(42.37 159.5) rotate(60)">
+        <rect x="-15.5" y="-22" width="31" height="44" rx="7" fill="#090c20" stroke="url(#key07Prism)" stroke-width="2" opacity=".98"/>
+        <rect x="-12.5" y="-19" width="25" height="38" rx="5" fill="none" stroke="#dce7ff" stroke-opacity=".36" stroke-width=".8"/>
+        <circle cx="0" cy="-17.5" r="1.2" fill="#d9ff70"/>
+        <circle cx="0" cy="17.5" r="1.2" fill="#55f2d1"/>
       </g>
-      <svg x="37.7" y="144" width="18" height="26" transform="rotate(60 46.7 157)" viewBox="0 0 180 260" overflow="visible">
+      <svg x="29.87" y="141.5" width="25" height="36.11" transform="rotate(60 42.37 159.5)" viewBox="0 0 180 260" overflow="visible">
         <g class="k7-spin">
           <title id="key05Title">Clé de résonance 05</title>
             <desc id="key05Desc">Clé USB en bouclier, cramoisie et or rose, au cœur en réseau de cinq nœuds reliés et marquée du sigle KEY 05.</desc>
@@ -871,11 +881,13 @@
       </svg>
     </g>
     <g class="k7-orbit orbit-6">
-      <g transform="translate(46.7 107) rotate(120)">
-        <rect x="-12.5" y="-17.5" width="25" height="35" rx="5" fill="#0a0d20" stroke="url(#key07Prism)" stroke-width="1.2" opacity=".92"/>
-        <rect x="-10.5" y="-15.5" width="21" height="31" rx="4" fill="none" stroke="#dce7ff" stroke-opacity=".22" stroke-width=".7"/>
+      <g transform="translate(42.37 104.5) rotate(120)">
+        <rect x="-15.5" y="-22" width="31" height="44" rx="7" fill="#090c20" stroke="url(#key07Prism)" stroke-width="2" opacity=".98"/>
+        <rect x="-12.5" y="-19" width="25" height="38" rx="5" fill="none" stroke="#dce7ff" stroke-opacity=".36" stroke-width=".8"/>
+        <circle cx="0" cy="-17.5" r="1.2" fill="#d9ff70"/>
+        <circle cx="0" cy="17.5" r="1.2" fill="#55f2d1"/>
       </g>
-      <svg x="37.7" y="94" width="18" height="26" transform="rotate(120 46.7 107)" viewBox="0 0 180 260" overflow="visible">
+      <svg x="29.87" y="86.5" width="25" height="36.11" transform="rotate(120 42.37 104.5)" viewBox="0 0 180 260" overflow="visible">
         <g class="k7-spin">
           <title id="key06Title">Clé de résonance 06</title>
             <desc id="key06Desc">Clé maîtresse USB or et blanc, au cœur serti de six gemmes de couleur autour d'une serrure lumineuse et marquée du sigle KEY 06.</desc>
