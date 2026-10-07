@@ -230,7 +230,7 @@
 
   const fragments = window.EchoesKeyFragments.mount({
     keyNumber: 2,
-    src: "../../assets/svg/key-02-usb.svg",
+    src: "../../assets/svg/key-02-usb.svg?v=2",
     core,
     before: document.querySelector(".boss02-actions"),
   });
@@ -332,7 +332,7 @@
     window.setTimeout(() => {
       window.EchoesKeyFragments.playCinematic({
         keyNumber: 2,
-        src: "../../assets/svg/key-02-usb.svg",
+        src: "../../assets/svg/key-02-usb.svg?v=2",
         onContinue: () => nextButton.click(),
       });
     }, 2000);
