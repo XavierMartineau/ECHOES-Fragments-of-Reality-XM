@@ -1,530 +1,506 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 270" role="img" aria-labelledby="key07Title key07Desc">
-  <title id="key07Title">Clé de résonance 07 — La fin...</title>
-  <desc id="key07Desc">Clé finale prismatique. Les six clés précédentes tournent chacune sur elles-mêmes et orbitent autour d'un cadenas central animé, vers lequel convergent six flèches lumineuses. Le contour de la clé pulse et s'illumine.</desc>
+  <title id="key07Title">Clé de résonance 07 — La clé finale</title>
+  <desc id="key07Desc">Clé USB finale prismatique. Les six clés de résonance précédentes conservent leurs formes et animations dans son cœur, orbitent en tournant autour d'un cadenas numérique muni d'un port USB, et pointent leurs connecteurs vers lui.</desc>
   <defs>
     <linearGradient id="key07Shell" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#20194b"/>
-      <stop offset=".32" stop-color="#11152d"/>
-      <stop offset=".68" stop-color="#351b4c"/>
-      <stop offset="1" stop-color="#123b3b"/>
+      <stop stop-color="#1b1e3a"/>
+      <stop offset=".5" stop-color="#11152b"/>
+      <stop offset="1" stop-color="#22213a"/>
     </linearGradient>
     <linearGradient id="key07Prism" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#d9ff70"/>
-      <stop offset=".26" stop-color="#7657ff"/>
-      <stop offset=".52" stop-color="#ff759c"/>
-      <stop offset=".76" stop-color="#55f2d1"/>
-      <stop offset="1" stop-color="#f2dcff"/>
+      <stop offset="0" stop-color="#d9f27e" class="k7-spectrum-tone tone-1"/>
+      <stop offset="0.25" stop-color="#6759e8" class="k7-spectrum-tone tone-2"/>
+      <stop offset="0.5" stop-color="#ff8c83" class="k7-spectrum-tone tone-3"/>
+      <stop offset="0.75" stop-color="#44d9c8" class="k7-spectrum-tone tone-4"/>
+      <stop offset="1" stop-color="#f2c9ff" class="k7-spectrum-tone tone-5"/>
     </linearGradient>
     <linearGradient id="key07Metal" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#f6ffd5"/>
-      <stop offset=".3" stop-color="#afa3ff"/>
-      <stop offset=".62" stop-color="#ff9cbd"/>
-      <stop offset="1" stop-color="#85ead7"/>
+      <stop stop-color="#f7f9d5"/>
+      <stop offset=".3" stop-color="#b9b2ff"/>
+      <stop offset=".62" stop-color="#ffb3a7"/>
+      <stop offset="1" stop-color="#91eadc"/>
     </linearGradient>
-    <radialGradient id="key07Core" cx=".5" cy=".42" r=".65">
-      <stop stop-color="#4f3c9b"/>
-      <stop offset=".62" stop-color="#17152f"/>
-      <stop offset="1" stop-color="#080b19"/>
+    <radialGradient id="key07Core" cx=".5" cy=".45" r=".7">
+      <stop stop-color="#363276"/>
+      <stop offset=".64" stop-color="#15152d"/>
+      <stop offset="1" stop-color="#090d1c"/>
     </radialGradient>
     <filter id="key07Glow" x="-80%" y="-80%" width="260%" height="260%">
-      <feGaussianBlur stdDeviation="3.2" result="blur"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <filter id="key07SoftGlow" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="7"/>
-    </filter>
     <style>
-      .k7-orbit { transform-box: view-box; transform-origin: 90px 132px; animation: k7-orbit 24s linear infinite; }
-      .k7-orbit.orbit-2 { animation-delay: -4s; }
-      .k7-orbit.orbit-3 { animation-delay: -8s; }
-      .k7-orbit.orbit-4 { animation-delay: -12s; }
-      .k7-orbit.orbit-5 { animation-delay: -16s; }
-      .k7-orbit.orbit-6 { animation-delay: -20s; }
-      .k7-spin { transform-box: fill-box; transform-origin: center; animation: k7-spin 4.2s linear infinite; }
-      .k7-ring { transform-box: fill-box; transform-origin: center; animation: k7-ring 13s linear infinite reverse; }
-      .k7-contour { stroke-dasharray: 22 8; animation: k7-flow 7s linear infinite, k7-contour-pulse 2.8s ease-in-out infinite; }
-      .k7-arrow { animation: k7-arrow-pulse 1.8s ease-in-out infinite; }
-      .k7-arrow.a2 { animation-delay: .3s; } .k7-arrow.a3 { animation-delay: .6s; }
-      .k7-arrow.a4 { animation-delay: .9s; } .k7-arrow.a5 { animation-delay: 1.2s; } .k7-arrow.a6 { animation-delay: 1.5s; }
-      .k7-lock-body { animation: k7-lock-pulse 2.2s ease-in-out infinite; }
-      .k7-lock-shackle { transform-box: fill-box; transform-origin: center; animation: k7-shackle 2.2s ease-in-out infinite; }
-      .k7-lock-spark { animation: k7-spark 1.6s ease-in-out infinite; }
+      .k7-spectrum-tone.tone-1 { animation: k7-tone-1 5.6s ease-in-out 0s infinite; }
+      @keyframes k7-tone-1 { 0%, 100% { stop-color: #d9f27e; } 50% { stop-color: #6759e8; } }
+      .k7-spectrum-tone.tone-2 { animation: k7-tone-2 5.909999999999999s ease-in-out -0.7s infinite; }
+      @keyframes k7-tone-2 { 0%, 100% { stop-color: #6759e8; } 50% { stop-color: #ff8c83; } }
+      .k7-spectrum-tone.tone-3 { animation: k7-tone-3 6.22s ease-in-out -1.4s infinite; }
+      @keyframes k7-tone-3 { 0%, 100% { stop-color: #ff8c83; } 50% { stop-color: #44d9c8; } }
+      .k7-spectrum-tone.tone-4 { animation: k7-tone-4 6.529999999999999s ease-in-out -2.0999999999999996s infinite; }
+      @keyframes k7-tone-4 { 0%, 100% { stop-color: #44d9c8; } 50% { stop-color: #f2c9ff; } }
+      .k7-spectrum-tone.tone-5 { animation: k7-tone-5 6.84s ease-in-out -2.8s infinite; }
+      @keyframes k7-tone-5 { 0%, 100% { stop-color: #f2c9ff; } 50% { stop-color: #d9f27e; } }
+      .k7-contour { stroke-dasharray: 18 7; animation: k7-contour-flow 5s linear infinite, k7-contour-pulse 2.6s ease-in-out infinite; }
+      .k7-orbit { transform-box: view-box; transform-origin: 90px 130px; animation: k7-orbit 20s linear infinite; }
+      .k7-field-ring { transform-box: fill-box; transform-origin: center; animation: k7-ring 12s linear infinite reverse; }
+      .k7-lock-halo { animation: k7-lock-pulse 2s ease-in-out infinite; }
+      .k7-port-light { animation: k7-port 1.6s ease-in-out infinite; }
+      @keyframes k7-contour-flow { to { stroke-dashoffset: -100; } }
+      @keyframes k7-contour-pulse {
+        0%, 100% { stroke-width: 4; opacity: .64; }
+        50% { stroke-width: 6; opacity: 1; }
+      }
       @keyframes k7-orbit { to { transform: rotate(360deg); } }
-      @keyframes k7-spin { to { transform: rotate(360deg); } }
       @keyframes k7-ring { to { transform: rotate(360deg); } }
-      @keyframes k7-flow { to { stroke-dashoffset: -180; } }
-      @keyframes k7-contour-pulse { 50% { stroke-width: 6; opacity: .72; } }
-      @keyframes k7-arrow-pulse { 50% { opacity: .34; } }
-      @keyframes k7-lock-pulse { 50% { opacity: .66; filter: drop-shadow(0 0 7px #d9ff70); } }
-      @keyframes k7-shackle { 50% { transform: translateY(-2px); } }
-      @keyframes k7-spark { 50% { opacity: .25; transform: scale(.72); } }
+      @keyframes k7-lock-pulse { 50% { opacity: .65; } }
+      @keyframes k7-port { 50% { opacity: .28; } }
       @media (prefers-reduced-motion: reduce) {
-        .k7-orbit, .k7-spin, .k7-ring, .k7-contour, .k7-arrow,
-        .k7-lock-body, .k7-lock-shackle, .k7-lock-spark,
-        .k7-spin *, .k7-spin *::before, .k7-spin *::after {
+        .k7-spectrum-tone, .k7-contour, .k7-orbit,
+        .k7-field-ring, .k7-lock-halo, .k7-port-light {
           animation: none !important;
         }
       }
     </style>
   </defs>
-  <g>
-    <path d="M59 7h62l10 11v28h7l17 18v111q0 23-19 31l-46 53-46-53q-19-8-19-31V64l17-18h7V18L59 7Z" fill="url(#key07Shell)" stroke="#725bca" stroke-opacity=".36" stroke-width="9" filter="url(#key07SoftGlow)"/>
-    <path class="k7-contour" d="M59 7h62l10 11v28h7l17 18v111q0 23-19 31l-46 53-46-53q-19-8-19-31V64l17-18h7V18L59 7Z" fill="url(#key07Shell)" stroke="url(#key07Prism)" stroke-width="4.5" stroke-linejoin="round" filter="url(#key07Glow)"/>
-    <path d="M66 14h48v20H66zM58 55h64" fill="none" stroke="url(#key07Prism)" stroke-width="1.5" opacity=".75"/>
-    <rect x="68" y="17" width="44" height="13" rx="3" fill="#11142b" stroke="#9e91db" stroke-opacity=".55"/>
-    <rect x="73" y="21" width="8" height="5" rx="1" fill="#d9ff70" filter="url(#key07Glow)"/>
-    <rect x="90" y="21" width="8" height="5" rx="1" fill="#ff759c" filter="url(#key07Glow)"/>
-    <rect x="107" y="21" width="2" height="5" rx="1" fill="#55f2d1" filter="url(#key07Glow)"/>
-    <circle cx="90" cy="132" r="57" fill="#090b1b" fill-opacity=".78" stroke="url(#key07Prism)" stroke-width="1.5" opacity=".9"/>
-    <circle class="k7-ring" cx="90" cy="132" r="52" fill="none" stroke="url(#key07Prism)" stroke-width="2" stroke-dasharray="3 5" filter="url(#key07Glow)"/>
-    <circle cx="90" cy="132" r="47" fill="none" stroke="#dbe7ff" stroke-opacity=".32" stroke-width=".8"/>
-    <path d="M90 83v13m34-3-9 10m24 26h-14m-1 34-10-10m-24 32v-14m-34-8 10-10m-24-24h14m1-34 10 10" fill="none" stroke="url(#key07Prism)" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
-    <path class="k7-arrow" d="M90 103v11m-4-4 4 4 4-4" fill="none" stroke="#d9ff70" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="url(#key07Glow)"/>
-    <path class="k7-arrow a2" d="m112 113-8 8m6-1-6 1 1-6" fill="none" stroke="#afa3ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="url(#key07Glow)"/>
-    <path class="k7-arrow a3" d="m112 151-8-8m1 6-1-6 6 1" fill="none" stroke="#ff759c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="url(#key07Glow)"/>
-    <path class="k7-arrow a4" d="M90 161v-11m4 4-4-4-4 4" fill="none" stroke="#55f2d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="url(#key07Glow)"/>
-    <path class="k7-arrow a5" d="m68 151 8-8m-6 1 6-1-1 6" fill="none" stroke="#f2dcff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="url(#key07Glow)"/>
-    <path class="k7-arrow a6" d="m68 113 8 8m-1-6 1 6-6-1" fill="none" stroke="#d9ff70" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="url(#key07Glow)"/>
-    <g class="k7-orbit orbit-1">
-      <svg x="79" y="69" width="22" height="31.78" viewBox="0 0 180 260" overflow="visible">
-        <g class="k7-spin">
-          <title id="key01Title">Clé de résonance 01</title>
-            <desc id="key01Desc">Clé USB du signal, en verre cyan et violet, au cœur marqué d'un cercle brisé traversé d'une impulsion et du sigle KEY 01.</desc>
-            <defs>
-              <linearGradient id="key01Shell" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#17406a"/>
-                <stop offset="0.5" stop-color="#0a1330"/>
-                <stop offset="1" stop-color="#2e1a5a"/>
-              </linearGradient>
-              <linearGradient id="key01Edge" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#79f7ff"/>
-                <stop offset="0.5" stop-color="#7aa8ff"/>
-                <stop offset="1" stop-color="#c08aff"/>
-              </linearGradient>
-              <linearGradient id="key01Metal" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#ffffff"/>
-                <stop offset="0.45" stop-color="#a8e4f5"/>
-                <stop offset="1" stop-color="#4f86bd"/>
-              </linearGradient>
-              <linearGradient id="key01Gloss" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#ffffff" stop-opacity="0.28"/>
-                <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
-              </linearGradient>
-              <radialGradient id="key01Core" cx="0.5" cy="0.5" r="0.5">
-                <stop stop-color="#12395a"/>
-                <stop offset="0.75" stop-color="#060d20"/>
-                <stop offset="1" stop-color="#0d0a24"/>
-              </radialGradient>
-              <clipPath id="key01Clip"><path d="M46 44h76l24 24v128a26 26 0 0 1-26 26H60a26 26 0 0 1-26-26V56q0-12 12-12Z"/></clipPath>
-              <filter id="key01Glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="3" result="blur"/>
-                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-              <style>
-                .k1-ring { transform-origin: 90px 130px; animation: k1-spin 14s linear infinite; }
-                .k1-pulse { stroke-dasharray: 10 6; animation: k1-flow 1.6s linear infinite; }
-                .k1-echo { transform-origin: 90px 130px; animation: k1-echo 3s ease-out infinite; }
-                .k1-bar { animation: k1-bar 2.4s ease-in-out infinite; }
-                .k1-bar.b2 { animation-delay: .3s; } .k1-bar.b3 { animation-delay: .6s; } .k1-bar.b4 { animation-delay: .9s; }
-                @keyframes k1-spin { to { transform: rotate(360deg); } }
-                @keyframes k1-flow { to { stroke-dashoffset: -32; } }
-                @keyframes k1-echo { 0% { opacity: .8; transform: scale(.55); } 100% { opacity: 0; transform: scale(1.25); } }
-                @keyframes k1-bar { 50% { opacity: .35; } }
-                @media (prefers-reduced-motion: reduce) { .k1-ring, .k1-pulse, .k1-echo, .k1-bar { animation: none; } }
-              </style>
-            </defs>
-            <g transform="translate(90 130) rotate(-6) translate(-90 -130)">
-              <rect x="62" y="6" width="56" height="42" rx="6" fill="url(#key01Metal)" stroke="#f2ffff" stroke-width="2"/>
-              <rect x="70" y="13" width="40" height="20" rx="3" fill="#081426"/>
-              <rect x="74" y="18" width="7" height="10" rx="1.5" fill="#79f7ff"/>
-              <rect x="86.5" y="18" width="7" height="10" rx="1.5" fill="#7aa8ff"/>
-              <rect x="99" y="18" width="7" height="10" rx="1.5" fill="#c08aff"/>
-              <path d="M72 41h36" stroke="#3a6aa0" stroke-width="2" stroke-linecap="round"/>
-              <path d="M46 44h76l24 24v128a26 26 0 0 1-26 26H60a26 26 0 0 1-26-26V56q0-12 12-12Z" fill="url(#key01Shell)" stroke="url(#key01Edge)" stroke-width="3.5" stroke-linejoin="round"/>
-              <g clip-path="url(#key01Clip)">
-                <path d="M20 40L110 40L20 170Z" fill="url(#key01Gloss)"/>
-              </g>
-              <path d="M44 62v26l8 8v22M136 62v20l-8 8v30" fill="none" stroke="#79f7ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
-              <circle cx="44" cy="62" r="2.5" fill="#79f7ff"/><circle cx="136" cy="62" r="2.5" fill="#c08aff"/>
-              <circle cx="90" cy="130" r="44" fill="url(#key01Core)" stroke="#79f7ff" stroke-width="1.5" opacity="0.95"/>
-              <circle class="k1-echo" cx="90" cy="130" r="34" fill="none" stroke="#79f7ff" stroke-width="2"/>
-              <circle cx="90" cy="130" r="25" fill="none" stroke="#7aa8ff" stroke-width="1" stroke-dasharray="3 5" opacity="0.7"/>
-              <g class="k1-ring" filter="url(#key01Glow)">
-                <path d="M117.85 110.5A34 34 0 1 1 98.8 97.16" fill="none" stroke="url(#key01Edge)" stroke-width="6" stroke-linecap="round"/>
-                <circle cx="109.5" cy="102.1" r="3.5" fill="#ffffff"/>
-              </g>
-              <path class="k1-pulse" d="M62 132h14l6-15 8 30 8-24 6 9h20" fill="none" stroke="#e8ffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#key01Glow)"/>
-              <text x="90" y="192" fill="#dcefff" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 01</text>
-              <rect class="k1-bar" x="72" y="208" width="6" height="6" rx="1" fill="#79f7ff"/>
-              <rect class="k1-bar b2" x="82" y="204" width="6" height="10" rx="1" fill="#79f7ff"/>
-              <rect class="k1-bar b3" x="92" y="200" width="6" height="14" rx="1" fill="#7aa8ff"/>
-              <rect class="k1-bar b4" x="102" y="196" width="6" height="18" rx="1" fill="#c08aff"/>
-            </g>
-        </g>
-      </svg>
+
+  <g aria-hidden="true">
+    <path d="M61 37h58v17h6c11 0 18 8 18 20v103c0 13-9 23-21 29l-18 4v9h16v13h-16v12H76v-12H60v-13h16v-9l-18-4c-12-6-21-16-21-29V74c0-12 7-20 18-20h6V37Z"
+      fill="url(#key07Shell)" stroke="#756bc0" stroke-opacity=".34" stroke-width="10" filter="url(#key07Glow)"/>
+    <path d="M61 37h58v17h6c11 0 18 8 18 20v103c0 13-9 23-21 29l-18 4v9h16v13h-16v12H76v-12H60v-13h16v-9l-18-4c-12-6-21-16-21-29V74c0-12 7-20 18-20h6V37Z"
+      fill="url(#key07Shell)" stroke="url(#key07Prism)" stroke-width="4" stroke-linejoin="round"/>
+    <path class="k7-contour" pathLength="100"
+      d="M61 37h58v17h6c11 0 18 8 18 20v103c0 13-9 23-21 29l-18 4v9h16v13h-16v12H76v-12H60v-13h16v-9l-18-4c-12-6-21-16-21-29V74c0-12 7-20 18-20h6V37Z"
+      fill="none" stroke="url(#key07Prism)" stroke-width="4" stroke-linejoin="round" filter="url(#key07Glow)"/>
+    <rect x="60" y="5" width="60" height="34" rx="6" fill="url(#key07Metal)" stroke="#f1f3ff" stroke-width="1.5"/>
+    <rect x="66" y="10" width="48" height="20" rx="3" fill="#10142a" stroke="#c5c2ff" stroke-opacity=".55"/>
+    <rect x="71" y="14" width="9" height="12" rx="1.5" fill="#d9f27e" filter="url(#key07Glow)"/>
+    <rect x="86" y="14" width="9" height="12" rx="1.5" fill="#ff8c83" filter="url(#key07Glow)"/>
+    <rect x="101" y="14" width="9" height="12" rx="1.5" fill="#44d9c8" filter="url(#key07Glow)"/>
+    <path d="M51 66h78M45 75h90" fill="none" stroke="url(#key07Prism)" stroke-width="1.2" opacity=".72"/>
+    <path d="M81 214h18v24M99 219h12v9M81 219H69v9" fill="none" stroke="url(#key07Metal)" stroke-width="1.4" opacity=".76"/>
+
+    <circle cx="90" cy="130" r="51" fill="#080b1b" fill-opacity=".72" stroke="url(#key07Prism)" stroke-opacity=".4" stroke-width="1.5"/>
+    <circle class="k7-field-ring" cx="90" cy="130" r="47" fill="none" stroke="url(#key07Prism)" stroke-width="1.5" stroke-dasharray="2 5" filter="url(#key07Glow)"/>
+    <circle cx="90" cy="130" r="43" fill="url(#key07Core)" fill-opacity=".34" stroke="#dce8ff" stroke-opacity=".18" stroke-width=".8"/>
+    <g class="k7-orbit">
+      <g class="k7-orbit-key key-01" transform="rotate(180 90 90)">
+        <svg x="78.00" y="72.67" width="24" height="34.67" viewBox="0 0 180 260" overflow="visible" role="img" aria-labelledby="key07mini01-key01Title key07mini01-key01Desc">
+          <title id="key07mini01-key01Title">Clé de résonance 01</title>
+  <desc id="key07mini01-key01Desc">Clé USB du signal, en verre cyan et violet, au cœur marqué d'un cercle brisé traversé d'une impulsion et du sigle KEY 01.</desc>
+          <defs><linearGradient id="key07mini01-key01Shell" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#17406a"/>
+      <stop offset="0.5" stop-color="#0a1330"/>
+      <stop offset="1" stop-color="#2e1a5a"/>
+    </linearGradient>
+    <linearGradient id="key07mini01-key01Edge" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#79f7ff"/>
+      <stop offset="0.5" stop-color="#7aa8ff"/>
+      <stop offset="1" stop-color="#c08aff"/>
+    </linearGradient>
+    <linearGradient id="key07mini01-key01Metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffffff"/>
+      <stop offset="0.45" stop-color="#a8e4f5"/>
+      <stop offset="1" stop-color="#4f86bd"/>
+    </linearGradient>
+    <linearGradient id="key07mini01-key01Gloss" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffffff" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="key07mini01-key01Core" cx="0.5" cy="0.5" r="0.5">
+      <stop stop-color="#12395a"/>
+      <stop offset="0.75" stop-color="#060d20"/>
+      <stop offset="1" stop-color="#0d0a24"/>
+    </radialGradient>
+    <clipPath id="key07mini01-key01Clip"><path d="M46 44h76l24 24v128a26 26 0 0 1-26 26H60a26 26 0 0 1-26-26V56q0-12 12-12Z"/></clipPath>
+    <filter id="key07mini01-key01Glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .k1-ring { transform-origin: 90px 130px; animation: k1-spin 14s linear infinite; }
+      .k1-pulse { stroke-dasharray: 10 6; animation: k1-flow 1.6s linear infinite; }
+      .k1-echo { transform-origin: 90px 130px; animation: k1-echo 3s ease-out infinite; }
+      .k1-bar { animation: k1-bar 2.4s ease-in-out infinite; }
+      .k1-bar.b2 { animation-delay: .3s; } .k1-bar.b3 { animation-delay: .6s; } .k1-bar.b4 { animation-delay: .9s; }
+      @keyframes k1-spin { to { transform: rotate(360deg); } }
+      @keyframes k1-flow { to { stroke-dashoffset: -32; } }
+      @keyframes k1-echo { 0% { opacity: .8; transform: scale(.55); } 100% { opacity: 0; transform: scale(1.25); } }
+      @keyframes k1-bar { 50% { opacity: .35; } }
+      @media (prefers-reduced-motion: reduce) { .k1-ring, .k1-pulse, .k1-echo, .k1-bar { animation: none; } }
+    </style></defs>
+          <g transform="translate(90 130) rotate(-6) translate(-90 -130)">
+    <rect x="62" y="6" width="56" height="42" rx="6" fill="url(#key07mini01-key01Metal)" stroke="#f2ffff" stroke-width="2"/>
+    <rect x="70" y="13" width="40" height="20" rx="3" fill="#081426"/>
+    <rect x="74" y="18" width="7" height="10" rx="1.5" fill="#79f7ff"/>
+    <rect x="86.5" y="18" width="7" height="10" rx="1.5" fill="#7aa8ff"/>
+    <rect x="99" y="18" width="7" height="10" rx="1.5" fill="#c08aff"/>
+    <path d="M72 41h36" stroke="#3a6aa0" stroke-width="2" stroke-linecap="round"/>
+    <path d="M46 44h76l24 24v128a26 26 0 0 1-26 26H60a26 26 0 0 1-26-26V56q0-12 12-12Z" fill="url(#key07mini01-key01Shell)" stroke="url(#key07mini01-key01Edge)" stroke-width="3.5" stroke-linejoin="round"/>
+    <g clip-path="url(#key07mini01-key01Clip)">
+      <path d="M20 40L110 40L20 170Z" fill="url(#key07mini01-key01Gloss)"/>
     </g>
-    <g class="k7-orbit orbit-2">
-      <svg x="115" y="91" width="22" height="31.78" viewBox="0 0 180 260" overflow="visible">
-        <g class="k7-spin">
-          <title id="key02Title">Clé de résonance 02</title>
-            <desc id="key02Desc">Clé USB fracturée, turquoise et ambre, au cœur en losange traversé d'une faille lumineuse et marqué du sigle 02.</desc>
-            <defs>
-              <linearGradient id="key02Shell" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#14414a"/>
-                <stop offset="0.55" stop-color="#071722"/>
-                <stop offset="1" stop-color="#5c3a1c"/>
-              </linearGradient>
-              <linearGradient id="key02Edge" x1="0" y1="0" x2="1" y2="0">
-                <stop stop-color="#45e5d2"/>
-                <stop offset="0.5" stop-color="#e4f7b0"/>
-                <stop offset="1" stop-color="#ffbd69"/>
-              </linearGradient>
-              <linearGradient id="key02Metal" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#fff4d6"/>
-                <stop offset="0.5" stop-color="#ffbd69"/>
-                <stop offset="1" stop-color="#9a6a2e"/>
-              </linearGradient>
-              <linearGradient id="key02Core" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#0f3a40"/>
-                <stop offset="1" stop-color="#06111b"/>
-              </linearGradient>
-              <filter id="key02Glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="3.5" result="blur"/>
-                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-              <style>
-                .k2-crack { stroke-dasharray: 7 4; animation: k2-crack 2.6s ease-in-out infinite; }
-                .k2-shard-a { animation: k2-drift-a 4s ease-in-out infinite; }
-                .k2-shard-b { animation: k2-drift-b 4.6s ease-in-out infinite; }
-                .k2-led { animation: k2-led 1.5s ease-in-out infinite; }
-                @keyframes k2-crack { 50% { opacity: .55; stroke-dashoffset: 22; } }
-                @keyframes k2-drift-a { 50% { transform: translate(-4px, -5px); } }
-                @keyframes k2-drift-b { 50% { transform: translate(4px, 5px); } }
-                @keyframes k2-led { 50% { opacity: .25; } }
-                @media (prefers-reduced-motion: reduce) { .k2-crack, .k2-shard-a, .k2-shard-b, .k2-led { animation: none; } }
-              </style>
-            </defs>
-            <g transform="translate(90 130) rotate(7) translate(-90 -130)">
-              <path d="M62 6h56l6 6v30H56V12l6-6Z" fill="url(#key02Metal)" stroke="#fff4d6" stroke-width="2"/>
-              <rect x="68" y="14" width="44" height="18" rx="2" fill="#2a1a0a"/>
-              <rect x="74" y="19" width="9" height="8" fill="#45e5d2"/>
-              <rect x="97" y="19" width="9" height="8" fill="#45e5d2"/>
-              <path d="M48 42h84l20 22v130l-20 22H48l-20-22V64l20-22Z" fill="url(#key02Shell)" stroke="url(#key02Edge)" stroke-width="3.5" stroke-linejoin="round"/>
-              <path d="M52 56h20m36 0h20M40 70l10-8m90 8-10-8" fill="none" stroke="#45e5d2" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-              <path d="M90 84l46 46-46 46-46-46 46-46Z" fill="url(#key02Core)" stroke="#45e5d2" stroke-width="2"/>
-              <path d="M90 96l34 34-34 34-34-34 34-34Z" fill="none" stroke="#45e5d2" stroke-width="1" opacity="0.5"/>
-              <path d="M90 108l22 22-22 22-22-22 22-22Z" fill="none" stroke="#ffbd69" stroke-width="1" stroke-dasharray="3 4" opacity="0.7"/>
-              <g class="k2-shard-a"><path d="M62 118l8-4-3 9Z" fill="#45e5d2" opacity="0.9"/></g>
-              <g class="k2-shard-b"><path d="M118 142l-9 3 4-8Z" fill="#ffbd69" opacity="0.9"/></g>
-              <path class="k2-crack" d="M90 84l-8 20 14 14-12 20 14 16-8 22" fill="none" stroke="#ffbd69" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#key02Glow)"/>
-              <path d="M90 84l-8 20 14 14-12 20 14 16-8 22" fill="none" stroke="#fff4d6" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-              <text x="90" y="194" fill="#fff0c6" font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="2" text-anchor="middle" filter="url(#key02Glow)">02</text>
-              <path d="M64 200h52" stroke="#45e5d2" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-              <circle class="k2-led" cx="90" cy="209" r="4.5" fill="#ffbd69" filter="url(#key02Glow)"/>
-            </g>
-        </g>
-      </svg>
+    <path d="M44 62v26l8 8v22M136 62v20l-8 8v30" fill="none" stroke="#79f7ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+    <circle cx="44" cy="62" r="2.5" fill="#79f7ff"/><circle cx="136" cy="62" r="2.5" fill="#c08aff"/>
+    <circle cx="90" cy="130" r="44" fill="url(#key07mini01-key01Core)" stroke="#79f7ff" stroke-width="1.5" opacity="0.95"/>
+    <circle class="k1-echo" cx="90" cy="130" r="34" fill="none" stroke="#79f7ff" stroke-width="2"/>
+    <circle cx="90" cy="130" r="25" fill="none" stroke="#7aa8ff" stroke-width="1" stroke-dasharray="3 5" opacity="0.7"/>
+    <g class="k1-ring" filter="url(#key07mini01-key01Glow)">
+      <path d="M117.85 110.5A34 34 0 1 1 98.8 97.16" fill="none" stroke="url(#key07mini01-key01Edge)" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="109.5" cy="102.1" r="3.5" fill="#ffffff"/>
     </g>
-    <g class="k7-orbit orbit-3">
-      <svg x="115" y="139" width="22" height="31.78" viewBox="0 0 180 260" overflow="visible">
-        <g class="k7-spin">
-          <title id="key03Title">Clé de résonance 03</title>
-            <desc id="key03Desc">Clé USB de l'éclipse, magenta, or et lime, au cœur marqué d'une éclipse solaire avec couronne et anneau de diamant, et du sigle 03.</desc>
-            <defs>
-              <linearGradient id="key03Shell" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#3a1250"/>
-                <stop offset="0.5" stop-color="#0c0618"/>
-                <stop offset="1" stop-color="#561436"/>
-              </linearGradient>
-              <linearGradient id="key03Edge" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#ff4fd8"/>
-                <stop offset="0.5" stop-color="#ffe39a"/>
-                <stop offset="1" stop-color="#c6ff4d"/>
-              </linearGradient>
-              <linearGradient id="key03Metal" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#fff6ea"/>
-                <stop offset="0.45" stop-color="#f0b8e8"/>
-                <stop offset="1" stop-color="#9a4a90"/>
-              </linearGradient>
-              <linearGradient id="key03Gloss" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#ffffff" stop-opacity="0.26"/>
-                <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
-              </linearGradient>
-              <radialGradient id="key03Core" cx="0.5" cy="0.5" r="0.5">
-                <stop stop-color="#2a0a36"/>
-                <stop offset="0.75" stop-color="#07030f"/>
-                <stop offset="1" stop-color="#14061c"/>
-              </radialGradient>
-              <radialGradient id="key03Corona" cx="0.5" cy="0.5" r="0.5">
-                <stop offset="0.5" stop-color="#ffe39a" stop-opacity="0"/>
-                <stop offset="0.68" stop-color="#ffe39a" stop-opacity="0.95"/>
-                <stop offset="1" stop-color="#ff4fd8" stop-opacity="0"/>
-              </radialGradient>
-              <radialGradient id="key03Sun" cx="0.5" cy="0.5" r="0.5">
-                <stop stop-color="#ffffff"/>
-                <stop offset="0.5" stop-color="#ffe39a"/>
-                <stop offset="1" stop-color="#ffb347"/>
-              </radialGradient>
-              <clipPath id="key03Clip"><path d="M48 44h84l16 16v116a58 58 0 0 1-116 0V60l16-16Z"/></clipPath>
-              <filter id="key03Glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="3.2" result="blur"/>
-                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-              <style>
-                .k3-corona { transform-origin: 90px 130px; animation: k3-pulse 3.2s ease-in-out infinite; }
-                .k3-rays { transform-origin: 90px 130px; animation: k3-spin 22s linear infinite; }
-                .k3-moon { animation: k3-drift 5s ease-in-out infinite; }
-                .k3-bead { animation: k3-bead 5s ease-in-out infinite; }
-                .k3-led { animation: k3-led 2.4s ease-in-out infinite; }
-                @keyframes k3-pulse { 50% { opacity: .55; transform: scale(1.1); } }
-                @keyframes k3-spin { to { transform: rotate(360deg); } }
-                @keyframes k3-drift { 50% { transform: translateX(3px); } }
-                @keyframes k3-bead { 50% { opacity: .35; } }
-                @keyframes k3-led { 50% { opacity: .35; } }
-                @media (prefers-reduced-motion: reduce) { .k3-corona, .k3-rays, .k3-moon, .k3-bead, .k3-led { animation: none; } }
-              </style>
-            </defs>
-            <g transform="translate(90 130) rotate(8) translate(-90 -130)">
-              <rect x="62" y="6" width="56" height="42" rx="6" fill="url(#key03Metal)" stroke="#fff6ea" stroke-width="2"/>
-              <rect x="70" y="13" width="40" height="20" rx="3" fill="#1a0a22"/>
-              <rect x="75" y="18" width="8" height="10" rx="1.5" fill="#c6ff4d"/>
-              <rect x="97" y="18" width="8" height="10" rx="1.5" fill="#c6ff4d"/>
-              <path d="M72 41h36" stroke="#8a3a80" stroke-width="2" stroke-linecap="round"/>
-              <path d="M48 44h84l16 16v116a58 58 0 0 1-116 0V60l16-16Z" fill="url(#key03Shell)" stroke="url(#key03Edge)" stroke-width="3.5" stroke-linejoin="round"/>
-              <g clip-path="url(#key03Clip)">
-                <path d="M20 40L112 40L20 180Z" fill="url(#key03Gloss)"/>
-              </g>
-              <path d="M52 58h76M42 68h96" fill="none" stroke="#ff4fd8" stroke-width="1.5" opacity="0.5"/>
-              <circle cx="90" cy="130" r="45" fill="url(#key03Core)" stroke="url(#key03Edge)" stroke-width="2.5"/>
-              <circle cx="90" cy="130" r="38" fill="none" stroke="#ff4fd8" stroke-width="1" stroke-dasharray="2 6" opacity="0.7"/>
-              <circle class="k3-corona" cx="90" cy="130" r="34" fill="url(#key03Corona)"/>
-              <g class="k3-rays" stroke="#ffe39a" stroke-width="2" stroke-linecap="round" opacity="0.85">
-                <path d="M90 90v8M90 162v8M50 130h8M122 130h8M61.7 101.7l5.7 5.7M112.6 152.6l5.7 5.7M118.3 101.7l-5.7 5.7M67.4 152.6l-5.7 5.7"/>
-              </g>
-              <circle cx="90" cy="130" r="21" fill="url(#key03Sun)" filter="url(#key03Glow)"/>
-              <circle class="k3-moon" cx="95" cy="130" r="20" fill="#07030f"/>
-              <circle class="k3-bead" cx="72" cy="121" r="3.2" fill="#ffffff" filter="url(#key03Glow)"/>
-              <text x="90" y="198" fill="#ffe9bd" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="3" text-anchor="middle" filter="url(#key03Glow)">KEY 03</text>
-              <path d="M70 205h40" stroke="#ff4fd8" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-              <circle class="k3-led" cx="90" cy="217" r="4.5" fill="#c6ff4d" filter="url(#key03Glow)"/>
-            </g>
-        </g>
-      </svg>
-    </g>
-    <g class="k7-orbit orbit-4">
-      <svg x="79" y="161" width="22" height="31.78" viewBox="0 0 180 260" overflow="visible">
-        <g class="k7-spin">
-          <title id="key04Title">Clé de résonance 04</title>
-            <desc id="key04Desc">Clé USB du recycleur, en violet électrique, rose néon et bleu, au cœur circulaire traversé de trois flèches de recyclage et marqué du sigle KEY 04.</desc>
-            <defs>
-              <linearGradient id="key04Shell" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#20204f"/>
-                <stop offset="0.55" stop-color="#080b20"/>
-                <stop offset="1" stop-color="#42164a"/>
-              </linearGradient>
-              <linearGradient id="key04Edge" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#38d6ff"/>
-                <stop offset="0.5" stop-color="#bd63ff"/>
-                <stop offset="1" stop-color="#ff4fd8"/>
-              </linearGradient>
-              <linearGradient id="key04Metal" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#f1f5ff"/>
-                <stop offset="0.5" stop-color="#9db6f5"/>
-                <stop offset="1" stop-color="#55538f"/>
-              </linearGradient>
-              <radialGradient id="key04Core" cx="0.5" cy="0.5" r="0.5">
-                <stop stop-color="#211b4f"/>
-                <stop offset="0.75" stop-color="#09091d"/>
-                <stop offset="1" stop-color="#17102d"/>
-              </radialGradient>
-              <filter id="key04Glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="3.5" result="blur"/>
-                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-              <style>
-                .k4-cycle { transform-origin: 90px 130px; animation: k4-spin 9s linear infinite; }
-                .k4-led { animation: k4-led 2.2s ease-in-out infinite; }
-                @keyframes k4-spin { to { transform: rotate(360deg); } }
-                @keyframes k4-led { 50% { opacity: .35; } }
-                @media (prefers-reduced-motion: reduce) { .k4-cycle, .k4-led { animation: none; } }
-              </style>
-            </defs>
-            <g transform="translate(90 130) rotate(-5) translate(-90 -130)">
-              <rect x="62" y="6" width="56" height="40" rx="5" fill="url(#key04Metal)" stroke="#edf3ff" stroke-width="2"/>
-              <rect x="70" y="13" width="40" height="18" rx="3" fill="#11102b"/>
-              <rect x="76" y="18" width="8" height="9" rx="1.5" fill="#ff4fd8"/>
-              <rect x="96" y="18" width="8" height="9" rx="1.5" fill="#38d6ff"/>
-              <path d="M44 44h92q10 0 10 10v20l-8 8v30l8 8v70a28 28 0 0 1-28 28H62a28 28 0 0 1-28-28v-70l8-8V82l-8-8V54q0-10 10-10Z" fill="url(#key04Shell)" stroke="url(#key04Edge)" stroke-width="3.5" stroke-linejoin="round"/>
-              <path d="M50 58h80M50 66h80" stroke="#38d6ff" stroke-width="1.5" opacity="0.55"/>
-              <circle cx="90" cy="130" r="44" fill="url(#key04Core)" stroke="#38d6ff" stroke-width="2"/>
-              <circle cx="90" cy="130" r="37" fill="none" stroke="#ff4fd8" stroke-width="1" stroke-dasharray="2 6" opacity="0.8"/>
-              <g class="k4-cycle" filter="url(#key04Glow)">
-              <path d="M98.03,105.27 A26 26 0 0 1 115.86,132.72" fill="none" stroke="url(#key04Edge)" stroke-width="5" stroke-linecap="round"/>
-              <path d="M114.43,138.89 L122.92,132.3 L108.95,131.33 Z" fill="#ff4fd8" stroke="#ff4fd8" stroke-width="1" stroke-linejoin="round"/>
-              <path d="M107.4,149.32 A26 26 0 0 1 74.72,151.03" fill="none" stroke="url(#key04Edge)" stroke-width="5" stroke-linecap="round"/>
-              <path d="M70.08,146.71 L71.55,157.36 L79.38,145.75 Z" fill="#38d6ff" stroke="#38d6ff" stroke-width="1" stroke-linejoin="round"/>
-              <path d="M64.57,135.41 A26 26 0 0 1 79.42,106.25" fill="none" stroke="url(#key04Edge)" stroke-width="5" stroke-linecap="round"/>
-              <path d="M85.49,104.39 L75.53,100.34 L81.67,112.92 Z" fill="#bd63ff" stroke="#bd63ff" stroke-width="1" stroke-linejoin="round"/>
-              </g>
-              <circle cx="90" cy="130" r="6" fill="#ff4fd8" filter="url(#key04Glow)"/>
-              <text x="90" y="192" fill="#e6eaff" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 04</text>
-              <circle class="k4-led" cx="90" cy="206" r="4.5" fill="#38d6ff" filter="url(#key04Glow)"/>
-            </g>
-        </g>
-      </svg>
-    </g>
-    <g class="k7-orbit orbit-5">
-      <svg x="43" y="139" width="22" height="31.78" viewBox="0 0 180 260" overflow="visible">
-        <g class="k7-spin">
-          <title id="key05Title">Clé de résonance 05</title>
-            <desc id="key05Desc">Clé USB en bouclier, cramoisie et or rose, au cœur en réseau de cinq nœuds reliés et marquée du sigle KEY 05.</desc>
-            <defs>
-              <linearGradient id="key05Shell" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#4a1020"/>
-                <stop offset="0.55" stop-color="#14060c"/>
-                <stop offset="1" stop-color="#5a2a14"/>
-              </linearGradient>
-              <linearGradient id="key05Edge" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#ff5a6e"/>
-                <stop offset="0.5" stop-color="#ffd0a8"/>
-                <stop offset="1" stop-color="#ff9f6b"/>
-              </linearGradient>
-              <linearGradient id="key05Metal" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#fff0e6"/>
-                <stop offset="0.5" stop-color="#e8a898"/>
-                <stop offset="1" stop-color="#8a4a48"/>
-              </linearGradient>
-              <radialGradient id="key05Core" cx="0.5" cy="0.5" r="0.5">
-                <stop stop-color="#3a0f1c"/>
-                <stop offset="0.8" stop-color="#12050a"/>
-                <stop offset="1" stop-color="#1c0a10"/>
-              </radialGradient>
-              <filter id="key05Glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="3.5" result="blur"/>
-                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-              <style>
-                .k5-net { animation: k5-net 3s ease-in-out infinite; }
-                .k5-node { animation: k5-node 2.4s ease-in-out infinite; }
-                .k5-core { transform-box: fill-box; transform-origin: center; animation: k5-core 1.8s ease-in-out infinite; }
-                .k5-node.n1 { animation-delay: .4s; } .k5-node.n2 { animation-delay: .8s; } .k5-node.n3 { animation-delay: 1.2s; } .k5-node.n4 { animation-delay: 1.6s; }
-                @keyframes k5-net { 50% { opacity: .45; } }
-                @keyframes k5-node { 50% { opacity: .3; } }
-                @keyframes k5-core { 50% { opacity: .55; transform: scale(.72); } }
-                @media (prefers-reduced-motion: reduce) { .k5-net, .k5-node, .k5-core { animation: none; } }
-              </style>
-            </defs>
-            <g transform="translate(90 130) rotate(6) translate(-90 -130)">
-              <path d="M66 6h48l8 10v30H58V16l8-10Z" fill="url(#key05Metal)" stroke="#fff0e6" stroke-width="2" stroke-linejoin="round"/>
-              <rect x="68" y="14" width="44" height="18" rx="2" fill="#2a0c12"/>
-              <rect x="74" y="19" width="9" height="8" fill="#ff9f6b"/>
-              <rect x="97" y="19" width="9" height="8" fill="#ff9f6b"/>
-              <path d="M48 44h84l18 18v108l-60 54-60-54V62l18-18Z" fill="url(#key05Shell)" stroke="url(#key05Edge)" stroke-width="3.5" stroke-linejoin="round"/>
-              <path d="M52 58h76" stroke="#ff9f6b" stroke-width="1.5" opacity="0.5"/>
-              <circle cx="90" cy="130" r="44" fill="url(#key05Core)" stroke="#ff5a6e" stroke-width="2"/>
-              <circle cx="90" cy="130" r="38" fill="none" stroke="#ffb38a" stroke-width="1" stroke-dasharray="2 6" opacity="0.6"/>
-              <g class="k5-net" fill="none" stroke-linecap="round">
-                <path d="M90,100 L107.63,154.27 M118.53,120.73 L72.37,154.27 M107.63,154.27 L61.47,120.73 M72.37,154.27 L90,100 M61.47,120.73 L118.53,120.73 " stroke="#ff9f6b" stroke-width="1.2" opacity="0.8"/>
-                <path d="M90,100 L118.53,120.73 M118.53,120.73 L107.63,154.27 M107.63,154.27 L72.37,154.27 M72.37,154.27 L61.47,120.73 M61.47,120.73 L90,100 " stroke="#ff5a6e" stroke-width="2"/>
-                <path d="M90,130 L90,100 M90,130 L118.53,120.73 M90,130 L107.63,154.27 M90,130 L72.37,154.27 M90,130 L61.47,120.73 " stroke="#ffd0a8" stroke-width="1" opacity="0.6"/>
-              </g>
-              <circle cx="90" cy="100" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
-              <circle class="k5-node n0" cx="90" cy="100" r="2.5" fill="#ff6b7e" filter="url(#key05Glow)"/>
-              <circle cx="118.53" cy="120.73" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
-              <circle class="k5-node n1" cx="118.53" cy="120.73" r="2.5" fill="#ff6b7e" filter="url(#key05Glow)"/>
-              <circle cx="107.63" cy="154.27" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
-              <circle class="k5-node n2" cx="107.63" cy="154.27" r="2.5" fill="#ff6b7e" filter="url(#key05Glow)"/>
-              <circle cx="72.37" cy="154.27" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
-              <circle class="k5-node n3" cx="72.37" cy="154.27" r="2.5" fill="#ff6b7e" filter="url(#key05Glow)"/>
-              <circle cx="61.47" cy="120.73" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
-              <circle class="k5-node n4" cx="61.47" cy="120.73" r="2.5" fill="#ff6b7e" filter="url(#key05Glow)"/>
-              <circle class="k5-core" cx="90" cy="130" r="7" fill="#ffd0a8" filter="url(#key05Glow)"/>
-              <text x="90" y="190" fill="#ffe6dc" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 05</text>
-              <circle cx="90" cy="203" r="4" fill="#ff6b7e" filter="url(#key05Glow)"/>
-            </g>
-        </g>
-      </svg>
-    </g>
-    <g class="k7-orbit orbit-6">
-      <svg x="43" y="91" width="22" height="31.78" viewBox="0 0 180 260" overflow="visible">
-        <g class="k7-spin">
-          <title id="key06Title">Clé de résonance 06</title>
-            <desc id="key06Desc">Clé maîtresse USB or et blanc, au cœur serti de six gemmes de couleur autour d'une serrure lumineuse et marquée du sigle KEY 06.</desc>
-            <defs>
-              <linearGradient id="key06Shell" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#3a3350"/>
-                <stop offset="0.5" stop-color="#0e0c1c"/>
-                <stop offset="1" stop-color="#4a3a1c"/>
-              </linearGradient>
-              <linearGradient id="key06Edge" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#fff6c8"/>
-                <stop offset="0.35" stop-color="#ffd24d"/>
-                <stop offset="0.7" stop-color="#ffffff"/>
-                <stop offset="1" stop-color="#e8b84a"/>
-              </linearGradient>
-              <linearGradient id="key06Metal" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#ffffff"/>
-                <stop offset="0.45" stop-color="#ffe9a0"/>
-                <stop offset="1" stop-color="#b8892e"/>
-              </linearGradient>
-              <radialGradient id="key06Core" cx="0.5" cy="0.5" r="0.5">
-                <stop stop-color="#2a2548"/>
-                <stop offset="0.8" stop-color="#0a0818"/>
-                <stop offset="1" stop-color="#14102a"/>
-              </radialGradient>
-              <filter id="key06Glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="3" result="blur"/>
-                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-              <style>
-                .k6-gems { transform-origin: 90px 130px; animation: k6-spin 20s linear infinite; }
-                .k6-lock { animation: k6-lock 2.8s ease-in-out infinite; }
-                @keyframes k6-spin { to { transform: rotate(360deg); } }
-                @keyframes k6-lock { 50% { opacity: .6; } }
-                @media (prefers-reduced-motion: reduce) { .k6-gems, .k6-lock { animation: none; } }
-              </style>
-            </defs>
-            <g transform="translate(90 130) rotate(-3) translate(-90 -130)">
-              <path d="M62 14l8-8 10 8 10-8 10 8 10-8 8 8v32H62V14Z" fill="url(#key06Metal)" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
-              <rect x="70" y="20" width="40" height="14" rx="2" fill="#241a08"/>
-              <rect x="75" y="23" width="8" height="8" fill="#ffd24d"/>
-              <rect x="97" y="23" width="8" height="8" fill="#ffd24d"/>
-              <path d="M52 46h76l24 24v116q0 36-36 36H64q-36 0-36-36V70l24-24Z" fill="url(#key06Shell)" stroke="url(#key06Edge)" stroke-width="4" stroke-linejoin="round"/>
-              <path d="M56 58h68M44 70h92" stroke="#ffe9a0" stroke-width="1.5" opacity="0.5"/>
-              <circle cx="90" cy="130" r="45" fill="url(#key06Core)" stroke="url(#key06Edge)" stroke-width="2.5"/>
-              <g class="k6-gems">
-              <circle cx="90" cy="92" r="4.5" fill="#ff5a6e" stroke="#fff" stroke-width="1" filter="url(#key06Glow)"/>
-              <circle cx="122.91" cy="111" r="4.5" fill="#ffd24d" stroke="#fff" stroke-width="1" filter="url(#key06Glow)"/>
-              <circle cx="122.91" cy="149" r="4.5" fill="#8cff7a" stroke="#fff" stroke-width="1" filter="url(#key06Glow)"/>
-              <circle cx="90" cy="168" r="4.5" fill="#38f2ff" stroke="#fff" stroke-width="1" filter="url(#key06Glow)"/>
-              <circle cx="57.09" cy="149" r="4.5" fill="#7a8cff" stroke="#fff" stroke-width="1" filter="url(#key06Glow)"/>
-              <circle cx="57.09" cy="111" r="4.5" fill="#e07aff" stroke="#fff" stroke-width="1" filter="url(#key06Glow)"/>
-              </g>
-              <path d="M90,102 L114.25,116 L114.25,144 L90,158 L65.75,144 L65.75,116 Z" fill="none" stroke="#ffe9a0" stroke-width="1.5" opacity="0.8"/>
-              <g class="k6-lock" filter="url(#key06Glow)">
-                <circle cx="90" cy="125" r="9" fill="#fff6c8"/>
-                <path d="M85 130h10l4 16H81Z" fill="#fff6c8"/>
-                <circle cx="90" cy="125" r="3.5" fill="#0a0818"/>
-                <path d="M89 126h2l1.5 13h-5Z" fill="#0a0818"/>
-              </g>
-              <text x="90" y="194" fill="#fff6d8" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 06</text>
-              <path d="M64 201h52" stroke="#ffd24d" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-              <circle cx="82" cy="213" r="3.5" fill="#ff5a6e"/><circle cx="90" cy="213" r="3.5" fill="#ffd24d"/><circle cx="98" cy="213" r="3.5" fill="#38f2ff"/>
-            </g>
-        </g>
-      </svg>
-    </g>
-    <circle cx="90" cy="132" r="18" fill="url(#key07Core)" stroke="url(#key07Prism)" stroke-width="2.5" filter="url(#key07Glow)"/>
-    <g class="k7-lock-body">
-      <path class="k7-lock-shackle" d="M84 129v-5a6 6 0 0 1 12 0v5" fill="none" stroke="url(#key07Metal)" stroke-width="3.5" stroke-linecap="round"/>
-      <rect x="80" y="129" width="20" height="15" rx="3" fill="url(#key07Metal)" stroke="#f4efff" stroke-width="1"/>
-      <circle cx="90" cy="135" r="2" fill="#21194b"/>
-      <path d="M89 136h2l1 4h-4l1-4Z" fill="#21194b"/>
-    </g>
-    <circle class="k7-lock-spark" cx="90" cy="132" r="23" fill="none" stroke="#d9ff70" stroke-width="1" opacity=".6"/>
-    <path d="M59 229h62" stroke="url(#key07Prism)" stroke-width="1.5" stroke-linecap="round"/>
-    <text x="90" y="243" fill="#f7f1ff" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">LA FIN...</text>
-    <text x="90" y="254" fill="#d9ff70" font-family="Arial, sans-serif" font-size="5.5" font-weight="700" letter-spacing="1.3" text-anchor="middle">KEY 07 // FINAL ECHO</text>
-    <circle cx="90" cy="263" r="3.5" fill="url(#key07Prism)" filter="url(#key07Glow)"/>
+    <path class="k1-pulse" d="M62 132h14l6-15 8 30 8-24 6 9h20" fill="none" stroke="#e8ffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#key07mini01-key01Glow)"/>
+    <text x="90" y="192" fill="#dcefff" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 01</text>
+    <rect class="k1-bar" x="72" y="208" width="6" height="6" rx="1" fill="#79f7ff"/>
+    <rect class="k1-bar b2" x="82" y="204" width="6" height="10" rx="1" fill="#79f7ff"/>
+    <rect class="k1-bar b3" x="92" y="200" width="6" height="14" rx="1" fill="#7aa8ff"/>
+    <rect class="k1-bar b4" x="102" y="196" width="6" height="18" rx="1" fill="#c08aff"/>
   </g>
+        </svg>
+      </g>
+      <g class="k7-orbit-key key-02" transform="rotate(240 124.64 110)">
+        <svg x="112.64" y="92.67" width="24" height="34.67" viewBox="0 0 180 260" overflow="visible" role="img" aria-labelledby="key07mini02-key02Title key07mini02-key02Desc">
+          <title id="key07mini02-key02Title">Clé de résonance 02</title>
+  <desc id="key07mini02-key02Desc">Clé USB fracturée, turquoise et ambre, au cœur en losange traversé d'une faille lumineuse et marqué du sigle 02.</desc>
+          <defs><linearGradient id="key07mini02-key02Shell" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#14414a"/>
+      <stop offset="0.55" stop-color="#071722"/>
+      <stop offset="1" stop-color="#5c3a1c"/>
+    </linearGradient>
+    <linearGradient id="key07mini02-key02Edge" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#45e5d2"/>
+      <stop offset="0.5" stop-color="#e4f7b0"/>
+      <stop offset="1" stop-color="#ffbd69"/>
+    </linearGradient>
+    <linearGradient id="key07mini02-key02Metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff4d6"/>
+      <stop offset="0.5" stop-color="#ffbd69"/>
+      <stop offset="1" stop-color="#9a6a2e"/>
+    </linearGradient>
+    <linearGradient id="key07mini02-key02Core" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#0f3a40"/>
+      <stop offset="1" stop-color="#06111b"/>
+    </linearGradient>
+    <filter id="key07mini02-key02Glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .k2-crack { stroke-dasharray: 7 4; animation: k2-crack 2.6s ease-in-out infinite; }
+      .k2-shard-a { animation: k2-drift-a 4s ease-in-out infinite; }
+      .k2-shard-b { animation: k2-drift-b 4.6s ease-in-out infinite; }
+      .k2-led { animation: k2-led 1.5s ease-in-out infinite; }
+      @keyframes k2-crack { 50% { opacity: .55; stroke-dashoffset: 22; } }
+      @keyframes k2-drift-a { 50% { transform: translate(-4px, -5px); } }
+      @keyframes k2-drift-b { 50% { transform: translate(4px, 5px); } }
+      @keyframes k2-led { 50% { opacity: .25; } }
+      @media (prefers-reduced-motion: reduce) { .k2-crack, .k2-shard-a, .k2-shard-b, .k2-led { animation: none; } }
+    </style></defs>
+          <g transform="translate(90 130) rotate(7) translate(-90 -130)">
+    <path d="M62 6h56l6 6v30H56V12l6-6Z" fill="url(#key07mini02-key02Metal)" stroke="#fff4d6" stroke-width="2"/>
+    <rect x="68" y="14" width="44" height="18" rx="2" fill="#2a1a0a"/>
+    <rect x="74" y="19" width="9" height="8" fill="#45e5d2"/>
+    <rect x="97" y="19" width="9" height="8" fill="#45e5d2"/>
+    <path d="M48 42h84l20 22v130l-20 22H48l-20-22V64l20-22Z" fill="url(#key07mini02-key02Shell)" stroke="url(#key07mini02-key02Edge)" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M52 56h20m36 0h20M40 70l10-8m90 8-10-8" fill="none" stroke="#45e5d2" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+    <path d="M90 84l46 46-46 46-46-46 46-46Z" fill="url(#key07mini02-key02Core)" stroke="#45e5d2" stroke-width="2"/>
+    <path d="M90 96l34 34-34 34-34-34 34-34Z" fill="none" stroke="#45e5d2" stroke-width="1" opacity="0.5"/>
+    <path d="M90 108l22 22-22 22-22-22 22-22Z" fill="none" stroke="#ffbd69" stroke-width="1" stroke-dasharray="3 4" opacity="0.7"/>
+    <g class="k2-shard-a"><path d="M62 118l8-4-3 9Z" fill="#45e5d2" opacity="0.9"/></g>
+    <g class="k2-shard-b"><path d="M118 142l-9 3 4-8Z" fill="#ffbd69" opacity="0.9"/></g>
+    <path class="k2-crack" d="M90 84l-8 20 14 14-12 20 14 16-8 22" fill="none" stroke="#ffbd69" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#key07mini02-key02Glow)"/>
+    <path d="M90 84l-8 20 14 14-12 20 14 16-8 22" fill="none" stroke="#fff4d6" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="90" y="194" fill="#fff0c6" font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="2" text-anchor="middle" filter="url(#key07mini02-key02Glow)">02</text>
+    <path d="M64 200h52" stroke="#45e5d2" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+    <circle class="k2-led" cx="90" cy="209" r="4.5" fill="#ffbd69" filter="url(#key07mini02-key02Glow)"/>
+  </g>
+        </svg>
+      </g>
+      <g class="k7-orbit-key key-03" transform="rotate(300 124.64 150)">
+        <svg x="112.64" y="132.67" width="24" height="34.67" viewBox="0 0 180 260" overflow="visible" role="img" aria-labelledby="key07mini03-key03Title key07mini03-key03Desc">
+          <title id="key07mini03-key03Title">Clé de résonance 03</title>
+  <desc id="key07mini03-key03Desc">Clé USB de l'éclipse, magenta, or et lime, au cœur marqué d'une éclipse solaire avec couronne et anneau de diamant, et du sigle 03.</desc>
+          <defs><linearGradient id="key07mini03-key03Shell" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3a1250"/>
+      <stop offset="0.5" stop-color="#0c0618"/>
+      <stop offset="1" stop-color="#561436"/>
+    </linearGradient>
+    <linearGradient id="key07mini03-key03Edge" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ff4fd8"/>
+      <stop offset="0.5" stop-color="#ffe39a"/>
+      <stop offset="1" stop-color="#c6ff4d"/>
+    </linearGradient>
+    <linearGradient id="key07mini03-key03Metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff6ea"/>
+      <stop offset="0.45" stop-color="#f0b8e8"/>
+      <stop offset="1" stop-color="#9a4a90"/>
+    </linearGradient>
+    <linearGradient id="key07mini03-key03Gloss" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffffff" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="key07mini03-key03Core" cx="0.5" cy="0.5" r="0.5">
+      <stop stop-color="#2a0a36"/>
+      <stop offset="0.75" stop-color="#07030f"/>
+      <stop offset="1" stop-color="#14061c"/>
+    </radialGradient>
+    <radialGradient id="key07mini03-key03Corona" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0.5" stop-color="#ffe39a" stop-opacity="0"/>
+      <stop offset="0.68" stop-color="#ffe39a" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#ff4fd8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="key07mini03-key03Sun" cx="0.5" cy="0.5" r="0.5">
+      <stop stop-color="#ffffff"/>
+      <stop offset="0.5" stop-color="#ffe39a"/>
+      <stop offset="1" stop-color="#ffb347"/>
+    </radialGradient>
+    <clipPath id="key07mini03-key03Clip"><path d="M48 44h84l16 16v116a58 58 0 0 1-116 0V60l16-16Z"/></clipPath>
+    <filter id="key07mini03-key03Glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .k3-corona { transform-origin: 90px 130px; animation: k3-pulse 3.2s ease-in-out infinite; }
+      .k3-rays { transform-origin: 90px 130px; animation: k3-spin 22s linear infinite; }
+      .k3-moon { animation: k3-drift 5s ease-in-out infinite; }
+      .k3-bead { animation: k3-bead 5s ease-in-out infinite; }
+      .k3-led { animation: k3-led 2.4s ease-in-out infinite; }
+      @keyframes k3-pulse { 50% { opacity: .55; transform: scale(1.1); } }
+      @keyframes k3-spin { to { transform: rotate(360deg); } }
+      @keyframes k3-drift { 50% { transform: translateX(3px); } }
+      @keyframes k3-bead { 50% { opacity: .35; } }
+      @keyframes k3-led { 50% { opacity: .35; } }
+      @media (prefers-reduced-motion: reduce) { .k3-corona, .k3-rays, .k3-moon, .k3-bead, .k3-led { animation: none; } }
+    </style></defs>
+          <g transform="translate(90 130) rotate(8) translate(-90 -130)">
+    <rect x="62" y="6" width="56" height="42" rx="6" fill="url(#key07mini03-key03Metal)" stroke="#fff6ea" stroke-width="2"/>
+    <rect x="70" y="13" width="40" height="20" rx="3" fill="#1a0a22"/>
+    <rect x="75" y="18" width="8" height="10" rx="1.5" fill="#c6ff4d"/>
+    <rect x="97" y="18" width="8" height="10" rx="1.5" fill="#c6ff4d"/>
+    <path d="M72 41h36" stroke="#8a3a80" stroke-width="2" stroke-linecap="round"/>
+    <path d="M48 44h84l16 16v116a58 58 0 0 1-116 0V60l16-16Z" fill="url(#key07mini03-key03Shell)" stroke="url(#key07mini03-key03Edge)" stroke-width="3.5" stroke-linejoin="round"/>
+    <g clip-path="url(#key07mini03-key03Clip)">
+      <path d="M20 40L112 40L20 180Z" fill="url(#key07mini03-key03Gloss)"/>
+    </g>
+    <path d="M52 58h76M42 68h96" fill="none" stroke="#ff4fd8" stroke-width="1.5" opacity="0.5"/>
+    <circle cx="90" cy="130" r="45" fill="url(#key07mini03-key03Core)" stroke="url(#key07mini03-key03Edge)" stroke-width="2.5"/>
+    <circle cx="90" cy="130" r="38" fill="none" stroke="#ff4fd8" stroke-width="1" stroke-dasharray="2 6" opacity="0.7"/>
+    <circle class="k3-corona" cx="90" cy="130" r="34" fill="url(#key07mini03-key03Corona)"/>
+    <g class="k3-rays" stroke="#ffe39a" stroke-width="2" stroke-linecap="round" opacity="0.85">
+      <path d="M90 90v8M90 162v8M50 130h8M122 130h8M61.7 101.7l5.7 5.7M112.6 152.6l5.7 5.7M118.3 101.7l-5.7 5.7M67.4 152.6l-5.7 5.7"/>
+    </g>
+    <circle cx="90" cy="130" r="21" fill="url(#key07mini03-key03Sun)" filter="url(#key07mini03-key03Glow)"/>
+    <circle class="k3-moon" cx="95" cy="130" r="20" fill="#07030f"/>
+    <circle class="k3-bead" cx="72" cy="121" r="3.2" fill="#ffffff" filter="url(#key07mini03-key03Glow)"/>
+    <text x="90" y="198" fill="#ffe9bd" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="3" text-anchor="middle" filter="url(#key07mini03-key03Glow)">KEY 03</text>
+    <path d="M70 205h40" stroke="#ff4fd8" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+    <circle class="k3-led" cx="90" cy="217" r="4.5" fill="#c6ff4d" filter="url(#key07mini03-key03Glow)"/>
+  </g>
+        </svg>
+      </g>
+      <g class="k7-orbit-key key-04" transform="rotate(0 90 170)">
+        <svg x="78.00" y="152.67" width="24" height="34.67" viewBox="0 0 180 260" overflow="visible" role="img" aria-labelledby="key07mini04-key04Title key07mini04-key04Desc">
+          <title id="key07mini04-key04Title">Clé de résonance 04</title>
+  <desc id="key07mini04-key04Desc">Clé USB du recycleur, en violet électrique, rose néon et bleu, au cœur circulaire traversé de trois flèches de recyclage et marqué du sigle KEY 04.</desc>
+          <defs><linearGradient id="key07mini04-key04Shell" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#20204f"/>
+      <stop offset="0.55" stop-color="#080b20"/>
+      <stop offset="1" stop-color="#42164a"/>
+    </linearGradient>
+    <linearGradient id="key07mini04-key04Edge" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#38d6ff"/>
+      <stop offset="0.5" stop-color="#bd63ff"/>
+      <stop offset="1" stop-color="#ff4fd8"/>
+    </linearGradient>
+    <linearGradient id="key07mini04-key04Metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f1f5ff"/>
+      <stop offset="0.5" stop-color="#9db6f5"/>
+      <stop offset="1" stop-color="#55538f"/>
+    </linearGradient>
+    <radialGradient id="key07mini04-key04Core" cx="0.5" cy="0.5" r="0.5">
+      <stop stop-color="#211b4f"/>
+      <stop offset="0.75" stop-color="#09091d"/>
+      <stop offset="1" stop-color="#17102d"/>
+    </radialGradient>
+    <filter id="key07mini04-key04Glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .k4-cycle { transform-origin: 90px 130px; animation: k4-spin 9s linear infinite; }
+      .k4-led { animation: k4-led 2.2s ease-in-out infinite; }
+      @keyframes k4-spin { to { transform: rotate(360deg); } }
+      @keyframes k4-led { 50% { opacity: .35; } }
+      @media (prefers-reduced-motion: reduce) { .k4-cycle, .k4-led { animation: none; } }
+    </style></defs>
+          <g transform="translate(90 130) rotate(-5) translate(-90 -130)">
+    <rect x="62" y="6" width="56" height="40" rx="5" fill="url(#key07mini04-key04Metal)" stroke="#edf3ff" stroke-width="2"/>
+    <rect x="70" y="13" width="40" height="18" rx="3" fill="#11102b"/>
+    <rect x="76" y="18" width="8" height="9" rx="1.5" fill="#ff4fd8"/>
+    <rect x="96" y="18" width="8" height="9" rx="1.5" fill="#38d6ff"/>
+    <path d="M44 44h92q10 0 10 10v20l-8 8v30l8 8v70a28 28 0 0 1-28 28H62a28 28 0 0 1-28-28v-70l8-8V82l-8-8V54q0-10 10-10Z" fill="url(#key07mini04-key04Shell)" stroke="url(#key07mini04-key04Edge)" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M50 58h80M50 66h80" stroke="#38d6ff" stroke-width="1.5" opacity="0.55"/>
+    <circle cx="90" cy="130" r="44" fill="url(#key07mini04-key04Core)" stroke="#38d6ff" stroke-width="2"/>
+    <circle cx="90" cy="130" r="37" fill="none" stroke="#ff4fd8" stroke-width="1" stroke-dasharray="2 6" opacity="0.8"/>
+    <g class="k4-cycle" filter="url(#key07mini04-key04Glow)">
+    <path d="M98.03,105.27 A26 26 0 0 1 115.86,132.72" fill="none" stroke="url(#key07mini04-key04Edge)" stroke-width="5" stroke-linecap="round"/>
+    <path d="M114.43,138.89 L122.92,132.3 L108.95,131.33 Z" fill="#ff4fd8" stroke="#ff4fd8" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M107.4,149.32 A26 26 0 0 1 74.72,151.03" fill="none" stroke="url(#key07mini04-key04Edge)" stroke-width="5" stroke-linecap="round"/>
+    <path d="M70.08,146.71 L71.55,157.36 L79.38,145.75 Z" fill="#38d6ff" stroke="#38d6ff" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M64.57,135.41 A26 26 0 0 1 79.42,106.25" fill="none" stroke="url(#key07mini04-key04Edge)" stroke-width="5" stroke-linecap="round"/>
+    <path d="M85.49,104.39 L75.53,100.34 L81.67,112.92 Z" fill="#bd63ff" stroke="#bd63ff" stroke-width="1" stroke-linejoin="round"/>
+    </g>
+    <circle cx="90" cy="130" r="6" fill="#ff4fd8" filter="url(#key07mini04-key04Glow)"/>
+    <text x="90" y="192" fill="#e6eaff" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 04</text>
+    <circle class="k4-led" cx="90" cy="206" r="4.5" fill="#38d6ff" filter="url(#key07mini04-key04Glow)"/>
+  </g>
+        </svg>
+      </g>
+      <g class="k7-orbit-key key-05" transform="rotate(60 55.36 150)">
+        <svg x="43.36" y="132.67" width="24" height="34.67" viewBox="0 0 180 260" overflow="visible" role="img" aria-labelledby="key07mini05-key05Title key07mini05-key05Desc">
+          <title id="key07mini05-key05Title">Clé de résonance 05</title>
+  <desc id="key07mini05-key05Desc">Clé USB en bouclier, cramoisie et or rose, au cœur en réseau de cinq nœuds reliés et marquée du sigle KEY 05.</desc>
+          <defs><linearGradient id="key07mini05-key05Shell" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#4a1020"/>
+      <stop offset="0.55" stop-color="#14060c"/>
+      <stop offset="1" stop-color="#5a2a14"/>
+    </linearGradient>
+    <linearGradient id="key07mini05-key05Edge" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ff5a6e"/>
+      <stop offset="0.5" stop-color="#ffd0a8"/>
+      <stop offset="1" stop-color="#ff9f6b"/>
+    </linearGradient>
+    <linearGradient id="key07mini05-key05Metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff0e6"/>
+      <stop offset="0.5" stop-color="#e8a898"/>
+      <stop offset="1" stop-color="#8a4a48"/>
+    </linearGradient>
+    <radialGradient id="key07mini05-key05Core" cx="0.5" cy="0.5" r="0.5">
+      <stop stop-color="#3a0f1c"/>
+      <stop offset="0.8" stop-color="#12050a"/>
+      <stop offset="1" stop-color="#1c0a10"/>
+    </radialGradient>
+    <filter id="key07mini05-key05Glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .k5-net { animation: k5-net 3s ease-in-out infinite; }
+      .k5-node { animation: k5-node 2.4s ease-in-out infinite; }
+      .k5-core { transform-box: fill-box; transform-origin: center; animation: k5-core 1.8s ease-in-out infinite; }
+      .k5-node.n1 { animation-delay: .4s; } .k5-node.n2 { animation-delay: .8s; } .k5-node.n3 { animation-delay: 1.2s; } .k5-node.n4 { animation-delay: 1.6s; }
+      @keyframes k5-net { 50% { opacity: .45; } }
+      @keyframes k5-node { 50% { opacity: .3; } }
+      @keyframes k5-core { 50% { opacity: .55; transform: scale(.72); } }
+      @media (prefers-reduced-motion: reduce) { .k5-net, .k5-node, .k5-core { animation: none; } }
+    </style></defs>
+          <g transform="translate(90 130) rotate(6) translate(-90 -130)">
+    <path d="M66 6h48l8 10v30H58V16l8-10Z" fill="url(#key07mini05-key05Metal)" stroke="#fff0e6" stroke-width="2" stroke-linejoin="round"/>
+    <rect x="68" y="14" width="44" height="18" rx="2" fill="#2a0c12"/>
+    <rect x="74" y="19" width="9" height="8" fill="#ff9f6b"/>
+    <rect x="97" y="19" width="9" height="8" fill="#ff9f6b"/>
+    <path d="M48 44h84l18 18v108l-60 54-60-54V62l18-18Z" fill="url(#key07mini05-key05Shell)" stroke="url(#key07mini05-key05Edge)" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M52 58h76" stroke="#ff9f6b" stroke-width="1.5" opacity="0.5"/>
+    <circle cx="90" cy="130" r="44" fill="url(#key07mini05-key05Core)" stroke="#ff5a6e" stroke-width="2"/>
+    <circle cx="90" cy="130" r="38" fill="none" stroke="#ffb38a" stroke-width="1" stroke-dasharray="2 6" opacity="0.6"/>
+    <g class="k5-net" fill="none" stroke-linecap="round">
+      <path d="M90,100 L107.63,154.27 M118.53,120.73 L72.37,154.27 M107.63,154.27 L61.47,120.73 M72.37,154.27 L90,100 M61.47,120.73 L118.53,120.73 " stroke="#ff9f6b" stroke-width="1.2" opacity="0.8"/>
+      <path d="M90,100 L118.53,120.73 M118.53,120.73 L107.63,154.27 M107.63,154.27 L72.37,154.27 M72.37,154.27 L61.47,120.73 M61.47,120.73 L90,100 " stroke="#ff5a6e" stroke-width="2"/>
+      <path d="M90,130 L90,100 M90,130 L118.53,120.73 M90,130 L107.63,154.27 M90,130 L72.37,154.27 M90,130 L61.47,120.73 " stroke="#ffd0a8" stroke-width="1" opacity="0.6"/>
+    </g>
+    <circle cx="90" cy="100" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
+    <circle class="k5-node n0" cx="90" cy="100" r="2.5" fill="#ff6b7e" filter="url(#key07mini05-key05Glow)"/>
+    <circle cx="118.53" cy="120.73" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
+    <circle class="k5-node n1" cx="118.53" cy="120.73" r="2.5" fill="#ff6b7e" filter="url(#key07mini05-key05Glow)"/>
+    <circle cx="107.63" cy="154.27" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
+    <circle class="k5-node n2" cx="107.63" cy="154.27" r="2.5" fill="#ff6b7e" filter="url(#key07mini05-key05Glow)"/>
+    <circle cx="72.37" cy="154.27" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
+    <circle class="k5-node n3" cx="72.37" cy="154.27" r="2.5" fill="#ff6b7e" filter="url(#key07mini05-key05Glow)"/>
+    <circle cx="61.47" cy="120.73" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
+    <circle class="k5-node n4" cx="61.47" cy="120.73" r="2.5" fill="#ff6b7e" filter="url(#key07mini05-key05Glow)"/>
+    <circle class="k5-core" cx="90" cy="130" r="7" fill="#ffd0a8" filter="url(#key07mini05-key05Glow)"/>
+    <text x="90" y="190" fill="#ffe6dc" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 05</text>
+    <circle cx="90" cy="203" r="4" fill="#ff6b7e" filter="url(#key07mini05-key05Glow)"/>
+  </g>
+        </svg>
+      </g>
+      <g class="k7-orbit-key key-06" transform="rotate(120 55.36 110)">
+        <svg x="43.36" y="92.67" width="24" height="34.67" viewBox="0 0 180 260" overflow="visible" role="img" aria-labelledby="key07mini06-key06Title key07mini06-key06Desc">
+          <title id="key07mini06-key06Title">Clé de résonance 06</title>
+  <desc id="key07mini06-key06Desc">Clé maîtresse USB or et blanc, au cœur serti de six gemmes de couleur autour d'une serrure lumineuse et marquée du sigle KEY 06.</desc>
+          <defs><linearGradient id="key07mini06-key06Shell" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3a3350"/>
+      <stop offset="0.5" stop-color="#0e0c1c"/>
+      <stop offset="1" stop-color="#4a3a1c"/>
+    </linearGradient>
+    <linearGradient id="key07mini06-key06Edge" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff6c8"/>
+      <stop offset="0.35" stop-color="#ffd24d"/>
+      <stop offset="0.7" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e8b84a"/>
+    </linearGradient>
+    <linearGradient id="key07mini06-key06Metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffffff"/>
+      <stop offset="0.45" stop-color="#ffe9a0"/>
+      <stop offset="1" stop-color="#b8892e"/>
+    </linearGradient>
+    <radialGradient id="key07mini06-key06Core" cx="0.5" cy="0.5" r="0.5">
+      <stop stop-color="#2a2548"/>
+      <stop offset="0.8" stop-color="#0a0818"/>
+      <stop offset="1" stop-color="#14102a"/>
+    </radialGradient>
+    <filter id="key07mini06-key06Glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .k6-gems { transform-origin: 90px 130px; animation: k6-spin 20s linear infinite; }
+      .k6-lock { animation: k6-lock 2.8s ease-in-out infinite; }
+      @keyframes k6-spin { to { transform: rotate(360deg); } }
+      @keyframes k6-lock { 50% { opacity: .6; } }
+      @media (prefers-reduced-motion: reduce) { .k6-gems, .k6-lock { animation: none; } }
+    </style></defs>
+          <g transform="translate(90 130) rotate(-3) translate(-90 -130)">
+    <path d="M62 14l8-8 10 8 10-8 10 8 10-8 8 8v32H62V14Z" fill="url(#key07mini06-key06Metal)" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+    <rect x="70" y="20" width="40" height="14" rx="2" fill="#241a08"/>
+    <rect x="75" y="23" width="8" height="8" fill="#ffd24d"/>
+    <rect x="97" y="23" width="8" height="8" fill="#ffd24d"/>
+    <path d="M52 46h76l24 24v116q0 36-36 36H64q-36 0-36-36V70l24-24Z" fill="url(#key07mini06-key06Shell)" stroke="url(#key07mini06-key06Edge)" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M56 58h68M44 70h92" stroke="#ffe9a0" stroke-width="1.5" opacity="0.5"/>
+    <circle cx="90" cy="130" r="45" fill="url(#key07mini06-key06Core)" stroke="url(#key07mini06-key06Edge)" stroke-width="2.5"/>
+    <g class="k6-gems">
+    <circle cx="90" cy="92" r="4.5" fill="#ff5a6e" stroke="#fff" stroke-width="1" filter="url(#key07mini06-key06Glow)"/>
+    <circle cx="122.91" cy="111" r="4.5" fill="#ffd24d" stroke="#fff" stroke-width="1" filter="url(#key07mini06-key06Glow)"/>
+    <circle cx="122.91" cy="149" r="4.5" fill="#8cff7a" stroke="#fff" stroke-width="1" filter="url(#key07mini06-key06Glow)"/>
+    <circle cx="90" cy="168" r="4.5" fill="#38f2ff" stroke="#fff" stroke-width="1" filter="url(#key07mini06-key06Glow)"/>
+    <circle cx="57.09" cy="149" r="4.5" fill="#7a8cff" stroke="#fff" stroke-width="1" filter="url(#key07mini06-key06Glow)"/>
+    <circle cx="57.09" cy="111" r="4.5" fill="#e07aff" stroke="#fff" stroke-width="1" filter="url(#key07mini06-key06Glow)"/>
+    </g>
+    <path d="M90,102 L114.25,116 L114.25,144 L90,158 L65.75,144 L65.75,116 Z" fill="none" stroke="#ffe9a0" stroke-width="1.5" opacity="0.8"/>
+    <g class="k6-lock" filter="url(#key07mini06-key06Glow)">
+      <circle cx="90" cy="125" r="9" fill="#fff6c8"/>
+      <path d="M85 130h10l4 16H81Z" fill="#fff6c8"/>
+      <circle cx="90" cy="125" r="3.5" fill="#0a0818"/>
+      <path d="M89 126h2l1.5 13h-5Z" fill="#0a0818"/>
+    </g>
+    <text x="90" y="194" fill="#fff6d8" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 06</text>
+    <path d="M64 201h52" stroke="#ffd24d" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+    <circle cx="82" cy="213" r="3.5" fill="#ff5a6e"/><circle cx="90" cy="213" r="3.5" fill="#ffd24d"/><circle cx="98" cy="213" r="3.5" fill="#38f2ff"/>
+  </g>
+        </svg>
+      </g>
+    </g>
+
+    <g class="k7-lock-halo">
+      <circle cx="90" cy="130" r="20" fill="#090d20" fill-opacity=".96" stroke="url(#key07Prism)" stroke-width="1.6" filter="url(#key07Glow)"/>
+      <path d="M82 122v-5a8 8 0 0 1 16 0v5" fill="none" stroke="url(#key07Metal)" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M78 121h24a3 3 0 0 1 3 3v17a4 4 0 0 1-4 4H79a4 4 0 0 1-4-4v-17a3 3 0 0 1 3-3Z"
+        fill="url(#key07Metal)" stroke="#f6f4ff" stroke-opacity=".62" stroke-width="1"/>
+      <rect x="80" y="127" width="20" height="8" rx="2" fill="#090d20" stroke="#dce8ff" stroke-opacity=".7" stroke-width=".8"/>
+      <path class="k7-port-light" d="M83 130h2m2 0h2m2 0h2m2 0h2" stroke="#d9f27e" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M90 135v4" stroke="#6759e8" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="90" cy="140" r="1.4" fill="#ff8c83"/>
+    </g>
+    <text x="90" y="260" fill="#eff1ff" font-family="Arial, sans-serif" font-size="6" font-weight="700" letter-spacing="1.1" text-anchor="middle">KEY 07 // FINAL ECHO</text>
+  </g>
+
 </svg>
