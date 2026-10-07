@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 260" role="img" aria-labelledby="key02Title key02Desc">
+  <title id="key02Title">Clé de résonance 02</title>
+  <desc id="key02Desc">Clé USB fracturée, turquoise et ambre, au cœur en losange traversé d'une faille lumineuse et marqué du sigle 02.</desc>
+  <defs>
+    <linearGradient id="key02Shell" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#14414a"/>
+      <stop offset="0.55" stop-color="#071722"/>
+      <stop offset="1" stop-color="#5c3a1c"/>
+    </linearGradient>
+    <linearGradient id="key02Edge" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#45e5d2"/>
+      <stop offset="0.5" stop-color="#e4f7b0"/>
+      <stop offset="1" stop-color="#ffbd69"/>
+    </linearGradient>
+    <linearGradient id="key02Metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff4d6"/>
+      <stop offset="0.5" stop-color="#ffbd69"/>
+      <stop offset="1" stop-color="#9a6a2e"/>
+    </linearGradient>
+    <linearGradient id="key02Core" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#0f3a40"/>
+      <stop offset="1" stop-color="#06111b"/>
+    </linearGradient>
+    <filter id="key02Glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .k2-crack { animation: k2-crack 2.6s ease-in-out infinite; }
+      .k2-shard-a { animation: k2-drift-a 4s ease-in-out infinite; }
+      .k2-shard-b { animation: k2-drift-b 4.6s ease-in-out infinite; }
+      @keyframes k2-crack { 50% { opacity: .55; } }
+      @keyframes k2-drift-a { 50% { transform: translate(-3px, -4px); } }
+      @keyframes k2-drift-b { 50% { transform: translate(3px, 4px); } }
+      @media (prefers-reduced-motion: reduce) { .k2-crack, .k2-shard-a, .k2-shard-b { animation: none; } }
+    </style>
+  </defs>
+  <g transform="translate(90 130) rotate(7) translate(-90 -130)">
+    <path d="M62 6h56l6 6v30H56V12l6-6Z" fill="url(#key02Metal)" stroke="#fff4d6" stroke-width="2"/>
+    <rect x="68" y="14" width="44" height="18" rx="2" fill="#2a1a0a"/>
+    <rect x="74" y="19" width="9" height="8" fill="#45e5d2"/>
+    <rect x="97" y="19" width="9" height="8" fill="#45e5d2"/>
+    <path d="M48 42h84l20 22v130l-20 22H48l-20-22V64l20-22Z" fill="url(#key02Shell)" stroke="url(#key02Edge)" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M52 56h20m36 0h20M40 70l10-8m90 8-10-8" fill="none" stroke="#45e5d2" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+    <path d="M90 84l46 46-46 46-46-46 46-46Z" fill="url(#key02Core)" stroke="#45e5d2" stroke-width="2"/>
+    <path d="M90 96l34 34-34 34-34-34 34-34Z" fill="none" stroke="#45e5d2" stroke-width="1" opacity="0.5"/>
+    <path d="M90 108l22 22-22 22-22-22 22-22Z" fill="none" stroke="#ffbd69" stroke-width="1" stroke-dasharray="3 4" opacity="0.7"/>
+    <g class="k2-shard-a"><path d="M62 118l8-4-3 9Z" fill="#45e5d2" opacity="0.9"/></g>
+    <g class="k2-shard-b"><path d="M118 142l-9 3 4-8Z" fill="#ffbd69" opacity="0.9"/></g>
+    <path class="k2-crack" d="M90 84l-8 20 14 14-12 20 14 16-8 22" fill="none" stroke="#ffbd69" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#key02Glow)"/>
+    <path d="M90 84l-8 20 14 14-12 20 14 16-8 22" fill="none" stroke="#fff4d6" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="90" y="194" fill="#fff0c6" font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="2" text-anchor="middle" filter="url(#key02Glow)">02</text>
+    <path d="M64 200h52" stroke="#45e5d2" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+    <circle cx="90" cy="209" r="4.5" fill="#ffbd69" filter="url(#key02Glow)"/>
+  </g>
+</svg>

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 260" role="img" aria-labelledby="key06Title key06Desc">
+  <title id="key06Title">Clé de résonance 06</title>
+  <desc id="key06Desc">Clé maîtresse USB or et blanc, au cœur serti de six gemmes de couleur autour d'une serrure lumineuse et marquée du sigle KEY 06.</desc>
+  <defs>
+    <linearGradient id="key06Shell" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3a3350"/>
+      <stop offset="0.5" stop-color="#0e0c1c"/>
+      <stop offset="1" stop-color="#4a3a1c"/>
+    </linearGradient>
+    <linearGradient id="key06Edge" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff6c8"/>
+      <stop offset="0.35" stop-color="#ffd24d"/>
+      <stop offset="0.7" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e8b84a"/>
+    </linearGradient>
+    <linearGradient id="key06Metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffffff"/>
+      <stop offset="0.45" stop-color="#ffe9a0"/>
+      <stop offset="1" stop-color="#b8892e"/>
+    </linearGradient>
+    <radialGradient id="key06Core" cx="0.5" cy="0.5" r="0.5">
+      <stop stop-color="#2a2548"/>
+      <stop offset="0.8" stop-color="#0a0818"/>
+      <stop offset="1" stop-color="#14102a"/>
+    </radialGradient>
+    <filter id="key06Glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .k6-gems { transform-origin: 90px 130px; animation: k6-spin 20s linear infinite; }
+      .k6-lock { animation: k6-lock 2.8s ease-in-out infinite; }
+      @keyframes k6-spin { to { transform: rotate(360deg); } }
+      @keyframes k6-lock { 50% { opacity: .6; } }
+      @media (prefers-reduced-motion: reduce) { .k6-gems, .k6-lock { animation: none; } }
+    </style>
+  </defs>
+  <g transform="translate(90 130) rotate(-3) translate(-90 -130)">
+    <path d="M62 14l8-8 10 8 10-8 10 8 10-8 8 8v32H62V14Z" fill="url(#key06Metal)" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+    <rect x="70" y="20" width="40" height="14" rx="2" fill="#241a08"/>
+    <rect x="75" y="23" width="8" height="8" fill="#ffd24d"/>
+    <rect x="97" y="23" width="8" height="8" fill="#ffd24d"/>
+    <path d="M52 46h76l24 24v116q0 36-36 36H64q-36 0-36-36V70l24-24Z" fill="url(#key06Shell)" stroke="url(#key06Edge)" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M56 58h68M44 70h92" stroke="#ffe9a0" stroke-width="1.5" opacity="0.5"/>
+    <circle cx="90" cy="130" r="45" fill="url(#key06Core)" stroke="url(#key06Edge)" stroke-width="2.5"/>
+    <g class="k6-gems">
+    <circle cx="90" cy="92" r="4.5" fill="#ff5a6e" stroke="#fff" stroke-width="1" filter="url(#key06Glow)"/>
+    <circle cx="122.91" cy="111" r="4.5" fill="#ffd24d" stroke="#fff" stroke-width="1" filter="url(#key06Glow)"/>
+    <circle cx="122.91" cy="149" r="4.5" fill="#8cff7a" stroke="#fff" stroke-width="1" filter="url(#key06Glow)"/>
+    <circle cx="90" cy="168" r="4.5" fill="#38f2ff" stroke="#fff" stroke-width="1" filter="url(#key06Glow)"/>
+    <circle cx="57.09" cy="149" r="4.5" fill="#7a8cff" stroke="#fff" stroke-width="1" filter="url(#key06Glow)"/>
+    <circle cx="57.09" cy="111" r="4.5" fill="#e07aff" stroke="#fff" stroke-width="1" filter="url(#key06Glow)"/>
+    </g>
+    <path d="M90,102 L114.25,116 L114.25,144 L90,158 L65.75,144 L65.75,116 Z" fill="none" stroke="#ffe9a0" stroke-width="1.5" opacity="0.8"/>
+    <g class="k6-lock" filter="url(#key06Glow)">
+      <circle cx="90" cy="125" r="9" fill="#fff6c8"/>
+      <path d="M85 130h10l4 16H81Z" fill="#fff6c8"/>
+      <circle cx="90" cy="125" r="3.5" fill="#0a0818"/>
+      <path d="M89 126h2l1.5 13h-5Z" fill="#0a0818"/>
+    </g>
+    <text x="90" y="194" fill="#fff6d8" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 06</text>
+    <path d="M64 201h52" stroke="#ffd24d" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+    <circle cx="82" cy="213" r="3.5" fill="#ff5a6e"/><circle cx="90" cy="213" r="3.5" fill="#ffd24d"/><circle cx="98" cy="213" r="3.5" fill="#38f2ff"/>
+  </g>
+</svg>

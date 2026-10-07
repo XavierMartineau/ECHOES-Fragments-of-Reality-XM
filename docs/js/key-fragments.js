@@ -15,7 +15,80 @@
     return svg;
   };
 
+  const lang = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const cineText = {
+    fr: { title: (n) => `CLÉ 0${n} COMPLÈTE`, sub: "Les trois fragments se rejoignent. La clé est reconstituée.", next: "CONTINUER", close: "Fermer" },
+    en: { title: (n) => `KEY 0${n} COMPLETE`, sub: "The three fragments join together. The key is restored.", next: "CONTINUE", close: "Close" },
+  }[lang];
+
+  const playCinematic = ({ keyNumber, src, onContinue }) => {
+    const root = document.createElement("div");
+    root.className = "kf-cine";
+    root.setAttribute("role", "dialog");
+    root.setAttribute("aria-modal", "true");
+    const rays = document.createElement("div");
+    rays.className = "kf-cine-rays";
+    const rings = document.createElement("div");
+    rings.className = "kf-cine-rings";
+    rings.append(document.createElement("span"), document.createElement("span"), document.createElement("span"));
+    const key = document.createElement("div");
+    key.className = "kf-cine-key";
+    [0, 1, 2].forEach((index) => key.appendChild(makeSvg(src, index, `kf-cine-piece piece-${index}`, false)));
+    const sparks = document.createElement("div");
+    sparks.className = "kf-cine-sparks";
+    const hues = ["#79f7ff", "#45e5d2", "#ffd24d", "#c084fc"];
+    for (let index = 0; index < 36; index += 1) {
+      const spark = document.createElement("i");
+      const angle = (index / 36) * Math.PI * 2;
+      const distance = 160 + Math.random() * 220;
+      spark.style.setProperty("--dx", `${Math.cos(angle) * distance}px`);
+      spark.style.setProperty("--dy", `${Math.sin(angle) * distance}px`);
+      spark.style.setProperty("--delay", `${3.1 + Math.random() * 0.5}s`);
+      spark.style.setProperty("--hue", hues[index % hues.length]);
+      sparks.appendChild(spark);
+    }
+    const title = document.createElement("h2");
+    title.className = "kf-cine-title";
+    title.textContent = cineText.title(keyNumber);
+    const sub = document.createElement("p");
+    sub.className = "kf-cine-sub";
+    sub.textContent = cineText.sub;
+    const actions = document.createElement("div");
+    actions.className = "kf-cine-actions";
+    actions.hidden = true;
+    const next = document.createElement("button");
+    next.type = "button";
+    next.className = "next-level-button kf-cine-button";
+    next.textContent = cineText.next;
+    const close = document.createElement("button");
+    close.type = "button";
+    close.className = "reset-button kf-cine-close";
+    close.textContent = cineText.close;
+    actions.append(next, close);
+    root.append(rays, rings, key, sparks, title, sub, actions);
+    document.body.appendChild(root);
+
+    const dismiss = () => {
+      window.clearTimeout(timer);
+      document.removeEventListener("keydown", onKey);
+      root.remove();
+    };
+    const onKey = (event) => { if (event.key === "Escape") dismiss(); };
+    document.addEventListener("keydown", onKey);
+    close.addEventListener("click", dismiss);
+    next.addEventListener("click", () => {
+      dismiss();
+      if (onContinue) onContinue();
+    });
+    void root.offsetWidth;
+    root.classList.add("is-playing");
+    const timer = window.setTimeout(() => {
+      actions.hidden = false;
+      next.focus();
+    }, 4300);
+  };
   window.EchoesKeyFragments = {
+    playCinematic,
     mount({ keyNumber, src, core, before, label }) {
       const assembly = document.createElement("div");
       assembly.className = "kf-assembly";

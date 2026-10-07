@@ -369,6 +369,13 @@
     startButton.disabled = true;
     playPuzzleSuccessAnimation();
     nextButton.focus();
+    window.setTimeout(() => {
+      window.EchoesKeyFragments.playCinematic({
+        keyNumber: 1,
+        src: "../../assets/images/key-01-usb.svg",
+        onContinue: () => nextButton.click(),
+      });
+    }, 1400);
     const accountId = window.EchoesSave?.getCurrentUser?.();
     if (!accountId) return;
     const progressKey = `echoes-completed-levels-${encodeURIComponent(accountId)}`;

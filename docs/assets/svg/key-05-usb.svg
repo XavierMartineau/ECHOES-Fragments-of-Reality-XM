@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 260" role="img" aria-labelledby="key05Title key05Desc">
+  <title id="key05Title">Clé de résonance 05</title>
+  <desc id="key05Desc">Clé USB en bouclier, cramoisie et or rose, au cœur en réseau de cinq nœuds reliés et marquée du sigle KEY 05.</desc>
+  <defs>
+    <linearGradient id="key05Shell" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#4a1020"/>
+      <stop offset="0.55" stop-color="#14060c"/>
+      <stop offset="1" stop-color="#5a2a14"/>
+    </linearGradient>
+    <linearGradient id="key05Edge" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ff5a6e"/>
+      <stop offset="0.5" stop-color="#ffd0a8"/>
+      <stop offset="1" stop-color="#ff9f6b"/>
+    </linearGradient>
+    <linearGradient id="key05Metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff0e6"/>
+      <stop offset="0.5" stop-color="#e8a898"/>
+      <stop offset="1" stop-color="#8a4a48"/>
+    </linearGradient>
+    <radialGradient id="key05Core" cx="0.5" cy="0.5" r="0.5">
+      <stop stop-color="#3a0f1c"/>
+      <stop offset="0.8" stop-color="#12050a"/>
+      <stop offset="1" stop-color="#1c0a10"/>
+    </radialGradient>
+    <filter id="key05Glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .k5-net { animation: k5-net 3s ease-in-out infinite; }
+      .k5-node { animation: k5-node 2.4s ease-in-out infinite; }
+      .k5-node.n1 { animation-delay: .4s; } .k5-node.n2 { animation-delay: .8s; } .k5-node.n3 { animation-delay: 1.2s; } .k5-node.n4 { animation-delay: 1.6s; }
+      @keyframes k5-net { 50% { opacity: .45; } }
+      @keyframes k5-node { 50% { opacity: .3; } }
+      @media (prefers-reduced-motion: reduce) { .k5-net, .k5-node { animation: none; } }
+    </style>
+  </defs>
+  <g transform="translate(90 130) rotate(6) translate(-90 -130)">
+    <path d="M66 6h48l8 10v30H58V16l8-10Z" fill="url(#key05Metal)" stroke="#fff0e6" stroke-width="2" stroke-linejoin="round"/>
+    <rect x="68" y="14" width="44" height="18" rx="2" fill="#2a0c12"/>
+    <rect x="74" y="19" width="9" height="8" fill="#ff9f6b"/>
+    <rect x="97" y="19" width="9" height="8" fill="#ff9f6b"/>
+    <path d="M48 44h84l18 18v108l-60 54-60-54V62l18-18Z" fill="url(#key05Shell)" stroke="url(#key05Edge)" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M52 58h76" stroke="#ff9f6b" stroke-width="1.5" opacity="0.5"/>
+    <circle cx="90" cy="130" r="44" fill="url(#key05Core)" stroke="#ff5a6e" stroke-width="2"/>
+    <circle cx="90" cy="130" r="38" fill="none" stroke="#ffb38a" stroke-width="1" stroke-dasharray="2 6" opacity="0.6"/>
+    <g class="k5-net" fill="none" stroke-linecap="round">
+      <path d="M90,100 L107.63,154.27 M118.53,120.73 L72.37,154.27 M107.63,154.27 L61.47,120.73 M72.37,154.27 L90,100 M61.47,120.73 L118.53,120.73 " stroke="#ff9f6b" stroke-width="1.2" opacity="0.8"/>
+      <path d="M90,100 L118.53,120.73 M118.53,120.73 L107.63,154.27 M107.63,154.27 L72.37,154.27 M72.37,154.27 L61.47,120.73 M61.47,120.73 L90,100 " stroke="#ff5a6e" stroke-width="2"/>
+      <path d="M90,130 L90,100 M90,130 L118.53,120.73 M90,130 L107.63,154.27 M90,130 L72.37,154.27 M90,130 L61.47,120.73 " stroke="#ffd0a8" stroke-width="1" opacity="0.6"/>
+    </g>
+    <circle cx="90" cy="100" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
+    <circle class="k5-node n0" cx="90" cy="100" r="2.5" fill="#ff6b7e" filter="url(#key05Glow)"/>
+    <circle cx="118.53" cy="120.73" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
+    <circle class="k5-node n1" cx="118.53" cy="120.73" r="2.5" fill="#ff6b7e" filter="url(#key05Glow)"/>
+    <circle cx="107.63" cy="154.27" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
+    <circle class="k5-node n2" cx="107.63" cy="154.27" r="2.5" fill="#ff6b7e" filter="url(#key05Glow)"/>
+    <circle cx="72.37" cy="154.27" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
+    <circle class="k5-node n3" cx="72.37" cy="154.27" r="2.5" fill="#ff6b7e" filter="url(#key05Glow)"/>
+    <circle cx="61.47" cy="120.73" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
+    <circle class="k5-node n4" cx="61.47" cy="120.73" r="2.5" fill="#ff6b7e" filter="url(#key05Glow)"/>
+    <circle cx="90" cy="130" r="7" fill="#ffd0a8" filter="url(#key05Glow)"/>
+    <text x="90" y="190" fill="#ffe6dc" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 05</text>
+    <circle cx="90" cy="203" r="4" fill="#ff6b7e" filter="url(#key05Glow)"/>
+  </g>
+</svg>

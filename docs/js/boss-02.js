@@ -329,6 +329,13 @@
     startButton.hidden = true;
     nextButton.hidden = false;
     setStatus(copy.victory, "success");
+    window.setTimeout(() => {
+      window.EchoesKeyFragments.playCinematic({
+        keyNumber: 2,
+        src: "../../assets/images/key-02-usb.svg",
+        onContinue: () => nextButton.click(),
+      });
+    }, 2000);
     nextButton.focus();
     render();
   };

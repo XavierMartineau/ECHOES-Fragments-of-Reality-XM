@@ -1,3 +1,7 @@
+/* ---------------------------------------------------------------------------
+ * PARTIE 4 // NIVEAUX 31 À 40
+ * Niveau 31 : plateau incliné (billes, obstacles, quatre manches).
+ * ------------------------------------------------------------------------- */
 (() => {
   const canvas = document.getElementById("tiltCanvas");
   if (!canvas) return;
