@@ -426,20 +426,20 @@
 
   const drawBackground = () => {
     const sky = ctx.createLinearGradient(0, -100, 0, H + 100);
-    sky.addColorStop(0, "#070c26");
-    sky.addColorStop(0.55, "#0c0a2b");
-    sky.addColorStop(1, "#1a0a30");
+    sky.addColorStop(0, "#04120f");
+    sky.addColorStop(0.55, "#07140f");
+    sky.addColorStop(1, "#0b1a10");
     ctx.fillStyle = sky;
     ctx.fillRect(-140, -140, W + 280, H + 280);
 
     stars.forEach((star) => {
       ctx.globalAlpha = 0.25 + 0.35 * Math.abs(Math.sin(time * star.s + star.x));
-      ctx.fillStyle = "#9fd8ff";
+      ctx.fillStyle = "#b8ffe0";
       ctx.fillRect(star.x, star.y, 1.5, 1.5);
     });
     ctx.globalAlpha = 1;
 
-    ctx.strokeStyle = "rgba(56,242,255,0.06)";
+    ctx.strokeStyle = "rgba(61,255,176,0.06)";
     ctx.lineWidth = 1;
     const offset = (time * 8) % 40;
     for (let x = -120; x <= W + 120; x += 40) { ctx.beginPath(); ctx.moveTo(x, -140); ctx.lineTo(x, H + 140); ctx.stroke(); }
@@ -448,26 +448,26 @@
     streams.forEach((stream) => {
       const y = ((stream.y + time * stream.speed) % (H + 140)) - 70;
       const line = ctx.createLinearGradient(0, y, 0, y + stream.len);
-      line.addColorStop(0, "rgba(121,247,255,0)");
-      line.addColorStop(1, "rgba(121,247,255,0.28)");
+      line.addColorStop(0, "rgba(125,255,196,0)");
+      line.addColorStop(1, "rgba(125,255,196,0.28)");
       ctx.fillStyle = line;
       ctx.fillRect(stream.x, y, 1.5, stream.len);
     });
 
     const hex = ctx.createRadialGradient(200, 320, 20, 200, 320, 260);
-    hex.addColorStop(0, "rgba(120,80,255,0.12)");
-    hex.addColorStop(1, "rgba(120,80,255,0)");
+    hex.addColorStop(0, "rgba(61,255,176,0.12)");
+    hex.addColorStop(1, "rgba(61,255,176,0)");
     ctx.fillStyle = hex;
     ctx.fillRect(-140, -140, W + 280, H + 280);
 
     floors.slice(0, 4).forEach((top, index) => {
       const [g0, g1] = gaps[index];
       const beam = ctx.createLinearGradient(0, top + FLOOR_H, 0, floors[index + 1]);
-      beam.addColorStop(0, "rgba(121,247,255,0.16)");
-      beam.addColorStop(1, "rgba(121,247,255,0)");
+      beam.addColorStop(0, "rgba(125,255,196,0.16)");
+      beam.addColorStop(1, "rgba(125,255,196,0)");
       ctx.fillStyle = beam;
       ctx.fillRect(g0, top + FLOOR_H, g1 - g0, floors[index + 1] - top - FLOOR_H);
-      ctx.fillStyle = "rgba(121,247,255,0.5)";
+      ctx.fillStyle = "rgba(125,255,196,0.5)";
       for (let chevron = 0; chevron < 2; chevron += 1) {
         const y = top + FLOOR_H + 14 + ((time * 40 + chevron * 40) % 78);
         const cx = (g0 + g1) / 2;
@@ -487,11 +487,11 @@
   const drawPlatforms = () => {
     rects.forEach((rect) => {
       const body = ctx.createLinearGradient(0, rect.y, 0, rect.y + rect.h);
-      body.addColorStop(0, "#35c9e8");
-      body.addColorStop(0.18, "#1d4a7a");
-      body.addColorStop(1, "#0c1a3a");
+      body.addColorStop(0, "#3dffb0");
+      body.addColorStop(0.18, "#1d6a52");
+      body.addColorStop(1, "#0a2a22");
       ctx.fillStyle = body;
-      ctx.shadowColor = "#38f2ff";
+      ctx.shadowColor = "#3dffb0";
       ctx.shadowBlur = 10;
       ctx.fillRect(rect.x, rect.y, rect.w, rect.h);
       ctx.shadowBlur = 0;
@@ -499,7 +499,7 @@
       ctx.fillRect(rect.x, rect.y, rect.w, 1.6);
       for (let x = rect.x + 8; x < rect.x + rect.w - 4; x += 16) {
         const on = Math.sin(time * 3 + x * 0.05) > 0.2;
-        ctx.fillStyle = on ? "rgba(121,247,255,0.9)" : "rgba(121,247,255,0.18)";
+        ctx.fillStyle = on ? "rgba(125,255,196,0.9)" : "rgba(125,255,196,0.18)";
         ctx.fillRect(x, rect.y + rect.h - 4, 3, 2);
       }
     });
@@ -525,7 +525,7 @@
         }
         ctx.restore();
       });
-      ctx.fillStyle = "rgba(160,215,255,0.55)";
+      ctx.fillStyle = "rgba(170,255,215,0.55)";
       ctx.font = "bold 8px Orbitron, Arial, sans-serif";
       ctx.textAlign = "left";
       ctx.fillText(`0${index + 1}`, 14, top - 4);
@@ -536,14 +536,14 @@
     const x = 50;
     const y = floors[0] - 56;
     const beam = ctx.createLinearGradient(0, y, 0, floors[0]);
-    beam.addColorStop(0, "rgba(121,247,255,0.22)");
-    beam.addColorStop(1, "rgba(121,247,255,0)");
+    beam.addColorStop(0, "rgba(125,255,196,0.22)");
+    beam.addColorStop(1, "rgba(125,255,196,0)");
     ctx.fillStyle = beam;
     ctx.fillRect(x - 26, y, 52, floors[0] - y);
     ctx.save();
     ctx.translate(x, y);
-    ctx.strokeStyle = "rgba(121,247,255,0.8)";
-    ctx.shadowColor = "#38f2ff";
+    ctx.strokeStyle = "rgba(125,255,196,0.8)";
+    ctx.shadowColor = "#3dffb0";
     ctx.shadowBlur = 10;
     ctx.lineWidth = 2;
     ctx.beginPath();
@@ -551,12 +551,12 @@
     ctx.stroke();
     ctx.rotate(time * 0.8);
     ctx.setLineDash([6, 8]);
-    ctx.strokeStyle = "rgba(192,138,255,0.9)";
+    ctx.strokeStyle = "rgba(182,255,90,0.9)";
     ctx.beginPath();
     ctx.ellipse(0, 0, 22, 6, 0, 0, Math.PI * 2);
     ctx.stroke();
     ctx.restore();
-    ctx.fillStyle = "rgba(121,247,255,0.8)";
+    ctx.fillStyle = "rgba(125,255,196,0.8)";
     ctx.font = "bold 8px Orbitron, Arial, sans-serif";
     ctx.textAlign = "center";
     ctx.fillText(text.spawn, x, y - 14);
@@ -791,9 +791,9 @@
 
   const drawCasing = () => {
     const metal = ctx.createLinearGradient(0, 0, W, H);
-    metal.addColorStop(0, "#2a3f6a");
-    metal.addColorStop(0.5, "#101a36");
-    metal.addColorStop(1, "#2a1a4a");
+    metal.addColorStop(0, "#1f5a45");
+    metal.addColorStop(0.5, "#0a1f1a");
+    metal.addColorStop(1, "#1a3a22");
     ctx.save();
     ctx.beginPath();
     ctx.rect(0, 0, W, H);
@@ -805,14 +805,14 @@
     ctx.closePath();
     ctx.fillStyle = metal;
     ctx.fill("evenodd");
-    ctx.strokeStyle = "#79f7ff";
-    ctx.shadowColor = "#38f2ff";
+    ctx.strokeStyle = "#7dffc4";
+    ctx.shadowColor = "#3dffb0";
     ctx.shadowBlur = 8;
     ctx.lineWidth = 1.5;
     roundedRect(INSET, INSET, W - INSET * 2, H - INSET * 2, 14);
     ctx.stroke();
     ctx.shadowBlur = 0;
-    ctx.fillStyle = "rgba(190,225,255,0.8)";
+    ctx.fillStyle = "rgba(200,255,225,0.8)";
     [[4, 4], [W - 4, 4], [4, H - 4], [W - 4, H - 4]].forEach(([x, y]) => {
       ctx.beginPath();
       ctx.arc(x, y, 1.8, 0, Math.PI * 2);
@@ -826,10 +826,10 @@
     roundedRect(150, 14, 100, 22, 11);
     ctx.fillStyle = "rgba(4,8,22,0.78)";
     ctx.fill();
-    ctx.strokeStyle = "rgba(121,247,255,0.6)";
+    ctx.strokeStyle = "rgba(125,255,196,0.6)";
     ctx.lineWidth = 1;
     ctx.stroke();
-    ctx.strokeStyle = "rgba(121,247,255,0.3)";
+    ctx.strokeStyle = "rgba(125,255,196,0.3)";
     for (let tick = -3; tick <= 3; tick += 1) {
       ctx.beginPath();
       ctx.moveTo(200 + tick * 12, 20);
@@ -848,10 +848,10 @@
     ctx.fill();
     ctx.shadowBlur = 0;
     ctx.font = "bold 9px Orbitron, Arial, sans-serif";
-    ctx.fillStyle = input < 0 ? "#fff" : "rgba(121,247,255,0.5)";
+    ctx.fillStyle = input < 0 ? "#fff" : "rgba(125,255,196,0.5)";
     ctx.textAlign = "left";
     ctx.fillText("◀", 156, 29);
-    ctx.fillStyle = input > 0 ? "#fff" : "rgba(121,247,255,0.5)";
+    ctx.fillStyle = input > 0 ? "#fff" : "rgba(125,255,196,0.5)";
     ctx.textAlign = "right";
     ctx.fillText("▶", 244, 29);
     ctx.restore();
@@ -862,7 +862,7 @@
       ctx.globalAlpha = alpha;
       ctx.textAlign = "center";
       ctx.font = "bold 30px Orbitron, Arial, sans-serif";
-      ctx.shadowColor = "#38f2ff";
+      ctx.shadowColor = "#3dffb0";
       ctx.shadowBlur = 20;
       ctx.fillStyle = "#e8ffff";
       ctx.fillText(banner.text, W / 2, 80 + (1 - alpha) * 10);

@@ -132,52 +132,84 @@
 </svg>
   <svg x="450" y="30" width="180" height="260" viewBox="0 0 180 260" overflow="visible">
   <title id="key03Title">Clé de résonance 03</title>
-  <desc id="key03Desc">Clé USB éclipse noire à couronne dorée et magenta portant le sigle CLEE 03.</desc>
+  <desc id="key03Desc">Clé USB de l'éclipse, magenta, or et lime, au cœur marqué d'une éclipse solaire avec couronne et anneau de diamant, et du sigle 03.</desc>
   <defs>
     <linearGradient id="key03Shell" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#2a0f3d"/>
-      <stop offset="0.55" stop-color="#0a0616"/>
-      <stop offset="1" stop-color="#4a1030"/>
+      <stop stop-color="#3a1250"/>
+      <stop offset="0.5" stop-color="#0c0618"/>
+      <stop offset="1" stop-color="#561436"/>
     </linearGradient>
-    <linearGradient id="key03Edge" x1="0" y1="0" x2="1" y2="0">
+    <linearGradient id="key03Edge" x1="0" y1="0" x2="1" y2="1">
       <stop stop-color="#ff4fd8"/>
       <stop offset="0.5" stop-color="#ffe39a"/>
       <stop offset="1" stop-color="#c6ff4d"/>
     </linearGradient>
+    <linearGradient id="key03Metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff6ea"/>
+      <stop offset="0.45" stop-color="#f0b8e8"/>
+      <stop offset="1" stop-color="#9a4a90"/>
+    </linearGradient>
+    <linearGradient id="key03Gloss" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffffff" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="key03Core" cx="0.5" cy="0.5" r="0.5">
+      <stop stop-color="#2a0a36"/>
+      <stop offset="0.75" stop-color="#07030f"/>
+      <stop offset="1" stop-color="#14061c"/>
+    </radialGradient>
     <radialGradient id="key03Corona" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0.55" stop-color="#ffe39a" stop-opacity="0"/>
-      <stop offset="0.72" stop-color="#ffe39a" stop-opacity=".95"/>
+      <stop offset="0.5" stop-color="#ffe39a" stop-opacity="0"/>
+      <stop offset="0.68" stop-color="#ffe39a" stop-opacity="0.95"/>
       <stop offset="1" stop-color="#ff4fd8" stop-opacity="0"/>
     </radialGradient>
-    <filter id="key03Glow">
-      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+    <radialGradient id="key03Sun" cx="0.5" cy="0.5" r="0.5">
+      <stop stop-color="#ffffff"/>
+      <stop offset="0.5" stop-color="#ffe39a"/>
+      <stop offset="1" stop-color="#ffb347"/>
+    </radialGradient>
+    <clipPath id="key03Clip"><path d="M48 44h84l16 16v116a58 58 0 0 1-116 0V60l16-16Z"/></clipPath>
+    <filter id="key03Glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.2" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
     <style>
-      .corona { transform-origin: 90px 132px; animation: pulse 3.2s ease-in-out infinite; }
-      .rays { transform-origin: 90px 132px; animation: spin 18s linear infinite; }
-      .moon { animation: drift 4s ease-in-out infinite; }
-      @keyframes pulse { 50% { opacity: .55; transform: scale(1.08); } }
-      @keyframes spin { to { transform: rotate(360deg); } }
-      @keyframes drift { 50% { transform: translateX(4px); } }
-      @media (prefers-reduced-motion: reduce) { .corona, .rays, .moon { animation: none; } }
+      .k3-corona { transform-origin: 90px 130px; animation: k3-pulse 3.2s ease-in-out infinite; }
+      .k3-rays { transform-origin: 90px 130px; animation: k3-spin 22s linear infinite; }
+      .k3-moon { animation: k3-drift 5s ease-in-out infinite; }
+      .k3-bead { animation: k3-bead 5s ease-in-out infinite; }
+      .k3-led { animation: k3-led 2.4s ease-in-out infinite; }
+      @keyframes k3-pulse { 50% { opacity: .55; transform: scale(1.1); } }
+      @keyframes k3-spin { to { transform: rotate(360deg); } }
+      @keyframes k3-drift { 50% { transform: translateX(3px); } }
+      @keyframes k3-bead { 50% { opacity: .35; } }
+      @keyframes k3-led { 50% { opacity: .35; } }
+      @media (prefers-reduced-motion: reduce) { .k3-corona, .k3-rays, .k3-moon, .k3-bead, .k3-led { animation: none; } }
     </style>
   </defs>
-  <g transform="translate(90 130) rotate(-8) translate(-90 -130)">
-    <path d="M58 22h64v32l18 21v111a34 34 0 0 1-34 34H74a34 34 0 0 1-34-34V75l18-21V22Z" fill="url(#key03Shell)" stroke="url(#key03Edge)" stroke-width="4"/>
-    <path d="M58 54h64m-64 18h64" fill="none" stroke="#ff4fd8" stroke-width="2" opacity=".8"/>
-    <path d="m68 39 10 7 10-7 10 7 10-7 10 7" fill="none" stroke="#ffe39a" stroke-width="3"/>
-    <rect x="55" y="91" width="70" height="91" rx="11" fill="#06030f" stroke="#ff4fd8" stroke-width="2"/>
-    <circle class="corona" cx="90" cy="132" r="29" fill="url(#key03Corona)"/>
-    <g class="rays" stroke="#ffe39a" stroke-width="2" stroke-linecap="round" opacity=".8">
-      <path d="M90 96v8M90 160v8M54 132h8M118 132h8M64.5 106.5l5.6 5.6M109.9 151.9l5.6 5.6M115.5 106.5l-5.6 5.6M70.1 151.9l-5.6 5.6"/>
+  <g transform="translate(90 130) rotate(8) translate(-90 -130)">
+    <rect x="62" y="6" width="56" height="42" rx="6" fill="url(#key03Metal)" stroke="#fff6ea" stroke-width="2"/>
+    <rect x="70" y="13" width="40" height="20" rx="3" fill="#1a0a22"/>
+    <rect x="75" y="18" width="8" height="10" rx="1.5" fill="#c6ff4d"/>
+    <rect x="97" y="18" width="8" height="10" rx="1.5" fill="#c6ff4d"/>
+    <path d="M72 41h36" stroke="#8a3a80" stroke-width="2" stroke-linecap="round"/>
+    <path d="M48 44h84l16 16v116a58 58 0 0 1-116 0V60l16-16Z" fill="url(#key03Shell)" stroke="url(#key03Edge)" stroke-width="3.5" stroke-linejoin="round"/>
+    <g clip-path="url(#key03Clip)">
+      <path d="M20 40L112 40L20 180Z" fill="url(#key03Gloss)"/>
     </g>
-    <circle cx="90" cy="132" r="17" fill="#ffe39a" filter="url(#key03Glow)"/>
-    <circle class="moon" cx="94" cy="132" r="17" fill="#06030f"/>
-    <path d="M72 151h36l-18 17H72z" fill="#3a0f3b" stroke="#ffe39a" stroke-width="2" transform="translate(0 6)"/>
-    <text x="90" y="169" fill="#ffe9bd" font-family="Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle" filter="url(#key03Glow)">03</text>
-    <circle cx="90" cy="203" r="7" fill="#c6ff4d" filter="url(#key03Glow)"/>
-    <path d="M68 224h44m-36 8h28" stroke="#ff4fd8" stroke-width="3" stroke-linecap="round"/>
+    <path d="M52 58h76M42 68h96" fill="none" stroke="#ff4fd8" stroke-width="1.5" opacity="0.5"/>
+    <circle cx="90" cy="130" r="45" fill="url(#key03Core)" stroke="url(#key03Edge)" stroke-width="2.5"/>
+    <circle cx="90" cy="130" r="38" fill="none" stroke="#ff4fd8" stroke-width="1" stroke-dasharray="2 6" opacity="0.7"/>
+    <circle class="k3-corona" cx="90" cy="130" r="34" fill="url(#key03Corona)"/>
+    <g class="k3-rays" stroke="#ffe39a" stroke-width="2" stroke-linecap="round" opacity="0.85">
+      <path d="M90 90v8M90 162v8M50 130h8M122 130h8M61.7 101.7l5.7 5.7M112.6 152.6l5.7 5.7M118.3 101.7l-5.7 5.7M67.4 152.6l-5.7 5.7"/>
+    </g>
+    <circle cx="90" cy="130" r="21" fill="url(#key03Sun)" filter="url(#key03Glow)"/>
+    <circle class="k3-moon" cx="95" cy="130" r="20" fill="#07030f"/>
+    <circle class="k3-bead" cx="72" cy="121" r="3.2" fill="#ffffff" filter="url(#key03Glow)"/>
+    <text x="90" y="198" fill="#ffe9bd" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="3" text-anchor="middle" filter="url(#key03Glow)">KEY 03</text>
+    <path d="M70 205h40" stroke="#ff4fd8" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+    <circle class="k3-led" cx="90" cy="217" r="4.5" fill="#c6ff4d" filter="url(#key03Glow)"/>
   </g>
 </svg>
   <svg x="30" y="320" width="180" height="260" viewBox="0 0 180 260" overflow="visible">
