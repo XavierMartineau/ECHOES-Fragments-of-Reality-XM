@@ -1005,7 +1005,6 @@
     updateInput();
   });
 
-  window.__n31 = { get balls() { return balls; }, floors, gaps, get running() { return running; }, get round() { return round; }, get solved() { return solved; }, step, get tilt() { return tilt; } };
   renderProgress();
   fullReset();
   saveProgress();
