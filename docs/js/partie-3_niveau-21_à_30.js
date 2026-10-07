@@ -1043,6 +1043,377 @@
     });
   }
 
+  function setupCaptcha() {
+    const total = 3;
+    const rand = (max) => Math.floor(Math.random() * max);
+    const shuffle = (list) => [...list].sort(() => Math.random() - 0.5);
+    const palette = ["#38f2ff", "#c6ff4d", "#ff4fd8", "#a78bff", "#ffd24d"];
+    const alphabet = "ABCDEFGHJKMNPRTUWXY347";
+    const svgNS = "http://www.w3.org/2000/svg";
+    const shapeDrawers = [
+      () => ["circle", { cx: 20, cy: 20, r: 13 }],
+      () => ["polygon", { points: "20,6 35,33 5,33" }],
+      () => ["rect", { x: 8, y: 8, width: 24, height: 24, rx: 2 }],
+      () => ["polygon", { points: "20,4 36,20 20,36 4,20" }],
+      () => ["polygon", { points: "20,4 32,11 32,29 20,36 8,29 8,11" }],
+    ];
+    const orbSizes = [34, 44, 55, 67, 80];
+    let round = 0;
+    let started = false;
+    let busy = false;
+    let epoch = 0;
+
+    const svgElement = (name, attributes = {}) => {
+      const element = document.createElementNS(svgNS, name);
+      Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
+      return element;
+    };
+    const frame = document.createElement("div");
+    frame.className = "captcha-frame";
+    const heading = document.createElement("h3");
+    heading.className = "captcha-title";
+    const prompt = document.createElement("p");
+    prompt.className = "captcha-prompt";
+    const stage = document.createElement("div");
+    stage.className = "captcha-stage";
+    frame.append(heading, prompt, stage);
+    board.replaceChildren(frame);
+
+    function showLocked() {
+      heading.textContent = strings.lockedTitle;
+      prompt.textContent = strings.locked;
+      stage.replaceChildren();
+      progressReadout.textContent = `0 / ${total}`;
+    }
+
+    function finishRound(success) {
+      if (busy || solved) return;
+      busy = true;
+      const current = epoch;
+      stage.classList.add(success ? "is-ok" : "is-bad");
+      stage.querySelectorAll("button, input").forEach((item) => { item.disabled = true; });
+      setStatus(success ? strings.roundOk : strings.roundFail, success ? "success" : "error");
+      setTimeout(() => {
+        if (current !== epoch) return;
+        busy = false;
+        if (success) round += 1;
+        if (round >= total) {
+          progressReadout.textContent = `${total} / ${total}`;
+          completeLevel();
+          return;
+        }
+        renderRound();
+      }, 900);
+    }
+
+    function renderText() {
+      let code = "";
+      for (let index = 0; index < 6; index += 1) code += alphabet[rand(alphabet.length)];
+      const image = svgElement("svg", { viewBox: "0 0 300 100", class: "captcha-image", role: "img" });
+      image.setAttribute("aria-label", strings.textImageLabel);
+      image.appendChild(svgElement("rect", { width: 300, height: 100, fill: "#0b0613" }));
+      for (let index = 0; index < 8; index += 1) {
+        image.appendChild(svgElement("line", {
+          x1: rand(300), y1: rand(100), x2: rand(300), y2: rand(100),
+          stroke: palette[rand(palette.length)], "stroke-width": 1.4, opacity: 0.5,
+        }));
+      }
+      [...code].forEach((letter, index) => {
+        const x = 30 + index * 41;
+        const y = 60 + rand(16) - 8;
+        const glyph = svgElement("text", {
+          x, y, "text-anchor": "middle", "font-size": 38 + rand(12), "font-weight": 700,
+          "font-family": "Space Mono, monospace", fill: palette[rand(palette.length)],
+          transform: `rotate(${rand(56) - 28} ${x} ${y}) skewX(${rand(30) - 15})`,
+        });
+        glyph.textContent = letter;
+        image.appendChild(glyph);
+      });
+      const wave = `M0,${40 + rand(20)} C70,${rand(100)} 140,${rand(100)} 210,${rand(100)} S280,${rand(100)} 300,${30 + rand(40)}`;
+      image.appendChild(svgElement("path", { d: wave, fill: "none", stroke: "#fff4fd", "stroke-width": 2.2, opacity: 0.7 }));
+      for (let index = 0; index < 70; index += 1) {
+        image.appendChild(svgElement("circle", {
+          cx: rand(300), cy: rand(100), r: 0.8 + Math.random(), fill: palette[rand(palette.length)], opacity: 0.6,
+        }));
+      }
+      const form = document.createElement("form");
+      form.className = "captcha-form";
+      const input = document.createElement("input");
+      input.className = "captcha-input";
+      input.autocomplete = "off";
+      input.spellcheck = false;
+      input.maxLength = 6;
+      input.setAttribute("aria-label", strings.inputLabel);
+      const submit = document.createElement("button");
+      submit.type = "submit";
+      submit.className = "captcha-button";
+      submit.textContent = strings.submit;
+      const refresh = document.createElement("button");
+      refresh.type = "button";
+      refresh.className = "captcha-button is-ghost";
+      refresh.textContent = strings.refresh;
+      refresh.addEventListener("click", () => { if (!busy) renderRound(); });
+      form.append(input, submit, refresh);
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        finishRound(input.value.trim().toUpperCase() === code);
+      });
+      stage.append(image, form);
+      input.focus();
+    }
+
+    function renderGrid() {
+      const targetShape = rand(shapeDrawers.length);
+      const targetColor = rand(palette.length);
+      const tileCount = 9;
+      const targetCount = 3 + rand(2);
+      const tiles = Array.from({ length: targetCount }, () => ({ shape: targetShape, color: targetColor }));
+      const otherColor = () => (targetColor + 1 + rand(palette.length - 1)) % palette.length;
+      const otherShape = () => (targetShape + 1 + rand(shapeDrawers.length - 1)) % shapeDrawers.length;
+      tiles.push({ shape: targetShape, color: otherColor() }, { shape: targetShape, color: otherColor() });
+      tiles.push({ shape: otherShape(), color: targetColor }, { shape: otherShape(), color: targetColor });
+      while (tiles.length < tileCount) {
+        const tile = { shape: rand(shapeDrawers.length), color: rand(palette.length) };
+        if (tile.shape !== targetShape || tile.color !== targetColor) tiles.push(tile);
+      }
+      const ordered = shuffle(tiles);
+      const selected = new Set();
+      prompt.textContent = format(strings.gridPrompt, {
+        shape: strings.shapes[targetShape],
+        color: strings.colors[targetColor],
+      });
+      const swatch = document.createElement("span");
+      swatch.className = "captcha-swatch";
+      swatch.style.background = palette[targetColor];
+      prompt.prepend(swatch);
+      const grid = document.createElement("div");
+      grid.className = "captcha-tiles";
+      ordered.forEach((tile, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "captcha-tile";
+        button.setAttribute("aria-pressed", "false");
+        button.setAttribute("aria-label", format(strings.tileLabel, {
+          shape: strings.shapes[tile.shape],
+          color: strings.colors[tile.color],
+          number: index + 1,
+        }));
+        const icon = svgElement("svg", { viewBox: "0 0 40 40", "aria-hidden": "true" });
+        const [name, attributes] = shapeDrawers[tile.shape]();
+        icon.appendChild(svgElement(name, { ...attributes, fill: palette[tile.color], opacity: 0.92 }));
+        button.appendChild(icon);
+        button.addEventListener("click", () => {
+          if (selected.has(index)) selected.delete(index);
+          else selected.add(index);
+          button.classList.toggle("is-selected", selected.has(index));
+          button.setAttribute("aria-pressed", String(selected.has(index)));
+        });
+        grid.appendChild(button);
+      });
+      const submit = document.createElement("button");
+      submit.type = "button";
+      submit.className = "captcha-button";
+      submit.textContent = strings.submit;
+      submit.addEventListener("click", () => {
+        const success = ordered.every((tile, index) =>
+          (tile.shape === targetShape && tile.color === targetColor) === selected.has(index));
+        finishRound(success);
+      });
+      stage.append(grid, submit);
+    }
+
+    function renderOrder() {
+      const sizes = shuffle(orbSizes);
+      const placed = [];
+      sizes.forEach((diameter) => {
+        const radius = diameter / 2;
+        for (let attempt = 0; attempt < 400; attempt += 1) {
+          const x = radius + 8 + Math.random() * (600 - diameter - 16);
+          const y = radius + 8 + Math.random() * (300 - diameter - 16);
+          if (placed.every((orb) => Math.hypot(orb.x - x, orb.y - y) > orb.radius + radius + 12)) {
+            placed.push({ x, y, radius, diameter });
+            return;
+          }
+        }
+        placed.push({ x: radius + 8 + placed.length * 110, y: 150, radius, diameter });
+      });
+      const order = placed.map((_, index) => index).sort((a, b) => placed[a].diameter - placed[b].diameter);
+      let next = 0;
+      const area = document.createElement("div");
+      area.className = "captcha-orbs";
+      const colors = shuffle(palette);
+      placed.forEach((orb, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "captcha-orb";
+        button.setAttribute("aria-label", strings.orbLabel);
+        button.style.left = `${(orb.x / 600) * 100}%`;
+        button.style.top = `${(orb.y / 300) * 100}%`;
+        button.style.width = `${(orb.diameter / 600) * 100}%`;
+        button.style.setProperty("--orb", colors[index % colors.length]);
+        button.addEventListener("click", () => {
+          if (busy) return;
+          if (index !== order[next]) {
+            finishRound(false);
+            return;
+          }
+          button.classList.add("is-done");
+          button.disabled = true;
+          next += 1;
+          if (next === order.length) finishRound(true);
+        });
+        area.appendChild(button);
+      });
+      stage.appendChild(area);
+    }
+
+    function renderRound() {
+      epoch += 1;
+      busy = false;
+      progressReadout.textContent = `${round} / ${total}`;
+      stage.className = "captcha-stage";
+      stage.replaceChildren();
+      const kinds = ["text", "grid", "order"];
+      const kind = kinds[round];
+      heading.textContent = format(strings.roundLabel, { current: round + 1, total }) + ` — ${strings[`${kind}Title`]}`;
+      prompt.textContent = strings[`${kind}Prompt`];
+      if (kind === "text") renderText();
+      if (kind === "grid") renderGrid();
+      if (kind === "order") renderOrder();
+      setStatus(strings.playing);
+    }
+
+    startButton.addEventListener("click", () => {
+      if (solved || started) return;
+      started = true;
+      startButton.hidden = true;
+      round = 0;
+      renderRound();
+    });
+    resetButton.addEventListener("click", () => {
+      epoch += 1;
+      resetCommon();
+      started = false;
+      busy = false;
+      round = 0;
+      showLocked();
+      setStatus(strings.ready);
+      startButton.focus();
+    });
+    showLocked();
+    setStatus(strings.ready);
+  }
+
+  function setupKnightEcho() {
+    const size = 4;
+    const cellCount = size * size;
+    const full = (1 << cellCount) - 1;
+    const knightMoves = [[1, 2], [2, 1], [-1, 2], [-2, 1], [1, -2], [2, -1], [-1, -2], [-2, -1]];
+    const masks = Array.from({ length: cellCount }, (_, index) => {
+      const row = Math.floor(index / size);
+      const column = index % size;
+      let mask = 1 << index;
+      knightMoves.forEach(([dr, dc]) => {
+        const r = row + dr;
+        const c = column + dc;
+        if (r >= 0 && c >= 0 && r < size && c < size) mask |= 1 << (r * size + c);
+      });
+      return mask;
+    });
+    const rand = (max) => Math.floor(Math.random() * max);
+    const shuffle = (list) => [...list].sort(() => Math.random() - 0.5);
+    const par = 7 + rand(3);
+    let solution = 0;
+    shuffle(Array.from({ length: cellCount }, (_, index) => index)).slice(0, par).forEach((index) => {
+      solution ^= masks[index];
+    });
+    const initial = full ^ solution;
+    let lights = initial;
+    let moves = 0;
+    let started = false;
+
+    const grid = document.createElement("div");
+    grid.className = "snake-grid echo-grid";
+    grid.style.setProperty("--snake-grid-size", size);
+    grid.setAttribute("role", "group");
+    const cells = [];
+
+    function refresh() {
+      cells.forEach((cell, index) => {
+        const lit = Boolean(lights & (1 << index));
+        cell.classList.toggle("is-lit", lit);
+        cell.disabled = !started || solved;
+        cell.setAttribute("aria-label", format(lit ? strings.cellOn : strings.cellOff, {
+          row: Math.floor(index / size) + 1,
+          column: (index % size) + 1,
+        }));
+      });
+      progressReadout.textContent = `${moves} / ${par}`;
+    }
+
+    function preview(index, active) {
+      cells.forEach((cell, target) => {
+        cell.classList.toggle("is-echo", active && Boolean(masks[index] & (1 << target)));
+      });
+    }
+
+    function press(index) {
+      if (!started || solved) return;
+      lights ^= masks[index];
+      moves += 1;
+      refresh();
+      if (lights === full) completeLevel();
+      else setStatus(strings.playing);
+    }
+
+    for (let index = 0; index < cellCount; index += 1) {
+      const cell = document.createElement("button");
+      cell.type = "button";
+      cell.className = "snake-cell echo-cell";
+      cell.addEventListener("click", () => press(index));
+      cell.addEventListener("mouseenter", () => preview(index, true));
+      cell.addEventListener("mouseleave", () => preview(index, false));
+      cell.addEventListener("focus", () => preview(index, true));
+      cell.addEventListener("blur", () => preview(index, false));
+      cell.addEventListener("keydown", (event) => {
+        const row = Math.floor(index / size);
+        const column = index % size;
+        const moves2 = {
+          ArrowUp: row > 0 ? index - size : -1,
+          ArrowDown: row < size - 1 ? index + size : -1,
+          ArrowLeft: column > 0 ? index - 1 : -1,
+          ArrowRight: column < size - 1 ? index + 1 : -1,
+        };
+        if (moves2[event.key] !== undefined) {
+          event.preventDefault();
+          cells[moves2[event.key]]?.focus();
+        }
+      });
+      cells.push(cell);
+      grid.appendChild(cell);
+    }
+    board.replaceChildren(grid);
+    startButton.addEventListener("click", () => {
+      if (solved || started) return;
+      started = true;
+      startButton.hidden = true;
+      refresh();
+      setStatus(strings.playing);
+      cells[0].focus();
+    });
+    resetButton.addEventListener("click", () => {
+      resetCommon();
+      started = false;
+      lights = initial;
+      moves = 0;
+      refresh();
+      setStatus(strings.ready);
+      startButton.focus();
+    });
+    refresh();
+    setStatus(strings.ready);
+  }
+
   function setupSnakeCaptcha() {
     const configs = {
       27: {
@@ -1050,18 +1421,6 @@
         waypoints: [[7, 0], [1, 0], [1, 5], [3, 5], [3, 6], [4, 6], [4, 1], [2, 1], [2, 4]],
         checkpoints: [16, 11, 29, 36, 25],
         walls: [1, 2, 3, 5, 6, 7, 22, 26, 31, 42, 43, 51, 52, 55, 61, 63],
-      },
-      28: {
-        size: 7,
-        waypoints: [[6, 0], [0, 0], [0, 5], [4, 5], [4, 1], [2, 1], [2, 4]],
-        checkpoints: [28, 4, 26, 30, 17],
-        walls: [8, 10, 13, 23, 24, 27, 34, 36, 39, 41, 45, 47],
-      },
-      29: {
-        size: 7,
-        waypoints: [[6, 0], [6, 6], [0, 6], [0, 0], [4, 0], [4, 4], [5, 4]],
-        checkpoints: [45, 3, 28, 32],
-        walls: [8, 10, 12, 16, 18, 22, 24, 26, 36, 38, 40],
       },
       30: {
         size: 8,
@@ -1265,7 +1624,9 @@
   if (level === 24) setupMirrorPuzzle();
   if (level === 25) setupDynamicSort();
   if (level === 26) setupSnakesAndLadders();
-  if (level >= 27) setupSnakeCaptcha();
+  if (level === 27 || level === 30) setupSnakeCaptcha();
+  if (level === 28) setupCaptcha();
+  if (level === 29) setupKnightEcho();
 
   nextButton.addEventListener("click", () => {
     if (!solved) return;
