@@ -5,13 +5,13 @@ Il est maintenu à partir des fonctionnalités présentes dans le dépôt et des
 significatifs de l'historique Git. La référence narrative et fonctionnelle principale
 reste [Info-fr.txt](./Info-fr.txt).
 
-## État du projet au 06/10/2026
+## État du projet au 07/10/2026
 
 - **Projet :** ECHOES: Fragments of Reality
 - **Type :** expérience narrative et jeu de puzzles web statique
 - **Déploiement visé :** GitHub Pages
 - **Version de travail :** bêta v4
-- **Jalon actuel :** boss `CLEE_01` / Clé 01 et combat tactique `CLEE_02` après le niveau 20
+- **Jalon actuel :** Partie 3 (niveaux 21 à 30) jouable ; boss `CLEE_01` / Clé 01 et combat tactique `CLEE_02` après le niveau 20
 - **Fondations disponibles :** accueil, connexion, introduction interactive, sauvegarde par compte,
   mode développeur, navigation partagée et responsive multi-écrans
 
@@ -313,6 +313,16 @@ cinématique et son parcours de récompense.
   un rond vert foncé dans l'indicateur de cohérence.
 - Favicon `echoes-favicon.svg` vérifié et référencé par
   toutes les pages HTML, dont la page 404 ; vérification sans lien favicon local cassé.
+
+### 07/10/2026 — Partie 3 : niveaux 21 à 30
+
+- `e8dea92` — Niveau 25 : puzzle de tri dynamique, thème néon magenta et vert acide de la Partie 3 (CSS, pages 21 à 25, contrôleur `partie-3_niveau-21_à_30.js`) et couleur dédiée dans le mode développeur.
+- `4ad336a` — Traductions FR/EN des puzzles captcha des fragments 026 à 030.
+- `7b73760` — Refactorisation des fonctions de traduction (lisibilité et maintenance).
+- `123eb00` — Niveau 26 : vrai jeu de serpents et échelles (plateau 10 × 10, pion, dé, serpents et échelles en SVG, énigme dans une fenêtre popup à chaque case).
+- `4fed206` — Niveau 27 : traçage durci (grille 8 × 8, 25 déplacements, 7 virages, 5 checkpoints, 16 cases corrompues) et règles de traduction mises à jour.
+- `7005184` — Niveau 27 : messages de refus détaillés (checkpoints, longueur, virages, ordre).
+- `fa70ed5` — Niveau 28 : captcha en trois épreuves (code déformé, grille de formes et couleurs, sphères à trier) ; niveau 29 « L'écho du cavalier » (grille 4 × 4, saut de cavalier, solution unique, difficulté visée 3,5/6) ; textes FR/EN et styles `.captcha-*` / `.echo-*`.
 
 ## Prochain jalon recommandé
 
