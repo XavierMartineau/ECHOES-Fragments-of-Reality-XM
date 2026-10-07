@@ -921,79 +921,116 @@ html body > .level-footer .site-copyright {
   }
 }
 
-/* Part 2 level numbers in the navigator use the electric blue of that part. */
-.dev-mode-level-group[data-levels-for="2"] .dev-mode-levels a {
-  border-color: rgba(75, 158, 255, 0.55);
-  color: #4b9eff;
+/* Each Dev Mode section follows the palette of its resonance key. */
+.dev-mode-part-toggle[data-part="1"],
+.dev-mode-level-group[data-levels-for="1"] {
+  --part-accent: #79f7ff;
+  --part-secondary: #b36cff;
+  --part-hover: #b36cff;
+  --part-soft: rgba(121, 247, 255, 0.045);
+  --part-tint: rgba(121, 247, 255, 0.15);
+  --part-border: rgba(121, 247, 255, 0.58);
+  --part-glow: rgba(121, 247, 255, 0.25);
 }
 
-.dev-mode-level-group[data-levels-for="2"] .dev-mode-levels a:hover,
-.dev-mode-level-group[data-levels-for="2"] .dev-mode-levels a:focus-visible {
-  background: rgba(75, 158, 255, 0.18);
-  box-shadow: 0 0 16px rgba(75, 158, 255, 0.3);
+.dev-mode-part-toggle[data-part="2"],
+.dev-mode-level-group[data-levels-for="2"] {
+  --part-accent: #45e5d2;
+  --part-secondary: #ffbd69;
+  --part-hover: #ffbd69;
+  --part-soft: rgba(69, 229, 210, 0.045);
+  --part-tint: rgba(69, 229, 210, 0.15);
+  --part-border: rgba(69, 229, 210, 0.58);
+  --part-glow: rgba(69, 229, 210, 0.25);
 }
 
-/* Part 2 selector button in the navigator is electric blue too. */
-.dev-mode-part-toggle[data-part="2"].is-active,
-.dev-mode-part-toggle[data-part="2"]:hover,
-.dev-mode-part-toggle[data-part="2"]:focus-visible {
-  background: rgba(75, 158, 255, 0.16);
-  border-color: rgba(75, 158, 255, 0.7);
+.dev-mode-part-toggle[data-part="3"],
+.dev-mode-level-group[data-levels-for="3"] {
+  --part-accent: #ff4fd8;
+  --part-secondary: #ffe39a;
+  --part-hover: #ffe39a;
+  --part-soft: rgba(255, 79, 216, 0.045);
+  --part-tint: rgba(255, 79, 216, 0.15);
+  --part-border: rgba(255, 79, 216, 0.6);
+  --part-glow: rgba(255, 79, 216, 0.25);
 }
 
-.dev-mode-part-toggle[data-part="2"] > span:first-child {
-  color: #4b9eff;
+.dev-mode-part-toggle[data-part="4"],
+.dev-mode-level-group[data-levels-for="4"] {
+  --part-accent: #38d6ff;
+  --part-secondary: #bd63ff;
+  --part-hover: #ff4fd8;
+  --part-soft: rgba(56, 214, 255, 0.045);
+  --part-tint: rgba(56, 214, 255, 0.15);
+  --part-border: rgba(56, 214, 255, 0.6);
+  --part-glow: rgba(56, 214, 255, 0.25);
 }
 
-/* Part 1 uses the cyan initiation signal in the level navigator. */
-.dev-mode-part-toggle[data-part="1"].is-active,
-.dev-mode-part-toggle[data-part="1"]:hover,
-.dev-mode-part-toggle[data-part="1"]:focus-visible {
-  border-color: rgba(121, 247, 255, 0.72);
-  background: rgba(121, 247, 255, 0.15);
-  box-shadow: 0 0 16px rgba(121, 247, 255, 0.18);
+.dev-mode-part-toggle[data-part="5"],
+.dev-mode-level-group[data-levels-for="5"] {
+  --part-accent: #ff5a6e;
+  --part-secondary: #ffd0a8;
+  --part-hover: #ff9f6b;
+  --part-soft: rgba(255, 90, 110, 0.045);
+  --part-tint: rgba(255, 90, 110, 0.15);
+  --part-border: rgba(255, 90, 110, 0.6);
+  --part-glow: rgba(255, 90, 110, 0.25);
 }
 
-.dev-mode-part-toggle[data-part="1"] > span:first-child,
-.dev-mode-level-group[data-levels-for="1"] .dev-mode-level-title {
-  color: #79f7ff;
+.dev-mode-part-toggle[data-part="6"],
+.dev-mode-level-group[data-levels-for="6"] {
+  --part-accent: #ffd24d;
+  --part-secondary: #fff6c8;
+  --part-hover: #fff6c8;
+  --part-soft: rgba(255, 210, 77, 0.045);
+  --part-tint: rgba(255, 210, 77, 0.15);
+  --part-border: rgba(255, 210, 77, 0.6);
+  --part-glow: rgba(255, 210, 77, 0.25);
 }
 
-.dev-mode-level-group[data-levels-for="1"] .dev-mode-levels a {
-  border-color: rgba(121, 247, 255, 0.55);
-  color: #79f7ff;
+.dev-mode-part-toggle[data-part] {
+  border-color: var(--part-border);
+  background: var(--part-soft);
 }
 
-.dev-mode-level-group[data-levels-for="1"] .dev-mode-levels a:hover,
-.dev-mode-level-group[data-levels-for="1"] .dev-mode-levels a:focus-visible {
-  background: rgba(121, 247, 255, 0.18);
-  box-shadow: 0 0 16px rgba(121, 247, 255, 0.3);
+.dev-mode-part-toggle[data-part] > span:first-child,
+.dev-mode-part-toggle[data-part] .dev-mode-chevron,
+.dev-mode-level-group[data-levels-for] .dev-mode-levels a {
+  color: var(--part-accent);
 }
 
-/* Part 3 carries its own ghost-neon magenta and acid-green palette. */
-.dev-mode-part-toggle[data-part="3"].is-active,
-.dev-mode-part-toggle[data-part="3"]:hover,
-.dev-mode-part-toggle[data-part="3"]:focus-visible {
-  border-color: rgba(255, 79, 216, 0.78);
-  background: rgba(255, 79, 216, 0.15);
-  box-shadow: 0 0 18px rgba(255, 79, 216, 0.2);
+.dev-mode-part-toggle[data-part] .dev-mode-part-count,
+.dev-mode-level-group[data-levels-for] .dev-mode-level-title {
+  color: var(--part-secondary);
 }
 
-.dev-mode-part-toggle[data-part="3"] > span:first-child,
-.dev-mode-level-group[data-levels-for="3"] .dev-mode-level-title {
-  color: #ff4fd8;
+.dev-mode-part-toggle[data-part].is-active,
+.dev-mode-part-toggle[data-part]:hover,
+.dev-mode-part-toggle[data-part]:focus-visible {
+  border-color: var(--part-hover);
+  background: var(--part-tint);
+  box-shadow: 0 0 16px var(--part-glow);
+  outline: none;
 }
 
-.dev-mode-level-group[data-levels-for="3"] .dev-mode-levels a {
-  border-color: rgba(255, 79, 216, 0.62);
-  background: rgba(255, 79, 216, 0.055);
-  color: #ff83e3;
+.dev-mode-level-group[data-levels-for] .dev-mode-levels a {
+  border-color: var(--part-border);
+  background: var(--part-soft);
 }
 
-.dev-mode-level-group[data-levels-for="3"] .dev-mode-levels a:hover,
-.dev-mode-level-group[data-levels-for="3"] .dev-mode-levels a:focus-visible {
-  border-color: #c6ff4d;
-  background: rgba(198, 255, 77, 0.16);
-  color: #e5ffa3;
-  box-shadow: 0 0 18px rgba(198, 255, 77, 0.28);
+.dev-mode-level-group[data-levels-for] .dev-mode-levels a:hover,
+.dev-mode-level-group[data-levels-for] .dev-mode-levels a:focus-visible,
+.dev-mode-level-group[data-levels-for] .dev-mode-special-link:hover,
+.dev-mode-level-group[data-levels-for] .dev-mode-special-link:focus-visible {
+  border-color: var(--part-hover);
+  background: var(--part-tint);
+  color: var(--part-secondary);
+  box-shadow: 0 0 16px var(--part-glow);
+  outline: none;
+}
+
+.dev-mode-level-group[data-levels-for] .dev-mode-special-link {
+  border-color: var(--part-border);
+  background: var(--part-soft);
+  color: var(--part-accent);
 }

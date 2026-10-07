@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 640" role="img" aria-label="Les six clés de résonance ECHO">
   <title>Les six clés de résonance ECHO</title>
   <svg x="30" y="30" width="180" height="260" viewBox="0 0 180 260" overflow="visible">
-  <title id="key01Title">Clé de résonance 01</title>
+<title id="key01Title">Clé de résonance 01</title>
   <desc id="key01Desc">Clé USB du signal, en verre cyan et violet, au cœur marqué d'un cercle brisé traversé d'une impulsion et du sigle KEY 01.</desc>
   <defs>
     <linearGradient id="key01Shell" x1="0" y1="0" x2="1" y2="1">
@@ -73,9 +73,9 @@
     <rect class="k1-bar b3" x="92" y="200" width="6" height="14" rx="1" fill="#7aa8ff"/>
     <rect class="k1-bar b4" x="102" y="196" width="6" height="18" rx="1" fill="#c08aff"/>
   </g>
-</svg>
+  </svg>
   <svg x="240" y="30" width="180" height="260" viewBox="0 0 180 260" overflow="visible">
-  <title id="key02Title">Clé de résonance 02</title>
+<title id="key02Title">Clé de résonance 02</title>
   <desc id="key02Desc">Clé USB fracturée, turquoise et ambre, au cœur en losange traversé d'une faille lumineuse et marqué du sigle 02.</desc>
   <defs>
     <linearGradient id="key02Shell" x1="0" y1="0" x2="1" y2="1">
@@ -102,13 +102,15 @@
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
     <style>
-      .k2-crack { animation: k2-crack 2.6s ease-in-out infinite; }
+      .k2-crack { stroke-dasharray: 7 4; animation: k2-crack 2.6s ease-in-out infinite; }
       .k2-shard-a { animation: k2-drift-a 4s ease-in-out infinite; }
       .k2-shard-b { animation: k2-drift-b 4.6s ease-in-out infinite; }
-      @keyframes k2-crack { 50% { opacity: .55; } }
-      @keyframes k2-drift-a { 50% { transform: translate(-3px, -4px); } }
-      @keyframes k2-drift-b { 50% { transform: translate(3px, 4px); } }
-      @media (prefers-reduced-motion: reduce) { .k2-crack, .k2-shard-a, .k2-shard-b { animation: none; } }
+      .k2-led { animation: k2-led 1.5s ease-in-out infinite; }
+      @keyframes k2-crack { 50% { opacity: .55; stroke-dashoffset: 22; } }
+      @keyframes k2-drift-a { 50% { transform: translate(-4px, -5px); } }
+      @keyframes k2-drift-b { 50% { transform: translate(4px, 5px); } }
+      @keyframes k2-led { 50% { opacity: .25; } }
+      @media (prefers-reduced-motion: reduce) { .k2-crack, .k2-shard-a, .k2-shard-b, .k2-led { animation: none; } }
     </style>
   </defs>
   <g transform="translate(90 130) rotate(7) translate(-90 -130)">
@@ -127,11 +129,11 @@
     <path d="M90 84l-8 20 14 14-12 20 14 16-8 22" fill="none" stroke="#fff4d6" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
     <text x="90" y="194" fill="#fff0c6" font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="2" text-anchor="middle" filter="url(#key02Glow)">02</text>
     <path d="M64 200h52" stroke="#45e5d2" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-    <circle cx="90" cy="209" r="4.5" fill="#ffbd69" filter="url(#key02Glow)"/>
+    <circle class="k2-led" cx="90" cy="209" r="4.5" fill="#ffbd69" filter="url(#key02Glow)"/>
   </g>
-</svg>
+  </svg>
   <svg x="450" y="30" width="180" height="260" viewBox="0 0 180 260" overflow="visible">
-  <title id="key03Title">Clé de résonance 03</title>
+<title id="key03Title">Clé de résonance 03</title>
   <desc id="key03Desc">Clé USB de l'éclipse, magenta, or et lime, au cœur marqué d'une éclipse solaire avec couronne et anneau de diamant, et du sigle 03.</desc>
   <defs>
     <linearGradient id="key03Shell" x1="0" y1="0" x2="1" y2="1">
@@ -211,30 +213,30 @@
     <path d="M70 205h40" stroke="#ff4fd8" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
     <circle class="k3-led" cx="90" cy="217" r="4.5" fill="#c6ff4d" filter="url(#key03Glow)"/>
   </g>
-</svg>
+  </svg>
   <svg x="30" y="320" width="180" height="260" viewBox="0 0 180 260" overflow="visible">
-  <title id="key04Title">Clé de résonance 04</title>
-  <desc id="key04Desc">Clé USB du recycleur, émeraude et lime, au cœur circulaire traversé de trois flèches de recyclage et marqué du sigle KEY 04.</desc>
+<title id="key04Title">Clé de résonance 04</title>
+  <desc id="key04Desc">Clé USB du recycleur, en violet électrique, rose néon et bleu, au cœur circulaire traversé de trois flèches de recyclage et marqué du sigle KEY 04.</desc>
   <defs>
     <linearGradient id="key04Shell" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#0f4a3a"/>
-      <stop offset="0.55" stop-color="#06161a"/>
-      <stop offset="1" stop-color="#244a16"/>
+      <stop stop-color="#20204f"/>
+      <stop offset="0.55" stop-color="#080b20"/>
+      <stop offset="1" stop-color="#42164a"/>
     </linearGradient>
     <linearGradient id="key04Edge" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#3dffb0"/>
-      <stop offset="0.5" stop-color="#b6ff5a"/>
-      <stop offset="1" stop-color="#38e1f0"/>
+      <stop stop-color="#38d6ff"/>
+      <stop offset="0.5" stop-color="#bd63ff"/>
+      <stop offset="1" stop-color="#ff4fd8"/>
     </linearGradient>
     <linearGradient id="key04Metal" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#f1fff4"/>
-      <stop offset="0.5" stop-color="#9fe8c0"/>
-      <stop offset="1" stop-color="#3f8a6a"/>
+      <stop stop-color="#f1f5ff"/>
+      <stop offset="0.5" stop-color="#9db6f5"/>
+      <stop offset="1" stop-color="#55538f"/>
     </linearGradient>
     <radialGradient id="key04Core" cx="0.5" cy="0.5" r="0.5">
-      <stop stop-color="#0e3a30"/>
-      <stop offset="0.75" stop-color="#05120f"/>
-      <stop offset="1" stop-color="#0a1f16"/>
+      <stop stop-color="#211b4f"/>
+      <stop offset="0.75" stop-color="#09091d"/>
+      <stop offset="1" stop-color="#17102d"/>
     </radialGradient>
     <filter id="key04Glow" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur stdDeviation="3.5" result="blur"/>
@@ -249,29 +251,29 @@
     </style>
   </defs>
   <g transform="translate(90 130) rotate(-5) translate(-90 -130)">
-    <rect x="62" y="6" width="56" height="40" rx="5" fill="url(#key04Metal)" stroke="#eafff2" stroke-width="2"/>
-    <rect x="70" y="13" width="40" height="18" rx="3" fill="#06201a"/>
-    <rect x="76" y="18" width="8" height="9" rx="1.5" fill="#b6ff5a"/>
-    <rect x="96" y="18" width="8" height="9" rx="1.5" fill="#b6ff5a"/>
+    <rect x="62" y="6" width="56" height="40" rx="5" fill="url(#key04Metal)" stroke="#edf3ff" stroke-width="2"/>
+    <rect x="70" y="13" width="40" height="18" rx="3" fill="#11102b"/>
+    <rect x="76" y="18" width="8" height="9" rx="1.5" fill="#ff4fd8"/>
+    <rect x="96" y="18" width="8" height="9" rx="1.5" fill="#38d6ff"/>
     <path d="M44 44h92q10 0 10 10v20l-8 8v30l8 8v70a28 28 0 0 1-28 28H62a28 28 0 0 1-28-28v-70l8-8V82l-8-8V54q0-10 10-10Z" fill="url(#key04Shell)" stroke="url(#key04Edge)" stroke-width="3.5" stroke-linejoin="round"/>
-    <path d="M50 58h80M50 66h80" stroke="#3dffb0" stroke-width="1.5" opacity="0.45"/>
-    <circle cx="90" cy="130" r="44" fill="url(#key04Core)" stroke="#3dffb0" stroke-width="2"/>
-    <circle cx="90" cy="130" r="37" fill="none" stroke="#b6ff5a" stroke-width="1" stroke-dasharray="2 6" opacity="0.7"/>
+    <path d="M50 58h80M50 66h80" stroke="#38d6ff" stroke-width="1.5" opacity="0.55"/>
+    <circle cx="90" cy="130" r="44" fill="url(#key04Core)" stroke="#38d6ff" stroke-width="2"/>
+    <circle cx="90" cy="130" r="37" fill="none" stroke="#ff4fd8" stroke-width="1" stroke-dasharray="2 6" opacity="0.8"/>
     <g class="k4-cycle" filter="url(#key04Glow)">
     <path d="M98.03,105.27 A26 26 0 0 1 115.86,132.72" fill="none" stroke="url(#key04Edge)" stroke-width="5" stroke-linecap="round"/>
-    <path d="M114.43,138.89 L122.92,132.3 L108.95,131.33 Z" fill="#d8ff7a" stroke="#d8ff7a" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M114.43,138.89 L122.92,132.3 L108.95,131.33 Z" fill="#ff4fd8" stroke="#ff4fd8" stroke-width="1" stroke-linejoin="round"/>
     <path d="M107.4,149.32 A26 26 0 0 1 74.72,151.03" fill="none" stroke="url(#key04Edge)" stroke-width="5" stroke-linecap="round"/>
-    <path d="M70.08,146.71 L71.55,157.36 L79.38,145.75 Z" fill="#d8ff7a" stroke="#d8ff7a" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M70.08,146.71 L71.55,157.36 L79.38,145.75 Z" fill="#38d6ff" stroke="#38d6ff" stroke-width="1" stroke-linejoin="round"/>
     <path d="M64.57,135.41 A26 26 0 0 1 79.42,106.25" fill="none" stroke="url(#key04Edge)" stroke-width="5" stroke-linecap="round"/>
-    <path d="M85.49,104.39 L75.53,100.34 L81.67,112.92 Z" fill="#d8ff7a" stroke="#d8ff7a" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M85.49,104.39 L75.53,100.34 L81.67,112.92 Z" fill="#bd63ff" stroke="#bd63ff" stroke-width="1" stroke-linejoin="round"/>
     </g>
-    <circle cx="90" cy="130" r="6" fill="#d8ff7a" filter="url(#key04Glow)"/>
-    <text x="90" y="192" fill="#e6ffe8" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 04</text>
-    <circle class="k4-led" cx="90" cy="206" r="4.5" fill="#b6ff5a" filter="url(#key04Glow)"/>
+    <circle cx="90" cy="130" r="6" fill="#ff4fd8" filter="url(#key04Glow)"/>
+    <text x="90" y="192" fill="#e6eaff" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 04</text>
+    <circle class="k4-led" cx="90" cy="206" r="4.5" fill="#38d6ff" filter="url(#key04Glow)"/>
   </g>
-</svg>
+  </svg>
   <svg x="240" y="320" width="180" height="260" viewBox="0 0 180 260" overflow="visible">
-  <title id="key05Title">Clé de résonance 05</title>
+<title id="key05Title">Clé de résonance 05</title>
   <desc id="key05Desc">Clé USB en bouclier, cramoisie et or rose, au cœur en réseau de cinq nœuds reliés et marquée du sigle KEY 05.</desc>
   <defs>
     <linearGradient id="key05Shell" x1="0" y1="0" x2="1" y2="1">
@@ -301,10 +303,12 @@
     <style>
       .k5-net { animation: k5-net 3s ease-in-out infinite; }
       .k5-node { animation: k5-node 2.4s ease-in-out infinite; }
+      .k5-core { transform-box: fill-box; transform-origin: center; animation: k5-core 1.8s ease-in-out infinite; }
       .k5-node.n1 { animation-delay: .4s; } .k5-node.n2 { animation-delay: .8s; } .k5-node.n3 { animation-delay: 1.2s; } .k5-node.n4 { animation-delay: 1.6s; }
       @keyframes k5-net { 50% { opacity: .45; } }
       @keyframes k5-node { 50% { opacity: .3; } }
-      @media (prefers-reduced-motion: reduce) { .k5-net, .k5-node { animation: none; } }
+      @keyframes k5-core { 50% { opacity: .55; transform: scale(.72); } }
+      @media (prefers-reduced-motion: reduce) { .k5-net, .k5-node, .k5-core { animation: none; } }
     </style>
   </defs>
   <g transform="translate(90 130) rotate(6) translate(-90 -130)">
@@ -331,13 +335,13 @@
     <circle class="k5-node n3" cx="72.37" cy="154.27" r="2.5" fill="#ff6b7e" filter="url(#key05Glow)"/>
     <circle cx="61.47" cy="120.73" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
     <circle class="k5-node n4" cx="61.47" cy="120.73" r="2.5" fill="#ff6b7e" filter="url(#key05Glow)"/>
-    <circle cx="90" cy="130" r="7" fill="#ffd0a8" filter="url(#key05Glow)"/>
+    <circle class="k5-core" cx="90" cy="130" r="7" fill="#ffd0a8" filter="url(#key05Glow)"/>
     <text x="90" y="190" fill="#ffe6dc" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="3" text-anchor="middle">KEY 05</text>
     <circle cx="90" cy="203" r="4" fill="#ff6b7e" filter="url(#key05Glow)"/>
   </g>
-</svg>
+  </svg>
   <svg x="450" y="320" width="180" height="260" viewBox="0 0 180 260" overflow="visible">
-  <title id="key06Title">Clé de résonance 06</title>
+<title id="key06Title">Clé de résonance 06</title>
   <desc id="key06Desc">Clé maîtresse USB or et blanc, au cœur serti de six gemmes de couleur autour d'une serrure lumineuse et marquée du sigle KEY 06.</desc>
   <defs>
     <linearGradient id="key06Shell" x1="0" y1="0" x2="1" y2="1">
@@ -400,5 +404,5 @@
     <path d="M64 201h52" stroke="#ffd24d" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
     <circle cx="82" cy="213" r="3.5" fill="#ff5a6e"/><circle cx="90" cy="213" r="3.5" fill="#ffd24d"/><circle cx="98" cy="213" r="3.5" fill="#38f2ff"/>
   </g>
-</svg>
+  </svg>
 </svg>
