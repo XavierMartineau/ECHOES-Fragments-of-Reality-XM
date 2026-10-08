@@ -418,20 +418,20 @@
     window.location.href = "../partie-2_niveau-11_à_20/niveau-11.html";
   });
   finishBoss = () => {
-    const rewardUnlocked = window.EchoesSave?.unlockKey?.("resonance-1");
-    if (!rewardUnlocked) {
-      setStatus(copy.rewardError, "error");
-      nextButton.hidden = true;
-      return;
-    }
-    nextButton.hidden = false;
+    nextButton.hidden = true;
     startButton.disabled = true;
     playPuzzleSuccessAnimation();
-    nextButton.focus();
     window.setTimeout(() => {
       window.EchoesKeyFragments.playCinematic({
         keyNumber: 1,
         src: "../../assets/svg/key-01-usb.svg",
+        onComplete: () => {
+          if (!window.EchoesSave?.unlockKey?.("resonance-1")) {
+            setStatus(copy.rewardError, "error");
+            return;
+          }
+          nextButton.hidden = false;
+        },
         onContinue: () => nextButton.click(),
       });
     }, 1400);

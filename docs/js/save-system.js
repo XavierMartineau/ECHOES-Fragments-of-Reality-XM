@@ -109,14 +109,20 @@ window.EchoesSave = (() => {
   // Débloque une clé pour un joueur.
   function unlockKey(keyId, username = getCurrentUser()) {
     if (!keyId) return false;
+    let unlocked = false;
     if (!username) {
       const guestKeys = JSON.parse(localStorage.getItem("echoes-guest-keys") || "[]");
       const keys = [...new Set(guestKeys.concat(keyId))];
       localStorage.setItem("echoes-guest-keys", JSON.stringify(keys));
-      return true;
+      unlocked = true;
+    } else {
+      const keys = [...new Set(getKeys(username).concat(keyId))];
+      unlocked = saveProgress({ keys }, username);
     }
-    const keys = [...new Set(getKeys(username).concat(keyId))];
-    return saveProgress({ keys }, username);
+    if (unlocked) {
+      document.dispatchEvent(new CustomEvent("echoes:key-unlocked", { detail: { keyId } }));
+    }
+    return unlocked;
   }
 
   // Déconnecte le joueur.

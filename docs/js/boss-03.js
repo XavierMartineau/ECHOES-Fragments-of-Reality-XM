@@ -355,7 +355,7 @@
     frame = requestAnimationFrame(tick);
   };
 
-  const playCinematic = () => {
+  const playCinematic = (onComplete) => {
     const keyHolder = $("cineKey");
     keyHolder.replaceChildren(...[0, 1, 2].map((index) => makePiece(index, `boss03-cine-piece piece-${index}`)));
     const sparks = $("cineSparks");
@@ -376,6 +376,7 @@
     cinematic.classList.add("is-playing");
     $("cineContinue").hidden = true;
     window.setTimeout(() => {
+      onComplete?.();
       $("cineContinue").hidden = false;
       $("cineContinue").focus();
     }, 4300);
@@ -387,19 +388,19 @@
     cancelAnimationFrame(frame);
     panel.classList.add("is-victory");
     setText("systemMessage", text.victory.toUpperCase());
-    const unlocked = window.EchoesSave?.unlockKey?.("resonance-3");
-    if (!unlocked) {
-      setStatus(text.saveError, "error");
-      draw();
-      return;
-    }
-    window.EchoesSave?.saveProgress({ currentPage: "level-31", currentLevel: 31 });
-    updateKeyHud();
-    playCinematic();
     startButton.hidden = true;
-    nextButton.hidden = false;
+    nextButton.hidden = true;
     setStatus(text.victory, "success");
-    nextButton.focus();
+    playCinematic(() => {
+      if (!window.EchoesSave?.unlockKey?.("resonance-3")) {
+        setStatus(text.saveError, "error");
+        draw();
+        return;
+      }
+      window.EchoesSave?.saveProgress({ currentPage: "level-31", currentLevel: 31 });
+      updateKeyHud();
+      nextButton.hidden = false;
+    });
     draw();
   };
 

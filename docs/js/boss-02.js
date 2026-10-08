@@ -300,15 +300,7 @@
     panel.classList.add("is-victory");
     fragments.set(3);
     $("systemMessage").textContent = copy.victory.toUpperCase();
-    const rewardUnlocked = window.EchoesSave?.unlockKey?.("resonance-2");
-    if (!rewardUnlocked) {
-      setStatus(copy.rewardError, "error");
-      nextButton.hidden = true;
-      render();
-      return;
-    }
     window.EchoesSave?.saveProgress({ currentPage: "level-21", currentLevel: 21 });
-    const keys = window.EchoesSave?.getKeys?.() || [];
     keyCount.textContent = "2 / 6";
     keyHud.classList.add("is-unlocked");
     keyHudNote.textContent = copy.keyRecovered;
@@ -327,16 +319,23 @@
       keyHudSlot.classList.add("is-visible");
     }, 1900);
     startButton.hidden = true;
-    nextButton.hidden = false;
+    nextButton.hidden = true;
     setStatus(copy.victory, "success");
     window.setTimeout(() => {
       window.EchoesKeyFragments.playCinematic({
         keyNumber: 2,
         src: "../../assets/svg/key-02-usb.svg?v=2",
+        onComplete: () => {
+          if (!window.EchoesSave?.unlockKey?.("resonance-2")) {
+            setStatus(copy.rewardError, "error");
+            render();
+            return;
+          }
+          nextButton.hidden = false;
+        },
         onContinue: () => nextButton.click(),
       });
     }, 2000);
-    nextButton.focus();
     render();
   };
 

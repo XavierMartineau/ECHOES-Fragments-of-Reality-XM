@@ -33,7 +33,7 @@
     },
   }[lang];
 
-  const playCinematic = ({ keyNumber, src, onContinue }) => {
+  const playCinematic = ({ keyNumber, src, onContinue, onComplete }) => {
     const root = document.createElement("div");
     root.className = "kf-cine";
     root.setAttribute("role", "dialog");
@@ -105,8 +105,15 @@
 
     const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     let timer = 0;
+    let completed = false;
+    const complete = () => {
+      if (completed) return;
+      completed = true;
+      onComplete?.();
+    };
     const dismiss = () => {
       window.clearTimeout(timer);
+      complete();
       document.removeEventListener("keydown", onKey);
       root.remove();
       if (previousFocus?.isConnected) previousFocus.focus();
@@ -123,6 +130,7 @@
     root.focus();
     timer = window.setTimeout(() => {
       actions.hidden = false;
+      complete();
       next.focus();
     }, 4300);
   };
