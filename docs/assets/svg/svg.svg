@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 930" role="img" aria-label="Les sept clés de résonance ECHO">
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 960" role="img" aria-label="Les sept clés de résonance ECHO">
   <title>Les sept clés de résonance ECHO</title>
   <svg x="30" y="30" width="180" height="260" viewBox="0 0 180 260" overflow="visible" role="img" aria-label="Clé de résonance 01">
 <title id="key01Title">Clé de résonance 01</title>
@@ -405,5 +405,413 @@
     <circle cx="82" cy="213" r="3.5" fill="#ff5a6e"/><circle cx="90" cy="213" r="3.5" fill="#ffd24d"/><circle cx="98" cy="213" r="3.5" fill="#38f2ff"/>
   </g>
   </svg>
-  <image href="key-07-usb.svg" x="250" y="605" width="160" height="296" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Clé de résonance 07 — KEY FINAL" />
+  <svg x="240" y="600" width="180" height="333" viewBox="0 0 400 740" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Clé mémoire ECHO — 07">
+  <title id="k7Title">Clé mémoire ECHO — 07</title>
+  <desc id="k7Desc">Clé mémoire d'ECHOES. Un emblème E animé se trouve au centre d'un noyau de stockage composé de six modules colorés et de circuits de données, reprenant les palettes des six clés précédentes.</desc>
+  <defs>
+    <linearGradient id="k7Shell" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#153a48"/>
+      <stop offset="0.22" stop-color="#18264f"/>
+      <stop offset="0.45" stop-color="#231647"/>
+      <stop offset="0.68" stop-color="#321638"/>
+      <stop offset="0.84" stop-color="#332319"/>
+      <stop offset="1" stop-color="#142b45"/>
+    </linearGradient>
+    <linearGradient id="k7Edge" gradientUnits="userSpaceOnUse" x1="40" y1="150" x2="360" y2="690">
+      <stop offset="0" stop-color="#00f0ff"/>
+      <stop offset="0.16" stop-color="#45e5d2"/>
+      <stop offset="0.33" stop-color="#c6ff4d"/>
+      <stop offset="0.5" stop-color="#ffd24d"/>
+      <stop offset="0.66" stop-color="#ff8c83"/>
+      <stop offset="0.83" stop-color="#ff4fd8"/>
+      <stop offset="1" stop-color="#8a5bff"/>
+    </linearGradient>
+    <linearGradient id="k7Chrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b6472"/>
+      <stop offset="0.38" stop-color="#23365e"/>
+      <stop offset="0.72" stop-color="#30214f"/>
+      <stop offset="1" stop-color="#14243e"/>
+    </linearGradient>
+    <linearGradient id="k7Gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff3b0"/>
+      <stop offset="0.5" stop-color="#ffc247"/>
+      <stop offset="1" stop-color="#c47a12"/>
+    </linearGradient>
+    <linearGradient id="k7Neon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00f0ff"/>
+      <stop offset="0.16" stop-color="#45e5d2"/>
+      <stop offset="0.33" stop-color="#c6ff4d"/>
+      <stop offset="0.5" stop-color="#ffd24d"/>
+      <stop offset="0.66" stop-color="#ff8c83"/>
+      <stop offset="0.83" stop-color="#ff4fd8"/>
+      <stop offset="1" stop-color="#8a5bff"/>
+    </linearGradient>
+    <linearGradient id="k7Text" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.5" stop-color="#9ff6ff"/>
+      <stop offset="1" stop-color="#ff7be8"/>
+    </linearGradient>
+    <linearGradient id="k7Gloss" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="k7Disc" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#1b1f5e"/>
+      <stop offset="0.7" stop-color="#070a26"/>
+      <stop offset="1" stop-color="#14062e"/>
+    </radialGradient>
+    <radialGradient id="k7Aura" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0.5" stop-color="#8a5bff" stop-opacity="0.35"/>
+      <stop offset="0.8" stop-color="#ff2bd6" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#8a5bff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="k7Sun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fffbe0"/>
+      <stop offset="0.6" stop-color="#ffd36b"/>
+      <stop offset="1" stop-color="#ff4fd8"/>
+    </radialGradient>
+    <radialGradient id="k7Corona" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0.5" stop-color="#ffb347" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ff4fd8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="k7Arrow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#38d6ff"/>
+      <stop offset="1" stop-color="#ff4fd8"/>
+    </linearGradient>
+    <linearGradient id="k7Dia" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0e5a63" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#3b1360" stop-opacity="0.55"/>
+    </linearGradient>
+    <path id="k7Body" d="M122 18H278V114C278 132 286 146 299 158L319 179Q354 204 354 235V365Q354 381 343 391L334 399Q328 405 334 411L343 419Q354 429 354 445V590Q354 635 319 659Q270 692 220 698Q200 701 180 698Q130 692 81 659Q46 635 46 590V445Q46 429 57 419L66 411Q72 405 66 399L57 391Q46 381 46 365V235Q46 204 81 179L101 158C114 146 122 132 122 114Z"/>
+    <style>
+      .rot { will-change: transform; }
+      .ripple { transform-origin: 200px 365px; animation: ripple 4s ease-out infinite; }
+      .ripple.r2 { animation-delay: 2s; }
+      .blink { animation: blink 2.4s ease-in-out infinite; }
+      .b2 { animation-delay: .6s; } .b3 { animation-delay: 1.2s; } .b4 { animation-delay: 1.8s; }
+      .flow { stroke-dasharray: 6 10; animation: flow 1.2s linear infinite; }
+      .orbit { stroke-dasharray: 70 1460; animation: orbit 6s linear infinite; }
+      .memory-ring { transform-origin: 200px 365px; animation: spin 34s linear infinite; }
+      .memory-pulse { animation: memory-pulse 3.8s ease-in-out infinite; }
+      .memory-chip { animation: memory-pulse 3.8s ease-in-out infinite; }
+      .memory-chip.m2 { animation-delay: .35s; } .memory-chip.m3 { animation-delay: .7s; }
+      .memory-chip.m4 { animation-delay: 1.05s; } .memory-chip.m5 { animation-delay: 1.4s; }
+      .memory-chip.m6 { animation-delay: 1.75s; }
+      .k1-ring { transform-origin: 90px 130px; animation: spin 14s linear infinite; }
+      .k1-pulse { stroke-dasharray: 10 6; animation: flow 1.6s linear infinite; }
+      .k1-echo { transform-origin: 90px 130px; animation: k1-echo 3s ease-out infinite; }
+      .k2-crack { stroke-dasharray: 7 4; animation: k2-crack 2.6s ease-in-out infinite; }
+      .k2-shard-a { animation: k2-a 4s ease-in-out infinite; }
+      .k2-shard-b { animation: k2-b 4.6s ease-in-out infinite; }
+      .k3-corona { transform-origin: 90px 130px; animation: k3-pulse 3.2s ease-in-out infinite; }
+      .k3-rays { transform-origin: 90px 130px; animation: spin 22s linear infinite; }
+      .k3-moon { animation: k3-drift 5s ease-in-out infinite; }
+      .k4-cycle { transform-origin: 90px 130px; animation: spin 9s linear infinite; }
+      .k5-node { animation: blink 2.4s ease-in-out infinite; }
+      .k5-node.n1 { animation-delay: .4s; } .k5-node.n2 { animation-delay: .8s; } .k5-node.n3 { animation-delay: 1.2s; } .k5-node.n4 { animation-delay: 1.6s; }
+      .k5-core { transform-box: fill-box; transform-origin: center; animation: k5-core 1.8s ease-in-out infinite; }
+      .k6-gems { transform-origin: 90px 130px; animation: spin 20s linear infinite; }
+      .k6-gem { animation: gem-light 3.6s ease-in-out infinite; }
+      .k6-gem.g2 { animation-delay: .6s; } .k6-gem.g3 { animation-delay: 1.2s; }
+      .k6-gem.g4 { animation-delay: 1.8s; } .k6-gem.g5 { animation-delay: 2.4s; } .k6-gem.g6 { animation-delay: 3s; }
+      .k6-lock { animation: k6-lock 2.8s ease-in-out infinite; }
+      .echo-frame { animation: echo-frame 3.6s ease-in-out infinite; }
+      .echo-letter { stroke-dasharray: 64 64; animation: echo-letter 2.8s ease-in-out infinite; }
+      .plug-light { animation: plug-light 3s ease-in-out infinite; }
+      .title-light { animation: title-light 5s ease-in-out infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      @keyframes blink { 50% { opacity: .3; } }
+      @keyframes flow { to { stroke-dashoffset: -32; } }
+      @keyframes orbit { to { stroke-dashoffset: -1530; } }
+      @keyframes memory-pulse { 50% { opacity: .52; } }
+      @keyframes ripple { 0% { transform: scale(.4); opacity: .7; } 100% { transform: scale(1.1); opacity: 0; } }
+      @keyframes k1-echo { 0% { opacity: .8; transform: scale(.55); } 100% { opacity: 0; transform: scale(1.25); } }
+      @keyframes k2-crack { 50% { opacity: .55; } }
+      @keyframes k2-a { 50% { transform: translate(-4px, -5px); } }
+      @keyframes k2-b { 50% { transform: translate(4px, 5px); } }
+      @keyframes k3-pulse { 50% { opacity: .55; transform: scale(1.1); } }
+      @keyframes k3-drift { 50% { transform: translateX(3px); } }
+      @keyframes k5-core { 50% { opacity: .55; transform: scale(.72); } }
+      @keyframes k6-lock { 50% { opacity: .6; } }
+      @keyframes echo-frame { 50% { opacity: .48; } }
+      @keyframes echo-letter { to { stroke-dashoffset: -128; } }
+      @keyframes gem-light { 50% { opacity: .6; } }
+      @keyframes plug-light { 50% { opacity: .45; } }
+      @keyframes title-light { 50% { opacity: .78; } }
+      @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+    </style>
+  </defs>
+
+  <circle cx="200" cy="385" r="215" fill="url(#k7Aura)"/>
+
+  <!-- Body -->
+  <use href="#k7Body" fill="url(#k7Shell)" stroke="url(#k7Edge)" stroke-width="4.5" stroke-linejoin="round"/>
+  <use href="#k7Body" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.12" transform="translate(200 420) scale(.975) translate(-200 -420)"/>
+  <path class="orbit" d="M122 18H278V114C278 132 286 146 299 158L319 179Q354 204 354 235V365Q354 381 343 391L334 399Q328 405 334 411L343 419Q354 429 354 445V590Q354 635 319 659Q270 692 220 698Q200 701 180 698Q130 692 81 659Q46 635 46 590V445Q46 429 57 419L66 411Q72 405 66 399L57 391Q46 381 46 365V235Q46 204 81 179L101 158C114 146 122 132 122 114Z" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.72" pathLength="1530"/>
+
+  <g>
+    <path d="M130 27H270V105Q270 126 254 143L236 161H164L146 143Q130 126 130 105Z" fill="url(#k7Chrome)" fill-opacity="0.32" stroke="url(#k7Edge)" stroke-width="1.2"/>
+    <path d="M135 32H265V103Q265 123 250 138L234 154H166L150 138Q135 123 135 103Z" fill="none" stroke="#d9fcff" stroke-width="0.8" opacity="0.46"/>
+    <g stroke="#f5fcff" stroke-width="0.7">
+      <path d="M150 38 155 43 150 48 145 43Z" fill="#79f7ff"/>
+      <path d="M170 38 175 43 170 48 165 43Z" fill="#45e5d2"/>
+      <path d="M190 38 195 43 190 48 185 43Z" fill="#c6ff4d"/>
+      <path d="M210 38 215 43 210 48 205 43Z" fill="#ff4fd8"/>
+      <path d="M230 38 235 43 230 48 225 43Z" fill="#ff5a6e"/>
+      <path d="M250 38 255 43 250 48 245 43Z" fill="#ffd24d"/>
+    </g>
+    <rect x="146" y="58" width="108" height="42" rx="6" fill="#080a22" stroke="url(#k7Edge)" stroke-width="1.5"/>
+    <rect x="152" y="64" width="96" height="28" rx="4" fill="#111638" stroke="#79f7ff" stroke-opacity="0.28" stroke-width="0.7"/>
+    <g fill="url(#k7Gold)">
+      <rect x="159" y="70" width="15" height="16" rx="2"/>
+      <rect x="183" y="70" width="15" height="16" rx="2"/>
+      <rect x="202" y="70" width="15" height="16" rx="2"/>
+      <rect x="226" y="70" width="15" height="16" rx="2"/>
+    </g>
+    <path d="M143 108h114" fill="none" stroke="#7186bd" stroke-width="1.2" stroke-linecap="round" opacity="0.75"/>
+    <g fill="none" stroke="url(#k7Neon)" stroke-width="1.2" stroke-linecap="round" opacity="0.88">
+      <path d="M139 56v37l10 10h8M261 56v37l-10 10h-8"/>
+      <path d="M148 113l8 8v15M252 113l-8 8v15"/>
+    </g>
+    <g fill="#0a102b" stroke="url(#k7Edge)" stroke-width="1">
+      <circle cx="139" cy="53" r="2.3"/>
+      <circle cx="261" cy="53" r="2.3"/>
+      <circle cx="156" cy="139" r="2.3"/>
+      <circle cx="244" cy="139" r="2.3"/>
+    </g>
+    <g class="flow" fill="none" stroke="#00f0ff" stroke-width="1.5" opacity="0.8">
+      <path d="M168 105v13M187 105v13M213 105v13M232 105v13"/>
+    </g>
+    <path class="plug-light" d="M178 145h44" fill="none" stroke="url(#k7Neon)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M177 164 200 150l23 14-23 14Z" fill="#101536" fill-opacity="0.72" stroke="url(#k7Neon)" stroke-width="0.8" opacity="0.8"/>
+  </g>
+
+  <g fill="none" stroke="url(#k7Neon)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M132 103v10c0 19 8 35 23 49l17 16" stroke-width="1.5" opacity="0.82"/>
+    <path d="M268 103v10c0 19-8 35-23 49l-17 16" stroke-width="1.5" opacity="0.82"/>
+    <path d="M141 106v8c0 16 7 29 19 41M259 106v8c0 16-7 29-19 41" stroke-width="0.8" opacity="0.5"/>
+    <path d="M200 103v31m-8 14 8-7 8 7-8 7Z" stroke-width="1.1" opacity="0.78"/>
+  </g>
+  <g fill="#101536" stroke="url(#k7Edge)" stroke-width="1">
+    <circle cx="132" cy="103" r="2.4"/>
+    <circle cx="268" cy="103" r="2.4"/>
+    <circle cx="170" cy="178" r="2.2"/>
+    <circle cx="230" cy="178" r="2.2"/>
+  </g>
+  <path d="M177 163 200 149l23 14-23 14Z" fill="#101536" fill-opacity="0.72" stroke="url(#k7Neon)" stroke-width="0.8" opacity="0.8"/>
+
+  <g fill="none" stroke="#00f0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.65">
+    <path d="M78 292h18l12 12"/>
+    <path d="M322 292h-18l-12 12"/>
+    <path d="M72 570v-28l16-18"/>
+    <path d="M328 570v-28l-16-18"/>
+  </g>
+  <circle class="blink" cx="78" cy="292" r="4" fill="#00f0ff"/>
+  <circle class="blink b2" cx="322" cy="292" r="4" fill="#ff2bd6"/>
+
+  <g fill="none" stroke="url(#k7Neon)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.68">
+    <path d="M91 273v-23l17-17h17M309 273v-23l-17-17h-17"/>
+    <path d="M101 277h18M299 277h-18M111 285h13M289 285h-13"/>
+    <path d="M160 224h20l7 6h26l7-6h20"/>
+  </g>
+  <g fill="#101536" stroke="url(#k7Edge)" stroke-width="1">
+    <circle cx="91" cy="273" r="3"/>
+    <circle cx="309" cy="273" r="3"/>
+    <circle cx="124" cy="233" r="2.5"/>
+    <circle cx="276" cy="233" r="2.5"/>
+  </g>
+  <g class="blink">
+    <rect x="169" y="219" width="7" height="2" rx="1" fill="#00f0ff"/>
+    <rect x="180" y="219" width="7" height="2" rx="1" fill="#45e5d2"/>
+    <rect x="191" y="219" width="7" height="2" rx="1" fill="#c6ff4d"/>
+    <rect x="202" y="219" width="7" height="2" rx="1" fill="#ffd24d"/>
+    <rect x="213" y="219" width="7" height="2" rx="1" fill="#ff5a6e"/>
+    <rect x="224" y="219" width="7" height="2" rx="1" fill="#ff4fd8"/>
+  </g>
+  <g fill="none" stroke="url(#k7Neon)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M164 185h72l8 8v13h-20M236 185l-8 5h-36l-6-5h-22" stroke-width="1.2" opacity="0.7"/>
+    <path d="M174 196h12M214 196h12" stroke-width="1.5" opacity="0.8"/>
+  </g>
+  <rect x="190" y="189" width="20" height="14" rx="3" fill="#0b102b" stroke="url(#k7Edge)" stroke-width="1"/>
+  <path d="M195 193h10M195 197h10" stroke="#bdfbff" stroke-width="1" stroke-linecap="round"/>
+  <g fill="url(#k7Neon)">
+    <circle cx="165" cy="185" r="2"/>
+    <circle cx="235" cy="185" r="2"/>
+    <circle cx="164" cy="204" r="2"/>
+    <circle cx="236" cy="204" r="2"/>
+  </g>
+
+  <!-- UNIFIED REACTOR CORE -->
+  <g display="none">
+  <circle cx="200" cy="365" r="142" fill="url(#k7Aura)"/>
+  <circle cx="200" cy="365" r="124" fill="url(#k7Disc)" stroke="url(#k7Edge)" stroke-width="3"/>
+  <circle class="ripple" cx="200" cy="365" r="110" fill="none" stroke="#00f0ff" stroke-width="2"/>
+  <circle class="ripple r2" cx="200" cy="365" r="110" fill="none" stroke="#ff2bd6" stroke-width="2"/>
+  <circle cx="200" cy="365" r="117" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="2 7" opacity="0.45"/>
+
+  <!-- 02 fractured diamond -->
+  <g transform="translate(200 365) scale(2.05) translate(-90 -130)">
+    <path d="M90 84l46 46-46 46-46-46 46-46Z" fill="url(#k7Dia)" stroke="#45e5d2" stroke-width="1.6"/>
+    <path d="M90 96l34 34-34 34-34-34 34-34Z" fill="none" stroke="#45e5d2" stroke-width="0.8" opacity="0.5"/>
+    <path d="M90 108l22 22-22 22-22-22 22-22Z" fill="none" stroke="#ffbd69" stroke-width="0.8" stroke-dasharray="3 4" opacity="0.7"/>
+    <g class="k2-shard-a"><path d="M62 118l8-4-3 9Z" fill="#45e5d2" opacity="0.9"/></g>
+    <g class="k2-shard-b"><path d="M118 142l-9 3 4-8Z" fill="#ffbd69" opacity="0.9"/></g>
+    <path class="k2-crack" d="M90 84l-8 20 14 14-12 20 14 16-8 22" fill="none" stroke="#ffbd69" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M90 84l-8 20 14 14-12 20 14 16-8 22" fill="none" stroke="#fff4d6" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 06 gems -->
+  <g transform="translate(200 365) rotate(30) scale(2.15) translate(-90 -130)">
+    <path d="M90,102 L114.25,116 L114.25,144 L90,158 L65.75,144 L65.75,116 Z" fill="none" stroke="#ffe9a0" stroke-width="0.6" opacity="0.4"/>
+    <g class="k6-gems">
+      <circle class="k6-gem g1" cx="90" cy="92" r="4.5" fill="#ff5a6e" stroke="#fff" stroke-width="1"/>
+      <circle class="k6-gem g2" cx="122.91" cy="111" r="4.5" fill="#ffd24d" stroke="#fff" stroke-width="1"/>
+      <circle class="k6-gem g3" cx="122.91" cy="149" r="4.5" fill="#8cff7a" stroke="#fff" stroke-width="1"/>
+      <circle class="k6-gem g4" cx="90" cy="168" r="4.5" fill="#38f2ff" stroke="#fff" stroke-width="1"/>
+      <circle class="k6-gem g5" cx="57.09" cy="149" r="4.5" fill="#7a8cff" stroke="#fff" stroke-width="1"/>
+      <circle class="k6-gem g6" cx="57.09" cy="111" r="4.5" fill="#e07aff" stroke="#fff" stroke-width="1"/>
+    </g>
+  </g>
+
+  <!-- 01 broken circle -->
+  <g transform="translate(200 365) scale(1.7) translate(-90 -130)">
+    <circle cx="90" cy="130" r="34" fill="none" stroke="#79f7ff" stroke-width="0.8" opacity="0.5"/>
+    <circle class="k1-echo" cx="90" cy="130" r="34" fill="none" stroke="#79f7ff" stroke-width="2"/>
+    <g class="k1-ring">
+      <path d="M117.85 110.5A34 34 0 1 1 98.8 97.16" fill="none" stroke="url(#k7Neon)" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="109.5" cy="102.1" r="3.5" fill="#ffffff"/>
+    </g>
+  </g>
+
+  <!-- 05 network -->
+  <g transform="translate(200 365) scale(1.1) translate(-90 -130)">
+    <g fill="none" stroke-linecap="round">
+      <path d="M90,100 L107.63,154.27 M118.53,120.73 L72.37,154.27 M107.63,154.27 L61.47,120.73 M72.37,154.27 L90,100 M61.47,120.73 L118.53,120.73 " stroke="#ff9f6b" stroke-width="1" opacity="0.6"/>
+      <path d="M90,100 L118.53,120.73 M118.53,120.73 L107.63,154.27 M107.63,154.27 L72.37,154.27 M72.37,154.27 L61.47,120.73 M61.47,120.73 L90,100 " stroke="#ff5a6e" stroke-width="1.8"/>
+    </g>
+    <circle cx="90" cy="100" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
+    <circle class="k5-node n0" cx="90" cy="100" r="2.5" fill="#ff6b7e"/>
+    <circle cx="118.53" cy="120.73" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
+    <circle class="k5-node n1" cx="118.53" cy="120.73" r="2.5" fill="#ff6b7e"/>
+    <circle cx="107.63" cy="154.27" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
+    <circle class="k5-node n2" cx="107.63" cy="154.27" r="2.5" fill="#ff6b7e"/>
+    <circle cx="72.37" cy="154.27" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
+    <circle class="k5-node n3" cx="72.37" cy="154.27" r="2.5" fill="#ff6b7e"/>
+    <circle cx="61.47" cy="120.73" r="5" fill="#1a0a10" stroke="#ffb38a" stroke-width="2"/>
+    <circle class="k5-node n4" cx="61.47" cy="120.73" r="2.5" fill="#ff6b7e"/>
+  </g>
+
+  <!-- 04 recycle -->
+  <g transform="translate(200 365) scale(.7) translate(-90 -130)">
+    <g class="k4-cycle">
+      <path d="M98.03,105.27 A26 26 0 0 1 115.86,132.72" fill="none" stroke="url(#k7Arrow)" stroke-width="5" stroke-linecap="round"/>
+      <path d="M114.43,138.89 L122.92,132.3 L108.95,131.33 Z" fill="#ff4fd8" stroke="#ff4fd8" stroke-width="1" stroke-linejoin="round"/>
+      <path d="M107.4,149.32 A26 26 0 0 1 74.72,151.03" fill="none" stroke="url(#k7Arrow)" stroke-width="5" stroke-linecap="round"/>
+      <path d="M70.08,146.71 L71.55,157.36 L79.38,145.75 Z" fill="#38d6ff" stroke="#38d6ff" stroke-width="1" stroke-linejoin="round"/>
+      <path d="M64.57,135.41 A26 26 0 0 1 79.42,106.25" fill="none" stroke="url(#k7Arrow)" stroke-width="5" stroke-linecap="round"/>
+      <path d="M85.49,104.39 L75.53,100.34 L81.67,112.92 Z" fill="#bd63ff" stroke="#bd63ff" stroke-width="1" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <!-- 03 eclipse (heart) -->
+  <g transform="translate(200 365) scale(.58) translate(-90 -130)">
+    <circle class="k3-corona" cx="90" cy="130" r="34" fill="url(#k7Corona)"/>
+    <g class="k3-rays" stroke="#ffe39a" stroke-width="2.4" stroke-linecap="round" opacity="0.9">
+      <path d="M90 90v8M90 162v8M50 130h8M122 130h8M61.7 101.7l5.7 5.7M112.6 152.6l5.7 5.7M118.3 101.7l-5.7 5.7M67.4 152.6l-5.7 5.7"/>
+    </g>
+    <circle cx="90" cy="130" r="21" fill="url(#k7Sun)"/>
+    <circle class="k3-moon" cx="95" cy="130" r="20" fill="#07030f" stroke="#fff3b0" stroke-width="1.5"/>
+    <circle cx="72" cy="121" r="3.2" fill="#ffffff"/>
+  </g>
+  </g>
+
+  <!-- ECHO memory core -->
+  <circle cx="200" cy="365" r="142" fill="url(#k7Aura)"/>
+  <circle cx="200" cy="365" r="124" fill="url(#k7Disc)" stroke="url(#k7Edge)" stroke-width="2.5"/>
+  <circle class="orbit" cx="200" cy="365" r="116" fill="none" stroke="#dffaff" stroke-width="1.6" pathLength="1530" opacity="0.82"/>
+  <circle cx="200" cy="365" r="103" fill="none" stroke="#45e5d2" stroke-width="1" stroke-dasharray="1 7" opacity="0.52"/>
+  <circle cx="200" cy="365" r="91" fill="#0a0d2d" fill-opacity="0.7" stroke="#8a5bff" stroke-opacity="0.5" stroke-width="1.2"/>
+  <g class="memory-ring" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M200 274 279 319v92l-79 45-79-45v-92Z" stroke="#45e5d2" stroke-width="1.4" opacity="0.8"/>
+    <path d="M200 289 266 327v76l-66 38-66-38v-76Z" stroke="#ff4fd8" stroke-width="0.8" stroke-dasharray="3 6" opacity="0.75"/>
+  </g>
+  <g fill="none" stroke="url(#k7Neon)" stroke-width="1.2" stroke-linecap="round" opacity="0.62">
+    <path d="M200 289v31M266 327l-27 16M266 403l-27-16M200 441v-31M134 403l27-16M134 327l27 16"/>
+  </g>
+  <g stroke="#ffffff" stroke-width="0.8">
+    <rect class="memory-chip" x="192" y="274" width="16" height="10" rx="3" fill="#79f7ff"/>
+    <rect class="memory-chip m2" x="251" y="309" width="16" height="10" rx="3" transform="rotate(60 259 314)" fill="#45e5d2"/>
+    <rect class="memory-chip m3" x="251" y="411" width="16" height="10" rx="3" transform="rotate(-60 259 416)" fill="#c6ff4d"/>
+    <rect class="memory-chip m4" x="192" y="446" width="16" height="10" rx="3" fill="#ffd24d"/>
+    <rect class="memory-chip m5" x="133" y="411" width="16" height="10" rx="3" transform="rotate(60 141 416)" fill="#ff5a6e"/>
+    <rect class="memory-chip m6" x="133" y="309" width="16" height="10" rx="3" transform="rotate(-60 141 314)" fill="#ff4fd8"/>
+  </g>
+  <g fill="#0a0d24" stroke="url(#k7Neon)" stroke-width="1.3">
+    <circle cx="200" cy="320" r="4"/>
+    <circle cx="239" cy="343" r="4"/>
+    <circle cx="239" cy="387" r="4"/>
+    <circle cx="200" cy="410" r="4"/>
+    <circle cx="161" cy="387" r="4"/>
+    <circle cx="161" cy="343" r="4"/>
+  </g>
+  <circle cx="200" cy="365" r="49" fill="url(#k7Disc)" stroke="url(#k7Edge)" stroke-width="2"/>
+  <circle class="memory-pulse" cx="200" cy="365" r="41" fill="none" stroke="url(#k7Neon)" stroke-width="1.4" opacity="0.88"/>
+  <path class="echo-frame" d="M200 327 233 346v38l-33 19-33-19v-38Z" fill="#0b102b" fill-opacity="0.94" stroke="url(#k7Edge)" stroke-width="1.7" stroke-linejoin="round"/>
+  <path class="echo-letter" d="M213 343H188V387H213M189 365H208" fill="none" stroke="url(#k7Neon)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="222" cy="347" r="2.2" fill="#c6ff4d"/>
+  <circle cx="222" cy="383" r="2.2" fill="#ff4fd8"/>
+  <text x="200" y="477" fill="#bfe9ff" font-family="Arial, sans-serif" font-size="7" font-weight="700" letter-spacing="3" text-anchor="middle" opacity="0.72">SIX SIGNALS · ONE MEMORY</text>
+
+  <g fill="none" stroke="url(#k7Neon)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.72">
+    <path d="M63 324v49l10 10v34l-10 10v55"/>
+    <path d="M337 324v49l-10 10v34l10 10v55"/>
+    <path d="M63 342h12M63 355h12M63 418h12M63 431h12M63 444h12"/>
+    <path d="M337 342h-12M337 355h-12M337 418h-12M337 431h-12M337 444h-12"/>
+  </g>
+  <g fill="#0b102b" stroke="url(#k7Edge)" stroke-width="1.2">
+    <circle cx="63" cy="324" r="3"/>
+    <circle cx="337" cy="324" r="3"/>
+    <circle cx="63" cy="482" r="3"/>
+    <circle cx="337" cy="482" r="3"/>
+    <path d="M80 347h12v16H80z"/>
+    <path d="M308 347h12v16h-12z"/>
+  </g>
+  <path d="M83 351h6M83 356h6M317 351h-6M317 356h-6" stroke="#c6ff4d" stroke-width="1" stroke-linecap="round"/>
+
+  <g fill="#0a102b" fill-opacity="0.62" stroke="url(#k7Edge)" stroke-width="1">
+    <path d="M101 536h27l8 8v38h-35Z"/>
+    <path d="M299 536h-27l-8 8v38h35Z"/>
+  </g>
+  <g fill="none" stroke-linecap="round">
+    <path d="M108 551h17M108 559h17M108 567h17M108 575h17" stroke="#45e5d2" stroke-width="1.6"/>
+    <path d="M292 551h-17M292 559h-17M292 567h-17M292 575h-17" stroke="#ff4fd8" stroke-width="1.6"/>
+  </g>
+  <g fill="#0b102b" stroke="url(#k7Neon)" stroke-width="1">
+    <circle cx="101" cy="536" r="2.4"/>
+    <circle cx="299" cy="536" r="2.4"/>
+    <circle cx="135" cy="582" r="2"/>
+    <circle cx="265" cy="582" r="2"/>
+  </g>
+
+  <!-- 01 pulse -->
+  <g transform="translate(200 535) scale(1.8) translate(-90 -132)">
+    <path class="k1-pulse" d="M62 132h14l6-15 8 30 8-24 6 9h20" fill="none" stroke="#e8ffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g fill="none" stroke="url(#k7Edge)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.62">
+    <path d="M126 579h27l8-8h18M274 579h-27l-8-8h-18"/>
+  </g>
+  <g stroke="#0c1240" stroke-width="0.7">
+    <circle cx="126" cy="579" r="2.8" fill="#00f0ff"/>
+    <circle cx="148" cy="579" r="2.8" fill="#45e5d2"/>
+    <circle cx="170" cy="579" r="2.8" fill="#c6ff4d"/>
+    <circle cx="230" cy="579" r="2.8" fill="#ffd24d"/>
+    <circle cx="252" cy="579" r="2.8" fill="#ff5a6e"/>
+    <circle cx="274" cy="579" r="2.8" fill="#ff4fd8"/>
+  </g>
+
+  <!-- text -->
+  <text class="title-light" x="200" y="620" fill="url(#k7Text)" font-family="Georgia, 'Times New Roman', serif" font-size="26" font-weight="700" letter-spacing="3" text-anchor="middle">ECHO MEMORY</text>
+  <rect x="110" y="636" width="180" height="2" rx="1" fill="url(#k7Neon)"/>
+</svg>
 </svg>
