@@ -76,18 +76,8 @@ Après le niveau 10, le joueur affronte le Gardien du Signal dans
 associer des sceaux, répéter une mélodie de trois symboles, puis cliquer le noyau
 pendant deux halos verts. Le joueur dispose de six unités d’énergie et peut
 recommencer sans passer par un niveau de récupération.
-La victoire ouvre le niveau spécial `clee_01_cinematic.html` et l’obtention de la Clé 01.
-
-Ce niveau rassemble en une seule scène :
-
-- le dialogue automatique entre Voyageur et ECHO ;
-- les répliques colorées du Voyageur et d'ECHO ;
-- l'effet de signal glitché propre à ECHO ;
-- l'apparition ponctuelle de la clé USB cyberpunk `CLEE_01` ;
-- l'animation de la clé vers le HUD ;
-- la sauvegarde de `resonance-1` ;
-- le passage du compteur `0 / 6` à `1 / 6` ;
-- l'indice final qui ouvre la suite du voyage.
+La victoire reconstitue la Clé 01 dans une courte cinématique intégrée au boss,
+enregistre la récompense, puis mène directement au niveau 11.
 
 ### Boss de la Partie 2 — `boss-02.html`
 
@@ -124,7 +114,7 @@ Fichiers importants :
 
 - `docs/js/save-system.js` : comptes, sauvegardes et clés débloquées ;
 - `docs/js/partie-1_niveau-1_à_10.js` : progression et routage de la Partie 1 ;
-- `docs/js/key-transition.js` : dialogue, récupération et animation de Clé 01 ;
+- `docs/js/key-fragments.js` : assemblage des fragments et cinématique de récompense ;
 - `docs/js/dev-mode.js` : accès développeur aux niveaux et scènes spéciales ;
 - `docs/assets/svg/key-01-usb.svg` : visuel cyberpunk de la première clé ;
 - `documentation/cheminement-projet.md` : historique fonctionnel et cheminement détaillé.
@@ -160,7 +150,8 @@ ECHOES utilise une identité visuelle fondée sur :
 Les vérifications courantes du projet comprennent :
 
 ```bash
-node --check docs/js/key-transition.js
+node --check docs/js/key-fragments.js
+node --check docs/js/boss-01.js
 git diff --check
 ```
 

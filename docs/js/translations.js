@@ -1612,7 +1612,6 @@ window.translations.en.pageI18n = (() => {
     "RÉCUPÉRATION": "RECOVERY",
     "REPÈRES COULEURS ACCESSIBLES": "ACCESSIBLE COLOR MARKERS",
     "Éclipse": "Eclipse",
-    "CLÉE_01 // CINÉMATIQUE": "CLEE_01 // CINEMATIC",
     "Progression de la Partie 2": "Part 2 progress",
     "Emplacements des formes": "Shape slots",
     "Formes à aligner": "Shapes to align",

@@ -17,8 +17,20 @@
 
   const lang = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const cineText = {
-    fr: { title: (n) => `CLÉ 0${n} COMPLÈTE`, sub: "Les trois fragments se rejoignent. La clé est reconstituée.", next: "CONTINUER", close: "Fermer" },
-    en: { title: (n) => `KEY 0${n} COMPLETE`, sub: "The three fragments join together. The key is restored.", next: "CONTINUE", close: "Close" },
+    fr: {
+      kicker: (n) => `RÉSONANCE // CLÉ 0${n}`,
+      title: (n) => `CLÉ 0${n} RECONSTITUÉE`,
+      sub: "Les trois fragments se rejoignent. Une nouvelle résonance est éveillée.",
+      next: "CONTINUER",
+      close: "Fermer",
+    },
+    en: {
+      kicker: (n) => `RESONANCE // KEY 0${n}`,
+      title: (n) => `KEY 0${n} RESTORED`,
+      sub: "The three fragments join together. A new resonance awakens.",
+      next: "CONTINUE",
+      close: "Close",
+    },
   }[lang];
 
   const playCinematic = ({ keyNumber, src, onContinue }) => {
@@ -26,11 +38,16 @@
     root.className = "kf-cine";
     root.setAttribute("role", "dialog");
     root.setAttribute("aria-modal", "true");
+    root.setAttribute("aria-labelledby", "kf-cine-title");
+    root.setAttribute("aria-describedby", "kf-cine-sub");
+    root.tabIndex = -1;
     const rays = document.createElement("div");
     rays.className = "kf-cine-rays";
     const rings = document.createElement("div");
     rings.className = "kf-cine-rings";
     rings.append(document.createElement("span"), document.createElement("span"), document.createElement("span"));
+    const content = document.createElement("div");
+    content.className = "kf-cine-content";
     const key = document.createElement("div");
     key.className = "kf-cine-key";
     [0, 1, 2].forEach((index) => key.appendChild(makeSvg(src, index, `kf-cine-piece piece-${index}`, false)));
@@ -47,31 +64,52 @@
       spark.style.setProperty("--hue", hues[index % hues.length]);
       sparks.appendChild(spark);
     }
+    const kicker = document.createElement("span");
+    kicker.className = "kf-cine-kicker";
+    kicker.textContent = cineText.kicker(keyNumber);
     const title = document.createElement("h2");
     title.className = "kf-cine-title";
+    title.id = "kf-cine-title";
     title.textContent = cineText.title(keyNumber);
     const sub = document.createElement("p");
     sub.className = "kf-cine-sub";
+    sub.id = "kf-cine-sub";
     sub.textContent = cineText.sub;
     const actions = document.createElement("div");
     actions.className = "kf-cine-actions";
+    actions.setAttribute("aria-label", lang === "en" ? "Reward actions" : "Actions de récompense");
     actions.hidden = true;
     const next = document.createElement("button");
     next.type = "button";
     next.className = "next-level-button kf-cine-button";
-    next.textContent = cineText.next;
+    const nextLabel = document.createElement("span");
+    nextLabel.textContent = cineText.next;
+    const arrow = document.createElement("span");
+    arrow.className = "kf-cine-arrow";
+    arrow.setAttribute("aria-hidden", "true");
+    arrow.textContent = "→";
+    next.append(nextLabel, arrow);
     const close = document.createElement("button");
     close.type = "button";
     close.className = "reset-button kf-cine-close";
-    close.textContent = cineText.close;
+    const closeIcon = document.createElement("span");
+    closeIcon.setAttribute("aria-hidden", "true");
+    closeIcon.textContent = "×";
+    const closeLabel = document.createElement("span");
+    closeLabel.textContent = cineText.close;
+    close.append(closeIcon, closeLabel);
     actions.append(next, close);
-    root.append(rays, rings, key, sparks, title, sub, actions);
+    content.append(key, kicker, title, sub, actions);
+    root.append(rays, rings, sparks, content);
     document.body.appendChild(root);
 
+    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    let timer = 0;
     const dismiss = () => {
       window.clearTimeout(timer);
       document.removeEventListener("keydown", onKey);
       root.remove();
+      if (previousFocus?.isConnected) previousFocus.focus();
     };
     const onKey = (event) => { if (event.key === "Escape") dismiss(); };
     document.addEventListener("keydown", onKey);
@@ -82,7 +120,8 @@
     });
     void root.offsetWidth;
     root.classList.add("is-playing");
-    const timer = window.setTimeout(() => {
+    root.focus();
+    timer = window.setTimeout(() => {
       actions.hidden = false;
       next.focus();
     }, 4300);

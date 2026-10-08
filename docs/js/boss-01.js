@@ -80,6 +80,10 @@
       "You ran out of energy. Click Reset to try the trial again.",
     ),
     victory: text("Le Gardien est apaisé. La Clé 01 t’attend.", "The Guardian is calm. Key 01 awaits."),
+    rewardError: text(
+      "La Clé 01 n’a pas pu être enregistrée. Vérifie ta sauvegarde puis réessaie.",
+      "Key 01 could not be saved. Check your save and try again.",
+    ),
     livesRemaining: (count) => text(`${count} unités d’énergie restantes`, `${count} energy units remaining`),
     saveSuccess: text("Progression enregistrée.", "Progress saved."),
     saveFailure: text("Connecte-toi pour enregistrer ta progression.", "Sign in to save your progress."),
@@ -411,9 +415,15 @@
   });
   resetButton.addEventListener("click", resetFight);
   nextButton.addEventListener("click", () => {
-    window.location.href = "clee_01_cinematic.html";
+    window.location.href = "../partie-2_niveau-11_à_20/niveau-11.html";
   });
   finishBoss = () => {
+    const rewardUnlocked = window.EchoesSave?.unlockKey?.("resonance-1");
+    if (!rewardUnlocked) {
+      setStatus(copy.rewardError, "error");
+      nextButton.hidden = true;
+      return;
+    }
     nextButton.hidden = false;
     startButton.disabled = true;
     playPuzzleSuccessAnimation();

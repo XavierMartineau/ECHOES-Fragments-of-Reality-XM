@@ -113,36 +113,9 @@ reste [Info-fr.txt](./Info-fr.txt).
 - Trois stages accessibles : trouver trois sceaux correspondants, répéter une mélodie de trois symboles et toucher le noyau pendant deux halos verts.
 - Difficulté visée : `1/6`, avec six unités d'énergie et une reprise par réinitialisation.
 - Contrôleur et styles isolés dans `docs/js/boss-01.js` et `docs/css/boss-01.css`.
-- La victoire mène à la cinématique de la Clé 01, restaurée dans
-  `clee_01_cinematic.html`. Le protocole de récupération séparé et l'interlude ont été
-  supprimés ; la cinématique reste le parcours de récompense.
-
-### Niveau spécial — Clé 01
-
-Page : `docs/html/partie-1_niveau-1_à_10/clee_01_cinematic.html`
-
-Le niveau spécial présente la récompense et la transmission narrative dans une scène :
-
-- scène centrale de résonance avec noyau ECHO et orbites cyan, violette et verte ;
-- dialogue automatique entre Voyageur et ECHO ;
-- Voyageur lisible et ECHO volontairement glitché ;
-- clé USB cyberpunk en SVG avec le symbole `E` et l'identifiant `RESONANCE // 01` ;
-- apparition ponctuelle de la clé lorsque le Voyageur l'identifie ;
-- animation de la clé vers le HUD après confirmation ;
-- affichage du compteur `0 / 6`, puis `1 / 6` après la sauvegarde ;
-- emplacement HUD nommé `CLEE_01` ;
-- trois répliques post-récupération donnant l'indice du cercle brisé ;
-- bouton de continuation vers le niveau suivant après la fin de la transmission.
-
-Fichiers associés :
-
-- `docs/html/partie-1_niveau-1_à_10/clee_01_cinematic.html`
-- `docs/js/key-transition.js`
-- `docs/assets/svg/key-01-usb.svg`
-- `docs/css/partie-1_niveau-1_à_10.css`
-
-L'ancien protocole de récupération du boss a été retiré; la Clé 01 conserve sa
-cinématique et son parcours de récompense.
+- La victoire enregistre `resonance-1` et présente la réunion des trois fragments
+  dans une fenêtre de récompense. « Continuer » ouvre directement le niveau 11 ;
+  aucune page cinématique Clé 01 séparée n'est conservée.
 
 ## Architecture technique
 

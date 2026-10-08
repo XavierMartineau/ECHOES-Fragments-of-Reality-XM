@@ -1676,10 +1676,6 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
     window.location.href = "boss-01.html";
     return;
   }
-  if (levelNumber === 11) {
-    window.location.href = "clee_01_cinematic.html";
-    return;
-  }
   window.location.href = `niveau-${String(levelNumber + 1).padStart(2, "0")}.html`;
   });
 
