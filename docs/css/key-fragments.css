@@ -243,7 +243,7 @@
 
 .kf-cine-actions[hidden] { display: none; }
 
-.kf-cine .kf-cine-button:not([hidden]),
+.kf-cine .kf-cine-content .kf-cine-button:not([hidden]),
 .kf-cine .kf-cine-close {
   display: inline-flex;
   align-items: center;
@@ -267,13 +267,13 @@
 .kf-cine .kf-cine-button::before,
 .kf-cine .kf-cine-close::before { display: none; }
 
-.kf-cine .kf-cine-button:hover,
-.kf-cine .kf-cine-button:focus-visible {
+.kf-cine .kf-cine-content .kf-cine-button:hover,
+.kf-cine .kf-cine-content .kf-cine-button:focus-visible {
   transform: translateY(-2px);
   box-shadow: 0 12px 34px rgba(67, 215, 232, 0.32), inset 0 1px rgba(255, 255, 255, 0.8);
 }
 
-.kf-cine .kf-cine-button:focus-visible,
+.kf-cine .kf-cine-content .kf-cine-button:focus-visible,
 .kf-cine .kf-cine-close:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 4px;
@@ -284,7 +284,7 @@
   transition: transform 180ms ease;
 }
 
-.kf-cine .kf-cine-button:hover .kf-cine-arrow { transform: translateX(3px); }
+.kf-cine .kf-cine-content .kf-cine-button:hover .kf-cine-arrow { transform: translateX(3px); }
 
 .kf-cine .kf-cine-close {
   min-width: 130px;
@@ -348,7 +348,7 @@
 @media (max-width: 520px) {
   .kf-cine-content { padding: 26px 20px; border-radius: 20px; }
   .kf-cine-actions { flex-direction: column; }
-  .kf-cine .kf-cine-button:not([hidden]),
+  .kf-cine .kf-cine-content .kf-cine-button:not([hidden]),
   .kf-cine .kf-cine-close { width: 100%; }
 }
 
