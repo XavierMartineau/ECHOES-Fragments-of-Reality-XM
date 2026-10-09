@@ -5555,7 +5555,7 @@ Condition de déblocage :
 Niveau 89 complété.
 
 Dialogue d’ECHO (final narratif) :  
-« Tu as traversé les trois dimensions.
+« Tu as traversé les six dimensions.
 Tu as stabilisé la Rupture.
 Tu as refermé les Fractures.
 Tu as ouvert le Miroir.
