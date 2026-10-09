@@ -314,9 +314,16 @@
   intro.querySelector(".eyebrow").textContent = levelCopy.eyebrow;
   intro.querySelector("h1").textContent = levelCopy.title;
   intro.querySelector(".level-description").textContent = levelCopy.description;
+  intro.querySelector(".volume-notice")?.remove();
+  intro.querySelectorAll("[data-i18n]").forEach((element) => {
+    element.removeAttribute("data-i18n");
+  });
   intro.querySelector(".system-label").textContent = "SYSTEM://LOG";
   document.getElementById("systemMessage").textContent = levelCopy.system;
   document.querySelector(".level-meta > span").textContent = copy.part;
+  document
+    .querySelectorAll(".level-meta [data-i18n], .level-footer [data-i18n]")
+    .forEach((element) => element.removeAttribute("data-i18n"));
   document
     .getElementById("levelProgress")
     .setAttribute(
@@ -362,9 +369,9 @@
   let completed = [];
   try {
     const current = JSON.parse(localStorage.getItem(progressKey) || "[]");
-    const legacy = accountId === "guest"
-      ? JSON.parse(localStorage.getItem("echoes-completed-levels") || "[]")
-      : [];
+    const legacy = JSON.parse(
+      localStorage.getItem("echoes-completed-levels") || "[]",
+    );
     completed = [...new Set([...current, ...legacy].filter(
       (value) => Number.isInteger(value) && value >= 1 && value <= 60,
     ))];
@@ -414,6 +421,17 @@
     element.className = className;
     element.textContent = text;
     return element;
+  };
+  const randomize = (values) => {
+    const shuffled = [...values];
+    for (let index = shuffled.length - 1; index > 0; index -= 1) {
+      const swapIndex = Math.floor(Math.random() * (index + 1));
+      [shuffled[index], shuffled[swapIndex]] = [
+        shuffled[swapIndex],
+        shuffled[index],
+      ];
+    }
+    return shuffled;
   };
   const nextUrl =
     level === 10 ? "boss-01.html" : `niveau-${String(level + 1).padStart(2, "0")}.html`;
@@ -686,9 +704,12 @@
   // Level 5: locate eight symbol pairs in a memory grid.
   if (level === 5) {
     const glyphs = ["✦", "◈", "⬡", "✧", "✺", "☾", "✥", "❖"];
-    const cards = [...glyphs, ...glyphs]
-      .map((glyph, index) => ({ glyph, id: index % glyphs.length }))
-      .sort(() => Math.random() - 0.5);
+    const cards = randomize(
+      [...glyphs, ...glyphs].map((glyph, index) => ({
+        glyph,
+        id: index % glyphs.length,
+      })),
+    );
     const grid = document.createElement("div");
     grid.className = "memory-grid";
     board.appendChild(grid);
@@ -742,7 +763,7 @@
   // Level 6: deduce a four-color code from Mastermind feedback.
   if (level === 6) {
     const palette = ["#51e7ef", "#8274ff", "#ff609e", "#ffd35a", "#82e0a8", "#ff8b5b"];
-    const code = [...palette.keys()].sort(() => Math.random() - 0.5).slice(0, 4);
+    const code = randomize([...palette.keys()]).slice(0, 4);
     const guess = [null, null, null, null];
     const history = document.createElement("div");
     history.className = "mastermind-history";
@@ -906,13 +927,13 @@
   // Level 8: route a laser through adjustable mirrors to the receiver.
   if (level === 8) {
     const mirrorCells = [
-      { x: 2, y: 5, angle: "\\" },
+      { x: 2, y: 5, angle: "/" },
       { x: 2, y: 2, angle: "/" },
-      { x: 0, y: 2, angle: "/" },
-      { x: 4, y: 4, angle: "\\" },
-      { x: 4, y: 1, angle: "/" },
+      { x: 4, y: 2, angle: "/" },
+      { x: 4, y: 0, angle: "/" },
+      { x: 1, y: 3, angle: "\\" },
     ];
-    const receiver = [0, 0];
+    const receiver = [5, 0];
     const grid = document.createElement("div");
     grid.className = "laser-grid";
     board.append(label(language === "en" ? "Click a mirror to rotate it. Then test the beam." : "Clique un miroir pour le faire pivoter, puis teste le faisceau."));

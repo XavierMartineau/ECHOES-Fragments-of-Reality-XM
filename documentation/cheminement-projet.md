@@ -51,23 +51,21 @@ reste [Info-fr.txt](./Info-fr.txt).
 
 ### Partie 1 — Niveaux 1 à 10
 
-- **Niveau 1 — Alignement primaire :** trois manches, formes mélangées et progression
-  après réussite de chaque manche.
-- **Niveau 2 — Séquence lumineuse :** quatre piliers, séquence aléatoire, replay et
-  feedback de désynchronisation.
-- **Niveau 3 — Formes géométriques :** six formes à classer dans six emplacements
-  mélangés.
-- **Niveau 4 — Rotation holographique :** quatre orientations diagonales aléatoires
-  (`45°`, `135°`, `225°`, `315°`).
-- **Niveau 5 — Séquence sonore :** quatre notes Web Audio, écoute manuelle et feedback
-  d'erreur.
-- **Niveau 6 — Observation des motifs :** grille de 20 symboles, motifs identiques
-  placés aléatoirement et reset complet.
-- **Niveau 7 — Porte lumineuse :** trois stages de difficulté et séquences à reproduire.
-- **Niveau 8 — Mécanique de couleur :** évolution du puzzle vers les séquences de couleurs.
-- **Niveau 9 — Mécanique de tri :** progression vers le classement et la constellation.
-- **Niveau 10 — Séquence de couleurs :** puzzle de séquence servant de transition vers
-  le combat de boss.
+- **Niveau 1 — La suite impossible :** trois suites numériques de difficulté croissante.
+- **Niveau 2 — Le labyrinthe des débris :** navigation sur une grille au clavier ou avec
+  les commandes directionnelles.
+- **Niveau 3 — Le chiffre d'ECHO :** décryptage de trois messages par décalage alphabétique.
+- **Niveau 4 — Le cœur fracturé :** taquin 3 × 3 généré par déplacements légaux.
+- **Niveau 5 — Les archives effacées :** jeu de mémoire avec huit paires de glyphes.
+- **Niveau 6 — Le code du gardien :** déduction d'un code de quatre couleurs en huit essais.
+- **Niveau 7 — La grille silencieuse :** nonogramme 5 × 5 à résoudre avec ses indices.
+- **Niveau 8 — Le corridor laser :** orientation de miroirs pour atteindre un récepteur.
+- **Niveau 9 — Les tours du temps :** transfert de quatre disques selon les règles de Hanoï.
+- **Niveau 10 — La matrice d'ECHO :** Sudoku 4 × 4 avant le combat de boss.
+
+Les dix pages partagent le contrôleur `docs/js/partie-1-puzzles.js` et les styles
+`docs/css/partie-1-redesign.css`. La progression et les niveaux déjà terminés restent
+compatibles avec le système de sauvegarde existant.
 
 ### Niveaux 11 à 20
 

@@ -53,18 +53,19 @@ Puis ouvrir <http://localhost:8000/html/index.html>.
 
 ### Partie 1 — Initiation
 
-Les niveaux 1 à 10 introduisent progressivement les mécaniques :
+Les niveaux 1 à 10 proposent dix mécaniques distinctes, avec une difficulté
+croissante :
 
-1. alignement de formes ;
-2. séquence lumineuse ;
-3. classement géométrique ;
-4. rotation holographique ;
-5. séquence sonore ;
-6. observation de motifs ;
-7. porte lumineuse ;
-8. séquence de couleurs ;
-9. tri et constellation ;
-10. séquence finale avant le boss.
+1. suites numériques à déduire ;
+2. labyrinthe à parcourir au clavier ou avec les commandes ;
+3. messages chiffrés par décalage alphabétique ;
+4. taquin 3 × 3 à reconstruire ;
+5. mémoire de huit paires ;
+6. déduction de code façon Mastermind ;
+7. nonogramme 5 × 5 ;
+8. miroirs à orienter pour guider un faisceau laser ;
+9. tours de Hanoï à quatre disques ;
+10. Sudoku 4 × 4 avant le combat de boss.
 
 Chaque niveau conserve sa progression, ses points verts et ses états de réussite.
 Les niveaux déjà terminés restent rejouables.
@@ -113,7 +114,8 @@ documentation/
 Fichiers importants :
 
 - `docs/js/save-system.js` : comptes, sauvegardes et clés débloquées ;
-- `docs/js/partie-1_niveau-1_à_10.js` : progression et routage de la Partie 1 ;
+- `docs/js/partie-1-puzzles.js` : nouveaux puzzles des niveaux 1 à 10 ;
+- `docs/js/partie-1_niveau-1_à_10.js` : utilitaires conservés pour le boss de la Partie 1 ;
 - `docs/js/key-fragments.js` : assemblage des fragments et cinématique de récompense ;
 - `docs/js/dev-mode.js` : accès développeur aux niveaux et scènes spéciales ;
 - `docs/assets/svg/key-01-usb.svg` : visuel cyberpunk de la première clé ;
