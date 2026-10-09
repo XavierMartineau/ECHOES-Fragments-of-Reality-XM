@@ -14,7 +14,7 @@
       save: "SAUVEGARDER",
       saved: "SAUVEGARDÉ",
       continue: (number) =>
-        number === 10 ? "AFFRONTER LE GARDIEN" : `CONTINUER VERS LE NIVEAU ${number}`,
+        number === 10 ? "AFFRONTER LE GARDIEN" : `CONTINUER VERS LE NIVEAU ${number + 1}`,
       completed: "Défi résolu. Le fragment est stabilisé.",
       progress: "Progression du défi",
       levels: [
@@ -160,7 +160,7 @@
       save: "SAVE",
       saved: "SAVED",
       continue: (number) =>
-        number === 10 ? "FACE THE GUARDIAN" : `CONTINUE TO LEVEL ${number}`,
+        number === 10 ? "FACE THE GUARDIAN" : `CONTINUE TO LEVEL ${number + 1}`,
       completed: "Challenge solved. The fragment is stable.",
       progress: "Challenge progress",
       levels: [
@@ -351,7 +351,7 @@
     <div class="puzzle-actions redesigned-actions">
       <button class="sequence-start-button" id="startPuzzleButton" type="button">${copy.start}</button>
       <p class="puzzle-status" id="puzzleStatus">${levelCopy.ready}</p>
-      <button class="next-level-button" id="nextLevelButton" type="button" hidden>${copy.continue(level + 1)}</button>
+      <button class="next-level-button" id="nextLevelButton" type="button" hidden>${copy.continue(level)}</button>
       <button class="reset-button" id="resetButton" type="button">${copy.reset}</button>
     </div>
   `;
