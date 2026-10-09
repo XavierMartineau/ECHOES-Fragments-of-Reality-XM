@@ -879,13 +879,14 @@
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = "#04060f";
     ctx.fillRect(0, 0, W, H);
+    stage.style.setProperty(
+      "--tilt-angle",
+      `${(tilt * visualTilt).toFixed(2)}deg`,
+    );
     ctx.save();
     if (shake > 0) ctx.translate((Math.random() - 0.5) * shake * 12, (Math.random() - 0.5) * shake * 12);
     roundedRect(INSET, INSET, W - INSET * 2, H - INSET * 2, 14);
     ctx.clip();
-    ctx.translate(W / 2, H / 2);
-    ctx.rotate((tilt * visualTilt * Math.PI) / 180);
-    ctx.translate(-W / 2, -H / 2);
     drawBackground();
     drawSpawn();
     drawPlatforms();

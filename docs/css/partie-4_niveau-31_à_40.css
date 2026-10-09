@@ -298,6 +298,9 @@ body.part-four-theme .construction-card h1 { color: #ffb8ee; }
     radial-gradient(circle at 50% 0%, rgba(189, 99, 255, 0.12), transparent 55%),
     linear-gradient(180deg, #10112b, #060713);
   box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.6), 0 0 28px rgba(56, 214, 255, 0.1);
+  transform: rotate(var(--tilt-angle, 0deg));
+  transform-origin: center;
+  will-change: transform;
 }
 
 .tilt-stage canvas {
@@ -308,6 +311,9 @@ body.part-four-theme .construction-card h1 { color: #ffb8ee; }
   aspect-ratio: 5 / 8;
   border-radius: 14px;
   touch-action: none;
+  transform: rotate(var(--tilt-angle, 0deg));
+  transform-origin: center;
+  will-change: transform;
 }
 
 .tilt-stage.is-solved {
@@ -405,6 +411,10 @@ body.part-four-theme .construction-card h1 { color: #ffb8ee; }
 
   .tilt-stage {
     padding: 8px;
+  }
+
+  .tilt-stage canvas {
+    transform: rotate(clamp(-5deg, var(--tilt-angle, 0deg), 5deg));
   }
 
   .tilt-stage canvas {
