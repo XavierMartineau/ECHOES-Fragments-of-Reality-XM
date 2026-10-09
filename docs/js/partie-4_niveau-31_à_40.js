@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * PARTIE 4 // NIVEAUX 31 À 40
- * Niveau 31 : le recycleur — plateau incliné, billes, pièges et quatre manches.
+ * Niveau 31 : le recycleur — plateau incliné, portails et quatre manches.
  * ------------------------------------------------------------------------- */
 (() => {
   const canvas = document.getElementById("tiltCanvas");
@@ -14,12 +14,12 @@
       level: "NIVEAU 31",
       eyebrow: "Fragment 031 // Plateau instable",
       title: "Le recycleur",
-      description: "Un plateau suspendu penche au moindre souffle. Fais rouler les billes d'étage en étage jusqu'au recycleur du futur.",
+      description: "Un immense plateau suspendu se divise en deux secteurs dès la deuxième manche. Chaque manche recrée ses passages, ses pièges et ses portails.",
       dialogue: "« Rien ne tombe tout seul. Il faut savoir pencher le monde. »",
       kicker: "PUZZLE // INCLINAISON",
       puzzle: "Le plateau suspendu",
-      rules: "Incline tout le plateau avec A / D (ou ← / →), ou avec les flèches à l'écran. Les billes roulent du côté qui descend : guide-les à travers les trappes, étage après étage, jusqu'au recycleur. À chaque manche, une bille de plus et de nouveaux pièges mortels. Si une bille est détruite, la manche recommence.",
-      legend: ["Laser", "Scie", "Gardien", "Rebondisseur", "Tapis roulant"],
+      rules: "Incline le plateau avec A / D (ou ← / →). Chaque manche génère un parcours différent avec des trappes et des pièges aléatoires. Dès la manche 2, guide deux billes entre les deux secteurs superposés grâce aux portails. Si une bille est détruite, une nouvelle configuration est créée.",
+      legend: ["Laser", "Scie", "Gardien", "Rebondisseur", "Tapis roulant", "Portail"],
       start: "LANCER LA MANCHE",
       restart: "REPRENDRE",
       reset: "Réinitialiser",
@@ -32,7 +32,7 @@
       ready: "Appuie sur « Lancer la manche », puis incline avec A / D.",
       playing: "Incline le plateau. Évite les lasers et les scies.",
       dead: "Une bille a été détruite ! La manche recommence.",
-      roundDone: (n) => `Manche ${n} réussie ! Une bille de plus et de nouveaux pièges arrivent.`,
+      roundDone: (n) => `Manche ${n} réussie ! Nouveau parcours aléatoire : plus de billes et de pièges.`,
       success: "Toutes les billes sont recyclées. Niveau 31 réussi.",
       systemSuccess: "SYSTEME:: RECYCLEUR SATURÉ // NIVEAU 31 VALIDÉ",
       saveError: "Impossible de sauvegarder.",
@@ -47,12 +47,12 @@
       level: "LEVEL 31",
       eyebrow: "Fragment 031 // Unstable board",
       title: "The Recycler",
-      description: "A suspended board tilts at the slightest breath. Roll the balls floor by floor into the recycler of the future.",
+      description: "A giant suspended board splits into two sectors in round two. Each round reshuffles its passages, hazards, and portals.",
       dialogue: "“Nothing falls by itself. You have to learn to tilt the world.”",
       kicker: "PUZZLE // TILT",
       puzzle: "The suspended board",
-      rules: "Tilt the whole board with A / D (or ← / →), or with the on-screen arrows. Balls roll toward the lower side: guide them through the hatches, floor after floor, into the recycler. Each round adds a ball and new deadly traps. If a ball is destroyed, the round restarts.",
-      legend: ["Laser", "Saw", "Guardian", "Bumper", "Conveyor"],
+      rules: "Tilt the board with A / D (or ← / →). Each round generates a new route with random hatches and hazards. From round two, guide two balls between the stacked sectors using portals. If a ball is destroyed, a new layout is generated.",
+      legend: ["Laser", "Saw", "Guardian", "Bumper", "Conveyor", "Portal"],
       start: "START ROUND",
       restart: "RETRY",
       reset: "Reset",
@@ -65,7 +65,7 @@
       ready: "Press “Start round”, then tilt with A / D.",
       playing: "Tilt the board. Avoid the lasers and saws.",
       dead: "A ball was destroyed! The round restarts.",
-      roundDone: (n) => `Round ${n} cleared! One more ball and new traps are coming.`,
+      roundDone: (n) => `Round ${n} cleared! A new random route brings more balls and hazards.`,
       success: "All balls recycled. Level 31 cleared.",
       systemSuccess: "SYSTEM:: RECYCLER SATURATED // LEVEL 31 VALIDATED",
       saveError: "Unable to save.",
@@ -81,39 +81,40 @@
   const ctx = canvas.getContext("2d");
   const SCALE = canvas.width / 400;
   const W = 400;
-  const H = 640;
+  const H = 840;
   const R = 9;
   const FLOOR_H = 12;
   const INSET = 7;
-  const floors = [130, 225, 320, 415, 510];
-  const gaps = [[308, 372], [28, 92], [176, 240], [308, 372], [28, 92]];
-  const bin = { x: 0, y: 566, w: 132, h: 74, cx: 66, cy: 606 };
+  const floors = [130, 235, 340, 445, 550, 655, 760];
+  let gaps = [[308, 372], [28, 92], [176, 240], [308, 372], [28, 92], [176, 240], [28, 92]];
+  const bin = { x: 0, y: 788, w: 132, h: 52, cx: 66, cy: 814 };
+  const dividerY = 492;
+  const dividerGap = [296, 384];
+  const dividerRects = [
+    { x: 0, y: dividerY, w: dividerGap[0], h: 14 },
+    { x: dividerGap[1], y: dividerY, w: W - dividerGap[1], h: 14 },
+  ];
+  const portals = [
+    { x: 64, y: 605, label: "A", color: "#38d6ff" },
+    { x: 326, y: 710, label: "B", color: "#ff4fd8" },
+  ];
   const maxTilt = 15;
   const visualTilt = 0.7;
   const gravity = 900;
   const damping = 1.2;
   const beltPush = 120;
 
-  const hazards = [
-    { type: "bob", f: 1, x: 215, phase: 0, round: 0 },
-    { type: "laser", f: 3, x: 268, period: 2.6, on: 1.2, phase: 0, round: 0 },
-    { type: "laser", f: 0, x: 172, period: 2.4, on: 1.1, phase: 1.2, round: 1 },
-    { type: "bob", f: 2, x: 112, phase: 1.7, round: 1 },
-    { type: "guard", f: 2, x1: 150, x2: 266, speed: 1.7, phase: 0, y: 352, round: 1 },
-    { type: "bob", f: 0, x: 240, phase: 2.4, round: 2 },
-    { type: "bumper", x: 208, y: 392, r: 15, round: 2 },
-    { type: "belt", f: 4, x1: 120, x2: 300, dir: 1, round: 2 },
-    { type: "laser", f: 4, x: 205, period: 2.2, on: 1.0, phase: 0.7, round: 3 },
-    { type: "guard", f: 0, x1: 296, x2: 384, speed: 2, phase: 1, y: 186, round: 3 },
-    { type: "laser", f: 1, x: 125, period: 2.3, on: 1.1, phase: 0.3, round: 3 },
-  ];
-
+  let hazards = [];
   const rects = [];
-  floors.forEach((top, index) => {
-    const [g0, g1] = gaps[index];
-    if (g0 > 0) rects.push({ x: 0, y: top, w: g0, h: FLOOR_H });
-    if (g1 < W) rects.push({ x: g1, y: top, w: W - g1, h: FLOOR_H });
-  });
+  const rebuildPlatforms = () => {
+    rects.length = 0;
+    floors.forEach((top, index) => {
+      const [g0, g1] = gaps[index];
+      if (g0 > 0) rects.push({ x: 0, y: top, w: g0, h: FLOOR_H });
+      if (g1 < W) rects.push({ x: g1, y: top, w: W - g1, h: FLOOR_H });
+    });
+  };
+  rebuildPlatforms();
 
   const startButton = $("startPuzzleButton");
   const nextButton = $("nextLevelButton");
@@ -145,15 +146,88 @@
   const held = { left: false, right: false };
   const sparks = [];
   const bumperFlash = new Map();
+  const randomBetween = (min, max) => min + Math.random() * (max - min);
+  const randomInteger = (min, max) => Math.floor(randomBetween(min, max + 1));
+  const randomizeRound = () => {
+    const openings = [[28, 92], [176, 240], [308, 372]];
+    gaps = [
+      [308, 372],
+      ...Array.from({ length: 5 }, () => openings[randomInteger(0, openings.length - 1)]),
+      [28, 92],
+    ];
+    rebuildPlatforms();
+
+    const floorsWithHazards = [1, 2, 3, 4, 5];
+    for (let index = floorsWithHazards.length - 1; index > 0; index -= 1) {
+      const swap = randomInteger(0, index);
+      [floorsWithHazards[index], floorsWithHazards[swap]] = [floorsWithHazards[swap], floorsWithHazards[index]];
+    }
+    hazards = [];
+    const hazardTypes = ["bob", "laser", "guard", "bumper", "belt"];
+    const hazardCount = 2 + round * 2;
+    for (let index = 0; index < hazardCount; index += 1) {
+      const floorIndex = floorsWithHazards[index % floorsWithHazards.length];
+      const [gapStart, gapEnd] = gaps[floorIndex];
+      const platforms = [
+        { x1: 12, x2: gapStart - 12 },
+        { x1: gapEnd + 12, x2: W - 12 },
+      ].filter((platform) => platform.x2 - platform.x1 >= 64);
+      const platform = platforms[randomInteger(0, platforms.length - 1)];
+      const x = randomBetween(platform.x1 + 14, platform.x2 - 14);
+      const type = hazardTypes[randomInteger(0, hazardTypes.length - 1)];
+      const hazard = { type, f: floorIndex, round };
+      if (type === "bob") {
+        Object.assign(hazard, { x, phase: randomBetween(0, Math.PI * 2) });
+      } else if (type === "laser") {
+        Object.assign(hazard, {
+          x,
+          period: randomBetween(2.1, 3.4),
+          on: randomBetween(0.75, 1.35),
+          phase: randomBetween(0, 3),
+        });
+      } else if (type === "guard") {
+        Object.assign(hazard, {
+          x1: platform.x1 + 10,
+          x2: platform.x2 - 10,
+          speed: randomBetween(0.8, 1.8),
+          phase: randomBetween(0, Math.PI * 2),
+          y: floors[floorIndex] - 35,
+        });
+      } else if (type === "bumper") {
+        Object.assign(hazard, {
+          x,
+          y: floors[floorIndex] - 35,
+          r: randomInteger(11, 17),
+        });
+      } else {
+        Object.assign(hazard, {
+          x1: platform.x1 + 8,
+          x2: platform.x2 - 8,
+          dir: Math.random() < 0.5 ? -1 : 1,
+        });
+      }
+      hazards.push(hazard);
+    }
+
+    if (round >= 1) {
+      const upperFloor = randomInteger(1, 2);
+      const lowerFloor = randomInteger(4, 5);
+      [upperFloor, lowerFloor].forEach((floorIndex, index) => {
+        const [gapStart, gapEnd] = gaps[floorIndex];
+        portals[index].x = (gapStart + gapEnd) / 2;
+        portals[index].y = floors[floorIndex] + (floors[floorIndex + 1] - floors[floorIndex]) / 2;
+      });
+    }
+  };
   const streams = Array.from({ length: 16 }, (_, index) => ({
     x: 14 + ((index * 53) % 372),
-    y: (index * 97) % 640,
+    y: (index * 97) % H,
     speed: 18 + ((index * 13) % 40),
     len: 24 + ((index * 7) % 46),
   }));
   const stars = Array.from({ length: 36 }, (_, index) => ({
     x: (index * 67) % 400,
-    y: (index * 131) % 640,
+    y: (index * 131) % H,
     s: 0.6 + ((index * 5) % 10) / 10,
   }));
 
@@ -212,6 +286,7 @@
       vy: 0,
       done: false,
       absorb: -1,
+      portalCooldown: 0,
       angle: 0,
       trail: [],
       hue: hues[index % hues.length],
@@ -286,7 +361,8 @@
   };
 
   const collide = (ball) => {
-    rects.forEach((rect) => {
+    const solidRects = round >= 1 ? [...rects, ...dividerRects] : rects;
+    solidRects.forEach((rect) => {
       const px = Math.max(rect.x, Math.min(ball.x, rect.x + rect.w));
       const py = Math.max(rect.y, Math.min(ball.y, rect.y + rect.h));
       let dx = ball.x - px;
@@ -330,6 +406,19 @@
     if (ball.x > W - R) { ball.x = W - R; ball.vx = -Math.abs(ball.vx) * 0.3; }
   };
 
+  const teleport = (ball) => {
+    if (round < 1 || ball.portalCooldown > 0) return;
+    const entry = portals.find((portal) => Math.hypot(ball.x - portal.x, ball.y - portal.y) < 22);
+    if (!entry) return;
+    const exit = portals.find((portal) => portal !== entry);
+    burst(entry.x, entry.y, "56,214,255", 12, 90);
+    ball.x = exit.x;
+    ball.y = exit.y;
+    ball.portalCooldown = 0.9;
+    ball.trail.length = 0;
+    burst(exit.x, exit.y, "255,79,216", 16, 120);
+  };
+
   const step = (dt) => {
     time += dt;
     const target = input * maxTilt;
@@ -343,6 +432,7 @@
       const h = dt / 4;
       balls.forEach((ball) => {
         if (ball.done) return;
+        ball.portalCooldown = Math.max(0, ball.portalCooldown - h);
         if (ball.absorb >= 0) {
           ball.absorb += h * 2.2;
           ball.x += (bin.cx - ball.x) * Math.min(1, h * 9);
@@ -365,6 +455,7 @@
         ball.y += ball.vy * h;
         collide(ball);
         ball.angle += (ball.vx / R) * h;
+        teleport(ball);
         if (ball.y > bin.y + 4 && ball.x < bin.w) ball.absorb = 0;
       });
     }
@@ -454,13 +545,13 @@
       ctx.fillRect(stream.x, y, 1.5, stream.len);
     });
 
-    const hex = ctx.createRadialGradient(200, 320, 20, 200, 320, 260);
+    const hex = ctx.createRadialGradient(W / 2, H / 2, 20, W / 2, H / 2, 300);
     hex.addColorStop(0, "rgba(56,214,255,0.12)");
     hex.addColorStop(1, "rgba(56,214,255,0)");
     ctx.fillStyle = hex;
     ctx.fillRect(-140, -140, W + 280, H + 280);
 
-    floors.slice(0, 4).forEach((top, index) => {
+    floors.slice(0, -1).forEach((top, index) => {
       const [g0, g1] = gaps[index];
       const beam = ctx.createLinearGradient(0, top + FLOOR_H, 0, floors[index + 1]);
       beam.addColorStop(0, "rgba(56,214,255,0.16)");
@@ -529,6 +620,61 @@
       ctx.font = "bold 8px Orbitron, Arial, sans-serif";
       ctx.textAlign = "left";
       ctx.fillText(`0${index + 1}`, 14, top - 4);
+    });
+  };
+
+  const drawSectionDivider = () => {
+    if (round < 1) return;
+    ctx.save();
+    ctx.fillStyle = "rgba(189,99,255,0.2)";
+    ctx.fillRect(0, dividerY - 5, W, 24);
+    ctx.fillStyle = "#131328";
+    ctx.fillRect(0, dividerY, W, 14);
+    ctx.fillStyle = "#38d6ff";
+    ctx.shadowColor = "#38d6ff";
+    ctx.shadowBlur = 8;
+    ctx.fillRect(0, dividerY, dividerGap[0], 2);
+    ctx.fillRect(dividerGap[1], dividerY, W - dividerGap[1], 2);
+    ctx.shadowBlur = 0;
+    ctx.strokeStyle = "rgba(255,79,216,0.85)";
+    ctx.strokeRect(dividerGap[0], dividerY - 2, dividerGap[1] - dividerGap[0], 18);
+    ctx.font = "bold 8px Orbitron, Arial, sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillStyle = "#38d6ff";
+    ctx.fillText("SECTEUR 01", 16, dividerY - 9);
+    ctx.textAlign = "right";
+    ctx.fillStyle = "#ff4fd8";
+    ctx.fillText("SECTEUR 02", W - 16, dividerY + 31);
+    ctx.restore();
+  };
+
+  const drawPortals = () => {
+    if (round < 1) return;
+    portals.forEach((portal, index) => {
+      const pulse = 1 + Math.sin(time * 4 + index) * 0.08;
+      ctx.save();
+      ctx.translate(portal.x, portal.y);
+      ctx.rotate(time * (index ? -0.8 : 0.8));
+      ctx.shadowColor = portal.color;
+      ctx.shadowBlur = 14;
+      ctx.strokeStyle = portal.color;
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, 20 * pulse, 11 * pulse, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.setLineDash([4, 5]);
+      ctx.globalAlpha = 0.75;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, 12, 6, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
+      ctx.font = "bold 8px Orbitron, Arial, sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#fff";
+      ctx.fillText(portal.label, 0, -17);
+      ctx.restore();
     });
   };
 
@@ -879,21 +1025,24 @@
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = "#04060f";
     ctx.fillRect(0, 0, W, H);
-    stage.style.setProperty(
-      "--tilt-angle",
-      `${(tilt * visualTilt).toFixed(2)}deg`,
-    );
     ctx.save();
     if (shake > 0) ctx.translate((Math.random() - 0.5) * shake * 12, (Math.random() - 0.5) * shake * 12);
     roundedRect(INSET, INSET, W - INSET * 2, H - INSET * 2, 14);
     ctx.clip();
+    ctx.save();
+    ctx.translate(W / 2, H / 2);
+    ctx.rotate((tilt * visualTilt * Math.PI) / 180);
+    ctx.translate(-W / 2, -H / 2);
     drawBackground();
     drawSpawn();
     drawPlatforms();
+    drawSectionDivider();
     drawBin();
+    drawPortals();
     drawHazards();
     drawBalls();
     drawSparks();
+    ctx.restore();
     ctx.restore();
     drawCasing();
     drawHud();
@@ -932,7 +1081,9 @@
   function resetRound(autostart) {
     window.clearTimeout(pendingTimer);
     running = false;
-    active = hazards.filter((hazard) => hazard.round <= round);
+    randomizeRound();
+    active = hazards;
+    tilt = 0;
     spawnBalls();
     updateReadouts();
     banner = { text: text.roundBanner(round + 1), t: 1.6 };
@@ -959,7 +1110,9 @@
 
   startButton.addEventListener("click", () => {
     if (running || solved) return;
-    resetRound(true);
+    running = true;
+    startButton.hidden = true;
+    setStatus(text.playing);
   });
   resetButton.addEventListener("click", fullReset);
   nextButton.addEventListener("click", () => {
