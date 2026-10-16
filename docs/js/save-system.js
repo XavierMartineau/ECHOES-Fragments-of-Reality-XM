@@ -130,7 +130,9 @@ window.EchoesSave = (() => {
     if (!keyId) return false;
     let unlocked = false;
     if (!username) {
-      const guestKeys = JSON.parse(localStorage.getItem("echoes-guest-keys") || "[]");
+      const guestKeys = JSON.parse(
+        localStorage.getItem("echoes-guest-keys") || "[]",
+      );
       const keys = [...new Set(guestKeys.concat(keyId))];
       localStorage.setItem("echoes-guest-keys", JSON.stringify(keys));
       unlocked = true;
@@ -139,7 +141,9 @@ window.EchoesSave = (() => {
       unlocked = saveProgress({ keys }, username);
     }
     if (unlocked) {
-      document.dispatchEvent(new CustomEvent("echoes:key-unlocked", { detail: { keyId } }));
+      document.dispatchEvent(
+        new CustomEvent("echoes:key-unlocked", { detail: { keyId } }),
+      );
     }
     return unlocked;
   }
@@ -164,7 +168,9 @@ window.EchoesSave = (() => {
     const normalizedUsername = normalizeUsername(username);
     localStorage.removeItem(keyFor(savePrefix, normalizedUsername));
     localStorage.removeItem(keyFor(accountPrefix, normalizedUsername));
-    localStorage.removeItem(keyFor("echoes-completed-levels-", normalizedUsername));
+    localStorage.removeItem(
+      keyFor("echoes-completed-levels-", normalizedUsername),
+    );
     localStorage.removeItem("echoes-completed-levels");
     return true;
   }

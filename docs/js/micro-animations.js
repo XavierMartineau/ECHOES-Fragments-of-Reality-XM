@@ -63,7 +63,9 @@
         },
         { passive: true },
       );
-      document.addEventListener("pointerleave", () => glow.classList.remove("is-on"));
+      document.addEventListener("pointerleave", () =>
+        glow.classList.remove("is-on"),
+      );
     }
 
     document.addEventListener(
@@ -105,10 +107,15 @@
         element.classList.remove("fx-flash");
         void element.offsetWidth;
         element.classList.add("fx-flash");
-      }).observe(element, { childList: true, characterData: true, subtree: true });
+      }).observe(element, {
+        childList: true,
+        characterData: true,
+        subtree: true,
+      });
     });
   };
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  if (document.readyState === "loading")
+    document.addEventListener("DOMContentLoaded", init);
   else init();
 })();

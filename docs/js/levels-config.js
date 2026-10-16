@@ -147,7 +147,11 @@ window.EchoesLevels = (() => {
       ready: finale.ready !== false,
       file: finale.file,
       requires: items
-        .filter((entry) => entry.type === "boss" || entry.id === `level-${series[series.length - 1].end}`)
+        .filter(
+          (entry) =>
+            entry.type === "boss" ||
+            entry.id === `level-${series[series.length - 1].end}`,
+        )
         .map((entry) => entry.id),
     });
     return items;
@@ -240,7 +244,9 @@ window.EchoesLevels = (() => {
   // Indique si un niveau peut être ouvert.
   function canOpen(id, username) {
     const item = getProgress(username).items.find((entry) => entry.id === id);
-    return Boolean(item) && ["completed", "current", "unlocked"].includes(item.state);
+    return (
+      Boolean(item) && ["completed", "current", "unlocked"].includes(item.state)
+    );
   }
 
   // Enregistre la réussite d'un niveau ou d'un boss.
@@ -254,7 +260,9 @@ window.EchoesLevels = (() => {
       levels.add(item.number);
       patch.completedLevels = [...levels].sort((a, b) => a - b);
     } else {
-      patch.completedBosses = [...new Set([...(save.completedBosses || []), id])];
+      patch.completedBosses = [
+        ...new Set([...(save.completedBosses || []), id]),
+      ];
     }
     const saved = window.EchoesSave.saveProgress(patch, username);
     if (saved) {

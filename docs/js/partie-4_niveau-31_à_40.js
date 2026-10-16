@@ -7,19 +7,29 @@
   if (!canvas) return;
 
   const $ = (id) => document.getElementById(id);
-  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const language =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const text = {
     fr: {
       part: "PARTIE 4 // RÉSONANCE",
       level: "NIVEAU 31",
       eyebrow: "Fragment 031 // Plateau instable",
       title: "Le recycleur",
-      description: "Un immense plateau suspendu se divise en deux secteurs dès la deuxième manche. Chaque manche recrée ses passages, ses pièges et ses portails.",
+      description:
+        "Un immense plateau suspendu se divise en deux secteurs dès la deuxième manche. Chaque manche recrée ses passages, ses pièges et ses portails.",
       dialogue: "« Rien ne tombe tout seul. Il faut savoir pencher le monde. »",
       kicker: "PUZZLE // INCLINAISON",
       puzzle: "Le plateau suspendu",
-      rules: "Incline le plateau avec A / D (ou ← / →). Chaque manche génère un parcours différent avec des trappes et des pièges aléatoires. Dès la manche 2, guide deux billes entre les deux secteurs superposés grâce aux portails. Si une bille est détruite, une nouvelle configuration est créée.",
-      legend: ["Laser", "Scie", "Gardien", "Rebondisseur", "Tapis roulant", "Portail"],
+      rules:
+        "Incline le plateau avec A / D (ou ← / →). Chaque manche génère un parcours différent avec des trappes et des pièges aléatoires. Dès la manche 2, guide deux billes entre les deux secteurs superposés grâce aux portails. Si une bille est détruite, une nouvelle configuration est créée.",
+      legend: [
+        "Laser",
+        "Scie",
+        "Gardien",
+        "Rebondisseur",
+        "Tapis roulant",
+        "Portail",
+      ],
       start: "LANCER LA MANCHE",
       restart: "REPRENDRE",
       reset: "Réinitialiser",
@@ -28,11 +38,13 @@
       saved: "SAUVEGARDÉ",
       round: (n) => `MANCHE ${n} / 4`,
       roundBanner: (n) => `MANCHE ${n}`,
-      system: "SYSTEME:: PLATEAU INSTABLE // GUIDE LES BILLES VERS LE RECYCLEUR",
+      system:
+        "SYSTEME:: PLATEAU INSTABLE // GUIDE LES BILLES VERS LE RECYCLEUR",
       ready: "Appuie sur « Lancer la manche », puis incline avec A / D.",
       playing: "Incline le plateau. Évite les lasers et les scies.",
       dead: "Une bille a été détruite ! La manche recommence.",
-      roundDone: (n) => `Manche ${n} réussie ! Nouveau parcours aléatoire : plus de billes et de pièges.`,
+      roundDone: (n) =>
+        `Manche ${n} réussie ! Nouveau parcours aléatoire : plus de billes et de pièges.`,
       success: "Toutes les billes sont recyclées. Niveau 31 réussi.",
       systemSuccess: "SYSTEME:: RECYCLEUR SATURÉ // NIVEAU 31 VALIDÉ",
       saveError: "Impossible de sauvegarder.",
@@ -47,11 +59,14 @@
       level: "LEVEL 31",
       eyebrow: "Fragment 031 // Unstable board",
       title: "The Recycler",
-      description: "A giant suspended board splits into two sectors in round two. Each round reshuffles its passages, hazards, and portals.",
-      dialogue: "“Nothing falls by itself. You have to learn to tilt the world.”",
+      description:
+        "A giant suspended board splits into two sectors in round two. Each round reshuffles its passages, hazards, and portals.",
+      dialogue:
+        "“Nothing falls by itself. You have to learn to tilt the world.”",
       kicker: "PUZZLE // TILT",
       puzzle: "The suspended board",
-      rules: "Tilt the board with A / D (or ← / →). Each round generates a new route with random hatches and hazards. From round two, guide two balls between the stacked sectors using portals. If a ball is destroyed, a new layout is generated.",
+      rules:
+        "Tilt the board with A / D (or ← / →). Each round generates a new route with random hatches and hazards. From round two, guide two balls between the stacked sectors using portals. If a ball is destroyed, a new layout is generated.",
       legend: ["Laser", "Saw", "Guardian", "Bumper", "Conveyor", "Portal"],
       start: "START ROUND",
       restart: "RETRY",
@@ -65,7 +80,8 @@
       ready: "Press “Start round”, then tilt with A / D.",
       playing: "Tilt the board. Avoid the lasers and saws.",
       dead: "A ball was destroyed! The round restarts.",
-      roundDone: (n) => `Round ${n} cleared! A new random route brings more balls and hazards.`,
+      roundDone: (n) =>
+        `Round ${n} cleared! A new random route brings more balls and hazards.`,
       success: "All balls recycled. Level 31 cleared.",
       systemSuccess: "SYSTEM:: RECYCLER SATURATED // LEVEL 31 VALIDATED",
       saveError: "Unable to save.",
@@ -86,7 +102,15 @@
   const FLOOR_H = 12;
   const INSET = 7;
   const floors = [130, 235, 340, 445, 550, 655, 760];
-  let gaps = [[308, 372], [28, 92], [176, 240], [308, 372], [28, 92], [176, 240], [28, 92]];
+  let gaps = [
+    [308, 372],
+    [28, 92],
+    [176, 240],
+    [308, 372],
+    [28, 92],
+    [176, 240],
+    [28, 92],
+  ];
   const bin = { x: 0, y: 788, w: 132, h: 52, cx: 66, cy: 814 };
   const dividerY = 492;
   const dividerGap = [296, 384];
@@ -127,7 +151,9 @@
 
   const currentUser = window.EchoesSave?.getCurrentUser?.() || "guest";
   const progressKey = `echoes-completed-levels-${encodeURIComponent(currentUser)}`;
-  const completed = new Set(JSON.parse(localStorage.getItem(progressKey) || "[]"));
+  const completed = new Set(
+    JSON.parse(localStorage.getItem(progressKey) || "[]"),
+  );
 
   let round = 0;
   let balls = [];
@@ -149,10 +175,17 @@
   const randomBetween = (min, max) => min + Math.random() * (max - min);
   const randomInteger = (min, max) => Math.floor(randomBetween(min, max + 1));
   const randomizeRound = () => {
-    const openings = [[28, 92], [176, 240], [308, 372]];
+    const openings = [
+      [28, 92],
+      [176, 240],
+      [308, 372],
+    ];
     gaps = [
       [308, 372],
-      ...Array.from({ length: 5 }, () => openings[randomInteger(0, openings.length - 1)]),
+      ...Array.from(
+        { length: 5 },
+        () => openings[randomInteger(0, openings.length - 1)],
+      ),
       [28, 92],
     ];
     rebuildPlatforms();
@@ -160,7 +193,10 @@
     const floorsWithHazards = [1, 2, 3, 4, 5];
     for (let index = floorsWithHazards.length - 1; index > 0; index -= 1) {
       const swap = randomInteger(0, index);
-      [floorsWithHazards[index], floorsWithHazards[swap]] = [floorsWithHazards[swap], floorsWithHazards[index]];
+      [floorsWithHazards[index], floorsWithHazards[swap]] = [
+        floorsWithHazards[swap],
+        floorsWithHazards[index],
+      ];
     }
     hazards = [];
     const hazardTypes = ["bob", "laser", "guard", "bumper", "belt"];
@@ -215,7 +251,9 @@
       [upperFloor, lowerFloor].forEach((floorIndex, index) => {
         const [gapStart, gapEnd] = gaps[floorIndex];
         portals[index].x = (gapStart + gapEnd) / 2;
-        portals[index].y = floors[floorIndex] + (floors[floorIndex + 1] - floors[floorIndex]) / 2;
+        portals[index].y =
+          floors[floorIndex] +
+          (floors[floorIndex + 1] - floors[floorIndex]) / 2;
       });
     }
   };
@@ -231,7 +269,9 @@
     s: 0.6 + ((index * 5) % 10) / 10,
   }));
 
-  const setText = (id, value) => { $(id).textContent = value; };
+  const setText = (id, value) => {
+    $(id).textContent = value;
+  };
   document.documentElement.lang = language;
   setText("partLabel", text.part);
   setText("levelLabel", text.level);
@@ -269,12 +309,20 @@
   };
 
   const saveProgress = (current = level) => {
-    localStorage.setItem(progressKey, JSON.stringify([...completed].sort((a, b) => a - b)));
-    return currentUser === "guest" || Boolean(window.EchoesSave?.saveProgress({
-      currentPage: `level-${current}`,
-      currentLevel: current,
-      completedLevels: [...completed].sort((a, b) => a - b),
-    }));
+    localStorage.setItem(
+      progressKey,
+      JSON.stringify([...completed].sort((a, b) => a - b)),
+    );
+    return (
+      currentUser === "guest" ||
+      Boolean(
+        window.EchoesSave?.saveProgress({
+          currentPage: `level-${current}`,
+          currentLevel: current,
+          completedLevels: [...completed].sort((a, b) => a - b),
+        }),
+      )
+    );
   };
 
   const hues = [185, 320, 75, 45];
@@ -293,25 +341,41 @@
     }));
   };
 
-  const sawY = (hazard) => floors[hazard.f] - 34 + 30 * Math.sin(time * 2.4 + hazard.phase);
+  const sawY = (hazard) =>
+    floors[hazard.f] - 34 + 30 * Math.sin(time * 2.4 + hazard.phase);
   const guardPos = (hazard) => ({
-    x: hazard.x1 + (hazard.x2 - hazard.x1) * (0.5 + 0.5 * Math.sin(time * hazard.speed + hazard.phase)),
+    x:
+      hazard.x1 +
+      (hazard.x2 - hazard.x1) *
+        (0.5 + 0.5 * Math.sin(time * hazard.speed + hazard.phase)),
     y: hazard.y,
   });
-  const laserPhase = (hazard) => (((time + hazard.phase) % hazard.period) + hazard.period) % hazard.period;
+  const laserPhase = (hazard) =>
+    (((time + hazard.phase) % hazard.period) + hazard.period) % hazard.period;
   const laserOn = (hazard) => laserPhase(hazard) < hazard.on;
-  const laserWarn = (hazard) => !laserOn(hazard) && laserPhase(hazard) > hazard.period - 0.5;
+  const laserWarn = (hazard) =>
+    !laserOn(hazard) && laserPhase(hazard) > hazard.period - 0.5;
 
   const updateReadouts = () => {
     setText("roundReadout", text.round(round + 1));
-    setText("ballReadout", `${balls.filter((ball) => ball.done).length} / ${balls.length}`);
+    setText(
+      "ballReadout",
+      `${balls.filter((ball) => ball.done).length} / ${balls.length}`,
+    );
   };
 
   const burst = (x, y, color = "255,210,77", count = 18, power = 140) => {
     for (let index = 0; index < count; index += 1) {
       const angle = (index / count) * Math.PI * 2 + Math.random() * 0.4;
       const speed = 40 + Math.random() * power;
-      sparks.push({ x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, life: 0.8, color });
+      sparks.push({
+        x,
+        y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        life: 0.8,
+        color,
+      });
     }
   };
 
@@ -352,7 +416,10 @@
     completed.add(level);
     renderProgress();
     const saved = saveProgress();
-    setStatus(saved ? text.success : text.saveError, saved ? "success" : "error");
+    setStatus(
+      saved ? text.success : text.saveError,
+      saved ? "success" : "error",
+    );
     setText("systemMessage", text.systemSuccess);
     stage.classList.add("is-solved");
     startButton.hidden = true;
@@ -385,30 +452,40 @@
         ball.vy -= 1.25 * vn * ny;
       }
     });
-    active.filter((hazard) => hazard.type === "bumper").forEach((bumper) => {
-      const dx = ball.x - bumper.x;
-      const dy = ball.y - bumper.y;
-      const dist = Math.hypot(dx, dy);
-      const reach = R + bumper.r;
-      if (dist >= reach || dist === 0) return;
-      const nx = dx / dist;
-      const ny = dy / dist;
-      ball.x = bumper.x + nx * reach;
-      ball.y = bumper.y + ny * reach;
-      const vn = ball.vx * nx + ball.vy * ny;
-      const speed = Math.max(260, Math.abs(vn) * 1.15);
-      ball.vx = nx * speed * 0.9 + ball.vx * 0.2;
-      ball.vy = ny * speed * 0.7;
-      bumperFlash.set(bumper, 1);
-      burst(ball.x, ball.y, "255,79,216", 8, 90);
-    });
-    if (ball.x < R) { ball.x = R; ball.vx = Math.abs(ball.vx) * 0.3; }
-    if (ball.x > W - R) { ball.x = W - R; ball.vx = -Math.abs(ball.vx) * 0.3; }
+    active
+      .filter((hazard) => hazard.type === "bumper")
+      .forEach((bumper) => {
+        const dx = ball.x - bumper.x;
+        const dy = ball.y - bumper.y;
+        const dist = Math.hypot(dx, dy);
+        const reach = R + bumper.r;
+        if (dist >= reach || dist === 0) return;
+        const nx = dx / dist;
+        const ny = dy / dist;
+        ball.x = bumper.x + nx * reach;
+        ball.y = bumper.y + ny * reach;
+        const vn = ball.vx * nx + ball.vy * ny;
+        const speed = Math.max(260, Math.abs(vn) * 1.15);
+        ball.vx = nx * speed * 0.9 + ball.vx * 0.2;
+        ball.vy = ny * speed * 0.7;
+        bumperFlash.set(bumper, 1);
+        burst(ball.x, ball.y, "255,79,216", 8, 90);
+      });
+    if (ball.x < R) {
+      ball.x = R;
+      ball.vx = Math.abs(ball.vx) * 0.3;
+    }
+    if (ball.x > W - R) {
+      ball.x = W - R;
+      ball.vx = -Math.abs(ball.vx) * 0.3;
+    }
   };
 
   const teleport = (ball) => {
     if (round < 1 || ball.portalCooldown > 0) return;
-    const entry = portals.find((portal) => Math.hypot(ball.x - portal.x, ball.y - portal.y) < 22);
+    const entry = portals.find(
+      (portal) => Math.hypot(ball.x - portal.x, ball.y - portal.y) < 22,
+    );
     if (!entry) return;
     const exit = portals.find((portal) => portal !== entry);
     burst(entry.x, entry.y, "56,214,255", 12, 90);
@@ -447,7 +524,12 @@
         ball.vy += gy * h;
         belts.forEach((belt) => {
           const top = floors[belt.f];
-          if (ball.x > belt.x1 && ball.x < belt.x2 && Math.abs(ball.y - (top - R)) < 3) ball.vx += belt.dir * beltPush * h;
+          if (
+            ball.x > belt.x1 &&
+            ball.x < belt.x2 &&
+            Math.abs(ball.y - (top - R)) < 3
+          )
+            ball.vx += belt.dir * beltPush * h;
         });
         ball.vx *= 1 - damping * h;
         ball.vx = Math.max(-260, Math.min(260, ball.vx));
@@ -466,12 +548,20 @@
       for (const hazard of active) {
         if (hazard.type === "laser") {
           const top = floors[hazard.f];
-          if (laserOn(hazard) && Math.abs(ball.x - hazard.x) < R + 2 && ball.y > top - 70 && ball.y < top + 4) {
+          if (
+            laserOn(hazard) &&
+            Math.abs(ball.x - hazard.x) < R + 2 &&
+            ball.y > top - 70 &&
+            ball.y < top + 4
+          ) {
             die(ball);
             return;
           }
         } else if (hazard.type === "bob") {
-          if (Math.hypot(ball.x - hazard.x, ball.y - sawY(hazard)) < 12 + R - 3) {
+          if (
+            Math.hypot(ball.x - hazard.x, ball.y - sawY(hazard)) <
+            12 + R - 3
+          ) {
             die(ball);
             return;
           }
@@ -524,7 +614,8 @@
     ctx.fillRect(-140, -140, W + 280, H + 280);
 
     stars.forEach((star) => {
-      ctx.globalAlpha = 0.25 + 0.35 * Math.abs(Math.sin(time * star.s + star.x));
+      ctx.globalAlpha =
+        0.25 + 0.35 * Math.abs(Math.sin(time * star.s + star.x));
       ctx.fillStyle = "#d4ddff";
       ctx.fillRect(star.x, star.y, 1.5, 1.5);
     });
@@ -533,8 +624,18 @@
     ctx.strokeStyle = "rgba(56,214,255,0.08)";
     ctx.lineWidth = 1;
     const offset = (time * 8) % 40;
-    for (let x = -120; x <= W + 120; x += 40) { ctx.beginPath(); ctx.moveTo(x, -140); ctx.lineTo(x, H + 140); ctx.stroke(); }
-    for (let y = -120 + offset; y <= H + 140; y += 40) { ctx.beginPath(); ctx.moveTo(-140, y); ctx.lineTo(W + 140, y); ctx.stroke(); }
+    for (let x = -120; x <= W + 120; x += 40) {
+      ctx.beginPath();
+      ctx.moveTo(x, -140);
+      ctx.lineTo(x, H + 140);
+      ctx.stroke();
+    }
+    for (let y = -120 + offset; y <= H + 140; y += 40) {
+      ctx.beginPath();
+      ctx.moveTo(-140, y);
+      ctx.lineTo(W + 140, y);
+      ctx.stroke();
+    }
 
     streams.forEach((stream) => {
       const y = ((stream.y + time * stream.speed) % (H + 140)) - 70;
@@ -553,11 +654,21 @@
 
     floors.slice(0, -1).forEach((top, index) => {
       const [g0, g1] = gaps[index];
-      const beam = ctx.createLinearGradient(0, top + FLOOR_H, 0, floors[index + 1]);
+      const beam = ctx.createLinearGradient(
+        0,
+        top + FLOOR_H,
+        0,
+        floors[index + 1],
+      );
       beam.addColorStop(0, "rgba(56,214,255,0.16)");
       beam.addColorStop(1, "rgba(56,214,255,0)");
       ctx.fillStyle = beam;
-      ctx.fillRect(g0, top + FLOOR_H, g1 - g0, floors[index + 1] - top - FLOOR_H);
+      ctx.fillRect(
+        g0,
+        top + FLOOR_H,
+        g1 - g0,
+        floors[index + 1] - top - FLOOR_H,
+      );
       ctx.fillStyle = "rgba(189,99,255,0.55)";
       for (let chevron = 0; chevron < 2; chevron += 1) {
         const y = top + FLOOR_H + 14 + ((time * 40 + chevron * 40) % 78);
@@ -596,7 +707,10 @@
     });
     floors.forEach((top, index) => {
       const [g0, g1] = gaps[index];
-      [[g0 - 7, g0, g0 > 0], [g1, g1 + 7, g1 < W]].forEach(([x0, x1, ok]) => {
+      [
+        [g0 - 7, g0, g0 > 0],
+        [g1, g1 + 7, g1 < W],
+      ].forEach(([x0, x1, ok]) => {
         if (!ok) return;
         ctx.save();
         ctx.beginPath();
@@ -637,7 +751,12 @@
     ctx.fillRect(dividerGap[1], dividerY, W - dividerGap[1], 2);
     ctx.shadowBlur = 0;
     ctx.strokeStyle = "rgba(255,79,216,0.85)";
-    ctx.strokeRect(dividerGap[0], dividerY - 2, dividerGap[1] - dividerGap[0], 18);
+    ctx.strokeRect(
+      dividerGap[0],
+      dividerY - 2,
+      dividerGap[1] - dividerGap[0],
+      18,
+    );
     ctx.font = "bold 8px Orbitron, Arial, sans-serif";
     ctx.textAlign = "left";
     ctx.fillStyle = "#38d6ff";
@@ -712,7 +831,14 @@
     const pulse = 0.5 + 0.5 * Math.sin(time * 4);
     const doneCount = balls.filter((ball) => ball.done).length;
     ctx.save();
-    const glow = ctx.createRadialGradient(bin.cx, bin.cy, 4, bin.cx, bin.cy, 80);
+    const glow = ctx.createRadialGradient(
+      bin.cx,
+      bin.cy,
+      4,
+      bin.cx,
+      bin.cy,
+      80,
+    );
     glow.addColorStop(0, `rgba(255,79,216,${0.3 + pulse * 0.18})`);
     glow.addColorStop(1, "rgba(255,79,216,0)");
     ctx.fillStyle = glow;
@@ -731,7 +857,8 @@
       ctx.save();
       ctx.translate(bin.cx, bin.cy);
       ctx.rotate(time * (1.2 + ring * 0.6) * (ring % 2 ? -1 : 1));
-      ctx.strokeStyle = ring === 1 ? "rgba(56,214,255,0.85)" : "rgba(255,79,216,0.8)";
+      ctx.strokeStyle =
+        ring === 1 ? "rgba(56,214,255,0.85)" : "rgba(255,79,216,0.8)";
       ctx.lineWidth = 2;
       ctx.setLineDash([8 + ring * 3, 6]);
       ctx.beginPath();
@@ -749,7 +876,13 @@
       ctx.shadowColor = "#ff4fd8";
       ctx.shadowBlur = index < doneCount ? 8 : 0;
       ctx.beginPath();
-      ctx.arc(bin.cx - 3 + (index - (balls.length - 1) / 2) * 16, bin.y - 4, 4, 0, Math.PI * 2);
+      ctx.arc(
+        bin.cx - 3 + (index - (balls.length - 1) / 2) * 16,
+        bin.y - 4,
+        4,
+        0,
+        Math.PI * 2,
+      );
       ctx.fill();
     }
     ctx.restore();
@@ -863,7 +996,14 @@
     ctx.save();
     ctx.shadowColor = "#ff4fd8";
     ctx.shadowBlur = 12 + f * 16;
-    const fill = ctx.createRadialGradient(hazard.x, hazard.y, 2, hazard.x, hazard.y, hazard.r);
+    const fill = ctx.createRadialGradient(
+      hazard.x,
+      hazard.y,
+      2,
+      hazard.x,
+      hazard.y,
+      hazard.r,
+    );
     fill.addColorStop(0, f > 0.2 ? "#fff" : "#ffb3f0");
     fill.addColorStop(0.6, "#ff4fd8");
     fill.addColorStop(1, "#7a1a78");
@@ -959,7 +1099,12 @@
     ctx.stroke();
     ctx.shadowBlur = 0;
     ctx.fillStyle = "rgba(212,221,255,0.85)";
-    [[4, 4], [W - 4, 4], [4, H - 4], [W - 4, H - 4]].forEach(([x, y]) => {
+    [
+      [4, 4],
+      [W - 4, 4],
+      [4, H - 4],
+      [W - 4, H - 4],
+    ].forEach(([x, y]) => {
       ctx.beginPath();
       ctx.arc(x, y, 1.8, 0, Math.PI * 2);
       ctx.fill();
@@ -1026,7 +1171,11 @@
     ctx.fillStyle = "#04060f";
     ctx.fillRect(0, 0, W, H);
     ctx.save();
-    if (shake > 0) ctx.translate((Math.random() - 0.5) * shake * 12, (Math.random() - 0.5) * shake * 12);
+    if (shake > 0)
+      ctx.translate(
+        (Math.random() - 0.5) * shake * 12,
+        (Math.random() - 0.5) * shake * 12,
+      );
     roundedRect(INSET, INSET, W - INSET * 2, H - INSET * 2, 14);
     ctx.clip();
     ctx.save();
@@ -1064,7 +1213,9 @@
       spark.life -= dt;
       if (spark.life <= 0) sparks.splice(index, 1);
     }
-    bumperFlash.forEach((value, key) => bumperFlash.set(key, Math.max(0, value - dt * 4)));
+    bumperFlash.forEach((value, key) =>
+      bumperFlash.set(key, Math.max(0, value - dt * 4)),
+    );
     shake = Math.max(0, shake - dt * 1.4);
     flash = Math.max(0, flash - dt * 1.2);
     banner.t = Math.max(0, banner.t - dt);
@@ -1128,14 +1279,20 @@
     setStatus(saved ? text.saved : text.saveError, saved ? "success" : "error");
   });
 
-  [[leftButton, "left"], [rightButton, "right"]].forEach(([button, side]) => {
+  [
+    [leftButton, "left"],
+    [rightButton, "right"],
+  ].forEach(([button, side]) => {
     button.addEventListener("pointerdown", (event) => {
       event.preventDefault();
       held[side] = true;
       updateInput();
     });
     ["pointerup", "pointerleave", "pointercancel"].forEach((name) => {
-      button.addEventListener(name, () => { held[side] = false; updateInput(); });
+      button.addEventListener(name, () => {
+        held[side] = false;
+        updateInput();
+      });
     });
   });
   document.addEventListener("keydown", (event) => {

@@ -112,9 +112,15 @@
   overflow: hidden;
   border: 1px solid rgba(121, 247, 255, 0.32);
   background:
-    radial-gradient(ellipse at 82% 42%, rgba(121, 247, 255, 0.08), transparent 38%),
+    radial-gradient(
+      ellipse at 82% 42%,
+      rgba(121, 247, 255, 0.08),
+      transparent 38%
+    ),
     rgba(5, 12, 28, 0.94);
-  box-shadow: 0 0 36px rgba(121, 247, 255, 0.08), inset 0 0 30px rgba(179, 108, 255, 0.035);
+  box-shadow:
+    0 0 36px rgba(121, 247, 255, 0.08),
+    inset 0 0 30px rgba(179, 108, 255, 0.035);
 }
 
 .boss01-panel-heading {
@@ -233,7 +239,9 @@
   width: 142px;
   height: 142px;
   border-color: rgba(179, 108, 255, 0.48);
-  box-shadow: 0 0 30px rgba(121, 247, 255, 0.09), inset 0 0 28px rgba(179, 108, 255, 0.08);
+  box-shadow:
+    0 0 30px rgba(121, 247, 255, 0.09),
+    inset 0 0 28px rgba(179, 108, 255, 0.08);
   animation: boss01-orbit-spin 18s linear infinite reverse;
 }
 
@@ -251,7 +259,11 @@
   font: 2rem var(--font-display, "Orbitron", sans-serif);
   cursor: pointer;
   box-shadow: 0 0 26px rgba(179, 108, 255, 0.35);
-  transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
 }
 
 .boss01-guardian-core.is-lit {
@@ -375,7 +387,9 @@
 }
 
 @keyframes boss01-orbit-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 800px) {
@@ -473,7 +487,10 @@
   background: var(--pad);
   box-shadow: 0 0 14px color-mix(in srgb, var(--pad) 70%, transparent);
   opacity: 0.55;
-  transition: opacity 150ms, transform 150ms, box-shadow 150ms;
+  transition:
+    opacity 150ms,
+    transform 150ms,
+    box-shadow 150ms;
 }
 
 .boss01-pad:hover:not(:disabled),
@@ -486,7 +503,9 @@
 .boss01-pad.is-flash {
   border-color: #fff;
   background: color-mix(in srgb, var(--pad) 45%, #050b18);
-  box-shadow: 0 0 26px var(--pad), inset 0 0 18px color-mix(in srgb, var(--pad) 60%, transparent);
+  box-shadow:
+    0 0 26px var(--pad),
+    inset 0 0 18px color-mix(in srgb, var(--pad) 60%, transparent);
 }
 
 .boss01-pad.is-flash::after {

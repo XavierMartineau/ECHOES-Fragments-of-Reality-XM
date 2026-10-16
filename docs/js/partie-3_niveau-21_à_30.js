@@ -3,10 +3,13 @@
   const level = Number(document.body.dataset.level);
   if (level < 21 || level > 30) return;
 
-  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const language =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const dictionary = window.translations?.[language];
   if (!dictionary?.partThree) {
-    throw new Error("Translations for Part 3 are missing from translations.js.");
+    throw new Error(
+      "Translations for Part 3 are missing from translations.js.",
+    );
   }
   const part = dictionary.partThree;
   const strings = part.levels[level];
@@ -22,11 +25,19 @@
   const currentUser = window.EchoesSave?.getCurrentUser?.() || "guest";
   const progressStorageKey = `echoes-completed-levels-${encodeURIComponent(currentUser)}`;
   const savedProgress = window.EchoesSave?.getSave?.();
-  const storedCompleted = JSON.parse(localStorage.getItem(progressStorageKey) || "[]");
-  const completedLevels = new Set([
-    ...(Array.isArray(storedCompleted) ? storedCompleted : []),
-    ...(Array.isArray(savedProgress?.completedLevels) ? savedProgress.completedLevels : []),
-  ].filter((number) => Number.isInteger(number) && number >= 21 && number <= 30));
+  const storedCompleted = JSON.parse(
+    localStorage.getItem(progressStorageKey) || "[]",
+  );
+  const completedLevels = new Set(
+    [
+      ...(Array.isArray(storedCompleted) ? storedCompleted : []),
+      ...(Array.isArray(savedProgress?.completedLevels)
+        ? savedProgress.completedLevels
+        : []),
+    ].filter(
+      (number) => Number.isInteger(number) && number >= 21 && number <= 30,
+    ),
+  );
   let solved = false;
 
   const format = (template, values = {}) =>
@@ -36,14 +47,14 @@
   document.title = `ECHOES - ${format(part.level, { level })}`;
   document.querySelectorAll("[data-copy]").forEach((element) => {
     const value = part[element.dataset.copy] ?? strings[element.dataset.copy];
-    if (typeof value === "string") element.textContent = format(value, { level });
+    if (typeof value === "string")
+      element.textContent = format(value, { level });
   });
   $("levelProgress").setAttribute("aria-label", part.progressLabel);
   startButton.textContent = strings.start;
   resetButton.textContent = part.reset;
-  nextButton.textContent = level === 25
-    ? part.nextFinal
-    : format(part.next, { level: level + 1 });
+  nextButton.textContent =
+    level === 25 ? part.nextFinal : format(part.next, { level: level + 1 });
   saveButton.textContent = part.save;
   systemMessage.textContent = strings.system;
   board.setAttribute("aria-label", strings.boardAria);
@@ -76,19 +87,30 @@
       currentLevel,
       completedLevels: [...completedLevels].sort((a, b) => a - b),
     };
-    localStorage.setItem(progressStorageKey, JSON.stringify(progress.completedLevels));
-    return currentUser === "guest" || Boolean(window.EchoesSave?.saveProgress(progress));
+    localStorage.setItem(
+      progressStorageKey,
+      JSON.stringify(progress.completedLevels),
+    );
+    return (
+      currentUser === "guest" ||
+      Boolean(window.EchoesSave?.saveProgress(progress))
+    );
   }
 
   function completeLevel() {
     if (solved) return;
     solved = true;
     board.classList.add("is-solved");
-    board.querySelectorAll("button").forEach((button) => { button.disabled = true; });
+    board.querySelectorAll("button").forEach((button) => {
+      button.disabled = true;
+    });
     completedLevels.add(level);
     renderProgress();
     const saved = saveProgress();
-    setStatus(saved ? strings.success : part.saveError, saved ? "success" : "error");
+    setStatus(
+      saved ? strings.success : part.saveError,
+      saved ? "success" : "error",
+    );
     systemMessage.textContent = strings.systemSuccess;
     nextButton.hidden = false;
     startButton.hidden = true;
@@ -116,7 +138,9 @@
     function showTransmission() {
       const signal = strings.signals[round];
       transmission.textContent = signal.split("").join(" ");
-      roundReadout.textContent = format(strings.transmissionLabel, { round: round + 1 });
+      roundReadout.textContent = format(strings.transmissionLabel, {
+        round: round + 1,
+      });
       input.value = "";
       input.disabled = false;
       submitButton.disabled = false;
@@ -157,7 +181,9 @@
       active = false;
       round = 0;
       transmission.textContent = "•••••";
-      roundReadout.textContent = format(strings.transmissionLabel, { round: 1 });
+      roundReadout.textContent = format(strings.transmissionLabel, {
+        round: 1,
+      });
       input.value = "";
       input.disabled = true;
       submitButton.disabled = true;
@@ -220,11 +246,14 @@
         slot.dataset.symbol = symbol;
         slot.setAttribute("role", "button");
         slot.tabIndex = 0;
-        slot.setAttribute("aria-label", format(strings.slot, {
-          line: lineIndex + 1,
-          position: position + 1,
-          symbol,
-        }));
+        slot.setAttribute(
+          "aria-label",
+          format(strings.slot, {
+            line: lineIndex + 1,
+            position: position + 1,
+            symbol,
+          }),
+        );
         slot.textContent = symbol;
         slot.addEventListener("click", () => {
           if (selectedToken) place(selectedToken, slot);
@@ -238,7 +267,10 @@
         slot.addEventListener("dragover", (event) => event.preventDefault());
         slot.addEventListener("drop", (event) => {
           event.preventDefault();
-          const token = tokens.find((item) => item.dataset.tokenId === event.dataTransfer.getData("text/plain"));
+          const token = tokens.find(
+            (item) =>
+              item.dataset.tokenId === event.dataTransfer.getData("text/plain"),
+          );
           if (token) place(token, slot);
         });
         lane.appendChild(slot);
@@ -248,7 +280,10 @@
         token.dataset.tokenId = String(tokenId);
         token.dataset.symbol = symbol;
         token.textContent = symbol;
-        token.setAttribute("aria-label", format(strings.token, { symbol, number: tokenId + 1 }));
+        token.setAttribute(
+          "aria-label",
+          format(strings.token, { symbol, number: tokenId + 1 }),
+        );
         token.draggable = true;
         token.disabled = true;
         token.addEventListener("click", () => {
@@ -273,10 +308,12 @@
       if (solved) return;
       started = true;
       startButton.hidden = true;
-      tokens.sort(() => Math.random() - 0.5).forEach((token) => {
-        token.disabled = false;
-        tray.appendChild(token);
-      });
+      tokens
+        .sort(() => Math.random() - 0.5)
+        .forEach((token) => {
+          token.disabled = false;
+          tray.appendChild(token);
+        });
       setStatus(strings.playing);
     });
     resetButton.addEventListener("click", () => {
@@ -296,7 +333,9 @@
         slot.classList.remove("is-aligned");
         slot.textContent = slot.dataset.symbol;
       });
-      tokens.forEach((token) => { token.disabled = true; });
+      tokens.forEach((token) => {
+        token.disabled = true;
+      });
       setStatus(strings.ready);
     });
     progressReadout.textContent = "0 / 9";
@@ -342,13 +381,26 @@
         beatTimes.push(beatTimes[beatTimes.length - 1] + interval);
       });
       beatTimes.forEach((beatAt, index) => {
-        timers.push(window.setTimeout(() => {
-          pulse.classList.add("is-pulsing");
-          window.setTimeout(() => pulse.classList.remove("is-pulsing"), 320);
-        }, Math.max(0, beatAt - performance.now())));
-        timers.push(window.setTimeout(() => {
-          if (active && hitCount <= index) fail();
-        }, Math.max(0, beatAt + tolerance - performance.now())));
+        timers.push(
+          window.setTimeout(
+            () => {
+              pulse.classList.add("is-pulsing");
+              window.setTimeout(
+                () => pulse.classList.remove("is-pulsing"),
+                320,
+              );
+            },
+            Math.max(0, beatAt - performance.now()),
+          ),
+        );
+        timers.push(
+          window.setTimeout(
+            () => {
+              if (active && hitCount <= index) fail();
+            },
+            Math.max(0, beatAt + tolerance - performance.now()),
+          ),
+        );
       });
     });
 
@@ -392,10 +444,15 @@
   function setupMirrorPuzzle() {
     const positions = [10, 12, 2, 4];
     const solution = ["/", "/", "/", "\\"];
-    const mirrors = new Map(positions.map((position, index) => [position, {
-      index,
-      orientation: index === 3 ? "/" : "\\",
-    }]));
+    const mirrors = new Map(
+      positions.map((position, index) => [
+        position,
+        {
+          index,
+          orientation: index === 3 ? "/" : "\\",
+        },
+      ]),
+    );
     const cells = [];
     let active = false;
 
@@ -434,13 +491,22 @@
         if (!mirror) return;
         const button = cell.querySelector(".mirror-control");
         button.textContent = mirror.orientation === "/" ? "╱" : "╲";
-        button.setAttribute("aria-label", format(strings.mirror, {
-          number: mirror.index + 1,
-          orientation: mirror.orientation === "/" ? strings.risingDiagonal : strings.fallingDiagonal,
-        }));
+        button.setAttribute(
+          "aria-label",
+          format(strings.mirror, {
+            number: mirror.index + 1,
+            orientation:
+              mirror.orientation === "/"
+                ? strings.risingDiagonal
+                : strings.fallingDiagonal,
+          }),
+        );
       });
-      progressReadout.textContent = `${[...mirrors.values()]
-        .filter((mirror) => mirror.orientation === solution[mirror.index]).length} / 4`;
+      progressReadout.textContent = `${
+        [...mirrors.values()].filter(
+          (mirror) => mirror.orientation === solution[mirror.index],
+        ).length
+      } / 4`;
       if (reachedReceiver) completeLevel();
       else setStatus(strings.blocked);
     }
@@ -452,7 +518,10 @@
       if (index === 20 || index === 24) {
         const emitter = index === 20;
         cell.classList.add(emitter ? "is-emitter" : "is-receiver");
-        cell.setAttribute("aria-label", emitter ? strings.emitter : strings.receiver);
+        cell.setAttribute(
+          "aria-label",
+          emitter ? strings.emitter : strings.receiver,
+        );
         cell.textContent = emitter ? "◉" : "◎";
       } else if (mirrors.has(index)) {
         const mirror = mirrors.get(index);
@@ -471,28 +540,42 @@
     }
     board.replaceChildren(...cells);
     mirrors.forEach((mirror) => {
-      const button = cells[positions[mirror.index]].querySelector(".mirror-control");
+      const button =
+        cells[positions[mirror.index]].querySelector(".mirror-control");
       button.textContent = mirror.orientation === "/" ? "╱" : "╲";
-      button.setAttribute("aria-label", format(strings.mirror, {
-        number: mirror.index + 1,
-        orientation: mirror.orientation === "/" ? strings.risingDiagonal : strings.fallingDiagonal,
-      }));
+      button.setAttribute(
+        "aria-label",
+        format(strings.mirror, {
+          number: mirror.index + 1,
+          orientation:
+            mirror.orientation === "/"
+              ? strings.risingDiagonal
+              : strings.fallingDiagonal,
+        }),
+      );
     });
     startButton.addEventListener("click", () => {
       if (solved) return;
       active = true;
       startButton.hidden = true;
-      board.querySelectorAll(".mirror-control").forEach((button) => { button.disabled = false; });
+      board.querySelectorAll(".mirror-control").forEach((button) => {
+        button.disabled = false;
+      });
       traceBeam();
     });
     resetButton.addEventListener("click", () => {
       resetCommon();
       active = false;
-      mirrors.forEach((mirror) => { mirror.orientation = mirror.index === 3 ? "/" : "\\"; });
-      board.querySelectorAll(".mirror-control").forEach((button) => { button.disabled = true; });
+      mirrors.forEach((mirror) => {
+        mirror.orientation = mirror.index === 3 ? "/" : "\\";
+      });
+      board.querySelectorAll(".mirror-control").forEach((button) => {
+        button.disabled = true;
+      });
       cells.forEach((cell) => cell.classList.remove("is-beam"));
       mirrors.forEach((mirror) => {
-        const button = cells[positions[mirror.index]].querySelector(".mirror-control");
+        const button =
+          cells[positions[mirror.index]].querySelector(".mirror-control");
         button.textContent = mirror.orientation === "/" ? "╱" : "╲";
       });
       progressReadout.textContent = "0 / 4";
@@ -540,7 +623,10 @@
       target.setAttribute("role", "button");
       target.tabIndex = -1;
       target.setAttribute("aria-disabled", "true");
-      target.setAttribute("aria-label", format(strings.target, { name: symbol.name }));
+      target.setAttribute(
+        "aria-label",
+        format(strings.target, { name: symbol.name }),
+      );
       const heading = document.createElement("span");
       heading.className = "sorting-target-glyph";
       heading.textContent = symbol.glyph;
@@ -562,7 +648,10 @@
       target.addEventListener("dragover", (event) => event.preventDefault());
       target.addEventListener("drop", (event) => {
         event.preventDefault();
-        const token = tokenList.find((item) => item.dataset.tokenId === event.dataTransfer.getData("text/plain"));
+        const token = tokenList.find(
+          (item) =>
+            item.dataset.tokenId === event.dataTransfer.getData("text/plain"),
+        );
         if (token) sortToken(token, target);
       });
       targets.appendChild(target);
@@ -574,10 +663,13 @@
         token.dataset.tokenId = String(tokenNumber);
         token.dataset.symbol = String(symbolIndex);
         token.textContent = symbol.glyph;
-        token.setAttribute("aria-label", format(strings.token, {
-          name: symbol.name.toLowerCase(),
-          number: tokenNumber + 1,
-        }));
+        token.setAttribute(
+          "aria-label",
+          format(strings.token, {
+            name: symbol.name.toLowerCase(),
+            number: tokenNumber + 1,
+          }),
+        );
         token.draggable = true;
         token.disabled = true;
         token.addEventListener("click", () => {
@@ -604,10 +696,12 @@
         target.tabIndex = 0;
         target.setAttribute("aria-disabled", "false");
       });
-      tokenList.sort(() => Math.random() - 0.5).forEach((token) => {
-        token.disabled = false;
-        tray.appendChild(token);
-      });
+      tokenList
+        .sort(() => Math.random() - 0.5)
+        .forEach((token) => {
+          token.disabled = false;
+          tray.appendChild(token);
+        });
       setStatus(strings.playing);
     });
     resetButton.addEventListener("click", () => {
@@ -636,8 +730,23 @@
     const size = 10;
     const finish = 100;
     const jumps = {
-      3: 22, 8: 30, 20: 41, 28: 55, 36: 67, 51: 72, 63: 84, 80: 99,
-      97: 61, 92: 75, 88: 47, 70: 49, 58: 17, 45: 24, 33: 13, 26: 6, 74: 53,
+      3: 22,
+      8: 30,
+      20: 41,
+      28: 55,
+      36: 67,
+      51: 72,
+      63: 84,
+      80: 99,
+      97: 61,
+      92: 75,
+      88: 47,
+      70: 49,
+      58: 17,
+      45: 24,
+      33: 13,
+      26: 6,
+      74: 53,
     };
     const snakeColors = ["#ff5a7a", "#38f2ff", "#ff9a3c", "#b78bff", "#ff4fd8"];
     const rand = (max) => Math.floor(Math.random() * max);
@@ -670,13 +779,20 @@
       for (let col = 0; col < size; col += 1) {
         const number = row * size + (row % 2 === 0 ? col : size - 1 - col) + 1;
         const square = document.createElement("div");
-        square.className = (row + col) % 2 ? "ladder-square is-alt" : "ladder-square";
+        square.className =
+          (row + col) % 2 ? "ladder-square is-alt" : "ladder-square";
         square.textContent = String(number);
         const target = jumps[number];
         if (target) {
           const up = target > number;
           square.classList.add(up ? "is-ladder" : "is-snake");
-          square.setAttribute("aria-label", format(up ? strings.ladderCell : strings.snakeCell, { from: number, to: target }));
+          square.setAttribute(
+            "aria-label",
+            format(up ? strings.ladderCell : strings.snakeCell, {
+              from: number,
+              to: target,
+            }),
+          );
         }
         if (number === finish) square.classList.add("is-finish");
         squares[number] = square;
@@ -698,85 +814,165 @@
 
     const center = (number) => {
       const cell = squares[number];
-      return [cell.offsetLeft + cell.offsetWidth / 2, cell.offsetTop + cell.offsetHeight / 2];
+      return [
+        cell.offsetLeft + cell.offsetWidth / 2,
+        cell.offsetTop + cell.offsetHeight / 2,
+      ];
     };
 
     function drawLines() {
-      lines.setAttribute("viewBox", `0 0 ${stage.offsetWidth} ${stage.offsetHeight}`);
+      lines.setAttribute(
+        "viewBox",
+        `0 0 ${stage.offsetWidth} ${stage.offsetHeight}`,
+      );
       lines.replaceChildren();
       const cellSize = squares[1].offsetWidth;
       const svgNode = (name, attributes) => {
-        const node = document.createElementNS("http://www.w3.org/2000/svg", name);
-        Object.entries(attributes).forEach(([key, value]) => node.setAttribute(key, value));
+        const node = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          name,
+        );
+        Object.entries(attributes).forEach(([key, value]) =>
+          node.setAttribute(key, value),
+        );
         lines.appendChild(node);
         return node;
       };
-      const entries = Object.entries(jumps).map(([from, to]) => [Number(from), to]);
-      entries.filter(([from, to]) => to > from).forEach(([from, to]) => {
-        const [x1, y1] = center(from);
-        const [x2, y2] = center(to);
-        const length = Math.hypot(x2 - x1, y2 - y1);
-        const ux = (x2 - x1) / length;
-        const uy = (y2 - y1) / length;
-        const nx = -uy;
-        const ny = ux;
-        const gap = cellSize * 0.17;
-        [-1, 1].forEach((side) => {
-          const rail = {
-            x1: x1 + nx * gap * side, y1: y1 + ny * gap * side,
-            x2: x2 + nx * gap * side, y2: y2 + ny * gap * side,
-          };
-          svgNode("line", { ...rail, class: "ladder-rail-glow" });
-          svgNode("line", { ...rail, class: "ladder-rail" });
-        });
-        for (let distance = cellSize * 0.3; distance < length - cellSize * 0.15; distance += cellSize * 0.3) {
-          svgNode("line", {
-            x1: x1 + ux * distance - nx * gap, y1: y1 + uy * distance - ny * gap,
-            x2: x1 + ux * distance + nx * gap, y2: y1 + uy * distance + ny * gap,
-            class: "ladder-rung",
+      const entries = Object.entries(jumps).map(([from, to]) => [
+        Number(from),
+        to,
+      ]);
+      entries
+        .filter(([from, to]) => to > from)
+        .forEach(([from, to]) => {
+          const [x1, y1] = center(from);
+          const [x2, y2] = center(to);
+          const length = Math.hypot(x2 - x1, y2 - y1);
+          const ux = (x2 - x1) / length;
+          const uy = (y2 - y1) / length;
+          const nx = -uy;
+          const ny = ux;
+          const gap = cellSize * 0.17;
+          [-1, 1].forEach((side) => {
+            const rail = {
+              x1: x1 + nx * gap * side,
+              y1: y1 + ny * gap * side,
+              x2: x2 + nx * gap * side,
+              y2: y2 + ny * gap * side,
+            };
+            svgNode("line", { ...rail, class: "ladder-rail-glow" });
+            svgNode("line", { ...rail, class: "ladder-rail" });
           });
-        }
-      });
-      entries.filter(([from, to]) => to < from).forEach(([from, to], index) => {
-        const [x1, y1] = center(from);
-        const [x2, y2] = center(to);
-        const length = Math.hypot(x2 - x1, y2 - y1);
-        const ux = (x2 - x1) / length;
-        const uy = (y2 - y1) / length;
-        const nx = -uy;
-        const ny = ux;
-        const color = snakeColors[index % snakeColors.length];
-        const width = cellSize * 0.3;
-        const amplitude = cellSize * 0.42;
-        const waves = Math.max(1.5, length / (cellSize * 1.7));
-        const points = [];
-        for (let step = 0; step <= 60; step += 1) {
-          const t = step / 60;
-          const wave = Math.sin(t * Math.PI * 2 * waves) * amplitude * Math.min(1, t * 6, (1 - t) * 4);
-          points.push([x1 + (x2 - x1) * t + nx * wave, y1 + (y2 - y1) * t + ny * wave]);
-        }
-        const path = points.map(([x, y], step) => `${step ? "L" : "M"}${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
-        const style = `--snake-color: ${color}`;
-        svgNode("path", { d: path, class: "snake-shadow", style });
-        svgNode("path", { d: path, class: "snake-body", style, "stroke-width": width });
-        svgNode("path", { d: path, class: "snake-pattern", style, "stroke-width": width * 0.5,
-          "stroke-dasharray": `${width * 0.35} ${width * 0.95}` });
-        const [hx, hy] = points[0];
-        const [px, py] = points[2];
-        const angle = Math.atan2(hy - py, hx - px);
-        const head = svgNode("g", { transform: `translate(${hx},${hy}) rotate(${angle * 180 / Math.PI})`, style });
-        const part = (name, attributes) => {
-          const node = document.createElementNS("http://www.w3.org/2000/svg", name);
-          Object.entries(attributes).forEach(([key, value]) => node.setAttribute(key, value));
-          head.appendChild(node);
-        };
-        part("path", { d: `M${width * 0.6},0 L${width * 1.3},${-width * 0.15} M${width * 0.6},0 L${width * 1.3},${width * 0.15}`, class: "snake-tongue" });
-        part("ellipse", { cx: 0, cy: 0, rx: width * 0.85, ry: width * 0.68, class: "snake-head" });
-        part("circle", { cx: width * 0.25, cy: -width * 0.32, r: width * 0.17, class: "snake-eye" });
-        part("circle", { cx: width * 0.25, cy: width * 0.32, r: width * 0.17, class: "snake-eye" });
-        const [tx, ty] = points[points.length - 1];
-        svgNode("circle", { cx: tx, cy: ty, r: width * 0.3, class: "snake-tail", style });
-      });
+          for (
+            let distance = cellSize * 0.3;
+            distance < length - cellSize * 0.15;
+            distance += cellSize * 0.3
+          ) {
+            svgNode("line", {
+              x1: x1 + ux * distance - nx * gap,
+              y1: y1 + uy * distance - ny * gap,
+              x2: x1 + ux * distance + nx * gap,
+              y2: y1 + uy * distance + ny * gap,
+              class: "ladder-rung",
+            });
+          }
+        });
+      entries
+        .filter(([from, to]) => to < from)
+        .forEach(([from, to], index) => {
+          const [x1, y1] = center(from);
+          const [x2, y2] = center(to);
+          const length = Math.hypot(x2 - x1, y2 - y1);
+          const ux = (x2 - x1) / length;
+          const uy = (y2 - y1) / length;
+          const nx = -uy;
+          const ny = ux;
+          const color = snakeColors[index % snakeColors.length];
+          const width = cellSize * 0.3;
+          const amplitude = cellSize * 0.42;
+          const waves = Math.max(1.5, length / (cellSize * 1.7));
+          const points = [];
+          for (let step = 0; step <= 60; step += 1) {
+            const t = step / 60;
+            const wave =
+              Math.sin(t * Math.PI * 2 * waves) *
+              amplitude *
+              Math.min(1, t * 6, (1 - t) * 4);
+            points.push([
+              x1 + (x2 - x1) * t + nx * wave,
+              y1 + (y2 - y1) * t + ny * wave,
+            ]);
+          }
+          const path = points
+            .map(
+              ([x, y], step) =>
+                `${step ? "L" : "M"}${x.toFixed(1)},${y.toFixed(1)}`,
+            )
+            .join(" ");
+          const style = `--snake-color: ${color}`;
+          svgNode("path", { d: path, class: "snake-shadow", style });
+          svgNode("path", {
+            d: path,
+            class: "snake-body",
+            style,
+            "stroke-width": width,
+          });
+          svgNode("path", {
+            d: path,
+            class: "snake-pattern",
+            style,
+            "stroke-width": width * 0.5,
+            "stroke-dasharray": `${width * 0.35} ${width * 0.95}`,
+          });
+          const [hx, hy] = points[0];
+          const [px, py] = points[2];
+          const angle = Math.atan2(hy - py, hx - px);
+          const head = svgNode("g", {
+            transform: `translate(${hx},${hy}) rotate(${(angle * 180) / Math.PI})`,
+            style,
+          });
+          const part = (name, attributes) => {
+            const node = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              name,
+            );
+            Object.entries(attributes).forEach(([key, value]) =>
+              node.setAttribute(key, value),
+            );
+            head.appendChild(node);
+          };
+          part("path", {
+            d: `M${width * 0.6},0 L${width * 1.3},${-width * 0.15} M${width * 0.6},0 L${width * 1.3},${width * 0.15}`,
+            class: "snake-tongue",
+          });
+          part("ellipse", {
+            cx: 0,
+            cy: 0,
+            rx: width * 0.85,
+            ry: width * 0.68,
+            class: "snake-head",
+          });
+          part("circle", {
+            cx: width * 0.25,
+            cy: -width * 0.32,
+            r: width * 0.17,
+            class: "snake-eye",
+          });
+          part("circle", {
+            cx: width * 0.25,
+            cy: width * 0.32,
+            r: width * 0.17,
+            class: "snake-eye",
+          });
+          const [tx, ty] = points[points.length - 1];
+          svgNode("circle", {
+            cx: tx,
+            cy: ty,
+            r: width * 0.3,
+            class: "snake-tail",
+            style,
+          });
+        });
     }
 
     function placeToken(number) {
@@ -809,7 +1005,14 @@
     }
 
     const shapeColors = ["#ff5a9e", "#38f2ff", "#c6ff4d", "#ffd24d"];
-    const puzzleKinds = ["match", "pattern", "odd", "count", "missing", "place"];
+    const puzzleKinds = [
+      "match",
+      "pattern",
+      "odd",
+      "count",
+      "missing",
+      "place",
+    ];
     let lastPuzzleKind = null;
     const pickOther = (count, exclude) => {
       let value = rand(count - 1);
@@ -821,7 +1024,8 @@
       element.textContent = shapeGlyphs[item.shape];
       element.style.color = shapeColors[item.color];
     };
-    const glyphLabel = (item) => `${strings.shapeNames[item.shape]} ${strings.colorNames[item.color]}`;
+    const glyphLabel = (item) =>
+      `${strings.shapeNames[item.shape]} ${strings.colorNames[item.color]}`;
 
     function buildPuzzle() {
       const pool = puzzleKinds.filter((item) => item !== lastPuzzleKind);
@@ -832,14 +1036,26 @@
       if (kind === "match") {
         const model = glyphToken(rand(shapeCount), rand(colorCount));
         const options = [model];
-        options.push(glyphToken(pickOther(shapeCount, model.shape), model.color));
-        options.push(glyphToken(model.shape, pickOther(colorCount, model.color)));
-        options.push(glyphToken(pickOther(shapeCount, model.shape), pickOther(colorCount, model.color)));
+        options.push(
+          glyphToken(pickOther(shapeCount, model.shape), model.color),
+        );
+        options.push(
+          glyphToken(model.shape, pickOther(colorCount, model.color)),
+        );
+        options.push(
+          glyphToken(
+            pickOther(shapeCount, model.shape),
+            pickOther(colorCount, model.color),
+          ),
+        );
         return {
           type: kind,
           prompt: strings.matchPrompt,
           display: [model],
-          options: shuffle(options).map((item) => ({ ...item, ok: item === model })),
+          options: shuffle(options).map((item) => ({
+            ...item,
+            ok: item === model,
+          })),
         };
       }
       if (kind === "pattern") {
@@ -853,20 +1069,32 @@
         ];
         const { seq, hidden } = sequences[variant];
         const answer = seq[hidden];
-        const others = shuffle([a, b, c, ...[0, 1, 2, 3, 4].filter((n) => ![a, b, c].includes(n))]
-          .filter((n) => n !== answer)).slice(0, 3);
+        const others = shuffle(
+          [
+            a,
+            b,
+            c,
+            ...[0, 1, 2, 3, 4].filter((n) => ![a, b, c].includes(n)),
+          ].filter((n) => n !== answer),
+        ).slice(0, 3);
         return {
           type: kind,
           prompt: strings.patternPrompt,
-          display: seq.map((shape, index) => (index === hidden ? { text: "?" } : glyphToken(shape, color))),
-          options: shuffle([answer, ...others]).map((shape) => ({ ...glyphToken(shape, color), ok: shape === answer })),
+          display: seq.map((shape, index) =>
+            index === hidden ? { text: "?" } : glyphToken(shape, color),
+          ),
+          options: shuffle([answer, ...others]).map((shape) => ({
+            ...glyphToken(shape, color),
+            ok: shape === answer,
+          })),
         };
       }
       if (kind === "odd") {
         const common = glyphToken(rand(shapeCount), rand(colorCount));
-        const intruder = rand(2) === 0
-          ? glyphToken(pickOther(shapeCount, common.shape), common.color)
-          : glyphToken(common.shape, pickOther(colorCount, common.color));
+        const intruder =
+          rand(2) === 0
+            ? glyphToken(pickOther(shapeCount, common.shape), common.color)
+            : glyphToken(common.shape, pickOther(colorCount, common.color));
         return {
           type: kind,
           prompt: strings.oddPrompt,
@@ -877,7 +1105,8 @@
         const color = rand(colorCount);
         const target = rand(shapeCount);
         const total = 2 + rand(4);
-        const group = (amount) => Array.from({ length: amount }, () => glyphToken(target, color));
+        const group = (amount) =>
+          Array.from({ length: amount }, () => glyphToken(target, color));
         const amounts = new Set([total]);
         while (amounts.size < 4) amounts.add(1 + rand(7));
         return {
@@ -890,7 +1119,8 @@
             ok: amount === total,
           })),
         };
-      }      if (kind === "missing") {
+      }
+      if (kind === "missing") {
         const color = rand(colorCount);
         const order = shuffle([0, 1, 2, 3, 4]);
         const absent = order[0];
@@ -901,10 +1131,15 @@
           type: kind,
           prompt: strings.missingPrompt,
           display: row.map((shape) => glyphToken(shape, color)),
-          options: options.map((shape) => ({ ...glyphToken(shape, color), ok: shape === absent })),
+          options: options.map((shape) => ({
+            ...glyphToken(shape, color),
+            ok: shape === absent,
+          })),
         };
       }
-      const targets = shuffle(Array.from({ length: shapeGlyphs.length }, (_, index) => index)).slice(0, 3);
+      const targets = shuffle(
+        Array.from({ length: shapeGlyphs.length }, (_, index) => index),
+      ).slice(0, 3);
       return {
         type: kind,
         prompt: strings.placePrompt,
@@ -954,7 +1189,9 @@
         const answer = (success) => {
           if (answered) return;
           answered = true;
-          dialog.querySelectorAll("button, input").forEach((item) => { item.disabled = true; });
+          dialog.querySelectorAll("button, input").forEach((item) => {
+            item.disabled = true;
+          });
           dialog.classList.add(success ? "is-success" : "is-failure");
           result.textContent = success ? strings.puzzleOk : strings.puzzleFail;
           setTimeout(() => {
@@ -975,7 +1212,10 @@
             } else {
               paintGlyph(button, option);
               button.classList.add("ladder-glyph");
-              button.setAttribute("aria-label", format(strings.shapeChoice, { name: glyphLabel(option) }));
+              button.setAttribute(
+                "aria-label",
+                format(strings.shapeChoice, { name: glyphLabel(option) }),
+              );
             }
             button.addEventListener("click", () => answer(option.ok));
             body.appendChild(button);
@@ -986,10 +1226,18 @@
             const button = document.createElement("button");
             button.type = "button";
             button.className = "ladder-choice ladder-glyph";
-            const item = index === puzzle.odd.index ? puzzle.odd.intruder : puzzle.odd.common;
+            const item =
+              index === puzzle.odd.index
+                ? puzzle.odd.intruder
+                : puzzle.odd.common;
             paintGlyph(button, item);
-            button.setAttribute("aria-label", format(strings.shapeChoice, { name: glyphLabel(item) }));
-            button.addEventListener("click", () => answer(index === puzzle.odd.index));
+            button.setAttribute(
+              "aria-label",
+              format(strings.shapeChoice, { name: glyphLabel(item) }),
+            );
+            button.addEventListener("click", () =>
+              answer(index === puzzle.odd.index),
+            );
             body.appendChild(button);
           }
         } else {
@@ -1006,9 +1254,12 @@
             targetButton.type = "button";
             targetButton.className = "ladder-choice ladder-shape-target";
             targetButton.textContent = shapeGlyphs[shape];
-            targetButton.setAttribute("aria-label", format(strings.shapeTarget, {
-              name: strings.shapeNames[shape],
-            }));
+            targetButton.setAttribute(
+              "aria-label",
+              format(strings.shapeTarget, {
+                name: strings.shapeNames[shape],
+              }),
+            );
             targetButton.addEventListener("click", () => {
               if (selectedPiece === null || placedShapes.has(shape)) return;
               if (selectedPiece !== shape) {
@@ -1032,14 +1283,20 @@
             pieceButton.type = "button";
             pieceButton.className = "ladder-choice ladder-piece";
             pieceButton.textContent = shapeGlyphs[shape];
-            pieceButton.setAttribute("aria-label", format(strings.shapePiece, {
-              name: strings.shapeNames[shape],
-            }));
+            pieceButton.setAttribute(
+              "aria-label",
+              format(strings.shapePiece, {
+                name: strings.shapeNames[shape],
+              }),
+            );
             pieceButton.addEventListener("click", () => {
               if (pieceButton.disabled) return;
               selectedPiece = selectedPiece === shape ? null : shape;
               pieceButtons.forEach((piece, pieceShape) => {
-                piece.classList.toggle("is-selected", pieceShape === selectedPiece);
+                piece.classList.toggle(
+                  "is-selected",
+                  pieceShape === selectedPiece,
+                );
               });
             });
             pieceButtons.set(shape, pieceButton);
@@ -1051,7 +1308,11 @@
         overlay.appendChild(dialog);
         document.body.appendChild(overlay);
         modal = overlay;
-        (dialog.querySelector(".ladder-piece") || dialog.querySelector(".ladder-choice") || dialog).focus();
+        (
+          dialog.querySelector(".ladder-piece") ||
+          dialog.querySelector(".ladder-choice") ||
+          dialog
+        ).focus();
       });
     }
 
@@ -1077,7 +1338,14 @@
       }
       await walk(route);
       const jump = jumps[position];
-      const kind = position === finish ? "final" : jump ? (jump > position ? "ladder" : "snake") : "square";
+      const kind =
+        position === finish
+          ? "final"
+          : jump
+            ? jump > position
+              ? "ladder"
+              : "snake"
+            : "square";
       const success = await openPuzzle(kind, jump || "");
       if (kind === "final") {
         if (success) {
@@ -1168,7 +1436,9 @@
 
     const svgElement = (name, attributes = {}) => {
       const element = document.createElementNS(svgNS, name);
-      Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
+      Object.entries(attributes).forEach(([key, value]) =>
+        element.setAttribute(key, value),
+      );
       return element;
     };
     const frame = document.createElement("div");
@@ -1194,8 +1464,13 @@
       busy = true;
       const current = epoch;
       stage.classList.add(success ? "is-ok" : "is-bad");
-      stage.querySelectorAll("button, input").forEach((item) => { item.disabled = true; });
-      setStatus(success ? strings.roundOk : strings.roundFail, success ? "success" : "error");
+      stage.querySelectorAll("button, input").forEach((item) => {
+        item.disabled = true;
+      });
+      setStatus(
+        success ? strings.roundOk : strings.roundFail,
+        success ? "success" : "error",
+      );
       setTimeout(() => {
         if (current !== epoch) return;
         busy = false;
@@ -1211,33 +1486,66 @@
 
     function renderText() {
       let code = "";
-      for (let index = 0; index < 6; index += 1) code += alphabet[rand(alphabet.length)];
-      const image = svgElement("svg", { viewBox: "0 0 300 100", class: "captcha-image", role: "img" });
+      for (let index = 0; index < 6; index += 1)
+        code += alphabet[rand(alphabet.length)];
+      const image = svgElement("svg", {
+        viewBox: "0 0 300 100",
+        class: "captcha-image",
+        role: "img",
+      });
       image.setAttribute("aria-label", strings.textImageLabel);
-      image.appendChild(svgElement("rect", { width: 300, height: 100, fill: "#0b0613" }));
+      image.appendChild(
+        svgElement("rect", { width: 300, height: 100, fill: "#0b0613" }),
+      );
       for (let index = 0; index < 8; index += 1) {
-        image.appendChild(svgElement("line", {
-          x1: rand(300), y1: rand(100), x2: rand(300), y2: rand(100),
-          stroke: palette[rand(palette.length)], "stroke-width": 1.4, opacity: 0.5,
-        }));
+        image.appendChild(
+          svgElement("line", {
+            x1: rand(300),
+            y1: rand(100),
+            x2: rand(300),
+            y2: rand(100),
+            stroke: palette[rand(palette.length)],
+            "stroke-width": 1.4,
+            opacity: 0.5,
+          }),
+        );
       }
       [...code].forEach((letter, index) => {
         const x = 30 + index * 41;
         const y = 60 + rand(16) - 8;
         const glyph = svgElement("text", {
-          x, y, "text-anchor": "middle", "font-size": 38 + rand(12), "font-weight": 700,
-          "font-family": "Space Mono, monospace", fill: palette[rand(palette.length)],
+          x,
+          y,
+          "text-anchor": "middle",
+          "font-size": 38 + rand(12),
+          "font-weight": 700,
+          "font-family": "Space Mono, monospace",
+          fill: palette[rand(palette.length)],
           transform: `rotate(${rand(56) - 28} ${x} ${y}) skewX(${rand(30) - 15})`,
         });
         glyph.textContent = letter;
         image.appendChild(glyph);
       });
       const wave = `M0,${40 + rand(20)} C70,${rand(100)} 140,${rand(100)} 210,${rand(100)} S280,${rand(100)} 300,${30 + rand(40)}`;
-      image.appendChild(svgElement("path", { d: wave, fill: "none", stroke: "#fff4fd", "stroke-width": 2.2, opacity: 0.7 }));
+      image.appendChild(
+        svgElement("path", {
+          d: wave,
+          fill: "none",
+          stroke: "#fff4fd",
+          "stroke-width": 2.2,
+          opacity: 0.7,
+        }),
+      );
       for (let index = 0; index < 70; index += 1) {
-        image.appendChild(svgElement("circle", {
-          cx: rand(300), cy: rand(100), r: 0.8 + Math.random(), fill: palette[rand(palette.length)], opacity: 0.6,
-        }));
+        image.appendChild(
+          svgElement("circle", {
+            cx: rand(300),
+            cy: rand(100),
+            r: 0.8 + Math.random(),
+            fill: palette[rand(palette.length)],
+            opacity: 0.6,
+          }),
+        );
       }
       const form = document.createElement("form");
       form.className = "captcha-form";
@@ -1255,7 +1563,9 @@
       refresh.type = "button";
       refresh.className = "captcha-button is-ghost";
       refresh.textContent = strings.refresh;
-      refresh.addEventListener("click", () => { if (!busy) renderRound(); });
+      refresh.addEventListener("click", () => {
+        if (!busy) renderRound();
+      });
       form.append(input, submit, refresh);
       form.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -1270,14 +1580,29 @@
       const targetColor = rand(palette.length);
       const tileCount = 9;
       const targetCount = 3 + rand(2);
-      const tiles = Array.from({ length: targetCount }, () => ({ shape: targetShape, color: targetColor }));
-      const otherColor = () => (targetColor + 1 + rand(palette.length - 1)) % palette.length;
-      const otherShape = () => (targetShape + 1 + rand(shapeDrawers.length - 1)) % shapeDrawers.length;
-      tiles.push({ shape: targetShape, color: otherColor() }, { shape: targetShape, color: otherColor() });
-      tiles.push({ shape: otherShape(), color: targetColor }, { shape: otherShape(), color: targetColor });
+      const tiles = Array.from({ length: targetCount }, () => ({
+        shape: targetShape,
+        color: targetColor,
+      }));
+      const otherColor = () =>
+        (targetColor + 1 + rand(palette.length - 1)) % palette.length;
+      const otherShape = () =>
+        (targetShape + 1 + rand(shapeDrawers.length - 1)) % shapeDrawers.length;
+      tiles.push(
+        { shape: targetShape, color: otherColor() },
+        { shape: targetShape, color: otherColor() },
+      );
+      tiles.push(
+        { shape: otherShape(), color: targetColor },
+        { shape: otherShape(), color: targetColor },
+      );
       while (tiles.length < tileCount) {
-        const tile = { shape: rand(shapeDrawers.length), color: rand(palette.length) };
-        if (tile.shape !== targetShape || tile.color !== targetColor) tiles.push(tile);
+        const tile = {
+          shape: rand(shapeDrawers.length),
+          color: rand(palette.length),
+        };
+        if (tile.shape !== targetShape || tile.color !== targetColor)
+          tiles.push(tile);
       }
       const ordered = shuffle(tiles);
       const selected = new Set();
@@ -1296,14 +1621,26 @@
         button.type = "button";
         button.className = "captcha-tile";
         button.setAttribute("aria-pressed", "false");
-        button.setAttribute("aria-label", format(strings.tileLabel, {
-          shape: strings.shapes[tile.shape],
-          color: strings.colors[tile.color],
-          number: index + 1,
-        }));
-        const icon = svgElement("svg", { viewBox: "0 0 40 40", "aria-hidden": "true" });
+        button.setAttribute(
+          "aria-label",
+          format(strings.tileLabel, {
+            shape: strings.shapes[tile.shape],
+            color: strings.colors[tile.color],
+            number: index + 1,
+          }),
+        );
+        const icon = svgElement("svg", {
+          viewBox: "0 0 40 40",
+          "aria-hidden": "true",
+        });
         const [name, attributes] = shapeDrawers[tile.shape]();
-        icon.appendChild(svgElement(name, { ...attributes, fill: palette[tile.color], opacity: 0.92 }));
+        icon.appendChild(
+          svgElement(name, {
+            ...attributes,
+            fill: palette[tile.color],
+            opacity: 0.92,
+          }),
+        );
         button.appendChild(icon);
         button.addEventListener("click", () => {
           if (selected.has(index)) selected.delete(index);
@@ -1318,8 +1655,11 @@
       submit.className = "captcha-button";
       submit.textContent = strings.submit;
       submit.addEventListener("click", () => {
-        const success = ordered.every((tile, index) =>
-          (tile.shape === targetShape && tile.color === targetColor) === selected.has(index));
+        const success = ordered.every(
+          (tile, index) =>
+            (tile.shape === targetShape && tile.color === targetColor) ===
+            selected.has(index),
+        );
         finishRound(success);
       });
       stage.append(grid, submit);
@@ -1333,14 +1673,26 @@
         for (let attempt = 0; attempt < 400; attempt += 1) {
           const x = radius + 8 + Math.random() * (600 - diameter - 16);
           const y = radius + 8 + Math.random() * (300 - diameter - 16);
-          if (placed.every((orb) => Math.hypot(orb.x - x, orb.y - y) > orb.radius + radius + 12)) {
+          if (
+            placed.every(
+              (orb) =>
+                Math.hypot(orb.x - x, orb.y - y) > orb.radius + radius + 12,
+            )
+          ) {
             placed.push({ x, y, radius, diameter });
             return;
           }
         }
-        placed.push({ x: radius + 8 + placed.length * 110, y: 150, radius, diameter });
+        placed.push({
+          x: radius + 8 + placed.length * 110,
+          y: 150,
+          radius,
+          diameter,
+        });
       });
-      const order = placed.map((_, index) => index).sort((a, b) => placed[a].diameter - placed[b].diameter);
+      const order = placed
+        .map((_, index) => index)
+        .sort((a, b) => placed[a].diameter - placed[b].diameter);
       let next = 0;
       const area = document.createElement("div");
       area.className = "captcha-orbs";
@@ -1378,7 +1730,9 @@
       stage.replaceChildren();
       const kinds = ["text", "grid", "order"];
       const kind = kinds[round];
-      heading.textContent = format(strings.roundLabel, { current: round + 1, total }) + ` — ${strings[`${kind}Title`]}`;
+      heading.textContent =
+        format(strings.roundLabel, { current: round + 1, total }) +
+        ` — ${strings[`${kind}Title`]}`;
       prompt.textContent = strings[`${kind}Prompt`];
       if (kind === "text") renderText();
       if (kind === "grid") renderGrid();
@@ -1434,10 +1788,13 @@
       const clue = document.createElement("div");
       clue.className = "memory-clue";
       clue.textContent = clues.join(" ");
-      clue.setAttribute("aria-label", format(strings.columnClue, {
-        column: column + 1,
-        clues: clues.join(", "),
-      }));
+      clue.setAttribute(
+        "aria-label",
+        format(strings.columnClue, {
+          column: column + 1,
+          clues: clues.join(", "),
+        }),
+      );
       columnClueList.appendChild(clue);
     });
 
@@ -1445,10 +1802,13 @@
       const clue = document.createElement("div");
       clue.className = "memory-clue";
       clue.textContent = clues.join(" ");
-      clue.setAttribute("aria-label", format(strings.rowClue, {
-        row: row + 1,
-        clues: clues.join(", "),
-      }));
+      clue.setAttribute(
+        "aria-label",
+        format(strings.rowClue, {
+          row: row + 1,
+          clues: clues.join(", "),
+        }),
+      );
       rowClueList.appendChild(clue);
     });
 
@@ -1458,11 +1818,14 @@
         cell.classList.toggle("is-filled", state === 1);
         cell.disabled = !started || solved;
         cell.setAttribute("aria-pressed", String(state === 1));
-        cell.setAttribute("aria-label", format(strings.cellLabel, {
-          row: Math.floor(index / size) + 1,
-          column: (index % size) + 1,
-          state: strings.cellStates[state],
-        }));
+        cell.setAttribute(
+          "aria-label",
+          format(strings.cellLabel, {
+            row: Math.floor(index / size) + 1,
+            column: (index % size) + 1,
+            state: strings.cellStates[state],
+          }),
+        );
       });
       progressReadout.textContent = `${marks.filter((mark) => mark === 1).length} / ${targetCount}`;
     }
@@ -1471,8 +1834,8 @@
       if (!started || solved) return;
       marks[index] = marks[index] === 1 ? 0 : 1;
       refresh();
-      const matchesSolution = marks.every((mark, pixel) =>
-        (mark === 1) === solution[pixel],
+      const matchesSolution = marks.every(
+        (mark, pixel) => (mark === 1) === solution[pixel],
       );
       if (matchesSolution) {
         completeLevel();
@@ -1532,13 +1895,31 @@
     const configs = {
       27: {
         size: 8,
-        waypoints: [[7, 0], [1, 0], [1, 5], [3, 5], [3, 6], [4, 6], [4, 1], [2, 1], [2, 4]],
+        waypoints: [
+          [7, 0],
+          [1, 0],
+          [1, 5],
+          [3, 5],
+          [3, 6],
+          [4, 6],
+          [4, 1],
+          [2, 1],
+          [2, 4],
+        ],
         checkpoints: [16, 11, 29, 36, 25],
         walls: [1, 2, 3, 5, 6, 7, 22, 26, 31, 42, 43, 51, 52, 55, 61, 63],
       },
       30: {
         size: 8,
-        waypoints: [[7, 0], [2, 0], [2, 7], [5, 7], [5, 1], [3, 1], [3, 6]],
+        waypoints: [
+          [7, 0],
+          [2, 0],
+          [2, 7],
+          [5, 7],
+          [5, 1],
+          [3, 1],
+          [3, 6],
+        ],
         checkpoints: [40, 22, 46, 25, 29],
         walls: [1, 3, 6, 9, 11, 14, 34, 37, 50, 55, 61],
       },
@@ -1548,14 +1929,16 @@
     const checkpoints = config.checkpoints;
     const walls = new Set(config.walls);
     const route = [config.waypoints[0][0] * rows + config.waypoints[0][1]];
-    config.waypoints.slice(1).forEach(([targetRow, targetColumn], segmentIndex) => {
-      let [row, column] = config.waypoints[segmentIndex];
-      while (row !== targetRow || column !== targetColumn) {
-        if (row !== targetRow) row += Math.sign(targetRow - row);
-        else column += Math.sign(targetColumn - column);
-        route.push(row * rows + column);
-      }
-    });
+    config.waypoints
+      .slice(1)
+      .forEach(([targetRow, targetColumn], segmentIndex) => {
+        let [row, column] = config.waypoints[segmentIndex];
+        while (row !== targetRow || column !== targetColumn) {
+          if (row !== targetRow) row += Math.sign(targetRow - row);
+          else column += Math.sign(targetColumn - column);
+          route.push(row * rows + column);
+        }
+      });
     const steps = route.length - 1;
     const requiredTurns = config.waypoints.length - 2;
     const start = route[0];
@@ -1589,7 +1972,10 @@
       path = [start];
       nextCheckpoint = 0;
       refreshBoard();
-      setStatus(message, message === strings.ready || message === strings.playing ? "" : "error");
+      setStatus(
+        message,
+        message === strings.ready || message === strings.playing ? "" : "error",
+      );
     }
 
     function rejectPath(reason) {
@@ -1614,7 +2000,9 @@
       }
       if (index === path.at(-2)) {
         path.pop();
-        nextCheckpoint = checkpoints.filter((point) => path.includes(point)).length;
+        nextCheckpoint = checkpoints.filter((point) =>
+          path.includes(point),
+        ).length;
         refreshBoard();
         setStatus(strings.playing);
         return;
@@ -1630,9 +2018,15 @@
         for (let position = 1; position < completedPath.length; position += 1) {
           const previous = coordinates(completedPath[position - 1]);
           const currentPoint = coordinates(completedPath[position]);
-          const direction = [currentPoint[0] - previous[0], currentPoint[1] - previous[1]];
-          if (previousDirection &&
-              (previousDirection[0] !== direction[0] || previousDirection[1] !== direction[1])) {
+          const direction = [
+            currentPoint[0] - previous[0],
+            currentPoint[1] - previous[1],
+          ];
+          if (
+            previousDirection &&
+            (previousDirection[0] !== direction[0] ||
+              previousDirection[1] !== direction[1])
+          ) {
             turns += 1;
           }
           previousDirection = direction;
@@ -1642,11 +2036,18 @@
           return;
         }
         if (completedPath.length - 1 !== steps) {
-          rejectPath(format(strings.failedLength, { moves: completedPath.length - 1, steps }));
+          rejectPath(
+            format(strings.failedLength, {
+              moves: completedPath.length - 1,
+              steps,
+            }),
+          );
           return;
         }
         if (turns !== requiredTurns) {
-          rejectPath(format(strings.failedTurns, { turns, required: requiredTurns }));
+          rejectPath(
+            format(strings.failedTurns, { turns, required: requiredTurns }),
+          );
           return;
         }
         path.push(index);
@@ -1654,7 +2055,10 @@
         completeLevel();
         return;
       }
-      if (checkpoints.includes(index) && index !== checkpoints[nextCheckpoint]) {
+      if (
+        checkpoints.includes(index) &&
+        index !== checkpoints[nextCheckpoint]
+      ) {
         rejectPath(strings.failedOrder);
         return;
       }
@@ -1672,10 +2076,13 @@
       cell.dataset.cell = String(index);
       if (walls.has(index)) {
         cell.textContent = "×";
-        cell.setAttribute("aria-label", format(strings.blockedCell, {
-          row: coordinates(index)[0] + 1,
-          column: coordinates(index)[1] + 1,
-        }));
+        cell.setAttribute(
+          "aria-label",
+          format(strings.blockedCell, {
+            row: coordinates(index)[0] + 1,
+            column: coordinates(index)[1] + 1,
+          }),
+        );
       } else if (index === start) {
         cell.textContent = "S";
         cell.setAttribute("aria-label", strings.startCell);
@@ -1684,15 +2091,21 @@
         cell.setAttribute("aria-label", strings.finishCell);
       } else if (checkpointNumber !== -1) {
         cell.textContent = String(checkpointNumber + 1);
-        cell.setAttribute("aria-label", format(strings.checkpointCell, {
-          number: checkpointNumber + 1,
-        }));
+        cell.setAttribute(
+          "aria-label",
+          format(strings.checkpointCell, {
+            number: checkpointNumber + 1,
+          }),
+        );
       } else {
         cell.textContent = "";
-        cell.setAttribute("aria-label", format(strings.openCell, {
-          row: coordinates(index)[0] + 1,
-          column: coordinates(index)[1] + 1,
-        }));
+        cell.setAttribute(
+          "aria-label",
+          format(strings.openCell, {
+            row: coordinates(index)[0] + 1,
+            column: coordinates(index)[1] + 1,
+          }),
+        );
       }
       cell.addEventListener("click", () => tryStep(index));
       cell.addEventListener("keydown", (event) => {
@@ -1749,7 +2162,10 @@
       setStatus(part.saveError, "error");
       return;
     }
-    window.location.href = level === 30 ? "boss-03.html" : `niveau-${String(nextLevel).padStart(2, "0")}.html`;
+    window.location.href =
+      level === 30
+        ? "boss-03.html"
+        : `niveau-${String(nextLevel).padStart(2, "0")}.html`;
   });
   saveButton.addEventListener("click", () => {
     const saved = saveProgress();

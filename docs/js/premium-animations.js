@@ -26,7 +26,10 @@
       piece.style.top = `${y}px`;
       piece.style.background = palette[index % palette.length];
       piece.style.setProperty("--fx-x", `${Math.cos(angle) * distance}px`);
-      piece.style.setProperty("--fx-y", `${Math.sin(angle) * distance + 140}px`);
+      piece.style.setProperty(
+        "--fx-y",
+        `${Math.sin(angle) * distance + 140}px`,
+      );
       piece.style.setProperty("--fx-r", `${(Math.random() - 0.5) * 900}deg`);
       piece.style.setProperty("--fx-t", `${1.1 + Math.random() * 0.9}s`);
       piece.setAttribute("aria-hidden", "true");
@@ -75,28 +78,39 @@
     }
 
     // Confettis dès qu'un message de réussite apparaît.
-    document.querySelectorAll(".puzzle-status, #puzzleStatus").forEach((status) => {
-      let wasSuccess = status.classList.contains("success");
-      new MutationObserver(() => {
-        const now = status.classList.contains("success");
-        if (now && !wasSuccess) {
-          const box = status.getBoundingClientRect();
-          burst(box.left + box.width / 2, Math.min(Math.max(box.top, 80), window.innerHeight - 80), 34);
-        }
-        wasSuccess = now;
-      }).observe(status, { attributes: true, attributeFilter: ["class"] });
-    });
+    document
+      .querySelectorAll(".puzzle-status, #puzzleStatus")
+      .forEach((status) => {
+        let wasSuccess = status.classList.contains("success");
+        new MutationObserver(() => {
+          const now = status.classList.contains("success");
+          if (now && !wasSuccess) {
+            const box = status.getBoundingClientRect();
+            burst(
+              box.left + box.width / 2,
+              Math.min(Math.max(box.top, 80), window.innerHeight - 80),
+              34,
+            );
+          }
+          wasSuccess = now;
+        }).observe(status, { attributes: true, attributeFilter: ["class"] });
+      });
 
     const next = document.querySelector(".next-level-button");
     if (next) {
       new MutationObserver(() => {
         if (next.hidden) return;
         const box = next.getBoundingClientRect();
-        burst(window.innerWidth / 2, Math.min(Math.max(box.top, 100), window.innerHeight - 100), 80);
+        burst(
+          window.innerWidth / 2,
+          Math.min(Math.max(box.top, 100), window.innerHeight - 100),
+          80,
+        );
       }).observe(next, { attributes: true, attributeFilter: ["hidden"] });
     }
   };
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  if (document.readyState === "loading")
+    document.addEventListener("DOMContentLoaded", init);
   else init();
 })();

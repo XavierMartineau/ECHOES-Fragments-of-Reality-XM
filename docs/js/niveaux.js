@@ -1,8 +1,11 @@
 // LEVEL SELECT HUB // grille des niveaux, progression globale, réinitialisation.
 (() => {
+  // Revenir au hub réactive le blocage des niveaux (le DEV MODE le désactive le temps d'une session).
+  sessionStorage.removeItem("echoes-dev-unlock");
   const save = window.EchoesSave;
   const levels = window.EchoesLevels;
-  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const language =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
 
   const text = {
     fr: {
@@ -63,22 +66,36 @@
     },
   }[language];
 
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
   const HEX = "M50 3 L94 28 L94 84 L50 109 L6 84 L6 28 Z";
   const FINAL_SHAPE =
     "M40 6 L560 6 L594 40 L594 66 L580 90 L594 114 L594 140 L560 174 L40 174 L6 140 L6 114 L20 90 L6 66 L6 40 Z";
   const BOSS_SHAPE =
     "M24 4 L176 4 L196 28 L196 40 L190 56 L196 72 L196 84 L176 108 L24 108 L4 84 L4 72 L10 56 L4 40 L4 28 Z";
-  const LOCK_PATH =
-    "M-9 -3V-9a9 9 0 0 1 18 0v6h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-22a2 2 0 0 1-2-2V-1a2 2 0 0 1 2-2h2Zm5 0h8v-6a4 4 0 0 0-8 0v6Zm4 8a2.4 2.4 0 0 0-1.2 4.5V17h2.4v-3.5A2.4 2.4 0 0 0 0 5Z";
+  // Cadenas premium : anse épaisse, corps biseauté, plaque et serrure.
+  const LOCK_SVG =
+    '<g class="lock"><path class="lock-shackle" d="M-6.5 -3V-8a6.5 6.5 0 0 1 13 0V-3"/>' +
+    '<rect class="lock-body" x="-11" y="-4" width="22" height="19" rx="4.5"/>' +
+    '<path class="lock-shine" d="M-11 2V0.5A4.5 4.5 0 0 1 -6.5 -4H6.5A4.5 4.5 0 0 1 11 0.5V2Z"/>' +
+    '<rect class="lock-plate" x="-8" y="-0.5" width="16" height="12.5" rx="3"/>' +
+    '<circle class="lock-hole" cx="0" cy="4.4" r="2.6"/><path class="lock-hole" d="M-1.1 5.6h2.2l.9 4.6h-4Z"/></g>';
   const SKULL_PATH =
     "M0-22c-12 0-20 8-20 19 0 7 3.800 11.500 8 14V20c0 1.100.9 2 2 2h2v4h4v-4h8v4h4v-4h2c1.100 0 2-.9 2-2v-9c4.200-2.500 8-7 8-14 0-11-8-19-20-19ZM-8 3a5 5 0 1 1 0-10 5 5 0 0 1 0 10Zm16 0a5 5 0 1 1 0-10 5 5 0 0 1 0 10ZM0 8l3.500 6h-7Z";
 
   // Mélange deux couleurs hexadécimales.
   function mix(from, to, amount) {
-    const parse = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+    const parse = (hex) =>
+      [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
     const [a, b] = [parse(from), parse(to)];
-    return `#${a.map((v, i) => Math.round(v + (b[i] - v) * amount).toString(16).padStart(2, "0")).join("")}`;
+    return `#${a
+      .map((v, i) =>
+        Math.round(v + (b[i] - v) * amount)
+          .toString(16)
+          .padStart(2, "0"),
+      )
+      .join("")}`;
   }
   const shade = (hex, amount) => mix(hex, "#000000", amount);
   const tint = (hex, amount) => mix(hex, "#ffffff", amount);
@@ -86,28 +103,87 @@
   // Dégradés SVG : communs, puis un jeu par partie pour garder sa couleur.
   function injectDefs() {
     const stops = (list) =>
-      list.map(([offset, color]) => `<stop offset="${offset}" stop-color="${color}"/>`).join("");
+      list
+        .map(
+          ([offset, color]) =>
+            `<stop offset="${offset}" stop-color="${color}"/>`,
+        )
+        .join("");
     const grad = (id, list, vertical = true) =>
       `<linearGradient id="${id}" x1="0" y1="0" x2="${vertical ? 0 : 1}" y2="1">${stops(list)}</linearGradient>`;
     const perSeries = levels.series
       .map(({ id, theme }) => {
         const { accent, accent2 } = theme;
         return [
-          grad(`grad-open-${id}`, [[0, shade(accent, 0.55)], [0.55, shade(accent, 0.75)], [1, shade(accent, 0.9)]]),
-          grad(`grad-rim-open-${id}`, [[0, tint(accent, 0.6)], [0.5, accent], [1, shade(accent, 0.6)]]),
-          grad(`grad-done-${id}`, [[0, shade(accent, 0.2)], [0.55, shade(accent, 0.45)], [1, shade(accent, 0.75)]]),
-          grad(`grad-rim-done-${id}`, [[0, tint(accent, 0.85)], [0.5, tint(accent, 0.2)], [1, shade(accent, 0.35)]]),
-          grad(`grad-current-${id}`, [[0, accent], [0.55, shade(accent, 0.35)], [1, shade(accent, 0.65)]]),
-          grad(`grad-rim-current-${id}`, [[0, "#ffffff"], [0.5, tint(accent2, 0.4)], [1, accent]]),
-          grad(`grad-boss-${id}`, [[0, shade(accent2, 0.35)], [0.5, shade(accent2, 0.65)], [1, shade(accent2, 0.9)]], false),
-          grad(`grad-bossdone-${id}`, [[0, shade(accent2, 0.2)], [0.5, shade(accent, 0.5)], [1, shade(accent2, 0.85)]], false),
-          grad(`grad-rim-boss-${id}`, [[0, tint(accent2, 0.75)], [0.5, accent2], [1, shade(accent, 0.4)]], false),
+          grad(`grad-open-${id}`, [
+            [0, shade(accent, 0.55)],
+            [0.55, shade(accent, 0.75)],
+            [1, shade(accent, 0.9)],
+          ]),
+          grad(`grad-rim-open-${id}`, [
+            [0, tint(accent, 0.6)],
+            [0.5, accent],
+            [1, shade(accent, 0.6)],
+          ]),
+          grad(`grad-done-${id}`, [
+            [0, shade(accent, 0.2)],
+            [0.55, shade(accent, 0.45)],
+            [1, shade(accent, 0.75)],
+          ]),
+          grad(`grad-rim-done-${id}`, [
+            [0, tint(accent, 0.85)],
+            [0.5, tint(accent, 0.2)],
+            [1, shade(accent, 0.35)],
+          ]),
+          grad(`grad-current-${id}`, [
+            [0, accent],
+            [0.55, shade(accent, 0.35)],
+            [1, shade(accent, 0.65)],
+          ]),
+          grad(`grad-rim-current-${id}`, [
+            [0, "#ffffff"],
+            [0.5, tint(accent2, 0.4)],
+            [1, accent],
+          ]),
+          grad(
+            `grad-boss-${id}`,
+            [
+              [0, shade(accent2, 0.35)],
+              [0.5, shade(accent2, 0.65)],
+              [1, shade(accent2, 0.9)],
+            ],
+            false,
+          ),
+          grad(
+            `grad-bossdone-${id}`,
+            [
+              [0, shade(accent2, 0.2)],
+              [0.5, shade(accent, 0.5)],
+              [1, shade(accent2, 0.85)],
+            ],
+            false,
+          ),
+          grad(
+            `grad-rim-boss-${id}`,
+            [
+              [0, tint(accent2, 0.75)],
+              [0.5, accent2],
+              [1, shade(accent, 0.4)],
+            ],
+            false,
+          ),
         ].join("");
       })
       .join("");
     const markup = `<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
-      ${grad("grad-locked", [[0, "#2a3042"], [1, "#12151f"]])}
-      ${grad("grad-rim-locked", [[0, "#586079"], [1, "#222738"]])}
+      ${grad("grad-locked", [
+        [0, "#2a3042"],
+        [1, "#12151f"],
+      ])}
+      ${grad("grad-rim-locked", [
+        [0, "#586079"],
+        [1, "#222738"],
+      ])}
       ${perSeries}
       <linearGradient id="grad-gloss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".38"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
       <linearGradient id="grad-sweep" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
@@ -126,10 +202,20 @@
       "--accent-soft": `${accent}55`,
       "--boss-text": tint(accent2, 0.78),
     };
-    ["open", "rim-open", "done", "rim-done", "current", "rim-current", "boss", "bossdone", "rim-boss"].forEach(
-      (name) => (vars[`--g-${name}`] = `url(#grad-${name}-${id})`),
+    [
+      "open",
+      "rim-open",
+      "done",
+      "rim-done",
+      "current",
+      "rim-current",
+      "boss",
+      "bossdone",
+      "rim-boss",
+    ].forEach((name) => (vars[`--g-${name}`] = `url(#grad-${name}-${id})`));
+    Object.entries(vars).forEach(([key, value]) =>
+      element.style.setProperty(key, value),
     );
-    Object.entries(vars).forEach(([key, value]) => element.style.setProperty(key, value));
   }
 
   // Anime un nombre de 0 à sa valeur finale.
@@ -176,14 +262,15 @@
       <path class="tile-gloss" d="M50 12 L86 33 L86 52 Q50 64 14 52 L14 33 Z"/>`;
     let body;
     if (locked) {
-      body = `<g class="tile-icon" transform="translate(50 46) scale(1.25)"><path d="${LOCK_PATH}"/></g>
+      body = `<g class="tile-icon" transform="translate(50 46) scale(1.25)">${LOCK_SVG}</g>
         <text class="tile-num" x="50" y="92">${item.number}</text>`;
     } else {
       body = `<text class="tile-num" x="50" y="70">${item.number}</text>`;
       if (item.state === "completed") {
         body += `<g transform="translate(80 26)"><circle class="tile-badge-bg" r="12"/><path class="tile-badge-icon" d="M-5 0.500L-1.500 4 5.500-3.500"/></g>`;
       }
-      if (caption) body += `<text class="tile-caption" x="50" y="92">${caption}</text>`;
+      if (caption)
+        body += `<text class="tile-caption" x="50" y="92">${caption}</text>`;
     }
     return `<svg class="tile" viewBox="0 0 100 112" aria-hidden="true" focusable="false">${base}${body}</svg>`;
   }
@@ -206,7 +293,7 @@
       <g transform="translate(100 46) scale(.95)"><g class="tile-skull"><path d="${SKULL_PATH}"/></g></g>
       <text class="tile-boss-label" x="100" y="94">${label}</text>
       ${keyMarkup}
-      ${locked ? `<g class="tile-icon" transform="translate(168 30)"><path d="${LOCK_PATH}"/></g>` : ""}
+      ${locked ? `<g class="tile-icon" transform="translate(168 30)">${LOCK_SVG}</g>` : ""}
       ${done ? `<g transform="translate(168 30)"><circle class="tile-badge-bg" r="13"/><path class="tile-badge-icon" d="M-5.500 0.500L-1.500 4.500 6-3.500"/></g>` : ""}
     </svg>`;
   }
@@ -221,7 +308,11 @@
         return `<image class="tile-key ${key.owned ? "is-owned" : "is-missing"}" href="${key.image}" x="${x - 15}" y="118" width="30" height="42" preserveAspectRatio="xMidYMid meet"/>`;
       })
       .join("");
-    const rays = Array.from({ length: 16 }, (_, i) => `<path d="M300 90 L${300 + Math.cos((i / 16) * Math.PI * 2) * 360} ${90 + Math.sin((i / 16) * Math.PI * 2) * 360}" />`).join("");
+    const rays = Array.from(
+      { length: 16 },
+      (_, i) =>
+        `<path d="M300 90 L${300 + Math.cos((i / 16) * Math.PI * 2) * 360} ${90 + Math.sin((i / 16) * Math.PI * 2) * 360}" />`,
+    ).join("");
     return `<svg class="tile" viewBox="0 0 600 180" aria-hidden="true" focusable="false">
       <defs>
         <radialGradient id="grad-final-core" cx="50%" cy="45%" r="60%"><stop offset="0" stop-color="#5a1b9a"/><stop offset=".6" stop-color="#1b0a3d"/><stop offset="1" stop-color="#07030f"/></radialGradient>
@@ -237,7 +328,7 @@
       <text class="final-title" x="300" y="76">${text.finalTitle}</text>
       <text class="final-hint" x="300" y="104">${locked ? text.finalHint : ""}</text>
       ${slots}
-      ${locked ? `<g class="tile-icon final-lock" transform="translate(556 40) scale(1.3)"><path d="${LOCK_PATH}"/></g>` : ""}
+      ${locked ? `<g class="tile-icon final-lock" transform="translate(556 40) scale(1.3)">${LOCK_SVG}</g>` : ""}
     </svg>`;
   }
 
@@ -264,7 +355,8 @@
     const isFinal = item.type === "final";
     const playable = ["completed", "current", "unlocked"].includes(item.state);
     const card = document.createElement(playable ? "a" : "div");
-    const name = isBoss || isFinal ? item.label[language] : `${text.level} ${item.number}`;
+    const name =
+      isBoss || isFinal ? item.label[language] : `${text.level} ${item.number}`;
     const stateLabel = {
       completed: text.completed,
       current: text.current,
@@ -340,14 +432,19 @@
           <span class="series-count">${finalItem.ready ? "" : text.finalSoon}</span>
         </header>
         <div class="level-grid final-grid"></div>`;
-      section.querySelector(".final-grid").appendChild(createCard(finalItem, false));
+      section
+        .querySelector(".final-grid")
+        .appendChild(createCard(finalItem, false));
       seriesList.appendChild(section);
     }
 
-    levels.keys.length && window.EchoesKeyTray.render(document.getElementById("keyTray"));
+    levels.keys.length &&
+      window.EchoesKeyTray.render(document.getElementById("keyTray"));
 
     const unlockedIds = progress.items
-      .filter((item) => ["current", "unlocked", "completed"].includes(item.state))
+      .filter((item) =>
+        ["current", "unlocked", "completed"].includes(item.state),
+      )
       .map((item) => item.id);
     save.saveProgress({ ui: { seen: unlockedIds } }, username);
 
@@ -358,10 +455,16 @@
     );
     const fill = document.getElementById("progressFill");
     fill.style.width = "0%";
-    requestAnimationFrame(() => requestAnimationFrame(() => (fill.style.width = `${progress.percent}%`)));
-    document.getElementById("progressTrack").setAttribute("aria-valuenow", String(progress.percent));
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => (fill.style.width = `${progress.percent}%`)),
+    );
+    document
+      .getElementById("progressTrack")
+      .setAttribute("aria-valuenow", String(progress.percent));
 
-    const current = progress.items.find((item) => item.id === progress.currentId);
+    const current = progress.items.find(
+      (item) => item.id === progress.currentId,
+    );
     if (current) {
       continueButton.href = levels.urlFor(current);
       continueButton.textContent = text.continue;
@@ -373,7 +476,10 @@
     observeSeries();
     document
       .querySelector(".level-card.state-current")
-      ?.scrollIntoView({ block: "center", behavior: reducedMotion ? "auto" : "smooth" });
+      ?.scrollIntoView({
+        block: "center",
+        behavior: reducedMotion ? "auto" : "smooth",
+      });
   }
 
   document.getElementById("switchUserButton").addEventListener("click", () => {
@@ -382,7 +488,8 @@
   });
 
   const resetDialog = document.getElementById("resetDialog");
-  document.getElementById("resetMessage").textContent = text.resetMessage(username);
+  document.getElementById("resetMessage").textContent =
+    text.resetMessage(username);
   document.getElementById("resetButton").addEventListener("click", () => {
     if (typeof resetDialog.showModal === "function") {
       resetDialog.showModal();

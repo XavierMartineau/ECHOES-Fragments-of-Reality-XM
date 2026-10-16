@@ -3,13 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="../../assets/svg/echoes-favicon.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../../assets/svg/echoes-favicon.svg"
+    />
     <title>ECHOES - Niveau 16</title>
     <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css" />
     <link rel="stylesheet" href="../../css/partie-2_niveau-11_à_20.css" />
     <link rel="stylesheet" href="../../css/responsive.css?v=t4" />
     <link rel="stylesheet" href="../../css/fonts.css" />
-</head>
+  </head>
   <body class="part-two-theme">
     <div class="background-glow" aria-hidden="true"></div>
     <div class="grid-overlay" aria-hidden="true"></div>
@@ -17,29 +21,54 @@
       <a class="brand" href="../../../index.html">ECHOES</a>
       <div class="level-meta">
         <span data-i18n="part">PARTIE 2 // FRACTURES</span>
-        <div class="level-progress" id="levelProgress" aria-label="Progression de la Partie 2"></div>
+        <div
+          class="level-progress"
+          id="levelProgress"
+          aria-label="Progression de la Partie 2"
+        ></div>
         <strong data-i18n="level">NIVEAU 16</strong>
       </div>
-      <button class="save-game-button" id="saveGameButton" type="button">SAUVEGARDER</button>
+      <button class="save-game-button" id="saveGameButton" type="button">
+        SAUVEGARDER
+      </button>
     </header>
     <main class="level-shell level-16-shell">
       <section class="level-intro" aria-labelledby="levelTitle">
-        <p class="eyebrow" data-i18n="eyebrow">Fragment 016 // Le cadenas des symboles</p>
+        <p class="eyebrow" data-i18n="eyebrow">
+          Fragment 016 // Le cadenas des symboles
+        </p>
         <h1 id="levelTitle" data-i18n="title">Le cadenas des symboles</h1>
-        <p class="level-description" data-i18n="description">Chaque symbole cache un chiffre. Déduis-les grâce aux indices, réponds aux quatre opérations, additionne les résultats : le dernier chiffre de la somme règle une molette du cadenas.</p>
+        <p class="level-description" data-i18n="description">
+          Chaque symbole cache un chiffre. Déduis-les grâce aux indices, réponds
+          aux quatre opérations, additionne les résultats : le dernier chiffre
+          de la somme règle une molette du cadenas.
+        </p>
         <div class="system-transmission" aria-live="polite">
-          <span class="system-label" data-i18n="systemLabel">ECHO://CADENAS</span>
-          <p id="systemMessage">SYSTEME:: CADENAS 016 VERROUILLE // QUATRE CHIFFRES REQUIS</p>
+          <span class="system-label" data-i18n="systemLabel"
+            >ECHO://CADENAS</span
+          >
+          <p id="systemMessage">
+            SYSTEME:: CADENAS 016 VERROUILLE // QUATRE CHIFFRES REQUIS
+          </p>
         </div>
       </section>
       <section class="puzzle-panel" aria-labelledby="puzzleTitle">
         <div class="panel-heading">
           <div>
-            <p class="panel-kicker" data-i18n="puzzleKicker">PUZZLE // DÉCHIFFRAGE</p>
-            <h2 id="puzzleTitle" data-i18n="puzzleTitle">Cadenas à quatre chiffres</h2>
+            <p class="panel-kicker" data-i18n="puzzleKicker">
+              PUZZLE // DÉCHIFFRAGE
+            </p>
+            <h2 id="puzzleTitle" data-i18n="puzzleTitle">
+              Cadenas à quatre chiffres
+            </h2>
           </div>
           <div class="logic-readouts">
-            <span class="progress-readout" id="progressReadout" aria-live="polite">0 / 4</span>
+            <span
+              class="progress-readout"
+              id="progressReadout"
+              aria-live="polite"
+              >0 / 4</span
+            >
           </div>
         </div>
         <div class="code-board" id="codeBoard">
@@ -55,8 +84,23 @@
           <p class="puzzle-status" id="puzzleStatus" aria-live="polite"></p>
         </div>
         <div class="puzzle-actions">
-          <button class="next-level-button" id="nextLevelButton" type="button" hidden data-i18n="next">CONTINUER VERS LE NIVEAU 17</button>
-          <button class="reset-button" id="resetButton" type="button" data-i18n="reset">Réinitialiser</button>
+          <button
+            class="next-level-button"
+            id="nextLevelButton"
+            type="button"
+            hidden
+            data-i18n="next"
+          >
+            CONTINUER VERS LE NIVEAU 17
+          </button>
+          <button
+            class="reset-button"
+            id="resetButton"
+            type="button"
+            data-i18n="reset"
+          >
+            Réinitialiser
+          </button>
         </div>
       </section>
     </main>
@@ -72,6 +116,8 @@
     <script src="../../js/dev-mode.js"></script>
     <script src="../../js/ambient-background.js"></script>
     <script src="../../js/partie-2_niveau-11_à_20.js"></script>
-    <script src="../../js/save-system.js"></script><script src="../../js/levels-config.js"></script><script src="../../js/level-guard.js"></script>
+    <script src="../../js/save-system.js"></script>
+    <script src="../../js/levels-config.js"></script>
+    <script src="../../js/level-guard.js"></script>
   </body>
 </html>

@@ -10,20 +10,37 @@ const sourceKeys = Array.from({ length: 6 }, (_, index) => {
   if (!match) throw new Error(`Invalid SVG root in ${file}`);
   const viewBox = match[1].match(/\bviewBox="([^"]+)"/)?.[1];
   if (!viewBox) throw new Error(`Missing viewBox in ${file}`);
-  const body = match[2].match(/<title\b[^>]*>[\s\S]*?<\/title>\s*<desc\b[^>]*>[\s\S]*?<\/desc>\s*<defs\b[^>]*>([\s\S]*?)<\/defs>\s*([\s\S]*)/);
-  if (!body) throw new Error(`Unable to split SVG artwork and definitions in ${file}`);
+  const body = match[2].match(
+    /<title\b[^>]*>[\s\S]*?<\/title>\s*<desc\b[^>]*>[\s\S]*?<\/desc>\s*<defs\b[^>]*>([\s\S]*?)<\/defs>\s*([\s\S]*)/,
+  );
+  if (!body)
+    throw new Error(`Unable to split SVG artwork and definitions in ${file}`);
   const prefix = `key07mini${number}-`;
   const namespaceIds = (markup) =>
     markup
       .replace(/\bid="([^"]+)"/g, (_, id) => `id="${prefix}${id}"`)
       .replace(/url\(#([^)]+)\)/g, (_, id) => `url(#${prefix}${id})`)
-      .replace(/\b(href|xlink:href)="#([^"]+)"/g, (_, attribute, id) => `${attribute}="#${prefix}${id}"`)
-      .replace(/\baria-labelledby="([^"]+)"/g, (_, ids) => `aria-labelledby="${ids.split(/\s+/).map((id) => prefix + id).join(" ")}"`);
+      .replace(
+        /\b(href|xlink:href)="#([^"]+)"/g,
+        (_, attribute, id) => `${attribute}="#${prefix}${id}"`,
+      )
+      .replace(
+        /\baria-labelledby="([^"]+)"/g,
+        (_, ids) =>
+          `aria-labelledby="${ids
+            .split(/\s+/)
+            .map((id) => prefix + id)
+            .join(" ")}"`,
+      );
   return {
     number,
     definitions: namespaceIds(body[1].trim()),
     content: namespaceIds(body[2].trim()),
-    titleDescription: namespaceIds(match[2].match(/<title\b[^>]*>[\s\S]*?<\/title>\s*<desc\b[^>]*>[\s\S]*?<\/desc>/)[0]),
+    titleDescription: namespaceIds(
+      match[2].match(
+        /<title\b[^>]*>[\s\S]*?<\/title>\s*<desc\b[^>]*>[\s\S]*?<\/desc>/,
+      )[0],
+    ),
     sheetContent: match[2].trim(),
     viewBox,
   };
@@ -55,7 +72,8 @@ const miniatureCenters = [
 const miniatures = sourceKeys
   .map(({ number, viewBox, titleDescription, definitions, content }, index) => {
     const [cx, cy, angle] = miniatureCenters[index];
-    const height = Number(viewBox.split(/\s+/)[3]) * 24 / Number(viewBox.split(/\s+/)[2]);
+    const height =
+      (Number(viewBox.split(/\s+/)[3]) * 24) / Number(viewBox.split(/\s+/)[2]);
     const x = cx - 12;
     const y = cy - height / 2;
     return `      <g class="k7-orbit-key key-${number}" transform="rotate(${angle} ${cx} ${cy})">
@@ -159,7 +177,9 @@ ${miniatures}
 </svg>
 `;
 
-const allKeys = [...sourceKeys.map((key) => ({ ...key, file: `key-${key.number}-usb.svg` }))];
+const allKeys = [
+  ...sourceKeys.map((key) => ({ ...key, file: `key-${key.number}-usb.svg` })),
+];
 allKeys.push({
   number: "07",
   file: "key-07-usb.svg",
@@ -185,10 +205,21 @@ ${allKeys
     const height = Number(viewBox.split(/\s+/)[3]);
     const keyContent =
       number === "07"
-        ? content.replace(/\bid="([^"]+)"/g, (_, id) => `id="sheet-${id}"`)
-          .replace(/url\(#([^)]+)\)/g, (_, id) => `url(#sheet-${id})`)
-          .replace(/\b(href|xlink:href)="#([^"]+)"/g, (_, attribute, id) => `${attribute}="#sheet-${id}"`)
-          .replace(/\baria-labelledby="([^"]+)"/g, (_, ids) => `aria-labelledby="${ids.split(/\s+/).map((id) => `sheet-${id}`).join(" ")}"`)
+        ? content
+            .replace(/\bid="([^"]+)"/g, (_, id) => `id="sheet-${id}"`)
+            .replace(/url\(#([^)]+)\)/g, (_, id) => `url(#sheet-${id})`)
+            .replace(
+              /\b(href|xlink:href)="#([^"]+)"/g,
+              (_, attribute, id) => `${attribute}="#sheet-${id}"`,
+            )
+            .replace(
+              /\baria-labelledby="([^"]+)"/g,
+              (_, ids) =>
+                `aria-labelledby="${ids
+                  .split(/\s+/)
+                  .map((id) => `sheet-${id}`)
+                  .join(" ")}"`,
+            )
         : sourceKeys[index].sheetContent;
     return `  <svg x="${x}" y="${y}" width="180" height="${height}" viewBox="${viewBox}" overflow="visible" role="img" aria-label="Clé de résonance ${number}">
 ${keyContent}

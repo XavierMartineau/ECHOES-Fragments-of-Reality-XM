@@ -64,7 +64,9 @@
 
 .boss02-panel {
   border-color: rgba(121, 247, 255, 0.32);
-  box-shadow: 0 0 30px rgba(36, 171, 201, 0.12), inset 0 0 30px rgba(121, 247, 255, 0.035);
+  box-shadow:
+    0 0 30px rgba(36, 171, 201, 0.12),
+    inset 0 0 30px rgba(121, 247, 255, 0.035);
 }
 
 .boss02-readouts {
@@ -147,7 +149,11 @@
   border: 1px solid rgba(121, 247, 255, 0.18);
   border-radius: 14px;
   background:
-    radial-gradient(ellipse at 77% 48%, rgba(24, 121, 154, 0.2), transparent 44%),
+    radial-gradient(
+      ellipse at 77% 48%,
+      rgba(24, 121, 154, 0.2),
+      transparent 44%
+    ),
     linear-gradient(135deg, rgba(5, 18, 35, 0.96), rgba(6, 10, 28, 0.98));
 }
 
@@ -161,8 +167,15 @@
   place-items: center;
   border: 1px solid rgba(121, 247, 255, 0.52);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(121, 247, 255, 0.24), rgba(16, 41, 75, 0.4) 56%, transparent 70%);
-  box-shadow: 0 0 35px rgba(121, 247, 255, 0.22), inset 0 0 25px rgba(121, 247, 255, 0.15);
+  background: radial-gradient(
+    circle,
+    rgba(121, 247, 255, 0.24),
+    rgba(16, 41, 75, 0.4) 56%,
+    transparent 70%
+  );
+  box-shadow:
+    0 0 35px rgba(121, 247, 255, 0.22),
+    inset 0 0 25px rgba(121, 247, 255, 0.15);
   color: #c7fbff;
   transform: translateY(-50%);
   animation: boss02-core-drift 6s ease-in-out infinite;
@@ -273,7 +286,11 @@
   color: #9bbbd0;
   cursor: pointer;
   font: 1.1rem var(--font-display, "Orbitron", sans-serif);
-  transition: background 140ms ease, border-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+  transition:
+    background 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    transform 140ms ease;
 }
 
 .boss02-cell:not(:disabled):hover,
@@ -292,7 +309,11 @@
 
 .boss02-cell.is-wall {
   border-color: rgba(166, 112, 255, 0.24);
-  background: repeating-linear-gradient(135deg, rgba(114, 76, 156, 0.2) 0 5px, rgba(8, 16, 35, 0.9) 5px 10px);
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(114, 76, 156, 0.2) 0 5px,
+    rgba(8, 16, 35, 0.9) 5px 10px
+  );
   color: #a77bd7;
   cursor: not-allowed;
 }
@@ -315,7 +336,9 @@
   border-color: #fff0a8;
   background: rgba(255, 189, 105, 0.24);
   color: #fff0a8;
-  box-shadow: 0 0 14px rgba(255, 189, 105, 0.46), inset 0 0 12px rgba(255, 189, 105, 0.22);
+  box-shadow:
+    0 0 14px rgba(255, 189, 105, 0.46),
+    inset 0 0 12px rgba(255, 189, 105, 0.22);
   animation: boss02-anchor-pulse 1.6s ease-in-out infinite;
 }
 
@@ -397,30 +420,53 @@
 }
 
 @keyframes boss02-core-drift {
-  50% { transform: translateY(calc(-50% - 9px)) rotate(8deg); }
+  50% {
+    transform: translateY(calc(-50% - 9px)) rotate(8deg);
+  }
 }
 
 @keyframes boss02-ring-turn {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes boss02-key-float {
-  50% { transform: translateY(-5px) rotate(7deg); }
+  50% {
+    transform: translateY(-5px) rotate(7deg);
+  }
 }
 
 @keyframes boss02-key-to-hud {
-  0% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0); }
-  55% { opacity: 1; transform: translate(-24vw, -8vh) scale(0.78) rotate(360deg); }
-  100% { opacity: 0; transform: translate(-52vw, -42vh) scale(0.35) rotate(720deg); }
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0);
+  }
+  55% {
+    opacity: 1;
+    transform: translate(-24vw, -8vh) scale(0.78) rotate(360deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-52vw, -42vh) scale(0.35) rotate(720deg);
+  }
 }
 
 @keyframes boss02-anchor-pulse {
-  50% { box-shadow: 0 0 20px rgba(255, 189, 105, 0.72), inset 0 0 14px rgba(255, 189, 105, 0.32); }
+  50% {
+    box-shadow:
+      0 0 20px rgba(255, 189, 105, 0.72),
+      inset 0 0 14px rgba(255, 189, 105, 0.32);
+  }
 }
 
 @keyframes boss02-hit {
-  25% { transform: translateX(-7px); }
-  75% { transform: translateX(7px); }
+  25% {
+    transform: translateX(-7px);
+  }
+  75% {
+    transform: translateX(7px);
+  }
 }
 
 @media (max-width: 700px) {
@@ -492,9 +538,18 @@
   }
 
   @keyframes boss02-key-to-hud {
-    0% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0); }
-    55% { opacity: 1; transform: translate(-20vw, -18vh) scale(0.75) rotate(360deg); }
-    100% { opacity: 0; transform: translate(-42vw, -45vh) scale(0.3) rotate(720deg); }
+    0% {
+      opacity: 1;
+      transform: translate(0, 0) scale(1) rotate(0);
+    }
+    55% {
+      opacity: 1;
+      transform: translate(-20vw, -18vh) scale(0.75) rotate(360deg);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-42vw, -45vh) scale(0.3) rotate(720deg);
+    }
   }
 }
 

@@ -5,40 +5,302 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>ECHOES - Signal perdu (404)</title>
-    <link rel="icon" type="image/svg+xml" href="docs/assets/svg/echoes-favicon.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="docs/assets/svg/echoes-favicon.svg"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
-      :root{--cyan:#73f3ff;--magenta:#ff4fd8;--violet:#8a5cff;--gold:#ffd166;--text:#edf8ff;--muted:#a9b7ce}
-      *{box-sizing:border-box}
-      html,body{margin:0;min-height:100%;background:#040816;color:var(--text)}
-      body{position:relative;display:grid;place-items:center;min-height:100vh;padding:24px;overflow:hidden;font-family:"Rajdhani",system-ui,sans-serif;background:radial-gradient(ellipse at 50% 30%,#14193a 0%,#070b1d 55%,#030510 100%)}
-      #stars{position:fixed;inset:0;width:100%;height:100%}
-      .grid{position:fixed;left:-50%;right:-50%;bottom:-10%;height:55%;background-image:linear-gradient(rgba(115,243,255,.22) 1px,transparent 1px),linear-gradient(90deg,rgba(115,243,255,.22) 1px,transparent 1px);background-size:60px 60px;transform:perspective(420px) rotateX(62deg);transform-origin:50% 100%;mask-image:linear-gradient(to top,#000 10%,transparent 85%);-webkit-mask-image:linear-gradient(to top,#000 10%,transparent 85%);animation:slide 4s linear infinite}
-      @keyframes slide{to{background-position:0 60px}}
-      .scan{position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(to bottom,transparent 0 3px,rgba(0,0,0,.18) 3px 4px);mix-blend-mode:multiply}
-      .glow{position:fixed;width:520px;height:520px;border-radius:50%;filter:blur(110px);opacity:.35;pointer-events:none}
-      .glow.a{top:-160px;left:-120px;background:var(--violet)}
-      .glow.b{bottom:-200px;right:-140px;background:var(--magenta)}
-      .card{position:relative;z-index:2;width:min(620px,100%);padding:44px 34px 38px;text-align:center;border:1px solid rgba(115,243,255,.35);border-radius:18px;background:linear-gradient(160deg,rgba(14,22,48,.78),rgba(7,10,26,.82));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 0 0 1px rgba(255,79,216,.12),0 30px 90px rgba(0,0,0,.6),0 0 70px rgba(115,243,255,.12);animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
-      .card::before,.card::after{content:"";position:absolute;width:26px;height:26px;border:2px solid var(--cyan);opacity:.8}
-      .card::before{top:-1px;left:-1px;border-right:0;border-bottom:0;border-top-left-radius:18px}
-      .card::after{bottom:-1px;right:-1px;border-left:0;border-top:0;border-bottom-right-radius:18px;border-color:var(--magenta)}
-      @keyframes rise{from{opacity:0;transform:translateY(24px) scale(.97)}}
-      .tag{display:inline-block;margin:0;padding:6px 14px;border:1px solid rgba(115,243,255,.4);border-radius:999px;color:var(--cyan);font:600 .62rem "Orbitron",sans-serif;letter-spacing:.3em;background:rgba(115,243,255,.07)}
-      .code{position:relative;margin:18px 0 6px;font:900 clamp(5rem,24vw,10rem)/1 "Orbitron",sans-serif;letter-spacing:.04em;background:linear-gradient(180deg,#fff 10%,var(--cyan) 55%,var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 28px rgba(115,243,255,.45))}
-      .code::before,.code::after{content:attr(data-t);position:absolute;inset:0;-webkit-background-clip:text;background-clip:text;color:transparent}
-      .code::before{background-image:linear-gradient(var(--magenta),var(--magenta));transform:translate(-3px,0);clip-path:inset(0 0 55% 0);animation:glitch 3.4s infinite steps(1)}
-      .code::after{background-image:linear-gradient(var(--cyan),var(--cyan));transform:translate(3px,0);clip-path:inset(55% 0 0 0);animation:glitch 3.4s infinite steps(1) reverse}
-      @keyframes glitch{0%,88%,100%{transform:translate(0)}90%{transform:translate(-6px,2px)}93%{transform:translate(5px,-2px)}96%{transform:translate(-3px,1px)}}
-      h1{margin:0 0 12px;color:var(--gold);font:700 clamp(.95rem,3.4vw,1.35rem) "Orbitron",sans-serif;letter-spacing:.22em;text-shadow:0 0 18px rgba(255,209,102,.4)}
-      .text{max-width:44ch;margin:0 auto 26px;color:var(--muted);font-size:1.15rem;line-height:1.55}
-      .log{margin:0 auto 28px;max-width:420px;padding:12px 16px;border-left:2px solid var(--magenta);background:rgba(255,79,216,.06);text-align:left;color:#c7d6ea;font:500 .72rem/1.8 "Orbitron",sans-serif;letter-spacing:.08em}
-      .log b{color:var(--cyan);font-weight:600}
-      .btn{position:relative;display:inline-block;padding:15px 34px;border:1px solid var(--cyan);border-radius:10px;color:#041018;background:linear-gradient(135deg,var(--cyan),#9a8cff);text-decoration:none;font:800 .8rem "Orbitron",sans-serif;letter-spacing:.2em;box-shadow:0 0 28px rgba(115,243,255,.45);transition:transform .2s,box-shadow .2s}
-      .btn:hover,.btn:focus-visible{transform:translateY(-3px);box-shadow:0 0 44px rgba(115,243,255,.8);outline:none}
-      footer{position:fixed;z-index:2;bottom:12px;left:0;right:0;text-align:center;color:rgba(169,183,206,.55);font:500 .6rem "Orbitron",sans-serif;letter-spacing:.3em}
-      @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+      :root {
+        --cyan: #73f3ff;
+        --magenta: #ff4fd8;
+        --violet: #8a5cff;
+        --gold: #ffd166;
+        --text: #edf8ff;
+        --muted: #a9b7ce;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: #040816;
+        color: var(--text);
+      }
+      body {
+        position: relative;
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        padding: 24px;
+        overflow: hidden;
+        font-family: "Rajdhani", system-ui, sans-serif;
+        background: radial-gradient(
+          ellipse at 50% 30%,
+          #14193a 0%,
+          #070b1d 55%,
+          #030510 100%
+        );
+      }
+      #stars {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .grid {
+        position: fixed;
+        left: -50%;
+        right: -50%;
+        bottom: -10%;
+        height: 55%;
+        background-image:
+          linear-gradient(rgba(115, 243, 255, 0.22) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(115, 243, 255, 0.22) 1px, transparent 1px);
+        background-size: 60px 60px;
+        transform: perspective(420px) rotateX(62deg);
+        transform-origin: 50% 100%;
+        mask-image: linear-gradient(to top, #000 10%, transparent 85%);
+        -webkit-mask-image: linear-gradient(to top, #000 10%, transparent 85%);
+        animation: slide 4s linear infinite;
+      }
+      @keyframes slide {
+        to {
+          background-position: 0 60px;
+        }
+      }
+      .scan {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background: repeating-linear-gradient(
+          to bottom,
+          transparent 0 3px,
+          rgba(0, 0, 0, 0.18) 3px 4px
+        );
+        mix-blend-mode: multiply;
+      }
+      .glow {
+        position: fixed;
+        width: 520px;
+        height: 520px;
+        border-radius: 50%;
+        filter: blur(110px);
+        opacity: 0.35;
+        pointer-events: none;
+      }
+      .glow.a {
+        top: -160px;
+        left: -120px;
+        background: var(--violet);
+      }
+      .glow.b {
+        bottom: -200px;
+        right: -140px;
+        background: var(--magenta);
+      }
+      .card {
+        position: relative;
+        z-index: 2;
+        width: min(620px, 100%);
+        padding: 44px 34px 38px;
+        text-align: center;
+        border: 1px solid rgba(115, 243, 255, 0.35);
+        border-radius: 18px;
+        background: linear-gradient(
+          160deg,
+          rgba(14, 22, 48, 0.78),
+          rgba(7, 10, 26, 0.82)
+        );
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        box-shadow:
+          0 0 0 1px rgba(255, 79, 216, 0.12),
+          0 30px 90px rgba(0, 0, 0, 0.6),
+          0 0 70px rgba(115, 243, 255, 0.12);
+        animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      }
+      .card::before,
+      .card::after {
+        content: "";
+        position: absolute;
+        width: 26px;
+        height: 26px;
+        border: 2px solid var(--cyan);
+        opacity: 0.8;
+      }
+      .card::before {
+        top: -1px;
+        left: -1px;
+        border-right: 0;
+        border-bottom: 0;
+        border-top-left-radius: 18px;
+      }
+      .card::after {
+        bottom: -1px;
+        right: -1px;
+        border-left: 0;
+        border-top: 0;
+        border-bottom-right-radius: 18px;
+        border-color: var(--magenta);
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(24px) scale(0.97);
+        }
+      }
+      .tag {
+        display: inline-block;
+        margin: 0;
+        padding: 6px 14px;
+        border: 1px solid rgba(115, 243, 255, 0.4);
+        border-radius: 999px;
+        color: var(--cyan);
+        font:
+          600 0.62rem "Orbitron",
+          sans-serif;
+        letter-spacing: 0.3em;
+        background: rgba(115, 243, 255, 0.07);
+      }
+      .code {
+        position: relative;
+        margin: 18px 0 6px;
+        font:
+          900 clamp(5rem, 24vw, 10rem)/1 "Orbitron",
+          sans-serif;
+        letter-spacing: 0.04em;
+        background: linear-gradient(
+          180deg,
+          #fff 10%,
+          var(--cyan) 55%,
+          var(--violet)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        filter: drop-shadow(0 0 28px rgba(115, 243, 255, 0.45));
+      }
+      .code::before,
+      .code::after {
+        content: attr(data-t);
+        position: absolute;
+        inset: 0;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .code::before {
+        background-image: linear-gradient(var(--magenta), var(--magenta));
+        transform: translate(-3px, 0);
+        clip-path: inset(0 0 55% 0);
+        animation: glitch 3.4s infinite steps(1);
+      }
+      .code::after {
+        background-image: linear-gradient(var(--cyan), var(--cyan));
+        transform: translate(3px, 0);
+        clip-path: inset(55% 0 0 0);
+        animation: glitch 3.4s infinite steps(1) reverse;
+      }
+      @keyframes glitch {
+        0%,
+        88%,
+        100% {
+          transform: translate(0);
+        }
+        90% {
+          transform: translate(-6px, 2px);
+        }
+        93% {
+          transform: translate(5px, -2px);
+        }
+        96% {
+          transform: translate(-3px, 1px);
+        }
+      }
+      h1 {
+        margin: 0 0 12px;
+        color: var(--gold);
+        font:
+          700 clamp(0.95rem, 3.4vw, 1.35rem) "Orbitron",
+          sans-serif;
+        letter-spacing: 0.22em;
+        text-shadow: 0 0 18px rgba(255, 209, 102, 0.4);
+      }
+      .text {
+        max-width: 44ch;
+        margin: 0 auto 26px;
+        color: var(--muted);
+        font-size: 1.15rem;
+        line-height: 1.55;
+      }
+      .log {
+        margin: 0 auto 28px;
+        max-width: 420px;
+        padding: 12px 16px;
+        border-left: 2px solid var(--magenta);
+        background: rgba(255, 79, 216, 0.06);
+        text-align: left;
+        color: #c7d6ea;
+        font:
+          500 0.72rem/1.8 "Orbitron",
+          sans-serif;
+        letter-spacing: 0.08em;
+      }
+      .log b {
+        color: var(--cyan);
+        font-weight: 600;
+      }
+      .btn {
+        position: relative;
+        display: inline-block;
+        padding: 15px 34px;
+        border: 1px solid var(--cyan);
+        border-radius: 10px;
+        color: #041018;
+        background: linear-gradient(135deg, var(--cyan), #9a8cff);
+        text-decoration: none;
+        font:
+          800 0.8rem "Orbitron",
+          sans-serif;
+        letter-spacing: 0.2em;
+        box-shadow: 0 0 28px rgba(115, 243, 255, 0.45);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .btn:hover,
+      .btn:focus-visible {
+        transform: translateY(-3px);
+        box-shadow: 0 0 44px rgba(115, 243, 255, 0.8);
+        outline: none;
+      }
+      footer {
+        position: fixed;
+        z-index: 2;
+        bottom: 12px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: rgba(169, 183, 206, 0.55);
+        font:
+          500 0.6rem "Orbitron",
+          sans-serif;
+        letter-spacing: 0.3em;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
     </style>
   </head>
   <body>
@@ -51,40 +313,86 @@
       <p class="tag" id="tag">ECHO://SIGNAL_PERDU</p>
       <p class="code" data-t="404">404</p>
       <h1 id="title">FRAGMENT INTROUVABLE</h1>
-      <p class="text" id="text">Cette page n'existe pas ou a été effacée de la réalité. Retourne à la base pour reprendre ta route.</p>
-      <p class="log" id="log"><b>&gt; SYSTEME::</b> ROUTE INCONNUE<br /><b>&gt; CHEMIN::</b> <span id="path"></span><br /><b>&gt; STATUT::</b> FRACTURE DETECTEE</p>
+      <p class="text" id="text">
+        Cette page n'existe pas ou a été effacée de la réalité. Retourne à la
+        base pour reprendre ta route.
+      </p>
+      <p class="log" id="log">
+        <b>&gt; SYSTEME::</b> ROUTE INCONNUE<br /><b>&gt; CHEMIN::</b>
+        <span id="path"></span><br /><b>&gt; STATUT::</b> FRACTURE DETECTEE
+      </p>
       <a class="btn" id="home" href="/">RETOUR À L'ACCUEIL</a>
     </main>
     <footer id="foot">ÉCHO // FRACTURES ACTIVES</footer>
     <script>
       (function () {
         var seg = location.pathname.split("/")[1];
-        var base = location.hostname.indexOf("github.io") !== -1 && seg ? "/" + seg + "/" : "/";
+        var base =
+          location.hostname.indexOf("github.io") !== -1 && seg
+            ? "/" + seg + "/"
+            : "/";
         document.getElementById("home").href = base;
-        document.getElementById("path").textContent = location.pathname.slice(0, 40);
+        document.getElementById("path").textContent = location.pathname.slice(
+          0,
+          40,
+        );
         var lang = "fr";
-        try { lang = localStorage.getItem("echoes-language") || "fr"; } catch (e) {}
+        try {
+          lang = localStorage.getItem("echoes-language") || "fr";
+        } catch (e) {}
         if (lang === "en") {
           document.documentElement.lang = "en";
           document.title = "ECHOES - Signal lost (404)";
-          var t = { tag: "ECHO://SIGNAL_LOST", title: "FRAGMENT NOT FOUND", text: "This page does not exist or was erased from reality. Head back to base and resume your route.", home: "BACK TO HOME", foot: "ECHO // ACTIVE FRACTURES" };
+          var t = {
+            tag: "ECHO://SIGNAL_LOST",
+            title: "FRAGMENT NOT FOUND",
+            text: "This page does not exist or was erased from reality. Head back to base and resume your route.",
+            home: "BACK TO HOME",
+            foot: "ECHO // ACTIVE FRACTURES",
+          };
           for (var k in t) document.getElementById(k).textContent = t[k];
-          document.getElementById("log").innerHTML = "<b>&gt; SYSTEM::</b> UNKNOWN ROUTE<br /><b>&gt; PATH::</b> <span id=\"path\"></span><br /><b>&gt; STATUS::</b> FRACTURE DETECTED";
-          document.getElementById("path").textContent = location.pathname.slice(0, 40);
+          document.getElementById("log").innerHTML =
+            '<b>&gt; SYSTEM::</b> UNKNOWN ROUTE<br /><b>&gt; PATH::</b> <span id="path"></span><br /><b>&gt; STATUS::</b> FRACTURE DETECTED';
+          document.getElementById("path").textContent = location.pathname.slice(
+            0,
+            40,
+          );
         }
-        var c = document.getElementById("stars"), x = c.getContext("2d"), stars = [], w, h;
-        function size() { w = c.width = innerWidth; h = c.height = innerHeight; stars = []; for (var i = 0; i < Math.min(160, w * h / 9000); i++) stars.push({ x: Math.random() * w, y: Math.random() * h, z: Math.random() * 1.6 + .3, p: Math.random() * 6 }); }
+        var c = document.getElementById("stars"),
+          x = c.getContext("2d"),
+          stars = [],
+          w,
+          h;
+        function size() {
+          w = c.width = innerWidth;
+          h = c.height = innerHeight;
+          stars = [];
+          for (var i = 0; i < Math.min(160, (w * h) / 9000); i++)
+            stars.push({
+              x: Math.random() * w,
+              y: Math.random() * h,
+              z: Math.random() * 1.6 + 0.3,
+              p: Math.random() * 6,
+            });
+        }
         function draw(t) {
           x.clearRect(0, 0, w, h);
           stars.forEach(function (s) {
-            s.y += s.z * .12; if (s.y > h) { s.y = 0; s.x = Math.random() * w; }
-            x.globalAlpha = .35 + .65 * Math.abs(Math.sin(t / 1100 + s.p));
+            s.y += s.z * 0.12;
+            if (s.y > h) {
+              s.y = 0;
+              s.x = Math.random() * w;
+            }
+            x.globalAlpha = 0.35 + 0.65 * Math.abs(Math.sin(t / 1100 + s.p));
             x.fillStyle = s.z > 1.5 ? "#ff9ae8" : "#bff8ff";
             x.fillRect(s.x, s.y, s.z, s.z);
           });
-          if (!matchMedia("(prefers-reduced-motion: reduce)").matches) requestAnimationFrame(draw);
+          if (!matchMedia("(prefers-reduced-motion: reduce)").matches)
+            requestAnimationFrame(draw);
         }
-        addEventListener("resize", size); size(); requestAnimationFrame(draw);
+        addEventListener("resize", size);
+        size();
+        requestAnimationFrame(draw);
       })();
     </script>
   </body>

@@ -18,9 +18,20 @@
   padding: 14px 16px;
   border: 1px solid rgba(121, 247, 255, 0.22);
   border-radius: 10px;
-  background: linear-gradient(145deg, rgba(8, 18, 35, 0.92), rgba(4, 8, 19, 0.9));
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2), inset 0 0 24px rgba(121, 247, 255, 0.025);
-  transition: width 350ms ease, max-height 350ms ease, padding 350ms ease, border-width 350ms ease, opacity 250ms ease;
+  background: linear-gradient(
+    145deg,
+    rgba(8, 18, 35, 0.92),
+    rgba(4, 8, 19, 0.9)
+  );
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.2),
+    inset 0 0 24px rgba(121, 247, 255, 0.025);
+  transition:
+    width 350ms ease,
+    max-height 350ms ease,
+    padding 350ms ease,
+    border-width 350ms ease,
+    opacity 250ms ease;
 }
 
 .key-collection-dock.is-collapsed .key-collection {
@@ -81,7 +92,10 @@
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.018);
   color: #8390a6;
-  transition: border-color 350ms ease, background-color 350ms ease, color 350ms ease;
+  transition:
+    border-color 350ms ease,
+    background-color 350ms ease,
+    color 350ms ease;
 }
 
 .key-collection-image {
@@ -102,7 +116,9 @@
   object-fit: contain;
   filter: grayscale(1) brightness(0.72) opacity(0.55);
   transform: translate(-50%, -50%) rotate(90deg);
-  transition: filter 500ms ease, transform 500ms ease;
+  transition:
+    filter 500ms ease,
+    transform 500ms ease;
 }
 
 .key-collection-name {

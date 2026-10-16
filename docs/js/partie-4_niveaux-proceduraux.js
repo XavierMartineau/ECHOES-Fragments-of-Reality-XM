@@ -9,15 +9,23 @@
   const level = Number(document.body.dataset.level);
   if (!Number.isInteger(level) || level < 32 || level > 40) return;
 
-  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const language =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const translations = {
     fr: {
       part: "PARTIE 4 // RÉSONANCE",
-      eyebrow: (n) => `Fragment ${String(n).padStart(3, "0")} // Labyrinthe instable`,
+      eyebrow: (n) =>
+        `Fragment ${String(n).padStart(3, "0")} // Labyrinthe instable`,
       titles: [
-        "Le labyrinthe fractal", "La chambre des brumes", "Le couloir de glace",
-        "Les sentinelles", "Les dalles fragiles", "La porte résonnante",
-        "Les failles mouvantes", "Les doubles portails", "La convergence",
+        "Le labyrinthe fractal",
+        "La chambre des brumes",
+        "Le couloir de glace",
+        "Les sentinelles",
+        "Les dalles fragiles",
+        "La porte résonnante",
+        "Les failles mouvantes",
+        "Les doubles portails",
+        "La convergence",
       ],
       descriptions: [
         "Une carte fractale se recompose à chaque tentative. Explore les portails et récupère les fragments.",
@@ -30,7 +38,8 @@
         "Deux paires de portails relient des zones éloignées du labyrinthe.",
         "Les mécaniques de la partie convergent dans une carte dense et imprévisible.",
       ],
-      rules: "Déplace-toi avec les flèches ou ZQSD. Récupère les fragments et rejoins la sortie. Chaque nouvelle tentative génère un autre labyrinthe.",
+      rules:
+        "Déplace-toi avec les flèches ou ZQSD. Récupère les fragments et rejoins la sortie. Chaque nouvelle tentative génère un autre labyrinthe.",
       reset: "RÉGÉNÉRER",
       start: "LANCER LA CARTE",
       saveError: "Impossible de sauvegarder la progression.",
@@ -72,9 +81,15 @@
       part: "PART 4 // RESONANCE",
       eyebrow: (n) => `Fragment ${String(n).padStart(3, "0")} // Unstable maze`,
       titles: [
-        "The Fractal Maze", "The Fog Chamber", "The Ice Corridor",
-        "The Sentinels", "The Fragile Tiles", "The Resonant Gate",
-        "The Shifting Faults", "The Twin Portals", "The Convergence",
+        "The Fractal Maze",
+        "The Fog Chamber",
+        "The Ice Corridor",
+        "The Sentinels",
+        "The Fragile Tiles",
+        "The Resonant Gate",
+        "The Shifting Faults",
+        "The Twin Portals",
+        "The Convergence",
       ],
       descriptions: [
         "A fractal map rebuilds itself with every attempt. Explore the portals and collect the fragments.",
@@ -87,7 +102,8 @@
         "Two pairs of portals connect distant parts of the maze.",
         "The part's mechanics converge in a dense, unpredictable map.",
       ],
-      rules: "Move with the arrow keys or WASD. Collect the fragments and reach the exit. Every new attempt generates another maze.",
+      rules:
+        "Move with the arrow keys or WASD. Collect the fragments and reach the exit. Every new attempt generates another maze.",
       reset: "REGENERATE",
       start: "START MAP",
       saveError: "Unable to save progress.",
@@ -141,7 +157,9 @@
   const shardCount = Math.min(2 + Math.floor(levelIndex / 2), 5);
   const currentUser = window.EchoesSave?.getCurrentUser?.() || "guest";
   const progressKey = `echoes-completed-levels-${encodeURIComponent(currentUser)}`;
-  const completed = new Set(JSON.parse(localStorage.getItem(progressKey) || "[]"));
+  const completed = new Set(
+    JSON.parse(localStorage.getItem(progressKey) || "[]"),
+  );
   let map;
   let route;
   let player;
@@ -161,7 +179,9 @@
   let solved;
   let active;
 
-  const setText = (id, value) => { $(id).textContent = value; };
+  const setText = (id, value) => {
+    $(id).textContent = value;
+  };
   document.documentElement.lang = language;
   document.title = `${language === "en" ? "Level" : "Niveau"} ${level} - ECHOES`;
   setText("partLabel", translations.part);
@@ -174,10 +194,16 @@
   setText("puzzleTitle", title);
   setText("footerLabel", translations.footer);
   setText("footerProgress", translations.footerProgress(level));
-  board.setAttribute("aria-label", language === "en" ? "Generated maze" : "Labyrinthe généré");
+  board.setAttribute(
+    "aria-label",
+    language === "en" ? "Generated maze" : "Labyrinthe généré",
+  );
   setText("startPuzzleButton", translations.start);
   setText("resetButton", translations.reset);
-  setText("nextLevelButton", level < 40 ? translations.next : translations.replay);
+  setText(
+    "nextLevelButton",
+    level < 40 ? translations.next : translations.replay,
+  );
   const legendIcons = [
     ["maze-wall", "maze-shard", "maze-portal", "maze-hazard"],
     ["maze-wall", "maze-shard", "maze-fog", "maze-hazard"],
@@ -193,10 +219,14 @@
     const label = translations.legend[levelIndex][index];
     item.hidden = !label;
     item.querySelector("span").textContent = label;
-    item.querySelector("i").className = `maze-legend ${legendIcons[levelIndex][index]}`;
+    item.querySelector("i").className =
+      `maze-legend ${legendIcons[levelIndex][index]}`;
   });
   document.querySelectorAll("[data-direction]").forEach((button) => {
-    button.setAttribute("aria-label", translations.controls[Number(button.dataset.direction)]);
+    button.setAttribute(
+      "aria-label",
+      translations.controls[Number(button.dataset.direction)],
+    );
   });
 
   const randomIndex = (length) => Math.floor(Math.random() * length);
@@ -204,9 +234,10 @@
   const sameCell = (a, b) => a && b && a.x === b.x && a.y === b.y;
   const inside = (x, y) => x > 0 && y > 0 && x < size - 1 && y < size - 1;
   const walkable = (x, y) => inside(x, y) && map[y][x] === 0;
-  const neighbours = ({ x, y }) => directions
-    .map(({ x: dx, y: dy }) => ({ x: x + dx, y: y + dy }))
-    .filter(({ x: nx, y: ny }) => walkable(nx, ny));
+  const neighbours = ({ x, y }) =>
+    directions
+      .map(({ x: dx, y: dy }) => ({ x: x + dx, y: y + dy }))
+      .filter(({ x: nx, y: ny }) => walkable(nx, ny));
 
   const generateMaze = () => {
     map = Array.from({ length: size }, () => Array(size).fill(1));
@@ -215,7 +246,12 @@
     while (stack.length) {
       const current = stack[stack.length - 1];
       const options = directions
-        .map(({ x: dx, y: dy }) => ({ x: current.x + dx * 2, y: current.y + dy * 2, dx, dy }))
+        .map(({ x: dx, y: dy }) => ({
+          x: current.x + dx * 2,
+          y: current.y + dy * 2,
+          dx,
+          dy,
+        }))
         .filter(({ x, y }) => inside(x, y) && map[y][x] === 1);
       if (!options.length) {
         stack.pop();
@@ -279,7 +315,10 @@
 
   const configureFeatures = () => {
     shards = takeRandomCells(
-      route.slice(Math.max(2, Math.floor(route.length * 0.14)), route.length - 2),
+      route.slice(
+        Math.max(2, Math.floor(route.length * 0.14)),
+        route.length - 2,
+      ),
       shardCount,
     );
     keyCell = level === 37 ? route[Math.floor(route.length * 0.3)] : null;
@@ -295,7 +334,9 @@
     if ([32, 38, 39, 40].includes(level)) {
       const pairCount = level >= 39 ? 2 : 1;
       portals = randomOpenCells(pairCount * 2, [...reserved, ...portals]);
-      portals.forEach((portal, index) => { portal.pair = index ^ 1; });
+      portals.forEach((portal, index) => {
+        portal.pair = index ^ 1;
+      });
       reserved.push(...portals);
     }
     if ([34, 40].includes(level)) {
@@ -316,12 +357,16 @@
     }
     if ([36, 40].includes(level)) {
       collapse = randomOpenCells(level === 40 ? 10 : 12, reserved);
-      collapse.forEach((cell) => { cell.timer = 0; });
+      collapse.forEach((cell) => {
+        cell.timer = 0;
+      });
       reserved.push(...collapse);
     }
     if ([38, 40].includes(level)) {
       unstable = randomOpenCells(level === 40 ? 8 : 6, reserved);
-      unstable.forEach((cell) => { cell.open = true; });
+      unstable.forEach((cell) => {
+        cell.open = true;
+      });
     }
   };
 
@@ -329,7 +374,10 @@
     if (!discovered) discovered = new Set();
     for (let y = player.y - 3; y <= player.y + 3; y += 1) {
       for (let x = player.x - 3; x <= player.x + 3; x += 1) {
-        if (inside(x, y) && Math.abs(player.x - x) + Math.abs(player.y - y) <= 4) {
+        if (
+          inside(x, y) &&
+          Math.abs(player.x - x) + Math.abs(player.y - y) <= 4
+        ) {
           discovered.add(cellKey({ x, y }));
         }
       }
@@ -337,19 +385,33 @@
   };
 
   const updateReadouts = () => {
-    setText("shardReadout", translations.shards(shards.filter((cell) => cell.collected).length, shardCount));
+    setText(
+      "shardReadout",
+      translations.shards(
+        shards.filter((cell) => cell.collected).length,
+        shardCount,
+      ),
+    );
     setText("energyReadout", translations.lives(energy));
   };
 
   const render = () => {
-    const fragmentCells = new Set(shards.filter((cell) => !cell.collected).map(cellKey));
+    const fragmentCells = new Set(
+      shards.filter((cell) => !cell.collected).map(cellKey),
+    );
     const portalCells = new Map(portals.map((cell) => [cellKey(cell), cell]));
     const hazardCells = new Set(hazards.map(cellKey));
     const guardCells = new Set(guards.map(cellKey));
     const iceCells = new Set(ice.map(cellKey));
-    const fragileCells = new Set(collapse.filter((cell) => cell.timer >= 0).map(cellKey));
-    const collapsedCells = new Set(collapse.filter((cell) => cell.timer < 0).map(cellKey));
-    const unstableCells = new Map(unstable.map((cell) => [cellKey(cell), cell]));
+    const fragileCells = new Set(
+      collapse.filter((cell) => cell.timer >= 0).map(cellKey),
+    );
+    const collapsedCells = new Set(
+      collapse.filter((cell) => cell.timer < 0).map(cellKey),
+    );
+    const unstableCells = new Map(
+      unstable.map((cell) => [cellKey(cell), cell]),
+    );
     const cells = document.createDocumentFragment();
 
     for (let y = 0; y < size; y += 1) {
@@ -361,7 +423,8 @@
         button.type = "button";
         button.className = "maze-cell";
         button.tabIndex = -1;
-        button.disabled = isFogged || map[y][x] === 1 || collapsedCells.has(key);
+        button.disabled =
+          isFogged || map[y][x] === 1 || collapsedCells.has(key);
         if (map[y][x] === 1) button.classList.add("is-wall");
         if (isFogged) button.classList.add("is-fogged");
         if (cellKey(start) === key) button.classList.add("is-start");
@@ -373,13 +436,16 @@
         if (iceCells.has(key)) button.classList.add("is-ice");
         if (fragileCells.has(key)) button.classList.add("has-fragile");
         if (collapsedCells.has(key)) button.classList.add("is-collapsed");
-        if (keyCell && sameCell(keyCell, cell) && !hasKey) button.classList.add("has-key");
+        if (keyCell && sameCell(keyCell, cell) && !hasKey)
+          button.classList.add("has-key");
         if (gateCell && sameCell(gateCell, cell)) {
           button.classList.add(hasKey ? "gate-open" : "gate-closed");
           button.disabled = !hasKey;
         }
         if (unstableCells.has(key)) {
-          button.classList.add(unstableCells.get(key).open ? "is-stable" : "is-unstable");
+          button.classList.add(
+            unstableCells.get(key).open ? "is-stable" : "is-unstable",
+          );
           if (!unstableCells.get(key).open) button.disabled = true;
         }
         if (player && sameCell(player, cell)) {
@@ -390,7 +456,10 @@
           button.setAttribute("aria-label", translations.exit);
           button.textContent = "✦";
         } else if (fragmentCells.has(key)) {
-          button.setAttribute("aria-label", language === "en" ? "Fragment" : "Fragment");
+          button.setAttribute(
+            "aria-label",
+            language === "en" ? "Fragment" : "Fragment",
+          );
           button.textContent = "◆";
         } else if (portalCells.has(key)) {
           button.setAttribute("aria-label", translations.portal);
@@ -405,13 +474,22 @@
           button.setAttribute("aria-label", translations.key);
           button.textContent = "⚿";
         } else if (iceCells.has(key)) {
-          button.setAttribute("aria-label", language === "en" ? "Ice" : "Glace");
+          button.setAttribute(
+            "aria-label",
+            language === "en" ? "Ice" : "Glace",
+          );
           button.textContent = "❄";
         } else if (fragileCells.has(key)) {
-          button.setAttribute("aria-label", language === "en" ? "Fragile tile" : "Dalle fragile");
+          button.setAttribute(
+            "aria-label",
+            language === "en" ? "Fragile tile" : "Dalle fragile",
+          );
           button.textContent = "▱";
         } else if (cellKey(start) === key) {
-          button.setAttribute("aria-label", language === "en" ? "Start" : "Départ");
+          button.setAttribute(
+            "aria-label",
+            language === "en" ? "Start" : "Départ",
+          );
           button.textContent = "⌂";
         } else {
           button.setAttribute("aria-label", isFogged ? "" : " ");
@@ -447,9 +525,12 @@
   const moveGuard = (guard) => {
     if (moves < guard.nextMove) return;
     guard.nextMove = moves + 3;
-    const available = neighbours(guard).filter((cell) =>
-      !sameCell(cell, start) && !sameCell(cell, exit) &&
-      !route.some((routeCell) => sameCell(routeCell, cell)));
+    const available = neighbours(guard).filter(
+      (cell) =>
+        !sameCell(cell, start) &&
+        !sameCell(cell, exit) &&
+        !route.some((routeCell) => sameCell(routeCell, cell)),
+    );
     if (!available.length) return;
     const next = available[randomIndex(available.length)];
     guard.x = next.x;
@@ -457,7 +538,9 @@
   };
 
   const settleOnCell = () => {
-    const shard = shards.find((cell) => sameCell(cell, player) && !cell.collected);
+    const shard = shards.find(
+      (cell) => sameCell(cell, player) && !cell.collected,
+    );
     if (shard) shard.collected = true;
     if (keyCell && sameCell(keyCell, player)) {
       hasKey = true;
@@ -476,7 +559,11 @@
       if (loseEnergy()) return;
     }
     if (gateCell && sameCell(gateCell, player) && !hasKey) {
-      player = { ...route[Math.max(0, route.findIndex((cell) => sameCell(cell, gateCell)) - 1)] };
+      player = {
+        ...route[
+          Math.max(0, route.findIndex((cell) => sameCell(cell, gateCell)) - 1)
+        ],
+      };
       setText("puzzleStatus", translations.gateLocked);
       $("puzzleStatus").className = "puzzle-status error";
     }
@@ -515,7 +602,11 @@
 
     moves += 1;
     player = { ...cell };
-    if (level === 34 && ice.some((tile) => sameCell(tile, player)) && direction) {
+    if (
+      level === 34 &&
+      ice.some((tile) => sameCell(tile, player)) &&
+      direction
+    ) {
       let slides = 0;
       while (slides < size && ice.some((tile) => sameCell(tile, player))) {
         const next = { x: player.x + direction.x, y: player.y + direction.y };
@@ -527,7 +618,10 @@
     }
 
     if (level === 38 || level === 40) {
-      if (moves % 4 === 0) unstable.forEach((tile) => { tile.open = !tile.open; });
+      if (moves % 4 === 0)
+        unstable.forEach((tile) => {
+          tile.open = !tile.open;
+        });
     }
     guards.forEach(moveGuard);
     collapse.forEach((tile) => {
@@ -543,14 +637,25 @@
     active = false;
     solved = true;
     completed.add(level);
-    localStorage.setItem(progressKey, JSON.stringify([...completed].sort((a, b) => a - b)));
-    const saved = currentUser === "guest" || Boolean(window.EchoesSave?.saveProgress({
-      currentPage: `level-${level + 1}`,
-      currentLevel: level + 1,
-      completedLevels: [...completed].sort((a, b) => a - b),
-    }));
-    setText("puzzleStatus", saved ? translations.solved : translations.saveError);
-    $("puzzleStatus").className = `puzzle-status ${saved ? "success" : "error"}`;
+    localStorage.setItem(
+      progressKey,
+      JSON.stringify([...completed].sort((a, b) => a - b)),
+    );
+    const saved =
+      currentUser === "guest" ||
+      Boolean(
+        window.EchoesSave?.saveProgress({
+          currentPage: `level-${level + 1}`,
+          currentLevel: level + 1,
+          completedLevels: [...completed].sort((a, b) => a - b),
+        }),
+      );
+    setText(
+      "puzzleStatus",
+      saved ? translations.solved : translations.saveError,
+    );
+    $("puzzleStatus").className =
+      `puzzle-status ${saved ? "success" : "error"}`;
     setText("systemMessage", translations.complete(level));
     $("puzzlePanel").classList.add("is-solved");
     $("startPuzzleButton").hidden = true;
@@ -616,24 +721,39 @@
   $("resetButton").addEventListener("click", startNewMap);
   $("nextLevelButton").addEventListener("click", () => {
     if (!solved) return;
-    window.location.href = level < 40 ? `niveau-${level + 1}.html` : "niveau-31.html";
+    window.location.href =
+      level < 40 ? `niveau-${level + 1}.html` : "niveau-31.html";
   });
   document.querySelectorAll("[data-direction]").forEach((button) => {
     const direction = directions[Number(button.dataset.direction)];
     button.addEventListener("click", () => {
-      if (player) moveTo({ x: player.x + direction.x, y: player.y + direction.y }, direction);
+      if (player)
+        moveTo(
+          { x: player.x + direction.x, y: player.y + direction.y },
+          direction,
+        );
     });
   });
   document.addEventListener("keydown", (event) => {
     const key = event.key.toLowerCase();
-    const direction = directions.find((item) => item.key.toLowerCase() === key) ||
-      (key === "w" || key === "z" ? directions[0] :
-        key === "a" || key === "q" ? directions[1] :
-          key === "s" ? directions[2] :
-            key === "d" ? directions[3] : null);
+    const direction =
+      directions.find((item) => item.key.toLowerCase() === key) ||
+      (key === "w" || key === "z"
+        ? directions[0]
+        : key === "a" || key === "q"
+          ? directions[1]
+          : key === "s"
+            ? directions[2]
+            : key === "d"
+              ? directions[3]
+              : null);
     if (!direction) return;
     event.preventDefault();
-    if (player) moveTo({ x: player.x + direction.x, y: player.y + direction.y }, direction);
+    if (player)
+      moveTo(
+        { x: player.x + direction.x, y: player.y + direction.y },
+        direction,
+      );
   });
 
   renderProgress();

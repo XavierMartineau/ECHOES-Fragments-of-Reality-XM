@@ -9,14 +9,17 @@
     document.documentElement.lang = "en";
     const legacyTranslations = window.translations?.en?.pageI18n;
     if (!legacyTranslations) {
-      console.error("English page translations are missing from translations.js.");
+      console.error(
+        "English page translations are missing from translations.js.",
+      );
       return;
     }
     const { exact } = legacyTranslations;
     const rules = legacyTranslations.rules(tr);
 
     // Normalise les espaces et apostrophes avant de chercher une traduction.
-    const normalize = (value) => value.replace(/\s+/g, " ").replace(/[’‘]/g, "'").trim();
+    const normalize = (value) =>
+      value.replace(/\s+/g, " ").replace(/[’‘]/g, "'").trim();
     const exactNormalized = new Map(
       Object.entries(exact).map(([key, value]) => [normalize(key), value]),
     );
@@ -75,11 +78,15 @@
       }
       if (root.nodeType !== 1) return;
       translateElement(root);
-      const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
+      const walker = document.createTreeWalker(
+        root,
+        NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT,
+      );
       let node = walker.nextNode();
       while (node) {
         if (node.nodeType === 3) {
-          if (!["SCRIPT", "STYLE"].includes(node.parentNode?.tagName)) translateText(node);
+          if (!["SCRIPT", "STYLE"].includes(node.parentNode?.tagName))
+            translateText(node);
         } else translateElement(node);
         node = walker.nextNode();
       }
@@ -95,10 +102,13 @@
       observer.disconnect();
       mutations.forEach((mutation) => {
         if (mutation.type === "characterData") translateText(mutation.target);
-        else if (mutation.type === "attributes") translateElement(mutation.target);
+        else if (mutation.type === "attributes")
+          translateElement(mutation.target);
         else mutation.addedNodes.forEach(walk);
         if (mutation.type === "childList" && mutation.target.nodeType === 1) {
-          mutation.target.childNodes.forEach((child) => child.nodeType === 3 && translateText(child));
+          mutation.target.childNodes.forEach(
+            (child) => child.nodeType === 3 && translateText(child),
+          );
         }
       });
       observe();
@@ -119,19 +129,28 @@
       run();
       observe();
     };
-    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
+    if (document.readyState === "loading")
+      document.addEventListener("DOMContentLoaded", start);
     else start();
-    }
+  }
 
   if (window.translations?.en?.pageI18n) {
     initializeLegacyPageI18n();
   } else {
     const translationScript = document.createElement("script");
     translationScript.src = new URL("translations.js", sourceScript.src).href;
-    translationScript.addEventListener("load", initializeLegacyPageI18n, { once: true });
-    translationScript.addEventListener("error", () => {
-      console.error("Failed to load translations.js for English page translations.");
-    }, { once: true });
+    translationScript.addEventListener("load", initializeLegacyPageI18n, {
+      once: true,
+    });
+    translationScript.addEventListener(
+      "error",
+      () => {
+        console.error(
+          "Failed to load translations.js for English page translations.",
+        );
+      },
+      { once: true },
+    );
     document.head.appendChild(translationScript);
   }
 })();

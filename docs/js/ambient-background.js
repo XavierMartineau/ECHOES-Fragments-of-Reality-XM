@@ -27,7 +27,8 @@
     ["#ffd24d", "#fff6c8"],
     ["#ff79d1", "#79a8ff"],
   ];
-  let [accent, secondary] = palettes[Math.max(0, Math.min(part, palettes.length - 1))];
+  let [accent, secondary] =
+    palettes[Math.max(0, Math.min(part, palettes.length - 1))];
   if (isBoss) [accent, secondary] = ["#ff456d", "#8d1dff"];
   if (isSecondBoss) [accent, secondary] = ["#45e5d2", "#ffbd69"];
   if (isThirdBoss) [accent, secondary] = ["#ff4fd8", "#ffd24d"];
@@ -48,7 +49,10 @@
     const english = localStorage.getItem("echoes-language") === "en";
     const keyStylesheet = document.createElement("link");
     keyStylesheet.rel = "stylesheet";
-    keyStylesheet.href = new URL("../css/key-collection-ui.css?v=1", document.currentScript.src).href;
+    keyStylesheet.href = new URL(
+      "../css/key-collection-ui.css?v=1",
+      document.currentScript.src,
+    ).href;
     document.head.appendChild(keyStylesheet);
     const dock = document.createElement("aside");
     dock.className = "key-collection-dock";
@@ -64,7 +68,10 @@
 
     const list = document.createElement("ol");
     list.className = "key-collection-list";
-    list.setAttribute("aria-label", english ? "Resonance keys" : "Clés de résonance");
+    list.setAttribute(
+      "aria-label",
+      english ? "Resonance keys" : "Clés de résonance",
+    );
     const keyNames = english
       ? ["Signal", "Fracture", "Eclipse", "Recycler", "Shield", "Master"]
       : ["Signal", "Fracture", "Éclipse", "Recycleur", "Bouclier", "Maîtresse"];
@@ -110,13 +117,20 @@
       toggle.setAttribute(
         "aria-label",
         english
-          ? isOpen ? "Open keys panel" : "Close keys panel"
-          : isOpen ? "Ouvrir l’interface des clés" : "Fermer l’interface des clés",
+          ? isOpen
+            ? "Open keys panel"
+            : "Close keys panel"
+          : isOpen
+            ? "Ouvrir l’interface des clés"
+            : "Fermer l’interface des clés",
       );
       toggleIcon.textContent = isOpen ? "›" : "‹";
       dock.classList.toggle("is-collapsed", isOpen);
     });
-    toggle.setAttribute("aria-label", english ? "Close keys panel" : "Fermer l’interface des clés");
+    toggle.setAttribute(
+      "aria-label",
+      english ? "Close keys panel" : "Fermer l’interface des clés",
+    );
     dock.append(collection, toggle);
     levelHeader.insertAdjacentElement("afterend", dock);
 
@@ -132,8 +146,12 @@
             : `Clé ${keyNames[index]}, ${unlocked ? "débloquée" : "verrouillée"}`,
         );
         state.textContent = english
-          ? unlocked ? "UNLOCKED" : "LOCKED"
-          : unlocked ? "DÉBLOQUÉE" : "VERROUILLÉE";
+          ? unlocked
+            ? "UNLOCKED"
+            : "LOCKED"
+          : unlocked
+            ? "DÉBLOQUÉE"
+            : "VERROUILLÉE";
       });
     };
     refreshKeys();

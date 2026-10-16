@@ -5,7 +5,10 @@
   const makeSvg = (src, index, className, crop) => {
     const svg = document.createElementNS(NS, "svg");
     svg.setAttribute("class", className);
-    svg.setAttribute("viewBox", `${crop ? 30 : 0} ${index * pieceHeight} ${crop ? 120 : 180} ${pieceHeight}`);
+    svg.setAttribute(
+      "viewBox",
+      `${crop ? 30 : 0} ${index * pieceHeight} ${crop ? 120 : 180} ${pieceHeight}`,
+    );
     svg.setAttribute("aria-hidden", "true");
     const image = document.createElementNS(NS, "image");
     image.setAttribute("href", src);
@@ -45,12 +48,20 @@
     rays.className = "kf-cine-rays";
     const rings = document.createElement("div");
     rings.className = "kf-cine-rings";
-    rings.append(document.createElement("span"), document.createElement("span"), document.createElement("span"));
+    rings.append(
+      document.createElement("span"),
+      document.createElement("span"),
+      document.createElement("span"),
+    );
     const content = document.createElement("div");
     content.className = "kf-cine-content";
     const key = document.createElement("div");
     key.className = "kf-cine-key";
-    [0, 1, 2].forEach((index) => key.appendChild(makeSvg(src, index, `kf-cine-piece piece-${index}`, false)));
+    [0, 1, 2].forEach((index) =>
+      key.appendChild(
+        makeSvg(src, index, `kf-cine-piece piece-${index}`, false),
+      ),
+    );
     const sparks = document.createElement("div");
     sparks.className = "kf-cine-sparks";
     const hues = ["#79f7ff", "#45e5d2", "#ffd24d", "#c084fc"];
@@ -77,7 +88,10 @@
     sub.textContent = cineText.sub;
     const actions = document.createElement("div");
     actions.className = "kf-cine-actions";
-    actions.setAttribute("aria-label", lang === "en" ? "Reward actions" : "Actions de récompense");
+    actions.setAttribute(
+      "aria-label",
+      lang === "en" ? "Reward actions" : "Actions de récompense",
+    );
     actions.hidden = true;
     const next = document.createElement("button");
     next.type = "button";
@@ -103,7 +117,10 @@
     root.append(rays, rings, sparks, content);
     document.body.appendChild(root);
 
-    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const previousFocus =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
     let timer = 0;
     let completed = false;
     const complete = () => {
@@ -118,7 +135,9 @@
       root.remove();
       if (previousFocus?.isConnected) previousFocus.focus();
     };
-    const onKey = (event) => { if (event.key === "Escape") dismiss(); };
+    const onKey = (event) => {
+      if (event.key === "Escape") dismiss();
+    };
     document.addEventListener("keydown", onKey);
     close.addEventListener("click", dismiss);
     next.addEventListener("click", () => {
@@ -183,7 +202,9 @@
         if (!corePiece || shown === earned) return;
         shown = earned;
         core.classList.toggle("kf-complete", earned === 3);
-        corePiece.replaceChildren(makeSvg(src, Math.min(earned, 2), "kf-core-piece", true));
+        corePiece.replaceChildren(
+          makeSvg(src, Math.min(earned, 2), "kf-core-piece", true),
+        );
         corePiece.classList.remove("is-hit");
         void corePiece.offsetWidth;
         corePiece.classList.add("is-hit");

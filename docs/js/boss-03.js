@@ -3,14 +3,16 @@
   if (!svg) return;
 
   const $ = (id) => document.getElementById(id);
-  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const language =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const text = {
     fr: {
       part: "PARTIE 3 // ÉCLIPSE",
       level: "CLÉE_03 // OCCULTEUR",
       eyebrow: "CLEE_03 // GARDIEN DE L'ÉCLIPSE",
       title: "L'Occulteur",
-      description: "Trois couronnes d'ombre étouffent le soleil. Aligne leurs brèches sur le rayon, au bon instant, avant que le temps ne s'écoule.",
+      description:
+        "Trois couronnes d'ombre étouffent le soleil. Aligne leurs brèches sur le rayon, au bon instant, avant que le temps ne s'écoule.",
       kicker: "COMBAT // TIMING ORBITAL",
       arena: "La couronne noire",
       helpTitle: "COMMENT COMBATTRE",
@@ -41,7 +43,8 @@
       cineTitle: "CLÉ 03 RÉCUPÉRÉE",
       cineSub: "Les trois fragments se rejoignent. L'éclipse est levée.",
       phase: (n, total) => `PHASE ${n} / ${total}`,
-      ready: "Observe la rotation, puis aligne chaque brèche sur le repère vert.",
+      ready:
+        "Observe la rotation, puis aligne chaque brèche sur le repère vert.",
       go: (n) => `Phase ${n} : à toi de jouer.`,
       locked: "Anneau verrouillé.",
       missed: "Raté ! L'ombre se resserre : −5 secondes.",
@@ -58,7 +61,8 @@
       level: "KEY_03 // OCCULTER",
       eyebrow: "KEY_03 // WARDEN OF THE ECLIPSE",
       title: "The Occulter",
-      description: "Three crowns of shadow smother the sun. Align their gaps with the beam at the right moment before time runs out.",
+      description:
+        "Three crowns of shadow smother the sun. Align their gaps with the beam at the right moment before time runs out.",
       kicker: "COMBAT // ORBITAL TIMING",
       arena: "The black crown",
       helpTitle: "HOW TO FIGHT",
@@ -177,7 +181,9 @@
   let slowLeft = 0;
   let meltdown = null;
 
-  const setText = (id, value) => { $(id).textContent = value; };
+  const setText = (id, value) => {
+    $(id).textContent = value;
+  };
   document.documentElement.lang = language;
   setText("bossPart", text.part);
   setText("bossLevel", text.level);
@@ -201,12 +207,17 @@
   saveButton.textContent = text.save;
   resetButton.textContent = text.reset;
   nextButton.textContent = text.next;
-  $("helpList").replaceChildren(...text.help.map((line) => {
-    const item = document.createElement("li");
-    item.textContent = line;
-    return item;
-  }));
-  $("levelProgress").setAttribute("aria-label", language === "en" ? "Part 3 progress" : "Progression de la Partie 3");
+  $("helpList").replaceChildren(
+    ...text.help.map((line) => {
+      const item = document.createElement("li");
+      item.textContent = line;
+      return item;
+    }),
+  );
+  $("levelProgress").setAttribute(
+    "aria-label",
+    language === "en" ? "Part 3 progress" : "Progression de la Partie 3",
+  );
   for (let level = 21; level <= 30; level += 1) {
     const marker = document.createElement("span");
     marker.className = "level-square";
@@ -249,9 +260,10 @@
 
   const renderTimer = () => {
     const shown = Math.max(0, timeLeft);
-    timerReadout.textContent = shown >= 60
-      ? `${Math.floor(shown / 60)}:${String(Math.floor(shown % 60)).padStart(2, "0")}`
-      : `${shown.toFixed(1)} s`;
+    timerReadout.textContent =
+      shown >= 60
+        ? `${Math.floor(shown / 60)}:${String(Math.floor(shown % 60)).padStart(2, "0")}`
+        : `${shown.toFixed(1)} s`;
     timerFill.style.transform = `scaleX(${shown / phaseTimes[Math.min(phase, phaseTimes.length - 1)]})`;
     timerReadout.classList.toggle("is-low", shown <= 10);
     timerReadout.classList.toggle("is-slowed", slowLeft > 0);
@@ -266,7 +278,10 @@
       const radius = count === 1 ? 120 : 170 - (100 * index) / (count - 1);
       const group = document.createElementNS(NS, "g");
       group.setAttribute("class", "boss03-ring");
-      group.style.setProperty("--ring-color", palettes[phase][index % palettes[phase].length]);
+      group.style.setProperty(
+        "--ring-color",
+        palettes[phase][index % palettes[phase].length],
+      );
       const track = document.createElementNS(NS, "circle");
       track.setAttribute("r", radius);
       track.setAttribute("class", "boss03-ring-track");
@@ -308,9 +323,17 @@
       ring.group.classList.toggle("is-locked", ring.locked);
       ring.group.classList.toggle("is-active", running && index === current);
     });
-    setText("phaseReadout", text.phase(Math.min(phase + 1, phases.length), phases.length));
-    coreKey.setAttribute("y", String(-20 - Math.min(phase, 2) * pieceHeight * 0.4667));
-    slots.forEach((slot, index) => slot.classList.toggle("is-earned", index < earned));
+    setText(
+      "phaseReadout",
+      text.phase(Math.min(phase + 1, phases.length), phases.length),
+    );
+    coreKey.setAttribute(
+      "y",
+      String(-20 - Math.min(phase, 2) * pieceHeight * 0.4667),
+    );
+    slots.forEach((slot, index) =>
+      slot.classList.toggle("is-earned", index < earned),
+    );
     setText("assemblyCount", `${earned} / 3`);
     lockButton.disabled = !running;
     slowButton.disabled = !running || slowLeft > 0 || timeLeft <= slowCost;
@@ -330,8 +353,12 @@
     }
     const factor = speedBoost * (slowLeft > 0 ? slowFactor : 1);
     rings.forEach((ring) => {
-      if (phase === 2 && !ring.locked && Math.random() < dt / 2.2) ring.dir *= -1;
-      if (!ring.locked) ring.angle = normalize(ring.angle + ring.dir * ring.speed * factor * dt);
+      if (phase === 2 && !ring.locked && Math.random() < dt / 2.2)
+        ring.dir *= -1;
+      if (!ring.locked)
+        ring.angle = normalize(
+          ring.angle + ring.dir * ring.speed * factor * dt,
+        );
     });
     draw();
     frame = requestAnimationFrame(tick);
@@ -357,7 +384,11 @@
 
   const playCinematic = (onComplete) => {
     const keyHolder = $("cineKey");
-    keyHolder.replaceChildren(...[0, 1, 2].map((index) => makePiece(index, `boss03-cine-piece piece-${index}`)));
+    keyHolder.replaceChildren(
+      ...[0, 1, 2].map((index) =>
+        makePiece(index, `boss03-cine-piece piece-${index}`),
+      ),
+    );
     const sparks = $("cineSparks");
     sparks.replaceChildren();
     for (let index = 0; index < 36; index += 1) {
@@ -367,7 +398,10 @@
       spark.style.setProperty("--dx", `${Math.cos(angle) * distance}px`);
       spark.style.setProperty("--dy", `${Math.sin(angle) * distance}px`);
       spark.style.setProperty("--delay", `${3.1 + Math.random() * 0.5}s`);
-      spark.style.setProperty("--hue", ["#ff4fd8", "#ffd24d", "#c6ff4d", "#38f2ff"][index % 4]);
+      spark.style.setProperty(
+        "--hue",
+        ["#ff4fd8", "#ffd24d", "#c6ff4d", "#38f2ff"][index % 4],
+      );
       sparks.appendChild(spark);
     }
     cinematic.classList.remove("is-playing");
@@ -397,7 +431,10 @@
         draw();
         return;
       }
-      window.EchoesSave?.saveProgress({ currentPage: "level-31", currentLevel: 31 });
+      window.EchoesSave?.saveProgress({
+        currentPage: "level-31",
+        currentLevel: 31,
+      });
       updateKeyHud();
       nextButton.hidden = false;
     });
@@ -444,8 +481,13 @@
       }
       const twist = phases[phase].twist;
       if (twist === "speed") speedBoost *= 1.2;
-      if (twist === "flip") rings.forEach((other) => { if (!other.locked) other.dir *= -1; });
-      setStatus(`${text.locked} ${twist === "speed" ? text.twistSpeed : twist === "flip" ? text.twistFlip : ""}`.trim());
+      if (twist === "flip")
+        rings.forEach((other) => {
+          if (!other.locked) other.dir *= -1;
+        });
+      setStatus(
+        `${text.locked} ${twist === "speed" ? text.twistSpeed : twist === "flip" ? text.twistFlip : ""}`.trim(),
+      );
       flash("is-lock");
       draw();
       return;
@@ -459,7 +501,10 @@
       return;
     }
     const previous = index - 1;
-    rings.forEach((other) => { if (!other.locked) other.angle = normalize(other.angle + 90 + Math.random() * 180); });
+    rings.forEach((other) => {
+      if (!other.locked)
+        other.angle = normalize(other.angle + 90 + Math.random() * 180);
+    });
     if (previous >= 0) {
       rings[previous].locked = false;
       rings[previous].angle = normalize(rings[previous].angle + 180);
@@ -478,7 +523,10 @@
     const progress = Math.min(meltdown.elapsed / meltdownDuration, 1);
     const frequency = 1.5 + 14 * progress * progress;
     meltdown.pulse += dt * frequency * Math.PI * 2;
-    arena.style.setProperty("--melt", (0.5 + 0.5 * Math.sin(meltdown.pulse)).toFixed(3));
+    arena.style.setProperty(
+      "--melt",
+      (0.5 + 0.5 * Math.sin(meltdown.pulse)).toFixed(3),
+    );
     arena.style.setProperty("--melt-level", progress.toFixed(3));
     const factor = 1 + 28 * progress * progress;
     rings.forEach((ring) => {
@@ -498,7 +546,9 @@
     slowLeft = 0;
     cancelAnimationFrame(frame);
     meltdown = { elapsed: 0, pulse: 0 };
-    rings.forEach((ring) => { ring.locked = false; });
+    rings.forEach((ring) => {
+      ring.locked = false;
+    });
     arena.classList.add("is-meltdown");
     setStatus(text.timeUp, "error");
     lastTime = performance.now();
@@ -540,7 +590,13 @@
     cinematic.classList.remove("is-playing");
     running = false;
     ended = false;
-    panel.classList.remove("is-victory", "is-defeat", "is-strike", "is-hit", "is-lock");
+    panel.classList.remove(
+      "is-victory",
+      "is-defeat",
+      "is-strike",
+      "is-hit",
+      "is-lock",
+    );
     const owned = updateKeyHud();
     startButton.hidden = false;
     nextButton.hidden = true;
@@ -567,9 +623,17 @@
     window.location.href = "../partie-4_niveau-31_à_40/niveau-31.html";
   });
   saveButton.addEventListener("click", () => {
-    if (!window.EchoesSave?.saveProgress({ currentPage: "boss-03", currentLevel: 30 })) return;
+    if (
+      !window.EchoesSave?.saveProgress({
+        currentPage: "boss-03",
+        currentLevel: 30,
+      })
+    )
+      return;
     saveButton.textContent = text.saved;
-    window.setTimeout(() => { saveButton.textContent = text.save; }, 1800);
+    window.setTimeout(() => {
+      saveButton.textContent = text.save;
+    }, 1800);
   });
   document.addEventListener("keydown", (event) => {
     if (event.code !== "Space" || event.repeat) return;

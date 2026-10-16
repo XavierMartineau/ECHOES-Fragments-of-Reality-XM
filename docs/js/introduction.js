@@ -109,9 +109,7 @@ function drawSpectrum(timestamp) {
       const wave = Math.abs(
         Math.sin(time * (2.4 + (barIndex % 5) * 0.18) + barIndex * 0.63),
       );
-      const envelope = Math.sin(
-        (barIndex / (barCount - 1)) * Math.PI,
-      );
+      const envelope = Math.sin((barIndex / (barCount - 1)) * Math.PI);
       const height =
         spectrumHeight *
         (0.14 +

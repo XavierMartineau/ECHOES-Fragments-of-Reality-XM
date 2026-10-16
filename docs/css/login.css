@@ -205,7 +205,10 @@ input {
   color: var(--login-text);
   font-size: 1rem;
   outline: none;
-  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 }
 input:hover {
   border-color: rgba(121, 247, 255, 0.52);
@@ -314,11 +317,20 @@ input:focus {
   display: none !important;
 }
 @keyframes login-pulse {
-  0%, 100% { opacity: 0.55; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1.15); }
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  .status-dot { animation: none; }
+  .status-dot {
+    animation: none;
+  }
 }
 @media (max-width: 560px) {
   .login-brand {
@@ -368,8 +380,16 @@ input:focus {
 }
 @media (min-width: 651px) and (max-width: 1099px) {
   html body .login-kicker,
-  html body label { font-size: max(0.7rem, 11px); }
+  html body label {
+    font-size: max(0.7rem, 11px);
+  }
   html body .password-toggle,
-  html body #passwordToggle { min-height: 40px; padding-inline: 14px; font-size: max(0.7rem, 11.5px); }
-  html body .login-submit { min-height: 48px; }
+  html body #passwordToggle {
+    min-height: 40px;
+    padding-inline: 14px;
+    font-size: max(0.7rem, 11.5px);
+  }
+  html body .login-submit {
+    min-height: 48px;
+  }
 }

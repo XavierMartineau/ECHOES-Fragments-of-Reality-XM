@@ -305,4 +305,5 @@ compatibles avec le système de sauvegarde existant.
 
 > Mettre à jour ce document à chaque commit : ajouter une entrée datée avec le hash du commit,
 > sa portée (fichiers ou fonctionnalités) et corriger les sections d'état si elles changent.
+
 - Ce commit — Niveau 19 devient un gros mots croisés (FR/EN selon la langue choisie) ; le cadenas des symboles passe au niveau 20 avec saisie de chiffres au clavier (plus de listes) ; nouvelle page 404.html aux couleurs du jeu.

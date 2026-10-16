@@ -202,6 +202,12 @@
     document.body.appendChild(menu);
   }
 
+  // Naviguer via le DEV MODE ouvre n'importe quel niveau, même verrouillé (voir level-guard.js).
+  menu.addEventListener("click", (event) => {
+    if (event.target.closest("a[href]"))
+      sessionStorage.setItem("echoes-dev-unlock", "1");
+  });
+
   const colorAssist = menu.querySelector("[data-color-assist]");
   // Active ou désactive le mode d'aide aux couleurs et le mémorise.
   const setColorAssist = (enabled) => {
@@ -210,7 +216,9 @@
     localStorage.setItem(colorAssistKey, String(enabled));
   };
   setColorAssist(localStorage.getItem(colorAssistKey) === "true");
-  colorAssist.addEventListener("change", () => setColorAssist(colorAssist.checked));
+  colorAssist.addEventListener("change", () =>
+    setColorAssist(colorAssist.checked),
+  );
 
   const toggle = menu.querySelector(".dev-mode-toggle");
   const panel = menu.querySelector(".dev-mode-panel");

@@ -3,13 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="../../assets/svg/echoes-favicon.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../../assets/svg/echoes-favicon.svg"
+    />
     <title>ECHOES - Niveau 19</title>
     <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css" />
     <link rel="stylesheet" href="../../css/partie-2_niveau-11_à_20.css" />
     <link rel="stylesheet" href="../../css/responsive.css?v=t4" />
     <link rel="stylesheet" href="../../css/fonts.css" />
-</head>
+  </head>
   <body class="part-two-theme">
     <div class="background-glow" aria-hidden="true"></div>
     <div class="grid-overlay" aria-hidden="true"></div>
@@ -17,29 +21,51 @@
       <a class="brand" href="../../../index.html">ECHOES</a>
       <div class="level-meta">
         <span data-i18n="part">PARTIE 2 // FRACTURES</span>
-        <div class="level-progress" id="levelProgress" aria-label="Progression de la Partie 2"></div>
+        <div
+          class="level-progress"
+          id="levelProgress"
+          aria-label="Progression de la Partie 2"
+        ></div>
         <strong data-i18n="level">NIVEAU 19</strong>
       </div>
-      <button class="save-game-button" id="saveGameButton" type="button">SAUVEGARDER</button>
+      <button class="save-game-button" id="saveGameButton" type="button">
+        SAUVEGARDER
+      </button>
     </header>
     <main class="level-shell level-19-shell">
       <section class="level-intro" aria-labelledby="levelTitle">
-        <p class="eyebrow" data-i18n="eyebrow">Fragment 019 // Les mots mêlés codés</p>
+        <p class="eyebrow" data-i18n="eyebrow">
+          Fragment 019 // Les mots mêlés codés
+        </p>
         <h1 id="levelTitle" data-i18n="title">Les mots mêlés codés</h1>
-        <p class="level-description" data-i18n="description">Trouve tous les mots dans la grille, lis le mot caché avec les lettres restantes, puis saisis le code de ses lettres.</p>
+        <p class="level-description" data-i18n="description">
+          Trouve tous les mots dans la grille, lis le mot caché avec les lettres
+          restantes, puis saisis le code de ses lettres.
+        </p>
         <div class="system-transmission" aria-live="polite">
-          <span class="system-label" data-i18n="systemLabel">ECHO://LEXIQUE</span>
-          <p id="systemMessage">SYSTEME:: LEXIQUE 019 VERROUILLE // GRILLE A COMPLETER</p>
+          <span class="system-label" data-i18n="systemLabel"
+            >ECHO://LEXIQUE</span
+          >
+          <p id="systemMessage">
+            SYSTEME:: LEXIQUE 019 VERROUILLE // GRILLE A COMPLETER
+          </p>
         </div>
       </section>
       <section class="puzzle-panel" aria-labelledby="puzzleTitle">
         <div class="panel-heading">
           <div>
-            <p class="panel-kicker" data-i18n="puzzleKicker">PUZZLE // LANGAGE</p>
+            <p class="panel-kicker" data-i18n="puzzleKicker">
+              PUZZLE // LANGAGE
+            </p>
             <h2 id="puzzleTitle" data-i18n="puzzleTitle">Grille de lettres</h2>
           </div>
           <div class="logic-readouts">
-            <span class="progress-readout" id="progressReadout" aria-live="polite">0 / 0 mots</span>
+            <span
+              class="progress-readout"
+              id="progressReadout"
+              aria-live="polite"
+              >0 / 0 mots</span
+            >
           </div>
         </div>
         <div class="sd-board" id="sudokuBoard">
@@ -48,18 +74,39 @@
             <div class="sd-word" id="sdWord"></div>
           </div>
           <div class="sd-grid" id="sdGrid"></div>
-            <div class="sd-clues"><h3 id="sdCluesTitle">MOTS À TROUVER</h3><ul id="sdClues"></ul></div>
+          <div class="sd-clues">
+            <h3 id="sdCluesTitle">MOTS À TROUVER</h3>
+            <ul id="sdClues"></ul>
+          </div>
           <div class="sd-side">
             <h3 id="sdLegendTitle">CODE DES LETTRES</h3>
             <div class="sd-letters" id="sdLetters"></div>
           </div>
         </div>
         <div class="sequence-controls">
-          <button class="sequence-start-button" id="checkButton" type="button">VÉRIFIER</button>
+          <button class="sequence-start-button" id="checkButton" type="button">
+            VÉRIFIER
+          </button>
           <p class="puzzle-status" id="puzzleStatus" aria-live="polite"></p>
-        </div>        <div class="puzzle-actions">
-          <button class="next-level-button" id="nextLevelButton" type="button" hidden data-i18n="next">CONTINUER VERS LE NIVEAU 20</button>
-          <button class="reset-button" id="resetButton" type="button" data-i18n="reset">Réinitialiser</button>
+        </div>
+        <div class="puzzle-actions">
+          <button
+            class="next-level-button"
+            id="nextLevelButton"
+            type="button"
+            hidden
+            data-i18n="next"
+          >
+            CONTINUER VERS LE NIVEAU 20
+          </button>
+          <button
+            class="reset-button"
+            id="resetButton"
+            type="button"
+            data-i18n="reset"
+          >
+            Réinitialiser
+          </button>
         </div>
       </section>
     </main>
@@ -75,6 +122,8 @@
     <script src="../../js/dev-mode.js"></script>
     <script src="../../js/ambient-background.js"></script>
     <script src="../../js/partie-2_niveau-11_à_20.js"></script>
-    <script src="../../js/save-system.js"></script><script src="../../js/levels-config.js"></script><script src="../../js/level-guard.js"></script>
+    <script src="../../js/save-system.js"></script>
+    <script src="../../js/levels-config.js"></script>
+    <script src="../../js/level-guard.js"></script>
   </body>
 </html>

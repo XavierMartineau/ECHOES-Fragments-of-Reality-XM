@@ -4,7 +4,8 @@
   const level = Number(match?.[1]);
   if (!Number.isInteger(level) || level < 1 || level > 10) return;
 
-  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const language =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const copy = {
     fr: {
       part: "PARTIE 1 // RUPTURE",
@@ -14,7 +15,9 @@
       save: "SAUVEGARDER",
       saved: "SAUVEGARDÉ",
       continue: (number) =>
-        number === 10 ? "AFFRONTER LE GARDIEN" : `CONTINUER VERS LE NIVEAU ${number + 1}`,
+        number === 10
+          ? "AFFRONTER LE GARDIEN"
+          : `CONTINUER VERS LE NIVEAU ${number + 1}`,
       completed: "Défi résolu. Le fragment est stabilisé.",
       progress: "Progression du défi",
       levels: [
@@ -52,7 +55,8 @@
             "Réassemble le noyau en faisant glisser les fragments dans le bon ordre. Le vide est la seule case mobile.",
           system: "SYSTEME:: MATRICE 3X3 // RECONSTRUCTION REQUISE",
           puzzle: "Taquin quantique",
-          ready: "Déplace les tuiles voisines du vide pour reconstruire l'image.",
+          ready:
+            "Déplace les tuiles voisines du vide pour reconstruire l'image.",
         },
         {
           eyebrow: "Fragment 005 // Mémoire",
@@ -70,7 +74,8 @@
             "Le gardien a verrouillé le signal avec quatre couleurs distinctes. Huit essais, et uniquement le nombre de couleurs bien placées ou déplacées, te séparent de la sortie.",
           system: "SYSTEME:: CODE A 4 POSITIONS // 8 ESSAIS MAXIMUM",
           puzzle: "Protocole Mastermind",
-          ready: "Choisis quatre couleurs, puis déduis le code grâce aux indices.",
+          ready:
+            "Choisis quatre couleurs, puis déduis le code grâce aux indices.",
         },
         {
           eyebrow: "Fragment 007 // Logique visuelle",
@@ -79,7 +84,8 @@
             "Restaure le motif lumineux à l'aide des indices de lignes et de colonnes. Les cases vides comptent autant que les cases allumées.",
           system: "SYSTEME:: MATRICE 5X5 // INDICES DE LIGNE ET COLONNE",
           puzzle: "Nonogramme fractal",
-          ready: "Reconstitue le motif. Clique une case pour la remplir, puis à nouveau pour la marquer vide.",
+          ready:
+            "Reconstitue le motif. Clique une case pour la remplir, puis à nouveau pour la marquer vide.",
         },
         {
           eyebrow: "Fragment 008 // Réflexion",
@@ -130,12 +136,14 @@
         exact: "bien placées",
         misplaced: "bonne couleur, mauvaise position",
         invalid: "Cette pièce ne peut pas être déplacée ici.",
-        wrong: "Ce n'est pas encore la bonne réponse. Analyse les indices et réessaie.",
+        wrong:
+          "Ce n'est pas encore la bonne réponse. Analyse les indices et réessaie.",
         matched: "Paire trouvée.",
         retry: "Les cartes ne correspondent pas. Réessaie.",
         locked: "Choisis d'abord une couleur.",
         fullGuess: "Renseigne les quatre positions avant de valider.",
-        noRoute: "Le faisceau n'atteint pas le récepteur. Réoriente les miroirs.",
+        noRoute:
+          "Le faisceau n'atteint pas le récepteur. Réoriente les miroirs.",
         mirror: "Miroir",
         target: "Récepteur",
         player: "Noyau",
@@ -149,7 +157,16 @@
         sudokuIncomplete: "La grille est incomplète.",
         solvedSudoku: "La matrice est cohérente, le verrou est ouvert.",
         round: (n, total) => `Séquence ${n} / ${total}`,
-        cardLabels: ["aurore", "comète", "cristal", "éclipse", "fractale", "nébuleuse", "orbite", "pulsar"],
+        cardLabels: [
+          "aurore",
+          "comète",
+          "cristal",
+          "éclipse",
+          "fractale",
+          "nébuleuse",
+          "orbite",
+          "pulsar",
+        ],
       },
     },
     en: {
@@ -225,7 +242,8 @@
             "Restore the light pattern using the row and column clues. Empty squares matter just as much as lit ones.",
           system: "SYSTEM:: 5X5 MATRIX // ROW AND COLUMN CLUES",
           puzzle: "Fractal nonogram",
-          ready: "Rebuild the pattern. Click a square to fill it, then click again to mark it empty.",
+          ready:
+            "Rebuild the pattern. Click a square to fill it, then click again to mark it empty.",
         },
         {
           eyebrow: "Fragment 008 // Reflection",
@@ -295,7 +313,16 @@
         sudokuIncomplete: "The grid is incomplete.",
         solvedSudoku: "The matrix is consistent. The lock is open.",
         round: (n, total) => `Sequence ${n} / ${total}`,
-        cardLabels: ["aurora", "comet", "crystal", "eclipse", "fractal", "nebula", "orbit", "pulsar"],
+        cardLabels: [
+          "aurora",
+          "comet",
+          "crystal",
+          "eclipse",
+          "fractal",
+          "nebula",
+          "orbit",
+          "pulsar",
+        ],
       },
     },
   }[language];
@@ -328,7 +355,9 @@
     .getElementById("levelProgress")
     .setAttribute(
       "aria-label",
-      language === "en" ? "Progress for levels 1 to 10" : "Progression des niveaux 1 à 10",
+      language === "en"
+        ? "Progress for levels 1 to 10"
+        : "Progression des niveaux 1 à 10",
     );
   document.querySelector(".level-meta > strong").textContent =
     `${language === "en" ? "LEVEL" : "NIVEAU"} ${String(level).padStart(2, "0")}`;
@@ -372,9 +401,13 @@
     const legacy = JSON.parse(
       localStorage.getItem("echoes-completed-levels") || "[]",
     );
-    completed = [...new Set([...current, ...legacy].filter(
-      (value) => Number.isInteger(value) && value >= 1 && value <= 60,
-    ))];
+    completed = [
+      ...new Set(
+        [...current, ...legacy].filter(
+          (value) => Number.isInteger(value) && value >= 1 && value <= 60,
+        ),
+      ),
+    ];
   } catch (error) {
     console.warn("Could not read saved level progression.", error);
   }
@@ -434,7 +467,9 @@
     return shuffled;
   };
   const nextUrl =
-    level === 10 ? "boss-01.html" : `niveau-${String(level + 1).padStart(2, "0")}.html`;
+    level === 10
+      ? "boss-01.html"
+      : `niveau-${String(level + 1).padStart(2, "0")}.html`;
   nextButton.addEventListener("click", () => {
     window.location.href = nextUrl;
   });
@@ -468,9 +503,33 @@
   // Level 1: three rule-based number sequences.
   if (level === 1) {
     const rounds = [
-      { values: [4, 9, 14, 19], answer: 24, options: [22, 23, 24, 26], rule: language === "en" ? "Each term increases by the same amount." : "Chaque terme augmente de la même quantité." },
-      { values: [2, 6, 12, 20], answer: 30, options: [28, 30, 32, 36], rule: language === "en" ? "The difference increases by two each time." : "L'écart augmente de deux à chaque étape." },
-      { values: [3, 6, 12, 24], answer: 48, options: [36, 42, 48, 54], rule: language === "en" ? "Each term follows the same multiplicative rule." : "Chaque terme suit la même règle de multiplication." },
+      {
+        values: [4, 9, 14, 19],
+        answer: 24,
+        options: [22, 23, 24, 26],
+        rule:
+          language === "en"
+            ? "Each term increases by the same amount."
+            : "Chaque terme augmente de la même quantité.",
+      },
+      {
+        values: [2, 6, 12, 20],
+        answer: 30,
+        options: [28, 30, 32, 36],
+        rule:
+          language === "en"
+            ? "The difference increases by two each time."
+            : "L'écart augmente de deux à chaque étape.",
+      },
+      {
+        values: [3, 6, 12, 24],
+        answer: 48,
+        options: [36, 42, 48, 54],
+        rule:
+          language === "en"
+            ? "Each term follows the same multiplicative rule."
+            : "Chaque terme suit la même règle de multiplication.",
+      },
     ];
     let round = 0;
     const render = () => {
@@ -505,7 +564,9 @@
             completeLevel();
           } else {
             setStatus(
-              language === "en" ? "Correct. The next pattern is more complex." : "Exact. Le prochain motif est plus complexe.",
+              language === "en"
+                ? "Correct. The next pattern is more complex."
+                : "Exact. Le prochain motif est plus complexe.",
               "success",
             );
             window.setTimeout(render, 500);
@@ -533,7 +594,13 @@
     let player = [0, 0];
     const grid = document.createElement("div");
     grid.className = "maze-grid";
-    board.append(label(language === "en" ? "Reach the exit without crossing a blocked cell." : "Atteins la sortie sans traverser les cases bloquées."));
+    board.append(
+      label(
+        language === "en"
+          ? "Reach the exit without crossing a blocked cell."
+          : "Atteins la sortie sans traverser les cases bloquées.",
+      ),
+    );
     board.appendChild(grid);
     const render = () => {
       grid.replaceChildren();
@@ -549,7 +616,10 @@
             tile.textContent = "◎";
             tile.setAttribute("aria-label", rules.exit);
           } else if (cell === "#") {
-            tile.setAttribute("aria-label", language === "en" ? "Blocked" : "Bloquée");
+            tile.setAttribute(
+              "aria-label",
+              language === "en" ? "Blocked" : "Bloquée",
+            );
           } else {
             tile.setAttribute("aria-hidden", "true");
           }
@@ -564,10 +634,18 @@
       const nextX = x + dx;
       const nextY = y + dy;
       if (
-        nextX < 0 || nextX >= 7 || nextY < 0 || nextY >= 7 ||
+        nextX < 0 ||
+        nextX >= 7 ||
+        nextY < 0 ||
+        nextY >= 7 ||
         maze[nextY][nextX] === "#"
       ) {
-        setStatus(language === "en" ? "Blocked. Find another route." : "Passage bloqué. Cherche un autre chemin.", "error");
+        setStatus(
+          language === "en"
+            ? "Blocked. Find another route."
+            : "Passage bloqué. Cherche un autre chemin.",
+          "error",
+        );
         return;
       }
       player = [nextX, nextY];
@@ -585,7 +663,10 @@
     ];
     directions.forEach(([symbol, dx, dy]) => {
       const moveButton = button(symbol, "maze-control");
-      moveButton.setAttribute("aria-label", `${language === "en" ? "Move" : "Aller"} ${symbol}`);
+      moveButton.setAttribute(
+        "aria-label",
+        `${language === "en" ? "Move" : "Aller"} ${symbol}`,
+      );
       moveButton.addEventListener("click", () => move(dx, dy));
       toolbar.appendChild(moveButton);
     });
@@ -612,15 +693,32 @@
   // Level 3: decode a Caesar-shifted message through three rounds.
   if (level === 3) {
     const rounds = [
-      { code: "HFKR", shift: 3, answer: "ECHO", options: ["ECHO", "CODE", "VOID", "ORBIT"] },
-      { code: "VLJQDO", shift: 3, answer: "SIGNAL", options: ["SIGNAL", "MEMORY", "SYSTEM", "PORTAL"] },
-      { code: "EULGJH", shift: 3, answer: "BRIDGE", options: ["BRIDGE", "BREACH", "FRAGILE", "SHADOW"] },
+      {
+        code: "HFKR",
+        shift: 3,
+        answer: "ECHO",
+        options: ["ECHO", "CODE", "VOID", "ORBIT"],
+      },
+      {
+        code: "VLJQDO",
+        shift: 3,
+        answer: "SIGNAL",
+        options: ["SIGNAL", "MEMORY", "SYSTEM", "PORTAL"],
+      },
+      {
+        code: "EULGJH",
+        shift: 3,
+        answer: "BRIDGE",
+        options: ["BRIDGE", "BREACH", "FRAGILE", "SHADOW"],
+      },
     ];
     let round = 0;
     const render = () => {
       const data = rounds[round];
       board.replaceChildren(
-        label(`${rules.round(round + 1, rounds.length)} — ${language === "en" ? `Shift each letter back by ${data.shift}.` : `Recule chaque lettre de ${data.shift} rangs dans l'alphabet.`}`),
+        label(
+          `${rules.round(round + 1, rounds.length)} — ${language === "en" ? `Shift each letter back by ${data.shift}.` : `Recule chaque lettre de ${data.shift} rangs dans l'alphabet.`}`,
+        ),
       );
       const encrypted = document.createElement("strong");
       encrypted.className = "cipher-message";
@@ -660,7 +758,13 @@
     let previousEmpty = -1;
     const grid = document.createElement("div");
     grid.className = "sliding-grid";
-    board.append(label(language === "en" ? "Arrange the fragments from 1 to 8." : "Range les fragments de 1 à 8."));
+    board.append(
+      label(
+        language === "en"
+          ? "Arrange the fragments from 1 to 8."
+          : "Range les fragments de 1 à 8.",
+      ),
+    );
     board.appendChild(grid);
     const neighbors = (index) => {
       const x = index % 3;
@@ -673,7 +777,9 @@
       ];
     };
     for (let step = 0; step < 50; step += 1) {
-      const options = neighbors(empty).filter((index) => index !== previousEmpty);
+      const options = neighbors(empty).filter(
+        (index) => index !== previousEmpty,
+      );
       const nextEmpty = options[Math.floor(Math.random() * options.length)];
       [tiles[empty], tiles[nextEmpty]] = [tiles[nextEmpty], tiles[empty]];
       previousEmpty = empty;
@@ -682,7 +788,10 @@
     const render = () => {
       grid.replaceChildren();
       tiles.forEach((value, index) => {
-        const tile = button(value ? String(value) : "", `sliding-tile${value ? "" : " is-empty"}`);
+        const tile = button(
+          value ? String(value) : "",
+          `sliding-tile${value ? "" : " is-empty"}`,
+        );
         tile.disabled = !value;
         tile.addEventListener("click", () => {
           if (!started || solved || !neighbors(empty).includes(index)) return;
@@ -691,7 +800,8 @@
           moves += 1;
           readout.textContent = `${moves} ${rules.moves}`;
           render();
-          if (tiles.every((item, cell) => item === solvedTiles[cell])) completeLevel();
+          if (tiles.every((item, cell) => item === solvedTiles[cell]))
+            completeLevel();
         });
         grid.appendChild(tile);
       });
@@ -726,10 +836,20 @@
         );
         tile.setAttribute(
           "aria-label",
-          faceUp ? `${rules.cardLabels[card.id]} ${language === "en" ? "card" : "carte"}` : (language === "en" ? "Hidden card" : "Carte cachée"),
+          faceUp
+            ? `${rules.cardLabels[card.id]} ${language === "en" ? "card" : "carte"}`
+            : language === "en"
+              ? "Hidden card"
+              : "Carte cachée",
         );
         tile.addEventListener("click", () => {
-          if (!started || locked || matched.has(index) || opened.includes(index)) return;
+          if (
+            !started ||
+            locked ||
+            matched.has(index) ||
+            opened.includes(index)
+          )
+            return;
           opened.push(index);
           render();
           if (opened.length < 2) return;
@@ -762,7 +882,14 @@
 
   // Level 6: deduce a four-color code from Mastermind feedback.
   if (level === 6) {
-    const palette = ["#51e7ef", "#8274ff", "#ff609e", "#ffd35a", "#82e0a8", "#ff8b5b"];
+    const palette = [
+      "#51e7ef",
+      "#8274ff",
+      "#ff609e",
+      "#ffd35a",
+      "#82e0a8",
+      "#ff8b5b",
+    ];
     const code = randomize([...palette.keys()]).slice(0, 4);
     const guess = [null, null, null, null];
     const history = document.createElement("div");
@@ -771,9 +898,17 @@
     current.className = "mastermind-guess";
     const swatches = document.createElement("div");
     swatches.className = "mastermind-palette";
-    const submit = button(language === "en" ? "SUBMIT GUESS" : "SOUMETTRE LE CODE");
+    const submit = button(
+      language === "en" ? "SUBMIT GUESS" : "SOUMETTRE LE CODE",
+    );
     const undo = button(rules.undo, "challenge-button is-secondary");
-    board.append(label(language === "en" ? "Four different colors. Feedback reveals counts, not positions." : "Quatre couleurs différentes. L'indice révèle un nombre, pas les positions."));
+    board.append(
+      label(
+        language === "en"
+          ? "Four different colors. Feedback reveals counts, not positions."
+          : "Quatre couleurs différentes. L'indice révèle un nombre, pas les positions.",
+      ),
+    );
     board.append(history, current, swatches);
     toolbar.append(undo, submit);
     let selectedColor = null;
@@ -782,8 +917,12 @@
       current.replaceChildren();
       guess.forEach((color, index) => {
         const position = button(color === null ? "?" : "", "mastermind-slot");
-        if (color !== null) position.style.setProperty("--peg-color", palette[color]);
-        position.setAttribute("aria-label", `${language === "en" ? "Position" : "Position"} ${index + 1}`);
+        if (color !== null)
+          position.style.setProperty("--peg-color", palette[color]);
+        position.setAttribute(
+          "aria-label",
+          `${language === "en" ? "Position" : "Position"} ${index + 1}`,
+        );
         position.addEventListener("click", () => {
           if (!started || selectedColor === null) return;
           guess[index] = selectedColor;
@@ -795,11 +934,16 @@
     palette.forEach((color, index) => {
       const peg = button("", "mastermind-peg");
       peg.style.setProperty("--peg-color", color);
-      peg.setAttribute("aria-label", `${language === "en" ? "Color" : "Couleur"} ${index + 1}`);
+      peg.setAttribute(
+        "aria-label",
+        `${language === "en" ? "Color" : "Couleur"} ${index + 1}`,
+      );
       peg.addEventListener("click", () => {
         if (!started) return;
         selectedColor = index;
-        swatches.querySelectorAll(".is-selected").forEach((item) => item.classList.remove("is-selected"));
+        swatches
+          .querySelectorAll(".is-selected")
+          .forEach((item) => item.classList.remove("is-selected"));
         peg.classList.add("is-selected");
       });
       swatches.appendChild(peg);
@@ -818,8 +962,12 @@
         return;
       }
       attempts += 1;
-      const exact = guess.reduce((count, value, index) => count + (value === code[index] ? 1 : 0), 0);
-      const misplaced = guess.filter((value) => code.includes(value)).length - exact;
+      const exact = guess.reduce(
+        (count, value, index) => count + (value === code[index] ? 1 : 0),
+        0,
+      );
+      const misplaced =
+        guess.filter((value) => code.includes(value)).length - exact;
       const row = document.createElement("div");
       row.className = "mastermind-history-row";
       guess.forEach((value) => {
@@ -838,13 +986,20 @@
         return;
       }
       if (attempts === 8) {
-        setStatus(language === "en" ? "No attempts left. Restart to try a new code." : "Plus d'essais. Recommence pour générer un nouveau code.", "error");
+        setStatus(
+          language === "en"
+            ? "No attempts left. Restart to try a new code."
+            : "Plus d'essais. Recommence pour générer un nouveau code.",
+          "error",
+        );
         submit.disabled = true;
         return;
       }
       guess.fill(null);
       paintGuess();
-      setStatus(`${8 - attempts} ${rules.attempts} ${language === "en" ? "remaining." : "restants."}`);
+      setStatus(
+        `${8 - attempts} ${rules.attempts} ${language === "en" ? "remaining." : "restants."}`,
+      );
     });
     beginPuzzle = () => setStatus(levelCopy.ready);
     paintGuess();
@@ -873,7 +1028,9 @@
       if (count) runs.push(count);
       return runs.length ? runs.join(" ") : "–";
     };
-    const columns = Array.from({ length: 5 }, (_, x) => solution.map((row) => row[x]));
+    const columns = Array.from({ length: 5 }, (_, x) =>
+      solution.map((row) => row[x]),
+    );
     const grid = document.createElement("div");
     grid.className = "nonogram-grid";
     const topLeft = document.createElement("span");
@@ -902,18 +1059,35 @@
           cell.classList.toggle("is-filled", states[index] === 1);
           cell.classList.toggle("is-empty", states[index] === 2);
           cell.textContent = states[index] === 2 ? "×" : "";
-          cell.setAttribute("aria-label", `${y + 1}, ${x + 1}: ${states[index] === 1 ? rules.filled : states[index] === 2 ? rules.empty : rules.unknown}`);
-          filled = states.reduce((count, value) => count + (value === 1 ? 1 : 0), 0);
+          cell.setAttribute(
+            "aria-label",
+            `${y + 1}, ${x + 1}: ${states[index] === 1 ? rules.filled : states[index] === 2 ? rules.empty : rules.unknown}`,
+          );
+          filled = states.reduce(
+            (count, value) => count + (value === 1 ? 1 : 0),
+            0,
+          );
           const correctFilled = states.reduce((count, value, cellIndex) => {
             const target = solution[Math.floor(cellIndex / 5)][cellIndex % 5];
             return count + (value === 1 && target === 1 ? 1 : 0);
           }, 0);
           const total = solution.flat().reduce((sum, value) => sum + value, 0);
           setProgress(correctFilled, total);
-          if (states.every((value, cellIndex) => value === (solution[Math.floor(cellIndex / 5)][cellIndex % 5] ? 1 : 2))) {
+          if (
+            states.every(
+              (value, cellIndex) =>
+                value ===
+                (solution[Math.floor(cellIndex / 5)][cellIndex % 5] ? 1 : 2),
+            )
+          ) {
             completeLevel();
           } else if (filled > total) {
-            setStatus(language === "en" ? "Too many cells are filled. Recheck the clues." : "Trop de cases sont remplies. Vérifie les indices.", "error");
+            setStatus(
+              language === "en"
+                ? "Too many cells are filled. Recheck the clues."
+                : "Trop de cases sont remplies. Vérifie les indices.",
+              "error",
+            );
           }
         });
         grid.appendChild(cell);
@@ -921,7 +1095,10 @@
     });
     board.appendChild(grid);
     beginPuzzle = () => setStatus(levelCopy.ready);
-    setProgress(0, solution.flat().reduce((sum, value) => sum + value, 0));
+    setProgress(
+      0,
+      solution.flat().reduce((sum, value) => sum + value, 0),
+    );
   }
 
   // Level 8: route a laser through adjustable mirrors to the receiver.
@@ -936,7 +1113,13 @@
     const receiver = [5, 0];
     const grid = document.createElement("div");
     grid.className = "laser-grid";
-    board.append(label(language === "en" ? "Click a mirror to rotate it. Then test the beam." : "Clique un miroir pour le faire pivoter, puis teste le faisceau."));
+    board.append(
+      label(
+        language === "en"
+          ? "Click a mirror to rotate it. Then test the beam."
+          : "Clique un miroir pour le faire pivoter, puis teste le faisceau.",
+      ),
+    );
     board.appendChild(grid);
     const cells = new Map();
     for (let y = 0; y < 6; y += 1) {
@@ -954,7 +1137,10 @@
         const cell = cells.get(`${mirror.x},${mirror.y}`);
         cell.textContent = mirror.angle;
         cell.classList.add("has-mirror");
-        cell.setAttribute("aria-label", `${rules.mirror} ${index + 1}: ${mirror.angle}`);
+        cell.setAttribute(
+          "aria-label",
+          `${rules.mirror} ${index + 1}: ${mirror.angle}`,
+        );
       });
       const goal = cells.get(`${receiver[0]},${receiver[1]}`);
       goal.textContent = "◎";
@@ -1015,16 +1201,28 @@
     moves.className = "hanoi-moves";
     const rods = document.createElement("div");
     rods.className = "hanoi-rods";
-    const rodNames = language === "en" ? ["LEFT", "MIDDLE", "RIGHT"] : ["GAUCHE", "CENTRE", "DROITE"];
+    const rodNames =
+      language === "en"
+        ? ["LEFT", "MIDDLE", "RIGHT"]
+        : ["GAUCHE", "CENTRE", "DROITE"];
     let selectedRod = null;
     let moveCount = 0;
-    board.append(label(language === "en" ? "Move the tower from the left pedestal to the right." : "Déplace la tour du socle gauche vers le socle droit."));
+    board.append(
+      label(
+        language === "en"
+          ? "Move the tower from the left pedestal to the right."
+          : "Déplace la tour du socle gauche vers le socle droit.",
+      ),
+    );
     board.appendChild(rods);
     board.appendChild(moves);
     const render = () => {
       rods.replaceChildren();
       piles.forEach((pile, rodIndex) => {
-        const rod = button("", `hanoi-rod${selectedRod === rodIndex ? " is-selected" : ""}`);
+        const rod = button(
+          "",
+          `hanoi-rod${selectedRod === rodIndex ? " is-selected" : ""}`,
+        );
         rod.setAttribute("aria-label", `${rules.hanoi} ${rodNames[rodIndex]}`);
         pile.forEach((disk) => {
           const piece = document.createElement("span");
@@ -1051,7 +1249,10 @@
           const source = piles[selectedRod];
           const destination = piles[rodIndex];
           const disk = source[source.length - 1];
-          if (destination.length && destination[destination.length - 1] < disk) {
+          if (
+            destination.length &&
+            destination[destination.length - 1] < disk
+          ) {
             setStatus(rules.invalid, "error");
             selectedRod = null;
             render();
@@ -1093,13 +1294,23 @@
     palette.className = "sudoku-palette";
     const verify = button(rules.verify);
     const selectedLabel = label(`${rules.sudoku}: 1`);
-    board.append(label(language === "en" ? "Each row, column, and 2x2 box must contain 1 through 4 once." : "Chaque ligne, colonne et carré 2x2 doit contenir une fois les chiffres de 1 à 4."));
+    board.append(
+      label(
+        language === "en"
+          ? "Each row, column, and 2x2 box must contain 1 through 4 once."
+          : "Chaque ligne, colonne et carré 2x2 doit contenir une fois les chiffres de 1 à 4.",
+      ),
+    );
     board.appendChild(grid);
     controls.append(palette, selectedLabel, verify);
     toolbar.appendChild(controls);
     const cells = [];
     const refresh = () => {
-      filled = values.flat().filter((value, index) => !given[Math.floor(index / 4)][index % 4] && value).length;
+      filled = values
+        .flat()
+        .filter(
+          (value, index) => !given[Math.floor(index / 4)][index % 4] && value,
+        ).length;
       setProgress(filled, 8);
       cells.forEach(({ cell, row, col }) => {
         cell.textContent = values[row][col] || "";
@@ -1133,7 +1344,9 @@
         if (!started) return;
         selectedNumber = value;
         selectedLabel.textContent = `${rules.sudoku}: ${value}`;
-        palette.querySelectorAll(".is-selected").forEach((item) => item.classList.remove("is-selected"));
+        palette
+          .querySelectorAll(".is-selected")
+          .forEach((item) => item.classList.remove("is-selected"));
         digit.classList.add("is-selected");
       });
       palette.appendChild(digit);

@@ -3,7 +3,7 @@
   if (!board) return;
 
   const english = localStorage.getItem("echoes-language") === "en";
-  const text = (fr, en) => english ? en : fr;
+  const text = (fr, en) => (english ? en : fr);
   const symbols = ["◇", "✦", "⬡"];
   const pads = [
     { color: "#79f7ff", name: text("cyan", "cyan") },
@@ -52,7 +52,10 @@
       "Observe les trois sceaux, puis choisis celui qui correspond.",
       "Watch the three seals, then choose the matching one.",
     ),
-    wrong: text("Ce n’est pas le bon sceau. Réessaie.", "That is not the matching seal. Try again."),
+    wrong: text(
+      "Ce n’est pas le bon sceau. Réessaie.",
+      "That is not the matching seal. Try again.",
+    ),
     stageOneWin: text(
       "Bien joué. Le Gardien envoie une courte mélodie.",
       "Good job. The Guardian sends a short melody.",
@@ -61,7 +64,10 @@
       "Observe les couleurs qui s’allument, puis répète-les dans le même ordre.",
       "Watch the colors light up, then repeat them in the same order.",
     ),
-    sequenceHint: text("À toi : reproduis la mélodie.", "Your turn: repeat the melody."),
+    sequenceHint: text(
+      "À toi : reproduis la mélodie.",
+      "Your turn: repeat the melody.",
+    ),
     sequenceError: text(
       "La mélodie recommence. Tu peux la revoir quand tu veux.",
       "The melody starts over. You can replay it whenever you like.",
@@ -74,32 +80,60 @@
       "Attends le halo vert, puis clique le noyau. Réussis deux fois.",
       "Wait for the green glow, then click the core. Do it twice.",
     ),
-    wait: text("Attends que le noyau s’illumine en vert.", "Wait for the core to glow green."),
+    wait: text(
+      "Attends que le noyau s’illumine en vert.",
+      "Wait for the core to glow green.",
+    ),
     defeated: text(
       "Ton énergie est épuisée. Clique sur Réinitialiser pour retenter l’épreuve.",
       "You ran out of energy. Click Reset to try the trial again.",
     ),
-    victory: text("Le Gardien est apaisé. La Clé 01 t’attend.", "The Guardian is calm. Key 01 awaits."),
+    victory: text(
+      "Le Gardien est apaisé. La Clé 01 t’attend.",
+      "The Guardian is calm. Key 01 awaits.",
+    ),
     rewardError: text(
       "La Clé 01 n’a pas pu être enregistrée. Vérifie ta sauvegarde puis réessaie.",
       "Key 01 could not be saved. Check your save and try again.",
     ),
-    livesRemaining: (count) => text(`${count} unités d’énergie restantes`, `${count} energy units remaining`),
+    livesRemaining: (count) =>
+      text(
+        `${count} unités d’énergie restantes`,
+        `${count} energy units remaining`,
+      ),
     saveSuccess: text("Progression enregistrée.", "Progress saved."),
-    saveFailure: text("Connecte-toi pour enregistrer ta progression.", "Sign in to save your progress."),
+    saveFailure: text(
+      "Connecte-toi pour enregistrer ta progression.",
+      "Sign in to save your progress.",
+    ),
     sealLabel: (number) => text(`Sceau ${number}`, `Seal ${number}`),
     stageOne: text("STAGE 1 // LES SCEAUX", "STAGE 1 // THE SEALS"),
     stageOnePrompt: text("Trouve le même sceau", "Find the matching seal"),
     stageTwo: text("STAGE 2 // LA MÉLODIE", "STAGE 2 // THE MELODY"),
-    stageTwoPrompt: text("Observe les couleurs, puis répète", "Watch the colors, then repeat"),
+    stageTwoPrompt: text(
+      "Observe les couleurs, puis répète",
+      "Watch the colors, then repeat",
+    ),
     padLabel: (name) => text(`Pastille ${name}`, `${name} pad`),
     stageThree: text("STAGE 3 // LE NOYAU", "STAGE 3 // THE CORE"),
-    stageThreePrompt: text("Clique quand le noyau est vert", "Click when the core turns green"),
+    stageThreePrompt: text(
+      "Clique quand le noyau est vert",
+      "Click when the core turns green",
+    ),
     stageThreeWait: text("ATTENDS LE SIGNAL", "WAIT FOR THE SIGNAL"),
     now: text("MAINTENANT !", "NOW!"),
-    signalCaught: text("Signal capté. Encore une fois !", "Signal caught. One more time!"),
-    correctSeal: text("Sceau accordé. Voici le suivant.", "Seal tuned. Here is the next one."),
-    resetHint: text("Le combat reprend. Observe les trois sceaux.", "The fight resumes. Watch the three seals."),
+    signalCaught: text(
+      "Signal capté. Encore une fois !",
+      "Signal caught. One more time!",
+    ),
+    correctSeal: text(
+      "Sceau accordé. Voici le suivant.",
+      "Seal tuned. Here is the next one.",
+    ),
+    resetHint: text(
+      "Le combat reprend. Observe les trois sceaux.",
+      "The fight resumes. Watch the three seals.",
+    ),
   };
 
   let stage = 0;
@@ -123,17 +157,23 @@
     marker.setAttribute("aria-hidden", "true");
     levels.appendChild(marker);
   }
-  levels.setAttribute("aria-label", text("Progression de la Partie 1", "Part 1 progress"));
+  levels.setAttribute(
+    "aria-label",
+    text("Progression de la Partie 1", "Part 1 progress"),
+  );
 
   const clearTimers = () => {
     sequenceTimers.forEach(window.clearTimeout);
     sequenceTimers = [];
     window.clearTimeout(pulseTimer);
     core.classList.remove("is-lit");
-    core.setAttribute("aria-label", text(
-      "Noyau du gardien, attends le signal vert",
-      "Guardian core, wait for the green signal",
-    ));
+    core.setAttribute(
+      "aria-label",
+      text(
+        "Noyau du gardien, attends le signal vert",
+        "Guardian core, wait for the green signal",
+      ),
+    );
     inputLocked = false;
   };
 
@@ -152,7 +192,10 @@
     }
     livesReadout.setAttribute(
       "aria-label",
-      text(`${energy} unités d’énergie restantes`, `${energy} energy units remaining`),
+      text(
+        `${energy} unités d’énergie restantes`,
+        `${energy} energy units remaining`,
+      ),
     );
   };
 
@@ -311,26 +354,38 @@
     });
     replayButton.disabled = true;
     melody.forEach((padIndex, index) => {
-      sequenceTimers.push(window.setTimeout(() => {
-        flashPad(padIndex, 520);
-        target.textContent = "●";
-        target.style.color = pads[padIndex].color;
-        target.classList.add("is-preview");
-        sequenceTimers.push(window.setTimeout(() => {
-          target.classList.remove("is-preview");
+      sequenceTimers.push(
+        window.setTimeout(
+          () => {
+            flashPad(padIndex, 520);
+            target.textContent = "●";
+            target.style.color = pads[padIndex].color;
+            target.classList.add("is-preview");
+            sequenceTimers.push(
+              window.setTimeout(() => {
+                target.classList.remove("is-preview");
+                target.textContent = "· · ·";
+                target.style.color = "";
+              }, 520),
+            );
+          },
+          800 * index + 450,
+        ),
+      );
+    });
+    sequenceTimers.push(
+      window.setTimeout(
+        () => {
+          if (!active || stage !== 1) return;
           target.textContent = "· · ·";
           target.style.color = "";
-        }, 520));
-      }, 800 * index + 450));
-    });
-    sequenceTimers.push(window.setTimeout(() => {
-      if (!active || stage !== 1) return;
-      target.textContent = "· · ·";
-      target.style.color = "";
-      inputLocked = false;
-      replayButton.disabled = false;
-      setStatus(copy.sequenceHint);
-    }, 800 * melody.length + 500));
+          inputLocked = false;
+          replayButton.disabled = false;
+          setStatus(copy.sequenceHint);
+        },
+        800 * melody.length + 500,
+      ),
+    );
   }
 
   function schedulePulse() {
@@ -339,16 +394,22 @@
       if (!active || stage !== 2) return;
       core.classList.add("is-lit");
       target.textContent = copy.now;
-      core.setAttribute("aria-label", text(
-        "Noyau illuminé en vert, clique maintenant",
-        "Core glowing green, click now",
-      ));
+      core.setAttribute(
+        "aria-label",
+        text(
+          "Noyau illuminé en vert, clique maintenant",
+          "Core glowing green, click now",
+        ),
+      );
       pulseTimer = window.setTimeout(() => {
         core.classList.remove("is-lit");
-        core.setAttribute("aria-label", text(
-          "Noyau du gardien, attends le signal vert",
-          "Guardian core, wait for the green signal",
-        ));
+        core.setAttribute(
+          "aria-label",
+          text(
+            "Noyau du gardien, attends le signal vert",
+            "Guardian core, wait for the green signal",
+          ),
+        );
         target.textContent = copy.stageThreeWait;
         schedulePulse();
       }, 1200);
@@ -378,7 +439,11 @@
   core.addEventListener("click", () => {
     if (!active || stage !== 2) return;
     if (!core.classList.contains("is-lit")) {
-      if (!loseEnergy()) setStatus(text("Attends le halo vert.", "Wait for the green glow."), "error");
+      if (!loseEnergy())
+        setStatus(
+          text("Attends le halo vert.", "Wait for the green glow."),
+          "error",
+        );
       return;
     }
     clearTimers();
@@ -403,7 +468,10 @@
       currentPage: "boss-01",
       currentLevel: 11,
     });
-    setStatus(saved ? copy.saveSuccess : copy.saveFailure, saved ? "success" : "error");
+    setStatus(
+      saved ? copy.saveSuccess : copy.saveFailure,
+      saved ? "success" : "error",
+    );
   });
 
   startButton.addEventListener("click", () => {

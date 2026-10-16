@@ -254,6 +254,29 @@ body {
 .tile-icon {
   fill: currentColor;
 }
+.lock {
+  filter: drop-shadow(0 0 2.5px currentColor);
+}
+.lock-shackle {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+}
+.lock-body {
+  fill: currentColor;
+}
+.lock-shine {
+  fill: #fff;
+  opacity: 0.28;
+}
+.lock-plate {
+  fill: #080b16;
+  opacity: 0.3;
+}
+.lock-hole {
+  fill: #060913;
+}
 .tile-badge-bg {
   fill: #07130f;
   stroke: var(--tile-edge);
@@ -913,4 +936,73 @@ a.level-card.is-boss:focus-visible {
   .series {
     opacity: 1;
   }
+}
+
+/* Pied de page premium du hub */
+html body.hub-page > .hub-footer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: min(960px, calc(100% - 32px));
+  margin: 28px auto 0;
+  padding: 26px 14px 34px;
+  border-top: 0;
+  color: var(--hub-muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  white-space: normal;
+  flex-wrap: wrap;
+}
+html body.hub-page > .hub-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-soft, rgba(121, 247, 255, 0.35)) 20%, rgba(179, 108, 255, 0.35) 80%, transparent);
+}
+html body.hub-page > .hub-footer::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 120px;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, transparent, #fff, var(--hub-cyan), transparent);
+  box-shadow: 0 0 14px 2px rgba(121, 247, 255, 0.7);
+  animation: hub-footer-scan 6s cubic-bezier(0.55, 0, 0.3, 1) infinite;
+}
+.hub-footer-dot {
+  width: 6px;
+  height: 6px;
+  rotate: 45deg;
+  background: var(--hub-cyan);
+  box-shadow: 0 0 10px var(--hub-cyan);
+  animation: hub-footer-pulse 2.4s ease-in-out infinite;
+}
+@keyframes hub-footer-scan {
+  0% { left: -130px; opacity: 0; }
+  10%, 90% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+@keyframes hub-footer-pulse {
+  50% { opacity: 0.35; scale: 0.7; }
+}
+html body.hub-page > .dev-mode {
+  width: min(960px, calc(100% - 32px));
+  margin: 36px auto 0;
+}html body.hub-page .dev-mode-toggle {
+  border-color: rgba(121, 247, 255, 0.7);
+  border-radius: 2px;
+  color: var(--hub-cyan);
+  background: rgba(5, 10, 24, 0.85);
+  box-shadow: 0 0 22px rgba(121, 247, 255, 0.2);
+}
+html body.hub-page .dev-mode-toggle:hover,
+html body.hub-page .dev-mode-toggle:focus-visible {
+  background: rgba(121, 247, 255, 0.14);
 }

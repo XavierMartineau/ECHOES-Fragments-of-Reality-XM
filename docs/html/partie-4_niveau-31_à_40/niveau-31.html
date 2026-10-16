@@ -3,13 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="../../assets/svg/echoes-favicon.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../../assets/svg/echoes-favicon.svg"
+    />
     <title>ECHOES - Niveau 31</title>
     <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css" />
     <link rel="stylesheet" href="../../css/partie-4_niveau-31_à_40.css?v=9" />
     <link rel="stylesheet" href="../../css/responsive.css?v=t4" />
     <link rel="stylesheet" href="../../css/fonts.css" />
-</head>
+  </head>
   <body class="part-four-theme" data-level="31">
     <div class="background-glow" aria-hidden="true"></div>
     <div class="grid-overlay" aria-hidden="true"></div>
@@ -17,10 +21,16 @@
       <a class="brand" href="../../../index.html">ECHOES</a>
       <div class="level-meta">
         <span id="partLabel">PARTIE 4 // RÉSONANCE</span>
-        <div class="level-progress" id="levelProgress" aria-label="Progression de la Partie 4"></div>
+        <div
+          class="level-progress"
+          id="levelProgress"
+          aria-label="Progression de la Partie 4"
+        ></div>
         <strong id="levelLabel">NIVEAU 31</strong>
       </div>
-      <button class="save-game-button" id="saveGameButton" type="button">SAUVEGARDER</button>
+      <button class="save-game-button" id="saveGameButton" type="button">
+        SAUVEGARDER
+      </button>
     </header>
     <main class="level-shell level-31-shell">
       <section class="level-intro" aria-labelledby="levelTitle">
@@ -35,15 +45,28 @@
       </section>
       <section class="puzzle-panel tilt-panel" aria-labelledby="puzzleTitle">
         <div class="panel-heading">
-          <div><p class="panel-kicker" id="kicker">PUZZLE // INCLINAISON</p><h2 id="puzzleTitle"></h2></div>
+          <div>
+            <p class="panel-kicker" id="kicker">PUZZLE // INCLINAISON</p>
+            <h2 id="puzzleTitle"></h2>
+          </div>
           <div class="tilt-readouts">
-            <span class="progress-readout" id="roundReadout" aria-live="polite">MANCHE 1 / 4</span>
-            <span class="progress-readout" id="ballReadout" aria-live="polite">0 / 1</span>
+            <span class="progress-readout" id="roundReadout" aria-live="polite"
+              >MANCHE 1 / 4</span
+            >
+            <span class="progress-readout" id="ballReadout" aria-live="polite"
+              >0 / 1</span
+            >
           </div>
         </div>
         <p class="tilt-rules" id="rules"></p>
         <div class="tilt-stage">
-          <canvas id="tiltCanvas" width="800" height="1680" role="img" aria-label="Plateau incliné avec passages et pièges générés aléatoirement, deux secteurs et des portails"></canvas>
+          <canvas
+            id="tiltCanvas"
+            width="800"
+            height="1680"
+            role="img"
+            aria-label="Plateau incliné avec passages et pièges générés aléatoirement, deux secteurs et des portails"
+          ></canvas>
         </div>
         <ul class="tilt-legend" id="legend" aria-hidden="true">
           <li><i class="lg lg-laser"></i><span></span></li>
@@ -54,18 +77,43 @@
           <li><i class="lg lg-portal"></i><span></span></li>
         </ul>
         <div class="tilt-controls">
-          <button class="tilt-arrow" id="leftButton" type="button" aria-label="Gauche">◀</button>
-          <button class="sequence-start-button" id="startPuzzleButton" type="button"></button>
-          <button class="tilt-arrow" id="rightButton" type="button" aria-label="Droite">▶</button>
+          <button
+            class="tilt-arrow"
+            id="leftButton"
+            type="button"
+            aria-label="Gauche"
+          >
+            ◀
+          </button>
+          <button
+            class="sequence-start-button"
+            id="startPuzzleButton"
+            type="button"
+          ></button>
+          <button
+            class="tilt-arrow"
+            id="rightButton"
+            type="button"
+            aria-label="Droite"
+          >
+            ▶
+          </button>
         </div>
         <p class="puzzle-status" id="puzzleStatus" aria-live="polite"></p>
         <div class="puzzle-actions">
-          <button class="next-level-button" id="nextLevelButton" type="button" hidden></button>
+          <button
+            class="next-level-button"
+            id="nextLevelButton"
+            type="button"
+            hidden
+          ></button>
           <button class="reset-button" id="resetButton" type="button"></button>
         </div>
       </section>
     </main>
-    <footer class="level-footer"><span id="footerLabel">ÉCHO // RÉSONANCE</span><span>31 / 60</span></footer>
+    <footer class="level-footer">
+      <span id="footerLabel">ÉCHO // RÉSONANCE</span><span>31 / 60</span>
+    </footer>
     <script src="../../js/translations.js"></script>
     <script src="../../js/save-system.js"></script>
     <script src="../../js/language.js"></script>
@@ -74,6 +122,8 @@
     <script src="../../js/premium-animations.js"></script>
     <script src="../../js/dev-mode.js"></script>
     <script src="../../js/ambient-background.js?v=2"></script>
-    <script src="../../js/save-system.js"></script><script src="../../js/levels-config.js"></script><script src="../../js/level-guard.js"></script>
+    <script src="../../js/save-system.js"></script>
+    <script src="../../js/levels-config.js"></script>
+    <script src="../../js/level-guard.js"></script>
   </body>
 </html>

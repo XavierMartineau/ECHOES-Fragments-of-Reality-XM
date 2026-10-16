@@ -10,14 +10,19 @@
     />
     <title>ECHOES - Niveaux</title>
     <link rel="stylesheet" href="../css/fonts.css" />
-    <link rel="stylesheet" href="../css/niveaux.css?v=7" />
+    <link rel="stylesheet" href="../css/niveaux.css?v=9" />
     <link rel="stylesheet" href="../css/key-tray.css?v=2" />
   </head>
-  <body>
+  <body class="hub-page">
     <div class="hub-background" aria-hidden="true"></div>
     <main class="hub-shell">
       <header class="hub-header">
-        <a class="hub-brand" href="../../index.html" aria-label="Retour à l'accueil ECHOES">ECHOES</a>
+        <a
+          class="hub-brand"
+          href="../../index.html"
+          aria-label="Retour à l'accueil ECHOES"
+          >ECHOES</a
+        >
         <div class="hub-player">
           <span class="hub-player-label" data-i18n="player">JOUEUR</span>
           <strong id="playerName"></strong>
@@ -25,7 +30,9 @@
       </header>
 
       <section class="hub-progress" aria-labelledby="hubTitle">
-        <p class="hub-kicker" data-i18n="kicker">CAMPAGNE // SÉLECTION DES NIVEAUX</p>
+        <p class="hub-kicker" data-i18n="kicker">
+          CAMPAGNE // SÉLECTION DES NIVEAUX
+        </p>
         <h1 id="hubTitle" data-i18n="title">Choisis ton niveau</h1>
         <div class="progress-meter">
           <div
@@ -38,13 +45,38 @@
           >
             <span class="progress-fill" id="progressFill"></span>
           </div>
-          <p class="progress-text"><strong id="progressPercent">0 %</strong> <span id="progressCount"></span></p>
+          <p class="progress-text">
+            <strong id="progressPercent">0 %</strong>
+            <span id="progressCount"></span>
+          </p>
         </div>
         <div class="hub-actions">
-          <a class="hub-button primary" id="continueButton" href="#" data-i18n="continue">Continuer</a>
-          <a class="hub-button" href="introduction.html" data-i18n="intro">Revoir l'introduction</a>
-          <button class="hub-button" id="switchUserButton" type="button" data-i18n="switchUser">Changer de joueur</button>
-          <button class="hub-button danger" id="resetButton" type="button" data-i18n="reset">Réinitialiser la progression</button>
+          <a
+            class="hub-button primary"
+            id="continueButton"
+            href="#"
+            data-i18n="continue"
+            >Continuer</a
+          >
+          <a class="hub-button" href="introduction.html" data-i18n="intro"
+            >Revoir l'introduction</a
+          >
+          <button
+            class="hub-button"
+            id="switchUserButton"
+            type="button"
+            data-i18n="switchUser"
+          >
+            Changer de joueur
+          </button>
+          <button
+            class="hub-button danger"
+            id="resetButton"
+            type="button"
+            data-i18n="reset"
+          >
+            Réinitialiser la progression
+          </button>
         </div>
       </section>
 
@@ -53,23 +85,38 @@
       <div id="seriesList" class="series-list"></div>
     </main>
 
-    <dialog class="confirm-dialog" id="resetDialog" aria-labelledby="resetTitle">
+    <dialog
+      class="confirm-dialog"
+      id="resetDialog"
+      aria-labelledby="resetTitle"
+    >
       <form method="dialog">
-        <h2 id="resetTitle" data-i18n="resetTitle">Réinitialiser la progression ?</h2>
+        <h2 id="resetTitle" data-i18n="resetTitle">
+          Réinitialiser la progression ?
+        </h2>
         <p id="resetMessage"></p>
         <div class="confirm-actions">
-          <button class="hub-button" value="cancel" data-i18n="cancel">Annuler</button>
-          <button class="hub-button danger" value="confirm" data-i18n="confirm">Tout effacer</button>
+          <button class="hub-button" value="cancel" data-i18n="cancel">
+            Annuler
+          </button>
+          <button class="hub-button danger" value="confirm" data-i18n="confirm">
+            Tout effacer
+          </button>
         </div>
       </form>
     </dialog>
 
-    <footer class="global-site-footer"><span>© 2026 Xavier Martineau</span><span>All rights reserved.</span></footer>
+    <footer class="global-site-footer hub-footer">
+      <span>© 2026 Xavier Martineau</span>
+      <i class="hub-footer-dot" aria-hidden="true"></i>
+      <span>All rights reserved.</span>
+    </footer>
     <script src="../js/translations.js?v=3"></script>
     <script src="../js/save-system.js?v=3"></script>
     <script src="../js/levels-config.js?v=4"></script>
     <script src="../js/key-tray.js"></script>
-    <script src="../js/niveaux.js?v=4"></script>
-    
+    <script src="../js/niveaux.js?v=5"></script>
+    <script src="../js/scene-bg.js?v=1"></script>
+    <script src="../js/dev-mode.js"></script>
   </body>
 </html>

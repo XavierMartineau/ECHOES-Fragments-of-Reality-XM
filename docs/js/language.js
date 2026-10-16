@@ -31,9 +31,8 @@
   const buttons = switcher.querySelectorAll(
     existing ? ".lang-btn" : ".global-lang-btn",
   );
-  const currentLanguage = localStorage.getItem("echoes-language") === "en"
-    ? "en"
-    : "fr";
+  const currentLanguage =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
 
   document.documentElement.lang = currentLanguage;
   switcher.setAttribute(

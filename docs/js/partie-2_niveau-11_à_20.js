@@ -24,7 +24,8 @@ else {
   const board = document.getElementById("alignmentBoard");
   if (!board) return;
 
-  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const language =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const copy = {
     fr: {
       part: "PARTIE 2 // FRACTURES",
@@ -50,23 +51,30 @@ else {
       slot: (line, position) => `${line}, emplacement ${position}`,
       tray: "Fragments à aligner",
       start: "OBSERVER LES DEUX LIGNES",
-      ready: "Observe les deux lignes, mémorise leur ordre, puis replace les fragments sans indice visuel.",
+      ready:
+        "Observe les deux lignes, mémorise leur ordre, puis replace les fragments sans indice visuel.",
       showing: (line, position, shape) =>
         `${line}, emplacement ${position} : ${shape}`,
-      playing: "La séquence est masquée. Reproduis maintenant les deux lignes de mémoire.",
-      selected: (shape) => `${shape} sélectionné. Place-le sur n'importe quel emplacement de même forme.`,
-      wrong: "Cette forme ne correspond pas à l'emplacement. Choisis une forme identique.",
+      playing:
+        "La séquence est masquée. Reproduis maintenant les deux lignes de mémoire.",
+      selected: (shape) =>
+        `${shape} sélectionné. Place-le sur n'importe quel emplacement de même forme.`,
+      wrong:
+        "Cette forme ne correspond pas à l'emplacement. Choisis une forme identique.",
       hintButton: "INDICE (-5 S)",
       hintShowing: (line, position, shape) =>
         `Indice : l'emplacement ${position} de ${line} contient un ${shape}.`,
       hintNoSlots: "Toutes les formes visibles ont déjà été placées.",
-      timerExpired: "Temps écoulé. Réinitialise le niveau pour retenter la séquence.",
+      timerExpired:
+        "Temps écoulé. Réinitialise le niveau pour retenter la séquence.",
       timeLeft: (seconds) => `Temps restant : ${seconds} secondes.`,
-      success: "Les deux lignes vibrent à l'unisson. La résonance est stabilisée.",
+      success:
+        "Les deux lignes vibrent à l'unisson. La résonance est stabilisée.",
       next: "CONTINUER VERS LE NIVEAU 12",
       reset: "Réinitialiser",
       system: "SYSTEME:: DEUX FRAGMENTS DETECTES // SYNCHRONISATION EN ATTENTE",
-      systemSuccess: "SYSTEME:: DOUBLE RESONANCE STABILISEE // PROTOCOLE 012 DEBLOQUE",
+      systemSuccess:
+        "SYSTEME:: DOUBLE RESONANCE STABILISEE // PROTOCOLE 012 DEBLOQUE",
       save: "SAUVEGARDER",
       saved: "SAUVEGARDÉ",
       saveHint: "Progression sauvegardée.",
@@ -97,11 +105,12 @@ else {
       slot: (line, position) => `${line}, slot ${position}`,
       tray: "Fragments to align",
       start: "OBSERVE BOTH LINES",
-      ready: "Observe both lines and memorize their order, then place the fragments without visual hints.",
-      showing: (line, position, shape) =>
-        `${line}, slot ${position}: ${shape}`,
+      ready:
+        "Observe both lines and memorize their order, then place the fragments without visual hints.",
+      showing: (line, position, shape) => `${line}, slot ${position}: ${shape}`,
       playing: "The sequence is hidden. Rebuild both lines from memory.",
-      selected: (shape) => `${shape} selected. Place it in any slot with the same shape.`,
+      selected: (shape) =>
+        `${shape} selected. Place it in any slot with the same shape.`,
       wrong: "That shape does not match this slot. Choose an identical shape.",
       hintButton: "HINT (-5 S)",
       hintShowing: (line, position, shape) =>
@@ -113,7 +122,8 @@ else {
       next: "CONTINUE TO LEVEL 12",
       reset: "Reset",
       system: "SYSTEM:: TWO FRAGMENTS DETECTED // SYNCHRONIZATION PENDING",
-      systemSuccess: "SYSTEM:: DOUBLE RESONANCE STABILIZED // PROTOCOL 012 UNLOCKED",
+      systemSuccess:
+        "SYSTEM:: DOUBLE RESONANCE STABILIZED // PROTOCOL 012 UNLOCKED",
       save: "SAVE",
       saved: "SAVED",
       saveHint: "Progress saved.",
@@ -250,7 +260,10 @@ else {
         const slot = document.createElement("button");
         slot.type = "button";
         slot.className = "resonance-slot";
-        slot.setAttribute("aria-label", copy.slot(copy.line[line], position + 1));
+        slot.setAttribute(
+          "aria-label",
+          copy.slot(copy.line[line], position + 1),
+        );
         slot.dataset.line = String(line);
         slot.dataset.position = String(position);
         slot.addEventListener("click", () => placePiece(key));
@@ -267,7 +280,11 @@ else {
           slot.classList.add("is-filled", `shape-${piece.shape}`);
           slot.innerHTML = `<span class="shape-icon shape-${piece.shape}" aria-hidden="true"></span>`;
         } else if (previewSlot === key) {
-          slot.classList.add("is-preview", `is-${previewType}`, `shape-${shape}`);
+          slot.classList.add(
+            "is-preview",
+            `is-${previewType}`,
+            `shape-${shape}`,
+          );
           slot.innerHTML = `<span class="shape-icon shape-${shape}" aria-hidden="true"></span>`;
         } else {
           slot.innerHTML = `<span class="slot-index" aria-hidden="true">0${position + 1}</span>`;
@@ -323,12 +340,18 @@ else {
     nextButton.hidden = true;
     for (let replay = 0; replay < 2; replay += 1) {
       for (let line = 0; line < lineShapes.length; line += 1) {
-        for (let position = 0; position < lineShapes[line].length; position += 1) {
+        for (
+          let position = 0;
+          position < lineShapes[line].length;
+          position += 1
+        ) {
           if (activePlayback !== playbackId || solved) return;
           const shape = lineShapes[line][position];
           previewSlot = slotKey(line, position);
           previewType = "sequence";
-          setStatus(copy.showing(copy.line[line], position + 1, copy.shape[shape]));
+          setStatus(
+            copy.showing(copy.line[line], position + 1, copy.shape[shape]),
+          );
           render();
           await new Promise((resolve) => window.setTimeout(resolve, 1000));
         }
@@ -338,7 +361,8 @@ else {
     previewSlot = null;
     previewType = "";
     started = true;
-    startButton.textContent = language === "en" ? "SEQUENCE OBSERVED" : "SÉQUENCE OBSERVÉE";
+    startButton.textContent =
+      language === "en" ? "SEQUENCE OBSERVED" : "SÉQUENCE OBSERVÉE";
     render();
     hintButton.disabled = false;
     startTimer();
@@ -420,11 +444,15 @@ else {
     lineShapes.forEach((row, line) => {
       row.forEach((shape, position) => {
         const key = slotKey(line, position);
-        if (!placed.has(key)) availableSlots.push({ key, line, position, shape });
+        if (!placed.has(key))
+          availableSlots.push({ key, line, position, shape });
       });
     });
 
-    timerDeadline = Math.max(Date.now(), timerDeadline - HINT_PENALTY_SECONDS * 1000);
+    timerDeadline = Math.max(
+      Date.now(),
+      timerDeadline - HINT_PENALTY_SECONDS * 1000,
+    );
     remainingMilliseconds = Math.max(0, timerDeadline - Date.now());
     updateTimer();
     if (remainingMilliseconds <= 0) {
@@ -437,17 +465,25 @@ else {
     }
 
     if (hintTimeout !== null) window.clearTimeout(hintTimeout);
-    const hint = availableSlots[Math.floor(Math.random() * availableSlots.length)];
+    const hint =
+      availableSlots[Math.floor(Math.random() * availableSlots.length)];
     previewSlot = hint.key;
     previewType = "hint";
     render();
-    setStatus(copy.hintShowing(copy.line[hint.line], hint.position + 1, copy.shape[hint.shape]));
+    setStatus(
+      copy.hintShowing(
+        copy.line[hint.line],
+        hint.position + 1,
+        copy.shape[hint.shape],
+      ),
+    );
     hintTimeout = window.setTimeout(() => {
       previewSlot = null;
       previewType = "";
       hintTimeout = null;
       render();
-      if (started) setStatus(copy.timeLeft(Math.ceil(remainingMilliseconds / 1000)));
+      if (started)
+        setStatus(copy.timeLeft(Math.ceil(remainingMilliseconds / 1000)));
     }, 1400);
   };
 
@@ -487,7 +523,8 @@ else {
   const board = document.getElementById("crossIntersections");
   if (!board) return;
 
-  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const language =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const copy = {
     fr: {
       part: "PARTIE 2 // FRACTURES",
@@ -505,16 +542,19 @@ else {
       point: (number) => `Intersection lumineuse ${number}`,
       start: "OBSERVER LA SÉQUENCE",
       replay: "REVOIR LA SÉQUENCE",
-      ready: "Observe la séquence lumineuse, puis reproduis-la dans le même ordre.",
+      ready:
+        "Observe la séquence lumineuse, puis reproduis-la dans le même ordre.",
       showing: "Observe le chemin de lumière…",
       playing: "À toi : active les intersections dans le même ordre.",
-      wrong: "La lumière a dévié. Réobserve la séquence et recommence ce motif.",
+      wrong:
+        "La lumière a dévié. Réobserve la séquence et recommence ce motif.",
       roundSuccess: "Résonance stabilisée. Le motif suivant se révèle.",
       success: "La lumière a retrouvé son chemin. La fracture est stabilisée.",
       next: "CONTINUER VERS LE NIVEAU 13",
       reset: "Réinitialiser",
       system: "SYSTEME:: FAISCEAUX CROISES // INTERSECTIONS EN ATTENTE",
-      systemSuccess: "SYSTEME:: SEQUENCE 012 RECONSTITUEE // PROTOCOLE 013 DEBLOQUE",
+      systemSuccess:
+        "SYSTEME:: SEQUENCE 012 RECONSTITUEE // PROTOCOLE 013 DEBLOQUE",
       save: "SAUVEGARDER",
       saved: "SAUVEGARDÉ",
       saveHint: "Progression sauvegardée.",
@@ -539,7 +579,8 @@ else {
       ready: "Watch the light sequence, then repeat it in the same order.",
       showing: "Follow the path of light…",
       playing: "Your turn: activate the intersections in the same order.",
-      wrong: "The light path slipped. Replay the sequence and try this pattern again.",
+      wrong:
+        "The light path slipped. Replay the sequence and try this pattern again.",
       roundSuccess: "Resonance stabilized. The next pattern appears.",
       success: "The light has found its path. The fracture is stable.",
       next: "CONTINUE TO LEVEL 13",
@@ -757,7 +798,8 @@ else {
   const board = document.getElementById("tileBoard");
   if (!board) return;
 
-  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const language =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const copy = {
     fr: {
       part: "PARTIE 2 // FRACTURES",
@@ -769,17 +811,22 @@ else {
       puzzleKicker: "PUZZLE // RECONSTRUCTION",
       puzzleTitle: "Motif fractal",
       referenceLabel: "MOTIF CIBLE",
-      referenceHint: "Reforme le motif en déplaçant les panneaux vers la case vide.",
+      referenceHint:
+        "Reforme le motif en déplaçant les panneaux vers la case vide.",
       board: "Panneaux holographiques mélangés",
       start: "DÉMARRER LE PUZZLE",
       next: "CONTINUER VERS LE NIVEAU 14",
       reset: "Réinitialiser",
-      ready: "Démarre le puzzle, puis déplace les panneaux voisins de la case vide.",
+      ready:
+        "Démarre le puzzle, puis déplace les panneaux voisins de la case vide.",
       playing: "Les fragments doivent glisser… jusqu'à retrouver leur forme.",
-      invalid: "Ce panneau ne touche pas la case vide. Choisis un panneau voisin.",
+      invalid:
+        "Ce panneau ne touche pas la case vide. Choisis un panneau voisin.",
       success: "Le motif fractal est restauré. La fracture se stabilise.",
-      system: "SYSTEME:: FRACTURE 013 DETECTEE // MOTIF EN ATTENTE DE RESTAURATION",
-      systemSuccess: "SYSTEME:: MOTIF FRACTAL RESTAURE // PROTOCOLE 014 DEBLOQUE",
+      system:
+        "SYSTEME:: FRACTURE 013 DETECTEE // MOTIF EN ATTENTE DE RESTAURATION",
+      systemSuccess:
+        "SYSTEME:: MOTIF FRACTAL RESTAURE // PROTOCOLE 014 DEBLOQUE",
       save: "SAUVEGARDER",
       saved: "SAUVEGARDÉ",
       saveHint: "Progression sauvegardée.",
@@ -801,17 +848,20 @@ else {
       puzzleKicker: "PUZZLE // RECONSTRUCTION",
       puzzleTitle: "Fractal pattern",
       referenceLabel: "TARGET PATTERN",
-      referenceHint: "Rebuild the pattern by sliding panels into the empty space.",
+      referenceHint:
+        "Rebuild the pattern by sliding panels into the empty space.",
       board: "Shuffled holographic panels",
       start: "START PUZZLE",
       next: "CONTINUE TO LEVEL 14",
       reset: "Reset",
       ready: "Start the puzzle, then move panels beside the empty space.",
       playing: "The fragments must slide until they regain their shape.",
-      invalid: "That panel does not touch the empty space. Choose a neighboring panel.",
+      invalid:
+        "That panel does not touch the empty space. Choose a neighboring panel.",
       success: "The fractal pattern is restored. The fracture stabilizes.",
       system: "SYSTEM:: FRACTURE 013 DETECTED // PATTERN AWAITS RESTORATION",
-      systemSuccess: "SYSTEM:: FRACTAL PATTERN RESTORED // PROTOCOL 014 UNLOCKED",
+      systemSuccess:
+        "SYSTEM:: FRACTAL PATTERN RESTORED // PROTOCOL 014 UNLOCKED",
       save: "SAVE",
       saved: "SAVED",
       saveHint: "Progress saved.",
@@ -860,7 +910,9 @@ else {
 
   // Met à jour le compteur de progression.
   const updateProgress = () => {
-    const placed = tiles.filter((tile, index) => tile === goal[index] && tile !== 0).length;
+    const placed = tiles.filter(
+      (tile, index) => tile === goal[index] && tile !== 0,
+    ).length;
     readout.textContent = `${placed} / 8`;
     return placed;
   };
@@ -873,7 +925,10 @@ else {
         const empty = document.createElement("div");
         empty.className = "fractal-empty";
         empty.setAttribute("role", "gridcell");
-        empty.setAttribute("aria-label", language === "en" ? "Empty space" : "Case vide");
+        empty.setAttribute(
+          "aria-label",
+          language === "en" ? "Empty space" : "Case vide",
+        );
         board.appendChild(empty);
         return;
       }
@@ -907,7 +962,9 @@ else {
     for (let move = 0; move < 80; move += 1) {
       const choices = result
         .map((_, index) => index)
-        .filter((index) => isNeighbor(index, emptyIndex) && index !== previousIndex);
+        .filter(
+          (index) => isNeighbor(index, emptyIndex) && index !== previousIndex,
+        );
       const nextIndex = choices[Math.floor(Math.random() * choices.length)];
       result[emptyIndex] = result[nextIndex];
       result[nextIndex] = 0;
@@ -973,10 +1030,12 @@ else {
     render();
     setStatus(copy.playing);
     const emptyIndex = tiles.indexOf(0);
-    const firstMove = [...board.querySelectorAll(".fractal-tile")].find((tile) => {
-      const tileIndex = tiles.indexOf(Number(tile.dataset.panel));
-      return isNeighbor(tileIndex, emptyIndex);
-    });
+    const firstMove = [...board.querySelectorAll(".fractal-tile")].find(
+      (tile) => {
+        const tileIndex = tiles.indexOf(Number(tile.dataset.panel));
+        return isNeighbor(tileIndex, emptyIndex);
+      },
+    );
     firstMove?.focus();
   });
   resetButton.addEventListener("click", reset);
@@ -1014,25 +1073,31 @@ else {
   const board = document.getElementById("prismBoard");
   if (!board) return;
 
-  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const language =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const copy = {
     fr: {
       part: "PARTIE 2 // FRACTURES",
       level: "NIVEAU 14",
       eyebrow: "Fragment 014 // Le prisme oublié",
       title: "Le prisme oublié",
-      description: "Un faisceau cherche sa sortie. Fais pivoter les miroirs pour le guider jusqu'au récepteur.",
+      description:
+        "Un faisceau cherche sa sortie. Fais pivoter les miroirs pour le guider jusqu'au récepteur.",
       systemLabel: "ECHO://PHOTON",
       puzzleKicker: "PUZZLE // TRAJECTOIRE LUMINEUSE",
       puzzleTitle: "Le chemin du faisceau",
       start: "ACTIVER LE FAISCEAU",
       next: "CONTINUER VERS LE NIVEAU 15",
       reset: "Réinitialiser",
-      ready: "Active le faisceau, puis oriente les miroirs pour atteindre le récepteur.",
-      playing: "Fais pivoter les miroirs. Le faisceau indique sa trajectoire en temps réel.",
-      success: "Le faisceau atteint le récepteur. Le prisme retrouve sa résonance.",
+      ready:
+        "Active le faisceau, puis oriente les miroirs pour atteindre le récepteur.",
+      playing:
+        "Fais pivoter les miroirs. Le faisceau indique sa trajectoire en temps réel.",
+      success:
+        "Le faisceau atteint le récepteur. Le prisme retrouve sa résonance.",
       system: "SYSTEME:: PRISME 014 DETECTE // FAISCEAU EN ATTENTE",
-      systemSuccess: "SYSTEME:: TRAJECTOIRE 014 RESTAUREE // PROTOCOLE 015 DEBLOQUE",
+      systemSuccess:
+        "SYSTEME:: TRAJECTOIRE 014 RESTAUREE // PROTOCOLE 015 DEBLOQUE",
       source: "S",
       receiver: "R",
       sourceLabel: "Source du faisceau",
@@ -1051,7 +1116,8 @@ else {
       level: "LEVEL 14",
       eyebrow: "Fragment 014 // The forgotten prism",
       title: "The forgotten prism",
-      description: "A beam is searching for an exit. Rotate the mirrors to guide it to the receiver.",
+      description:
+        "A beam is searching for an exit. Rotate the mirrors to guide it to the receiver.",
       systemLabel: "ECHO://PHOTON",
       puzzleKicker: "PUZZLE // LIGHT PATH",
       puzzleTitle: "The beam's path",
@@ -1134,7 +1200,8 @@ else {
 
       const mirror = mirrors.get(index);
       if (mirror) {
-        const reflection = mirror.direction === "/" ? slashReflection : backslashReflection;
+        const reflection =
+          mirror.direction === "/" ? slashReflection : backslashReflection;
         direction = reflection[direction];
       }
       x += dx[direction];
@@ -1190,13 +1257,18 @@ else {
 
   // Met à jour le compteur de progression.
   const updateProgress = () => {
-    const aligned = [...mirrors.values()].filter((mirror) => mirror.direction === mirror.target).length;
+    const aligned = [...mirrors.values()].filter(
+      (mirror) => mirror.direction === mirror.target,
+    ).length;
     readout.textContent = `${aligned} / ${mirrors.size}`;
   };
 
   // Enregistre la réussite du niveau.
   const saveCompletion = () => {
-    window.EchoesSave?.saveProgress({ currentPage: "level-14", currentLevel: 14 });
+    window.EchoesSave?.saveProgress({
+      currentPage: "level-14",
+      currentLevel: 14,
+    });
   };
 
   // Termine le niveau.
@@ -1241,7 +1313,13 @@ else {
     window.location.href = "niveau-15.html";
   });
   saveButton.addEventListener("click", () => {
-    if (!window.EchoesSave?.saveProgress({ currentPage: "level-14", currentLevel: 14 })) return;
+    if (
+      !window.EchoesSave?.saveProgress({
+        currentPage: "level-14",
+        currentLevel: 14,
+      })
+    )
+      return;
     saveButton.textContent = copy.saved;
     setStatus(copy.saveHint);
     window.setTimeout(() => {
@@ -1265,33 +1343,62 @@ else {
   const board = document.getElementById("flowBoard");
   if (!board) return;
 
-  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const language =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const copy = {
     fr: {
       part: "PARTIE 2 // FRACTURES",
       level: "NIVEAU 15",
       eyebrow: "Fragment 015 // Les veines de lumière",
       title: "Les veines de lumière",
-      description: "Vingt paires de balises se répondent dans cette grille de 14 par 14. Relie chaque paire par un tracé sinueux, sans croiser les flux. Il n'est pas nécessaire de remplir toute la grille.",
+      description:
+        "Vingt paires de balises se répondent dans cette grille de 14 par 14. Relie chaque paire par un tracé sinueux, sans croiser les flux. Il n'est pas nécessaire de remplir toute la grille.",
       systemLabel: "ECHO://FLUX",
       puzzleKicker: "PUZZLE // ROUTAGE DE FLUX",
       puzzleTitle: "Réseau de résonance",
       start: "ACTIVER LE RÉSEAU",
       next: "CONTINUER VERS LE NIVEAU 16",
       reset: "Réinitialiser",
-      ready: "Maintiens une balise et trace son chemin sinueux jusqu'à la balise de même couleur. Rien ne t'oblige à remplir toute la grille.",
-      playing: "Relie les vingt paires sans croiser les flux. Tu peux aussi toucher les cellules une à une.",
-      connecting: (color) => `Flux ${color} en cours. Continue jusqu'à sa balise jumelle.`,
+      ready:
+        "Maintiens une balise et trace son chemin sinueux jusqu'à la balise de même couleur. Rien ne t'oblige à remplir toute la grille.",
+      playing:
+        "Relie les vingt paires sans croiser les flux. Tu peux aussi toucher les cellules une à une.",
+      connecting: (color) =>
+        `Flux ${color} en cours. Continue jusqu'à sa balise jumelle.`,
       blocked: "Cette cellule est déjà occupée par un autre flux.",
       invalid: "Le chemin ne peut avancer que vers une cellule voisine.",
-      lineComplete: (color) => `Paire ${color} reliée. Poursuis les autres flux.`,
+      lineComplete: (color) =>
+        `Paire ${color} reliée. Poursuis les autres flux.`,
       fillRemaining: "Toutes les paires sont reliées.",
-      success: "Les vingt flux sont reliés sans croisement. Le réseau est rétabli.",
+      success:
+        "Les vingt flux sont reliés sans croisement. Le réseau est rétabli.",
       system: "SYSTEME:: 20 PAIRES DETECTEES // RESEAU EN ATTENTE",
       systemSuccess: "SYSTEME:: RESEAU 015 RESTAURE // PROTOCOLE 016 DEBLOQUE",
       cell: (row, column) => `Cellule ${row}, ${column}`,
-      endpoint: (color, row, column) => `Balise ${color}, ligne ${row}, colonne ${column}`,
-      colors: ["red", "orange", "yellow", "lime", "green", "teal", "cyan", "sky", "blue", "indigo", "purple", "magenta", "pink", "brown", "white", "slate", "khaki", "burgundy", "olive", "peach"],
+      endpoint: (color, row, column) =>
+        `Balise ${color}, ligne ${row}, colonne ${column}`,
+      colors: [
+        "red",
+        "orange",
+        "yellow",
+        "lime",
+        "green",
+        "teal",
+        "cyan",
+        "sky",
+        "blue",
+        "indigo",
+        "purple",
+        "magenta",
+        "pink",
+        "brown",
+        "white",
+        "slate",
+        "khaki",
+        "burgundy",
+        "olive",
+        "peach",
+      ],
       board: "Grille de connexion 14 par 14",
       progress: "Progression de la Partie 2",
       save: "SAUVEGARDER",
@@ -1305,26 +1412,54 @@ else {
       level: "LEVEL 15",
       eyebrow: "Fragment 015 // Veins of light",
       title: "Veins of light",
-      description: "Twenty pairs of beacons answer each other across this 14-by-14 grid. Connect every pair with a winding path, without crossing flows. You do not need to fill the whole grid.",
+      description:
+        "Twenty pairs of beacons answer each other across this 14-by-14 grid. Connect every pair with a winding path, without crossing flows. You do not need to fill the whole grid.",
       systemLabel: "ECHO://FLOW",
       puzzleKicker: "PUZZLE // FLOW ROUTING",
       puzzleTitle: "Resonance network",
       start: "ACTIVATE THE NETWORK",
       next: "CONTINUE TO LEVEL 16",
       reset: "Reset",
-      ready: "Hold a beacon and trace a winding path to the beacon of the same color. You do not have to fill the whole grid.",
-      playing: "Connect all twenty pairs without crossing flows. You can also tap cells one at a time.",
-      connecting: (color) => `${color} flow in progress. Continue to its matching beacon.`,
+      ready:
+        "Hold a beacon and trace a winding path to the beacon of the same color. You do not have to fill the whole grid.",
+      playing:
+        "Connect all twenty pairs without crossing flows. You can also tap cells one at a time.",
+      connecting: (color) =>
+        `${color} flow in progress. Continue to its matching beacon.`,
       blocked: "That cell is already occupied by another flow.",
       invalid: "A path can only move into a neighboring cell.",
-      lineComplete: (color) => `${color} pair connected. Continue with the other flows.`,
+      lineComplete: (color) =>
+        `${color} pair connected. Continue with the other flows.`,
       fillRemaining: "All pairs are connected.",
-      success: "All twenty flows are connected without crossing. The network is restored.",
+      success:
+        "All twenty flows are connected without crossing. The network is restored.",
       system: "SYSTEM:: 20 PAIRS DETECTED // NETWORK STANDBY",
       systemSuccess: "SYSTEM:: NETWORK 015 RESTORED // PROTOCOL 016 UNLOCKED",
       cell: (row, column) => `Cell ${row}, ${column}`,
-      endpoint: (color, row, column) => `${color} beacon, row ${row}, column ${column}`,
-      colors: ["red", "orange", "yellow", "lime", "green", "teal", "cyan", "sky", "blue", "indigo", "purple", "magenta", "pink", "brown", "white", "slate", "khaki", "burgundy", "olive", "peach"],
+      endpoint: (color, row, column) =>
+        `${color} beacon, row ${row}, column ${column}`,
+      colors: [
+        "red",
+        "orange",
+        "yellow",
+        "lime",
+        "green",
+        "teal",
+        "cyan",
+        "sky",
+        "blue",
+        "indigo",
+        "purple",
+        "magenta",
+        "pink",
+        "brown",
+        "white",
+        "slate",
+        "khaki",
+        "burgundy",
+        "olive",
+        "peach",
+      ],
       board: "14 by 14 connection grid",
       progress: "Part 2 progress",
       save: "SAVE",
@@ -1344,11 +1479,37 @@ else {
   const saveButton = $("saveGameButton");
   const systemMessage = $("systemMessage");
   const size = 14;
-  const palette = ["#ff1744", "#ff8f00", "#ffea00", "#b2ff00", "#00c853", "#00897b", "#00e5ff", "#80b4ff", "#2962ff", "#5e35b1", "#c158ff", "#ff00d4", "#ff8ab8", "#8d4e2a", "#ffffff", "#78909c", "#e0c9a0", "#7b1030", "#8a8a00", "#ff6e5e"];
+  const palette = [
+    "#ff1744",
+    "#ff8f00",
+    "#ffea00",
+    "#b2ff00",
+    "#00c853",
+    "#00897b",
+    "#00e5ff",
+    "#80b4ff",
+    "#2962ff",
+    "#5e35b1",
+    "#c158ff",
+    "#ff00d4",
+    "#ff8ab8",
+    "#8d4e2a",
+    "#ffffff",
+    "#78909c",
+    "#e0c9a0",
+    "#7b1030",
+    "#8a8a00",
+    "#ff6e5e",
+  ];
   const symbols = [];
   copy.colors.forEach((label) => {
-    const letters = label.normalize("NFD").replace(/[^a-zA-Z]/g, "").toUpperCase();
-    symbols.push([...letters].find((letter) => !symbols.includes(letter)) ?? "?");
+    const letters = label
+      .normalize("NFD")
+      .replace(/[^a-zA-Z]/g, "")
+      .toUpperCase();
+    symbols.push(
+      [...letters].find((letter) => !symbols.includes(letter)) ?? "?",
+    );
   });
   // Renvoie un entier aléatoire entre 0 et max-1.
   const randomInt = (max) => Math.floor(Math.random() * max);
@@ -1381,11 +1542,14 @@ else {
       }
     }
     const position = new Array(size * size);
-    const refresh = () => path.forEach((cell, i) => { position[cell] = i; });
+    const refresh = () =>
+      path.forEach((cell, i) => {
+        position[cell] = i;
+      });
     refresh();
     for (let iteration = 0; iteration < 400; iteration += 1) {
       const atEnd = Math.random() < 0.5;
-      if (!atEnd) path.reverse(), refresh();
+      if (!atEnd) (path.reverse(), refresh());
       const head = path[path.length - 1];
       const options = neighborsOf(head);
       const target = options[randomInt(options.length)];
@@ -1404,8 +1568,8 @@ else {
     const blocks = Array(16).fill(0);
     routes.forEach((route) => {
       [route[0], route[route.length - 1]].forEach((cell) => {
-        const row = Math.floor(Math.floor(cell / size) * 4 / size);
-        const column = Math.floor((cell % size) * 4 / size);
+        const row = Math.floor((Math.floor(cell / size) * 4) / size);
+        const column = Math.floor(((cell % size) * 4) / size);
         blocks[row * 4 + column] += 1;
       });
     });
@@ -1426,14 +1590,17 @@ else {
           if (candidate.length < length) break;
           const first = candidate[0];
           const last = candidate[length - 1];
-          const distance = Math.abs(Math.floor(first / size) - Math.floor(last / size)) + Math.abs((first % size) - (last % size));
+          const distance =
+            Math.abs(Math.floor(first / size) - Math.floor(last / size)) +
+            Math.abs((first % size) - (last % size));
           if (distance >= 5) route = candidate;
         }
         if (!route) break;
         generated.push(route);
         offset += route.length + randomInt(2);
       }
-      if (generated.length === pairCount && isSpread(generated)) return generated;
+      if (generated.length === pairCount && isSpread(generated))
+        return generated;
     }
   };
   const colors = [];
@@ -1503,14 +1670,16 @@ else {
       const color = owner ? colorFor(owner) : null;
       cell.classList.toggle("is-connected", Boolean(color));
       cell.classList.toggle("is-endpoint", endpoints.has(index));
-      cell.classList.toggle("is-complete", Boolean(color && completedPaths.has(owner)));
+      cell.classList.toggle(
+        "is-complete",
+        Boolean(color && completedPaths.has(owner)),
+      );
       if (endpoints.has(index) && color) cell.dataset.symbol = color.symbol;
       else delete cell.dataset.symbol;
       if (color) {
         cell.style.setProperty("--flow-color", color.hex);
         cell.style.setProperty("--flow-ink", color.ink);
-      }
-      else cell.style.removeProperty("--flow-color");
+      } else cell.style.removeProperty("--flow-color");
 
       const endpoint = endpoints.get(index);
       const row = Math.floor(index / size) + 1;
@@ -1536,9 +1705,14 @@ else {
       void cell.offsetWidth;
       cell.classList.add("is-celebrating");
     });
-    window.setTimeout(() => {
-      path.forEach((index) => cells[index].classList.remove("is-celebrating"));
-    }, path.length * step + 900);
+    window.setTimeout(
+      () => {
+        path.forEach((index) =>
+          cells[index].classList.remove("is-celebrating"),
+        );
+      },
+      path.length * step + 900,
+    );
   };
 
   // Efface le chemin d'une couleur.
@@ -1563,7 +1737,9 @@ else {
 
   // Indique si deux cases sont voisines.
   const isNeighbor = (first, second) => {
-    const rowDelta = Math.abs(Math.floor(first / size) - Math.floor(second / size));
+    const rowDelta = Math.abs(
+      Math.floor(first / size) - Math.floor(second / size),
+    );
     const columnDelta = Math.abs((first % size) - (second % size));
     return rowDelta + columnDelta === 1;
   };
@@ -1579,7 +1755,10 @@ else {
     }
 
     const matchingEndpoint = endpoints.get(nextIndex);
-    if (matchingEndpoint?.colorId === activeColor && matchingEndpoint.end === activePath[0]) {
+    if (
+      matchingEndpoint?.colorId === activeColor &&
+      matchingEndpoint.end === activePath[0]
+    ) {
       activePath.push(nextIndex);
       owners[nextIndex] = activeColor;
       completedPaths.set(activeColor, activePath.slice());
@@ -1598,7 +1777,10 @@ else {
         systemMessage.textContent = copy.systemSuccess;
         nextButton.hidden = false;
         startButton.disabled = true;
-        window.EchoesSave?.saveProgress({ currentPage: "level-15", currentLevel: 15 });
+        window.EchoesSave?.saveProgress({
+          currentPage: "level-15",
+          currentLevel: 15,
+        });
         nextButton.focus();
       } else if (completedPaths.size === colors.length) {
         setStatus(copy.fillRemaining);
@@ -1720,7 +1902,13 @@ else {
     window.location.href = "niveau-16.html";
   });
   saveButton.addEventListener("click", () => {
-    if (!window.EchoesSave?.saveProgress({ currentPage: "level-15", currentLevel: 15 })) return;
+    if (
+      !window.EchoesSave?.saveProgress({
+        currentPage: "level-15",
+        currentLevel: 15,
+      })
+    )
+      return;
     saveButton.textContent = copy.saved;
     setStatus(copy.saveHint);
     window.setTimeout(() => {
@@ -1744,14 +1932,16 @@ else {
   const board = document.getElementById("logicBoard");
   if (!board) return;
 
-  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const language =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const copy = {
     fr: {
       part: "PARTIE 2 // FRACTURES",
       level: "NIVEAU 20",
       eyebrow: "Fragment 020 // Le réseau dormant",
       title: "Le réseau dormant",
-      description: "Le réseau s'est éteint. Chaque impulsion inverse une cellule et ses voisines : éteins toute la grille.",
+      description:
+        "Le réseau s'est éteint. Chaque impulsion inverse une cellule et ses voisines : éteins toute la grille.",
       systemLabel: "ECHO://RESEAU",
       puzzleKicker: "PUZZLE // INVERSION LOGIQUE",
       puzzleTitle: "Grille d'impulsions",
@@ -1759,8 +1949,10 @@ else {
       next: "AFFRONTER LE GARDIEN DE LA PARTIE 2",
       reset: "Réinitialiser",
       ready: "Réveille le réseau, puis éteins toutes les cellules.",
-      playing: "Chaque impulsion inverse la cellule choisie et ses voisines directes.",
-      roundSuccess: "Réseau stabilisé. Une nouvelle grille de plus grande complexité apparaît.",
+      playing:
+        "Chaque impulsion inverse la cellule choisie et ses voisines directes.",
+      roundSuccess:
+        "Réseau stabilisé. Une nouvelle grille de plus grande complexité apparaît.",
       success: "Les trois réseaux sont stabilisés. La fracture s'apaise.",
       system: "SYSTEME:: RESEAU 020 EN VEILLE // IMPULSION REQUISE",
       systemSuccess: "SYSTEME:: RESEAU 020 STABILISE // PROTOCOLE 021 DEBLOQUE",
@@ -1781,7 +1973,8 @@ else {
       level: "LEVEL 20",
       eyebrow: "Fragment 020 // The dormant network",
       title: "The dormant network",
-      description: "The network has gone dark. Each pulse toggles a cell and its neighbors: switch off the entire grid.",
+      description:
+        "The network has gone dark. Each pulse toggles a cell and its neighbors: switch off the entire grid.",
       systemLabel: "ECHO://NETWORK",
       puzzleKicker: "PUZZLE // LOGIC INVERSION",
       puzzleTitle: "Pulse grid",
@@ -1856,7 +2049,7 @@ else {
       cell.setAttribute("aria-pressed", String(state[index]));
       cell.setAttribute(
         "aria-label",
-        `${copy.cell} ${Math.floor(index / 3) + 1}, ${index % 3 + 1}: ${state[index] ? copy.on : copy.off}`,
+        `${copy.cell} ${Math.floor(index / 3) + 1}, ${(index % 3) + 1}: ${state[index] ? copy.on : copy.off}`,
       );
     });
   };
@@ -1875,14 +2068,21 @@ else {
       if (neighbor < 0 || neighbor >= state.length) return;
       const neighborRow = Math.floor(neighbor / 3);
       const neighborColumn = neighbor % 3;
-      if (Math.abs(row - neighborRow) + Math.abs(column - neighborColumn) !== 1 && neighbor !== index) return;
+      if (
+        Math.abs(row - neighborRow) + Math.abs(column - neighborColumn) !== 1 &&
+        neighbor !== index
+      )
+        return;
       state[neighbor] = !state[neighbor];
     });
   };
 
   // Enregistre la réussite du niveau.
   const saveCompletion = () => {
-    window.EchoesSave?.saveProgress({ currentPage: "level-20", currentLevel: 20 });
+    window.EchoesSave?.saveProgress({
+      currentPage: "level-20",
+      currentLevel: 20,
+    });
   };
 
   // Termine la manche et passe à la suivante ou au bouton Continuer.
@@ -1964,7 +2164,13 @@ else {
     window.location.href = "boss-02.html";
   });
   saveButton.addEventListener("click", () => {
-    if (!window.EchoesSave?.saveProgress({ currentPage: "level-20", currentLevel: 20 })) return;
+    if (
+      !window.EchoesSave?.saveProgress({
+        currentPage: "level-20",
+        currentLevel: 20,
+      })
+    )
+      return;
     saveButton.textContent = copy.saved;
     setStatus(copy.saveHint);
     window.setTimeout(() => {
@@ -1988,24 +2194,28 @@ else {
   const board = document.getElementById("scaleBoard");
   if (!board) return;
 
-  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const language =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const copy = {
     fr: {
       part: "PARTIE 2 // FRACTURES",
       level: "NIVEAU 17",
       eyebrow: "Fragment 017 // La balance du vide",
       title: "La balance du vide",
-      description: "Deux plateaux, un seul équilibre. Répartis chaque masse sur les plateaux pour que les deux côtés pèsent exactement pareil.",
+      description:
+        "Deux plateaux, un seul équilibre. Répartis chaque masse sur les plateaux pour que les deux côtés pèsent exactement pareil.",
       systemLabel: "ECHO://EQUILIBRE",
       puzzleKicker: "PUZZLE // ÉQUILIBRE",
       puzzleTitle: "Plateaux de la balance",
       next: "CONTINUER VERS LE NIVEAU 18",
       reset: "Réinitialiser",
-      ready: "Touche une masse, puis touche le plateau gauche, la réserve ou le plateau droit qui s'illumine.",
+      ready:
+        "Touche une masse, puis touche le plateau gauche, la réserve ou le plateau droit qui s'illumine.",
       roundSuccess: "Équilibre atteint. Un nouvel ensemble de masses apparaît.",
       success: "Les trois balances sont équilibrées. Le vide se stabilise.",
       system: "SYSTEME:: BALANCE 017 DESEQUILIBREE // REPARTITION REQUISE",
-      systemSuccess: "SYSTEME:: BALANCE 017 EQUILIBREE // PROTOCOLE 018 DEBLOQUE",
+      systemSuccess:
+        "SYSTEME:: BALANCE 017 EQUILIBREE // PROTOCOLE 018 DEBLOQUE",
       left: "Plateau gauche",
       right: "Plateau droit",
       tray: "Réserve",
@@ -2023,7 +2233,8 @@ else {
       level: "LEVEL 17",
       eyebrow: "Fragment 017 // The void scale",
       title: "The void scale",
-      description: "Two pans, one balance. Spread every mass across the pans so both sides weigh exactly the same.",
+      description:
+        "Two pans, one balance. Spread every mass across the pans so both sides weigh exactly the same.",
       systemLabel: "ECHO://BALANCE",
       puzzleKicker: "PUZZLE // BALANCE",
       puzzleTitle: "Scale pans",
@@ -2111,7 +2322,10 @@ else {
       button.className = `scale-weight zone-${zones[index]}${selected === index ? " is-selected" : ""}`;
       button.textContent = String(weight);
       button.disabled = solved || locked;
-      button.setAttribute("aria-label", `${copy.mass} ${weight}: ${zoneNames[zones[index]]}`);
+      button.setAttribute(
+        "aria-label",
+        `${copy.mass} ${weight}: ${zoneNames[zones[index]]}`,
+      );
       button.addEventListener("click", (event) => {
         event.stopPropagation();
         selected = selected === index ? null : index;
@@ -2120,7 +2334,11 @@ else {
       containers[zones[index]].appendChild(button);
     });
     zoneElements.forEach((zone, zoneIndex) => {
-      const targetable = selected !== null && !solved && !locked && zones[selected] !== zoneIndex;
+      const targetable =
+        selected !== null &&
+        !solved &&
+        !locked &&
+        zones[selected] !== zoneIndex;
       zone.classList.toggle("is-target", targetable);
     });
     const [, left, right] = sums();
@@ -2149,7 +2367,10 @@ else {
       setStatus(copy.success, "success");
       systemMessage.textContent = copy.systemSuccess;
       nextButton.hidden = false;
-      window.EchoesSave?.saveProgress({ currentPage: "level-17", currentLevel: 17 });
+      window.EchoesSave?.saveProgress({
+        currentPage: "level-17",
+        currentLevel: 17,
+      });
       readout.textContent = `${round} / ${rounds.length}`;
       render();
       nextButton.focus();
@@ -2178,7 +2399,8 @@ else {
 
   zoneElements.forEach((zone, zoneIndex) => {
     zone.addEventListener("click", () => {
-      if (selected !== null && zones[selected] !== zoneIndex) moveWeight(selected, zoneIndex);
+      if (selected !== null && zones[selected] !== zoneIndex)
+        moveWeight(selected, zoneIndex);
     });
   });
 
@@ -2201,7 +2423,13 @@ else {
     window.location.href = "niveau-18.html";
   });
   saveButton.addEventListener("click", () => {
-    if (!window.EchoesSave?.saveProgress({ currentPage: "level-17", currentLevel: 17 })) return;
+    if (
+      !window.EchoesSave?.saveProgress({
+        currentPage: "level-17",
+        currentLevel: 17,
+      })
+    )
+      return;
     saveButton.textContent = copy.saved;
     setStatus(copy.saveHint);
     window.setTimeout(() => {
@@ -2225,14 +2453,16 @@ else {
   const board = document.getElementById("towerBoard");
   if (!board) return;
 
-  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const language =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const copy = {
     fr: {
       part: "PARTIE 2 // FRACTURES",
       level: "NIVEAU 18",
       eyebrow: "Fragment 018 // La tour des échos",
       title: "La tour des échos",
-      description: "Déplace toute la pile de disques vers la tour de droite. Un seul disque à la fois, et jamais un grand disque sur un plus petit.",
+      description:
+        "Déplace toute la pile de disques vers la tour de droite. Un seul disque à la fois, et jamais un grand disque sur un plus petit.",
       systemLabel: "ECHO://TOUR",
       puzzleKicker: "PUZZLE // TRANSFERT DE PILE",
       puzzleTitle: "Tours d'écho",
@@ -2261,7 +2491,8 @@ else {
       level: "LEVEL 18",
       eyebrow: "Fragment 018 // The echo tower",
       title: "The echo tower",
-      description: "Move the whole stack of discs to the right tower. One disc at a time, and never a larger disc on a smaller one.",
+      description:
+        "Move the whole stack of discs to the right tower. One disc at a time, and never a larger disc on a smaller one.",
       systemLabel: "ECHO://TOWER",
       puzzleKicker: "PUZZLE // STACK TRANSFER",
       puzzleTitle: "Echo towers",
@@ -2332,12 +2563,16 @@ else {
         disc.className = "tower-disc";
         disc.style.width = `${26 + (size / count) * 66}%`;
         disc.style.setProperty("--disc-hue", String(190 + size * 26));
-        if (selected === index && position === towers[index].length - 1) disc.classList.add("is-lifted");
+        if (selected === index && position === towers[index].length - 1)
+          disc.classList.add("is-lifted");
         stack.appendChild(disc);
       });
       peg.classList.toggle("is-selected", selected === index);
       peg.disabled = solved || locked;
-      peg.setAttribute("aria-label", `${copy.tower} ${index + 1}: ${towers[index].length} ${copy.discs}`);
+      peg.setAttribute(
+        "aria-label",
+        `${copy.tower} ${index + 1}: ${towers[index].length} ${copy.discs}`,
+      );
     });
     readout.textContent = `${round} / ${discCounts.length}`;
     moveReadout.textContent = `${copy.moves}: ${moves}`;
@@ -2362,7 +2597,10 @@ else {
       setStatus(copy.success, "success");
       systemMessage.textContent = copy.systemSuccess;
       nextButton.hidden = false;
-      window.EchoesSave?.saveProgress({ currentPage: "level-18", currentLevel: 18 });
+      window.EchoesSave?.saveProgress({
+        currentPage: "level-18",
+        currentLevel: 18,
+      });
       render();
       nextButton.focus();
       return;
@@ -2426,13 +2664,21 @@ else {
     buildRound();
   };
 
-  pegs.forEach((peg, index) => peg.addEventListener("click", () => pressPeg(index)));
+  pegs.forEach((peg, index) =>
+    peg.addEventListener("click", () => pressPeg(index)),
+  );
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
     window.location.href = "niveau-19.html";
   });
   saveButton.addEventListener("click", () => {
-    if (!window.EchoesSave?.saveProgress({ currentPage: "level-18", currentLevel: 18 })) return;
+    if (
+      !window.EchoesSave?.saveProgress({
+        currentPage: "level-18",
+        currentLevel: 18,
+      })
+    )
+      return;
     saveButton.textContent = copy.saved;
     setStatus(copy.saveHint);
     window.setTimeout(() => {
@@ -2456,15 +2702,94 @@ else {
   const board = document.getElementById("sudokuBoard");
   if (!board) return;
 
-  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const language =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const size = 8;
-  const dirs = [[0, 1], [1, 0], [1, 1], [-1, 1], [0, -1], [-1, 0], [-1, -1], [1, -1]];
+  const dirs = [
+    [0, 1],
+    [1, 0],
+    [1, 1],
+    [-1, 1],
+    [0, -1],
+    [-1, 0],
+    [-1, -1],
+    [1, -1],
+  ];
   const content = {
     fr: {
-      pool: ["LUNE", "ETOILE", "COMETE", "ORBITE", "GALAXIE", "PLANETE", "SOLEIL", "AURORE", "METEORE", "ECLIPSE", "COSMOS", "FUSEE", "ASTRE", "NOVA", "ATOME", "TERRE", "MARS", "LASER", "SATURNE", "JUPITER", "NEBULEUSE", "VENUS", "PULSAR", "QUASAR", "ROBOT", "SIGNAL", "RADAR", "ECHO", "TEMPS", "ESPACE", "MONDE", "LUMIERE", "ENERGIE", "MIRAGE"],
+      pool: [
+        "LUNE",
+        "ETOILE",
+        "COMETE",
+        "ORBITE",
+        "GALAXIE",
+        "PLANETE",
+        "SOLEIL",
+        "AURORE",
+        "METEORE",
+        "ECLIPSE",
+        "COSMOS",
+        "FUSEE",
+        "ASTRE",
+        "NOVA",
+        "ATOME",
+        "TERRE",
+        "MARS",
+        "LASER",
+        "SATURNE",
+        "JUPITER",
+        "NEBULEUSE",
+        "VENUS",
+        "PULSAR",
+        "QUASAR",
+        "ROBOT",
+        "SIGNAL",
+        "RADAR",
+        "ECHO",
+        "TEMPS",
+        "ESPACE",
+        "MONDE",
+        "LUMIERE",
+        "ENERGIE",
+        "MIRAGE",
+      ],
     },
     en: {
-      pool: ["MOON", "STAR", "COMET", "ORBIT", "GALAXY", "PLANET", "SUNRISE", "AURORA", "METEOR", "ECLIPSE", "COSMOS", "ROCKET", "ATOM", "EARTH", "MARS", "LASER", "NOVA", "SOLAR", "SATURN", "JUPITER", "VENUS", "PULSAR", "QUASAR", "ROBOT", "SIGNAL", "RADAR", "ECHO", "TIME", "SPACE", "WORLD", "LIGHT", "ENERGY", "MIRAGE"],
+      pool: [
+        "MOON",
+        "STAR",
+        "COMET",
+        "ORBIT",
+        "GALAXY",
+        "PLANET",
+        "SUNRISE",
+        "AURORA",
+        "METEOR",
+        "ECLIPSE",
+        "COSMOS",
+        "ROCKET",
+        "ATOM",
+        "EARTH",
+        "MARS",
+        "LASER",
+        "NOVA",
+        "SOLAR",
+        "SATURN",
+        "JUPITER",
+        "VENUS",
+        "PULSAR",
+        "QUASAR",
+        "ROBOT",
+        "SIGNAL",
+        "RADAR",
+        "ECHO",
+        "TIME",
+        "SPACE",
+        "WORLD",
+        "LIGHT",
+        "ENERGY",
+        "MIRAGE",
+      ],
     },
   }[language];
   const hiddenLength = 6;
@@ -2475,7 +2800,8 @@ else {
       level: "NIVEAU 19",
       eyebrow: "Fragment 019 // Les mots mêlés codés",
       title: "Les mots mêlés codés",
-      description: "Trouve tous les mots de la liste dans la grille : ils peuvent être à l'horizontale, à la verticale, en oblique ou à l'envers. Six lettres sont partagées par deux mots et numérotées de 1 à 6. Cherche leur code dans la table (A = nombre, Z = nombre, entre 0 et 100), puis saisis en haut les six nombres dans l'ordre des numéros : les lettres forment le mot caché.",
+      description:
+        "Trouve tous les mots de la liste dans la grille : ils peuvent être à l'horizontale, à la verticale, en oblique ou à l'envers. Six lettres sont partagées par deux mots et numérotées de 1 à 6. Cherche leur code dans la table (A = nombre, Z = nombre, entre 0 et 100), puis saisis en haut les six nombres dans l'ordre des numéros : les lettres forment le mot caché.",
       systemLabel: "ECHO://LEXIQUE",
       puzzleKicker: "PUZZLE // LANGAGE",
       puzzleTitle: "Mots mêlés",
@@ -2485,10 +2811,12 @@ else {
       wordTitle: "CODE DES LETTRES NUMÉROTÉES (1 À 6)",
       cluesTitle: "MOTS À TROUVER",
       legendTitle: "CODE DES LETTRES",
-      ready: "Trouve les mots (touche leur première puis leur dernière lettre), puis écris en haut le code des lettres numérotées.",
+      ready:
+        "Trouve les mots (touche leur première puis leur dernière lettre), puis écris en haut le code des lettres numérotées.",
       found: "Mot trouvé : ",
       notAWord: "Ce n'est pas un mot de la liste.",
-      allFound: "Tous les mots sont trouvés ! Saisis en haut le code des six lettres dorées, dans l'ordre des numéros.",
+      allFound:
+        "Tous les mots sont trouvés ! Saisis en haut le code des six lettres dorées, dans l'ordre des numéros.",
       keepSearching: "Il reste des mots à trouver.",
       wrongCode: "Un code est faux. Vérifie la table des lettres en bas.",
       incompleteCode: "Saisis les six codes.",
@@ -2509,7 +2837,8 @@ else {
       level: "LEVEL 19",
       eyebrow: "Fragment 019 // The coded word search",
       title: "The coded word search",
-      description: "Find every word of the list in the grid: they can run horizontally, vertically, diagonally or backwards. Six letters are shared by two words and numbered 1 to 6. Look up their codes in the table (A = number, Z = number, between 0 and 100), then type the six numbers at the top in the order of the numbers: the letters spell the hidden word.",
+      description:
+        "Find every word of the list in the grid: they can run horizontally, vertically, diagonally or backwards. Six letters are shared by two words and numbered 1 to 6. Look up their codes in the table (A = number, Z = number, between 0 and 100), then type the six numbers at the top in the order of the numbers: the letters spell the hidden word.",
       systemLabel: "ECHO://LEXICON",
       puzzleKicker: "PUZZLE // LANGUAGE",
       puzzleTitle: "Word search",
@@ -2519,10 +2848,12 @@ else {
       wordTitle: "CODES OF THE NUMBERED LETTERS (1 TO 6)",
       cluesTitle: "WORDS TO FIND",
       legendTitle: "LETTER CODES",
-      ready: "Find the words (tap their first then last letter), then type the codes of the numbered letters at the top.",
+      ready:
+        "Find the words (tap their first then last letter), then type the codes of the numbered letters at the top.",
       found: "Word found: ",
       notAWord: "That is not a word from the list.",
-      allFound: "All words found! Type the codes of the six gold letters at the top, in numbered order.",
+      allFound:
+        "All words found! Type the codes of the six gold letters at the top, in numbered order.",
       keepSearching: "Some words are still missing.",
       wrongCode: "A code is wrong. Check the letter table below.",
       incompleteCode: "Type all six codes.",
@@ -2610,7 +2941,9 @@ else {
       const letters = Array.from({ length: size }, () => Array(size).fill(""));
       const shared = new Set();
       const placed = [];
-      for (const word of shuffle(content.pool.filter((w) => w.length <= size)).slice(0, wordCount + 3)) {
+      for (const word of shuffle(
+        content.pool.filter((w) => w.length <= size),
+      ).slice(0, wordCount + 3)) {
         if (placed.length === wordCount) break;
         const options = [];
         for (let r = 0; r < size; r += 1) {
@@ -2622,17 +2955,22 @@ else {
                 const rr = r + dr * i;
                 const cc = c + dc * i;
                 if (rr < 0 || cc < 0 || rr >= size || cc >= size) valid = false;
-                else if (letters[rr][cc] === word[i]) overlap.push(rr * size + cc);
+                else if (letters[rr][cc] === word[i])
+                  overlap.push(rr * size + cc);
                 else if (letters[rr][cc]) valid = false;
               }
-              if (valid && overlap.length < word.length) options.push({ r, c, dr, dc, overlap });
+              if (valid && overlap.length < word.length)
+                options.push({ r, c, dr, dc, overlap });
             }
           }
         }
-        const room = options.filter((o) => new Set([...shared, ...o.overlap]).size <= hiddenLength);
+        const room = options.filter(
+          (o) => new Set([...shared, ...o.overlap]).size <= hiddenLength,
+        );
         if (!room.length) continue;
         const pick = room[rand(room.length)];
-        for (let i = 0; i < word.length; i += 1) letters[pick.r + pick.dr * i][pick.c + pick.dc * i] = word[i];
+        for (let i = 0; i < word.length; i += 1)
+          letters[pick.r + pick.dr * i][pick.c + pick.dc * i] = word[i];
         pick.overlap.forEach((index) => shared.add(index));
         placed.push(word);
       }
@@ -2665,7 +3003,13 @@ else {
       });
       box.appendChild(button);
       grid.appendChild(box);
-      cells.push({ index, row: Math.floor(index / size), col: index % size, box, button });
+      cells.push({
+        index,
+        row: Math.floor(index / size),
+        col: index % size,
+        box,
+        button,
+      });
     }
     for (let index = 0; index < hiddenLength; index += 1) {
       const input = document.createElement("input");
@@ -2712,16 +3056,23 @@ else {
     const steps = Math.max(Math.abs(dr), Math.abs(dc));
     const path = [];
     for (let i = 0; i <= steps; i += 1) {
-      path.push((from.row + Math.sign(dr) * i) * size + from.col + Math.sign(dc) * i);
+      path.push(
+        (from.row + Math.sign(dr) * i) * size + from.col + Math.sign(dc) * i,
+      );
     }
     return path;
   };
 
-  const textOf = (path) => path.map((i) => cells[i].button.textContent).join("");
+  const textOf = (path) =>
+    path.map((i) => cells[i].button.textContent).join("");
 
   const matchWord = (path) => {
     const text = textOf(path);
-    return words.find((entry) => !foundWords.has(entry) && (entry === text || [...entry].reverse().join("") === text));
+    return words.find(
+      (entry) =>
+        !foundWords.has(entry) &&
+        (entry === text || [...entry].reverse().join("") === text),
+    );
   };
 
   // Met en évidence la sélection en cours.
@@ -2780,10 +3131,17 @@ else {
       submit(ends);
       return;
     }
-    const near = Math.abs(cells[last].row - cells[index].row) <= 1 && Math.abs(cells[last].col - cells[index].col) <= 1;
+    const near =
+      Math.abs(cells[last].row - cells[index].row) <= 1 &&
+      Math.abs(cells[last].col - cells[index].col) <= 1;
     const next = [...selection, index];
     const straight = line(cells[next[0]], cells[index]);
-    if (near && !selection.includes(index) && straight && straight.length === next.length) {
+    if (
+      near &&
+      !selection.includes(index) &&
+      straight &&
+      straight.length === next.length
+    ) {
       if (matchWord(next)) submit(next);
       else {
         selection = next;
@@ -2843,7 +3201,10 @@ else {
     dragPath = null;
     highlight(selection);
   });
-  const codeCorrect = () => codeInputs.every((input, i) => input.value === String(codes[hiddenWord[i]]));
+  const codeCorrect = () =>
+    codeInputs.every(
+      (input, i) => input.value === String(codes[hiddenWord[i]]),
+    );
 
   // Met à jour la progression et la victoire.
   const refresh = () => {
@@ -2857,14 +3218,16 @@ else {
     let bad = false;
     let missing = false;
     codeInputs.forEach((input, i) => {
-      const wrong = input.value !== "" && input.value !== String(codes[hiddenWord[i]]);
+      const wrong =
+        input.value !== "" && input.value !== String(codes[hiddenWord[i]]);
       input.classList.toggle("is-wrong", wrong);
       if (wrong) bad = true;
       if (input.value === "") missing = true;
     });
     if (bad) setStatus(copy.wrongCode, "error");
     else if (missing) setStatus(copy.incompleteCode, "error");
-    else if (foundWords.size < words.length) setStatus(copy.keepSearching, "error");
+    else if (foundWords.size < words.length)
+      setStatus(copy.keepSearching, "error");
   };
 
   // Termine le niveau : révèle le mot caché et débloque la suite.
@@ -2880,7 +3243,10 @@ else {
     setStatus(`${copy.success}${hiddenWord}`, "success");
     systemMessage.textContent = copy.systemSuccess;
     nextButton.hidden = false;
-    window.EchoesSave?.saveProgress({ currentPage: "level-19", currentLevel: 19 });
+    window.EchoesSave?.saveProgress({
+      currentPage: "level-19",
+      currentLevel: 19,
+    });
     nextButton.focus();
   };
 
@@ -2895,13 +3261,16 @@ else {
     const puzzle = generate();
     words = puzzle.placed.slice().sort();
     crossings = puzzle.order;
-    hiddenWord = crossings.map((index) => puzzle.letters[Math.floor(index / size)][index % size]).join("");
+    hiddenWord = crossings
+      .map((index) => puzzle.letters[Math.floor(index / size)][index % size])
+      .join("");
     cells.forEach((cell) => {
       cell.hits = 0;
       cell.button.textContent = puzzle.letters[cell.row][cell.col];
       cell.box.className = "sd-cell";
       cell.box.style.removeProperty("--d");
-      if (puzzle.fillers.includes(cell.index)) cell.box.classList.add("is-filler");
+      if (puzzle.fillers.includes(cell.index))
+        cell.box.classList.add("is-filler");
       delete cell.box.dataset.order;
     });
 
@@ -2929,7 +3298,13 @@ else {
     window.location.href = "niveau-20.html";
   });
   saveButton.addEventListener("click", () => {
-    if (!window.EchoesSave?.saveProgress({ currentPage: "level-19", currentLevel: 19 })) return;
+    if (
+      !window.EchoesSave?.saveProgress({
+        currentPage: "level-19",
+        currentLevel: 19,
+      })
+    )
+      return;
     saveButton.textContent = copy.saved;
     setStatus(copy.saveHint, "success");
     window.setTimeout(() => {
@@ -2953,14 +3328,16 @@ else {
   const board = document.getElementById("codeBoard");
   if (!board) return;
 
-  const language = localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const language =
+    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const copy = {
     fr: {
       part: "PARTIE 2 // FRACTURES",
       level: "NIVEAU 16",
       eyebrow: "Fragment 016 // Le cadenas des symboles",
       title: "Le cadenas des symboles",
-      description: "Chaque symbole cache un chiffre. Déduis-les grâce aux indices, réponds aux quatre opérations, additionne les résultats : le dernier chiffre de la somme règle une molette du cadenas.",
+      description:
+        "Chaque symbole cache un chiffre. Déduis-les grâce aux indices, réponds aux quatre opérations, additionne les résultats : le dernier chiffre de la somme règle une molette du cadenas.",
       systemLabel: "ECHO://CADENAS",
       puzzleKicker: "PUZZLE // DÉCHIFFRAGE",
       puzzleTitle: "Cadenas à quatre chiffres",
@@ -2970,12 +3347,16 @@ else {
       questions: "À RÉSOUDRE",
       padlock: "CADENAS",
       choose: "?",
-      ready: "Déduis la valeur de chaque symbole, puis écris les résultats (chiffres uniquement).",
+      ready:
+        "Déduis la valeur de chaque symbole, puis écris les résultats (chiffres uniquement).",
       okAnswer: "Bonne réponse.",
-      badAnswer: "Ce résultat n'est pas bon. Recalcule avec la valeur des symboles.",
-      sumReady: "Les quatre résultats sont bons. Additionne-les puis règle la molette éclairée avec le dernier chiffre de la somme.",
+      badAnswer:
+        "Ce résultat n'est pas bon. Recalcule avec la valeur des symboles.",
+      sumReady:
+        "Les quatre résultats sont bons. Additionne-les puis règle la molette éclairée avec le dernier chiffre de la somme.",
       sumLabel: "Somme",
-      badDigit: "Ce n'est pas le bon chiffre. Additionne les quatre résultats et garde le dernier chiffre.",
+      badDigit:
+        "Ce n'est pas le bon chiffre. Additionne les quatre résultats et garde le dernier chiffre.",
       stageDone: "Molette réglée. Nouvelle série de symboles.",
       success: "Le cadenas s'ouvre. Les quatre chiffres sont corrects.",
       system: "SYSTEME:: CADENAS 016 VERROUILLE // QUATRE CHIFFRES REQUIS",
@@ -2994,7 +3375,8 @@ else {
       level: "LEVEL 16",
       eyebrow: "Fragment 016 // The symbol padlock",
       title: "The symbol padlock",
-      description: "Each symbol hides a number. Deduce them from the clues, answer the four operations, add the results: the last digit of the sum sets one wheel of the padlock.",
+      description:
+        "Each symbol hides a number. Deduce them from the clues, answer the four operations, add the results: the last digit of the sum sets one wheel of the padlock.",
       systemLabel: "ECHO://PADLOCK",
       puzzleKicker: "PUZZLE // DECODING",
       puzzleTitle: "Four-digit padlock",
@@ -3004,10 +3386,12 @@ else {
       questions: "TO SOLVE",
       padlock: "PADLOCK",
       choose: "?",
-      ready: "Deduce the value of each symbol, then type the results (digits only).",
+      ready:
+        "Deduce the value of each symbol, then type the results (digits only).",
       okAnswer: "Correct answer.",
       badAnswer: "That result is wrong. Recalculate with the symbol values.",
-      sumReady: "All four results are right. Add them up, then set the lit wheel to the last digit of the sum.",
+      sumReady:
+        "All four results are right. Add them up, then set the lit wheel to the last digit of the sum.",
       sumLabel: "Sum",
       badDigit: "Wrong digit. Add the four results and keep the last digit.",
       stageDone: "Wheel set. A new series of symbols appears.",
@@ -3088,7 +3472,11 @@ else {
     const clueLines = [
       { terms: [a, a], op: "+", result: va + va },
       { terms: [a, b], op: "+", result: va + vb },
-      { terms: [b, c], op: useProduct ? "×" : "+", result: useProduct ? vb * vc : vb + vc },
+      {
+        terms: [b, c],
+        op: useProduct ? "×" : "+",
+        result: useProduct ? vb * vc : vb + vc,
+      },
       { terms: [c, d], op: "+", result: vc + vd },
     ];
     clueLines.forEach((line) => {
@@ -3113,7 +3501,8 @@ else {
       select.addEventListener("input", () => {
         select.value = select.value.replace(/\D/g, "");
         select.classList.remove("is-wrong");
-        if (select.value.length >= String(question.result).length) checkAnswer(select, question);
+        if (select.value.length >= String(question.result).length)
+          checkAnswer(select, question);
       });
       const line = buildLine(question.terms, question.op, null);
       line.appendChild(select);
@@ -3195,7 +3584,8 @@ else {
         select.disabled = true;
         select.classList.add("is-correct");
       } else {
-        const active = index === stage && answered === questions.length && !solved;
+        const active =
+          index === stage && answered === questions.length && !solved;
         select.disabled = !active;
         select.classList.toggle("is-active", active);
         select.addEventListener("input", () => {
@@ -3226,7 +3616,10 @@ else {
       setStatus(copy.success, "success");
       systemMessage.textContent = copy.systemSuccess;
       nextButton.hidden = false;
-      window.EchoesSave?.saveProgress({ currentPage: "level-16", currentLevel: 16 });
+      window.EchoesSave?.saveProgress({
+        currentPage: "level-16",
+        currentLevel: 16,
+      });
       nextButton.focus();
       return;
     }
@@ -3261,7 +3654,13 @@ else {
     window.location.href = "niveau-17.html";
   });
   saveButton.addEventListener("click", () => {
-    if (!window.EchoesSave?.saveProgress({ currentPage: "level-16", currentLevel: 16 })) return;
+    if (
+      !window.EchoesSave?.saveProgress({
+        currentPage: "level-16",
+        currentLevel: 16,
+      })
+    )
+      return;
     saveButton.textContent = copy.saved;
     setStatus(copy.saveHint, "success");
     window.setTimeout(() => {

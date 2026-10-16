@@ -3,14 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="../../assets/svg/echoes-favicon.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../../assets/svg/echoes-favicon.svg"
+    />
     <title>ECHOES - CLEE 03 // BOSS</title>
     <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css" />
     <link rel="stylesheet" href="../../css/partie-3_niveau-21_à_30.css" />
     <link rel="stylesheet" href="../../css/responsive.css?v=t4" />
     <link rel="stylesheet" href="../../css/fonts.css" />
     <link rel="stylesheet" href="../../css/boss-03.css?v=13" />
-</head>
+  </head>
   <body class="part-three-theme">
     <div class="background-glow" aria-hidden="true"></div>
     <div class="grid-overlay" aria-hidden="true"></div>
@@ -18,16 +22,28 @@
       <a class="brand" href="../../../index.html">ECHOES</a>
       <div class="level-meta">
         <span id="bossPart">PARTIE 3 // ÉCLIPSE</span>
-        <div class="level-progress" id="levelProgress" aria-label="Progression de la Partie 3"></div>
+        <div
+          class="level-progress"
+          id="levelProgress"
+          aria-label="Progression de la Partie 3"
+        ></div>
         <strong id="bossLevel">CLÉE_03 // OCCULTEUR</strong>
       </div>
-      <button class="save-game-button" id="bossSaveButton" type="button">SAUVEGARDER</button>
+      <button class="save-game-button" id="bossSaveButton" type="button">
+        SAUVEGARDER
+      </button>
     </header>
-    <aside class="key-redesign-hud boss03-key-hud" id="keyHud" aria-label="Progression des clés">
+    <aside
+      class="key-redesign-hud boss03-key-hud"
+      id="keyHud"
+      aria-label="Progression des clés"
+    >
       <span class="key-redesign-hud-label" id="keyLabel">RÉSONANCES</span>
       <strong class="key-hud-value" id="keyCount">3 / 6</strong>
       <span class="key-redesign-hud-line" aria-hidden="true"></span>
-      <span class="key-redesign-hud-note" id="keyHudNote">CLÉ 03 // À RÉCUPÉRER</span>
+      <span class="key-redesign-hud-note" id="keyHudNote"
+        >CLÉ 03 // À RÉCUPÉRER</span
+      >
       <span class="key-redesign-hud-slot" id="keyHudSlot" aria-hidden="true">
         <img src="../../assets/svg/key-03-usb.svg" alt="" />
         <b>CLEE_03</b>
@@ -37,7 +53,10 @@
       <section class="level-intro" aria-labelledby="bossTitle">
         <p class="eyebrow" id="bossEyebrow">CLEE_03 // GARDIEN DE L'ÉCLIPSE</p>
         <h1 id="bossTitle">L'Occulteur</h1>
-        <p class="level-description" id="bossDescription">Trois anneaux d'ombre protègent le soleil. Aligne leurs brèches au bon instant pour laisser passer le rayon.</p>
+        <p class="level-description" id="bossDescription">
+          Trois anneaux d'ombre protègent le soleil. Aligne leurs brèches au bon
+          instant pour laisser passer le rayon.
+        </p>
         <div class="system-transmission" aria-live="polite">
           <span class="system-label">ECHO://PROTOCOLE_03</span>
           <p id="systemMessage">SYSTEME:: ÉCLIPSE TOTALE // TROIS COURONNES</p>
@@ -50,7 +69,9 @@
             <h2 id="arenaTitle">La couronne noire</h2>
           </div>
           <div class="boss03-readouts">
-            <span class="progress-readout" id="phaseReadout" aria-live="polite">PHASE 1 / 3</span>
+            <span class="progress-readout" id="phaseReadout" aria-live="polite"
+              >PHASE 1 / 3</span
+            >
           </div>
         </div>
         <details class="boss03-help" open>
@@ -59,37 +80,97 @@
         </details>
         <div class="boss03-arena" id="arena">
           <div class="boss03-timer-box">
-            <span class="boss03-timer" id="timerReadout" role="timer" aria-live="off">45.0 s</span>
-            <span class="boss03-timer-bar" aria-hidden="true"><i id="timerFill"></i></span>
+            <span
+              class="boss03-timer"
+              id="timerReadout"
+              role="timer"
+              aria-live="off"
+              >45.0 s</span
+            >
+            <span class="boss03-timer-bar" aria-hidden="true"
+              ><i id="timerFill"></i
+            ></span>
           </div>
-          <svg class="boss03-svg" id="bossSvg" viewBox="-200 -200 400 400" role="img" aria-label="Anneaux d'éclipse">
+          <svg
+            class="boss03-svg"
+            id="bossSvg"
+            viewBox="-200 -200 400 400"
+            role="img"
+            aria-label="Anneaux d'éclipse"
+          >
             <defs>
               <radialGradient id="b3Sun" cx="0.5" cy="0.5" r="0.5">
-                <stop offset="0" stop-color="#fff6d5"/>
-                <stop offset="0.55" stop-color="#ffd24d"/>
-                <stop offset="1" stop-color="#ff4fd8" stop-opacity="0"/>
+                <stop offset="0" stop-color="#fff6d5" />
+                <stop offset="0.55" stop-color="#ffd24d" />
+                <stop offset="1" stop-color="#ff4fd8" stop-opacity="0" />
               </radialGradient>
               <filter id="b3Glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="4" result="b"/>
-                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                <feGaussianBlur stdDeviation="4" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
               </filter>
             </defs>
             <g id="beam" class="boss03-beam">
-              <rect x="-5" y="-200" width="10" height="200" fill="#c6ff4d" filter="url(#b3Glow)"/>
+              <rect
+                x="-5"
+                y="-200"
+                width="10"
+                height="200"
+                fill="#c6ff4d"
+                filter="url(#b3Glow)"
+              />
             </g>
             <g id="rings"></g>
             <g class="boss03-sun" id="sun">
-              <circle r="46" fill="url(#b3Sun)" class="boss03-corona"/>
-              <circle r="40" fill="#0a0616" stroke="#ffd24d" stroke-opacity=".5"/>
-              <clipPath id="coreClip"><rect x="-28" y="-20" width="56" height="40" rx="4"/></clipPath>
-              <g clip-path="url(#coreClip)"><image id="coreKey" class="boss03-core-key" href="../../assets/svg/key-03-usb.svg" x="-42" y="-20" width="84" height="121.3"/></g>
+              <circle r="46" fill="url(#b3Sun)" class="boss03-corona" />
+              <circle
+                r="40"
+                fill="#0a0616"
+                stroke="#ffd24d"
+                stroke-opacity=".5"
+              />
+              <clipPath id="coreClip">
+                <rect x="-28" y="-20" width="56" height="40" rx="4" />
+              </clipPath>
+              <g clip-path="url(#coreClip)">
+                <image
+                  id="coreKey"
+                  class="boss03-core-key"
+                  href="../../assets/svg/key-03-usb.svg"
+                  x="-42"
+                  y="-20"
+                  width="84"
+                  height="121.3"
+                />
+              </g>
             </g>
-            <path class="boss03-marker" d="M-9 -196h18l-9 14z" fill="#c6ff4d" filter="url(#b3Glow)"/>
+            <path
+              class="boss03-marker"
+              d="M-9 -196h18l-9 14z"
+              fill="#c6ff4d"
+              filter="url(#b3Glow)"
+            />
           </svg>
-          <div class="boss03-error" id="errorOverlay" hidden role="alertdialog" aria-labelledby="errorTitle">
+          <div
+            class="boss03-error"
+            id="errorOverlay"
+            hidden
+            role="alertdialog"
+            aria-labelledby="errorTitle"
+          >
             <strong class="boss03-error-title" id="errorTitle">ERREUR</strong>
-            <span class="boss03-error-sub" id="errorSub">SÉQUENCE TERMINÉE</span>
-            <button class="boss03-action-button boss03-error-button" id="errorResetButton" type="button">Réinitialiser</button>
+            <span class="boss03-error-sub" id="errorSub"
+              >SÉQUENCE TERMINÉE</span
+            >
+            <button
+              class="boss03-action-button boss03-error-button"
+              id="errorResetButton"
+              type="button"
+            >
+              Réinitialiser
+            </button>
           </div>
         </div>
         <div class="boss03-assembly" id="assembly" aria-live="polite">
@@ -97,21 +178,67 @@
           <div class="boss03-assembly-slots" id="assemblySlots"></div>
           <span class="boss03-assembly-count" id="assemblyCount">0 / 3</span>
         </div>
-        <div class="boss03-cinematic" id="keyCinematic" hidden role="dialog" aria-modal="true" aria-labelledby="cinematicTitle">
+        <div
+          class="boss03-cinematic"
+          id="keyCinematic"
+          hidden
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="cinematicTitle"
+        >
           <div class="boss03-cine-rays" aria-hidden="true"></div>
-          <div class="boss03-cine-rings" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="boss03-cine-rings" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
           <div class="boss03-cine-key" id="cineKey" aria-hidden="true"></div>
-          <div class="boss03-cine-sparks" id="cineSparks" aria-hidden="true"></div>
+          <div
+            class="boss03-cine-sparks"
+            id="cineSparks"
+            aria-hidden="true"
+          ></div>
           <h2 class="boss03-cine-title" id="cinematicTitle"></h2>
           <p class="boss03-cine-sub" id="cinematicSub"></p>
-          <button class="next-level-button boss03-cine-button" id="cineContinue" type="button"></button>
+          <button
+            class="next-level-button boss03-cine-button"
+            id="cineContinue"
+            type="button"
+          ></button>
         </div>
         <div class="boss03-actions">
-          <button class="sequence-start-button" id="startBossButton" type="button">ENTRER DANS L'ÉCLIPSE</button>
-          <button class="boss03-action-button boss03-lock-button" id="lockButton" type="button" disabled>ALIGNER (ESPACE)</button>
-          <button class="boss03-action-button boss03-slow-button" id="slowButton" type="button" disabled>RALENTIR</button>
-          <button class="next-level-button" id="nextLevelButton" type="button" hidden>CONTINUER</button>
-          <button class="reset-button" id="resetButton" type="button">Réinitialiser</button>
+          <button
+            class="sequence-start-button"
+            id="startBossButton"
+            type="button"
+          >
+            ENTRER DANS L'ÉCLIPSE
+          </button>
+          <button
+            class="boss03-action-button boss03-lock-button"
+            id="lockButton"
+            type="button"
+            disabled
+          >
+            ALIGNER (ESPACE)
+          </button>
+          <button
+            class="boss03-action-button boss03-slow-button"
+            id="slowButton"
+            type="button"
+            disabled
+          >
+            RALENTIR
+          </button>
+          <button
+            class="next-level-button"
+            id="nextLevelButton"
+            type="button"
+            hidden
+          >
+            CONTINUER
+          </button>
+          <button class="reset-button" id="resetButton" type="button">
+            Réinitialiser
+          </button>
         </div>
         <p class="puzzle-status" id="puzzleStatus" aria-live="polite"></p>
       </section>
@@ -127,6 +254,9 @@
     <script src="../../js/dev-mode.js"></script>
     <script src="../../js/ambient-background.js"></script>
     <script src="../../js/boss-03.js?v=10"></script>
-    <script src="../../js/save-system.js"></script><script src="../../js/levels-config.js"></script><script src="../../js/level-guard.js"></script><script src="../../js/key-tray.js" data-auto-boss></script>
+    <script src="../../js/save-system.js"></script>
+    <script src="../../js/levels-config.js"></script>
+    <script src="../../js/level-guard.js"></script>
+    <script src="../../js/key-tray.js" data-auto-boss></script>
   </body>
 </html>

@@ -3,13 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="../../assets/svg/echoes-favicon.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../../assets/svg/echoes-favicon.svg"
+    />
     <title>ECHOES - Niveau 17</title>
     <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css" />
     <link rel="stylesheet" href="../../css/partie-2_niveau-11_à_20.css" />
     <link rel="stylesheet" href="../../css/responsive.css?v=t4" />
     <link rel="stylesheet" href="../../css/fonts.css" />
-</head>
+  </head>
   <body class="part-two-theme">
     <div class="background-glow" aria-hidden="true"></div>
     <div class="grid-overlay" aria-hidden="true"></div>
@@ -17,49 +21,100 @@
       <a class="brand" href="../../../index.html">ECHOES</a>
       <div class="level-meta">
         <span data-i18n="part">PARTIE 2 // FRACTURES</span>
-        <div class="level-progress" id="levelProgress" aria-label="Progression de la Partie 2"></div>
+        <div
+          class="level-progress"
+          id="levelProgress"
+          aria-label="Progression de la Partie 2"
+        ></div>
         <strong data-i18n="level">NIVEAU 17</strong>
       </div>
-      <button class="save-game-button" id="saveGameButton" type="button">SAUVEGARDER</button>
+      <button class="save-game-button" id="saveGameButton" type="button">
+        SAUVEGARDER
+      </button>
     </header>
     <main class="level-shell level-17-shell">
       <section class="level-intro" aria-labelledby="levelTitle">
-        <p class="eyebrow" data-i18n="eyebrow">Fragment 017 // La balance du vide</p>
+        <p class="eyebrow" data-i18n="eyebrow">
+          Fragment 017 // La balance du vide
+        </p>
         <h1 id="levelTitle" data-i18n="title">La balance du vide</h1>
         <p class="level-description" data-i18n="description">
-          Deux plateaux, un seul équilibre. Répartis chaque masse sur les plateaux pour que les deux côtés pèsent exactement pareil.
+          Deux plateaux, un seul équilibre. Répartis chaque masse sur les
+          plateaux pour que les deux côtés pèsent exactement pareil.
         </p>
         <div class="system-transmission" aria-live="polite">
-          <span class="system-label" data-i18n="systemLabel">ECHO://EQUILIBRE</span>
-          <p id="systemMessage">SYSTEME:: BALANCE 017 DESEQUILIBREE // REPARTITION REQUISE</p>
+          <span class="system-label" data-i18n="systemLabel"
+            >ECHO://EQUILIBRE</span
+          >
+          <p id="systemMessage">
+            SYSTEME:: BALANCE 017 DESEQUILIBREE // REPARTITION REQUISE
+          </p>
         </div>
       </section>
       <section class="puzzle-panel" aria-labelledby="puzzleTitle">
         <div class="panel-heading">
           <div>
-            <p class="panel-kicker" data-i18n="puzzleKicker">PUZZLE // ÉQUILIBRE</p>
-            <h2 id="puzzleTitle" data-i18n="puzzleTitle">Plateaux de la balance</h2>
+            <p class="panel-kicker" data-i18n="puzzleKicker">
+              PUZZLE // ÉQUILIBRE
+            </p>
+            <h2 id="puzzleTitle" data-i18n="puzzleTitle">
+              Plateaux de la balance
+            </h2>
           </div>
           <div class="logic-readouts">
-            <span class="progress-readout" id="progressReadout" aria-live="polite">0 / 3</span>
-            <span class="logic-moves" id="moveReadout" aria-live="polite">0</span>
+            <span
+              class="progress-readout"
+              id="progressReadout"
+              aria-live="polite"
+              >0 / 3</span
+            >
+            <span class="logic-moves" id="moveReadout" aria-live="polite"
+              >0</span
+            >
           </div>
         </div>
         <div class="scale-board" id="scaleBoard">
-          <div class="scale-beam-wrap" aria-hidden="true"><span class="scale-total" id="scaleLeftTotal">0</span><div class="scale-beam" id="scaleBeam"></div><span class="scale-total" id="scaleRightTotal">0</span></div>
+          <div class="scale-beam-wrap" aria-hidden="true">
+            <span class="scale-total" id="scaleLeftTotal">0</span>
+            <div class="scale-beam" id="scaleBeam"></div>
+            <span class="scale-total" id="scaleRightTotal">0</span>
+          </div>
           <div class="scale-zones">
-            <div class="scale-zone"><span class="scale-zone-label" id="scaleLeftLabel"></span><div class="scale-items" id="scaleLeft"></div></div>
-            <div class="scale-zone is-tray"><span class="scale-zone-label" id="scaleTrayLabel"></span><div class="scale-items" id="scaleTray"></div></div>
-            <div class="scale-zone"><span class="scale-zone-label" id="scaleRightLabel"></span><div class="scale-items" id="scaleRight"></div></div>
+            <div class="scale-zone">
+              <span class="scale-zone-label" id="scaleLeftLabel"></span>
+              <div class="scale-items" id="scaleLeft"></div>
+            </div>
+            <div class="scale-zone is-tray">
+              <span class="scale-zone-label" id="scaleTrayLabel"></span>
+              <div class="scale-items" id="scaleTray"></div>
+            </div>
+            <div class="scale-zone">
+              <span class="scale-zone-label" id="scaleRightLabel"></span>
+              <div class="scale-items" id="scaleRight"></div>
+            </div>
           </div>
         </div>
         <div class="sequence-controls">
-
           <p class="puzzle-status" id="puzzleStatus" aria-live="polite"></p>
         </div>
         <div class="puzzle-actions">
-          <button class="next-level-button" id="nextLevelButton" type="button" hidden data-i18n="next">CONTINUER VERS LE NIVEAU 18</button>
-          <button class="reset-button" id="resetButton" type="button" data-i18n="reset">Réinitialiser</button>
+          <button
+            class="next-level-button"
+            id="nextLevelButton"
+            type="button"
+            hidden
+            data-i18n="next"
+          >
+            CONTINUER VERS LE NIVEAU 18
+          </button>
+          <button
+            class="reset-button"
+            id="resetButton"
+            type="button"
+            data-i18n="reset"
+          >
+            Réinitialiser
+          </button>
         </div>
       </section>
     </main>
@@ -75,6 +130,8 @@
     <script src="../../js/dev-mode.js"></script>
     <script src="../../js/ambient-background.js"></script>
     <script src="../../js/partie-2_niveau-11_à_20.js"></script>
-    <script src="../../js/save-system.js"></script><script src="../../js/levels-config.js"></script><script src="../../js/level-guard.js"></script>
+    <script src="../../js/save-system.js"></script>
+    <script src="../../js/levels-config.js"></script>
+    <script src="../../js/level-guard.js"></script>
   </body>
 </html>

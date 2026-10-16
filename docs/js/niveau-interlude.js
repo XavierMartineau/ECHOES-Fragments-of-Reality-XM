@@ -10,9 +10,21 @@
   const continueButton = document.getElementById("continueToLevel5");
   const step = document.getElementById("transmissionStep");
   const messages = [
-    { speaker: "ECHO", className: "echo", text: "Voyageur... je reçois enfin ton signal." },
-    { speaker: "VOYAGEUR", className: "traveler", text: "La clé est en sécurité. Qu'est-ce que tu vois ?" },
-    { speaker: "ECHO", className: "echo", text: "Merci de l'avoir récupérée. Cherche maintenant la porte marquée d'un cercle brisé." },
+    {
+      speaker: "ECHO",
+      className: "echo",
+      text: "Voyageur... je reçois enfin ton signal.",
+    },
+    {
+      speaker: "VOYAGEUR",
+      className: "traveler",
+      text: "La clé est en sécurité. Qu'est-ce que tu vois ?",
+    },
+    {
+      speaker: "ECHO",
+      className: "echo",
+      text: "Merci de l'avoir récupérée. Cherche maintenant la porte marquée d'un cercle brisé.",
+    },
   ];
   messages.forEach((message) => {
     const tr = window.echoesTranslate;
@@ -30,7 +42,8 @@
   const finish = () => {
     step.textContent = "03 // 03";
     hint.textContent = "Transmission reçue // passage suivant disponible";
-    status.textContent = "INDICE ENREGISTRÉ // LA PORTE DU CERCLE BRISÉ T'ATTEND";
+    status.textContent =
+      "INDICE ENREGISTRÉ // LA PORTE DU CERCLE BRISÉ T'ATTEND";
     status.classList.add("is-success");
     startButton.hidden = true;
     continueButton.hidden = false;
@@ -55,7 +68,10 @@
       text.textContent += message.text[character];
       character += 1;
       if (character < message.text.length) {
-        typeTimer = window.setTimeout(write, ".!?".includes(message.text[character - 1]) ? 160 : 28);
+        typeTimer = window.setTimeout(
+          write,
+          ".!?".includes(message.text[character - 1]) ? 160 : 28,
+        );
         return;
       }
       typing = false;
