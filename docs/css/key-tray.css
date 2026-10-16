@@ -1,0 +1,129 @@
+.key-tray {
+  padding: 16px 18px 18px;
+  border: 1px solid rgba(255, 210, 122, 0.3);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 184, 77, 0.1), transparent 60%),
+    linear-gradient(160deg, rgba(16, 20, 40, 0.92), rgba(10, 8, 28, 0.92));
+  box-shadow: 0 0 40px rgba(255, 184, 77, 0.06);
+}
+.key-tray-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.key-tray-title {
+  color: #ffd27a;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+}
+.key-tray-count {
+  color: #edfaff;
+}
+.key-tray-list {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+.key-slot {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+}
+.key-slot-frame {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border: 1px solid rgba(121, 247, 255, 0.25);
+  border-radius: 12px;
+  background: linear-gradient(170deg, #121a33, #080b18);
+  box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.6);
+}
+.key-slot-frame img {
+  width: 62%;
+  height: 84%;
+  object-fit: contain;
+  transition: filter 0.4s, transform 0.3s;
+}
+.key-slot-number {
+  color: #6b7691;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+}
+.key-slot.is-owned .key-slot-frame {
+  border-color: #ffd27a;
+  box-shadow:
+    inset 0 0 14px rgba(255, 184, 77, 0.25),
+    0 0 18px rgba(255, 184, 77, 0.45);
+  animation: key-owned-glow 2.8s ease-in-out infinite;
+}
+.key-slot.is-owned .key-slot-number {
+  color: #ffd27a;
+}
+.key-slot.is-missing .key-slot-frame img {
+  filter: grayscale(1) brightness(0.8) contrast(0.9);
+  opacity: 0.7;
+}
+.key-slot.is-missing .key-slot-frame::after {
+  content: "?";
+  position: absolute;
+  right: 6px;
+  bottom: 3px;
+  color: #4a5570;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+@keyframes key-owned-glow {
+  0%,
+  100% {
+    box-shadow: inset 0 0 14px rgba(255, 184, 77, 0.25), 0 0 10px rgba(255, 184, 77, 0.3);
+  }
+  50% {
+    box-shadow: inset 0 0 14px rgba(255, 184, 77, 0.35), 0 0 24px rgba(255, 184, 77, 0.7);
+  }
+}
+
+/* Version flottante sur les pages de boss */
+.key-tray-floating {
+  position: fixed;
+  left: 50%;
+  bottom: 12px;
+  z-index: 40;
+  width: min(420px, calc(100% - 24px));
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.key-tray.is-compact {
+  padding: 8px 12px 10px;
+  backdrop-filter: blur(6px);
+}
+.key-tray.is-compact .key-tray-head {
+  margin-bottom: 6px;
+}
+.key-tray.is-compact .key-tray-list {
+  gap: 6px;
+}
+.key-tray.is-compact .key-slot-frame {
+  aspect-ratio: 1;
+}
+.key-tray.is-compact .key-slot-number {
+  display: none;
+}
+@media (max-width: 560px) {
+  .key-tray-list {
+    gap: 6px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .key-slot.is-owned .key-slot-frame {
+    animation: none;
+  }
+}

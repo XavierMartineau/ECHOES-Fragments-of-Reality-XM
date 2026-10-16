@@ -441,7 +441,6 @@
     const completed = new Set([
       ...readCompletedLevels("echoes-completed-levels"),
       ...readCompletedLevels(progressKey),
-      11,
     ]);
     const completedLevels = [...completed].sort((a, b) => a - b);
     localStorage.setItem(progressKey, JSON.stringify(completedLevels));

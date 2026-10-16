@@ -164,3 +164,10 @@ dialogues, progression, sauvegarde de clé, responsive et liens locaux.
 
 Pour le détail des jalons, des mécaniques et des commits fonctionnels, consulter
 [`documentation/cheminement-projet.md`](documentation/cheminement-projet.md).
+
+## Campagne et progression
+
+- `docs/html/login.html` : nom d'utilisateur seul (identifiant unique de la sauvegarde, `localStorage`).
+- `docs/html/niveaux.html` : grille des niveaux, progression globale, bouton de r?initialisation (avec confirmation).
+- `docs/js/levels-config.js` : structure de la campagne. Pour ajouter des niveaux, ?diter `series` (et mettre `ready: true` quand les pages existent).
+- `docs/js/level-guard.js` : bloque les niveaux verrouill?s et enregistre la r?ussite (apparition du bouton ? niveau suivant ?). Contournement dev : `localStorage.setItem("echoes-dev-unlock", "1")`.

@@ -30,77 +30,45 @@
         <p class="login-kicker" data-i18n="loginKicker">
           SECURE ACCESS // MEMORY SYSTEM
         </p>
-        <h1 id="loginTitle" data-i18n="loginTitle">Connexion requise</h1>
+        <h1 id="loginTitle" data-i18n="loginTitle">Identification</h1>
         <p class="login-description" data-i18n="loginDescription">
-          Connecte-toi pour commencer une nouvelle partie ou reprendre ta
+          Entre ton nom d'utilisateur pour commencer la campagne ou reprendre ta
           progression.
         </p>
 
-        <form id="loginForm" autocomplete="on">
-          <label for="username" data-i18n="usernameLabel">Nom du joueur</label>
+        <form id="loginForm" autocomplete="on" novalidate>
+          <label for="username" data-i18n="usernameLabel"
+            >Nom d'utilisateur</label
+          >
           <input
             id="username"
             name="username"
             type="text"
             autocomplete="username"
+            maxlength="32"
             required
+            aria-describedby="usernameHint loginError"
           />
-          <small class="field-hint">Identifiant de votre fragment de mémoire</small>
-          <label for="password" data-i18n="passwordLabel">Mot de passe</label>
-          <div class="password-field">
-            <input
-              id="password"
-              name="password"
-              type="password"
-              autocomplete="current-password"
-              required
-            />
-            <button
-              class="password-toggle"
-              id="passwordToggle"
-              type="button"
-              aria-controls="password"
-              aria-pressed="false"
-              data-i18n="showPassword"
-            >
-              Afficher
-            </button>
-          </div>
-          <small class="field-hint">Protégez l’accès à votre progression</small>
+          <small class="field-hint" id="usernameHint" data-i18n="usernameHint"
+            >Identifiant unique de ta sauvegarde</small
+          >
           <p class="login-error" id="loginError" role="alert" hidden></p>
           <button class="login-submit" type="submit" data-i18n="loginSubmit">
-            Se connecter
+            Continuer
           </button>
         </form>
-
-        <section class="save-choice" id="saveChoice" aria-live="polite" hidden>
-          <p class="login-kicker" data-i18n="saveKicker">MEMORY CHECKPOINT</p>
-          <h2 data-i18n="saveTitle">Nouvelle sauvegarde</h2>
-          <p id="saveSummary"></p>
-          <div class="save-actions">
-            <button id="newGameButton" type="button" data-i18n="newGameButton">
-              Nouvelle partie
-            </button>
-            <button id="resumeButton" type="button" data-i18n="resumeButton">
-              Reprendre
-            </button>
-            <button
-              id="deleteSaveButton"
-              class="delete-save-button"
-              type="button"
-              data-i18n="deleteSaveButton"
-            >
-              Supprimer la sauvegarde
-            </button>
-          </div>
-        </section>
       </section>
     </main>
-    <script src="../js/translations.js"></script>
-    <script src="../js/save-system.js?v=2"></script>
-    <script src="../js/login.js?v=2"></script>
+    <footer class="global-site-footer">
+      <span>© 2026 Xavier Martineau</span><span>All rights reserved.</span>
+    </footer>
+    <script src="../js/translations.js?v=3"></script>
+    <script src="../js/save-system.js?v=3"></script>
+    <script src="../js/login.js?v=3"></script>
     <script src="../js/language.js"></script>
-    <footer class="global-site-footer"><span>© 2026 Xavier Martineau</span><span>All rights reserved.</span></footer>    <script src="../js/micro-animations.js"></script><script src="../js/premium-animations.js"></script><script src="../js/dev-mode.js"></script>
+    <script src="../js/micro-animations.js"></script>
+    <script src="../js/premium-animations.js"></script>
+    <script src="../js/dev-mode.js"></script>
     <script src="../js/ambient-background.js"></script>
   </body>
 </html>

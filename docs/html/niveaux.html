@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../assets/svg/echoes-favicon.svg"
+    />
+    <title>ECHOES - Niveaux</title>
+    <link rel="stylesheet" href="../css/fonts.css" />
+    <link rel="stylesheet" href="../css/niveaux.css?v=7" />
+    <link rel="stylesheet" href="../css/key-tray.css?v=2" />
+  </head>
+  <body>
+    <div class="hub-background" aria-hidden="true"></div>
+    <main class="hub-shell">
+      <header class="hub-header">
+        <a class="hub-brand" href="../../index.html" aria-label="Retour à l'accueil ECHOES">ECHOES</a>
+        <div class="hub-player">
+          <span class="hub-player-label" data-i18n="player">JOUEUR</span>
+          <strong id="playerName"></strong>
+        </div>
+      </header>
+
+      <section class="hub-progress" aria-labelledby="hubTitle">
+        <p class="hub-kicker" data-i18n="kicker">CAMPAGNE // SÉLECTION DES NIVEAUX</p>
+        <h1 id="hubTitle" data-i18n="title">Choisis ton niveau</h1>
+        <div class="progress-meter">
+          <div
+            class="progress-track"
+            id="progressTrack"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+          >
+            <span class="progress-fill" id="progressFill"></span>
+          </div>
+          <p class="progress-text"><strong id="progressPercent">0 %</strong> <span id="progressCount"></span></p>
+        </div>
+        <div class="hub-actions">
+          <a class="hub-button primary" id="continueButton" href="#" data-i18n="continue">Continuer</a>
+          <a class="hub-button" href="introduction.html" data-i18n="intro">Revoir l'introduction</a>
+          <button class="hub-button" id="switchUserButton" type="button" data-i18n="switchUser">Changer de joueur</button>
+          <button class="hub-button danger" id="resetButton" type="button" data-i18n="reset">Réinitialiser la progression</button>
+        </div>
+      </section>
+
+      <aside id="keyTray" aria-live="polite"></aside>
+
+      <div id="seriesList" class="series-list"></div>
+    </main>
+
+    <dialog class="confirm-dialog" id="resetDialog" aria-labelledby="resetTitle">
+      <form method="dialog">
+        <h2 id="resetTitle" data-i18n="resetTitle">Réinitialiser la progression ?</h2>
+        <p id="resetMessage"></p>
+        <div class="confirm-actions">
+          <button class="hub-button" value="cancel" data-i18n="cancel">Annuler</button>
+          <button class="hub-button danger" value="confirm" data-i18n="confirm">Tout effacer</button>
+        </div>
+      </form>
+    </dialog>
+
+    <footer class="global-site-footer"><span>© 2026 Xavier Martineau</span><span>All rights reserved.</span></footer>
+    <script src="../js/translations.js?v=3"></script>
+    <script src="../js/save-system.js?v=3"></script>
+    <script src="../js/levels-config.js?v=4"></script>
+    <script src="../js/key-tray.js"></script>
+    <script src="../js/niveaux.js?v=4"></script>
+    
+  </body>
+</html>

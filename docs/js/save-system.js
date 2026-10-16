@@ -48,6 +48,25 @@ window.EchoesSave = (() => {
     return { ok: true, username: normalizedUsername, isNew: !existingAccount };
   }
 
+  // Connecte un joueur avec son seul nom d'utilisateur (identifiant unique).
+  function enterAsUser(username) {
+    const normalizedUsername = normalizeUsername(username || "");
+    if (!normalizedUsername) return { ok: false, reason: "empty" };
+    const accountKey = keyFor(accountPrefix, normalizedUsername);
+    const isNew = !localStorage.getItem(accountKey);
+    if (isNew) {
+      localStorage.setItem(
+        accountKey,
+        JSON.stringify({
+          username: normalizedUsername,
+          createdAt: new Date().toISOString(),
+        }),
+      );
+    }
+    localStorage.setItem(currentUserKey, normalizedUsername);
+    return { ok: true, username: normalizedUsername, isNew };
+  }
+
   // Lit la sauvegarde d'un joueur.
   function getSave(username = getCurrentUser()) {
     if (!username) return null;
@@ -125,6 +144,31 @@ window.EchoesSave = (() => {
     return unlocked;
   }
 
+  // Lit les réponses enregistrées d'un joueur (formulaire, brouillons, choix).
+  function getAnswers(username = getCurrentUser()) {
+    return getSave(username)?.answers || {};
+  }
+
+  // Enregistre une ou plusieurs réponses sans écraser les autres.
+  function saveAnswers(answers, username = getCurrentUser()) {
+    if (!username) return false;
+    return saveProgress(
+      { answers: { ...getAnswers(username), ...answers } },
+      username,
+    );
+  }
+
+  // Efface toutes les données liées à un nom d'utilisateur.
+  function resetProgress(username = getCurrentUser()) {
+    if (!username) return false;
+    const normalizedUsername = normalizeUsername(username);
+    localStorage.removeItem(keyFor(savePrefix, normalizedUsername));
+    localStorage.removeItem(keyFor(accountPrefix, normalizedUsername));
+    localStorage.removeItem(keyFor("echoes-completed-levels-", normalizedUsername));
+    localStorage.removeItem("echoes-completed-levels");
+    return true;
+  }
+
   // Déconnecte le joueur.
   function logout() {
     localStorage.removeItem(currentUserKey);
@@ -135,6 +179,10 @@ window.EchoesSave = (() => {
     getAccount,
     getSave,
     loginOrCreate,
+    enterAsUser,
+    getAnswers,
+    saveAnswers,
+    resetProgress,
     saveProgress,
     deleteSave,
     startNewGame,
