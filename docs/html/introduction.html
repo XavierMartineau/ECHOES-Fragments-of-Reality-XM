@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../css/responsive.css?v=3" />
     <link rel="stylesheet" href="../css/fonts.css?v=2" />
     <link rel="stylesheet" href="../css/intro-premium.css?v=2" />
+    <link rel="stylesheet" href="../css/echo-ai.css?v=4" />
     <style>
       @media (max-width: 650px) {
         body.intro-page.desktop-layout h1.intro-title {
@@ -27,7 +28,10 @@
   </head>
   <body class="intro-page">
     <div class="background-glow"></div>
-    <div class="grid-overlay"></div>
+    <div class="intro-bg" aria-hidden="true">
+      <div class="intro-bg-nebula"></div>
+      <div class="intro-bg-shards"></div>
+    </div>
 
     <header class="top-bar">
       <a
@@ -50,14 +54,13 @@
         Fragments de la réalité
       </p>
 
-      <section class="ai-stage" aria-label="Spectre audio ECHO">
-        <img class="intro-core" src="../assets/svg/intro-core.svg" alt="" aria-hidden="true" />
+      <section class="echo-ai" aria-label="ECHO">
         <canvas
-          class="spectrum-canvas"
-          id="spectrumCanvas"
+          class="echo-ai-canvas"
+          id="echoAiCanvas"
           aria-hidden="true"
         ></canvas>
-        <span class="spectrum-label">ECHO</span>
+        <span class="echo-ai-tag"><i aria-hidden="true"></i>ECHO</span>
       </section>
 
       <section
@@ -103,7 +106,8 @@
 
     <script src="../js/translations.js"></script>
     <script src="../js/save-system.js"></script>
-    <script src="../js/introduction.js"></script>
+    <script src="../js/echo-ai.js?v=1"></script>
+    <script src="../js/introduction.js?v=2"></script>
     <script src="../js/language.js"></script>
     <script src="../js/micro-animations.js"></script>
     <script src="../js/premium-animations.js?v=2"></script>

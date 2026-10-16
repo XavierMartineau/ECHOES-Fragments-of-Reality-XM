@@ -1,5 +1,4 @@
-// INTRODUCTION // ECHO spectrum, dialogue flow, language, and mission start.
-const spectrumCanvas = document.getElementById("spectrumCanvas");
+// INTRODUCTION // ECHO dialogue flow, language, and mission start.
 const prefersReducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)",
 ).matches;
@@ -7,7 +6,6 @@ const isDesktopDevice =
   /Windows|Macintosh|Linux/.test(navigator.userAgent) &&
   !/Android|iPhone|iPad|Mobile/.test(navigator.userAgent);
 document.body.classList.toggle("desktop-layout", isDesktopDevice);
-const spectrumContext = spectrumCanvas.getContext("2d");
 const dialogueShell = document.getElementById("dialogueShell");
 const dialogueText = document.getElementById("dialogueText");
 const dialogueHint = document.getElementById("dialogueHint");
@@ -23,26 +21,7 @@ if (localStorage.getItem("echoes-reduced-effects") === "true") {
 let hasStarted = false;
 let currentLanguage = localStorage.getItem("echoes-language") || "fr";
 let dialogueMessages = [];
-let spectrumActivity = 0;
-let targetSpectrumActivity = 0;
 let dialogueScrollFrame = 0;
-let spectrumGlitch = 0;
-let targetSpectrumGlitch = 0;
-
-let spectrumSize = 0;
-let spectrumWidth = 0;
-let spectrumHeight = 0;
-let lastSpectrumFrame = 0;
-let spectrumVisible = true;
-let spectrumAnimationFrame = 0;
-const spectrumParticles = Array.from({ length: 72 }, (_, particleIndex) => ({
-  angle: (particleIndex / 72) * Math.PI * 2,
-  radius: 0.54 + Math.random() * 0.42,
-  phase: Math.random() * Math.PI * 2,
-  speed: 0.5 + Math.random() * 1.4,
-  size: 0.7 + Math.random() * 2.5,
-  hue: particleIndex % 3 === 0 ? 190 : particleIndex % 3 === 1 ? 205 : 275,
-}));
 
 // Applies translated interface labels and selects the dialogue collection.
 function applyLanguage(language) {
@@ -59,227 +38,9 @@ function applyLanguage(language) {
   localStorage.setItem("echoes-language", currentLanguage);
 }
 
-// Resizes the canvas for responsive layouts and high-density displays.
-function resizeSpectrum() {
-  const pixelRatio = window.devicePixelRatio || 1;
-  const bounds = spectrumCanvas.getBoundingClientRect();
-  spectrumWidth = bounds.width;
-  spectrumHeight = bounds.height;
-  spectrumSize = Math.min(spectrumWidth, spectrumHeight);
-  spectrumCanvas.width = spectrumWidth * pixelRatio;
-  spectrumCanvas.height = spectrumHeight * pixelRatio;
-  spectrumContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-}
-
-// Draws the animated spectrum and its glitch response every frame.
-function drawSpectrum(timestamp) {
-  spectrumAnimationFrame = 0;
-  if (!spectrumVisible) return;
-  if (timestamp - lastSpectrumFrame < 33) {
-    if (!prefersReducedMotion) {
-      spectrumAnimationFrame = window.requestAnimationFrame(drawSpectrum);
-    }
-    return;
-  }
-  lastSpectrumFrame = timestamp;
-  const center = spectrumSize / 2;
-  const innerRadius = spectrumSize * 0.24;
-  const time = timestamp * 0.001;
-  spectrumActivity += (targetSpectrumActivity - spectrumActivity) * 0.08;
-  spectrumGlitch += (targetSpectrumGlitch - spectrumGlitch) * 0.1;
-
-  spectrumContext.clearRect(0, 0, spectrumWidth, spectrumHeight);
-  if (spectrumWidth > spectrumHeight * 2) {
-    const centerY = spectrumHeight / 2;
-    const barCount = Math.max(28, Math.floor(spectrumWidth / 6));
-    const barGap = spectrumWidth / (barCount + 1);
-    const idlePulse = 0.5 + Math.sin(time * 3.2) * 0.18;
-
-    spectrumContext.save();
-    spectrumContext.lineCap = "round";
-    spectrumContext.beginPath();
-    spectrumContext.moveTo(0, centerY);
-    spectrumContext.lineTo(spectrumWidth, centerY);
-    spectrumContext.strokeStyle = "rgba(121, 247, 255, 0.3)";
-    spectrumContext.lineWidth = 1.2;
-    spectrumContext.stroke();
-
-    for (let barIndex = 0; barIndex < barCount; barIndex += 1) {
-      const x = (barIndex + 1) * barGap;
-      const wave = Math.abs(
-        Math.sin(time * (2.4 + (barIndex % 5) * 0.18) + barIndex * 0.63),
-      );
-      const envelope = Math.sin((barIndex / (barCount - 1)) * Math.PI);
-      const height =
-        spectrumHeight *
-        (0.14 +
-          envelope *
-            (0.34 + idlePulse * 0.16 + spectrumActivity * (0.5 + wave * 0.42)));
-      const glitchShift =
-        spectrumGlitch * Math.sin(time * 30 + barIndex) * spectrumHeight * 0.3;
-      const hue =
-        spectrumGlitch > 0.2
-          ? 350
-          : 184 + Math.sin(time * 0.45 + barIndex * 0.22) * 52;
-
-      spectrumContext.beginPath();
-      spectrumContext.moveTo(x, centerY - height * 0.58);
-      spectrumContext.lineTo(x, centerY + height * 0.58);
-      spectrumContext.strokeStyle = `hsla(${hue}, 100%, 72%, 0.16)`;
-      spectrumContext.lineWidth = Math.max(1, barGap * 0.58);
-      spectrumContext.shadowBlur = 0;
-      spectrumContext.stroke();
-
-      spectrumContext.beginPath();
-      spectrumContext.moveTo(x + glitchShift, centerY - height);
-      spectrumContext.lineTo(x - glitchShift, centerY + height);
-      spectrumContext.strokeStyle = `hsla(${hue}, 100%, 76%, ${0.55 + spectrumActivity * 0.4})`;
-      spectrumContext.lineWidth = Math.max(1.5, barGap * 0.34);
-      spectrumContext.shadowColor = `hsla(${hue}, 100%, 72%, 0.8)`;
-      spectrumContext.shadowBlur = 9;
-      spectrumContext.stroke();
-    }
-
-    const scanX = ((time * 80) % (spectrumWidth + 40)) - 20;
-    const scanGradient = spectrumContext.createLinearGradient(
-      scanX - 18,
-      0,
-      scanX + 18,
-      0,
-    );
-    scanGradient.addColorStop(0, "rgba(121, 247, 255, 0)");
-    scanGradient.addColorStop(0.5, "rgba(255, 255, 255, 0.9)");
-    scanGradient.addColorStop(1, "rgba(179, 108, 255, 0)");
-    spectrumContext.beginPath();
-    spectrumContext.moveTo(scanX, centerY - spectrumHeight * 0.42);
-    spectrumContext.lineTo(scanX, centerY + spectrumHeight * 0.42);
-    spectrumContext.strokeStyle = scanGradient;
-    spectrumContext.lineWidth = 1.5;
-    spectrumContext.shadowColor = "rgba(121, 247, 255, 0.9)";
-    spectrumContext.shadowBlur = 12;
-    spectrumContext.stroke();
-
-    spectrumContext.restore();
-    spectrumAnimationFrame = window.requestAnimationFrame(drawSpectrum);
-    return;
-  }
-
-  spectrumContext.save();
-  spectrumContext.translate(center, center);
-
-  spectrumContext.beginPath();
-  spectrumContext.arc(0, 0, innerRadius * 1.08, 0, Math.PI * 2);
-  spectrumContext.fillStyle =
-    spectrumGlitch > 0.2 ? "rgba(20, 2, 8, 0.94)" : "rgba(2, 8, 18, 0.92)";
-  spectrumContext.shadowColor =
-    spectrumGlitch > 0.2
-      ? "rgba(255, 45, 83, 0.8)"
-      : "rgba(121, 247, 255, 0.5)";
-  spectrumContext.shadowBlur = 22;
-  spectrumContext.fill();
-  spectrumContext.shadowBlur = 0;
-
-  for (let barIndex = 0; barIndex < 64; barIndex += 1) {
-    const angle = (barIndex / 64) * Math.PI * 2 - Math.PI / 2;
-    const wave = Math.abs(
-      Math.sin(time * (1.2 + (barIndex % 5) * 0.08) + barIndex * 0.48),
-    );
-    const height =
-      spectrumSize * (0.012 + spectrumActivity * (0.045 + wave * 0.13));
-    const startRadius = innerRadius * 1.18;
-    const endRadius = startRadius + height;
-    const hue =
-      spectrumGlitch > 0.2
-        ? 350 + Math.sin(barIndex * 0.8) * 18
-        : 185 + Math.sin(barIndex * 0.18) * 38;
-    const glitchShift =
-      spectrumGlitch *
-      Math.sin(time * 32 + barIndex * 2.4) *
-      spectrumSize *
-      0.025;
-
-    spectrumContext.beginPath();
-    spectrumContext.moveTo(
-      Math.cos(angle) * startRadius + glitchShift,
-      Math.sin(angle) * startRadius,
-    );
-    spectrumContext.lineTo(
-      Math.cos(angle) * endRadius - glitchShift,
-      Math.sin(angle) * endRadius + glitchShift,
-    );
-    spectrumContext.strokeStyle = `hsla(${hue}, 100%, 72%, ${0.04 + spectrumActivity * (0.45 + wave * 0.5)})`;
-    spectrumContext.lineWidth = 0.5 + spectrumActivity * (1.5 + wave * 2.2);
-    spectrumContext.shadowBlur = 0;
-    spectrumContext.stroke();
-  }
-
-  spectrumParticles.forEach((particle) => {
-    const pulse = Math.sin(time * particle.speed + particle.phase);
-    const radius =
-      spectrumSize * (particle.radius + pulse * 0.025 * spectrumActivity);
-    const particleGlitch =
-      spectrumGlitch *
-      Math.sin(time * 28 + particle.phase) *
-      spectrumSize *
-      0.04;
-    const x = Math.cos(particle.angle + time * 0.04) * radius + particleGlitch;
-    const y = Math.sin(particle.angle + time * 0.04) * radius - particleGlitch;
-
-    spectrumContext.beginPath();
-    spectrumContext.arc(
-      x,
-      y,
-      particle.size + Math.max(pulse, 0) * 1.3 * spectrumActivity,
-      0,
-      Math.PI * 2,
-    );
-    const particleHue = spectrumGlitch > 0.2 ? 350 : particle.hue;
-    spectrumContext.fillStyle = `hsla(${particleHue}, 100%, 72%, ${spectrumActivity * (0.35 + (pulse + 1) * 0.28)})`;
-    spectrumContext.shadowBlur = 0;
-    spectrumContext.fill();
-  });
-
-  if (spectrumGlitch > 0.2) {
-    spectrumContext.strokeStyle = `rgba(255, 45, 83, ${spectrumGlitch * 0.85})`;
-    spectrumContext.lineWidth = 1.2;
-    for (let fractureIndex = 0; fractureIndex < 7; fractureIndex += 1) {
-      const fractureAngle =
-        fractureIndex * 0.9 + Math.sin(time * 7 + fractureIndex) * 0.08;
-      const fractureLength = innerRadius * (0.8 + (fractureIndex % 3) * 0.25);
-      spectrumContext.beginPath();
-      spectrumContext.moveTo(
-        Math.cos(fractureAngle) * innerRadius * 0.1,
-        Math.sin(fractureAngle) * innerRadius * 0.1,
-      );
-      spectrumContext.lineTo(
-        Math.cos(fractureAngle) * fractureLength,
-        Math.sin(fractureAngle) * fractureLength,
-      );
-      spectrumContext.stroke();
-    }
-
-    for (let glitchBarIndex = 0; glitchBarIndex < 5; glitchBarIndex += 1) {
-      const glitchWave = Math.sin(time * 24 + glitchBarIndex * 2.7);
-      const glitchY = (glitchWave * 0.42 + 0.5) * spectrumSize - center;
-      const glitchWidth = spectrumSize * (0.16 + Math.abs(glitchWave) * 0.28);
-      spectrumContext.fillStyle = `rgba(255, 45, 83, ${spectrumGlitch * 0.28})`;
-      spectrumContext.fillRect(
-        -glitchWidth / 2 + glitchWave * spectrumSize * 0.14,
-        glitchY,
-        glitchWidth,
-        1 + Math.abs(glitchWave) * 2,
-      );
-    }
-  }
-
-  spectrumContext.restore();
-  spectrumAnimationFrame = window.requestAnimationFrame(drawSpectrum);
-}
-
 // Anime le spectre audio quand ECHO parle ou glitche.
 function setSpectrumActivity(isEchoSpeaking, isGlitching = false) {
-  targetSpectrumActivity = isEchoSpeaking ? 1 : 0;
-  targetSpectrumGlitch = isGlitching ? 1 : 0;
+  window.EchoAI.setState(isEchoSpeaking, isGlitching);
 }
 
 // Fait défiler le dialogue pour garder la dernière ligne visible.
@@ -442,24 +203,5 @@ missionButton.addEventListener("click", () => {
   }, 650);
 });
 
-window.addEventListener("resize", resizeSpectrum);
-const spectrumObserver = new IntersectionObserver(
-  ([entry]) => {
-    spectrumVisible = entry.isIntersecting && !prefersReducedMotion;
-    if (spectrumVisible) {
-      lastSpectrumFrame = 0;
-      if (!spectrumAnimationFrame) {
-        spectrumAnimationFrame = window.requestAnimationFrame(drawSpectrum);
-      }
-    }
-  },
-  { threshold: 0.01 },
-);
-spectrumObserver.observe(spectrumCanvas);
 applyLanguage(currentLanguage);
-resizeSpectrum();
-if (prefersReducedMotion) {
-  drawSpectrum(1000);
-} else {
-  spectrumAnimationFrame = window.requestAnimationFrame(drawSpectrum);
-}
+window.EchoAI.init(document.getElementById("echoAiCanvas"));

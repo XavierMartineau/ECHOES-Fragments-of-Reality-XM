@@ -410,12 +410,45 @@ body.part-four-theme .construction-card h1 { color: #ffb8ee; }
     padding: 8px;
   }
 
+  .tilt-panel {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 12px;
+    overflow: clip;
+  }
+
   .tilt-stage canvas {
-    width: 100%;
+    width: auto;
+    max-width: 100%;
+    height: min(700px, calc(100svh - 190px));
+  }
+
+  .tilt-stage { order: 1; }
+  .tilt-controls { order: 2; }
+  .tilt-legend { order: 3; }
+  .tilt-panel > .puzzle-status { order: 4; }
+  .tilt-panel > .puzzle-actions { order: 5; }
+
+  .tilt-controls {
+    gap: 10px;
+    margin: 10px 0 0;
+    padding: 8px;
+    border: 1px solid rgba(56, 214, 255, 0.35);
+    border-radius: 18px;
+    background: rgba(6, 7, 19, 0.88);
   }
 
   .tilt-arrow {
-    width: 76px;
+    flex: 0 0 auto;
+    width: 68px;
+    height: 54px;
+  }
+
+  .tilt-controls .sequence-start-button {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-inline: 8px;
+    font-size: 0.72rem;
   }
 }
 

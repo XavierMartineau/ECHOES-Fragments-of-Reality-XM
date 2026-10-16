@@ -210,7 +210,9 @@
       ].filter((platform) => platform.x2 - platform.x1 >= 64);
       const platform = platforms[randomInteger(0, platforms.length - 1)];
       const x = randomBetween(platform.x1 + 14, platform.x2 - 14);
-      const type = hazardTypes[randomInteger(0, hazardTypes.length - 1)];
+      const lowHeadroom = floorIndex === 4;
+      const pool = lowHeadroom ? ["bob", "guard", "belt"] : hazardTypes;
+      const type = pool[randomInteger(0, pool.length - 1)];
       const hazard = { type, f: floorIndex, round };
       if (type === "bob") {
         Object.assign(hazard, { x, phase: randomBetween(0, Math.PI * 2) });
@@ -227,7 +229,7 @@
           x2: platform.x2 - 10,
           speed: randomBetween(0.8, 1.8),
           phase: randomBetween(0, Math.PI * 2),
-          y: floors[floorIndex] - 35,
+          y: floors[floorIndex] - (lowHeadroom ? 26 : 35),
         });
       } else if (type === "bumper") {
         Object.assign(hazard, {
@@ -342,7 +344,9 @@
   };
 
   const sawY = (hazard) =>
-    floors[hazard.f] - 34 + 30 * Math.sin(time * 2.4 + hazard.phase);
+    hazard.f === 4
+      ? floors[4] - 22 + 8 * Math.sin(time * 2.4 + hazard.phase)
+      : floors[hazard.f] - 34 + 30 * Math.sin(time * 2.4 + hazard.phase);
   const guardPos = (hazard) => ({
     x:
       hazard.x1 +
