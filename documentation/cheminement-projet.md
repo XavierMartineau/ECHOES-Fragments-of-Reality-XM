@@ -307,3 +307,25 @@ compatibles avec le système de sauvegarde existant.
 > sa portée (fichiers ou fonctionnalités) et corriger les sections d'état si elles changent.
 
 - Ce commit — Niveau 19 devient un gros mots croisés (FR/EN selon la langue choisie) ; le cadenas des symboles passe au niveau 20 avec saisie de chiffres au clavier (plus de listes) ; nouvelle page 404.html aux couleurs du jeu.
+
+
+### 16/10/2026 — Polissage UI, DEV MODE sécurisé et page de connexion
+
+#### Prompts du jour (résumé)
+
+- « Supprime l'animation des cartes de quiz qui bougent » → précisé : garder l'inclinaison (tilt) du panneau et le bouton « Lancer le jeu » qui pulse, mais arrêter toutes les animations de lignes qui traversent l'écran.
+- « Améliore aussi l'UI sur toutes les pages ».
+- « Mobile et tablette doivent bien s'afficher ».
+- Accès DEV MODE par code envoyé par courriel (popup, adresse masquée, code à 4 chiffres, 3 essais, accès valable 3 h), puis aide pour configurer EmailJS (code, modèle HTML aux couleurs du site, mode sombre, taille mobile, identifiants).
+- « Refais la page login » → « pas assez style brisé futur » → « moche, refais-la » → « les boutons aussi doivent avoir ça » → « refais le bouton » → « ajoute des SVG sur la page, c'est trop neutre ».
+- Demande finale : ajouter les prompts du jour et le travail réalisé à la fin de ce document.
+
+#### Travail réalisé
+
+- **Animations** : inclinaison 3D du panneau conservée ; lignes de scan et traits animés neutralisés (`.puzzle-panel::before/::after`, `.fx-scanline`, footers) dans `dev-mode.css` ; bouton de départ `.sequence-start-button` qui pulse (coupé en mode animations réduites).
+- **Polissage global** (`dev-mode.css`) : panneaux en verre dépoli arrondis, boutons à coins coupés (`clip-path`), focus visible cyan, barre de défilement fine.
+- **Responsive** : tests à 390 et 768 px sans débordement ; panneau des clés replié par défaut sous 900 px (`ambient-background.js`).
+- **DEV MODE protégé** (`dev-mode.js`, `emailjs-config.js`) : popup, adresse masquée, code à 4 chiffres valable 10 min, 3 essais puis blocage 5 min, accès mémorisé 3 h dans `localStorage`, envoi via EmailJS. Limite : site statique, la protection reste contournable.
+- **Page de connexion** (`login.html`, `login.css`) : titre fracturé cyan/violet, contenu flottant sur la nébuleuse, champ à coins coupés, bouton « Continuer » refait, logo hexagonal.
+- **SVG** : nouveau `docs/assets/svg/login-fragments.svg` (éclats cyan/violet flottants et points lumineux), masqué en mode performance (`fx-lite`).
+- **À vérifier** : rendu du bouton « Continuer » au repos (contour sombre non confirmé), envoi réel du courriel EmailJS et expiration des 3 h.
