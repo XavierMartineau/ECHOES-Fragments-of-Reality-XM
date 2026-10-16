@@ -2915,9 +2915,6 @@ body.level-corruption .level-footer {
   transform-origin: right center;
   animation: alignment-line-draw 0.35s ease-out 0.16s both;
 }
-.puzzle-panel.puzzle-victory-primary .primary-alignment-progress .sequence-progress-dot {
-  animation: alignment-dot-complete 0.9s ease-in-out infinite alternate;
-}
 @keyframes alignment-dot-activate {
   from {
     opacity: 0.45;
@@ -3743,8 +3740,6 @@ html[lang="en"] .color-sort-pieces::before {
   filter: brightness(1.08);
 }
 .color-sequence-grid.is-complete .color-sequence-option {
-  animation: color-sequence-success 0.75s ease both;
-  animation-delay: var(--success-delay, 0ms);
 }
 .color-sequence-option.is-error {
   border-color: var(--danger);

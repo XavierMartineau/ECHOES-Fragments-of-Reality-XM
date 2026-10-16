@@ -23,6 +23,8 @@
       confirm: "Tout effacer",
       progress: (done, total) => `${done} / ${total} niveaux terminés`,
       part: "PARTIE",
+      introKicker: "PROLOGUE",
+      introTag: "Intro",
       level: "Niveau",
       current: "En cours",
       completed: "terminé",
@@ -51,6 +53,8 @@
       confirm: "Erase everything",
       progress: (done, total) => `${done} / ${total} levels completed`,
       part: "PART",
+      introKicker: "PROLOGUE",
+      introTag: "Intro",
       level: "Level",
       current: "Current",
       completed: "completed",
@@ -279,7 +283,10 @@
   function bossSvg(item, label) {
     const locked = item.state === "locked" || item.state === "soon";
     const done = item.state === "completed";
-    const key = levels.getKeys(username).find((entry) => entry.id === item.key);
+    const isIntro = item.type === "intro";
+    const key = isIntro
+      ? null
+      : levels.getKeys(username).find((entry) => entry.id === item.key);
     const keyMarkup = key
       ? `<image class="tile-key ${key.owned ? "is-owned" : "is-missing"}" href="${key.image}" x="20" y="24" width="30" height="44" preserveAspectRatio="xMidYMid meet"/>
          <text class="tile-key-label" x="35" y="82">0${key.number}</text>`
@@ -290,7 +297,7 @@
       <g clip-path="url(#clip-boss)"><rect class="tile-sweep" x="30" y="0" width="60" height="112" transform="skewX(-20)"/></g>
       <path class="tile-inner" d="${BOSS_SHAPE}" transform="translate(100 56) scale(.88 .8) translate(-100 -56)"/>
       <path class="tile-gloss" d="M24 8 L176 8 L190 28 L190 48 Q100 62 10 48 L10 28 Z"/>
-      <g transform="translate(100 46) scale(.95)"><g class="tile-skull"><path d="${SKULL_PATH}"/></g></g>
+      <g transform="translate(100 46) scale(.95)"><g class="tile-skull">${isIntro ? `<path d="M-9 -14 L-9 14 L15 0 Z"/>` : `<path d="${SKULL_PATH}"/>`}</g></g>
       <text class="tile-boss-label" x="100" y="94">${label}</text>
       ${keyMarkup}
       ${locked ? `<g class="tile-icon" transform="translate(168 30)">${LOCK_SVG}</g>` : ""}
@@ -351,12 +358,15 @@
 
   // Crée la carte d'un niveau selon son état.
   function createCard(item, animate) {
-    const isBoss = item.type === "boss";
+    const isIntro = item.type === "intro";
+    const isBoss = item.type === "boss" || isIntro;
     const isFinal = item.type === "final";
     const playable = ["completed", "current", "unlocked"].includes(item.state);
     const card = document.createElement(playable ? "a" : "div");
     const name =
-      isBoss || isFinal ? item.label[language] : `${text.level} ${item.number}`;
+      isBoss || isFinal || item.type === "intro"
+        ? item.label[language]
+        : `${text.level} ${item.number}`;
     const stateLabel = {
       completed: text.completed,
       current: text.current,
@@ -374,8 +384,9 @@
     card.innerHTML = isFinal
       ? finaleSvg(item)
       : isBoss
-        ? bossSvg(item, text.boss)
+        ? bossSvg(item, isIntro ? text.introTag : text.boss)
         : tileSvg(item, item.state === "current" ? text.current : "");
+    if (isIntro) card.classList.add("is-intro");
     return card;
   }
 
@@ -386,6 +397,26 @@
     let delay = 0;
 
     seriesList.replaceChildren();
+    const introItem = progress.items.find((item) => item.type === "intro");
+    if (introItem) {
+      const section = document.createElement("section");
+      section.className = "series series-intro";
+      section.setAttribute("aria-labelledby", "series-intro");
+      section.innerHTML = `
+        <header class="series-header">
+          <div>
+            <p class="series-kicker">${text.introKicker}</p>
+            <h2 id="series-intro">${introItem.label[language]}</h2>
+          </div>
+          <span class="series-count">${introItem.state === "completed" ? "1 / 1" : "0 / 1"}</span>
+        </header>
+        <div class="level-grid"></div>`;
+      const fresh = introItem.state === "current" && !seen.has(introItem.id);
+      const card = createCard(introItem, fresh && !reducedMotion);
+      card.style.setProperty("--i", 0);
+      section.querySelector(".level-grid").appendChild(card);
+      seriesList.appendChild(section);
+    }
     levels.series.forEach((serie) => {
       const entries = progress.items.filter((item) => item.series === serie.id);
       const playable = entries.filter((item) => item.ready);

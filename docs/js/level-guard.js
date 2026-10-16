@@ -14,7 +14,16 @@
   const item = levels.itemForPath();
   if (!item) return;
 
-  // Mode développeur : le DEV MODE pose le drapeau en session ; manuellement : localStorage.setItem("echoes-dev-unlock", "1")
+  // Animation de réussite unique par niveau (voir level-victory.js).
+  if (document.currentScript) {
+    const style = document.createElement("link");
+    style.rel = "stylesheet";
+    style.href = new URL("../css/level-victory.css?v=2", document.currentScript.src).href;
+    document.head.appendChild(style);
+    const effect = document.createElement("script");
+    effect.src = new URL("level-victory.js?v=3", document.currentScript.src).href;
+    document.body.appendChild(effect);
+  }  // Mode développeur : le DEV MODE pose le drapeau en session ; manuellement : localStorage.setItem("echoes-dev-unlock", "1")
   if (
     localStorage.getItem("echoes-dev-unlock") === "1" ||
     sessionStorage.getItem("echoes-dev-unlock") === "1"

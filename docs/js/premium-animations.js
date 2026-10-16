@@ -1,5 +1,5 @@
 // ============================================================================
-// Animations « premium » : balayage lumineux, relief 3D des panneaux, révélation au défilement, confettis de réussite.
+// Animations « premium » : balayage lumineux, relief 3D des panneaux, révélation au défilement.
 // ============================================================================
 (() => {
   const script = document.currentScript;
@@ -12,31 +12,6 @@
     document.head.appendChild(link);
   }
   if (reduced) return;
-
-  const palette = ["#8fd0ff", "#ffd166", "#80ffcf", "#ff9ad5", "#ffffff"];
-
-  // Lance une gerbe de confettis depuis un point de l'écran.
-  const burst = (x, y, count = 46) => {
-    for (let index = 0; index < count; index += 1) {
-      const piece = document.createElement("span");
-      const angle = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.3;
-      const distance = 90 + Math.random() * 220;
-      piece.className = "fx-confetti";
-      piece.style.left = `${x}px`;
-      piece.style.top = `${y}px`;
-      piece.style.background = palette[index % palette.length];
-      piece.style.setProperty("--fx-x", `${Math.cos(angle) * distance}px`);
-      piece.style.setProperty(
-        "--fx-y",
-        `${Math.sin(angle) * distance + 140}px`,
-      );
-      piece.style.setProperty("--fx-r", `${(Math.random() - 0.5) * 900}deg`);
-      piece.style.setProperty("--fx-t", `${1.1 + Math.random() * 0.9}s`);
-      piece.setAttribute("aria-hidden", "true");
-      document.body.appendChild(piece);
-      piece.addEventListener("animationend", () => piece.remove());
-    }
-  };
 
   const init = () => {
     const scan = document.createElement("div");
@@ -77,37 +52,6 @@
       });
     }
 
-    // Confettis dès qu'un message de réussite apparaît.
-    document
-      .querySelectorAll(".puzzle-status, #puzzleStatus")
-      .forEach((status) => {
-        let wasSuccess = status.classList.contains("success");
-        new MutationObserver(() => {
-          const now = status.classList.contains("success");
-          if (now && !wasSuccess) {
-            const box = status.getBoundingClientRect();
-            burst(
-              box.left + box.width / 2,
-              Math.min(Math.max(box.top, 80), window.innerHeight - 80),
-              34,
-            );
-          }
-          wasSuccess = now;
-        }).observe(status, { attributes: true, attributeFilter: ["class"] });
-      });
-
-    const next = document.querySelector(".next-level-button");
-    if (next) {
-      new MutationObserver(() => {
-        if (next.hidden) return;
-        const box = next.getBoundingClientRect();
-        burst(
-          window.innerWidth / 2,
-          Math.min(Math.max(box.top, 100), window.innerHeight - 100),
-          80,
-        );
-      }).observe(next, { attributes: true, attributeFilter: ["hidden"] });
-    }
   };
 
   if (document.readyState === "loading")

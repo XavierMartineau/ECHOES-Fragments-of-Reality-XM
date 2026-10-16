@@ -1006,3 +1006,11 @@ html body.hub-page .dev-mode-toggle:hover,
 html body.hub-page .dev-mode-toggle:focus-visible {
   background: rgba(121, 247, 255, 0.14);
 }
+
+/* Intro : petit emblème centré, comme le boss */
+.level-card.is-intro {
+  width: min(100%, 150px);
+}
+.series-intro .level-grid {
+  justify-items: center;
+}

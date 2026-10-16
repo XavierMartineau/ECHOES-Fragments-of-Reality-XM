@@ -431,7 +431,12 @@ missionButton.addEventListener("click", () => {
   missionButton.querySelector("[data-i18n]").textContent =
     translations[currentLanguage].introMissionStarted;
   missionButton.disabled = true;
-  window.EchoesSave.saveProgress({ currentPage: "level-1", currentLevel: 1 });
+  const done = window.EchoesSave.getSave()?.completedBosses || [];
+  window.EchoesSave.saveProgress({
+    currentPage: "level-1",
+    currentLevel: 1,
+    completedBosses: [...new Set([...done, "intro"])],
+  });
   window.setTimeout(() => {
     window.location.href = "partie-1_niveau-1_à_10/niveau-01.html";
   }, 650);

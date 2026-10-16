@@ -1612,3 +1612,24 @@ html body > aside.dev-mode {
     transform: none;
   }
 }
+
+/* Visibilité des formes et flèches (mobile, tablette, PC) */
+html body .maze-direction,
+html body .maze-cell.is-player { color:#fff !important; }
+html body .maze-direction {
+  width: 56px !important; height: 52px !important; font-size: 1.6rem !important; font-weight: 800;
+  border: 2px solid #38d6ff !important; background: rgba(56,214,255,.22) !important;
+  box-shadow: 0 0 14px rgba(56,214,255,.45); text-shadow: 0 0 8px #38d6ff;
+}
+html body .maze-direction:active { background: rgba(56,214,255,.5) !important; }
+html body .shape-icon { width: 34px !important; height: 34px !important; border-width: 3px !important; border-color:#fff !important; box-shadow: 0 0 14px currentColor !important; }
+html body .shape-icon.shape-diamond { width: 26px !important; height: 26px !important; }
+html body .sort-piece, html body .pattern-symbol, html body .color-symbol { filter: drop-shadow(0 0 6px currentColor); }
+html body .sort-piece { min-width: 64px; min-height: 64px; }
+html body .pattern-symbol { font-size: 2rem !important; font-weight: 800; }
+html body .shape-triangle::after, html body .shape-circle::after, html body .shape-square::after,
+html body .shape-hexagon::after, html body .shape-diamond::after, html body .shape-star::after { filter: brightness(1.25) drop-shadow(0 0 6px currentColor); }
+html body .puzzle-panel button { font-weight: 700; }
+@media (max-width: 560px) {
+  html body .maze-direction { width: 52px !important; height: 50px !important; }
+}

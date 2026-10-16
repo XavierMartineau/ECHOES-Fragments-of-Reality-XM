@@ -1342,14 +1342,21 @@ html body > .hub-footer {
   html body > .level-footer > span,
   html body > .global-site-footer > span,
   html body > .site-footer > span {
-    min-width: max-content !important;
-    max-width: none !important;
-    flex: 0 0 auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex: 0 1 auto !important;
     overflow: visible !important;
-    overflow-wrap: normal !important;
+    overflow-wrap: break-word !important;
     word-break: normal !important;
+    white-space: normal !important;
+    text-align: center;
     grid-column: auto !important;
     justify-self: auto !important;
+  }
+
+  html body > .level-footer .site-copyright,
+  html body > .site-footer .site-copyright {
+    white-space: normal;
   }
 }
 /* Sauvegarde automatique : le bouton manuel est retire, barre superieure compacte */

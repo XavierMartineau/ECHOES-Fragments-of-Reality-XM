@@ -1,0 +1,30 @@
+/* RÉUSSITE // calque d'effets de fin de niveau (voir level-victory.js). */
+.vx-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.vx-piece {
+  position: absolute;
+  display: block;
+  will-change: transform, opacity;
+}
+
+.vx-banner {
+  position: absolute;
+  padding: 14px 30px;
+  max-width: calc(100vw - 32px);
+  border-top: 2px solid var(--vx, #79f7ff);
+  border-bottom: 2px solid var(--vx, #79f7ff);
+  background: rgba(4, 9, 22, 0.88);
+  box-shadow: 0 0 36px color-mix(in srgb, var(--vx, #79f7ff) 55%, transparent);
+  color: #fff;
+  font: 700 clamp(0.8rem, 3.4vw, 1.25rem) var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.22em;
+  text-align: center;
+  text-shadow: 0 0 14px var(--vx, #79f7ff);
+  white-space: nowrap;
+}

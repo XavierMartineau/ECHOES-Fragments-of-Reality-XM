@@ -101,8 +101,20 @@ window.EchoesLevels = (() => {
 
   // Construit la liste ordonnée des niveaux avec leurs prérequis.
   function buildItems() {
-    const items = [];
-    let gate = [];
+    // L'introduction précède le niveau 1 : il ne se débloque qu'après elle.
+    const items = [
+      {
+        id: "intro",
+        type: "intro",
+        number: 0,
+        label: { fr: "Introduction", en: "Introduction" },
+        series: "intro",
+        ready: true,
+        file: "introduction.html",
+        requires: [],
+      },
+    ];
+    let gate = ["intro"];
     series.forEach((serie) => {
       const ready = serie.ready !== false;
       const levelIds = [];
@@ -205,6 +217,9 @@ window.EchoesLevels = (() => {
     items.forEach((item) => {
       if (item.type === "level" && item.number < reached) done.add(item.id);
     });
+    // Anciennes sauvegardes : avoir joué un niveau implique que l'introduction est faite.
+    if (items.some((item) => item.type === "level" && done.has(item.id)) || reached >= 1)
+      done.add("intro");
     return done;
   }
 

@@ -400,8 +400,6 @@
 
   const finishRound = () => {
     running = false;
-    flash = 0.45;
-    flashColor = "198,255,77";
     banner = { text: text.cleared, t: 1.4 };
     if (round < 3) {
       setStatus(text.roundDone(round + 1), "success");

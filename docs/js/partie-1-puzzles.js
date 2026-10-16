@@ -582,23 +582,56 @@
 
   // Level 2: navigate a maze with keyboard or directional buttons.
   if (level === 2) {
-    const maze = [
-      "S.#....",
-      "..#.#..",
-      "....#..",
-      ".##....",
-      "...##.#",
-      "#......",
-      "...#..G",
-    ];
+    // Labyrinthe 15 × 15 généré à chaque partie : il faut récupérer 3 éclats avant que la sortie s'ouvre.
+    const SIZE = 15;
+    const SHARDS = 3;
+    const TRAIL = 14;
+    const maze = Array.from({ length: SIZE }, () => Array(SIZE).fill("#"));
+    const carve = (cx, cy) => {
+      maze[cy][cx] = ".";
+      randomize([
+        [0, -2],
+        [2, 0],
+        [0, 2],
+        [-2, 0],
+      ]).forEach(([dx, dy]) => {
+        const nx = cx + dx;
+        const ny = cy + dy;
+        if (nx < 0 || ny < 0 || nx >= SIZE || ny >= SIZE) return;
+        if (maze[ny][nx] !== "#") return;
+        maze[cy + dy / 2][cx + dx / 2] = ".";
+        carve(nx, ny);
+      });
+    };
+    carve(0, 0);
+    // Ouvre quelques murs pour créer des boucles et des culs-de-sac moins évidents.
+    for (let index = 0; index < 14; index += 1) {
+      const x = 1 + Math.floor(Math.random() * (SIZE - 2));
+      const y = 1 + Math.floor(Math.random() * (SIZE - 2));
+      if ((x + y) % 2 === 1) maze[y][x] = ".";
+    }
+    maze[0][0] = "S";
+    maze[SIZE - 1][SIZE - 1] = "G";
+    const shards = new Set();
+    const floors = randomize(
+      maze.flatMap((row, y) =>
+        row
+          .map((cell, x) => (cell === "." && x + y > 8 ? `${x},${y}` : null))
+          .filter(Boolean),
+      ),
+    );
+    floors.slice(0, SHARDS).forEach((key) => shards.add(key));
+    let collected = 0;
     let player = [0, 0];
+    const trail = [];
     const grid = document.createElement("div");
     grid.className = "maze-grid";
+    grid.style.gridTemplateColumns = `repeat(${SIZE}, minmax(0, 1fr))`;
     board.append(
       label(
         language === "en"
-          ? "Reach the exit without crossing a blocked cell."
-          : "Atteins la sortie sans traverser les cases bloquées.",
+          ? `Collect the ${SHARDS} shards, then reach the exit. It stays sealed until then.`
+          : `Récupère les ${SHARDS} éclats, puis rejoins la sortie. Elle reste scellée tant qu'ils ne sont pas tous pris.`,
       ),
     );
     board.appendChild(grid);
@@ -608,10 +641,20 @@
         [...row].forEach((cell, x) => {
           const tile = document.createElement("span");
           tile.className = `maze-cell${cell === "#" ? " is-wall" : ""}${cell === "G" ? " is-goal" : ""}`;
+          const age = trail.findIndex(([tx, ty]) => tx === x && ty === y);
+          if (age !== -1 && cell !== "#") {
+            tile.classList.add("is-trail");
+            tile.style.setProperty("--t", String(1 - age / TRAIL));
+          }
+          if (cell === "G" && collected < SHARDS) tile.classList.add("is-sealed");
           if (player[0] === x && player[1] === y) {
             tile.classList.add("is-player");
             tile.textContent = "◆";
             tile.setAttribute("aria-label", rules.player);
+          } else if (shards.has(`${x},${y}`)) {
+            tile.classList.add("is-shard");
+            tile.textContent = "✦";
+            tile.setAttribute("aria-label", language === "en" ? "Shard" : "Éclat");
           } else if (cell === "G") {
             tile.textContent = "◎";
             tile.setAttribute("aria-label", rules.exit);
@@ -635,9 +678,9 @@
       const nextY = y + dy;
       if (
         nextX < 0 ||
-        nextX >= 7 ||
+        nextX >= SIZE ||
         nextY < 0 ||
-        nextY >= 7 ||
+        nextY >= SIZE ||
         maze[nextY][nextX] === "#"
       ) {
         setStatus(
@@ -648,12 +691,27 @@
         );
         return;
       }
+      if (maze[nextY][nextX] === "G" && collected < SHARDS) {
+        setStatus(
+          language === "en"
+            ? `The exit is sealed: ${SHARDS - collected} shard(s) missing.`
+            : `Sortie scellée : il manque ${SHARDS - collected} éclat(s).`,
+          "error",
+        );
+        return;
+      }
+      trail.unshift([x, y]);
+      trail.length = Math.min(trail.length, TRAIL);
       player = [nextX, nextY];
       moves += 1;
       readout.textContent = `${moves} ${rules.moves}`;
+      if (shards.delete(`${nextX},${nextY}`)) collected += 1;
       render();
       if (maze[nextY][nextX] === "G") completeLevel();
-      else setStatus(`${moves} ${rules.moves}`);
+      else
+        setStatus(
+          `${moves} ${rules.moves} · ✦ ${collected} / ${SHARDS}`,
+        );
     };
     const directions = [
       ["↑", 0, -1],
@@ -712,6 +770,48 @@
         options: ["BRIDGE", "BREACH", "FRAGILE", "SHADOW"],
       },
     ];
+    // Aide : fenêtre centrée affichant seulement les lettres de l'alphabet.
+    const helpButton = button("ALPHABET", "challenge-button alphabet-help-button");
+    helpButton.addEventListener("click", () => {
+      if (document.querySelector(".alphabet-modal")) return;
+      const modal = document.createElement("div");
+      modal.className = "alphabet-modal";
+      modal.setAttribute("role", "dialog");
+      modal.setAttribute("aria-modal", "true");
+      modal.setAttribute("aria-label", "Alphabet");
+      const box = document.createElement("div");
+      box.className = "alphabet-box";
+      const close = document.createElement("button");
+      close.type = "button";
+      close.className = "alphabet-close";
+      close.setAttribute("aria-label", language === "en" ? "Close" : "Fermer");
+      close.textContent = "×";
+      const strip = document.createElement("div");
+      strip.className = "alphabet-strip";
+      [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"].forEach((letter) => {
+        const cell = document.createElement("span");
+        cell.className = "alphabet-cell";
+        cell.textContent = letter;
+        strip.appendChild(cell);
+      });
+      box.append(close, strip);
+      modal.appendChild(box);
+      const closeModal = () => {
+        modal.remove();
+        document.removeEventListener("keydown", onKey);
+      };
+      const onKey = (event) => {
+        if (event.key === "Escape") closeModal();
+      };
+      close.addEventListener("click", closeModal);
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) closeModal();
+      });
+      document.addEventListener("keydown", onKey);
+      document.body.appendChild(modal);
+      close.focus();
+    });
+    toolbar.appendChild(helpButton);
     let round = 0;
     const render = () => {
       const data = rounds[round];
@@ -744,6 +844,7 @@
         options.appendChild(answer);
       });
       board.appendChild(options);
+
     };
     beginPuzzle = render;
     setProgress(0, rounds.length);
@@ -776,15 +877,21 @@
         ...(x < 2 ? [index + 1] : []),
       ];
     };
-    for (let step = 0; step < 50; step += 1) {
-      const options = neighbors(empty).filter(
-        (index) => index !== previousEmpty,
-      );
-      const nextEmpty = options[Math.floor(Math.random() * options.length)];
-      [tiles[empty], tiles[nextEmpty]] = [tiles[nextEmpty], tiles[empty]];
-      previousEmpty = empty;
-      empty = nextEmpty;
-    }
+    // Mélange léger (premier palier) : quelques coups depuis la grille résolue.
+    do {
+      tiles.splice(0, 9, ...solvedTiles);
+      empty = 8;
+      previousEmpty = -1;
+      for (let step = 0; step < 14; step += 1) {
+        const options = neighbors(empty).filter(
+          (index) => index !== previousEmpty,
+        );
+        const nextEmpty = options[Math.floor(Math.random() * options.length)];
+        [tiles[empty], tiles[nextEmpty]] = [tiles[nextEmpty], tiles[empty]];
+        previousEmpty = empty;
+        empty = nextEmpty;
+      }
+    } while (tiles.every((item, cell) => item === solvedTiles[cell]));
     const render = () => {
       grid.replaceChildren();
       tiles.forEach((value, index) => {

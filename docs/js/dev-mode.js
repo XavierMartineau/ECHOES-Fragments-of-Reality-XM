@@ -8,7 +8,7 @@
   const rootUrl = new URL("../../", script.src);
   const style = document.createElement("link");
   style.rel = "stylesheet";
-  style.href = new URL("../css/dev-mode.css?v=20", script.src).href;
+  style.href = new URL("../css/dev-mode.css?v=21", script.src).href;
   document.head.appendChild(style);
 
   // Keeps the browser tab title synchronized with the current level language.
@@ -376,7 +376,7 @@
       }
       if ((await sha(input.value.trim())) === pending.hash) {
         sessionStorage.removeItem("echoes-dev-pending");
-        store.set("echoes-dev-ok", Date.now() + 3 * 60 * 60 * 1000, true);
+        store.set("echoes-dev-ok", Date.now() + 12 * 60 * 60 * 1000, true);
         done();
         setOpen(true);
         showLevels("1");
