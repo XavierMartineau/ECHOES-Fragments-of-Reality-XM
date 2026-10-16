@@ -384,4 +384,7 @@ compatibles avec le système de sauvegarde existant.
 - **Niveau 31 mobile** (`partie-4_niveau-31_à_40.css`) : plateau dimensionné selon la hauteur d'écran, boutons ◀ ▶ juste sous le plateau, marges du panneau.
 - **Niveau 31 jeu** (`partie-4_niveau-31_à_40.js`) : les pièges du dernier étage du secteur 1 (scie, gardien, tapis) ne traversent plus la barre de séparation ; lasers et rebondisseurs en sont exclus.
 - **Niveau 31 couleurs** : fond et cadre bleu nuit/violet (plus de vert), danger en rouge/orange (gardiens, scies, lasers), tapis roulants cyan, rebondisseurs et portails inchangés.
+- **Boutons ECHOES** : sur les 40 pages de niveau, le logo du haut renvoie à `niveaux.html`.
+- **Accueil** : barre du haut en cartouches angulaires (système / FR-EN / dimension) ; avertissement stroboscopique refait (icône SVG, plaque d'alerte, bouton à interrupteur).
+- **DEV MODE** : bouton compact angulaire et panneau refaits (`docs/css/dev-mode-ui.css`) : raccourcis, interrupteurs d'options, cartes de parties colorées, grille de niveaux, accès spéciaux.
 - **À vérifier** : rendu final du niveau 31 en jeu, glitch rouge de l'intro sur PC large, couleur violette de l'alphabet (choix perso).
