@@ -5,6 +5,38 @@ Il est maintenu à partir des fonctionnalités présentes dans le dépôt et des
 significatifs de l'historique Git. La référence narrative et fonctionnelle principale
 reste [Info-fr.txt](./Info-fr.txt).
 
+## Dernière mise à jour — 16/10/2026
+
+**Résumé :** journée consacrée à l'habillage visuel et à la sécurité du mode développeur : hub de niveaux gamifié, effets d'interface, accueil en nébuleuse, DEV MODE protégé par code courriel, page de connexion « style brisé » et nouveaux SVG. Le gameplay, les puzzles et le contenu n'ont pas été modifiés.
+
+### Commits GitHub du 16/10/2026 (du plus récent au plus ancien)
+
+| Heure | Commit | Contenu |
+|-------|--------|---------|
+| 03:19 | `c180c65` | Polissage global de l'UI, DEV MODE sécurisé et refonte de la page de connexion. |
+| 03:18 | `6aa5626` | Fond décoratif SVG (`login-fragments.svg`) sur la page de connexion et styles associés. |
+| 03:17 | `bcc9b65` | Nouveau fond et nouveaux boutons pour la page de connexion. |
+| 03:13 | `af27038` | Vérification par courriel pour l'accès au DEV MODE et configuration EmailJS. |
+| 02:54 | `3b3a8e2` | Amélioration de l'UI du mode développeur et optimisations pour les connexions lentes. |
+| 02:43 | `a6cd1d6` | Refonte des styles de l'accueil et suppression du script d'interlude. |
+| 02:33 | `000f4c9` | Effets d'interface personnalisés : curseur et barres de défilement. |
+| 02:10 | `1871a19` | Nettoyage du code : sections redondantes retirées pour la lisibilité et la maintenance. |
+| 01:50 | `b650597` | Hub de sélection des niveaux et panneau des clés. |
+
+### Reste à faire
+
+1. Vérifier le rendu du bouton « Continuer » de la page de connexion au repos (contour sombre non confirmé).
+2. Tester l'envoi réel du code par EmailJS : courriel en mode sombre, lisibilité sur mobile, expiration à 10 minutes, blocage de 5 minutes après 3 essais, validité de 3 heures.
+3. Appliquer le pied de page minimal (« © 2026 Xavier Martineau » et « ECHOES: Fragments of Reality ») sur toutes les pages.
+4. Contrôler visuellement les boutons à coins coupés sur l'accueil, le hub et les boss.
+5. Tester l'accueil et les boss sur mobile et tablette après les derniers changements.
+6. Valider les parcours complets des parties 1 et 2 sur ordinateur et mobile, puis les liens et ressources sur GitHub Pages.
+7. Relier les clés restantes aux verrous et aux fragments narratifs ; préparer une nouvelle version bêta.
+
+### Points d'attention
+
+- Le code d'accès au DEV MODE ne protège pas réellement : le site est statique et la vérification reste contournable côté navigateur.
+- La clé publique EmailJS est visible côté client (comportement normal) ; restreindre le domaine autorisé dans le compte EmailJS.
 ## État du projet au 07/10/2026
 
 - **Projet :** ECHOES: Fragments of Reality
@@ -311,7 +343,7 @@ compatibles avec le système de sauvegarde existant.
 
 ### 16/10/2026 — Polissage UI, DEV MODE sécurisé et page de connexion
 
-#### Prompts du jour (résumé)
+#### Demandes du jour (résumé)
 
 - « Supprime l'animation des cartes de quiz qui bougent » → précisé : garder l'inclinaison (tilt) du panneau et le bouton « Lancer le jeu » qui pulse, mais arrêter toutes les animations de lignes qui traversent l'écran.
 - « Améliore aussi l'UI sur toutes les pages ».
