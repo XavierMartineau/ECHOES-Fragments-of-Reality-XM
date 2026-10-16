@@ -625,3 +625,16 @@ html body .login-submit:focus-visible::after { left: 120%; }
 html body .login-submit:hover,
 html body .login-submit:focus-visible { filter: none; color: #fff; outline: none; }
 html body .login-submit:active { transform: scale(0.985); }
+/* Éclats SVG décoratifs en fond */
+html body .login-fragments {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  opacity: 0.95;
+}
+@media (max-width: 700px) { html body .login-fragments { opacity: 0.55; } }
+html.fx-lite body .login-fragments { display: none; }

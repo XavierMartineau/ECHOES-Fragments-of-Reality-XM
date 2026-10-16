@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="c" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#79f7ff" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#3a7bff" stop-opacity=".04"/>
+    </linearGradient>
+    <linearGradient id="v" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b36cff" stop-opacity=".38"/>
+      <stop offset="1" stop-color="#ff4fd8" stop-opacity=".04"/>
+    </linearGradient>
+    <radialGradient id="g" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#79f7ff" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#79f7ff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="b" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.2"/></filter>
+    <style>
+      .a{animation:da 14s ease-in-out infinite}
+      .b{animation:db 18s ease-in-out infinite}
+      .c{animation:dc 22s ease-in-out infinite}
+      .p{animation:tw 3.6s ease-in-out infinite}
+      @keyframes da{50%{transform:translate(18px,-22px) rotate(3deg)}}
+      @keyframes db{50%{transform:translate(-20px,16px) rotate(-4deg)}}
+      @keyframes dc{50%{transform:translate(12px,20px) rotate(5deg)}}
+      @keyframes tw{50%{opacity:.25}}
+      @media (prefers-reduced-motion:reduce){.a,.b,.c,.p{animation:none}}
+    </style>
+  </defs>
+  <g class="a" style="transform-box:fill-box;transform-origin:center">
+    <polygon points="120,160 330,110 400,300 250,420 90,330" fill="url(#c)"/>
+    <polygon points="250,420 400,300 470,470 330,560" fill="url(#v)" opacity=".7"/>
+  </g>
+  <g class="b" style="transform-box:fill-box;transform-origin:center">
+    <polygon points="1210,120 1420,170 1480,340 1320,400 1180,270" fill="url(#v)"/>
+    <polygon points="1320,400 1480,340 1540,520 1390,560" fill="url(#c)" opacity=".7"/>
+  </g>
+  <g class="c" style="transform-box:fill-box;transform-origin:center">
+    <polygon points="160,620 330,590 420,760 270,850 130,780" fill="url(#c)" opacity=".85"/>
+  </g>
+  <g class="a" style="transform-box:fill-box;transform-origin:center">
+    <polygon points="1240,640 1400,600 1480,760 1330,840 1200,760" fill="url(#v)" opacity=".85"/>
+  </g>
+  <g filter="url(#b)">
+    <circle class="p" cx="520" cy="210" r="5" fill="#79f7ff"/>
+    <circle class="p" cx="1090" cy="260" r="4" fill="#b36cff" style="animation-delay:-1.2s"/>
+    <circle class="p" cx="610" cy="760" r="4" fill="#b36cff" style="animation-delay:-2.2s"/>
+    <circle class="p" cx="1010" cy="730" r="5" fill="#79f7ff" style="animation-delay:-.6s"/>
+  </g>
+  <circle cx="800" cy="450" r="360" fill="url(#g)" opacity=".05"/>
+</svg>
