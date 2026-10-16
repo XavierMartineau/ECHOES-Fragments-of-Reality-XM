@@ -133,6 +133,7 @@
     );
     dock.append(collection, toggle);
     levelHeader.insertAdjacentElement("afterend", dock);
+    if (window.matchMedia("(max-width: 900px)").matches) toggle.click();
 
     const refreshKeys = () => {
       const keys = window.EchoesSave?.getKeys?.() || [];
