@@ -1,4 +1,4 @@
-﻿const canvas = document.getElementById("background");
+const canvas = document.getElementById("background");
 const ctx = canvas.getContext("2d");
 
 let width = 0;
@@ -65,7 +65,15 @@ function resizeCanvas() {
   const lowEnd =
     localStorage.getItem("echoes-perf") === "lite" ||
     (navigator.hardwareConcurrency || 8) <= 4 ||
-    (navigator.deviceMemory || 8) <= 4;
+    (navigator.deviceMemory || 8) <= 4 ||
+    sessionStorage.getItem("echoes-slow") === "1" ||
+    /(^|-)2g$|^3g$/.test((navigator.connection || {}).effectiveType || "") ||
+    (navigator.connection || {}).saveData === true ||
+    ((navigator.connection || {}).downlink > 0 && navigator.connection.downlink < 1.5) ||
+    (navigator.connection || {}).rtt > 500 ||
+    (performance.getEntriesByType("navigation")[0] || {}).responseEnd > 2500;
+  if (lowEnd) sessionStorage.setItem("echoes-slow", "1");
+  document.documentElement.classList.toggle("fx-lite", lowEnd);
   particles = Array.from({ length: lowEnd ? 55 : 120 }, () => ({
     x: Math.random() * width,
     y: Math.random() * height,

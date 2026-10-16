@@ -14,11 +14,29 @@
   // Les fonds animés peuvent être coupés depuis le DEV MODE.
   if (store("echoes-fx-scene") === "off") return;
 
-  // Appareil lent : réglage manuel, économie de données, peu de cœurs ou peu de mémoire.
-  const conn = navigator.connection || {};
+  // Réseau lent : économie de données, 2G/3G, faible débit, forte latence ou page lente à arriver.
+  // Le verdict est mémorisé pour la session : les pages suivantes démarrent directement en mode léger.
+  const slowConnection = () => {
+    const c = navigator.connection || {};
+    let slow =
+      c.saveData === true ||
+      /(^|-)2g$|^3g$/.test(c.effectiveType || "") ||
+      (c.downlink > 0 && c.downlink < 1.5) ||
+      c.rtt > 500;
+    try {
+      const nav = performance.getEntriesByType("navigation")[0];
+      if (nav && nav.responseEnd > 2500) slow = true;
+      if (slow) sessionStorage.setItem("echoes-slow", "1");
+      return slow || sessionStorage.getItem("echoes-slow") === "1";
+    } catch (e) {
+      return slow;
+    }
+  };
+
+  // Appareil lent : réglage manuel, réseau lent, peu de cœurs ou peu de mémoire.
   let lite =
     store("echoes-perf") === "lite" ||
-    conn.saveData === true ||
+    slowConnection() ||
     (navigator.hardwareConcurrency || 8) <= 4 ||
     (navigator.deviceMemory || 8) <= 4;
   document.documentElement.classList.toggle("fx-lite", lite);
@@ -52,6 +70,7 @@
 
   function start(scene) {
     const css = scene.pal[0].join(",");
+    const css2 = (scene.pal[1] || scene.pal[0]).join(",");
     document.documentElement.style.setProperty("--fx-rgb", css);
 
     const style = document.createElement("style");
@@ -61,15 +80,17 @@
       #echoes-scene{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:#04060e}
       #echoes-scene canvas{position:absolute;inset:0;width:100%;height:100%;animation:sb-fade 1.4s ease-out both}
       #echoes-scene .sb-vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(3,5,12,.3),transparent 60%),radial-gradient(ellipse at center,transparent 42%,rgba(0,0,0,${0.55 + scene.tier * 0.06}) 100%)}
-      #echoes-scene .sb-scan{position:absolute;inset:0;background:repeating-linear-gradient(to bottom,rgba(255,255,255,.028) 0 1px,transparent 1px 3px);mix-blend-mode:overlay}
-      #echoes-scene .sb-bar{position:absolute;left:0;right:0;top:-24vh;height:22vh;background:linear-gradient(to bottom,transparent,rgba(${css},.07),transparent);animation:sb-bar 10s linear infinite}
+      #echoes-scene .sb-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,12,26,.34),rgba(4,6,14,.5))}
+      #echoes-scene .sb-neb{position:absolute;inset:-12%;background:radial-gradient(42% 38% at 22% 24%,rgba(${css},.2),transparent 70%),radial-gradient(46% 42% at 80% 72%,rgba(${css2},.22),transparent 70%),radial-gradient(40% 34% at 56% 48%,rgba(${css},.1),transparent 70%);animation:sb-neb 26s ease-in-out infinite alternate;will-change:transform}
+      #echoes-scene .sb-neb.b{background:radial-gradient(34% 30% at 76% 20%,rgba(${css2},.16),transparent 70%),radial-gradient(38% 34% at 18% 80%,rgba(${css},.16),transparent 70%);animation-duration:34s;animation-direction:alternate-reverse}
       .sb-reveal{position:fixed;inset:0;z-index:99999;pointer-events:none;background:#04060e;animation:sb-wipe .9s cubic-bezier(.65,0,.25,1) forwards}
       .sb-reveal i{position:absolute;top:0;bottom:0;width:2px;left:0;background:rgb(${css});box-shadow:0 0 18px 4px rgba(${css},.8),0 0 60px 14px rgba(${css},.35);animation:sb-line .9s cubic-bezier(.65,0,.25,1) forwards}
       @keyframes sb-fade{from{opacity:0}to{opacity:1}}
-      @keyframes sb-bar{to{transform:translateY(145vh)}}
+      @keyframes sb-neb{from{transform:translate3d(-3%,-2%,0) scale(1)}to{transform:translate3d(3%,3%,0) scale(1.1)}}
       @keyframes sb-wipe{from{clip-path:inset(0 0 0 0)}to{clip-path:inset(0 0 0 100%)}}
       @keyframes sb-line{from{left:0}to{left:100%}}
-      @media (prefers-reduced-motion:reduce){.sb-bar,.sb-reveal{display:none}}
+      @media (prefers-reduced-motion:reduce){.sb-neb{animation:none}.sb-reveal{display:none}}
+      .fx-lite .sb-neb{animation:none;will-change:auto}
     `;
     document.head.appendChild(style);
 
@@ -78,7 +99,7 @@
     wrap.setAttribute("aria-hidden", "true");
     const canvas = document.createElement("canvas");
     wrap.appendChild(canvas);
-    ["sb-vig", "sb-scan", "sb-bar"].forEach((cls) => {
+    ["sb-neb", "sb-neb b", "sb-veil", "sb-vig"].forEach((cls) => {
       const d = document.createElement("div");
       d.className = cls;
       wrap.appendChild(d);
@@ -151,11 +172,11 @@
       stage++;
       if (stage === 1) {
         lite = true;
+        try { sessionStorage.setItem("echoes-slow", "1"); } catch (e) {}
         document.documentElement.classList.add("fx-lite");
         resize();
       } else if (stage >= 2) {
-        wrap.querySelector(".sb-bar")?.remove();
-        wrap.querySelector(".sb-scan")?.remove();
+        wrap.querySelectorAll(".sb-neb").forEach((n) => n.remove());
         frozen = true;
         render();
       }

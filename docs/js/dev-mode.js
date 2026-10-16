@@ -8,7 +8,7 @@
   const rootUrl = new URL("../../", script.src);
   const style = document.createElement("link");
   style.rel = "stylesheet";
-  style.href = new URL("../css/dev-mode.css?v=12", script.src).href;
+  style.href = new URL("../css/dev-mode.css?v=18", script.src).href;
   document.head.appendChild(style);
 
   // Keeps the browser tab title synchronized with the current level language.

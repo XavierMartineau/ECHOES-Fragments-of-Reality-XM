@@ -659,3 +659,14 @@ html body.index-page .ambient-grid,
 html body.index-page .scanlines,
 html body.index-page::before { display: none !important; }
 html body.index-page #background { opacity: 0.55; }
+
+/* Mode léger (réseau ou appareil lent) : pas d'animations décoratives sur l'accueil */
+html.fx-lite body.index-page .title,
+html.fx-lite body.index-page .subtitle,
+html.fx-lite body.index-page .home-logo,
+html.fx-lite body.index-page .meta span:first-child::after { animation: none; }
+html.fx-lite body.index-page .title::before,
+html.fx-lite body.index-page .title::after,
+html.fx-lite body.index-page::after { display: none; }
+html.fx-lite body.index-page .home-skyline,
+html.fx-lite body.index-page .home-emblem { opacity: 0.5; }
