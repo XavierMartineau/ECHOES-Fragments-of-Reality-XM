@@ -75,12 +75,8 @@
 
     // Projecteur lumineux sur le panneau central et attraction magnétique des boutons d'accueil.
     if (document.body.classList.contains("index-page")) {
-      const panel = document.querySelector(".content");
-      if (panel) {
-        const r = panel.getBoundingClientRect();
-        panel.style.setProperty("--mx", `${x - r.left}px`);
-        panel.style.setProperty("--my", `${y - r.top}px`);
-      }
+      root.style.setProperty("--mx", `${x}px`);
+      root.style.setProperty("--my", `${y}px`);
       if (!reduce) {
         document.querySelectorAll(".primary-btn,.strobe-notice button,.lang-btn").forEach((b) => {
           const r = b.getBoundingClientRect();

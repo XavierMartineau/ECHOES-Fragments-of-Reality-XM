@@ -16,12 +16,11 @@ body.index-page .home-skyline {
   bottom: 0;
   z-index: 0;
   width: 100%;
-  height: min(36vh, 360px);
+  top: 0;
+  height: 100%;
   object-fit: cover;
-  object-position: center bottom;
-  opacity: 0.55;
+  opacity: 0.7;
   pointer-events: none;
-  mask-image: linear-gradient(to top, #000 55%, transparent);
 }
 
 body.index-page .home-emblem {
@@ -48,7 +47,7 @@ html body.index-page .content {
     0 0 80px rgba(var(--home-violet), 0.14),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(14px) saturate(1.2);
-  overflow: hidden;
+  overflow: visible;
   animation: home-rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
@@ -408,20 +407,16 @@ html body.index-page > .site-footer .footer-console .pulse {
 }
 
 /* Projecteur qui suit le curseur (variables posées par ui-fx.js) */
-@media (hover: hover) and (pointer: fine) {
-  html body.index-page .content::after {
-    display: block;
+@media all {
+  html body.index-page::after {
     content: "";
-    position: absolute;
+    position: fixed;
     inset: 0;
-    border: 0;
-    background: radial-gradient(
-      360px circle at var(--mx, 50%) var(--my, 30%),
-      rgba(var(--home-cyan), 0.1),
-      transparent 70%
-    );
-    pointer-events: none;
     z-index: 0;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 40%), rgba(var(--home-cyan), 0.09), transparent 70%), linear-gradient(180deg, rgba(10, 16, 34, 0.5), rgba(6, 9, 20, 0.68));
+    -webkit-backdrop-filter: blur(6px) saturate(1.15);
+    backdrop-filter: blur(6px) saturate(1.15);
+    pointer-events: none;
   }
 
   html body.index-page .primary-btn,
@@ -440,3 +435,227 @@ html body.index-page > .site-footer .footer-console .pulse {
     display: none;
   }
 }
+
+/* Voile semi-transparent sur toute la page (au lieu d'un panneau encadré) */
+html body.index-page .content {
+  border: 0;
+  background: none;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+html body.index-page .content::before {
+  display: none;
+}
+
+/* Petit logo en haut de la page */
+html body.index-page .home-logo {
+  display: block;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto clamp(14px, 2.4vw, 22px);
+  filter: drop-shadow(0 0 14px rgba(var(--home-cyan), 0.55));
+  animation: home-logo-float 6s ease-in-out infinite;
+}
+
+@keyframes home-logo-float {
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body.index-page .home-logo {
+    animation: none;
+  }
+}
+/* Typographie v3 : hiérarchie plus nette, moins chargée */
+html body.index-page .eyebrow {
+  gap: 14px;
+  margin-bottom: clamp(16px, 2.6vw, 26px);
+  font-size: clamp(0.56rem, 1.3vw, 0.68rem);
+  font-weight: 600;
+  letter-spacing: 0.46em;
+  text-indent: 0.46em;
+  color: rgba(var(--home-cyan), 0.9);
+  text-shadow: none;
+}
+
+html body.index-page .eyebrow::before,
+html body.index-page .eyebrow::after {
+  flex: 0 0 clamp(18px, 6vw, 56px);
+  height: 1px;
+}
+
+html body.index-page .title {
+  font-size: clamp(2.9rem, 10.5vw, 7.4rem);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  margin-right: -0.22em;
+  text-indent: 0.22em;
+  background: linear-gradient(180deg, #ffffff 0%, #e3f7ff 45%, #9fd8ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 28px rgba(var(--home-cyan), 0.28));
+}
+
+html body.index-page .title::before {
+  display: none;
+}
+
+html body.index-page .subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3vw, 22px);
+  margin-top: clamp(12px, 2.2vw, 20px);
+  font-size: clamp(0.66rem, 1.8vw, 0.95rem);
+  font-weight: 500;
+  letter-spacing: 0.5em;
+  text-indent: 0.5em;
+  margin-right: 0;
+  color: rgba(214, 228, 255, 0.72);
+}
+
+html body.index-page .subtitle::before,
+html body.index-page .subtitle::after {
+  content: "";
+  flex: 0 0 clamp(18px, 6vw, 56px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(var(--home-violet), 0.8));
+}
+
+html body.index-page .subtitle::after {
+  transform: scaleX(-1);
+}
+
+html body.index-page .description {
+  max-width: 500px;
+  margin-top: clamp(22px, 3.6vw, 32px);
+  font-size: clamp(0.98rem, 1.9vw, 1.12rem);
+  font-weight: 400;
+  line-height: 1.85;
+  letter-spacing: 0.02em;
+  color: rgba(222, 234, 252, 0.74);
+}
+
+html body.index-page .primary-btn {
+  min-width: min(100%, 320px);
+  padding: 18px 40px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
+}
+
+html body.index-page .meta {
+  gap: clamp(14px, 4vw, 30px);
+  font-size: clamp(0.52rem, 1.3vw, 0.62rem);
+  letter-spacing: 0.34em;
+  color: rgba(var(--home-cyan), 0.7);
+}
+
+html body.index-page .meta span:first-child {
+  color: rgb(var(--home-cyan));
+}
+
+html body.index-page .meta span:first-child::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-left: 8px;
+  border-radius: 50%;
+  background: rgb(var(--home-cyan));
+  box-shadow: 0 0 10px rgb(var(--home-cyan));
+  animation: home-dot 2.4s ease-in-out infinite;
+}
+
+@keyframes home-dot {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+html body.index-page .meta span + span::before {
+  display: none;
+}
+/* Titre fracturé : deux tranches décalées qui se détachent par à-coups */
+html body.index-page .title {
+  position: relative;
+  animation: home-title-flicker 7s steps(1, end) infinite;
+}
+
+html body.index-page .title::before,
+html body.index-page .title::after {
+  display: block;
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  filter: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+html body.index-page .title::before {
+  color: rgb(var(--home-cyan));
+  -webkit-text-fill-color: rgb(var(--home-cyan));
+  clip-path: polygon(0 0, 100% 0, 100% 42%, 0 48%);
+  animation: home-slice-a 5.5s infinite;
+}
+
+html body.index-page .title::after {
+  color: rgb(var(--home-violet));
+  -webkit-text-fill-color: rgb(var(--home-violet));
+  clip-path: polygon(0 56%, 100% 50%, 100% 100%, 0 100%);
+  animation: home-slice-b 5.5s infinite 0.15s;
+}
+
+@keyframes home-slice-a {
+  0%, 86%, 100% { opacity: 0; transform: none; }
+  88% { opacity: 0.85; transform: translate(-7px, -2px) skewX(-4deg); }
+  90% { opacity: 0.7; transform: translate(5px, 1px); clip-path: polygon(0 0, 100% 0, 100% 30%, 0 36%); }
+  93% { opacity: 0.8; transform: translate(-3px, 0); clip-path: polygon(0 10%, 100% 4%, 100% 58%, 0 64%); }
+  96% { opacity: 0; transform: none; }
+}
+
+@keyframes home-slice-b {
+  0%, 86%, 100% { opacity: 0; transform: none; }
+  88% { opacity: 0.85; transform: translate(8px, 2px) skewX(4deg); }
+  90% { opacity: 0.7; transform: translate(-5px, -1px); clip-path: polygon(0 66%, 100% 60%, 100% 100%, 0 100%); }
+  93% { opacity: 0.8; transform: translate(4px, 0); clip-path: polygon(0 38%, 100% 44%, 100% 92%, 0 86%); }
+  96% { opacity: 0; transform: none; }
+}
+
+@keyframes home-title-flicker {
+  0%, 87%, 94%, 100% { transform: none; }
+  88% { transform: translateX(2px); }
+  90% { transform: translateX(-2px) skewX(1.5deg); }
+  92% { transform: translateX(1px); }
+}
+
+/* Micro-lueur lente sur le sous-titre */
+html body.index-page .subtitle {
+  animation: home-sub-breathe 6s ease-in-out infinite;
+}
+
+@keyframes home-sub-breathe {
+  50% { color: rgba(236, 244, 255, 0.95); letter-spacing: 0.53em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body.index-page .title,
+  html body.index-page .subtitle { animation: none; }
+  html body.index-page .title::before,
+  html body.index-page .title::after { display: none; }
+}
+html body.index-page .title { isolation: isolate; }
+html body.index-page .title::before,
+html body.index-page .title::after { z-index: 1; mix-blend-mode: screen; }
+
+/* Plus de grille ni de lignes : fond nébuleuse (SVG) */
+html body.index-page .ambient-grid,
+html body.index-page .scanlines,
+html body.index-page::before { display: none !important; }
+html body.index-page #background { opacity: 0.55; }
