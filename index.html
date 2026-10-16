@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="style.css?v=2" />
     <link rel="stylesheet" href="docs/css/responsive.css" />
     <link rel="stylesheet" href="docs/css/fonts.css" />
-    <link rel="stylesheet" href="docs/css/home.css?v=10" />
+    <link rel="stylesheet" href="docs/css/home.css?v=13" />
   </head>
   <body class="index-page">
     <canvas id="background"></canvas>
@@ -35,20 +35,22 @@
       aria-hidden="true"
     />
 
-    <div class="lang-switcher" aria-label="Choix de langue">
-      <button class="lang-btn active" data-lang="fr" type="button">FR</button>
-      <button class="lang-btn" data-lang="en" type="button">EN</button>
-    </div>
+    <header class="home-topbar">
+      <div class="hud top-left">
+        <span class="label" data-i18n="systemLabel">SYSTÈME</span>
+        <span class="status" data-i18n="systemStatus">EN LIGNE</span>
+      </div>
 
-    <div class="hud top-left">
-      <span class="label" data-i18n="systemLabel">SYSTÈME</span>
-      <span class="status" data-i18n="systemStatus">EN LIGNE</span>
-    </div>
+      <div class="lang-switcher" aria-label="Choix de langue">
+        <button class="lang-btn active" data-lang="fr" type="button">FR</button>
+        <button class="lang-btn" data-lang="en" type="button">EN</button>
+      </div>
 
-    <div class="hud top-right">
-      <span class="label" data-i18n="dimensionLabel">DIMENSION</span>
-      <span class="status" data-i18n="dimensionStatus">RUPTURE</span>
-    </div>
+      <div class="hud top-right">
+        <span class="label" data-i18n="dimensionLabel">DIMENSION</span>
+        <span class="status" data-i18n="dimensionStatus">RUPTURE</span>
+      </div>
+    </header>
 
     <main class="hero">
       <div class="scanlines"></div>
@@ -87,6 +89,10 @@
       </div>
 
       <aside class="strobe-notice" role="note">
+        <svg class="strobe-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+          <path class="strobe-icon-tri" d="M24 4 45 41H3Z" />
+          <path class="strobe-icon-bolt" d="M26 14 17 27h6l-2 9 10-14h-6Z" />
+        </svg>
         <p data-i18n="motionWarning">
           AVERTISSEMENT : effets lumineux et stroboscopiques.
         </p>
@@ -117,7 +123,7 @@
     <script src="docs/js/language.js"></script>
     <script src="docs/js/micro-animations.js"></script>
     <script src="docs/js/premium-animations.js"></script>
-    <script src="docs/js/dev-mode.js?v=2"></script>
+    <script src="docs/js/dev-mode.js?v=3"></script>
     <script src="docs/js/ui-fx.js"></script>
   </body>
 </html>

@@ -10,6 +10,10 @@
   style.rel = "stylesheet";
   style.href = new URL("../css/dev-mode.css?v=21", script.src).href;
   document.head.appendChild(style);
+  const uiStyle = document.createElement("link");
+  uiStyle.rel = "stylesheet";
+  uiStyle.href = new URL("../css/dev-mode-ui.css?v=1", script.src).href;
+  document.head.appendChild(uiStyle);
 
   // Keeps the browser tab title synchronized with the current level language.
   const levelMatch = window.location.pathname.match(/niveau-(\d+)\.html$/i);
@@ -108,8 +112,11 @@
   const colorAssistKey = "echoes-color-assist";
   menu.innerHTML = `
     <button class="dev-mode-toggle" type="button" aria-expanded="false" aria-controls="devModePanel">
-      <span class="dev-mode-icon" aria-hidden="true">☰</span>
-      <span>DEV MODE</span>
+      <svg class="dev-mode-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+        <path d="M7 5 2.5 10 7 15M13 5l4.5 5L13 15M11.2 3.5 8.8 16.5" />
+      </svg>
+      <span class="dev-mode-label">DEV MODE</span>
+      <i class="dev-mode-led" aria-hidden="true"></i>
     </button>
     <div class="dev-mode-panel" id="devModePanel" hidden>
       <div class="dev-mode-heading">
@@ -120,26 +127,33 @@
         </div>
         <button class="dev-mode-close" type="button" aria-label="Close menu">×</button>
       </div>
-      <a class="dev-mode-home" href="${new URL("index.html", rootUrl).href}">Home</a>
-      <a class="dev-mode-home" href="${new URL("docs/html/login.html", rootUrl).href}">Connexion</a>
-      <a class="dev-mode-home" href="${new URL("docs/html/niveaux.html", rootUrl).href}">Hub des niveaux</a>
-      <a class="dev-mode-home" href="${new URL("docs/html/partie-bonus/bonus-01.html", rootUrl).href}">Partie bonus</a>
-      <label class="dev-mode-accessibility">
-        <input type="checkbox" data-color-assist />
-        <span>REPÈRES COULEURS ACCESSIBLES</span>
-      </label>
-      <label class="dev-mode-accessibility">
-        <input type="checkbox" data-fx-toggle="echoes-fx-cursor" />
-        <span>CURSEUR PREMIUM</span>
-      </label>
-      <label class="dev-mode-accessibility">
-        <input type="checkbox" data-fx-toggle="echoes-fx-scene" />
-        <span>FONDS ANIMÉS CONTEXTUELS</span>
-      </label>
-      <label class="dev-mode-accessibility">
-        <input type="checkbox" data-fx-toggle="echoes-perf" data-on="lite" data-off="auto" />
-        <span>MODE PERFORMANCE (APPAREILS LENTS)</span>
-      </label>
+      <span class="dev-mode-section">Raccourcis</span>
+      <div class="dev-mode-links">
+        <a class="dev-mode-home" href="${new URL("index.html", rootUrl).href}">Home</a>
+        <a class="dev-mode-home" href="${new URL("docs/html/login.html", rootUrl).href}">Connexion</a>
+        <a class="dev-mode-home" href="${new URL("docs/html/niveaux.html", rootUrl).href}">Hub des niveaux</a>
+        <a class="dev-mode-home" href="${new URL("docs/html/partie-bonus/bonus-01.html", rootUrl).href}">Partie bonus</a>
+      </div>
+      <span class="dev-mode-section">Options</span>
+      <div class="dev-mode-options">
+        <label class="dev-mode-accessibility">
+          <span>Repères couleurs accessibles</span>
+          <input type="checkbox" data-color-assist />
+        </label>
+        <label class="dev-mode-accessibility">
+          <span>Curseur premium</span>
+          <input type="checkbox" data-fx-toggle="echoes-fx-cursor" />
+        </label>
+        <label class="dev-mode-accessibility">
+          <span>Fonds animés contextuels</span>
+          <input type="checkbox" data-fx-toggle="echoes-fx-scene" />
+        </label>
+        <label class="dev-mode-accessibility">
+          <span>Mode performance (appareils lents)</span>
+          <input type="checkbox" data-fx-toggle="echoes-perf" data-on="lite" data-off="auto" />
+        </label>
+      </div>
+      <span class="dev-mode-section">Parties</span>
       <div class="dev-mode-navigation">
         <div class="dev-mode-parts">
           ${parts
