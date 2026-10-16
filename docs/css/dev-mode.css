@@ -1791,3 +1791,12 @@ html body { scrollbar-width: thin; scrollbar-color: rgba(var(--fx-rgb, 121, 247,
 .dev-gate-input { width: 7.5em; padding: 10px; text-align: center; font: inherit; font-size: 1.3rem; letter-spacing: 0.5em; border-radius: 14px; color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.05); }
 .dev-gate-msg { min-height: 1.4em; margin: 14px 0 6px; font-size: 0.82rem; color: #ffd166; }
 .dev-gate button.dev-gate-cancel { border-color: transparent; background: none; color: #8a97ad; }
+/* Boutons « futur brisé » : coins coupés partout (le halo passe par la luminosité, car clip-path masque les ombres) */
+html body :is(.sequence-start-button, .next-level-button, .reset-button, .save-game-button, .dev-mode-toggle, .dev-gate button, .primary-btn, .hub-btn, .boss-btn) {
+  border-radius: 0 !important;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+}
+@keyframes start-btn-pulse {
+  0%, 100% { filter: brightness(1); background-color: rgba(121, 247, 255, 0.14); }
+  50% { filter: brightness(1.35); background-color: rgba(121, 247, 255, 0.3); }
+}

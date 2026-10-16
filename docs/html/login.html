@@ -10,7 +10,7 @@
     />
     <title>ECHOES - Connexion</title>
     <link rel="stylesheet" href="../css/fonts.css" />
-    <link rel="stylesheet" href="../css/login.css?v=t1" />
+    <link rel="stylesheet" href="../css/login.css?v=t6" />
     <link rel="stylesheet" href="../css/ambient-background.css" />
   </head>
   <body>
@@ -23,6 +23,7 @@
         >ECHOES</a
       >
       <section class="login-card" aria-labelledby="loginTitle">
+        <img class="login-mark" src="../assets/svg/echoes-mark.svg?v=3" alt="" width="64" height="64" />
         <div class="login-status" aria-label="Statut du système">
           <span class="status-dot" aria-hidden="true"></span>
           <span>SYSTÈME MÉMOIRE // EN ATTENTE</span>
@@ -71,5 +72,6 @@
     <script src="../js/dev-mode.js"></script>
     <script src="../js/ambient-background.js"></script>
     <script src="../js/ui-fx.js"></script>
+    <script>(function(){var h=document.getElementById("loginTitle");if(!h)return;var s=function(){h.setAttribute("data-text",h.textContent.trim())};s();new MutationObserver(s).observe(h,{childList:true,characterData:true,subtree:true});})();</script>
   </body>
 </html>
