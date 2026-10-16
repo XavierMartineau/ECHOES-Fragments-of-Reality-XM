@@ -348,9 +348,9 @@ body.part-four-theme .construction-card h1 { color: #ffb8ee; }
 
 .lg-laser { width: 4px; border-radius: 2px; background: #ff5080; box-shadow: 0 0 8px #ff2d64; }
 .lg-saw { background: radial-gradient(circle, #fff0d0 20%, #ff9f4d 55%, #c0182f); box-shadow: 0 0 8px #ff7a2d; }
-.lg-guard { background: radial-gradient(circle, #fff0d0 20%, #ff4fd8 55%, #c0182f); box-shadow: 0 0 8px #ff4fd8; }
+.lg-guard { background: radial-gradient(circle, #fff0d0 20%, #ff5a6e 55%, #c0182f); box-shadow: 0 0 8px #ff3d5a; }
 .lg-bumper { background: radial-gradient(circle, #ffb3f0, #ff4fd8 60%, #7a1a78); }
-.lg-belt { width: 18px; height: 6px; border-radius: 2px; background: repeating-linear-gradient(90deg, #ff4fd8 0 4px, #2a1038 4px 8px); }
+.lg-belt { width: 18px; height: 6px; border-radius: 2px; background: repeating-linear-gradient(90deg, #38d6ff 0 4px, #101a3a 4px 8px); }
 .lg-portal { background: radial-gradient(ellipse, #fff 8%, #38d6ff 40%, #bd63ff 75%); box-shadow: 0 0 8px #38d6ff; }
 
 .tilt-controls {

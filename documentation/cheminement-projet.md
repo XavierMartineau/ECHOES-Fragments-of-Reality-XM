@@ -361,3 +361,27 @@ compatibles avec le système de sauvegarde existant.
 - **Page de connexion** (`login.html`, `login.css`) : titre fracturé cyan/violet, contenu flottant sur la nébuleuse, champ à coins coupés, bouton « Continuer » refait, logo hexagonal.
 - **SVG** : nouveau `docs/assets/svg/login-fragments.svg` (éclats cyan/violet flottants et points lumineux), masqué en mode performance (`fx-lite`).
 - **À vérifier** : rendu du bouton « Continuer » au repos (contour sombre non confirmé), envoi réel du courriel EmailJS et expiration des 3 h.
+
+
+### 16/10/2026 (suite) — Refonte de l'IA ECHO, fond de l'intro, alphabet, DEV MODE 12 h et niveau 31
+
+#### Demandes (résumé)
+
+- Niveau 3 : bouton ALPHABET (PC et mobile), popup centré avec seulement les lettres et un bouton ×, plus petit sur mobile/tablette, × qui ne touche plus les lettres, fond de la fenêtre changé (violet).
+- DEV MODE : accès valable 12 h au lieu de 3 h.
+- Footer des pages de niveau qui dépassait sur mobile.
+- Bouton ECHOES des pages Boss : retour à la page des niveaux.
+- « Refais toute l'IA ECHO, PC et mobile, de A à Z », puis correction de la barre du haut et du footer de l'intro, et nouveau fond SVG sans les petites lignes bleues.
+- Niveau 31 : mise en page mobile, pièges « bizarres », ajustement des couleurs.
+
+#### Travail réalisé
+
+- **Alphabet (niveau 3)** : bouton dans la barre d'outils (`partie-1-puzzles.js`), taille réduite ≤ 1024 px, popup violet (`partie-1-redesign.css`).
+- **DEV MODE** : `echoes-dev-ok` valable 12 h (`dev-mode.js`). Footer des niveaux sans débordement ≤ 700 px (`dev-mode.css`).
+- **Pages Boss** : le logo `.brand` de `boss-01/02/03.html` pointe vers `niveaux.html`. Les pages `niveau-XX` pointent toujours vers l'accueil.
+- **Entité ECHO** : nouveau composant canvas `echo-ai.js` + `echo-ai.css` (anneaux, spectre vocal radial, étincelles, noyau vitré, mode glitch rouge). Rendu identique PC/mobile, branché via `EchoAI.init` / `EchoAI.setState` dans `introduction.js`.
+- **Intro** : fond SVG (`intro-bg.svg`, `intro-shards.svg`) à la place de la grille et des lignes bleues ; barre du haut sur une ligne ; footer centré avec « Tous droits réservés » ; point lumineux du dialogue aligné avec le titre.
+- **Niveau 31 mobile** (`partie-4_niveau-31_à_40.css`) : plateau dimensionné selon la hauteur d'écran, boutons ◀ ▶ juste sous le plateau, marges du panneau.
+- **Niveau 31 jeu** (`partie-4_niveau-31_à_40.js`) : les pièges du dernier étage du secteur 1 (scie, gardien, tapis) ne traversent plus la barre de séparation ; lasers et rebondisseurs en sont exclus.
+- **Niveau 31 couleurs** : fond et cadre bleu nuit/violet (plus de vert), danger en rouge/orange (gardiens, scies, lasers), tapis roulants cyan, rebondisseurs et portails inchangés.
+- **À vérifier** : rendu final du niveau 31 en jeu, glitch rouge de l'intro sur PC large, couleur violette de l'alphabet (choix perso).

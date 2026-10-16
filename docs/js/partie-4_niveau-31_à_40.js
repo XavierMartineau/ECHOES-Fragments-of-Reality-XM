@@ -609,9 +609,9 @@
 
   const drawBackground = () => {
     const sky = ctx.createLinearGradient(0, -100, 0, H + 100);
-    sky.addColorStop(0, "#04120f");
-    sky.addColorStop(0.55, "#0d1028");
-    sky.addColorStop(1, "#16102b");
+    sky.addColorStop(0, "#070b24");
+    sky.addColorStop(0.55, "#0d1030");
+    sky.addColorStop(1, "#1a1038");
     ctx.fillStyle = sky;
     ctx.fillRect(-140, -140, W + 280, H + 280);
 
@@ -897,9 +897,9 @@
     ctx.beginPath();
     ctx.rect(hazard.x1, top - 4, hazard.x2 - hazard.x1, 5);
     ctx.clip();
-    ctx.fillStyle = "#2a1038";
+    ctx.fillStyle = "#101a3a";
     ctx.fillRect(hazard.x1, top - 4, hazard.x2 - hazard.x1, 5);
-    ctx.fillStyle = "#ff4fd8";
+    ctx.fillStyle = "#38d6ff";
     const shift = (time * 30 * d) % 14;
     for (let x = hazard.x1 - 14 + shift; x < hazard.x2 + 14; x += 14) {
       ctx.beginPath();
@@ -913,7 +913,7 @@
       ctx.fill();
     }
     ctx.restore();
-    ctx.fillStyle = "#ff4fd8";
+    ctx.fillStyle = "#38d6ff";
     ctx.beginPath();
     ctx.arc(hazard.x1, top - 1.5, 3, 0, Math.PI * 2);
     ctx.arc(hazard.x2, top - 1.5, 3, 0, Math.PI * 2);
@@ -977,12 +977,12 @@
     ctx.stroke();
     ctx.setLineDash([]);
     ctx.save();
-    ctx.shadowColor = guard ? "#ff4fd8" : "#ff7a2d";
+    ctx.shadowColor = guard ? "#ff3d5a" : "#ff7a2d";
     ctx.shadowBlur = 14;
     gearPath(pos.x, pos.y, 13, 9, time * (guard ? 7 : 6));
     const blade = ctx.createRadialGradient(pos.x, pos.y, 2, pos.x, pos.y, 13);
     blade.addColorStop(0, "#fff0d0");
-    blade.addColorStop(0.5, guard ? "#ff4fd8" : "#ff9f4d");
+    blade.addColorStop(0.5, guard ? "#ff5a6e" : "#ff9f4d");
     blade.addColorStop(1, "#c0182f");
     ctx.fillStyle = blade;
     ctx.fill();
@@ -1079,9 +1079,9 @@
 
   const drawCasing = () => {
     const metal = ctx.createLinearGradient(0, 0, W, H);
-    metal.addColorStop(0, "#1f5a45");
+    metal.addColorStop(0, "#1b3f7a");
     metal.addColorStop(0.5, "#0b0d25");
-    metal.addColorStop(1, "#21163c");
+    metal.addColorStop(1, "#2a1a5c");
     ctx.save();
     ctx.beginPath();
     ctx.rect(0, 0, W, H);
