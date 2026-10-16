@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="ECHO">
+  <title>ECHO - intelligence artificielle</title>
+  <defs>
+    <radialGradient id="body" cx="50%" cy="38%" r="65%">
+      <stop offset="0" stop-color="#bffcff" stop-opacity=".55"/>
+      <stop offset=".45" stop-color="#2a8fb8" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#050a18" stop-opacity=".96"/>
+    </radialGradient>
+    <radialGradient id="core" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".35" stop-color="#79f7ff"/>
+      <stop offset="1" stop-color="#79f7ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#79f7ff"/>
+      <stop offset="1" stop-color="#b36cff"/>
+    </linearGradient>
+    <clipPath id="sphere"><circle cx="100" cy="100" r="82"/></clipPath>
+  </defs>
+  <circle cx="100" cy="100" r="82" fill="url(#body)"/>
+  <g clip-path="url(#sphere)" stroke="#79f7ff" stroke-opacity=".3" stroke-width=".8">
+    <ellipse cx="100" cy="100" rx="82" ry="30"/>
+    <ellipse cx="100" cy="100" rx="82" ry="58"/>
+    <ellipse cx="100" cy="100" rx="30" ry="82"/>
+    <ellipse cx="100" cy="100" rx="58" ry="82"/>
+    <path d="M18 100h164M100 18v164"/>
+  </g>
+  <g stroke="#79f7ff" stroke-opacity=".6" stroke-width="1" clip-path="url(#sphere)">
+    <path d="M100 100L58 66M100 100L146 70M100 100L142 132M100 100L62 138M100 100L100 44M100 100L36 104M100 100L166 98"/>
+    <path d="M58 66L100 44L146 70L166 98L142 132L100 160L62 138L36 104Z" stroke-opacity=".35"/>
+  </g>
+  <g fill="#e8ffff">
+    <circle cx="58" cy="66" r="3"/><circle cx="146" cy="70" r="3"/>
+    <circle cx="142" cy="132" r="3"/><circle cx="62" cy="138" r="3"/>
+    <circle cx="100" cy="44" r="2.5"/><circle cx="36" cy="104" r="2.5"/>
+    <circle cx="166" cy="98" r="2.5"/><circle cx="100" cy="160" r="2.5"/>
+  </g>
+  <circle cx="100" cy="100" r="34" fill="url(#core)"/>
+  <circle cx="100" cy="100" r="9" fill="#fff"/>
+  <circle cx="100" cy="100" r="82" stroke="url(#rim)" stroke-width="2"/>
+  <path d="M30 70a82 82 0 0 1 46-42" stroke="#fff" stroke-opacity=".7" stroke-width="2" stroke-linecap="round"/>
+</svg>

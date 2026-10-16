@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 360" preserveAspectRatio="xMidYMax slice" fill="none" role="img" aria-label="Horizon futuriste">
+  <title>Horizon futuriste</title>
+  <defs>
+    <linearGradient id="far" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4b3a9a" stop-opacity=".5" />
+      <stop offset="1" stop-color="#0a0d1f" stop-opacity=".9" />
+    </linearGradient>
+    <linearGradient id="near" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16204a" />
+      <stop offset="1" stop-color="#05070f" />
+    </linearGradient>
+    <linearGradient id="haze" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#79f7ff" stop-opacity="0" />
+      <stop offset="1" stop-color="#79f7ff" stop-opacity=".22" />
+    </linearGradient>
+  </defs>
+  <path fill="url(#far)" d="M0 360V230h50v-40h40v30h30v-70h34v60h40v-30h50v-90h28v100h44v-50h40v40h36v-120h24v130h46v-40h40v60h30v-80h38v70h44v-30h44v-100h30v110h50v-50h40v50h30v-60h40v80h36v-110h26v120h44v-40h50v60h36v-70h34v60h40v-90h30v100h46v-40h40v50H1600V360Z" />
+  <path fill="url(#near)" d="M0 360V285h70v-45h56v30h40v-85h46v80h50v-35h64v55h40v-110h34v120h60v-50h56v70h48v-100h44v90h56v-40h60v60h44v-80h40v90h60v-45h54v50h46v-120h38v130h56v-55h60v70h52v-60h44v65h60v-30h46V360Z" />
+  <g fill="#79f7ff" fill-opacity=".8">
+    <rect x="132" y="262" width="3" height="3" /><rect x="200" y="222" width="3" height="3" />
+    <rect x="386" y="248" width="3" height="3" /><rect x="520" y="212" width="3" height="3" />
+    <rect x="712" y="258" width="3" height="3" /><rect x="868" y="226" width="3" height="3" />
+    <rect x="1060" y="252" width="3" height="3" /><rect x="1214" y="214" width="3" height="3" />
+    <rect x="1392" y="256" width="3" height="3" /><rect x="1510" y="226" width="3" height="3" />
+  </g>
+  <g fill="#ff4fd8" fill-opacity=".75">
+    <rect x="256" y="270" width="3" height="3" /><rect x="640" y="240" width="3" height="3" />
+    <rect x="960" y="268" width="3" height="3" /><rect x="1310" y="238" width="3" height="3" />
+  </g>
+  <rect y="240" width="1600" height="120" fill="url(#haze)" />
+</svg>

@@ -8,7 +8,7 @@
   const rootUrl = new URL("../../", script.src);
   const style = document.createElement("link");
   style.rel = "stylesheet";
-  style.href = new URL("../css/dev-mode.css", script.src).href;
+  style.href = new URL("../css/dev-mode.css?v=12", script.src).href;
   document.head.appendChild(style);
 
   // Keeps the browser tab title synchronized with the current level language.
@@ -121,10 +121,24 @@
         <button class="dev-mode-close" type="button" aria-label="Close menu">×</button>
       </div>
       <a class="dev-mode-home" href="${new URL("index.html", rootUrl).href}">Home</a>
+      <a class="dev-mode-home" href="${new URL("docs/html/login.html", rootUrl).href}">Connexion</a>
+      <a class="dev-mode-home" href="${new URL("docs/html/niveaux.html", rootUrl).href}">Hub des niveaux</a>
       <a class="dev-mode-home" href="${new URL("docs/html/partie-bonus/bonus-01.html", rootUrl).href}">Partie bonus</a>
       <label class="dev-mode-accessibility">
         <input type="checkbox" data-color-assist />
         <span>REPÈRES COULEURS ACCESSIBLES</span>
+      </label>
+      <label class="dev-mode-accessibility">
+        <input type="checkbox" data-fx-toggle="echoes-fx-cursor" />
+        <span>CURSEUR PREMIUM</span>
+      </label>
+      <label class="dev-mode-accessibility">
+        <input type="checkbox" data-fx-toggle="echoes-fx-scene" />
+        <span>FONDS ANIMÉS CONTEXTUELS</span>
+      </label>
+      <label class="dev-mode-accessibility">
+        <input type="checkbox" data-fx-toggle="echoes-perf" data-on="lite" data-off="auto" />
+        <span>MODE PERFORMANCE (APPAREILS LENTS)</span>
       </label>
       <div class="dev-mode-navigation">
         <div class="dev-mode-parts">
@@ -209,6 +223,25 @@
   });
 
   const colorAssist = menu.querySelector("[data-color-assist]");
+
+  // Réglages visuels : « echoes-fx-cursor » et « echoes-fx-scene » valent "off" quand désactivés,
+  // « echoes-perf » vaut "lite" en mode performance. Lus par ui-fx.js et scene-bg.js.
+  menu.querySelectorAll("[data-fx-toggle]").forEach((box) => {
+    const key = box.dataset.fxToggle;
+    const on = box.dataset.on || "on";
+    const off = box.dataset.off || "off";
+    const inverted = !box.dataset.on;
+    const value = localStorage.getItem(key);
+    box.checked = inverted ? value !== off : value === on;
+    box.addEventListener("change", () => {
+      if (inverted) {
+        box.checked ? localStorage.removeItem(key) : localStorage.setItem(key, off);
+      } else {
+        box.checked ? localStorage.setItem(key, on) : localStorage.removeItem(key);
+      }
+      window.location.reload();
+    });
+  });
   // Active ou désactive le mode d'aide aux couleurs et le mémorise.
   const setColorAssist = (enabled) => {
     document.body.classList.toggle("echo-color-assist", enabled);

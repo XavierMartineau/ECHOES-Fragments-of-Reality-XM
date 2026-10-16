@@ -7,11 +7,12 @@
     <link
       rel="icon"
       type="image/svg+xml"
-      href="../assets/svg/echoes-favicon.svg"
+      href="../assets/svg/echoes-favicon.svg?v=2"
     />
     <link rel="stylesheet" href="../css/introduction.css" />
     <link rel="stylesheet" href="../css/responsive.css?v=3" />
     <link rel="stylesheet" href="../css/fonts.css?v=2" />
+    <link rel="stylesheet" href="../css/intro-premium.css?v=2" />
     <style>
       @media (max-width: 650px) {
         body.intro-page.desktop-layout h1.intro-title {
@@ -38,14 +39,6 @@
       <div class="status-pill" data-i18n="introStatus">
         ACTE I / INITIALISATION
       </div>
-      <button
-        class="save-game-button"
-        id="saveGameButton"
-        type="button"
-        data-i18n="introSave"
-      >
-        Sauvegarder
-      </button>
     </header>
 
     <main class="intro">
@@ -58,6 +51,7 @@
       </p>
 
       <section class="ai-stage" aria-label="Spectre audio ECHO">
+        <img class="intro-core" src="../assets/svg/intro-core.svg" alt="" aria-hidden="true" />
         <canvas
           class="spectrum-canvas"
           id="spectrumCanvas"
@@ -74,6 +68,7 @@
         aria-label="Cliquer pour débuter la simulation"
       >
         <div class="dialogue-head">
+          <i class="dialogue-led" aria-hidden="true"></i>
           <strong data-i18n="introDialogueTitle"
             >Neural dialogue // ECHO</strong
           >
@@ -114,5 +109,6 @@
     <script src="../js/premium-animations.js"></script>
     <script src="../js/dev-mode.js"></script>
     <script src="../js/ambient-background.js"></script>
+      <script src="../js/ui-fx.js"></script>
   </body>
 </html>

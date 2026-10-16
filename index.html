@@ -11,15 +11,29 @@
     <link
       rel="icon"
       type="image/svg+xml"
-      href="docs/assets/svg/echoes-favicon.svg"
+      href="docs/assets/svg/echoes-favicon.svg?v=2"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link rel="prefetch" href="docs/html/login.html" />
     <link rel="stylesheet" href="style.css?v=2" />
     <link rel="stylesheet" href="docs/css/responsive.css" />
     <link rel="stylesheet" href="docs/css/fonts.css" />
+    <link rel="stylesheet" href="docs/css/home.css" />
   </head>
   <body class="index-page">
     <canvas id="background"></canvas>
     <div class="ambient-grid"></div>
+    <img
+      class="home-skyline"
+      src="docs/assets/svg/home-skyline.svg"
+      alt=""
+      aria-hidden="true"
+    />
 
     <div class="lang-switcher" aria-label="Choix de langue">
       <button class="lang-btn active" data-lang="fr" type="button">FR</button>
@@ -41,6 +55,12 @@
 
       <div class="content">
         <div class="signal-ring"></div>
+        <img
+          class="home-emblem"
+          src="docs/assets/svg/home-emblem.svg"
+          alt=""
+          aria-hidden="true"
+        />
         <p class="eyebrow" data-i18n="eyebrow">
           INTELLIGENCE CONSCIENTE FRAGMENTÉE
         </p>
@@ -80,14 +100,15 @@
     </main>
 
     <footer class="site-footer">
+      <span class="footer-console"
+        ><span class="pulse">●</span>
+        <span data-i18n="consoleText"
+          >ÉCHO // VÉRIFICATION DE LA RÉALITÉ</span
+        ></span
+      >
       <span data-i18n="footerYear">© 2026 Xavier Martineau</span>
       <span data-i18n="footerRights">Tous droits réservés.</span>
     </footer>
-
-    <div class="console-footer">
-      <span data-i18n="consoleText">ÉCHO // VÉRIFICATION DE LA RÉALITÉ</span>
-      <span class="pulse">●</span>
-    </div>
 
     <script src="docs/js/translations.js"></script>
     <script src="script.js"></script>
@@ -96,5 +117,6 @@
     <script src="docs/js/micro-animations.js"></script>
     <script src="docs/js/premium-animations.js"></script>
     <script src="docs/js/dev-mode.js"></script>
+    <script src="docs/js/ui-fx.js"></script>
   </body>
 </html>

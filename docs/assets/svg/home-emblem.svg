@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-200 -200 400 400" fill="none" role="img" aria-label="Emblème ECHOES">
+  <title>Emblème ECHOES</title>
+  <defs>
+    <radialGradient id="core" r="50%">
+      <stop offset="0" stop-color="#79f7ff" stop-opacity=".3" />
+      <stop offset="1" stop-color="#79f7ff" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="edge" x1="-1" y1="-1" x2="1" y2="1">
+      <stop offset="0" stop-color="#9ffaff" />
+      <stop offset="1" stop-color="#b36cff" />
+    </linearGradient>
+  </defs>
+  <circle r="196" fill="url(#core)" />
+  <g stroke="url(#edge)">
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="120s" repeatCount="indefinite" />
+      <circle r="184" stroke-width="1" stroke-opacity=".3" stroke-dasharray="1 9" />
+      <path d="M0-196v-4M0 196v4M-196 0h-4M196 0h4" stroke-width="2" />
+    </g>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="80s" repeatCount="indefinite" />
+      <circle r="150" stroke-width="1.2" stroke-opacity=".4" stroke-dasharray="90 30 10 30" />
+    </g>
+    <polygon points="0,-118 102.2,-59 102.2,59 0,118 -102.2,59 -102.2,-59" stroke-width="2" stroke-opacity=".55" stroke-linejoin="round" />
+    <polygon points="0,-92 79.7,-46 79.7,46 0,92 -79.7,46 -79.7,-46" stroke-width="1" stroke-opacity=".3" />
+  </g>
+  <g fill="#e8ffff" fill-opacity=".9">
+    <path d="M-40-56h20v112h-20z" />
+    <path d="M-20-56h64v20h-64zM-20-10h44v20h-44zM-20 36h64v20h-64z" />
+  </g>
+  <g stroke="#79f7ff" stroke-linecap="round">
+    <path d="M44-14a24 24 0 0 1 0 28" stroke-width="5" />
+    <path d="M62-30a42 42 0 0 1 0 60" stroke-width="4" stroke-opacity=".55">
+      <animate attributeName="stroke-opacity" values=".2;.6;.2" dur="3.6s" repeatCount="indefinite" />
+    </path>
+    <path d="M80-46a60 60 0 0 1 0 92" stroke-width="3" stroke-opacity=".3" stroke="#b36cff">
+      <animate attributeName="stroke-opacity" values=".1;.4;.1" dur="3.6s" begin="1.2s" repeatCount="indefinite" />
+    </path>
+  </g>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <defs>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#79f7ff" stop-opacity=".22"/>
+      <stop offset=".6" stop-color="#b36cff" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#79f7ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="arc" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#79f7ff"/>
+      <stop offset="1" stop-color="#b36cff"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="198" fill="url(#halo)"/>
+  <g stroke="#79f7ff" stroke-opacity=".28">
+    <circle cx="200" cy="200" r="186" stroke-dasharray="2 8"/>
+    <circle cx="200" cy="200" r="150"/>
+  </g>
+  <g stroke="url(#arc)" stroke-width="2" stroke-linecap="round">
+    <path d="M200 14a186 186 0 0 1 120 44"/>
+    <path d="M386 200a186 186 0 0 1-44 120"/>
+    <path d="M200 386a186 186 0 0 1-120-44"/>
+    <path d="M14 200a186 186 0 0 1 44-120"/>
+  </g>
+  <g stroke="#79f7ff" stroke-opacity=".55" stroke-width="1.5">
+    <path d="M200 6v14M200 380v14M6 200h14M380 200h14"/>
+    <path d="M200 50v8M200 342v8M50 200h8M342 200h8" stroke-opacity=".3"/>
+  </g>
+  <path d="M200 74l65 37.5v75L200 224l-65-37.5v-75z" transform="translate(0 -12)" stroke="#79f7ff" stroke-opacity=".16"/>
+  <circle cx="200" cy="200" r="112" stroke="#b36cff" stroke-opacity=".3" stroke-dasharray="1 5"/>
+</svg>

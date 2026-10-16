@@ -62,7 +62,11 @@ function resizeCanvas() {
     0,
   );
 
-  particles = Array.from({ length: 120 }, () => ({
+  const lowEnd =
+    localStorage.getItem("echoes-perf") === "lite" ||
+    (navigator.hardwareConcurrency || 8) <= 4 ||
+    (navigator.deviceMemory || 8) <= 4;
+  particles = Array.from({ length: lowEnd ? 55 : 120 }, () => ({
     x: Math.random() * width,
     y: Math.random() * height,
     radius: Math.random() * 2.2 + 0.8,
@@ -84,6 +88,17 @@ function drawBackground() {
     }
 
     particle.y += particle.speed * particleFactor;
+    const pointer = window.__echoesPointer;
+    if (pointer && !isReduced) {
+      const dx = particle.x - pointer.x;
+      const dy = particle.y - pointer.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < 140 && dist > 0.1) {
+        const push = (1 - dist / 140) * 2.2;
+        particle.x += (dx / dist) * push;
+        particle.y += (dy / dist) * push;
+      }
+    }
     if (particle.y > height + 10) {
       particle.y = -10;
       particle.x = Math.random() * width;
@@ -164,13 +179,22 @@ startButton.addEventListener("click", () => {
   startButton.dataset.loading = "true";
   updateStartButton();
   startButton.disabled = true;
+  startButton.classList.add("is-loading");
+  document.body.classList.add("is-leaving");
 
   setTimeout(() => {
-    startButton.dataset.loading = "false";
-    updateStartButton();
-    startButton.disabled = false;
     window.location.href = "docs/html/login.html";
-  }, 1200);
+  }, 850);
+});
+
+// Réinitialise le bouton si la page est restaurée depuis le cache (retour arrière).
+window.addEventListener("pageshow", (event) => {
+  if (!event.persisted) return;
+  startButton.dataset.loading = "false";
+  startButton.disabled = false;
+  startButton.classList.remove("is-loading");
+  document.body.classList.remove("is-leaving");
+  updateStartButton();
 });
 
 languageButtons.forEach((button) => {
@@ -185,7 +209,11 @@ reducedEffectsButton.addEventListener("click", () => {
   updateReducedEffects();
 });
 
-window.addEventListener("resize", resizeCanvas);
+let resizeTimer;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(resizeCanvas, 150);
+});
 resizeCanvas();
 drawBackground();
 applyLanguage(currentLang);

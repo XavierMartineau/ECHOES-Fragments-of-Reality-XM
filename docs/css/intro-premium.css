@@ -1,0 +1,490 @@
+/* Introduction premium : scène cinématique ECHO + terminal de transmission.
+   Chargé après introduction.css ; la logique des dialogues reste inchangée. */
+
+body.intro-page {
+  --acc: 121, 247, 255;
+  --acc2: 179, 108, 255;
+  --ease: cubic-bezier(0.2, 0.9, 0.2, 1);
+  min-height: 100vh;
+  padding-bottom: 64px;
+  background:
+    radial-gradient(ellipse 60% 55% at 28% 48%, rgba(var(--acc), 0.13), transparent 70%),
+    radial-gradient(ellipse 50% 50% at 82% 70%, rgba(var(--acc2), 0.1), transparent 70%),
+    linear-gradient(160deg, #03050d, #070c1a 55%, #0c0716);
+  transition: background 0.8s ease;
+}
+body.intro-page.simulation-failure {
+  --acc: 255, 45, 83;
+  --acc2: 255, 110, 60;
+}
+
+/* Barre supérieure */
+body.intro-page .top-bar {
+  width: min(1240px, calc(100% - 40px));
+  border-bottom: 1px solid rgba(var(--acc), 0.14);
+}
+body.intro-page .status-pill {
+  border-color: rgba(var(--acc2), 0.4);
+  border-radius: 999px;
+  background: rgba(var(--acc2), 0.07);
+  letter-spacing: 0.18em;
+}
+
+/* Disposition : scène à gauche, terminal à droite */
+body.intro-page .intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  grid-template-rows: auto auto auto 1fr;
+  column-gap: clamp(28px, 5vw, 80px);
+  align-items: start;
+  justify-items: center;
+  width: min(1240px, calc(100% - 40px));
+  min-height: calc(100vh - 150px);
+  margin: 0 auto;
+  padding: clamp(18px, 4vh, 48px) 0 24px;
+  text-align: center;
+}
+body.intro-page .intro > .eyebrow,
+body.intro-page .intro > .intro-title,
+body.intro-page .intro > .intro-subtitle,
+body.intro-page .intro > .ai-stage {
+  grid-column: 1;
+}
+body.intro-page .intro > .dialogue-shell,
+body.intro-page .intro > .mission-button {
+  grid-column: 2;
+  grid-row: 1 / 5;
+  align-self: center;
+}
+
+body.intro-page .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 10px;
+  color: rgb(var(--acc));
+  font-size: 0.66rem;
+  letter-spacing: 0.3em;
+}
+body.intro-page .eyebrow::before,
+body.intro-page .eyebrow::after {
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(var(--acc)));
+  content: "";
+}
+body.intro-page .eyebrow::after {
+  transform: scaleX(-1);
+}
+body.intro-page .intro-title {
+  margin: 0;
+  background: linear-gradient(180deg, #fff 20%, rgb(var(--acc)) 130%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: clamp(2.8rem, 7vw, 5.6rem);
+  letter-spacing: 0.12em;
+  text-indent: 0.12em;
+  filter: drop-shadow(0 0 22px rgba(var(--acc), 0.4));
+}
+body.intro-page .intro-subtitle {
+  margin: 6px 0 0;
+  color: rgba(223, 234, 249, 0.7);
+  font-size: clamp(0.7rem, 1.3vw, 0.9rem);
+  letter-spacing: 0.4em;
+  text-indent: 0.4em;
+}
+
+/* Noyau ECHO */
+body.intro-page .ai-stage {
+  width: min(360px, 62vw);
+  margin: clamp(16px, 3vh, 34px) 0 0;
+}
+body.intro-page .ai-stage::before {
+  display: block;
+  width: 64%;
+  height: 64%;
+  background: rgba(var(--acc), 0.18);
+  filter: blur(34px);
+}
+body.intro-page .ai-stage::after {
+  display: none;
+}
+body.intro-page .intro-core {
+  position: absolute;
+  inset: -6%;
+  width: 112%;
+  height: 112%;
+  max-width: none;
+  opacity: 0.9;
+  pointer-events: none;
+  animation: intro-core-spin 48s linear infinite;
+  transition: filter 0.8s ease;
+}
+body.intro-page.simulation-failure .intro-core {
+  filter: hue-rotate(150deg) saturate(2.2);
+  animation-duration: 9s;
+}
+body.intro-page .spectrum-canvas {
+  filter: drop-shadow(0 0 10px rgba(var(--acc), 0.45));
+}
+body.intro-page .spectrum-label {
+  width: 36%;
+  height: 36%;
+  border-color: rgba(var(--acc), 0.5);
+  background: radial-gradient(circle at 50% 35%, rgba(var(--acc), 0.16), rgba(3, 8, 18, 0.95) 70%);
+  box-shadow:
+    0 0 28px rgba(var(--acc), 0.4),
+    inset 0 0 22px rgba(var(--acc), 0.16);
+}
+@keyframes intro-core-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Terminal de transmission */
+body.intro-page .dialogue-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 640px;
+  overflow: hidden;
+  border: 1px solid rgba(var(--acc), 0.28);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(var(--acc), 0.06), transparent 30%),
+    rgba(6, 11, 24, 0.72);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.55),
+    0 0 60px rgba(var(--acc), 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.4s var(--ease);
+}
+body.intro-page .dialogue-shell::before {
+  position: absolute;
+  top: 0;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(var(--acc)), transparent);
+  content: "";
+  opacity: 0.8;
+}
+body.intro-page .dialogue-shell:hover,
+body.intro-page .dialogue-shell:focus-visible {
+  border-color: rgba(var(--acc), 0.55);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.55),
+    0 0 80px rgba(var(--acc), 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+  transform: translateY(-3px);
+}
+body.intro-page .dialogue-shell.is-active {
+  cursor: default;
+  transform: none;
+}
+body.intro-page .dialogue-shell.is-fading-out {
+  pointer-events: none;
+}
+
+body.intro-page .dialogue-head {
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(var(--acc), 0.14);
+  background: rgba(0, 0, 0, 0.22);
+  font-size: 0.6rem;
+}
+body.intro-page .dialogue-head strong {
+  margin-right: auto;
+  color: rgb(var(--acc));
+  letter-spacing: 0.18em;
+}
+body.intro-page .dialogue-head span {
+  font-family: "Space Mono", monospace;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  opacity: 0.7;
+}
+.dialogue-led {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 50%;
+  background: rgb(var(--acc));
+  box-shadow: 0 0 10px rgb(var(--acc));
+  animation: intro-led 1.6s ease-in-out infinite;
+}
+@keyframes intro-led {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+body.intro-page .dialogue-body {
+  min-height: 240px;
+  max-height: min(52vh, 430px);
+  padding: 24px 22px;
+  overflow-y: auto;
+  font-size: clamp(0.98rem, 1.5vw, 1.12rem);
+  scroll-behavior: smooth;
+}
+body.intro-page .dialogue-body::after {
+  background: rgb(var(--acc));
+  box-shadow: 0 0 10px rgb(var(--acc));
+}
+body.intro-page .dialogue-placeholder {
+  display: grid;
+  min-height: 190px;
+  place-items: center;
+  align-content: center;
+  gap: 14px;
+  color: rgb(var(--acc));
+  font-size: clamp(0.74rem, 1.4vw, 0.92rem);
+  line-height: 1.7;
+  letter-spacing: 0.22em;
+}
+body.intro-page .dialogue-placeholder::before {
+  width: 54px;
+  height: 54px;
+  border: 1px solid rgba(var(--acc), 0.6);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgb(var(--acc)) 0 4px, transparent 5px),
+    radial-gradient(circle, rgba(var(--acc), 0.18), transparent 70%);
+  content: "";
+  animation: intro-ping 2s ease-out infinite;
+}
+@keyframes intro-ping {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--acc), 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0 26px rgba(var(--acc), 0);
+  }
+}
+body.intro-page .dialogue-body:has(.dialogue-placeholder)::after {
+  display: none;
+}
+
+/* Lignes de dialogue en bulles */
+body.intro-page .dialogue-line {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  max-width: 92%;
+  margin: 0 0 14px;
+  padding: 11px 15px 12px;
+  border: 1px solid rgba(var(--acc), 0.18);
+  border-left: 2px solid rgb(var(--acc));
+  border-radius: 4px 14px 14px 14px;
+  background: rgba(var(--acc), 0.06);
+  filter: none;
+  animation: intro-line-in 0.4s var(--ease) both;
+}
+body.intro-page .dialogue-line:has(.speaker.traveler) {
+  align-self: flex-end;
+  align-items: flex-end;
+  margin-left: auto;
+  border: 1px solid rgba(var(--acc2), 0.25);
+  border-right: 2px solid rgb(var(--acc2));
+  border-radius: 14px 4px 14px 14px;
+  background: rgba(var(--acc2), 0.08);
+  text-align: right;
+}
+body.intro-page .speaker {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  opacity: 0.9;
+}
+body.intro-page .dialogue-line-text {
+  line-height: 1.5;
+}
+body.intro-page .system-line {
+  max-width: 100%;
+  margin-top: 8px;
+  border: 1px dashed rgba(128, 255, 207, 0.35);
+  border-radius: 10px;
+  background: rgba(128, 255, 207, 0.05);
+}
+body.intro-page .alarm-line,
+body.intro-page .error-code-line {
+  border-color: rgba(255, 45, 83, 0.5);
+  background: rgba(255, 45, 83, 0.09);
+}
+@keyframes intro-line-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+body.intro-page .dialogue-hint {
+  padding: 12px 20px 14px;
+  border-top: 1px solid rgba(var(--acc), 0.12);
+  background: rgba(0, 0, 0, 0.2);
+  font-family: "Space Mono", monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-align: left;
+}
+
+/* Bouton de mission */
+body.intro-page .mission-button {
+  width: min(460px, 100%);
+  margin: 0;
+  padding: 20px 24px;
+  border: 1px solid rgba(255, 45, 83, 0.6);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255, 45, 83, 0.2), rgba(38, 8, 22, 0.8));
+  box-shadow:
+    0 0 50px rgba(255, 45, 83, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s ease;
+}
+body.intro-page .mission-button:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 0 70px rgba(255, 45, 83, 0.4);
+}
+body.intro-page .mission-arrow {
+  transition: transform 0.3s var(--ease);
+}
+body.intro-page .mission-button:hover .mission-arrow {
+  transform: translateX(6px);
+}
+
+/* Pied de page minimal */
+body.intro-page .console-footer {
+  justify-content: center;
+  gap: 14px;
+  padding: 9px 16px;
+  background: rgba(3, 5, 13, 0.7);
+  font-size: 0.58rem;
+}
+body.intro-page .console-footer .footer-rights {
+  display: none;
+}
+
+/* Tablette et mobile : une seule colonne */
+@media (max-width: 980px) {
+  body.intro-page .intro {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    row-gap: 0;
+    min-height: 0;
+  }
+  body.intro-page .intro > .dialogue-shell,
+  body.intro-page .intro > .mission-button {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 26px;
+  }
+  body.intro-page .ai-stage {
+    width: min(280px, 64vw);
+  }
+  body.intro-page .dialogue-body {
+    max-height: 46vh;
+  }
+}
+@media (max-width: 560px) {
+  body.intro-page {
+    padding-bottom: 54px;
+  }
+  body.intro-page .intro,
+  body.intro-page .top-bar {
+    width: calc(100% - 28px);
+  }
+  body.intro-page .eyebrow {
+    font-size: 0.56rem;
+    letter-spacing: 0.18em;
+  }
+  body.intro-page .eyebrow::before,
+  body.intro-page .eyebrow::after {
+    width: 14px;
+  }
+  body.intro-page .dialogue-head span {
+    display: none;
+  }
+  body.intro-page .dialogue-body {
+    padding: 18px 14px;
+  }
+  body.intro-page .dialogue-line {
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.intro-page .intro-core,
+  .dialogue-led,
+  body.intro-page .dialogue-placeholder::before {
+    animation: none;
+  }
+}
+body.intro-page.reduced-effects .intro-core {
+  animation: none;
+}
+
+/* Entité ECHO : visage SVG de l'IA dans le noyau du spectre */
+body.intro-page .spectrum-label {
+  width: 46%;
+  height: 46%;
+  align-items: end;
+  padding-bottom: 6%;
+  border: 0;
+  background: url("../assets/svg/echo-ai.svg") center / contain no-repeat;
+  box-shadow: none;
+  filter: drop-shadow(0 0 18px rgba(var(--acc), 0.5));
+  font-size: clamp(0.55rem, 1.2vw, 0.72rem);
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  animation: echo-ai-breathe 4.5s ease-in-out infinite;
+}
+body.intro-page.simulation-failure .spectrum-label {
+  filter: hue-rotate(150deg) saturate(2.4) drop-shadow(0 0 20px rgba(255, 45, 83, 0.7));
+}
+@keyframes echo-ai-breathe {
+  50% {
+    transform: scale(1.05);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.intro-page .spectrum-label { animation: none; }
+}
+
+/* Surcharges de mise en page (priorité sur dev-mode.css / responsive.css) */
+html body.intro-page main.intro {
+  width: min(1240px, calc(100% - 40px)) !important;
+  max-width: none !important;
+  margin: 0 auto !important;
+  padding: clamp(18px, 4vh, 48px) 0 24px !important;
+  gap: 0 clamp(28px, 5vw, 80px) !important;
+}
+html body.intro-page main.intro > .dialogue-shell {
+  width: 100% !important;
+  max-width: 640px !important;
+  margin: 0 !important;
+}
+html body.intro-page main.intro > .mission-button {
+  width: min(460px, 100%) !important;
+  margin: 0 !important;
+}
+@media (max-width: 980px) {
+  html body.intro-page main.intro { gap: 0 !important; }
+  html body.intro-page main.intro > .dialogue-shell,
+  html body.intro-page main.intro > .mission-button { margin-top: 26px !important; }
+}
+
+body.intro-page .dialogue-body { scrollbar-width: thin; scrollbar-color: rgba(var(--acc), 0.4) transparent; }
+body.intro-page .dialogue-body::-webkit-scrollbar { width: 6px; }
+body.intro-page .dialogue-body::-webkit-scrollbar-track { background: transparent; }
+body.intro-page .dialogue-body::-webkit-scrollbar-thumb { border-radius: 6px; background: rgba(var(--acc), 0.4); }
