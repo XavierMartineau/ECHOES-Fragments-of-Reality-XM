@@ -9,6 +9,9 @@ window.translations = {
     dimensionLabel: "DIMENSION",
     dimensionStatus: "RUPTURE",
     eyebrow: "INTELLIGENCE CONSCIENTE FRAGMENTÉE",
+    aiKicker: "ENTITÉ NUMÉRIQUE // ECHO",
+    aiSignal: "SIGNAL NEURAL",
+    aiState: "CONSCIENCE ACTIVE",
     subtitle: "Fragments de la réalité",
     description:
       "Le monde a été brisé. Les dimensions se fracturent. La mémoire du temps est perdue. La seule voix qui reste est celle d’ECHO.",
@@ -808,6 +811,9 @@ window.translations = {
     dimensionLabel: "DIMENSION",
     dimensionStatus: "RUPTURE",
     eyebrow: "FRAGMENTED SENTIENT INTELLIGENCE",
+    aiKicker: "DIGITAL ENTITY // ECHO",
+    aiSignal: "NEURAL SIGNAL",
+    aiState: "CONSCIOUSNESS ACTIVE",
     subtitle: "Fragments of reality",
     description:
       "The world has been shattered. Dimensions are breaking apart. The memory of time is lost. The only voice left is ECHO.",

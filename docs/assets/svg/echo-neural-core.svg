@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="none">
+  <defs>
+    <radialGradient id="aura" cx="50%" cy="48%" r="50%">
+      <stop offset="0" stop-color="#79f7ff" stop-opacity=".24"/>
+      <stop offset=".46" stop-color="#8f70ff" stop-opacity=".1"/>
+      <stop offset="1" stop-color="#06101f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="core" cx="40%" cy="32%" r="72%">
+      <stop offset="0" stop-color="#edffff" stop-opacity=".95"/>
+      <stop offset=".16" stop-color="#79f7ff" stop-opacity=".72"/>
+      <stop offset=".58" stop-color="#526dff" stop-opacity=".24"/>
+      <stop offset="1" stop-color="#b36cff" stop-opacity=".04"/>
+    </radialGradient>
+    <linearGradient id="line" x1="120" y1="120" x2="520" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a8ffff"/>
+      <stop offset=".52" stop-color="#79f7ff"/>
+      <stop offset="1" stop-color="#c078ff"/>
+    </linearGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="soft-glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+    <clipPath id="sphere">
+      <circle cx="320" cy="320" r="152"/>
+    </clipPath>
+  </defs>
+  <style>
+    .orbit-a{transform-origin:320px 320px;animation:rotate 46s linear infinite}
+    .orbit-b{transform-origin:320px 320px;animation:rotate 64s linear infinite reverse}
+    .orbit-c{transform-origin:320px 320px;animation:rotate 31s linear infinite}
+    .core-pulse{transform-origin:320px 320px;animation:pulse 5s ease-in-out infinite}
+    .nodes{animation:node-glow 3.8s ease-in-out infinite alternate}
+    @keyframes rotate{to{transform:rotate(360deg)}}
+    @keyframes pulse{50%{transform:scale(1.035);opacity:.8}}
+    @keyframes node-glow{to{opacity:.5}}
+    @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+  </style>
+
+  <circle cx="320" cy="320" r="292" fill="url(#aura)"/>
+  <circle cx="320" cy="320" r="160" fill="#79f7ff" fill-opacity=".08" filter="url(#soft-glow)"/>
+
+  <g class="orbit-a" stroke="url(#line)" stroke-linecap="round">
+    <circle cx="320" cy="320" r="282" stroke-width="1" stroke-dasharray="2 12" opacity=".48"/>
+    <circle cx="320" cy="320" r="248" stroke-width="2" stroke-dasharray="112 20 48 36 182 34" opacity=".66"/>
+    <path d="M320 37v38m0 490v38M37 320h38m490 0h38" stroke-width="2" opacity=".8"/>
+    <path d="m120 120 25 25m350 350 25 25m0-400-25 25M145 495l-25 25" stroke-width="2" opacity=".6"/>
+  </g>
+  <g class="orbit-b" stroke="url(#line)" stroke-linecap="round">
+    <circle cx="320" cy="320" r="207" stroke-width="1.5" stroke-dasharray="58 10 5 10 92 18 5 18" opacity=".72"/>
+    <circle cx="320" cy="320" r="178" stroke-width="1" stroke-dasharray="1 9" opacity=".38"/>
+    <path d="M320 112v24m0 368v24M112 320h24m368 0h24" stroke-width="3"/>
+  </g>
+  <g class="orbit-c" stroke="url(#line)" stroke-width="1.4" opacity=".7">
+    <path d="m320 110 182 105v210L320 530 138 425V215l182-105Z"/>
+    <path d="m320 146 151 87v174l-151 87-151-87V233l151-87Z" stroke-dasharray="36 8"/>
+    <path d="m226 158 188 324m0-324L226 482"/>
+  </g>
+
+  <g clip-path="url(#sphere)" stroke="#a9fbff" stroke-opacity=".42" stroke-width="1">
+    <circle cx="320" cy="320" r="152" fill="url(#core)" stroke="none"/>
+    <ellipse cx="320" cy="320" rx="150" ry="48"/>
+    <ellipse cx="320" cy="320" rx="150" ry="94"/>
+    <ellipse cx="320" cy="320" rx="48" ry="150"/>
+    <ellipse cx="320" cy="320" rx="94" ry="150"/>
+    <path d="M168 320h304M320 168v304"/>
+    <path d="m207 218 222 204M431 211 205 429"/>
+    <path d="m187 274 265 92M187 367l265-94"/>
+  </g>
+  <circle cx="320" cy="320" r="152" stroke="url(#line)" stroke-width="2" stroke-opacity=".85"/>
+  <circle class="core-pulse" cx="320" cy="320" r="118" fill="url(#core)" stroke="#d7ffff" stroke-opacity=".55" stroke-width="1.2"/>
+
+  <g stroke="url(#line)" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">
+    <path d="M320 234c-48 0-82 35-82 79 0 29 15 50 38 63v27h88v-27c23-13 38-34 38-63 0-44-34-79-82-79Z" stroke-width="2.2"/>
+    <path d="M290 417h60m-50 13h40m-30 13h20" stroke-width="2"/>
+    <path d="M273 306c11-15 25-22 47-22s36 7 47 22m-80 30c9-8 20-12 33-12s24 4 33 12" stroke-width="2"/>
+    <circle cx="320" cy="358" r="8" fill="#eaffff" stroke="none"/>
+  </g>
+  <circle cx="320" cy="358" r="28" fill="#79f7ff" fill-opacity=".28" filter="url(#soft-glow)"/>
+
+  <g class="nodes" fill="#eaffff" filter="url(#glow)">
+    <circle cx="138" cy="215" r="4"/><circle cx="502" cy="215" r="4"/>
+    <circle cx="138" cy="425" r="4"/><circle cx="502" cy="425" r="4"/>
+    <circle cx="320" cy="112" r="3"/><circle cx="320" cy="528" r="3"/>
+    <circle cx="112" cy="320" r="3"/><circle cx="528" cy="320" r="3"/>
+  </g>
+  <g stroke="#c8ffff" stroke-width="1" opacity=".7">
+    <path d="M72 320h28m440 0h28M320 72v28m0 440v28"/>
+    <path d="M320 182v-18m0 308v-18m-138-134h-18m308 0h-18"/>
+  </g>
+</svg>
