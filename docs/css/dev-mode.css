@@ -489,6 +489,9 @@ body.echo-color-assist .light-pink::after {
 
 .dev-mode-level-panel {
   min-width: 0;
+  max-height: min(55vh, 420px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding-left: 14px;
   border-left: 1px solid rgba(121, 247, 255, 0.18);
 }

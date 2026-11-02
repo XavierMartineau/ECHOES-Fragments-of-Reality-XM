@@ -92,14 +92,14 @@ recommencer sans passer par un niveau de récupération.
 La victoire reconstitue la Clé 01 dans une courte cinématique intégrée au boss,
 enregistre la récompense, puis mène directement au niveau 11, dans la Partie 3.
 
-### Boss après la Partie 4 — `boss-02.html`
+### Boss après la Partie 4 — `partie-4_niveau-16_à_20/boss-02.html`
 
 Après le niveau 20, le joueur affronte l'Archonte des Fractures dans une arène
 tactique à cases : il faut naviguer entre les murs, éviter les lignes d'impact
 télégraphiées, stabiliser six ancres et gérer deux boucliers sur trois phases.
 La victoire débloque la Clé 02 et ouvre le niveau 21, dans la Partie 5.
 
-### Boss après la Partie 6 — `boss-03.html`
+### Boss après la Partie 6 — `partie-6_niveau-26_à_30/boss-03.html`
 
 Après le niveau 30, le joueur affronte l'Occulteur : trois phases d'anneaux
 d'éclipse qui tournent autour du soleil. Il faut verrouiller chaque brèche sous
@@ -119,21 +119,21 @@ docs/
 ├── js/          Progression, sauvegarde, puzzles et mode développeur
 └── data/        Données et contenus auxiliaires
 
-Les pages de la campagne sont regroupées par blocs de cinq dans
-`docs/html/partie-1_niveau-1_à_5/` à
-`docs/html/partie-6_niveau-26_à_30/`. Les pages 31 à 60 se trouvent dans
-`docs/html/partie-bonus/`.
-
 documentation/
 ├── Info-fr.txt
 └── cheminement-projet.md
 ```
 
+Les pages de la campagne sont regroupées par blocs de cinq dans
+`docs/html/partie-1_niveau-1_à_5/` à
+`docs/html/partie-6_niveau-26_à_30/`. Les pages 31 à 60 se trouvent dans
+`docs/html/partie-bonus/`.
+
 Fichiers importants :
 
 - `docs/js/save-system.js` : comptes, sauvegardes et clés débloquées ;
 - `docs/js/partie-1-puzzles.js` : nouveaux puzzles des niveaux 1 à 10 ;
-- `docs/js/partie-1_niveau-1_à_10.js` : utilitaires conservés pour le boss de la Partie 1 ;
+- `docs/js/partie-1_niveau-1_à_10.js` : anciens contrôleurs et utilitaires du premier arc ;
 - `docs/js/key-fragments.js` : assemblage des fragments et cinématique de récompense ;
 - `docs/js/dev-mode.js` : accès développeur aux niveaux et scènes spéciales ;
 - `docs/assets/svg/key-01-usb.svg` : visuel cyberpunk de la première clé ;

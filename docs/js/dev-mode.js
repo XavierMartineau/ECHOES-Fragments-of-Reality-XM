@@ -8,7 +8,7 @@
   const rootUrl = new URL("../../", script.src);
   const style = document.createElement("link");
   style.rel = "stylesheet";
-  style.href = new URL("../css/dev-mode.css?v=22", script.src).href;
+  style.href = new URL("../css/dev-mode.css?v=23", script.src).href;
   document.head.appendChild(style);
   const uiStyle = document.createElement("link");
   uiStyle.rel = "stylesheet";
@@ -198,17 +198,6 @@
                           `<a href="${levelLink(level)}">${String(level).padStart(2, "0")}</a>`,
                       )
                       .join("")}
-          <div class="dev-mode-level-group" data-levels-for="bonus" hidden>
-                      <span class="dev-mode-level-title">NIVEAUX BONUS // 31–60</span>
-                      <div class="dev-mode-levels">
-                        ${Array.from({ length: 30 }, (_, index) => index + 31)
-                          .map(
-                            (level) =>
-                              `<a href="${levelLink(level)}">${String(level).padStart(2, "0")}</a>`,
-                          )
-                          .join("")}
-                      </div>
-          </div>
                   </div>
                   ${
                     part.special
@@ -227,6 +216,17 @@
               `,
             )
             .join("")}
+          <div class="dev-mode-level-group" data-levels-for="bonus" hidden>
+            <span class="dev-mode-level-title">NIVEAUX BONUS // 31–60</span>
+            <div class="dev-mode-levels">
+              ${Array.from({ length: 30 }, (_, index) => index + 31)
+                .map(
+                  (level) =>
+                    `<a href="${levelLink(level)}">${String(level).padStart(2, "0")}</a>`,
+                )
+                .join("")}
+            </div>
+          </div>
         </div>
       </div>
     </div>
