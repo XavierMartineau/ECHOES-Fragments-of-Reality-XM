@@ -66,6 +66,7 @@
   let started = false;
   let frame = 0;
   let pressed = false;
+  let overDraggable = false;
   let clickTimer;
 
   const render = () => {
@@ -100,10 +101,11 @@
     const disabled = pointerTarget &&
       (pointerTarget.matches(":disabled") ||
         pointerTarget.getAttribute("aria-disabled") === "true");
+    overDraggable = !!draggable && !disabled;
     root.classList.toggle("fx-hover", !!pointerTarget && !disabled);
     root.classList.toggle("fx-disabled", !!disabled);
-    root.classList.toggle("fx-grab", !!draggable && !e.buttons);
-    root.classList.toggle("fx-grabbing", !!draggable && !!e.buttons);
+    root.classList.toggle("fx-grab", overDraggable && !e.buttons);
+    root.classList.toggle("fx-grabbing", overDraggable && !!e.buttons);
     root.classList.toggle("fx-crosshair", !!crosshair);
     root.classList.toggle("fx-text", !!(el && el.closest(TEXT)));
     window.__echoesPointer = { x, y };
@@ -132,18 +134,23 @@
   }, { passive: true });
   window.addEventListener("pointerup", (e) => {
     if (e.button !== 0) return;
-    root.classList.remove("fx-down");
-    if (!pressed) return;
+    const wasPressed = pressed;
     pressed = false;
+    root.classList.remove("fx-down", "fx-grabbing");
+    root.classList.toggle("fx-grab", overDraggable);
+    if (!wasPressed) return;
     root.classList.add("fx-click");
     window.clearTimeout(clickTimer);
     clickTimer = window.setTimeout(() => root.classList.remove("fx-click"), 180);
   }, { passive: true });
   window.addEventListener("pointercancel", () => {
     pressed = false;
-    root.classList.remove("fx-down");
+    root.classList.remove("fx-down", "fx-grabbing");
+    root.classList.toggle("fx-grab", overDraggable);
   }, { passive: true });
   document.addEventListener("pointerleave", () => {
+    pressed = false;
+    overDraggable = false;
     root.classList.remove(
       "fx-on",
       "fx-hover",
@@ -151,6 +158,7 @@
       "fx-grabbing",
       "fx-crosshair",
       "fx-text",
+      "fx-down",
     );
   });
   document.addEventListener("pointerenter", () => started && root.classList.add("fx-on"));
