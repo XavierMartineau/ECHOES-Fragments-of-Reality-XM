@@ -77,18 +77,18 @@
           eyebrow: "Fragment 006 // Déduction",
           title: "Le code du gardien",
           description:
-            "Le gardien a verrouillé le signal avec quatre couleurs distinctes. Huit essais, et uniquement le nombre de couleurs bien placées ou déplacées, te séparent de la sortie.",
-          system: "SYSTEME:: CODE A 4 POSITIONS // 8 ESSAIS MAXIMUM",
+            "Le gardien a verrouillé le signal avec cinq couleurs distinctes. Déduis leur ordre avec les indices de position et de couleur en sept essais maximum.",
+          system: "SYSTEME:: CODE A 5 POSITIONS // 7 ESSAIS MAXIMUM",
           puzzle: "Protocole Mastermind",
           ready:
-            "Choisis quatre couleurs, puis déduis le code grâce aux indices.",
+            "Choisis cinq couleurs distinctes, puis déduis le code grâce aux indices.",
         },
         {
           eyebrow: "Fragment 007 // Logique visuelle",
           title: "La grille silencieuse",
           description:
-            "Restaure le motif lumineux à l'aide des indices de lignes et de colonnes. Les cases vides comptent autant que les cases allumées.",
-          system: "SYSTEME:: MATRICE 5X5 // INDICES DE LIGNE ET COLONNE",
+            "Restaure le motif lumineux dans une matrice de six cases par six. Les indices décrivent chaque groupe de cases allumées, séparé par au moins une case vide.",
+          system: "SYSTEME:: MATRICE 6X6 // INDICES CROISÉS",
           puzzle: "Nonogramme fractal",
           ready:
             "Reconstitue le motif. Clique une case pour la remplir, puis à nouveau pour la marquer vide.",
@@ -106,7 +106,7 @@
           eyebrow: "Fragment 009 // Planification",
           title: "Les tours du temps",
           description:
-            "Déplace les quatre disques vers le socle opposé. Un grand disque ne peut jamais recouvrir un plus petit.",
+            "Déplace cinq disques vers le socle opposé. Un seul disque à la fois, et jamais un grand disque sur un plus petit.",
           system: "SYSTEME:: 4 DISQUES // DEPLACEMENT MINIMAL : 15",
           puzzle: "Transfert temporel",
           ready: "Déplace la tour complète en respectant la règle de taille.",
@@ -115,8 +115,8 @@
           eyebrow: "Fragment 010 // Synthèse",
           title: "La matrice d'ECHO",
           description:
-            "Le dernier verrou est une grille de logique. Complète chaque ligne, colonne et carré sans répéter de chiffre.",
-          system: "SYSTEME:: MATRICE 4X4 // CONTRAINTES MULTIPLES",
+            "Le dernier verrou est une grille de six par six. Complète chaque ligne, colonne et rectangle de deux par trois sans répéter de chiffre.",
+          system: "SYSTEME:: MATRICE 6X6 // CONTRAINTES MULTIPLES",
           puzzle: "Sudoku de stabilisation",
           ready: "Complète la grille puis vérifie ta solution.",
         },
@@ -147,7 +147,7 @@
         matched: "Paire trouvée.",
         retry: "Les cartes ne correspondent pas. Réessaie.",
         locked: "Choisis d'abord une couleur.",
-        fullGuess: "Renseigne les quatre positions avant de valider.",
+        fullGuess: "Renseigne les cinq positions avant de valider.",
         noRoute:
           "Le faisceau n'atteint pas le récepteur. Réoriente les miroirs.",
         mirror: "Miroir",
@@ -236,17 +236,18 @@
           eyebrow: "Fragment 006 // Deduction",
           title: "The guardian's code",
           description:
-            "The guardian locked the signal with four distinct colors. Eight attempts and feedback on correct or misplaced colors stand between you and the exit.",
-          system: "SYSTEM:: 4-POSITION CODE // 8 ATTEMPTS MAXIMUM",
+            "The guardian locked the signal with five distinct colors. Deduce their order from position and color feedback in seven attempts or fewer.",
+          system: "SYSTEM:: 5-POSITION CODE // 7 ATTEMPTS MAXIMUM",
           puzzle: "Mastermind protocol",
-          ready: "Choose four colors, then deduce the code from the clues.",
+          ready:
+            "Choose five distinct colors, then deduce the code from the clues.",
         },
         {
           eyebrow: "Fragment 007 // Visual logic",
           title: "The silent grid",
           description:
-            "Restore the light pattern using the row and column clues. Empty squares matter just as much as lit ones.",
-          system: "SYSTEM:: 5X5 MATRIX // ROW AND COLUMN CLUES",
+            "Restore the light pattern in a six-by-six grid. Each clue gives a run of filled cells, separated from the next by at least one empty cell.",
+          system: "SYSTEM:: 6X6 GRID // CROSS-REFERENCED CLUES",
           puzzle: "Fractal nonogram",
           ready:
             "Rebuild the pattern. Click a square to fill it, then click again to mark it empty.",
@@ -264,7 +265,7 @@
           eyebrow: "Fragment 009 // Planning",
           title: "The towers of time",
           description:
-            "Move all four disks to the opposite pedestal. A larger disk can never be placed on a smaller one.",
+            "Move five disks to the opposite pedestal. Move one disk at a time, and never place a larger disk on a smaller one.",
           system: "SYSTEM:: 4 DISKS // MINIMUM MOVES: 15",
           puzzle: "Temporal transfer",
           ready: "Move the full tower while respecting disk size.",
@@ -273,8 +274,8 @@
           eyebrow: "Fragment 010 // Synthesis",
           title: "ECHO's matrix",
           description:
-            "The final lock is a logic grid. Complete every row, column, and box without repeating a number.",
-          system: "SYSTEM:: 4X4 MATRIX // MULTIPLE CONSTRAINTS",
+            "The final lock is a six-by-six logic grid. Complete every row, column, and two-by-three box without repeating a number.",
+          system: "SYSTEM:: 6X6 GRID // MULTIPLE CONSTRAINTS",
           puzzle: "Stabilization sudoku",
           ready: "Complete the grid, then verify your solution.",
         },
@@ -304,7 +305,7 @@
         matched: "Pair found.",
         retry: "Those cards do not match. Try again.",
         locked: "Choose a color first.",
-        fullGuess: "Fill all four positions before submitting.",
+        fullGuess: "Fill all five positions before submitting.",
         noRoute: "The beam missed the receiver. Reorient the mirrors.",
         mirror: "Mirror",
         target: "Receiver",
@@ -1001,8 +1002,10 @@
     setProgress(0, glyphs.length);
   }
 
-  // Level 6: deduce a four-color code from Mastermind feedback.
+  // Level 6: deduce a five-color code from Mastermind feedback.
   if (level === 6) {
+    const codeLength = 5;
+    const maxAttempts = 7;
     const palette = [
       "#51e7ef",
       "#8274ff",
@@ -1011,8 +1014,8 @@
       "#82e0a8",
       "#ff8b5b",
     ];
-    const code = randomize([...palette.keys()]).slice(0, 4);
-    const guess = [null, null, null, null];
+    const code = randomize([...palette.keys()]).slice(0, codeLength);
+    const guess = Array(codeLength).fill(null);
     const history = document.createElement("div");
     history.className = "mastermind-history";
     const current = document.createElement("div");
@@ -1026,8 +1029,8 @@
     board.append(
       label(
         language === "en"
-          ? "Four different colors. Feedback reveals counts, not positions."
-          : "Quatre couleurs différentes. L'indice révèle un nombre, pas les positions.",
+          ? "Five different colors. Feedback gives counts, not exact positions."
+          : "Cinq couleurs différentes. Les indices donnent les quantités, pas les positions exactes.",
       ),
     );
     board.append(history, current, swatches);
@@ -1101,12 +1104,12 @@
       clue.textContent = `${exact} ${rules.exact} · ${misplaced} ${rules.misplaced}`;
       row.appendChild(clue);
       history.prepend(row);
-      setProgress(attempts, 8);
+      setProgress(attempts, maxAttempts);
       if (exact === code.length) {
         completeLevel();
         return;
       }
-      if (attempts === 8) {
+      if (attempts === maxAttempts) {
         setStatus(
           language === "en"
             ? "No attempts left. Restart to try a new code."
@@ -1119,22 +1122,24 @@
       guess.fill(null);
       paintGuess();
       setStatus(
-        `${8 - attempts} ${rules.attempts} ${language === "en" ? "remaining." : "restants."}`,
+        `${maxAttempts - attempts} ${rules.attempts} ${language === "en" ? "remaining." : "restants."}`,
       );
     });
     beginPuzzle = () => setStatus(levelCopy.ready);
     paintGuess();
-    setProgress(0, 8);
+    setProgress(0, maxAttempts);
   }
 
-  // Level 7: solve a 5x5 nonogram using row and column clues.
+  // Level 7: solve a 6x6 nonogram using row and column clues.
   if (level === 7) {
+    const size = 6;
     const solution = [
-      [1, 1, 0, 0, 1],
-      [1, 0, 1, 0, 1],
-      [1, 1, 1, 1, 1],
-      [0, 0, 1, 0, 1],
-      [0, 1, 1, 1, 0],
+      [0, 0, 1, 1, 0, 0],
+      [0, 1, 1, 1, 1, 0],
+      [1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1],
+      [0, 1, 1, 1, 1, 0],
+      [0, 0, 1, 1, 0, 0],
     ];
     const clues = (line) => {
       const runs = [];
@@ -1149,11 +1154,13 @@
       if (count) runs.push(count);
       return runs.length ? runs.join(" ") : "–";
     };
-    const columns = Array.from({ length: 5 }, (_, x) =>
+    const columns = Array.from({ length: size }, (_, x) =>
       solution.map((row) => row[x]),
     );
     const grid = document.createElement("div");
-    grid.className = "nonogram-grid";
+    grid.className = "nonogram-grid is-advanced";
+    grid.style.gridTemplateColumns = `42px repeat(${size}, minmax(28px, 1fr))`;
+    grid.style.gridTemplateRows = `48px repeat(${size}, minmax(28px, 1fr))`;
     const topLeft = document.createElement("span");
     topLeft.className = "nonogram-corner";
     grid.appendChild(topLeft);
@@ -1163,7 +1170,7 @@
       clue.textContent = clues(column).replace(/ /g, "\n");
       grid.appendChild(clue);
     });
-    const states = Array.from({ length: 25 }, () => 0);
+    const states = Array.from({ length: size * size }, () => 0);
     let filled = 0;
     solution.forEach((row, y) => {
       const clue = document.createElement("span");
@@ -1171,7 +1178,7 @@
       clue.textContent = clues(row);
       grid.appendChild(clue);
       row.forEach((_, x) => {
-        const index = y * 5 + x;
+        const index = y * size + x;
         const cell = button("", "nonogram-cell");
         cell.setAttribute("aria-label", `${y + 1}, ${x + 1}`);
         cell.addEventListener("click", () => {
@@ -1189,7 +1196,8 @@
             0,
           );
           const correctFilled = states.reduce((count, value, cellIndex) => {
-            const target = solution[Math.floor(cellIndex / 5)][cellIndex % 5];
+            const target =
+              solution[Math.floor(cellIndex / size)][cellIndex % size];
             return count + (value === 1 && target === 1 ? 1 : 0);
           }, 0);
           const total = solution.flat().reduce((sum, value) => sum + value, 0);
@@ -1198,7 +1206,9 @@
             states.every(
               (value, cellIndex) =>
                 value ===
-                (solution[Math.floor(cellIndex / 5)][cellIndex % 5] ? 1 : 2),
+                (solution[Math.floor(cellIndex / size)][cellIndex % size]
+                  ? 1
+                  : 2),
             )
           ) {
             completeLevel();
@@ -1315,9 +1325,15 @@
     setProgress(0, 1);
   }
 
-  // Level 9: transfer four disks while obeying the size constraint.
+  // Level 9: transfer five disks while obeying the size constraint.
   if (level === 9) {
-    const piles = [[4, 3, 2, 1], [], []];
+    const diskCount = 5;
+    const minimumMoves = 2 ** diskCount - 1;
+    const piles = [
+      Array.from({ length: diskCount }, (_, index) => diskCount - index),
+      [],
+      [],
+    ];
     const moves = document.createElement("div");
     moves.className = "hanoi-moves";
     const rods = document.createElement("div");
@@ -1331,8 +1347,8 @@
     board.append(
       label(
         language === "en"
-          ? "Move the tower from the left pedestal to the right."
-          : "Déplace la tour du socle gauche vers le socle droit.",
+          ? "Move all five disks from the left pedestal to the right."
+          : "Déplace les cinq disques du socle gauche vers le socle droit.",
       ),
     );
     board.appendChild(rods);
@@ -1382,33 +1398,40 @@
           destination.push(source.pop());
           selectedRod = null;
           moveCount += 1;
-          moves.textContent = `${moveCount} ${rules.moves} · ${language === "en" ? "minimum" : "minimum"} 15`;
-          setProgress(moveCount, 15);
+          moves.textContent = `${moveCount} ${rules.moves} · minimum ${minimumMoves}`;
+          setProgress(moveCount, minimumMoves);
           render();
-          if (piles[2].length === 4) completeLevel();
+          if (piles[2].length === diskCount) completeLevel();
         });
         rods.appendChild(rod);
       });
-      moves.textContent = `${moveCount} ${rules.moves} · ${language === "en" ? "minimum" : "minimum"} 15`;
+      moves.textContent = `${moveCount} ${rules.moves} · minimum ${minimumMoves}`;
     };
     beginPuzzle = () => setStatus(levelCopy.ready);
     render();
-    setProgress(0, 15);
+    setProgress(0, minimumMoves);
   }
 
-  // Level 10: solve a compact Sudoku with row, column, and box constraints.
+  // Level 10: solve a 6x6 Sudoku with row, column, and 2x3 box constraints.
   if (level === 10) {
+    const size = 6;
+    const boxRows = 2;
+    const boxColumns = 3;
     const given = [
-      [1, 0, 3, 0],
-      [0, 4, 0, 2],
-      [2, 0, 4, 0],
-      [0, 3, 0, 1],
+      [1, 0, 0, 0, 5, 6],
+      [0, 5, 6, 1, 2, 0],
+      [2, 3, 4, 0, 6, 1],
+      [5, 0, 1, 0, 3, 4],
+      [0, 0, 5, 6, 1, 2],
+      [6, 1, 0, 0, 4, 5],
     ];
     const values = given.map((row) => [...row]);
     let selectedNumber = 1;
     let filled = 0;
     const grid = document.createElement("div");
     grid.className = "sudoku-grid";
+    grid.style.gridTemplateColumns = `repeat(${size}, minmax(36px, 1fr))`;
+    grid.style.width = "min(100%, 390px)";
     const controls = document.createElement("div");
     controls.className = "sudoku-controls";
     const palette = document.createElement("div");
@@ -1418,8 +1441,8 @@
     board.append(
       label(
         language === "en"
-          ? "Each row, column, and 2x2 box must contain 1 through 4 once."
-          : "Chaque ligne, colonne et carré 2x2 doit contenir une fois les chiffres de 1 à 4.",
+          ? "Each row, column, and 2x3 box must contain the digits 1 through 6 once."
+          : "Chaque ligne, colonne et rectangle 2x3 doit contenir une fois les chiffres de 1 à 6.",
       ),
     );
     board.appendChild(grid);
@@ -1430,9 +1453,10 @@
       filled = values
         .flat()
         .filter(
-          (value, index) => !given[Math.floor(index / 4)][index % 4] && value,
+          (value, index) =>
+            !given[Math.floor(index / size)][index % size] && value,
         ).length;
-      setProgress(filled, 8);
+      setProgress(filled, size * size - given.flat().filter(Boolean).length);
       cells.forEach(({ cell, row, col }) => {
         cell.textContent = values[row][col] || "";
         cell.classList.toggle("is-given", Boolean(given[row][col]));
@@ -1444,6 +1468,14 @@
         const cell = button(value ? String(value) : "", "sudoku-cell");
         cell.dataset.row = String(y);
         cell.dataset.col = String(x);
+        cell.style.borderRight =
+          (x + 1) % boxColumns === 0 && x < size - 1
+            ? "2px solid rgba(121, 247, 255, 0.7)"
+            : "1px solid rgba(121, 247, 255, 0.25)";
+        cell.style.borderBottom =
+          (y + 1) % boxRows === 0 && y < size - 1
+            ? "2px solid rgba(121, 247, 255, 0.7)"
+            : "1px solid rgba(121, 247, 255, 0.25)";
         cell.addEventListener("click", () => {
           if (!started || solved || given[y][x]) return;
           cells.forEach(({ cell: item }) => {
@@ -1459,7 +1491,7 @@
         grid.appendChild(cell);
       }),
     );
-    [1, 2, 3, 4].forEach((value) => {
+    Array.from({ length: size }, (_, index) => index + 1).forEach((value) => {
       const digit = button(String(value), "sudoku-digit");
       digit.addEventListener("click", () => {
         if (!started) return;
@@ -1478,21 +1510,26 @@
         setStatus(rules.sudokuIncomplete, "error");
         return;
       }
-      const rowsValid = values.every((row) => new Set(row).size === 4);
+      const rowsValid = values.every((row) => new Set(row).size === size);
       const columnsValid = values.every(
-        (_, x) => new Set(values.map((row) => row[x])).size === 4,
+        (_, x) => new Set(values.map((row) => row[x])).size === size,
       );
-      const boxesValid = [0, 1].every((boxY) =>
-        [0, 1].every((boxX) => {
-          const boxValues = [
-            values[boxY * 2][boxX * 2],
-            values[boxY * 2][boxX * 2 + 1],
-            values[boxY * 2 + 1][boxX * 2],
-            values[boxY * 2 + 1][boxX * 2 + 1],
-          ];
-          return new Set(boxValues).size === 4;
-        }),
-      );
+      let boxesValid = true;
+      for (let boxY = 0; boxY < size && boxesValid; boxY += boxRows) {
+        for (let boxX = 0; boxX < size && boxesValid; boxX += boxColumns) {
+          const boxValues = [];
+          for (let row = boxY; row < boxY + boxRows; row += 1) {
+            for (
+              let column = boxX;
+              column < boxX + boxColumns;
+              column += 1
+            ) {
+              boxValues.push(values[row][column]);
+            }
+          }
+          boxesValid = new Set(boxValues).size === size;
+        }
+      }
       if (rowsValid && columnsValid && boxesValid) completeLevel();
       else setStatus(rules.sudokuConflict, "error");
     });

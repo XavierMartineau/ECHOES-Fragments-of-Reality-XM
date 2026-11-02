@@ -749,6 +749,8 @@
       33: 13,
       26: 6,
       74: 53,
+      15: 7,
+      69: 50,
     };
     const snakeColors = ["#ff5a7a", "#38f2ff", "#ff9a3c", "#b78bff", "#ff4fd8"];
     const rand = (max) => Math.floor(Math.random() * max);
@@ -1417,7 +1419,7 @@
   }
 
   function setupCaptcha() {
-    const total = 3;
+    const total = 4;
     const rand = (max) => Math.floor(Math.random() * max);
     const shuffle = (list) => [...list].sort(() => Math.random() - 0.5);
     const palette = ["#ff5a7a", "#38f2ff", "#ff9a3c", "#b78bff", "#ff4fd8"];
@@ -1764,13 +1766,20 @@
   }
 
   function setupMemoryNonogram() {
-    const size = 5;
-    const solution = ["01110", "11111", "11111", "01110", "00100"]
+    const size = 6;
+    const solution = [
+      "001100",
+      "011110",
+      "111111",
+      "111111",
+      "011110",
+      "001100",
+    ]
       .join("")
       .split("")
       .map((pixel) => pixel === "1");
-    const rowClues = [[3], [5], [5], [3], [1]];
-    const columnClues = [[2], [4], [5], [4], [2]];
+    const rowClues = [[2], [4], [6], [6], [4], [2]];
+    const columnClues = [[2], [4], [6], [6], [4], [2]];
     const targetCount = solution.filter(Boolean).length;
     const marks = Array(solution.length).fill(0);
     let started = false;
@@ -1780,10 +1789,14 @@
     puzzle.setAttribute("role", "group");
     const columnClueList = document.createElement("div");
     columnClueList.className = "memory-column-clues";
+    columnClueList.style.gridTemplateColumns = `repeat(${size}, minmax(0, 1fr))`;
     const rowClueList = document.createElement("div");
     rowClueList.className = "memory-row-clues";
+    rowClueList.style.gridTemplateRows = `repeat(${size}, minmax(0, 1fr))`;
     const grid = document.createElement("div");
     grid.className = "memory-grid";
+    grid.style.gridTemplateColumns = `repeat(${size}, minmax(0, 1fr))`;
+    grid.style.gridTemplateRows = `repeat(${size}, minmax(0, 1fr))`;
     const cells = [];
 
     columnClues.forEach((clues, column) => {
@@ -1908,8 +1921,8 @@
           [2, 1],
           [2, 4],
         ],
-        checkpoints: [16, 11, 29, 36, 25],
-        walls: [1, 2, 3, 5, 6, 7, 22, 26, 31, 42, 43, 51, 52, 55, 61, 63],
+        checkpoints: [16, 11, 29, 36, 25, 19],
+        walls: [1, 2, 3, 5, 6, 7, 22, 23, 26, 31, 42, 43, 51, 52, 55, 61, 63],
       },
       30: {
         size: 8,
@@ -1922,8 +1935,8 @@
           [3, 1],
           [3, 6],
         ],
-        checkpoints: [40, 22, 46, 25, 29],
-        walls: [1, 3, 6, 9, 11, 14, 34, 37, 50, 55, 61],
+        checkpoints: [40, 22, 46, 25, 27, 29],
+        walls: [1, 3, 6, 9, 11, 13, 14, 34, 37, 50, 53, 55, 61, 62],
       },
     };
     const config = configs[level];

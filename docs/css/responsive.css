@@ -1891,3 +1891,138 @@ html body .puzzle-panel button { font-weight: 700; }
 @media (max-width: 560px) {
   html body .maze-direction { width: 52px !important; height: 50px !important; }
 }
+
+.level-launch-card {
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 8px;
+  scrollbar-color: rgba(121, 247, 255, 0.55) transparent;
+  scrollbar-width: thin;
+}
+
+.level-example {
+  display: grid;
+  width: min(100%, 340px);
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid rgba(121, 247, 255, 0.3);
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(14, 33, 55, 0.95), rgba(15, 13, 39, 0.95));
+  box-shadow: inset 0 0 22px rgba(121, 247, 255, 0.06), 0 0 18px rgba(121, 247, 255, 0.08);
+  color: #e6f8ff;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+}
+
+.level-example-toggle,
+.level-example-next {
+  min-height: 34px;
+  border: 1px solid rgba(121, 247, 255, 0.38);
+  border-radius: 7px;
+  background: rgba(9, 25, 45, 0.9);
+  color: #9af9ff;
+  font: 700 0.62rem/1.3 var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.level-example-toggle:hover,
+.level-example-next:hover,
+.level-example-toggle:focus-visible,
+.level-example-next:focus-visible {
+  background: rgba(26, 61, 88, 0.95);
+  box-shadow: 0 0 14px rgba(121, 247, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.level-example-toggle:focus-visible,
+.level-example-next:focus-visible {
+  outline: 2px solid #9af9ff;
+  outline-offset: 2px;
+}
+
+.level-example-content {
+  display: grid;
+  gap: 8px;
+}
+
+.level-example-content[hidden] {
+  display: none;
+}
+
+.level-example-description,
+.level-example-step {
+  margin: 0;
+  color: rgba(230, 248, 255, 0.88);
+  font: 500 0.65rem/1.5 var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.025em;
+}
+
+.level-example-visual {
+  display: flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px;
+  border: 1px solid rgba(179, 108, 255, 0.2);
+  border-radius: 8px;
+  background:
+    linear-gradient(rgba(121, 247, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(121, 247, 255, 0.04) 1px, transparent 1px),
+    rgba(2, 8, 21, 0.72);
+  background-size: 15px 15px;
+}
+
+.level-example-token {
+  display: inline-grid;
+  min-width: 27px;
+  min-height: 27px;
+  place-items: center;
+  padding: 3px 6px;
+  border: 1px solid rgba(121, 247, 255, 0.44);
+  border-radius: 6px;
+  background: rgba(30, 78, 105, 0.72);
+  color: #dffbff;
+  font: 700 0.63rem/1.2 var(--font-display, "Orbitron", sans-serif);
+  text-shadow: 0 0 8px rgba(121, 247, 255, 0.35);
+}
+
+.level-example-token-1 {
+  border-color: rgba(179, 108, 255, 0.5);
+  background: rgba(77, 43, 107, 0.7);
+}
+
+.level-example-token-2 {
+  border-color: rgba(255, 208, 112, 0.5);
+  background: rgba(98, 70, 28, 0.65);
+}
+
+.level-example-token-3 {
+  border-color: rgba(255, 126, 158, 0.5);
+  background: rgba(99, 38, 64, 0.68);
+}
+
+html body .puzzle-actions .level-example {
+  grid-column: 1 / -1;
+  justify-self: center;
+  margin: 10px auto;
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .level-launch-card { gap: 9px; }
+  .level-example { padding: 9px; }
+  .level-example-description,
+  .level-example-step { font-size: 0.6rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .level-example-toggle,
+  .level-example-next {
+    transition: none;
+  }
+}

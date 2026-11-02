@@ -2018,6 +2018,7 @@ else {
     [0, 4, 8],
     [1, 3, 4, 5, 7],
     [0, 2, 3, 4, 5, 6, 8],
+    [0, 1, 3, 4, 5, 7, 8],
   ];
   const cells = [];
   let state = Array(9).fill(false);
@@ -2276,9 +2277,9 @@ else {
   const beam = $("scaleBeam");
   const zoneNames = [copy.tray, copy.left, copy.right];
   const rounds = [
-    [3, 5, 7, 9, 4],
-    [2, 3, 5, 6, 8, 10],
-    [4, 7, 9, 11, 13, 6, 8],
+    [3, 5, 7, 9, 4, 12],
+    [2, 3, 5, 6, 8, 10, 12],
+    [4, 7, 9, 11, 13, 6, 8, 10],
   ];
   let zones = [];
   let round = 0;
@@ -2452,7 +2453,7 @@ else {
 })();
 
 /* ===== NIVEAU 18 ===== */
-/* Tour des échos : transférer une pile de 3, 4 puis 5 disques (tours de Hanoï, #towerBoard). */
+/* Tour des échos : transférer une pile de 4, 5 puis 6 disques (tours de Hanoï, #towerBoard). */
 (() => {
   const board = document.getElementById("towerBoard");
   if (!board) return;
@@ -2531,7 +2532,7 @@ else {
   const saveButton = $("saveGameButton");
   const systemMessage = $("systemMessage");
   const pegs = [...board.querySelectorAll(".tower-peg")];
-  const discCounts = [3, 4, 5];
+  const discCounts = [4, 5, 6];
   let towers = [[], [], []];
   let selected = -1;
   let round = 0;
@@ -2708,7 +2709,7 @@ else {
 
   const language =
     localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
-  const size = 8;
+  const size = 9;
   const dirs = [
     [0, 1],
     [1, 0],
@@ -2796,8 +2797,8 @@ else {
       ],
     },
   }[language];
-  const hiddenLength = 6;
-  const wordCount = 8;
+  const hiddenLength = 7;
+  const wordCount = 10;
   const copy = {
     fr: {
       part: "PARTIE 2 // FRACTURES",
@@ -2805,14 +2806,14 @@ else {
       eyebrow: "Fragment 019 // Les mots mêlés codés",
       title: "Les mots mêlés codés",
       description:
-        "Trouve tous les mots de la liste dans la grille : ils peuvent être à l'horizontale, à la verticale, en oblique ou à l'envers. Six lettres sont partagées par deux mots et numérotées de 1 à 6. Cherche leur code dans la table (A = nombre, Z = nombre, entre 0 et 100), puis saisis en haut les six nombres dans l'ordre des numéros : les lettres forment le mot caché.",
+        "Trouve dix mots dans la grille 9x9 : ils peuvent être à l'horizontale, à la verticale, en oblique ou à l'envers. Sept lettres partagées par plusieurs mots sont numérotées de 1 à 7. Cherche leur code dans la table, puis saisis les sept nombres dans l'ordre pour révéler le mot caché.",
       systemLabel: "ECHO://LEXIQUE",
       puzzleKicker: "PUZZLE // LANGAGE",
       puzzleTitle: "Mots mêlés",
       next: "CONTINUER VERS LE NIVEAU 20",
       reset: "Nouvelle grille",
       check: "VÉRIFIER",
-      wordTitle: "CODE DES LETTRES NUMÉROTÉES (1 À 6)",
+      wordTitle: "CODE DES LETTRES NUMÉROTÉES (1 À 7)",
       cluesTitle: "MOTS À TROUVER",
       legendTitle: "CODE DES LETTRES",
       ready:
@@ -2820,10 +2821,10 @@ else {
       found: "Mot trouvé : ",
       notAWord: "Ce n'est pas un mot de la liste.",
       allFound:
-        "Tous les mots sont trouvés ! Saisis en haut le code des six lettres dorées, dans l'ordre des numéros.",
+        "Tous les mots sont trouvés ! Saisis en haut le code des sept lettres dorées, dans l'ordre des numéros.",
       keepSearching: "Il reste des mots à trouver.",
       wrongCode: "Un code est faux. Vérifie la table des lettres en bas.",
-      incompleteCode: "Saisis les six codes.",
+      incompleteCode: "Saisis les sept codes.",
       success: "Mots et code corrects. Le mot caché est : ",
       system: "SYSTEME:: LEXIQUE 019 VERROUILLE // MOTS ET CODE A TROUVER",
       systemSuccess: "SYSTEME:: LEXIQUE 019 COMPLET // PROTOCOLE 020 DEBLOQUE",
@@ -2842,14 +2843,14 @@ else {
       eyebrow: "Fragment 019 // The coded word search",
       title: "The coded word search",
       description:
-        "Find every word of the list in the grid: they can run horizontally, vertically, diagonally or backwards. Six letters are shared by two words and numbered 1 to 6. Look up their codes in the table (A = number, Z = number, between 0 and 100), then type the six numbers at the top in the order of the numbers: the letters spell the hidden word.",
+        "Find ten words in the 9x9 grid: they can run horizontally, vertically, diagonally or backwards. Seven letters shared by several words are numbered 1 to 7. Look up their codes in the table, then enter the seven numbers in order to reveal the hidden word.",
       systemLabel: "ECHO://LEXICON",
       puzzleKicker: "PUZZLE // LANGUAGE",
       puzzleTitle: "Word search",
       next: "CONTINUE TO LEVEL 20",
       reset: "New grid",
       check: "CHECK",
-      wordTitle: "CODES OF THE NUMBERED LETTERS (1 TO 6)",
+      wordTitle: "CODES OF THE NUMBERED LETTERS (1 TO 7)",
       cluesTitle: "WORDS TO FIND",
       legendTitle: "LETTER CODES",
       ready:
@@ -2857,10 +2858,10 @@ else {
       found: "Word found: ",
       notAWord: "That is not a word from the list.",
       allFound:
-        "All words found! Type the codes of the six gold letters at the top, in numbered order.",
+        "All words found! Type the codes of the seven gold letters at the top, in numbered order.",
       keepSearching: "Some words are still missing.",
       wrongCode: "A code is wrong. Check the letter table below.",
-      incompleteCode: "Type all six codes.",
+      incompleteCode: "Type all seven codes.",
       success: "Words and code are correct. The hidden word is: ",
       system: "SYSTEM:: LEXICON 019 LOCKED // WORDS AND CODE REQUIRED",
       systemSuccess: "SYSTEM:: LEXICON 019 COMPLETE // PROTOCOL 020 UNLOCKED",
@@ -2938,7 +2939,7 @@ else {
     });
   };
 
-  // Place des mots (8 directions) pour obtenir exactement 6 lettres partagées ; ces lettres, numérotées dans un ordre aléatoire, forment le mot caché.
+  // Place les mots (8 directions) pour obtenir exactement 7 lettres partagées, qui composent le code caché.
   const generate = () => {
     const filler = "ABCDEFGHIJLMNOPRSTU";
     for (let attempt = 0; attempt < 20000; attempt += 1) {
@@ -3327,7 +3328,7 @@ else {
   reset();
 })();
 /* ===== MÉCANIQUE DU NIVEAU 16 ===== */
-/* Cadenas des symboles : déduire la valeur de chaque symbole, répondre à 4 opérations, puis régler un chiffre du cadenas avec la somme (#codeBoard). */
+/* Cadenas des symboles : déduire la valeur de chaque symbole, résoudre 5 opérations, puis régler un chiffre du cadenas avec la somme (#codeBoard). */
 (() => {
   const board = document.getElementById("codeBoard");
   if (!board) return;
@@ -3341,7 +3342,7 @@ else {
       eyebrow: "Fragment 016 // Le cadenas des symboles",
       title: "Le cadenas des symboles",
       description:
-        "Chaque symbole cache un chiffre. Déduis-les grâce aux indices, réponds aux quatre opérations, additionne les résultats : le dernier chiffre de la somme règle une molette du cadenas.",
+        "Chaque symbole cache un chiffre. Déduis-les grâce aux indices, résous cinq opérations par série, puis additionne les résultats pour régler la molette du cadenas.",
       systemLabel: "ECHO://CADENAS",
       puzzleKicker: "PUZZLE // DÉCHIFFRAGE",
       puzzleTitle: "Cadenas à quatre chiffres",
@@ -3357,10 +3358,10 @@ else {
       badAnswer:
         "Ce résultat n'est pas bon. Recalcule avec la valeur des symboles.",
       sumReady:
-        "Les quatre résultats sont bons. Additionne-les puis règle la molette éclairée avec le dernier chiffre de la somme.",
+        "Les cinq résultats sont bons. Additionne-les puis règle la molette éclairée avec le dernier chiffre de la somme.",
       sumLabel: "Somme",
       badDigit:
-        "Ce n'est pas le bon chiffre. Additionne les quatre résultats et garde le dernier chiffre.",
+        "Ce n'est pas le bon chiffre. Additionne les cinq résultats et garde le dernier chiffre.",
       stageDone: "Molette réglée. Nouvelle série de symboles.",
       success: "Le cadenas s'ouvre. Les quatre chiffres sont corrects.",
       system: "SYSTEME:: CADENAS 016 VERROUILLE // QUATRE CHIFFRES REQUIS",
@@ -3380,7 +3381,7 @@ else {
       eyebrow: "Fragment 016 // The symbol padlock",
       title: "The symbol padlock",
       description:
-        "Each symbol hides a number. Deduce them from the clues, answer the four operations, add the results: the last digit of the sum sets one wheel of the padlock.",
+        "Each symbol hides a number. Deduce them from the clues, solve five operations per series, then add the results to set a wheel of the padlock.",
       systemLabel: "ECHO://PADLOCK",
       puzzleKicker: "PUZZLE // DECODING",
       puzzleTitle: "Four-digit padlock",
@@ -3395,9 +3396,9 @@ else {
       okAnswer: "Correct answer.",
       badAnswer: "That result is wrong. Recalculate with the symbol values.",
       sumReady:
-        "All four results are right. Add them up, then set the lit wheel to the last digit of the sum.",
+        "All five results are right. Add them up, then set the lit wheel to the last digit of the sum.",
       sumLabel: "Sum",
-      badDigit: "Wrong digit. Add the four results and keep the last digit.",
+      badDigit: "Wrong digit. Add the five results and keep the last digit.",
       stageDone: "Wheel set. A new series of symbols appears.",
       success: "The padlock opens. All four digits are correct.",
       system: "SYSTEM:: PADLOCK 016 SEALED // FOUR DIGITS REQUIRED",
@@ -3491,6 +3492,7 @@ else {
       { terms: [b, c], op: "+", result: vb + vc },
       { terms: [c, d], op: "×", result: vc * vd },
       { terms: [d, a, b], op: "+", result: vd + va + vb },
+      { terms: [a, b, c, d], op: "+", result: va + vb + vc + vd },
     ];
     questionsBox.replaceChildren();
     questions.forEach((question, index) => {

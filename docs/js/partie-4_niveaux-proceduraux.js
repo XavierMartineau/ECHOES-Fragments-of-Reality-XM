@@ -154,7 +154,7 @@
   ];
   const start = { x: 1, y: 1 };
   const exit = { x: size - 2, y: size - 2 };
-  const shardCount = Math.min(2 + Math.floor(levelIndex / 2), 5);
+  const shardCount = Math.min(5 + (levelIndex - 4), 9);
   const currentUser = window.EchoesSave?.getCurrentUser?.() || "guest";
   const progressKey = `echoes-completed-levels-${encodeURIComponent(currentUser)}`;
   const completed = new Set(
