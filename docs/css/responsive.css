@@ -45,7 +45,265 @@ svg {
   body {
     overflow: auto;
   }
+}
 
+.puzzle-panel {
+  position: relative;
+}
+
+.level-challenge-launch {
+    position: absolute;
+    z-index: 20;
+    inset: 0;
+    display: grid;
+    overflow: hidden;
+    place-items: center;
+    padding: clamp(18px, 5vw, 48px);
+    border: 1px solid rgba(121, 247, 255, 0.34);
+    border-radius: inherit;
+    background:
+      radial-gradient(ellipse at 50% 42%, rgba(121, 247, 255, 0.13), transparent 42%),
+      radial-gradient(ellipse at 50% 100%, rgba(179, 108, 255, 0.14), transparent 56%),
+      rgba(3, 8, 22, 0.88);
+    -webkit-backdrop-filter: blur(9px);
+    backdrop-filter: blur(9px);
+    animation: level-launch-appear 420ms ease-out both;
+}
+
+.level-challenge-launch::before,
+.level-challenge-launch::after {
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(121, 247, 255, 0.13);
+    content: "";
+    pointer-events: none;
+}
+
+.level-challenge-launch::after {
+    inset: 20px;
+    border-color: rgba(179, 108, 255, 0.12);
+    clip-path: polygon(0 0, 24% 0, 24% 1px, 1px 1px, 1px 24%, 0 24%, 0 0,
+      100% 0, 100% 24%, calc(100% - 1px) 24%, calc(100% - 1px) 1px, 76% 1px, 76% 0,
+      100% 100%, 76% 100%, 76% calc(100% - 1px), calc(100% - 1px) calc(100% - 1px), calc(100% - 1px) 76%, 100% 76%, 100% 100%,
+      0 100%, 0 76%, 1px 76%, 1px calc(100% - 1px), 24% calc(100% - 1px), 24% 100%);
+}
+
+.level-launch-card {
+    position: relative;
+    display: grid;
+    width: min(100%, 370px);
+    justify-items: center;
+    gap: 14px;
+    text-align: center;
+    animation: level-launch-card-enter 560ms cubic-bezier(0.2, 0.85, 0.25, 1.15) both;
+}
+
+.level-launch-kicker,
+.level-launch-title,
+.level-launch-caption {
+    margin: 0;
+    color: rgba(210, 245, 255, 0.72);
+    font-family: var(--font-display, "Orbitron", sans-serif);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.level-launch-kicker {
+    color: #9af9ff;
+    font-size: clamp(0.58rem, 1.5vw, 0.72rem);
+    text-shadow: 0 0 12px rgba(121, 247, 255, 0.65);
+}
+
+.level-launch-emblem {
+    position: relative;
+    display: grid;
+    width: clamp(76px, 12vw, 104px);
+    aspect-ratio: 1;
+    place-items: center;
+    color: #8df8ff;
+    filter: drop-shadow(0 0 16px rgba(121, 247, 255, 0.55));
+    animation: level-launch-emblem-pulse 2.8s ease-in-out infinite;
+}
+
+.level-launch-emblem::before,
+.level-launch-emblem::after {
+    position: absolute;
+    inset: 9%;
+    border: 1px solid rgba(121, 247, 255, 0.52);
+    border-radius: 30%;
+    content: "";
+    transform: rotate(45deg);
+    animation: level-launch-emblem-spin 18s linear infinite;
+}
+
+.level-launch-emblem::after {
+    inset: 19%;
+    border-color: rgba(179, 108, 255, 0.55);
+    animation-direction: reverse;
+    animation-duration: 12s;
+}
+
+.level-launch-emblem svg {
+    position: relative;
+    z-index: 1;
+    width: 72%;
+    overflow: visible;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.6;
+}
+
+.level-launch-emblem-frame,
+.level-launch-emblem-spark {
+    stroke: rgba(121, 247, 255, 0.76);
+}
+
+.level-launch-emblem-ring {
+    stroke: rgba(179, 108, 255, 0.9);
+}
+
+.level-launch-emblem-key {
+    stroke: #f0dcff;
+    stroke-width: 2.3;
+}
+
+.level-launch-title {
+    color: #eefaff;
+    font-size: clamp(0.65rem, 1.8vw, 0.82rem);
+}
+
+.level-launch-button {
+    position: relative;
+    display: flex;
+    width: min(100%, 310px);
+    min-height: 64px;
+    padding: 14px 20px;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    overflow: hidden;
+    border: 1px solid #8cf7ff;
+    clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+    background: linear-gradient(110deg, rgba(20, 99, 125, 0.92), rgba(71, 34, 111, 0.92));
+    box-shadow:
+      0 0 20px rgba(121, 247, 255, 0.28),
+      inset 0 0 22px rgba(121, 247, 255, 0.13);
+    color: #f2feff;
+    cursor: pointer;
+    font: 700 clamp(0.72rem, 2vw, 0.9rem) var(--font-display, "Orbitron", sans-serif);
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 12px rgba(121, 247, 255, 0.6);
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      filter 180ms ease;
+    animation: level-launch-button-breathe 2.2s ease-in-out infinite;
+}
+
+.level-launch-button::before {
+    position: absolute;
+    top: -30%;
+    bottom: -30%;
+    left: -45%;
+    width: 28%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.32), transparent);
+    content: "";
+    transform: skewX(-22deg);
+    animation: level-launch-button-scan 3.8s ease-in-out infinite;
+}
+
+.level-launch-button:hover,
+.level-launch-button:focus-visible {
+    transform: translateY(-3px) scale(1.025);
+    border-color: #fff;
+    box-shadow:
+      0 0 34px rgba(121, 247, 255, 0.48),
+      0 0 68px rgba(179, 108, 255, 0.2),
+      inset 0 0 28px rgba(121, 247, 255, 0.22);
+    filter: brightness(1.18);
+}
+
+.level-launch-button:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 5px;
+}
+
+.level-launch-button:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 0 14px rgba(121, 247, 255, 0.3);
+}
+
+.level-launch-button svg {
+    width: 20px;
+    flex: 0 0 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+    transition: transform 180ms ease;
+}
+
+.level-launch-button:hover svg {
+    transform: translateX(4px);
+}
+
+.level-launch-caption {
+    color: rgba(190, 211, 235, 0.72);
+    font-size: 0.55rem;
+}
+
+@keyframes level-launch-appear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes level-launch-card-enter {
+  from { opacity: 0; transform: translateY(14px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes level-launch-emblem-pulse {
+  50% { filter: drop-shadow(0 0 28px rgba(179, 108, 255, 0.72)); transform: scale(1.06); }
+}
+
+@keyframes level-launch-emblem-spin {
+  to { transform: rotate(405deg); }
+}
+
+@keyframes level-launch-button-breathe {
+  50% { box-shadow: 0 0 30px rgba(121, 247, 255, 0.42), inset 0 0 28px rgba(121, 247, 255, 0.2); }
+}
+
+@keyframes level-launch-button-scan {
+  0%, 15% { left: -45%; }
+  55%, 100% { left: 125%; }
+}
+
+@media (max-width: 560px) {
+  .level-challenge-launch { padding: 14px; }
+  .level-challenge-launch::before { inset: 8px; }
+  .level-challenge-launch::after { inset: 15px; }
+  .level-launch-card { gap: 11px; }
+  .level-launch-button { min-height: 58px; padding: 12px 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .level-challenge-launch,
+  .level-launch-card,
+  .level-launch-emblem,
+  .level-launch-emblem::before,
+  .level-launch-emblem::after,
+  .level-launch-button,
+  .level-launch-button::before {
+    animation: none;
+  }
+}
+
+@media (min-width: 651px) and (max-width: 1099px) {
   .hero {
     min-height: 100svh;
     padding: 104px 32px 112px;

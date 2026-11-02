@@ -110,6 +110,71 @@
     }
   }
 
+  if (item.type === "level" && serie?.levels?.includes(item.number)) {
+    const panel = document.querySelector(".puzzle-panel");
+    if (panel) {
+      const language =
+        localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+      const levelName = language === "en" ? "LEVEL" : "NIVEAU";
+      const startButton = document.getElementById("startPuzzleButton");
+      const previousInertStates = [...panel.children].map((child) => [
+        child,
+        child.inert,
+      ]);
+      previousInertStates.forEach(([child]) => {
+        child.inert = true;
+      });
+
+      const overlay = document.createElement("div");
+      overlay.className = "level-challenge-launch";
+      overlay.setAttribute("role", "group");
+      overlay.setAttribute(
+        "aria-label",
+        language === "en"
+          ? `Start part ${item.series}, level ${item.displayNumber}`
+          : `Lancer la partie ${item.series}, niveau ${item.displayNumber}`,
+      );
+      overlay.innerHTML = `
+        <div class="level-launch-card">
+          <span class="level-launch-kicker">${language === "en" ? "CHALLENGE // READY" : "ÉPREUVE // PRÊTE"}</span>
+          <span class="level-launch-emblem" aria-hidden="true">
+            <svg viewBox="0 0 64 64" focusable="false">
+              <path class="level-launch-emblem-frame" d="M32 3 55 16v27L32 61 9 43V16L32 3Z" />
+              <circle class="level-launch-emblem-ring" cx="32" cy="27" r="11" />
+              <path class="level-launch-emblem-key" d="M35.8 23.2a5.4 5.4 0 1 0-2.1 4.3L43 36.8h4.2v-4.2h-4.1v-4.1h-4.2l-1.6-1.6" />
+              <path class="level-launch-emblem-spark" d="m14 13 3-4m33 4-3-4m-15-6v5" />
+            </svg>
+          </span>
+          <p class="level-launch-title">${language === "en" ? `PART ${item.series} // ${levelName} ${item.displayNumber}` : `PARTIE ${item.series} // ${levelName} ${item.displayNumber}`}</p>
+          <button class="level-launch-button" type="button">
+            <span>${language === "en" ? "START CHALLENGE" : "LANCER LE DÉFI"}</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M4 12h15m-6-6 6 6-6 6" />
+            </svg>
+          </button>
+          <p class="level-launch-caption">${language === "en" ? "ACTIVATE TO ENTER THE PUZZLE" : "ACTIVER POUR ENTRER DANS LE PUZZLE"}</p>
+        </div>`;
+      panel.appendChild(overlay);
+
+      const restorePanel = () => {
+        previousInertStates.forEach(([child, wasInert]) => {
+          child.inert = wasInert;
+        });
+        overlay.remove();
+      };
+      overlay
+        .querySelector(".level-launch-button")
+        .addEventListener("click", () => {
+          restorePanel();
+          if (!startButton || startButton.disabled) return;
+          startButton.hidden = false;
+          startButton.click();
+          if (!startButton.hidden) startButton.hidden = true;
+        });
+      overlay.querySelector(".level-launch-button").focus();
+    }
+  }
+
   if (devModeUnlocked) return;
 
   const complete = () => {
