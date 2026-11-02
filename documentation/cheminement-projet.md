@@ -7,7 +7,7 @@ reste [Info-fr.txt](./Info-fr.txt).
 
 ## Organisation actuelle du code
 
-- Les 18 SVG sont classés par usage dans `docs/assets/svg/` : `accueil/`,
+- Les SVG sont classés par usage dans `docs/assets/svg/` : `accueil/`,
   `animations-depart/`, `cles/`, `connexion/`, `ia/`, `identite/` et `motifs/`.
 - Les feuilles CSS sont regroupées dans `docs/css/` par rôle : `base/`,
   `bosses/`, `composants/`, `niveaux/` et `pages/`.
@@ -19,45 +19,83 @@ reste [Info-fr.txt](./Info-fr.txt).
 - Les contrôles de sauvegarde manuelle ont été retirés des pages. La sauvegarde
   automatique de la progression, des réussites et des récompenses est conservée.
 
-## Dernière mise à jour — 16/10/2026
+## État du projet — 02/11/2026
 
-**Résumé :** journée consacrée à l'habillage visuel et à la sécurité du mode développeur : hub de niveaux gamifié, effets d'interface, accueil en nébuleuse, DEV MODE protégé par code courriel, page de connexion « style brisé » et nouveaux SVG. Le gameplay, les puzzles et le contenu n'ont pas été modifiés.
+**Campagne active :** 30 niveaux répartis en six parties de cinq niveaux (1–5, 6–10, 11–15, 16–20, 21–25 et 26–30). Les boss 01, 02 et 03 suivent respectivement les niveaux 10, 20 et 30.
 
-### Commits GitHub du 16/10/2026 (du plus récent au plus ancien)
+Les niveaux 31 à 40 sont des bonus jouables, dont les labyrinthes procéduraux 32 à 40. Les pages 41 à 60 sont présentes dans la section bonus, mais affichent encore « En construction ».
+
+### Travail réalisé aujourd'hui
+
+- **Accueil et performances :** visuel neural SVG plein écran, panneau de lecture de l'IA repositionné pour les écrans étroits et traductions FR/EN. Les effets communs ont été regroupés dans `ui-effects.js` et `ui-effects.css` ; des anciens scripts ont été retirés et le redimensionnement du canvas a été ajusté.
+- **Sauvegarde :** boutons « Save » et code JavaScript associé supprimés des pages concernées ; la progression continue d'être sauvegardée automatiquement.
+- **Niveaux bonus :** labyrinthes procéduraux 32–40 et éveil du fragment bonus ; pages 41–60 préparées, avec les défis et traductions toujours en construction.
+- **Exemples visuels :** exemples des niveaux 1 à 30 réalignés sur les mécaniques des puzzles, avec grilles d'exemple adaptées.
+- **CSS :** feuilles nommées selon leur portée plutôt que d'après un numéro de partie historique. Les styles communs et ceux des niveaux 11–30 sont séparés ; les feuilles identiques des bonus 41–50 et 51–60 ont été fusionnées.
+- **Cache et références :** versions des scripts et feuilles CSS harmonisées dans les pages concernées.
+
+### Commits Git du 02/11/2026
 
 | Heure | Commit | Contenu |
-|-------|--------|---------|
-| 03:19 | `c180c65` | Polissage global de l'UI, DEV MODE sécurisé et refonte de la page de connexion. |
-| 03:18 | `6aa5626` | Fond décoratif SVG (`login-fragments.svg`) sur la page de connexion et styles associés. |
-| 03:17 | `bcc9b65` | Nouveau fond et nouveaux boutons pour la page de connexion. |
-| 03:13 | `af27038` | Vérification par courriel pour l'accès au DEV MODE et configuration EmailJS. |
-| 02:54 | `3b3a8e2` | Amélioration de l'UI du mode développeur et optimisations pour les connexions lentes. |
-| 02:43 | `a6cd1d6` | Refonte des styles de l'accueil et suppression du script d'interlude. |
-| 02:33 | `000f4c9` | Effets d'interface personnalisés : curseur et barres de défilement. |
-| 02:10 | `1871a19` | Nettoyage du code : sections redondantes retirées pour la lisibilité et la maintenance. |
-| 01:50 | `b650597` | Hub de sélection des niveaux et panneau des clés. |
+|---|---|---|
+| 09:33 | `67d1a69` | Ajout des pages « En construction » pour les bonus 50 à 60. |
+| 09:41 | `b4543da` | Mise à jour des scripts de la partie 2 et de leurs références HTML. |
+| 09:45 | `62049a2` | Harmonisation des versions JavaScript et des références HTML. |
+| 09:54 | `00a21b6` | Mise à jour de `level-guard.js` et de ses références dans les pages. |
+| 10:02 | `4c8f91e` | Amélioration des visuels de l'accueil et des traductions. |
+| 10:07 | `916e35c` | Correction des références de scripts dans `index.html`. |
+| 10:12 | `186f864` | Suppression des boutons de sauvegarde manuelle et des fonctions associées. |
+| 10:21 | `5e7f026` | Ajout des labyrinthes procéduraux 32–40 et de l'éveil du fragment bonus. |
+| 10:25 | `bbb613f` | Ajout du visuel neural plein écran et du panneau de lecture de l'IA sur l'accueil. |
+| 10:31 | `45d9bd0` | Correction du positionnement responsive du panneau IA de l'accueil. |
+| 10:31 | `da99a4f` | Harmonisation des versions des scripts dans les pages HTML. |
+| 10:38 | `ef00d30` | Mise à jour des versions CSS/JS de l'accueil et des traductions. |
+| 11:02 | `b1498a7` | Regroupement des micro-animations et effets premium ; suppression des anciens scripts et ajustement du canvas et du DEV MODE. |
+| 11:22 | `bfb6bd8` | Mise à jour de `level-guard.js`, des exemples visuels et de leurs styles. |
+| 11:32 | `53177ab` | Ajout des styles et animations des bonus 41–50 et 51–60. |
+| 11:32 | `d0e8ce1` | Ajustement des styles/scripts bonus 45–60 et des défis/traductions de `level-guard.js`. |
+| 11:35 | `988d209` | Suppression des CSS devenus inutiles après la refonte des panneaux et le regroupement des bonus. |
+| 11:35 | `f7784b9` | Mise à jour des liens CSS des niveaux 24–30 et des bonus 31–60. |
 
-### Reste à faire
+### Points à revalider
 
-1. Vérifier le rendu du bouton « Continuer » de la page de connexion au repos (contour sombre non confirmé).
-2. Tester l'envoi réel du code par EmailJS : courriel en mode sombre, lisibilité sur mobile, expiration à 10 minutes, blocage de 5 minutes après 3 essais, validité de 3 heures.
-3. Appliquer le pied de page minimal (« © 2026 Xavier Martineau » et « ECHOES: Fragments of Reality ») sur toutes les pages.
-4. Contrôler visuellement les boutons à coins coupés sur l'accueil, le hub et les boss.
-5. Tester l'accueil et les boss sur mobile et tablette après les derniers changements.
-6. Valider les parcours complets des parties 1 et 2 sur ordinateur et mobile, puis les liens et ressources sur GitHub Pages.
-7. Relier les clés restantes aux verrous et aux fragments narratifs ; préparer une nouvelle version bêta.
+- Parcours complet des six parties et des trois boss sur ordinateur et mobile.
+- Correspondance des traductions FR/EN et des exemples visuels sur toutes les pages de puzzle.
+- Parcours et responsive des bonus 31–40 ; création des puzzles 41–60.
+- Déploiement GitHub Pages : liens, ressources et casse des chemins.
+- Protection du DEV MODE : le site étant statique, le contrôle exécuté côté navigateur ne constitue pas une protection de sécurité.
+
+### Repère historique — 16/10/2026
+
+Cette journée portait sur l'habillage du hub, de l'accueil et du DEV MODE, ainsi que sur la connexion et les SVG. Les tâches ci-dessous sont les vérifications notées à cette date ; leur état actuel n'est pas présumé.
+
+| Commit | Contenu |
+|---|---|
+| `c180c65` | Polissage global de l'interface, DEV MODE et page de connexion. |
+| `6aa5626` | Fond SVG `login-fragments.svg` et styles de connexion. |
+| `bcc9b65` | Nouveau fond et nouveaux boutons de connexion. |
+| `af27038` | Vérification par courriel pour le DEV MODE et configuration EmailJS. |
+| `3b3a8e2` | Amélioration du DEV MODE et des connexions lentes. |
+| `a6cd1d6` | Refonte de l'accueil et suppression du script d'interlude. |
+| `000f4c9` | Curseur et barres de défilement personnalisés. |
+| `1871a19` | Nettoyage des styles redondants. |
+| `b650597` | Hub de sélection des niveaux et panneau des clés. |
+
+- Vérifier le rendu du bouton « Continuer » de la page de connexion.
+- Tester l'envoi réel des codes EmailJS et leur affichage sur mobile.
+- Contrôler les boutons à coins coupés sur l'accueil, le hub et les boss.
+- Valider les parcours, les traductions et les liens sur mobile et GitHub Pages.
 
 ### Points d'attention
 
-- Le code d'accès au DEV MODE ne protège pas réellement : le site est statique et la vérification reste contournable côté navigateur.
 - La clé publique EmailJS est visible côté client (comportement normal) ; restreindre le domaine autorisé dans le compte EmailJS.
-## État du projet au 07/10/2026
+## Présentation fonctionnelle
 
 - **Projet :** ECHOES: Fragments of Reality
 - **Type :** expérience narrative et jeu de puzzles web statique
 - **Déploiement visé :** GitHub Pages
 - **Version de travail :** bêta v4
-- **Jalon actuel :** Partie 3 (niveaux 21 à 30) jouable ; boss `CLEE_01` / Clé 01 et combat tactique `CLEE_02` après le niveau 20
+- **Jalon actuel :** campagne principale de 30 niveaux en six parties de cinq niveaux ; trois boss après les niveaux 10, 20 et 30 ; bonus 31–40 jouables et 41–60 en construction
 - **Fondations disponibles :** accueil, connexion, introduction interactive, sauvegarde par compte,
   mode développeur, navigation partagée et responsive multi-écrans
 
@@ -77,6 +115,7 @@ reste [Info-fr.txt](./Info-fr.txt).
 - Progression séparée par compte dans `localStorage`.
 - Points verts de navigation liés au compte actif.
 - Sauvegarde automatique du niveau courant.
+- Les pages de puzzle ne proposent plus de bouton « Save » ; l'enregistrement reste automatique.
 - Reprise de la dernière progression sauvegardée.
 - Nouvelle partie avec effacement de la progression du compte.
 - Niveaux terminés rejouables sans supprimer les points verts.
@@ -95,7 +134,7 @@ reste [Info-fr.txt](./Info-fr.txt).
 
 ## Puzzles et niveaux
 
-### Partie 1 — Niveaux 1 à 10
+### Niveaux 1 à 10 — Parties 1 et 2
 
 - **Niveau 1 — La suite impossible :** trois suites numériques de difficulté croissante.
 - **Niveau 2 — Le labyrinthe des débris :** navigation sur une grille au clavier ou avec
@@ -113,7 +152,7 @@ Les dix pages partagent le contrôleur `docs/js/niveaux/partie-1-puzzles.js` et 
 `docs/css/niveaux/niveaux-communs.css`. La progression et les niveaux déjà terminés restent
 compatibles avec le système de sauvegarde existant.
 
-### Niveaux 11 à 20
+### Niveaux 11 à 20 — Parties 3 et 4
 
 - Niveau 11 : alignement de plusieurs anneaux de résonance.
 - Niveau 12 : mémorisation puis répétition de séquences lumineuses croisées.
@@ -139,20 +178,31 @@ compatibles avec le système de sauvegarde existant.
   le réseau dormant au niveau 20. Le niveau 20 existait déjà ; ses mécaniques ont été
   réaffectées plutôt que dupliquées.
 
+### Niveaux bonus 31 à 60
+
+- Niveau 31 : le Recycleur, un jeu d'action avec pièges et mécanismes de déplacement.
+- Niveaux 32 à 40 : labyrinthes procéduraux avec des mécaniques distinctes et textes FR/EN.
+- Niveaux 41 à 60 : pages bonus préparées, mais encore marquées « En construction ».
+
 ### Boss — `boss-02.html`
 
-- Combat placé après le niveau 20 et avant l'entrée dans la partie 3.
+- Combat placé après le niveau 20 et avant l'entrée dans la partie 5.
 - Arène tactique 5 × 5, déplacements orthogonaux, murs et lignes de frappe télégraphiées.
 - Six ancres à stabiliser en trois phases, huit unités de cohérence et deux boucliers.
 - Les ancres stabilisées sont indiquées par un rond vert foncé dans le compteur de
   cohérence, plutôt que par l'indicateur orange.
 - Victoire débloquant la Clé 02 et le niveau 21.
 
+### Boss — `boss-03.html`
+
+- Combat placé après le niveau 30, à la fin de la partie 6.
+- Page, contrôleur et styles dédiés ; la victoire complète la dernière étape de la campagne principale.
+
 ### Boss — `boss-01.html`
 
-- Boss placé après le niveau 10 dans la partie 1.
+- Boss placé après le niveau 10, à la fin de la partie 2.
 - Nouvelle direction visuelle : gardien spectral, cœur lumineux et orbites de résonance cyan/violettes.
-- Page renommée `docs/html/partie-1_niveau-1_à_10/boss-01.html` ; le lien du niveau 10,
+- Page située dans `docs/html/partie-2_niveau-6_à_10/boss-01.html` ; le lien du niveau 10,
   le menu développeur et l'ambiance visuelle utilisent ce nom.
 - Trois stages accessibles : trouver trois sceaux correspondants, répéter une mélodie de trois symboles et toucher le noyau pendant deux halos verts.
 - Difficulté visée : `1/6`, avec six unités d'énergie et une reprise par réinitialisation.
@@ -165,35 +215,42 @@ compatibles avec le système de sauvegarde existant.
 
 - Le favicon commun est `docs/assets/svg/identite/echoes-favicon.svg` et est référencé par
   toutes les pages HTML du site, y compris `404.html`.
-- Scripts centralisés des niveaux 1 à 10 dans
-  `docs/js/niveaux/partie-1_niveau-1_à_10.js`.
-- Styles communs et styles de partie séparés dans `docs/css/`.
+- Les scripts des puzzles sont regroupés par lots dans `docs/js/niveaux/` ; les labyrinthes
+  procéduraux 32–40 sont partagés par `partie-4_niveaux-proceduraux.js`.
+- Les styles de `docs/css/niveaux/` sont nommés selon leur portée :
+  `niveaux-communs.css`, `niveaux-11-20.css`, `niveaux-21-30.css`,
+  `niveaux-bonus-31-40.css` et `niveaux-bonus-41-60.css`.
+- Les anciennes feuilles de redesign ont été fusionnées dans la feuille commune et les styles
+  identiques des bonus 41–50 et 51–60 ont été regroupés.
+- Les effets d'interface partagés utilisent `docs/js/ui-effects.js` et
+  `docs/css/composants/ui-effects.css`.
+- `level-guard.js` fournit l'accès aux niveaux, la progression et les exemples visuels.
 - `save-system.js` gère les comptes et la progression persistante.
 - `dev-mode.js` fournit les outils de test et de navigation.
-- `partie-2_niveau-11_à_20.js` regroupe tout le JavaScript des niveaux 11 à 16 (sauvegarde,
-  navigation et contrôleurs de puzzle) ; il n'existe plus de script `niveau-1X.js` séparé.
 - `ambient-background.js` et les feuilles d'ambiance gèrent les effets d'arrière-plan.
 - Les pages restent compatibles avec un déploiement statique GitHub Pages.
 
 ## Validation réalisée
 
-- Vérification navigateur des trois stages du boss 01, de la victoire, de la perte
-  d'énergie et de la réinitialisation ; test du boss 02 tactique.
-- Vérification des textes FR/EN et de l'absence de débordement horizontal sur mobile
-  pour la page du boss 01.
-- Vérification des références locales : les 68 pages HTML ont un favicon référencé
-  et tous les liens locaux vers le SVG existent.
-- Vérification de syntaxe JavaScript et `git diff --check`.
+- Vérification navigateur des exemples des niveaux 1 à 30 : aucun exemple manquant ni erreur
+  JavaScript, avec contrôle des grilles des niveaux 4 et 11.
+- Vérification navigateur de neuf pages représentatives : feuilles CSS attendues chargées
+  pour les six parties et les plages bonus 31–60, sans erreur JavaScript.
+- Vérification automatisée des chemins CSS locaux dans les 67 pages HTML de `docs/html/` :
+  aucun fichier référencé manquant.
+- Vérifications antérieures : parcours du boss 01 et test du boss 02 tactique, traductions
+  FR/EN et contrôles responsive ciblés.
+- `git diff --check` passe sur les changements documentaires.
 
 ## Travail en cours
 
-- Valider complètement les parcours des niveaux 1 à 20 sur desktop et mobile.
-- Harmoniser et vérifier les contenus FR/EN des pages restantes.
+- Valider complètement les parcours des six parties et des trois boss sur desktop et mobile.
+- Vérifier les labyrinthes bonus 31–40 et leurs textes FR/EN.
+- Créer les puzzles des niveaux bonus 41–60, encore en construction.
 - Relier complètement les six clés aux verrous et fragments narratifs.
-- Compléter les puzzles des dimensions Fractures et Éclipse.
 - Effectuer une validation complète des parcours sur GitHub Pages.
 
-## Journal des pushes Git significatifs
+## Journal des commits Git significatifs
 
 ### 30/09/2026 — Initialisation et fondations
 
@@ -209,7 +266,6 @@ compatibles avec le système de sauvegarde existant.
 - `3e4cb41` — Ajout des mécaniques du niveau 5.
 - `0e3609e` — Ajout des mécaniques des niveaux 6 à 10 et du système de sauvegarde.
 - `3d20b90` — Auto-sauvegarde et progression par utilisateur.
-- `c28050c` — Harmonisation de la version des scripts et de la sauvegarde.
 - `56e253d` — Ajout des animations et messages système des niveaux 2 à 7.
 - `0064a39` — Ajout des niveaux 11 à 14 et de leurs premières mécaniques.
 - `c69e70a` — Correction des chemins sensibles à la casse pour GitHub Pages.
@@ -343,17 +399,14 @@ compatibles avec le système de sauvegarde existant.
 
 ## Prochain jalon recommandé
 
-1. Valider les parcours complets des parties 1 et 2 sur desktop et mobile.
-2. Vérifier le rendu du SVG `key-01-usb.svg` et de son animation dans le HUD.
-3. Relier les clés restantes aux verrous et fragments narratifs.
-4. Vérifier l'ensemble des liens et assets sur GitHub Pages.
-5. Préparer une nouvelle version bêta après validation des parcours complets.
+1. Tester les six parties et les trois boss sur ordinateur et mobile.
+2. Vérifier les exemples visuels, les traductions et les effets réduits sur toutes les pages jouables.
+3. Terminer les puzzles bonus 41–60 et valider les bonus 31–40.
+4. Vérifier les clés, les liens et les ressources sur le déploiement GitHub Pages.
+5. Préparer une nouvelle version bêta après ces validations.
 
 > Mettre à jour ce document à chaque commit : ajouter une entrée datée avec le hash du commit,
 > sa portée (fichiers ou fonctionnalités) et corriger les sections d'état si elles changent.
-
-- Ce commit — Niveau 19 devient un gros mots croisés (FR/EN selon la langue choisie) ; le cadenas des symboles passe au niveau 20 avec saisie de chiffres au clavier (plus de listes) ; nouvelle page 404.html aux couleurs du jeu.
-
 
 ### 16/10/2026 — Polissage UI, DEV MODE sécurisé et page de connexion
 
@@ -406,7 +459,6 @@ compatibles avec le système de sauvegarde existant.
 ### 01/11/2026 — Noms des fichiers des parties
 
 - La campagne active est répartie en six dossiers de cinq niveaux : 1–5, 6–10, 11–15, 16–20, 21–25 et 26–30. Les pages 31–60 restent des niveaux bonus dans `docs/html/partie-bonus/`.
-- Les feuilles CSS portent maintenant des noms décrivant leur portée : `niveaux-communs.css`, `niveaux-11-20.css`, `niveaux-21-30.css` et `niveaux-bonus-31-40.css`. Les styles identiques des niveaux bonus 41–50 et 51–60 sont regroupés dans `niveaux-bonus-41-60.css`.
 
 ### 01/11/2026 — Réduction des défis
 
