@@ -1,19 +1,4 @@
-/* ============================================================================
- * PARTIE 2 // FRACTURES (niveaux 11 à 20) — feuille de style
- * Carte des niveaux :
- *  - Niveau 11 : anneaux de résonance (.alignment-board, .resonance-tray, minuteur)
- *  - Niveau 12 : lumière croisée (.cross-light-board)
- *  - Niveau 13 : puzzle coulissant fractal (.fractal-*)
- *  - Niveau 14 : miroirs et faisceau (.prism-*)
- *  - Niveau 15 : routage de flux 14 x 14 (.flow-*)
- *  - Niveau 16 : inversion logique 3 x 3 (.logic-*)
- *  - Niveau 17 : balance du vide (.scale-*)
- *  - Niveau 18 : tour des échos / tours de Hanoï (.tower-*)
- *  - Niveau 19 : sudoku de lettres (.sd-*)
- *  - Niveau 20 : cadenas des symboles / équations (.code-*)
- * Les animations d'entrée et les styles génériques (en-tête, panneau, pied de
- * page) viennent d'abord ; les blocs propres à chaque niveau suivent.
- * ========================================================================== */
+/* STYLES PUZZLES // niveaux 11 a 20, repartis sur les parties 3 et 4. */
 @keyframes level-enter {
   from {
     opacity: 0;
