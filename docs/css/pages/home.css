@@ -1471,7 +1471,7 @@ html body.index-page .home-ai-readout-top {
 
 html body.index-page .home-ai-readout-bottom {
   right: clamp(18px, 9vw, 144px);
-  bottom: 14%;
+  bottom: clamp(150px, 26vh, 260px);
 }
 
 html body.index-page .content {

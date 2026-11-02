@@ -40,7 +40,7 @@
       "approve": true,
       "matchCommandLine": true
     },
-    "/^cd /c/ECHOES-Fragments-of-Reality-XM ; node -e \"const fs=require\\('fs'\\); const html=fs\\.readFileSync\\('docs/html/introduction\\.html','utf8'\\); const css=fs\\.readFileSync\\('docs/css/introduction\\.css','utf8'\\); const js=fs\\.readFileSync\\('docs/js/introduction\\.js','utf8'\\); console\\.log\\('html', html\\.includes\\('dialogueShell'\\) && html\\.includes\\('intro'\\)\\); console\\.log\\('css', css\\.includes\\('@keyframes shell-appear'\\) && css\\.includes\\('@keyframes line-in'\\)\\); console\\.log\\('js', js\\.includes\\('is-fading-out'\\) && js\\.includes\\('is-active'\\)\\);\"$/": {
+    "/^cd /c/ECHOES-Fragments-of-Reality-XM ; node -e \"const fs=require\\('fs'\\); const html=fs\\.readFileSync\\('docs/html/introduction\\.html','utf8'\\); const css=fs\\.readFileSync\\('docs/css/pages/introduction\\.css','utf8'\\); const js=fs\\.readFileSync\\('docs/js/introduction\\.js','utf8'\\); console\\.log\\('html', html\\.includes\\('dialogueShell'\\) && html\\.includes\\('intro'\\)\\); console\\.log\\('css', css\\.includes\\('@keyframes shell-appear'\\) && css\\.includes\\('@keyframes line-in'\\)\\); console\\.log\\('js', js\\.includes\\('is-fading-out'\\) && js\\.includes\\('is-active'\\)\\);\"$/": {
       "approve": true,
       "matchCommandLine": true
     },
