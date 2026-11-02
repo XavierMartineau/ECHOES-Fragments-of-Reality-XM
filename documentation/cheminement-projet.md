@@ -227,7 +227,7 @@ compatibles avec le système de sauvegarde existant.
 - `level-guard.js` fournit l'accès aux niveaux, la progression et les exemples visuels.
 - `save-system.js` gère les comptes et la progression persistante.
 - `dev-mode.js` fournit les outils de test et de navigation.
-- `ambient-background.js` et les feuilles d'ambiance gèrent les effets d'arrière-plan.
+- `ui-effects.js` (qui a absorbé l'ancien `ambient-background.js`) gère aussi l'ambiance d'arrière-plan et le panneau des clés.
 - Les pages restent compatibles avec un déploiement statique GitHub Pages.
 
 ## Validation réalisée
@@ -423,7 +423,7 @@ compatibles avec le système de sauvegarde existant.
 
 - **Animations** : inclinaison 3D du panneau conservée ; lignes de scan et traits animés neutralisés (`.puzzle-panel::before/::after`, `.fx-scanline`, footers) dans `dev-mode.css` ; bouton de départ `.sequence-start-button` qui pulse (coupé en mode animations réduites).
 - **Polissage global** (`dev-mode.css`) : panneaux en verre dépoli arrondis, boutons à coins coupés (`clip-path`), focus visible cyan, barre de défilement fine.
-- **Responsive** : tests à 390 et 768 px sans débordement ; panneau des clés replié par défaut sous 900 px (`ambient-background.js`).
+- **Responsive** : tests à 390 et 768 px sans débordement ; panneau des clés replié par défaut sous 900 px (`ui-effects.js`).
 - **DEV MODE protégé** (`dev-mode.js`, `emailjs-config.js`) : popup, adresse masquée, code à 4 chiffres valable 10 min, 3 essais puis blocage 5 min, accès mémorisé 3 h dans `localStorage`, envoi via EmailJS. Limite : site statique, la protection reste contournable.
 - **Page de connexion** (`login.html`, `login.css`) : titre fracturé cyan/violet, contenu flottant sur la nébuleuse, champ à coins coupés, bouton « Continuer » refait, logo hexagonal.
 - **SVG** : nouveau `docs/assets/svg/connexion/login-fragments.svg` (éclats cyan/violet flottants et points lumineux), masqué en mode performance (`fx-lite`).
