@@ -1903,7 +1903,7 @@ else {
   });
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
-    window.location.href = "partie-2_niveau-1.html";
+    window.location.href = "../partie-4_niveau-16_à_20/niveau-16.html";
   });
   saveButton.addEventListener("click", () => {
     if (
@@ -2425,7 +2425,7 @@ else {
 
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
-    window.location.href = "partie-2_niveau-3.html";
+    window.location.href = "niveau-18.html";
   });
   saveButton.addEventListener("click", () => {
     if (
@@ -2674,7 +2674,7 @@ else {
   );
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
-    window.location.href = "partie-2_niveau-4.html";
+    window.location.href = "niveau-19.html";
   });
   saveButton.addEventListener("click", () => {
     if (
@@ -3300,7 +3300,7 @@ else {
   resetButton.addEventListener("click", reset);
   checkButton.addEventListener("click", check);
   nextButton.addEventListener("click", () => {
-    window.location.href = "partie-2_niveau-5.html";
+    window.location.href = "niveau-20.html";
   });
   saveButton.addEventListener("click", () => {
     if (
@@ -3657,7 +3657,7 @@ else {
 
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
-    window.location.href = "partie-2_niveau-2.html";
+    window.location.href = "niveau-17.html";
   });
   saveButton.addEventListener("click", () => {
     if (

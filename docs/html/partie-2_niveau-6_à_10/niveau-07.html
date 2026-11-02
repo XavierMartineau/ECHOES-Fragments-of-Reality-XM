@@ -8,7 +8,7 @@
       type="image/svg+xml"
       href="../../assets/svg/echoes-favicon.svg?v=2"
     />
-    <title>ECHOES - Niveau 10</title>
+    <title>ECHOES - Niveau 02</title>
     <link rel="stylesheet" href="../../css/partie-1.css?v=1" />
     <link rel="stylesheet" href="../../css/partie-1-redesign.css?v=12" />
     <link rel="stylesheet" href="../../css/responsive.css?v=t6" />
@@ -23,7 +23,7 @@
       <div class="level-meta">
         <span data-i18n="part">PARTIE 1 // INITIATION</span>
         <div class="level-progress" id="levelProgress"></div>
-        <strong data-i18n="level">NIVEAU 10</strong>
+        <strong data-i18n="level">NIVEAU 02</strong>
       </div>
       <button class="save-game-button" id="saveGameButton" type="button">
         SAUVEGARDER
@@ -31,24 +31,79 @@
     </header>
     <main class="level-shell" data-level-start="1" data-level-end="15">
       <section class="level-intro">
-        <p class="eyebrow">Fragment 010 // Séquence chromatique</p>
-        <h1 data-i18n="title">Première illusion</h1>
+        <p class="eyebrow" data-i18n="eyebrow">
+          Fragment 002 // Porte lumineuse
+        </p>
+        <h1 data-i18n="title">Porte lumineuse</h1>
         <p class="level-description" data-i18n="description">
-          Observe la séquence de couleurs, puis reproduis-la dans le même ordre.
+          Active les trois symboles dans le bon ordre pour ouvrir la porte.
         </p>
         <div class="system-transmission" aria-live="polite">
           <span class="system-label" data-i18n="systemLabel">SYSTEM://LOG</span>
           <p id="systemMessage" data-i18n="systemInput">
-            SYSTEME:: SEQUENCE CHROMATIQUE EN ATTENTE // 5 COULEURS DETECTEES
+            SYSTEME:: PORTE HOLOGRAPHIQUE EN ATTENTE
           </p>
         </div>
       </section>
-      <section class="puzzle-panel color-sequence-board">
+      <section class="puzzle-panel gate-board">
         <div class="panel-heading">
-          <h2 data-i18n="puzzleTitle">Mémoire des couleurs</h2>
-          <span class="progress-readout" id="progressReadout">0 / 5</span>
+          <div>
+            <p class="panel-kicker" data-i18n="puzzleKicker">
+              PORTE HOLOGRAPHIQUE // ACCÈS 002
+            </p>
+            <h2 data-i18n="puzzleTitle">Séquence de la porte</h2>
+          </div>
+          <span class="progress-readout" id="progressReadout">0 / 3</span>
         </div>
-        <div class="color-sequence-grid" id="colorSequenceGrid"></div>
+        <div class="gate-door" id="gateDoor">
+          <div class="gate-ring gate-ring-outer"></div>
+          <div class="gate-ring gate-ring-inner"></div>
+          <div class="gate-core"><span>GATE://02 </span></div>
+          <div class="gate-symbols" id="gateSymbols">
+            <button
+              class="gate-symbol gate-symbol-diamond"
+              type="button"
+              data-gate="0"
+            >
+              ◇
+            </button>
+            <button
+              class="gate-symbol gate-symbol-triangle"
+              type="button"
+              data-gate="1"
+            >
+              △
+            </button>
+            <button
+              class="gate-symbol gate-symbol-circle"
+              type="button"
+              data-gate="2"
+            >
+              ○
+            </button>
+            <button
+              class="gate-symbol gate-symbol-star"
+              type="button"
+              data-gate="3"
+            >
+              ✦
+            </button>
+            <button
+              class="gate-symbol gate-symbol-hexagon"
+              type="button"
+              data-gate="4"
+            >
+              ⬡
+            </button>
+          </div>
+        </div>
+        <p
+          class="gate-sequence-status"
+          id="gateSequenceStatus"
+          data-i18n="gateStatus"
+        >
+          SIGNAL:// EN ATTENTE DE SYNCHRONISATION
+        </p>
         <div class="puzzle-actions">
           <button
             class="sequence-start-button"
@@ -57,25 +112,16 @@
           >
             DÉMARRER LE PUZZLE
           </button>
-          <p class="puzzle-status" id="puzzleStatus">
-            Observe la séquence de couleurs.
+          <p class="puzzle-status" id="puzzleStatus" data-i18n="statusReady">
+            Active les symboles dans le bon ordre.
           </p>
-          <button
-            class="sequence-replay-button"
-            id="replaySequenceButton"
-            data-i18n="replaySequence"
-            type="button"
-            hidden
-          >
-            REJOUER LA SEQUENCE
-          </button>
           <button
             class="next-level-button"
             id="nextLevelButton"
             type="button"
             hidden
           >
-            CONTINUER</button
+            <span data-i18n="continue">CONTINUER</span></button
           ><button class="reset-button" id="resetButton" type="button">
             Réinitialiser
           </button>
@@ -84,7 +130,7 @@
     </main>
     <footer class="level-footer">
       <span data-i18n="footer">ÉCHO // INITIATION ACTIVE</span
-      ><span data-i18n="counter">10 / 60</span>
+      ><span data-i18n="counter">2 / 30</span>
     </footer>
     <script src="../../js/translations.js"></script>
     <script src="../../js/save-system.js?v=4"></script>

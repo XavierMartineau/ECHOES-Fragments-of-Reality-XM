@@ -8,7 +8,7 @@
       type="image/svg+xml"
       href="../../assets/svg/echoes-favicon.svg?v=2"
     />
-    <title>ECHOES - Niveau 09</title>
+    <title>ECHOES - Niveau 03</title>
     <link rel="stylesheet" href="../../css/partie-1.css?v=1" />
     <link rel="stylesheet" href="../../css/partie-1-redesign.css?v=12" />
     <link rel="stylesheet" href="../../css/responsive.css?v=t6" />
@@ -23,7 +23,7 @@
       <div class="level-meta">
         <span data-i18n="part">PARTIE 1 // INITIATION</span>
         <div class="level-progress" id="levelProgress"></div>
-        <strong data-i18n="level">NIVEAU 09</strong>
+        <strong data-i18n="level">NIVEAU 03</strong>
       </div>
       <button class="save-game-button" id="saveGameButton" type="button">
         SAUVEGARDER
@@ -31,33 +31,24 @@
     </header>
     <main class="level-shell" data-level-start="1" data-level-end="15">
       <section class="level-intro">
-        <p class="eyebrow">Fragment 009 // Constellation fracturée</p>
-        <h1 data-i18n="title">Miroirs simples</h1>
+        <p class="eyebrow">Fragment 003 // Tri des symboles</p>
+        <h1 data-i18n="title">Tri des symboles</h1>
         <p class="level-description" data-i18n="description">
-          Recompose la constellation en activant les étoiles dans le bon ordre.
+          Classe les symboles selon leur couleur.
         </p>
         <div class="system-transmission" aria-live="polite">
           <span class="system-label" data-i18n="systemLabel">SYSTEM://LOG</span>
           <p id="systemMessage" data-i18n="systemInput">
-            SYSTEME:: CONSTELLATION EN ATTENTE // SEQUENCE A RECALER
+            SYSTEME:: TRI CHROMATIQUE EN ATTENTE // 6 SYMBOLES DETECTES
           </p>
         </div>
       </section>
-      <section class="puzzle-panel constellation-board">
+      <section class="puzzle-panel advanced-sort-board">
         <div class="panel-heading">
-          <h2 data-i18n="puzzleTitle">Réflexion holographique</h2>
-          <span class="progress-readout" id="progressReadout">0 / 3</span>
+          <h2 data-i18n="puzzleTitle">Classification chromatique</h2>
+          <span class="progress-readout" id="progressReadout">0 / 6</span>
         </div>
-        <div class="constellation-field" id="constellationField">
-          <svg
-            class="constellation-lines"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <polyline points=""></polyline>
-          </svg>
-        </div>
+        <div class="color-sort-grid" id="colorSortGrid"></div>
         <div class="puzzle-actions">
           <button
             class="sequence-start-button"
@@ -67,7 +58,7 @@
             DÉMARRER LE PUZZLE
           </button>
           <p class="puzzle-status" id="puzzleStatus">
-            Active les étoiles dans l'ordre indiqué par la console.
+            Classe chaque symbole dans sa couleur.
           </p>
           <button
             class="next-level-button"
@@ -84,7 +75,7 @@
     </main>
     <footer class="level-footer">
       <span data-i18n="footer">ÉCHO // INITIATION ACTIVE</span
-      ><span data-i18n="counter">9 / 60</span>
+      ><span data-i18n="counter">3 / 30 </span>
     </footer>
     <script src="../../js/translations.js"></script>
     <script src="../../js/save-system.js?v=4"></script>

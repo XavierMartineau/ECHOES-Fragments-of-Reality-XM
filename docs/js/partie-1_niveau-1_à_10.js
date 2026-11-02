@@ -907,7 +907,8 @@ if (activeLevelScript) {
     });
     reset.addEventListener("click", () => window.location.reload());
     next.addEventListener("click", () => {
-      window.location.href = "partie-1_niveau-1.html";
+      window.location.href =
+        "../partie-2_niveau-6_à_10/niveau-06.html";
     });
     status.textContent = levelCopy.statusReady;
     if (completedLevels.has(5)) {
@@ -1682,6 +1683,11 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
   nextButton.addEventListener("click", () => {
     if (levelNumber === 10) {
       window.location.href = "boss-01.html";
+      return;
+    }
+    if (levelNumber === 5) {
+      window.location.href =
+        "../partie-2_niveau-6_à_10/niveau-06.html";
       return;
     }
     window.location.href = `niveau-${String(levelNumber + 1).padStart(2, "0")}.html`;

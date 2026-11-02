@@ -1,4 +1,4 @@
-// PARTIE 3 // puzzles et progression des niveaux 21 à 30.
+// PARTIES 5 ET 6 // puzzles des niveaux 21 à 30.
 (() => {
   const level = Number(document.body.dataset.level);
   if (level < 21 || level > 30) return;
@@ -13,6 +13,8 @@
   }
   const part = dictionary.partThree;
   const strings = part.levels[level];
+  const seriesStart = level <= 25 ? 21 : 26;
+  const seriesEnd = seriesStart + 4;
   const $ = (id) => document.getElementById(id);
   const board = $("puzzleBoard");
   const status = $("puzzleStatus");
@@ -70,10 +72,12 @@
   function renderProgress() {
     const progress = $("levelProgress");
     progress.replaceChildren();
-    for (let number = 26; number <= 30; number += 1) {
+    for (let number = seriesStart; number <= seriesEnd; number += 1) {
       const marker = document.createElement("span");
       marker.className = "level-square";
-      marker.title = format(part.progressMarker, { level: number - 25 });
+      marker.title = format(part.progressMarker, {
+        level: number - seriesStart + 1,
+      });
       marker.setAttribute("aria-label", marker.title);
       if (completedLevels.has(number)) marker.classList.add("completed");
       if (number === level) marker.classList.add("current");
@@ -2180,8 +2184,8 @@
     window.location.href =
       level === 30
         ? "boss-03.html"
-        : level >= 25
-          ? `partie-3_niveau-${nextLevel - 25}.html`
+        : level === 25
+          ? "../partie-6_niveau-26_à_30/niveau-26.html"
           : `niveau-${String(nextLevel).padStart(2, "0")}.html`;
   });
   saveButton.addEventListener("click", () => {

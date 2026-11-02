@@ -51,6 +51,7 @@
   const progressMarkers = new Map();
   const serie = levels.series.find((entry) => entry.id === item.series);
   if (item.type === "level" && serie?.levels) {
+    const seriesPosition = item.number - serie.start + 1;
     const language =
       localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
     const levelWord = language === "en" ? "Level" : "Niveau";
@@ -62,6 +63,16 @@
       '[data-i18n="level"], [data-copy="level"], #levelLabel, .level-meta > strong',
     );
     if (heading) heading.textContent = levelLabel;
+    const partHeading = document.querySelector(
+      '[data-i18n="part"], [data-copy="part"], #partLabel',
+    );
+    if (partHeading) {
+      const partName =
+        typeof serie.name === "string" ? serie.name : serie.name[language];
+      partHeading.textContent = language === "en"
+        ? `PART ${item.series} // ${partName.toUpperCase()}`
+        : `PARTIE ${item.series} // ${partName.toUpperCase()}`;
+    }
 
     const counter =
       document.querySelector(
@@ -70,14 +81,13 @@
       [...document.querySelectorAll(".level-footer > span")].find((element) =>
         /^\s*\d+\s*\/\s*\d+\s*$/.test(element.textContent),
       );
-    if (counter) counter.textContent = `${item.displayNumber} / ${serie.levels.length}`;
-
+    if (counter) counter.textContent = `${seriesPosition} / ${serie.levels.length}`;
     const nextButton = document.getElementById("nextLevelButton");
     if (nextButton) {
-      if (item.displayNumber < serie.levels.length) {
+      if (seriesPosition < serie.levels.length) {
         nextButton.textContent = nextButton.textContent.replace(
           /\b(?:NIVEAU|LEVEL)\s+\d+\b/i,
-          `${nextWord} ${item.displayNumber + 1}`,
+          `${nextWord} ${item.number + 1}`,
         );
       } else if (serie.boss && /\b(?:NIVEAU|LEVEL)\s+\d+\b/i.test(nextButton.textContent)) {
         nextButton.textContent =
@@ -104,8 +114,8 @@
       progress.setAttribute(
         "aria-label",
         language === "en"
-          ? "Progress for levels 1 to 5"
-          : "Progression des niveaux 1 à 5",
+            ? `Progress for levels ${serie.start} to ${serie.end}`
+            : `Progression des niveaux ${serie.start} à ${serie.end}`,
       );
     }
   }
@@ -287,7 +297,7 @@
           },
         ],
       ];
-      const example = examples[item.series - 1]?.[item.displayNumber - 1];
+      const example = examples[item.series - 1]?.[seriesPosition - 1];
       const previousInertStates = [...panel.children].map((child) => [
         child,
         child.inert,
@@ -302,8 +312,8 @@
       overlay.setAttribute(
         "aria-label",
         language === "en"
-          ? `Start part ${item.series}, level ${item.displayNumber}`
-          : `Lancer la partie ${item.series}, niveau ${item.displayNumber}`,
+          ? `Start part ${item.series}, level ${item.number}`
+          : `Lancer la partie ${item.series}, niveau ${item.number}`,
       );
       overlay.innerHTML = `
         <div class="level-launch-card">

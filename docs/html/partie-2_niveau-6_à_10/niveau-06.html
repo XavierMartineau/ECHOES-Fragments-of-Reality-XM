@@ -8,7 +8,7 @@
       type="image/svg+xml"
       href="../../assets/svg/echoes-favicon.svg?v=2"
     />
-    <title>ECHOES - Niveau 07</title>
+    <title>ECHOES - Niveau 01</title>
     <link rel="stylesheet" href="../../css/partie-1.css?v=1" />
     <link rel="stylesheet" href="../../css/partie-1-redesign.css?v=12" />
     <link rel="stylesheet" href="../../css/responsive.css?v=t6" />
@@ -23,7 +23,7 @@
       <div class="level-meta">
         <span data-i18n="part">PARTIE 1 // INITIATION</span>
         <div class="level-progress" id="levelProgress"></div>
-        <strong data-i18n="level">NIVEAU 07</strong>
+        <strong data-i18n="level">NIVEAU 01 </strong>
       </div>
       <button class="save-game-button" id="saveGameButton" type="button">
         SAUVEGARDER
@@ -32,78 +32,25 @@
     <main class="level-shell" data-level-start="1" data-level-end="15">
       <section class="level-intro">
         <p class="eyebrow" data-i18n="eyebrow">
-          Fragment 007 // Porte lumineuse
+          Fragment 001 // Observation des motifs
         </p>
-        <h1 data-i18n="title">Porte lumineuse</h1>
+        <h1 data-i18n="title">Observation des motifs</h1>
         <p class="level-description" data-i18n="description">
-          Active les trois symboles dans le bon ordre pour ouvrir la porte.
+          Trouve les trois symboles identiques dans le mur holographique.
         </p>
-        <div class="system-transmission" aria-live="polite">
+        <div class="system-transmission">
           <span class="system-label" data-i18n="systemLabel">SYSTEM://LOG</span>
           <p id="systemMessage" data-i18n="systemInput">
-            SYSTEME:: PORTE HOLOGRAPHIQUE EN ATTENTE
+            SYSTEME:: MOTIFS EN ATTENTE
           </p>
         </div>
       </section>
-      <section class="puzzle-panel gate-board">
+      <section class="puzzle-panel pattern-board">
         <div class="panel-heading">
-          <div>
-            <p class="panel-kicker" data-i18n="puzzleKicker">
-              PORTE HOLOGRAPHIQUE // ACCÈS 007
-            </p>
-            <h2 data-i18n="puzzleTitle">Séquence de la porte</h2>
-          </div>
+          <h2 data-i18n="puzzleTitle">Motifs cachés</h2>
           <span class="progress-readout" id="progressReadout">0 / 3</span>
         </div>
-        <div class="gate-door" id="gateDoor">
-          <div class="gate-ring gate-ring-outer"></div>
-          <div class="gate-ring gate-ring-inner"></div>
-          <div class="gate-core"><span>GATE://07</span></div>
-          <div class="gate-symbols" id="gateSymbols">
-            <button
-              class="gate-symbol gate-symbol-diamond"
-              type="button"
-              data-gate="0"
-            >
-              ◇
-            </button>
-            <button
-              class="gate-symbol gate-symbol-triangle"
-              type="button"
-              data-gate="1"
-            >
-              △
-            </button>
-            <button
-              class="gate-symbol gate-symbol-circle"
-              type="button"
-              data-gate="2"
-            >
-              ○
-            </button>
-            <button
-              class="gate-symbol gate-symbol-star"
-              type="button"
-              data-gate="3"
-            >
-              ✦
-            </button>
-            <button
-              class="gate-symbol gate-symbol-hexagon"
-              type="button"
-              data-gate="4"
-            >
-              ⬡
-            </button>
-          </div>
-        </div>
-        <p
-          class="gate-sequence-status"
-          id="gateSequenceStatus"
-          data-i18n="gateStatus"
-        >
-          SIGNAL:// EN ATTENTE DE SYNCHRONISATION
-        </p>
+        <div class="pattern-grid" id="patternGrid"></div>
         <div class="puzzle-actions">
           <button
             class="sequence-start-button"
@@ -113,7 +60,7 @@
             DÉMARRER LE PUZZLE
           </button>
           <p class="puzzle-status" id="puzzleStatus" data-i18n="statusReady">
-            Active les symboles dans le bon ordre.
+            Repère les trois symboles identiques.
           </p>
           <button
             class="next-level-button"
@@ -130,7 +77,7 @@
     </main>
     <footer class="level-footer">
       <span data-i18n="footer">ÉCHO // INITIATION ACTIVE</span
-      ><span data-i18n="counter">7 / 60</span>
+      ><span data-i18n="counter">1 / 30</span>
     </footer>
     <script src="../../js/translations.js"></script>
     <script src="../../js/save-system.js?v=4"></script>

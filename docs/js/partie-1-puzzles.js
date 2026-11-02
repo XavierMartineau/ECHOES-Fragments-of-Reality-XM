@@ -1,13 +1,8 @@
 // PART 1 // Ten redesigned challenges, from deduction to constraint solving.
 (() => {
   const pathname = decodeURIComponent(window.location.pathname);
-  const selectedMatch = pathname.match(
-    /partie-1_niveau-(\d+)\.html$/i,
-  );
   const match = pathname.match(/niveau-(\d+)\.html$/i);
-  const level = selectedMatch
-    ? Number(selectedMatch[1]) + 5
-    : Number(match?.[1]);
+  const level = Number(match?.[1]);
   if (!Number.isInteger(level) || level < 1 || level > 10) return;
 
   const language =
@@ -333,9 +328,17 @@
       },
     },
   }[language];
+  const partName = level <= 5 ? "INITIATION" : "FRACTURES";
+  copy.part =
+    language === "en"
+      ? `PART ${level <= 5 ? 1 : 2} // ${partName}`
+      : `PARTIE ${level <= 5 ? 1 : 2} // ${partName}`;
 
   const levelCopy = copy.levels[level - 1];
-  const displayLevel = level > 5 ? level - 5 : level;
+  const displayLevel = level;
+  const partStart = level <= 5 ? 1 : 6;
+  const partEnd = partStart + 4;
+  const partPosition = level - partStart + 1;
   const rules = copy.rules;
   const main = document.querySelector(".level-shell");
   const intro = main?.querySelector(".level-intro");
@@ -344,8 +347,8 @@
 
   document.documentElement.lang = language;
   document.title = `ECHOES - ${levelCopy.title}`;
-  main.dataset.levelStart = "6";
-  main.dataset.levelEnd = "10";
+  main.dataset.levelStart = String(partStart);
+  main.dataset.levelEnd = String(partEnd);
   intro.querySelector(".eyebrow").textContent = levelCopy.eyebrow;
   intro.querySelector("h1").textContent = levelCopy.title;
   intro.querySelector(".level-description").textContent = levelCopy.description;
@@ -364,15 +367,15 @@
     .setAttribute(
       "aria-label",
       language === "en"
-          ? "Progress for levels 1 to 5"
-          : "Progression des niveaux 1 à 5",
+          ? `Progress for levels ${partStart} to ${partEnd}`
+          : `Progression des niveaux ${partStart} à ${partEnd}`,
     );
   document.querySelector(".level-meta > strong").textContent =
       `${language === "en" ? "LEVEL" : "NIVEAU"} ${String(displayLevel).padStart(2, "0")}`;
   document.querySelector(".level-footer > span:first-child").textContent =
     copy.footer;
   document.querySelector(".level-footer > span:last-child").textContent =
-    `${displayLevel} / 5`;
+    `${partPosition} / 5`;
 
   panel.className = "puzzle-panel redesigned-panel";
   panel.innerHTML = `
@@ -449,7 +452,7 @@
     startButton.hidden = true;
     panel.classList.add("puzzle-completed");
     document.querySelectorAll(".level-square").forEach((square, index) => {
-      if (index + 6 === level) square.classList.add("completed");
+      if (index + partStart === level) square.classList.add("completed");
     });
   };
   const button = (label, className = "challenge-button") => {
@@ -476,12 +479,9 @@
     }
     return shuffled;
   };
-  const nextUrl = selectedMatch
-    ? level === 10
-      ? "boss-01.html"
-      : `partie-1_niveau-${Number(selectedMatch[1]) + 1}.html`
-    : level === 5
-      ? "partie-1_niveau-1.html"
+  const nextUrl =
+    level === 5
+      ? "../partie-2_niveau-6_à_10/niveau-06.html"
       : level === 10
         ? "boss-01.html"
         : `niveau-${String(level + 1).padStart(2, "0")}.html`;
@@ -504,12 +504,12 @@
     });
     if (saved) saveButton.textContent = copy.saved;
   });
-  for (let index = 6; index <= 10; index += 1) {
+  for (let index = partStart; index <= partEnd; index += 1) {
     const square = document.createElement("span");
     square.className = `level-square${index === level ? " current" : ""}${completed.includes(index) ? " completed" : ""}`;
     square.setAttribute(
       "aria-label",
-      `${language === "en" ? "Level" : "Niveau"} ${index - 5}`,
+      `${language === "en" ? "Level" : "Niveau"} ${index - partStart + 1}`,
     );
     document.getElementById("levelProgress")?.appendChild(square);
   }

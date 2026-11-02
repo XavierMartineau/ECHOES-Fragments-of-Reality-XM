@@ -7,7 +7,7 @@
     localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const text = {
     fr: {
-      part: "PARTIE 3 // ÉCLIPSE",
+      part: "PARTIE 6 // ORIGINE",
       level: "CLÉE_03 // OCCULTEUR",
       eyebrow: "CLEE_03 // GARDIEN DE L'ÉCLIPSE",
       title: "L'Occulteur",
@@ -57,7 +57,7 @@
       system: "SYSTEME:: ÉCLIPSE TOTALE // TROIS COURONNES",
     },
     en: {
-      part: "PART 3 // ECLIPSE",
+      part: "PART 6 // ORIGIN",
       level: "KEY_03 // OCCULTER",
       eyebrow: "KEY_03 // WARDEN OF THE ECLIPSE",
       title: "The Occulter",
@@ -618,11 +618,11 @@
   errorReset.addEventListener("click", reset);
   $("cineContinue").addEventListener("click", () => {
     window.location.href =
-      "../partie-4_niveau-31_à_40/partie-4_niveau-1.html";
+      "../niveaux.html";
   });
   nextButton.addEventListener("click", () => {
     window.location.href =
-      "../partie-4_niveau-31_à_40/partie-4_niveau-1.html";
+      "../niveaux.html";
   });
   saveButton.addEventListener("click", () => {
     if (

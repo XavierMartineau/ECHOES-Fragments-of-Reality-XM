@@ -8,7 +8,7 @@
       type="image/svg+xml"
       href="../../assets/svg/echoes-favicon.svg?v=2"
     />
-    <title>ECHOES - Niveau 16</title>
+    <title>ECHOES - Niveau 20</title>
     <link rel="stylesheet" href="../../css/partie-1.css?v=1" />
     <link rel="stylesheet" href="../../css/partie-2.css?v=1" />
     <link rel="stylesheet" href="../../css/responsive.css?v=t6" />
@@ -26,29 +26,28 @@
           id="levelProgress"
           aria-label="Progression de la Partie 2"
         ></div>
-        <strong data-i18n="level">NIVEAU 16</strong>
+        <strong data-i18n="level">NIVEAU 20</strong>
       </div>
       <button class="save-game-button" id="saveGameButton" type="button">
         SAUVEGARDER
       </button>
     </header>
-    <main class="level-shell level-16-shell">
+    <main class="level-shell level-20-shell">
       <section class="level-intro" aria-labelledby="levelTitle">
         <p class="eyebrow" data-i18n="eyebrow">
-          Fragment 016 // Le cadenas des symboles
+          Fragment 020 // Le réseau dormant
         </p>
-        <h1 id="levelTitle" data-i18n="title">Le cadenas des symboles</h1>
+        <h1 id="levelTitle" data-i18n="title">Le réseau dormant</h1>
         <p class="level-description" data-i18n="description">
-          Chaque symbole cache un chiffre. Déduis-les grâce aux indices, réponds
-          aux quatre opérations, additionne les résultats : le dernier chiffre
-          de la somme règle une molette du cadenas.
+          Le réseau s'est éteint. Chaque impulsion inverse une cellule et ses
+          voisines : éteins toute la grille.
         </p>
         <div class="system-transmission" aria-live="polite">
           <span class="system-label" data-i18n="systemLabel"
-            >ECHO://CADENAS</span
+            >ECHO://RESEAU</span
           >
           <p id="systemMessage">
-            SYSTEME:: CADENAS 016 VERROUILLE // QUATRE CHIFFRES REQUIS
+            SYSTEME:: RESEAU 010 EN VEILLE // IMPULSION REQUISE
           </p>
         </div>
       </section>
@@ -56,10 +55,10 @@
         <div class="panel-heading">
           <div>
             <p class="panel-kicker" data-i18n="puzzleKicker">
-              PUZZLE // DÉCHIFFRAGE
+              PUZZLE // INVERSION LOGIQUE
             </p>
             <h2 id="puzzleTitle" data-i18n="puzzleTitle">
-              Cadenas à quatre chiffres
+              Grille d'impulsions
             </h2>
           </div>
           <div class="logic-readouts">
@@ -67,21 +66,31 @@
               class="progress-readout"
               id="progressReadout"
               aria-live="polite"
-              >0 / 4</span
+              >0 / 3</span
+            >
+            <span class="logic-moves" id="moveReadout" aria-live="polite"
+              >0</span
             >
           </div>
         </div>
-        <div class="code-board" id="codeBoard">
-          <p class="code-section-title" data-i18n="clues">INDICES</p>
-          <div class="code-block" id="codeClues"></div>
-          <p class="code-section-title" data-i18n="questions">À RÉSOUDRE</p>
-          <div class="code-block" id="codeQuestions"></div>
-          <p class="code-sum" id="codeSum" hidden></p>
-          <p class="code-section-title" data-i18n="padlock">CADENAS</p>
-          <div class="code-padlock" id="codePadlock"></div>
-        </div>
+        <div
+          class="logic-board"
+          id="logicBoard"
+          role="group"
+          aria-label="Grille logique"
+        ></div>
         <div class="sequence-controls">
-          <p class="puzzle-status" id="puzzleStatus" aria-live="polite"></p>
+          <button
+            class="sequence-start-button"
+            id="startPuzzleButton"
+            type="button"
+            data-i18n="start"
+          >
+            RÉVEILLER LE RÉSEAU
+          </button>
+          <p class="puzzle-status" id="puzzleStatus" aria-live="polite">
+            Réveille le réseau, puis éteins toutes les cellules.
+          </p>
         </div>
         <div class="puzzle-actions">
           <button
@@ -91,7 +100,7 @@
             hidden
             data-i18n="next"
           >
-            CONTINUER VERS LE NIVEAU 17
+            AFFRONTER LE GARDIEN DE LA PARTIE 2
           </button>
           <button
             class="reset-button"
@@ -106,7 +115,7 @@
     </main>
     <footer class="level-footer">
       <span data-i18n="footer">ÉCHO // FRACTURES ACTIVES</span>
-      <span data-i18n="counter">16 / 60</span>
+      <span data-i18n="counter">5 / 5</span>
     </footer>
     <script src="../../js/save-system.js?v=4"></script>
     <script src="../../js/language.js"></script>

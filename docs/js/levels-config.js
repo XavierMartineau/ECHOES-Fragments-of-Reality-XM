@@ -10,9 +10,18 @@ window.EchoesLevels = (() => {
     {
       id: 1,
       theme: { accent: "#79f7ff", accent2: "#b36cff" },
-      folder: "partie-1_niveau-1_à_10",
+      folder: "partie-1_niveau-1_à_5",
       name: { fr: "Initiation", en: "Initiation" },
       start: 1,
+      end: 5,
+      levels: [1, 2, 3, 4, 5],
+    },
+    {
+      id: 2,
+      theme: { accent: "#4b9eff", accent2: "#d4dce7" },
+      folder: "partie-2_niveau-6_à_10",
+      name: { fr: "Fractures", en: "Fractures" },
+      start: 6,
       end: 10,
       levels: [6, 7, 8, 9, 10],
       boss: {
@@ -22,11 +31,20 @@ window.EchoesLevels = (() => {
       },
     },
     {
-      id: 2,
-      theme: { accent: "#4b9eff", accent2: "#d4dce7" },
-      folder: "partie-2_niveau-11_à_20",
-      name: { fr: "Fractures", en: "Fractures" },
+      id: 3,
+      theme: { accent: "#ff4fd8", accent2: "#a855f7" },
+      folder: "partie-3_niveau-11_à_15",
+      name: { fr: "Éclipse", en: "Eclipse" },
       start: 11,
+      end: 15,
+      levels: [11, 12, 13, 14, 15],
+    },
+    {
+      id: 4,
+      theme: { accent: "#4b9eff", accent2: "#d4dce7" },
+      folder: "partie-4_niveau-16_à_20",
+      name: { fr: "Résonance", en: "Resonance" },
+      start: 16,
       end: 20,
       levels: [16, 17, 18, 19, 20],
       boss: {
@@ -36,11 +54,20 @@ window.EchoesLevels = (() => {
       },
     },
     {
-      id: 3,
+      id: 5,
       theme: { accent: "#ff4fd8", accent2: "#a855f7" },
-      folder: "partie-3_niveau-21_à_30",
-      name: { fr: "Éclipse", en: "Eclipse" },
+      folder: "partie-5_niveau-21_à_25",
+      name: { fr: "Convergence", en: "Convergence" },
       start: 21,
+      end: 25,
+      levels: [21, 22, 23, 24, 25],
+    },
+    {
+      id: 6,
+      theme: { accent: "#f5e6a8", accent2: "#ffd27a" },
+      folder: "partie-6_niveau-26_à_30",
+      name: { fr: "Origine", en: "Origin" },
+      start: 26,
       end: 30,
       levels: [26, 27, 28, 29, 30],
       boss: {
@@ -48,33 +75,6 @@ window.EchoesLevels = (() => {
         key: "resonance-3",
         name: { fr: "Boss // CLÉ 03", en: "Boss // KEY 03" },
       },
-    },
-    {
-      id: 4,
-      theme: { accent: "#38d6ff", accent2: "#bd63ff" },
-      folder: "partie-4_niveau-31_à_40",
-      name: { fr: "Résonance", en: "Resonance" },
-      start: 31,
-      end: 40,
-      levels: [36, 37, 38, 39, 40],
-    },
-    {
-      id: 5,
-      theme: { accent: "#ffb84d", accent2: "#ff7a45" },
-      folder: "partie-5_niveau-41_à_50",
-      name: { fr: "Convergence", en: "Convergence" },
-      start: 41,
-      end: 50,
-      ready: false,
-    },
-    {
-      id: 6,
-      theme: { accent: "#f5e6a8", accent2: "#ffd27a" },
-      folder: "partie-6_niveau-51_à_60",
-      name: { fr: "Origine", en: "Origin" },
-      start: 51,
-      end: 60,
-      ready: false,
     },
   ];
 
@@ -130,7 +130,7 @@ window.EchoesLevels = (() => {
         );
       selectedLevels.forEach((number, index) => {
         const id = `level-${number}`;
-        const displayNumber = serie.levels ? index + 1 : number;
+        const displayNumber = number;
         items.push({
           id,
           type: "level",
@@ -139,9 +139,7 @@ window.EchoesLevels = (() => {
           label: String(displayNumber),
           series: serie.id,
           ready,
-          file: serie.levels
-            ? `${serie.folder}/partie-${serie.id}_niveau-${displayNumber}.html`
-            : `${serie.folder}/niveau-${pad(number)}.html`,
+          file: `${serie.folder}/niveau-${pad(number)}.html`,
           requires: levelIds.length ? [levelIds[levelIds.length - 1]] : gate,
         });
         levelIds.push(id);
@@ -197,14 +195,6 @@ window.EchoesLevels = (() => {
   // Retrouve un niveau à partir du chemin de la page courante.
   function itemForPath(pathname = window.location.pathname) {
     const decoded = decodeURIComponent(pathname);
-    const localLevel = /partie-(\d+)_niveau-(\d+)\.html$/i.exec(decoded);
-    if (localLevel) {
-      const serie = series.find(
-        (entry) => entry.id === Number(localLevel[1]),
-      );
-      const number = serie?.levels?.[Number(localLevel[2]) - 1];
-      return number ? byId.get(`level-${number}`) || null : null;
-    }
     const level = /niveau-(\d+)\.html$/i.exec(decoded);
     if (level) return byId.get(`level-${Number(level[1])}`) || null;
     const boss = /boss-(\d+)\.html$/i.exec(decoded);

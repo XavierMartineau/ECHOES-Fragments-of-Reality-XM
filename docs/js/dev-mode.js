@@ -29,9 +29,17 @@
       number: 1,
       name: "Initiation",
       start: 1,
+      end: 5,
+      levels: [1, 2, 3, 4, 5],
+      folder: "partie-1_niveau-1_à_5",
+    },
+    {
+      number: 2,
+      name: "Fractures",
+      start: 6,
       end: 10,
       levels: [6, 7, 8, 9, 10],
-      folder: "partie-1_niveau-1_à_10",
+      folder: "partie-2_niveau-6_à_10",
       special: [
         {
           label: "BOSS 01 // CLEE_01",
@@ -40,75 +48,68 @@
       ],
     },
     {
-      number: 2,
-      name: "Fractures",
+      number: 3,
+      name: "Éclipse",
       start: 11,
+      end: 15,
+      levels: [11, 12, 13, 14, 15],
+      folder: "partie-3_niveau-11_à_15",
+    },
+    {
+      number: 4,
+      name: "Résonance",
+      start: 16,
       end: 20,
       levels: [16, 17, 18, 19, 20],
-      folder: "partie-2_niveau-11_à_20",
+      folder: "partie-4_niveau-16_à_20",
       special: [
         {
-          label: "CLEE_02 // BOSS",
+          label: "BOSS 02 // CLEE_02",
           file: "boss-02.html",
         },
       ],
     },
     {
-      number: 3,
-      name: "Éclipse",
-      start: 21,
-      end: 30,
-      levels: [26, 27, 28, 29, 30],
-      folder: "partie-3_niveau-21_à_30",
-      special: [
-        {
-          label: "CLEE_03 // BOSS",
-          file: "boss-03.html",
-        },
-      ],
-    },
-    {
-      number: 4,
-      name: "Resonance",
-      start: 31,
-      end: 40,
-      levels: [36, 37, 38, 39, 40],
-      folder: "partie-4_niveau-31_à_40",
-    },
-    {
       number: 5,
       name: "Convergence",
-      start: 41,
-      end: 50,
-      folder: "partie-5_niveau-41_à_50",
+      start: 21,
+      end: 25,
+      levels: [21, 22, 23, 24, 25],
+      folder: "partie-5_niveau-21_à_25",
     },
     {
       number: 6,
-      name: "Last Echo",
-      start: 51,
-      end: 60,
-      folder: "partie-6_niveau-51_à_60",
+      name: "Origine",
+      start: 26,
+      end: 30,
+      levels: [26, 27, 28, 29, 30],
+      folder: "partie-6_niveau-26_à_30",
+      special: [
+        {
+          label: "BOSS 03 // CLEE_03",
+          file: "boss-03.html",
+        },
+      ],
     },
   ];
 
   // Renvoie le dossier de partie correspondant à un numéro de niveau.
   const folderForLevel = (level) => {
-    if (level <= 10) return "partie-1_niveau-1_à_10";
-    if (level <= 20) return "partie-2_niveau-11_à_20";
-    if (level <= 30) return "partie-3_niveau-21_à_30";
-    if (level <= 40) return "partie-4_niveau-31_à_40";
-    if (level <= 50) return "partie-5_niveau-41_à_50";
-    return "partie-6_niveau-51_à_60";
+    if (level <= 5) return "partie-1_niveau-1_à_5";
+    if (level <= 10) return "partie-2_niveau-6_à_10";
+    if (level <= 15) return "partie-3_niveau-11_à_15";
+    if (level <= 20) return "partie-4_niveau-16_à_20";
+    if (level <= 25) return "partie-5_niveau-21_à_25";
+    if (level <= 30) return "partie-6_niveau-26_à_30";
+    return "partie-bonus";
   };
 
   // Construit le lien vers la page d'un niveau.
-  const levelLink = (level) => {
-    const part = parts.find((entry) => entry.levels?.includes(level));
-    const file = part
-      ? `partie-${part.number}_niveau-${part.levels.indexOf(level) + 1}.html`
-      : `niveau-${String(level).padStart(2, "0")}.html`;
-    return new URL(`docs/html/${folderForLevel(level)}/${file}`, rootUrl).href;
-  };
+  const levelLink = (level) =>
+    new URL(
+      `docs/html/${folderForLevel(level)}/niveau-${String(level).padStart(2, "0")}.html`,
+      rootUrl,
+    ).href;
   // Construit le lien vers une page spéciale (boss, cinématique, récupération).
   const specialLink = (part, file) =>
     new URL(`docs/html/${part.folder}/${file}`, rootUrl).href;
@@ -174,13 +175,19 @@
               `,
             )
             .join("")}
+          <button class="dev-mode-part-toggle" type="button" data-part="bonus" aria-expanded="false">
+            <span>BONUS</span>
+            <span class="dev-mode-part-name">Niveaux bonus</span>
+            <span class="dev-mode-part-count">30 niveaux</span>
+            <span class="dev-mode-chevron" aria-hidden="true">›</span>
+          </button>
         </div>
         <div class="dev-mode-level-panel" hidden>
           ${parts
             .map(
               (part) => `
                 <div class="dev-mode-level-group" data-levels-for="${part.number}" hidden>
-                  <span class="dev-mode-level-title">PART ${part.number} // NIVEAUX ${part.levels ? "1–" + part.levels.length : part.start + "–" + part.end}</span>
+                  <span class="dev-mode-level-title">PART ${part.number} // NIVEAUX ${part.start}–${part.end}</span>
                   <div class="dev-mode-levels">
                     ${(part.levels || Array.from(
                       { length: part.end - part.start + 1 },
@@ -188,9 +195,20 @@
                     ))
                       .map(
                         (level, index) =>
-                          `<a href="${levelLink(level)}">${String(part.levels ? index + 1 : level).padStart(2, "0")}</a>`,
+                          `<a href="${levelLink(level)}">${String(level).padStart(2, "0")}</a>`,
                       )
                       .join("")}
+          <div class="dev-mode-level-group" data-levels-for="bonus" hidden>
+                      <span class="dev-mode-level-title">NIVEAUX BONUS // 31–60</span>
+                      <div class="dev-mode-levels">
+                        ${Array.from({ length: 30 }, (_, index) => index + 31)
+                          .map(
+                            (level) =>
+                              `<a href="${levelLink(level)}">${String(level).padStart(2, "0")}</a>`,
+                          )
+                          .join("")}
+                      </div>
+          </div>
                   </div>
                   ${
                     part.special

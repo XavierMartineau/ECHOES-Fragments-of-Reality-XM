@@ -31,7 +31,7 @@
   const stageDots = [...document.querySelectorAll("[data-stage-dot]")];
 
   const copy = {
-    part: text("PARTIE 1 // INITIATION", "PART 1 // INITIATION"),
+    part: text("PARTIE 2 // FRACTURES", "PART 2 // FRACTURES"),
     level: text("CLÉ 01 // SENTINELLE", "KEY 01 // SENTINEL"),
     eyebrow: text("ARCHIVE 01 // SCEAU FRAGMENTÉ", "ARCHIVE 01 // FRACTURED SEAL"),
     panelKicker: text("DUEL // NOYAU DE LA SENTINELLE", "DUEL // SENTINEL CORE"),
@@ -505,7 +505,7 @@
   resetButton.addEventListener("click", resetFight);
   nextButton.addEventListener("click", () => {
     window.location.href =
-      "../partie-2_niveau-11_à_20/partie-2_niveau-1.html";
+      "../partie-3_niveau-11_à_15/niveau-11.html";
   });
   finishBoss = () => {
     nextButton.hidden = true;

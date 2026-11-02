@@ -11,8 +11,9 @@ dimensions instables pour retrouver six clés de résonance.
 ## État actuel
 
 - **Version de travail :** bêta v4
-- **Partie jouable principale :** Partie 1, niveaux 1 à 10
-- **Jalons narratifs :** boss `CLEE_01` / Clé 01 et boss `CLEE_02` / Clé 02
+- **Campagne principale :** 6 parties, niveaux 1 à 30
+- **Jalons narratifs :** boss `CLEE_01` / Clé 01, `CLEE_02` / Clé 02 et `CLEE_03` / Clé 03
+- **Niveaux bonus :** niveaux 31 à 60, accessibles depuis le DEV MODE
 - **Déploiement prévu :** GitHub Pages
 - **Technologies :** HTML, CSS et JavaScript sans framework ni serveur obligatoire
 
@@ -37,24 +38,33 @@ Indice ECHO pour la suite
 Le jeu ne nécessite pas de compilation.
 
 1. Cloner le dépôt.
-2. Ouvrir `docs/html/index.html` dans un navigateur, ou servir le dossier
-   `docs/` avec un serveur statique local.
+2. Ouvrir `index.html` à la racine dans un navigateur, ou servir la racine
+   du dépôt avec un serveur statique local.
 3. Pour tester rapidement une scène spéciale, ouvrir le **DEV MODE** dans le jeu.
 
 Un serveur local est recommandé pour reproduire le comportement de GitHub Pages :
 
 ```bash
-python -m http.server 8000 --directory docs
+python -m http.server 8000
 ```
 
-Puis ouvrir <http://localhost:8000/html/index.html>.
+Puis ouvrir <http://localhost:8000>.
 
 ## Parcours et gameplay
 
-### Partie 1 — Initiation
+La campagne principale compte six parties de cinq niveaux chacune :
 
-Les niveaux 1 à 10 proposent dix mécaniques distinctes, avec une difficulté
-croissante :
+| Partie | Niveaux |
+| --- | --- |
+| Partie 1 — Initiation | 1 à 5 |
+| Partie 2 — Fractures | 6 à 10 |
+| Partie 3 — Éclipse | 11 à 15 |
+| Partie 4 — Résonance | 16 à 20 |
+| Partie 5 — Convergence | 21 à 25 |
+| Partie 6 — Origine | 26 à 30 |
+
+Les dix premiers niveaux proposent dix mécaniques distinctes, avec une
+difficulté croissante :
 
 1. suites numériques à déduire ;
 2. labyrinthe à parcourir au clavier ou avec les commandes ;
@@ -68,33 +78,36 @@ croissante :
 10. Sudoku 4 × 4 avant le combat de boss.
 
 Chaque niveau conserve sa progression, ses points verts et ses états de réussite.
-Les niveaux déjà terminés restent rejouables.
+Les niveaux déjà terminés restent rejouables. Les niveaux 31 à 60 sont des
+niveaux bonus : ils ne figurent pas dans le parcours principal et se lancent
+depuis la navigation du DEV MODE.
 
 ### Boss et Clé 01
 
 Après le niveau 10, le joueur affronte le Gardien du Signal dans
-`boss-01.html`. Ce combat accessible comprend trois stages courts :
+`partie-2_niveau-6_à_10/boss-01.html`. Ce combat accessible comprend trois stages courts :
 associer des sceaux, répéter une mélodie de trois symboles, puis cliquer le noyau
 pendant deux halos verts. Le joueur dispose de six unités d’énergie et peut
 recommencer sans passer par un niveau de récupération.
 La victoire reconstitue la Clé 01 dans une courte cinématique intégrée au boss,
-enregistre la récompense, puis mène directement au niveau 11.
+enregistre la récompense, puis mène directement au niveau 11, dans la Partie 3.
 
-### Boss de la Partie 2 — `boss-02.html`
+### Boss après la Partie 4 — `boss-02.html`
 
 Après le niveau 20, le joueur affronte l'Archonte des Fractures dans une arène
 tactique à cases : il faut naviguer entre les murs, éviter les lignes d'impact
 télégraphiées, stabiliser six ancres et gérer deux boucliers sur trois phases.
-La victoire débloque la Clé 02 et ouvre le niveau 21.
+La victoire débloque la Clé 02 et ouvre le niveau 21, dans la Partie 5.
 
-### Boss de la Partie 3 — `boss-03.html`
+### Boss après la Partie 6 — `boss-03.html`
 
 Après le niveau 30, le joueur affronte l'Occulteur : trois phases d'anneaux
 d'éclipse qui tournent autour du soleil. Il faut verrouiller chaque brèche sous
 le rayon au bon instant (de l'anneau extérieur à l'intérieur). Une erreur coûte
 de la cohérence et libère l'anneau précédent ; la phase 2 accélère les anneaux
 restants à chaque verrouillage, la phase 3 inverse leur sens. La victoire
-débloque la Clé 03 (SVG animé `key-03-usb.svg`) et ouvre le niveau 31.
+débloque la Clé 03 (SVG animé `key-03-usb.svg`) et termine la campagne
+principale. Les niveaux bonus restent accessibles depuis le DEV MODE.
 
 ## Organisation du dépôt
 
@@ -102,9 +115,14 @@ débloque la Clé 03 (SVG animé `key-03-usb.svg`) et ouvre le niveau 31.
 docs/
 ├── assets/      Images, SVG et ressources visuelles
 ├── css/         Styles globaux, responsive et styles des parties
-├── html/        Pages du jeu et niveaux
+├── html/        Pages du jeu, six parties et niveaux bonus 31 à 60
 ├── js/          Progression, sauvegarde, puzzles et mode développeur
 └── data/        Données et contenus auxiliaires
+
+Les pages de la campagne sont regroupées par blocs de cinq dans
+`docs/html/partie-1_niveau-1_à_5/` à
+`docs/html/partie-6_niveau-26_à_30/`. Les pages 31 à 60 se trouvent dans
+`docs/html/partie-bonus/`.
 
 documentation/
 ├── Info-fr.txt

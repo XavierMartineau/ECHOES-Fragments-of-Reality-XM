@@ -6,7 +6,7 @@
     localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
   const copy = {
     fr: {
-      part: "PARTIE 2 // FRACTURES",
+      part: "PARTIE 4 // RÉSONANCE",
       level: "CLEE_02 // GARDIEN",
       eyebrow: "CLEE_02 // ARCHONTE DES FRACTURES",
       title: "L'Architecte du Néant",
@@ -78,7 +78,7 @@
       counter: "BOSS // 02",
     },
     en: {
-      part: "PART 2 // FRACTURES",
+      part: "PART 4 // RESONANCE",
       level: "KEY 02 // WARDEN",
       eyebrow: "CLEE_02 // ARCHON OF FRACTURES",
       title: "The Architect of the Void",
@@ -560,7 +560,7 @@
   });
   nextButton.addEventListener("click", () => {
     window.location.href =
-      "../partie-3_niveau-21_à_30/partie-3_niveau-1.html";
+      "../partie-5_niveau-21_à_25/niveau-21.html";
   });
   saveButton.addEventListener("click", () => {
     const saved = window.EchoesSave?.saveProgress({

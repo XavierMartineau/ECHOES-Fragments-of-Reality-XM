@@ -8,7 +8,7 @@
       type="image/svg+xml"
       href="../../assets/svg/echoes-favicon.svg?v=2"
     />
-    <title>ECHOES - Niveau 19</title>
+    <title>ECHOES - Niveau 18</title>
     <link rel="stylesheet" href="../../css/partie-1.css?v=1" />
     <link rel="stylesheet" href="../../css/partie-2.css?v=1" />
     <link rel="stylesheet" href="../../css/responsive.css?v=t6" />
@@ -26,28 +26,26 @@
           id="levelProgress"
           aria-label="Progression de la Partie 2"
         ></div>
-        <strong data-i18n="level">NIVEAU 19</strong>
+        <strong data-i18n="level">NIVEAU 18</strong>
       </div>
       <button class="save-game-button" id="saveGameButton" type="button">
         SAUVEGARDER
       </button>
     </header>
-    <main class="level-shell level-19-shell">
+    <main class="level-shell level-18-shell">
       <section class="level-intro" aria-labelledby="levelTitle">
         <p class="eyebrow" data-i18n="eyebrow">
-          Fragment 019 // Les mots mêlés codés
+          Fragment 018 // La tour des échos
         </p>
-        <h1 id="levelTitle" data-i18n="title">Les mots mêlés codés</h1>
+        <h1 id="levelTitle" data-i18n="title">La tour des échos</h1>
         <p class="level-description" data-i18n="description">
-          Trouve tous les mots dans la grille, lis le mot caché avec les lettres
-          restantes, puis saisis le code de ses lettres.
+          Déplace toute la pile de disques vers la tour de droite. Un seul
+          disque à la fois, et jamais un grand disque sur un plus petit.
         </p>
         <div class="system-transmission" aria-live="polite">
-          <span class="system-label" data-i18n="systemLabel"
-            >ECHO://LEXIQUE</span
-          >
+          <span class="system-label" data-i18n="systemLabel">ECHO://TOUR</span>
           <p id="systemMessage">
-            SYSTEME:: LEXIQUE 019 VERROUILLE // GRILLE A COMPLETER
+            SYSTEME:: TOUR 018 DESALIGNEE // TRANSFERT REQUIS
           </p>
         </div>
       </section>
@@ -55,38 +53,34 @@
         <div class="panel-heading">
           <div>
             <p class="panel-kicker" data-i18n="puzzleKicker">
-              PUZZLE // LANGAGE
+              PUZZLE // TRANSFERT DE PILE
             </p>
-            <h2 id="puzzleTitle" data-i18n="puzzleTitle">Grille de lettres</h2>
+            <h2 id="puzzleTitle" data-i18n="puzzleTitle">Tours d'écho</h2>
           </div>
           <div class="logic-readouts">
             <span
               class="progress-readout"
               id="progressReadout"
               aria-live="polite"
-              >0 / 0 mots</span
+              >0 / 3</span
+            >
+            <span class="logic-moves" id="moveReadout" aria-live="polite"
+              >0</span
             >
           </div>
         </div>
-        <div class="sd-board" id="sudokuBoard">
-          <div class="sd-top">
-            <h3 id="sdWordTitle">CODE DES LETTRES NUMÉROTÉES</h3>
-            <div class="sd-word" id="sdWord"></div>
-          </div>
-          <div class="sd-grid" id="sdGrid"></div>
-          <div class="sd-clues">
-            <h3 id="sdCluesTitle">MOTS À TROUVER</h3>
-            <ul id="sdClues"></ul>
-          </div>
-          <div class="sd-side">
-            <h3 id="sdLegendTitle">CODE DES LETTRES</h3>
-            <div class="sd-letters" id="sdLetters"></div>
-          </div>
+        <div class="tower-board" id="towerBoard" role="group">
+          <button class="tower-peg" type="button">
+            <span class="tower-stack"></span>
+          </button>
+          <button class="tower-peg" type="button">
+            <span class="tower-stack"></span>
+          </button>
+          <button class="tower-peg" type="button">
+            <span class="tower-stack"></span>
+          </button>
         </div>
         <div class="sequence-controls">
-          <button class="sequence-start-button" id="checkButton" type="button">
-            VÉRIFIER
-          </button>
           <p class="puzzle-status" id="puzzleStatus" aria-live="polite"></p>
         </div>
         <div class="puzzle-actions">
@@ -97,7 +91,7 @@
             hidden
             data-i18n="next"
           >
-            CONTINUER VERS LE NIVEAU 20
+            CONTINUER VERS LE NIVEAU 19
           </button>
           <button
             class="reset-button"
@@ -112,7 +106,7 @@
     </main>
     <footer class="level-footer">
       <span data-i18n="footer">ÉCHO // FRACTURES ACTIVES</span>
-      <span data-i18n="counter">19 / 60</span>
+      <span data-i18n="counter">3 / 5</span>
     </footer>
     <script src="../../js/save-system.js?v=4"></script>
     <script src="../../js/language.js"></script>
