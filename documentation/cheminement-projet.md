@@ -227,7 +227,7 @@ compatibles avec le système de sauvegarde existant.
 - `level-guard.js` fournit l'accès aux niveaux, la progression et les exemples visuels.
 - `save-system.js` gère les comptes et la progression persistante.
 - `dev-mode.js` fournit les outils de test et de navigation.
-- `ui-effects.js` (qui a absorbé l'ancien `ambient-background.js`) gère aussi l'ambiance d'arrière-plan et le panneau des clés.
+- `ui-effects.js` (qui a absorbé l'ancien `ambient-background.js` puis `ui-fx.js`) gère aussi l'ambiance d'arrière-plan, le panneau des clés et le curseur premium (accueil, hub, introduction, connexion).
 - Les pages restent compatibles avec un déploiement statique GitHub Pages.
 
 ## Validation réalisée

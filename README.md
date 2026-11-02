@@ -153,7 +153,7 @@ Fichiers importants :
 - `docs/js/bosses/` : contrôleurs des trois combats de boss ;
 - `docs/js/key-fragments.js` : assemblage des fragments et cinématique de récompense ;
 - `docs/js/dev-mode.js` : accès développeur aux niveaux et scènes spéciales ;
-- `docs/js/ui-effects.js` et `docs/css/composants/ui-effects.css` : animations partagées, ambiance par niveau et panneau des clés ;
+- `docs/js/ui-effects.js` et `docs/css/composants/ui-effects.css` : animations partagées, ambiance par niveau, panneau des clés et curseur premium ;
 - `docs/css/composants/dev-mode.css` : styles DEV MODE, y compris les anciens styles UI ;
 - `docs/assets/svg/cles/key-01-usb.svg` : visuel cyberpunk de la première clé ;
 - `documentation/cheminement-projet.md` : historique fonctionnel et cheminement détaillé.

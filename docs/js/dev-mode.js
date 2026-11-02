@@ -261,7 +261,7 @@
   const colorAssist = menu.querySelector("[data-color-assist]");
 
   // Réglages visuels : « echoes-fx-cursor » et « echoes-fx-scene » valent "off" quand désactivés,
-  // « echoes-perf » vaut "lite" en mode performance. Lus par ui-fx.js et scene-bg.js.
+  // « echoes-perf » vaut "lite" en mode performance. Lus par ui-effects.js et scene-bg.js.
   menu.querySelectorAll("[data-fx-toggle]").forEach((box) => {
     const key = box.dataset.fxToggle;
     const on = box.dataset.on || "on";
