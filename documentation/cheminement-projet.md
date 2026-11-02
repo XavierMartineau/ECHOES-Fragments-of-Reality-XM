@@ -110,7 +110,7 @@ reste [Info-fr.txt](./Info-fr.txt).
 - **Niveau 10 — La matrice d'ECHO :** Sudoku 4 × 4 avant le combat de boss.
 
 Les dix pages partagent le contrôleur `docs/js/niveaux/partie-1-puzzles.js` et les styles
-`docs/css/niveaux/partie-1-redesign.css`. La progression et les niveaux déjà terminés restent
+`docs/css/niveaux/niveaux-communs.css`. La progression et les niveaux déjà terminés restent
 compatibles avec le système de sauvegarde existant.
 
 ### Niveaux 11 à 20
@@ -390,12 +390,12 @@ compatibles avec le système de sauvegarde existant.
 
 #### Travail réalisé
 
-- **Alphabet (niveau 3)** : bouton dans la barre d'outils (`partie-1-puzzles.js`), taille réduite ≤ 1024 px, popup violet (`partie-1-redesign.css`).
+- **Alphabet (niveau 3)** : bouton dans la barre d'outils (`partie-1-puzzles.js`), taille réduite ≤ 1024 px, popup violet (`niveaux-communs.css`).
 - **DEV MODE** : code `popol` ; accès mémorisé 24 h dans `echoes-dev-ok` (`dev-mode.js`). Vérification côté client uniquement, adaptée au développement et non sécurisée pour protéger des données. Footer des niveaux sans débordement ≤ 700 px (`dev-mode.css`).
 - **Pages Boss** : le logo `.brand` de `boss-01/02/03.html` pointe vers `niveaux.html`. Les pages `niveau-XX` pointent toujours vers l'accueil.
 - **Entité ECHO** : nouveau composant canvas `echo-ai.js` + `echo-ai.css` (anneaux, spectre vocal radial, étincelles, noyau vitré, mode glitch rouge). Rendu identique PC/mobile, branché via `EchoAI.init` / `EchoAI.setState` dans `introduction.js`.
 - **Intro** : fond SVG (`intro-bg.svg`, `intro-shards.svg`) à la place de la grille et des lignes bleues ; barre du haut sur une ligne ; footer centré avec « Tous droits réservés » ; point lumineux du dialogue aligné avec le titre.
-- **Niveau 31 mobile** (`partie-4.css`) : plateau dimensionné selon la hauteur d'écran, boutons ◀ ▶ juste sous le plateau, marges du panneau.
+- **Niveau 31 mobile** (`niveaux-bonus-31-40.css`) : plateau dimensionné selon la hauteur d'écran, boutons ◀ ▶ juste sous le plateau, marges du panneau.
 - **Niveau 31 jeu** (`partie-4_niveau-31_à_40.js`) : les pièges du dernier étage du secteur 1 (scie, gardien, tapis) ne traversent plus la barre de séparation ; lasers et rebondisseurs en sont exclus.
 - **Niveau 31 couleurs** : fond et cadre bleu nuit/violet (plus de vert), danger en rouge/orange (gardiens, scies, lasers), tapis roulants cyan, rebondisseurs et portails inchangés.
 - **Boutons ECHOES** : sur les 40 pages de niveau, le logo du haut renvoie à `niveaux.html`.
@@ -405,11 +405,11 @@ compatibles avec le système de sauvegarde existant.
 
 ### 01/11/2026 — Noms des fichiers des parties
 
-- Les cinq niveaux conservés des parties 1 à 4 utilisent des noms locaux (`partie-N_niveau-1.html` à `partie-N_niveau-5.html`) ; les anciens niveaux non retenus restent archivés sous leurs noms d'origine.
-- Les feuilles CSS partagées sont renommées `partie-1.css` à `partie-4.css`. Les routes du hub, de l'introduction, des boss, des boutons « suivant » et du DEV MODE pointent vers les nouveaux fichiers.
+- La campagne active est répartie en six dossiers de cinq niveaux : 1–5, 6–10, 11–15, 16–20, 21–25 et 26–30. Les pages 31–60 restent des niveaux bonus dans `docs/html/partie-bonus/`.
+- Les feuilles CSS portent maintenant des noms décrivant leur portée : `niveaux-communs.css`, `niveaux-11-20.css`, `niveaux-21-30.css` et `niveaux-bonus-31-40.css`. Les styles identiques des niveaux bonus 41–50 et 51–60 sont regroupés dans `niveaux-bonus-41-60.css`.
 
 ### 01/11/2026 — Réduction des défis
 
-- Parties 1 à 4 : conservation des cinq défis les plus avancés (niveaux internes 6–10, 16–20, 26–30 et 36–40), affichés de 1 à 5 dans chaque partie.
-- Les trois boss existants restent après les parties 1 à 3. Aucun boss n'est ajouté à la partie 4 ; les parties 5 et 6 restent en construction.
+- La campagne active comporte six parties de cinq niveaux chacune, du niveau 1 au niveau 30.
+- Les trois boss sont placés après les parties 2, 4 et 6. Les niveaux 31 à 60 restent séparés de la campagne dans le dossier bonus.
 - Les autres pages de niveaux sont conservées en archive et redirigent vers le hub hors DEV MODE.

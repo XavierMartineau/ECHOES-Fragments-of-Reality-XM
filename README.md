@@ -149,6 +149,7 @@ Fichiers importants :
 
 - `docs/js/save-system.js` : comptes, sauvegardes et clés débloquées ;
 - `docs/js/niveaux/partie-1-puzzles.js` : puzzles des niveaux 1 à 10 ;
+- `docs/css/niveaux/` : styles communs, plages de niveaux 11–30 et styles des pages bonus ;
 - `docs/js/bosses/` : contrôleurs des trois combats de boss ;
 - `docs/js/key-fragments.js` : assemblage des fragments et cinématique de récompense ;
 - `docs/js/dev-mode.js` : accès développeur aux niveaux et scènes spéciales ;
