@@ -3722,8 +3722,6 @@ html[lang="en"] .color-sort-pieces::before {
   animation: color-sequence-settle 0.45s ease both;
   filter: brightness(1.08);
 }
-.color-sequence-grid.is-complete .color-sequence-option {
-}
 .color-sequence-option.is-error {
   border-color: var(--danger);
   animation: puzzle-shake 0.25s linear 2;

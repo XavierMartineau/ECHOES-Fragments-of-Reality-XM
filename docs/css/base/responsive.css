@@ -1967,6 +1967,12 @@ html body .puzzle-panel button { font-weight: 700; }
   justify-content: center;
 }
 
+.level-example-visual[data-layout="grid-4"] {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(32px, 46px));
+  justify-content: center;
+}
+
 .level-example-token {
   display: inline-grid;
   min-width: 27px;
