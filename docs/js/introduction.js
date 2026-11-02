@@ -199,7 +199,7 @@ missionButton.addEventListener("click", () => {
     completedBosses: [...new Set([...done, "intro"])],
   });
   window.setTimeout(() => {
-    window.location.href = "partie-1_niveau-1_à_10/niveau-01.html";
+    window.location.href = "partie-1_niveau-1_à_10/partie-1_niveau-1.html";
   }, 650);
 });
 

@@ -8,13 +8,13 @@
       type="image/svg+xml"
       href="../../assets/svg/echoes-favicon.svg?v=2"
     />
-    <title>ECHOES - Niveau 29</title>
-    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css" />
-    <link rel="stylesheet" href="../../css/partie-3_niveau-21_à_30.css" />
+    <title>ECHOES - Niveau 26</title>
+    <link rel="stylesheet" href="../../css/partie-1.css?v=1" />
+    <link rel="stylesheet" href="../../css/partie-3.css?v=1" />
     <link rel="stylesheet" href="../../css/responsive.css?v=t4" />
     <link rel="stylesheet" href="../../css/fonts.css" />
   </head>
-  <body class="part-three-theme" data-level="29">
+  <body class="part-three-theme" data-level="26">
     <div class="background-glow" aria-hidden="true"></div>
     <div class="grid-overlay" aria-hidden="true"></div>
     <header class="level-header">
@@ -26,33 +26,32 @@
           id="levelProgress"
           aria-label="Progression de la Partie 3"
         ></div>
-        <strong data-copy="level">NIVEAU 29</strong>
+        <strong data-copy="level">NIVEAU 26</strong>
       </div>
       <button class="save-game-button" id="saveGameButton" type="button">
         SAUVEGARDER
       </button>
     </header>
-    <main class="level-shell level-29-shell">
+    <main class="level-shell level-26-shell">
       <section class="level-intro" aria-labelledby="levelTitle">
         <p class="eyebrow" data-copy="eyebrow">
-          Fragment 029 // Cœur de mémoire
+          Fragment 026 // Serpents et échelles
         </p>
-        <h1 id="levelTitle" data-copy="title">Le cœur de la mémoire</h1>
+        <h1 id="levelTitle" data-copy="title">Le serpent de verre</h1>
         <p class="level-description" data-copy="description">
-          Déduis le motif caché à partir des indices de lignes et de colonnes
-          pour reconstituer un fragment d'ECHO.
+          Chaque case est un verrou.
         </p>
         <blockquote class="echo-dialogue" data-copy="dialogue">
-          « Chaque silence a une forme. Retrouve celle que j'ai perdue. »
+          « La ligne la plus courte n'est pas toujours la bonne. »
         </blockquote>
         <div
           class="system-transmission"
           id="systemTransmission"
           aria-live="polite"
         >
-          <span class="system-label">ECHO://MEMORY-CORE</span>
+          <span class="system-label">ECHO://NEON-NET</span>
           <p id="systemMessage">
-            SYSTEME:: MEMOIRE 029 FRAGMENTEE // RECONSTRUCTION REQUISE
+            SYSTEME:: PLATEAU 026 VERROUILLÉ // PUZZLES ACTIFS
           </p>
         </div>
       </section>
@@ -60,24 +59,22 @@
         <div class="panel-heading">
           <div>
             <p class="panel-kicker" data-copy="kicker">
-              PUZZLE // NONOGRAMME DE MÉMOIRE
+              PUZZLE // SERPENTS ET ÉCHELLES
             </p>
-            <h2 id="puzzleTitle" data-copy="puzzle">Le fragment d'ECHO</h2>
+            <h2 id="puzzleTitle" data-copy="puzzle">
+              Plateau d'authentification
+            </h2>
           </div>
           <span class="progress-readout" id="progressReadout" aria-live="polite"
-            >0 / 17</span
+            >1 / 100</span
           >
         </div>
-        <p class="memory-rules" data-copy="rules">
-          Les nombres indiquent les groupes de cases actives consécutives de
-          chaque ligne et colonne. Clique une case pour l'activer ; clique de
-          nouveau pour la laisser vide.
-        </p>
+        <p class="snake-rules" data-copy="rules"></p>
         <div
-          class="neon-board memory-board"
+          class="neon-board snake-captcha-board snake-board"
           id="puzzleBoard"
           role="group"
-          aria-label="Nonogramme de mémoire à cinq lignes et cinq colonnes"
+          aria-label="Plateau de serpents et échelles"
         ></div>
         <div class="sequence-controls">
           <button
@@ -86,10 +83,10 @@
             type="button"
             data-copy="start"
           >
-            RECONSTRUIRE LE FRAGMENT
+            LANCER LE JEU
           </button>
           <p class="puzzle-status" id="puzzleStatus" aria-live="polite">
-            Lance la reconstruction quand tu es prêt.
+            Étudie le plateau, puis lance le dé.
           </p>
         </div>
         <div class="puzzle-actions">
@@ -114,18 +111,18 @@
     </main>
     <footer class="level-footer">
       <span data-copy="footer">ÉCHO // ÉCLIPSE</span
-      ><span data-copy="counter">29 / 60</span>
+      ><span data-copy="counter">26 / 60</span>
     </footer>
     <script src="../../js/translations.js"></script>
-    <script src="../../js/save-system.js"></script>
+    <script src="../../js/save-system.js?v=4"></script>
     <script src="../../js/language.js"></script>
-    <script src="../../js/partie-3_niveau-21_à_30.js"></script>
+    <script src="../../js/partie-3_niveau-21_à_30.js?v=3"></script>
     <script src="../../js/micro-animations.js"></script>
     <script src="../../js/premium-animations.js?v=2"></script>
-    <script src="../../js/dev-mode.js?v=3"></script>
+    <script src="../../js/dev-mode.js?v=5"></script>
     <script src="../../js/ambient-background.js"></script>
-    <script src="../../js/save-system.js"></script>
-    <script src="../../js/levels-config.js"></script>
-    <script src="../../js/level-guard.js?v=3"></script>
+    <script src="../../js/save-system.js?v=4"></script>
+    <script src="../../js/levels-config.js?v=7"></script>
+    <script src="../../js/level-guard.js?v=6"></script>
   </body>
 </html>

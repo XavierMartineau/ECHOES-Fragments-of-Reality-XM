@@ -637,10 +637,12 @@
     active = false;
     solved = true;
     completed.add(level);
-    localStorage.setItem(
-      progressKey,
-      JSON.stringify([...completed].sort((a, b) => a - b)),
-    );
+    if (!window.EchoesSave?.isDevMode?.()) {
+      localStorage.setItem(
+        progressKey,
+        JSON.stringify([...completed].sort((a, b) => a - b)),
+      );
+    }
     const saved =
       currentUser === "guest" ||
       Boolean(
@@ -722,7 +724,11 @@
   $("nextLevelButton").addEventListener("click", () => {
     if (!solved) return;
     window.location.href =
-      level < 40 ? `niveau-${level + 1}.html` : "niveau-31.html";
+      level < 40
+        ? level >= 35
+          ? `partie-4_niveau-${level - 34}.html`
+          : `niveau-${level + 1}.html`
+        : "../niveaux.html";
   });
   document.querySelectorAll("[data-direction]").forEach((button) => {
     const direction = directions[Number(button.dataset.direction)];

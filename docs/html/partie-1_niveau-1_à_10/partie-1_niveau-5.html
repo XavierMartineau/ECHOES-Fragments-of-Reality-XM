@@ -8,8 +8,8 @@
       type="image/svg+xml"
       href="../../assets/svg/echoes-favicon.svg?v=2"
     />
-    <title>ECHOES - Niveau 09</title>
-    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css?v=10" />
+    <title>ECHOES - Niveau 10</title>
+    <link rel="stylesheet" href="../../css/partie-1.css?v=1" />
     <link rel="stylesheet" href="../../css/partie-1-redesign.css?v=12" />
     <link rel="stylesheet" href="../../css/responsive.css?v=t4" />
     <link rel="stylesheet" href="../../css/fonts.css" />
@@ -23,7 +23,7 @@
       <div class="level-meta">
         <span data-i18n="part">PARTIE 1 // INITIATION</span>
         <div class="level-progress" id="levelProgress"></div>
-        <strong data-i18n="level">NIVEAU 09</strong>
+        <strong data-i18n="level">NIVEAU 10</strong>
       </div>
       <button class="save-game-button" id="saveGameButton" type="button">
         SAUVEGARDER
@@ -31,33 +31,24 @@
     </header>
     <main class="level-shell" data-level-start="1" data-level-end="15">
       <section class="level-intro">
-        <p class="eyebrow">Fragment 009 // Constellation fracturée</p>
-        <h1 data-i18n="title">Miroirs simples</h1>
+        <p class="eyebrow">Fragment 010 // Séquence chromatique</p>
+        <h1 data-i18n="title">Première illusion</h1>
         <p class="level-description" data-i18n="description">
-          Recompose la constellation en activant les étoiles dans le bon ordre.
+          Observe la séquence de couleurs, puis reproduis-la dans le même ordre.
         </p>
         <div class="system-transmission" aria-live="polite">
           <span class="system-label" data-i18n="systemLabel">SYSTEM://LOG</span>
           <p id="systemMessage" data-i18n="systemInput">
-            SYSTEME:: CONSTELLATION EN ATTENTE // SEQUENCE A RECALER
+            SYSTEME:: SEQUENCE CHROMATIQUE EN ATTENTE // 5 COULEURS DETECTEES
           </p>
         </div>
       </section>
-      <section class="puzzle-panel constellation-board">
+      <section class="puzzle-panel color-sequence-board">
         <div class="panel-heading">
-          <h2 data-i18n="puzzleTitle">Réflexion holographique</h2>
-          <span class="progress-readout" id="progressReadout">0 / 3</span>
+          <h2 data-i18n="puzzleTitle">Mémoire des couleurs</h2>
+          <span class="progress-readout" id="progressReadout">0 / 5</span>
         </div>
-        <div class="constellation-field" id="constellationField">
-          <svg
-            class="constellation-lines"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <polyline points=""></polyline>
-          </svg>
-        </div>
+        <div class="color-sequence-grid" id="colorSequenceGrid"></div>
         <div class="puzzle-actions">
           <button
             class="sequence-start-button"
@@ -67,8 +58,17 @@
             DÉMARRER LE PUZZLE
           </button>
           <p class="puzzle-status" id="puzzleStatus">
-            Active les étoiles dans l'ordre indiqué par la console.
+            Observe la séquence de couleurs.
           </p>
+          <button
+            class="sequence-replay-button"
+            id="replaySequenceButton"
+            data-i18n="replaySequence"
+            type="button"
+            hidden
+          >
+            REJOUER LA SEQUENCE
+          </button>
           <button
             class="next-level-button"
             id="nextLevelButton"
@@ -84,20 +84,20 @@
     </main>
     <footer class="level-footer">
       <span data-i18n="footer">ÉCHO // INITIATION ACTIVE</span
-      ><span data-i18n="counter">9 / 60</span>
+      ><span data-i18n="counter">10 / 60</span>
     </footer>
     <script src="../../js/translations.js"></script>
-    <script src="../../js/save-system.js"></script>
-    <script src="../../js/partie-1-puzzles.js?v=6"></script>
+    <script src="../../js/save-system.js?v=4"></script>
+    <script src="../../js/partie-1-puzzles.js?v=8"></script>
     <script src="../../js/language.js"></script>
     <script src="../../js/page-i18n.js"></script>
     <script src="../../js/micro-animations.js"></script>
     <script src="../../js/premium-animations.js?v=2"></script>
-    <script src="../../js/dev-mode.js?v=3"></script>
+    <script src="../../js/dev-mode.js?v=5"></script>
     <script src="../../js/puzzle-demos.js"></script>
     <script src="../../js/ambient-background.js"></script>
-    <script src="../../js/save-system.js"></script>
-    <script src="../../js/levels-config.js"></script>
-    <script src="../../js/level-guard.js?v=3"></script>
+    <script src="../../js/save-system.js?v=4"></script>
+    <script src="../../js/levels-config.js?v=7"></script>
+    <script src="../../js/level-guard.js?v=6"></script>
   </body>
 </html>

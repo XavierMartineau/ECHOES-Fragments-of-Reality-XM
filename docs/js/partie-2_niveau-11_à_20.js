@@ -2,7 +2,11 @@
  * This file owns the shared back-navigation and autosave bootstrap for every
  * page in this range. Every puzzle controller for these levels lives below this bootstrap. */
 const currentLevel = Number(
-  window.location.pathname.match(/niveau-(\d+)/)?.[1] || 0,
+  document
+    .querySelector(".level-shell")
+    ?.className.match(/\blevel-(\d+)-shell\b/)?.[1] ||
+    window.location.pathname.match(/niveau-(\d+)/)?.[1] ||
+    0,
 );
 // Sauvegarde automatiquement la progression de la page courante.
 const autoSave = () =>
@@ -13,7 +17,7 @@ const autoSave = () =>
 if (window.EchoesSave) autoSave();
 else {
   const script = document.createElement("script");
-  script.src = "../../js/save-system.js";
+  script.src = "../../js/save-system.js?v=4";
   script.onload = autoSave;
   document.head.appendChild(script);
 }
@@ -1899,7 +1903,7 @@ else {
   });
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
-    window.location.href = "niveau-16.html";
+    window.location.href = "partie-2_niveau-1.html";
   });
   saveButton.addEventListener("click", () => {
     if (
@@ -2420,7 +2424,7 @@ else {
 
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
-    window.location.href = "niveau-18.html";
+    window.location.href = "partie-2_niveau-3.html";
   });
   saveButton.addEventListener("click", () => {
     if (
@@ -2669,7 +2673,7 @@ else {
   );
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
-    window.location.href = "niveau-19.html";
+    window.location.href = "partie-2_niveau-4.html";
   });
   saveButton.addEventListener("click", () => {
     if (
@@ -3295,7 +3299,7 @@ else {
   resetButton.addEventListener("click", reset);
   checkButton.addEventListener("click", check);
   nextButton.addEventListener("click", () => {
-    window.location.href = "niveau-20.html";
+    window.location.href = "partie-2_niveau-5.html";
   });
   saveButton.addEventListener("click", () => {
     if (
@@ -3651,7 +3655,7 @@ else {
 
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
-    window.location.href = "niveau-17.html";
+    window.location.href = "partie-2_niveau-2.html";
   });
   saveButton.addEventListener("click", () => {
     if (

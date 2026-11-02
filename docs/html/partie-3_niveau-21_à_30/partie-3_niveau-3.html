@@ -8,13 +8,13 @@
       type="image/svg+xml"
       href="../../assets/svg/echoes-favicon.svg?v=2"
     />
-    <title>ECHOES - Niveau 26</title>
-    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css" />
-    <link rel="stylesheet" href="../../css/partie-3_niveau-21_à_30.css" />
+    <title>ECHOES - Niveau 28</title>
+    <link rel="stylesheet" href="../../css/partie-1.css?v=1" />
+    <link rel="stylesheet" href="../../css/partie-3.css?v=1" />
     <link rel="stylesheet" href="../../css/responsive.css?v=t4" />
     <link rel="stylesheet" href="../../css/fonts.css" />
   </head>
-  <body class="part-three-theme" data-level="26">
+  <body class="part-three-theme" data-level="28">
     <div class="background-glow" aria-hidden="true"></div>
     <div class="grid-overlay" aria-hidden="true"></div>
     <header class="level-header">
@@ -26,23 +26,23 @@
           id="levelProgress"
           aria-label="Progression de la Partie 3"
         ></div>
-        <strong data-copy="level">NIVEAU 26</strong>
+        <strong data-copy="level">NIVEAU 28</strong>
       </div>
       <button class="save-game-button" id="saveGameButton" type="button">
         SAUVEGARDER
       </button>
     </header>
-    <main class="level-shell level-26-shell">
+    <main class="level-shell level-28-shell">
       <section class="level-intro" aria-labelledby="levelTitle">
         <p class="eyebrow" data-copy="eyebrow">
-          Fragment 026 // Serpents et échelles
+          Fragment 028 // Nœud de Möbius
         </p>
-        <h1 id="levelTitle" data-copy="title">Le serpent de verre</h1>
+        <h1 id="levelTitle" data-copy="title">Le nœud de Möbius</h1>
         <p class="level-description" data-copy="description">
-          Chaque case est un verrou.
+          Relie les points de contrôle en comptant chaque pas et chaque virage.
         </p>
         <blockquote class="echo-dialogue" data-copy="dialogue">
-          « La ligne la plus courte n'est pas toujours la bonne. »
+          « La grille ment. Les nombres, eux, restent exacts. »
         </blockquote>
         <div
           class="system-transmission"
@@ -51,7 +51,7 @@
         >
           <span class="system-label">ECHO://NEON-NET</span>
           <p id="systemMessage">
-            SYSTEME:: PLATEAU 026 VERROUILLÉ // PUZZLES ACTIFS
+            SYSTEME:: TOPOLOGIE 028 INSTABLE // TRAJET EXACT REQUIS
           </p>
         </div>
       </section>
@@ -59,14 +59,12 @@
         <div class="panel-heading">
           <div>
             <p class="panel-kicker" data-copy="kicker">
-              PUZZLE // SERPENTS ET ÉCHELLES
+              PUZZLE // CAPTCHA GÉOMÉTRIQUE
             </p>
-            <h2 id="puzzleTitle" data-copy="puzzle">
-              Plateau d'authentification
-            </h2>
+            <h2 id="puzzleTitle" data-copy="puzzle">Traçage à contraintes</h2>
           </div>
           <span class="progress-readout" id="progressReadout" aria-live="polite"
-            >1 / 100</span
+            >0 / 3</span
           >
         </div>
         <p class="snake-rules" data-copy="rules"></p>
@@ -74,7 +72,7 @@
           class="neon-board snake-captcha-board snake-board"
           id="puzzleBoard"
           role="group"
-          aria-label="Plateau de serpents et échelles"
+          aria-label="Grille géométrique de traçage"
         ></div>
         <div class="sequence-controls">
           <button
@@ -83,10 +81,10 @@
             type="button"
             data-copy="start"
           >
-            LANCER LE JEU
+            DÉCHIFFRER LA GRILLE
           </button>
           <p class="puzzle-status" id="puzzleStatus" aria-live="polite">
-            Étudie le plateau, puis lance le dé.
+            Compte les segments et repère les checkpoints avant de tracer.
           </p>
         </div>
         <div class="puzzle-actions">
@@ -111,18 +109,18 @@
     </main>
     <footer class="level-footer">
       <span data-copy="footer">ÉCHO // ÉCLIPSE</span
-      ><span data-copy="counter">26 / 60</span>
+      ><span data-copy="counter">28 / 60</span>
     </footer>
     <script src="../../js/translations.js"></script>
-    <script src="../../js/save-system.js"></script>
+    <script src="../../js/save-system.js?v=4"></script>
     <script src="../../js/language.js"></script>
-    <script src="../../js/partie-3_niveau-21_à_30.js"></script>
+    <script src="../../js/partie-3_niveau-21_à_30.js?v=3"></script>
     <script src="../../js/micro-animations.js"></script>
     <script src="../../js/premium-animations.js?v=2"></script>
-    <script src="../../js/dev-mode.js?v=3"></script>
+    <script src="../../js/dev-mode.js?v=5"></script>
     <script src="../../js/ambient-background.js"></script>
-    <script src="../../js/save-system.js"></script>
-    <script src="../../js/levels-config.js"></script>
-    <script src="../../js/level-guard.js?v=3"></script>
+    <script src="../../js/save-system.js?v=4"></script>
+    <script src="../../js/levels-config.js?v=7"></script>
+    <script src="../../js/level-guard.js?v=6"></script>
   </body>
 </html>

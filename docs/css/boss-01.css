@@ -257,7 +257,7 @@
   background: radial-gradient(circle, #18294c, #080d1d 72%);
   color: #d9c1ff;
   font: 2rem var(--font-display, "Orbitron", sans-serif);
-  cursor: pointer;
+  cursor: wait;
   box-shadow: 0 0 26px rgba(179, 108, 255, 0.35);
   transition:
     border-color 180ms ease,
@@ -272,6 +272,15 @@
   color: #eafff5;
   box-shadow: 0 0 36px rgba(128, 255, 207, 0.65);
   transform: scale(1.08);
+  cursor: pointer;
+}
+
+.boss01-guardian-core:disabled {
+  cursor: not-allowed;
+}
+
+.boss01-guardian-core:not(:disabled):active {
+  transform: scale(0.96);
 }
 
 .boss01-guardian-core:focus-visible {
@@ -290,6 +299,51 @@
 .boss01-game {
   min-width: 0;
   text-align: center;
+}
+
+.boss01-start {
+  display: block;
+  min-width: min(100%, 260px);
+  min-height: 48px;
+  margin: 0 auto 16px;
+  padding: 12px 18px;
+  border-color: var(--boss-cyan);
+  background: linear-gradient(
+    110deg,
+    rgba(121, 247, 255, 0.18),
+    rgba(179, 108, 255, 0.16)
+  );
+  color: #effcff;
+  cursor: pointer;
+  font: 600 0.72rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.08em;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.boss01-start:hover,
+.boss01-start:focus-visible {
+  transform: translateY(-2px);
+  border-color: #fff;
+  background: linear-gradient(
+    110deg,
+    rgba(121, 247, 255, 0.3),
+    rgba(179, 108, 255, 0.28)
+  );
+  box-shadow: 0 0 24px rgba(121, 247, 255, 0.28);
+}
+
+.boss01-start:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 0 10px rgba(121, 247, 255, 0.2);
+}
+
+.boss01-start:disabled {
+  cursor: wait;
+  opacity: 0.65;
 }
 
 .boss01-stage-label {
@@ -346,6 +400,11 @@
   outline-offset: 2px;
 }
 
+.boss01-choice:active:not(:disabled) {
+  transform: scale(0.96);
+  box-shadow: 0 0 18px rgba(121, 247, 255, 0.25);
+}
+
 .boss01-choice.is-correct {
   border-color: var(--boss-green);
   background: rgba(128, 255, 207, 0.16);
@@ -359,7 +418,8 @@
 }
 
 .boss01-choice:disabled {
-  cursor: default;
+  cursor: not-allowed;
+  opacity: 0.62;
 }
 
 .boss01-replay {
@@ -373,6 +433,29 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.boss01-actions button {
+  cursor: pointer;
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease,
+    filter 150ms ease;
+}
+
+.boss01-actions button:hover:not(:disabled),
+.boss01-actions button:focus-visible {
+  transform: translateY(-1px);
+  filter: brightness(1.15);
+}
+
+.boss01-actions button:active:not(:disabled) {
+  transform: translateY(1px) scale(0.98);
+}
+
+.boss01-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .boss01-status {
@@ -498,6 +581,10 @@
   border-color: var(--pad);
   background: color-mix(in srgb, var(--pad) 26%, #050b18);
   outline-color: var(--pad);
+}
+
+.boss01-pad:active:not(:disabled) {
+  transform: scale(0.94);
 }
 
 .boss01-pad.is-flash {

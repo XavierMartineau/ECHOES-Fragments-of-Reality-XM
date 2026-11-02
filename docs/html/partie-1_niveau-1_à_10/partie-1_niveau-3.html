@@ -8,8 +8,8 @@
       type="image/svg+xml"
       href="../../assets/svg/echoes-favicon.svg?v=2"
     />
-    <title>ECHOES - Niveau 06</title>
-    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css?v=10" />
+    <title>ECHOES - Niveau 08</title>
+    <link rel="stylesheet" href="../../css/partie-1.css?v=1" />
     <link rel="stylesheet" href="../../css/partie-1-redesign.css?v=12" />
     <link rel="stylesheet" href="../../css/responsive.css?v=t4" />
     <link rel="stylesheet" href="../../css/fonts.css" />
@@ -23,7 +23,7 @@
       <div class="level-meta">
         <span data-i18n="part">PARTIE 1 // INITIATION</span>
         <div class="level-progress" id="levelProgress"></div>
-        <strong data-i18n="level">NIVEAU 06</strong>
+        <strong data-i18n="level">NIVEAU 08</strong>
       </div>
       <button class="save-game-button" id="saveGameButton" type="button">
         SAUVEGARDER
@@ -31,26 +31,24 @@
     </header>
     <main class="level-shell" data-level-start="1" data-level-end="15">
       <section class="level-intro">
-        <p class="eyebrow" data-i18n="eyebrow">
-          Fragment 006 // Observation des motifs
-        </p>
-        <h1 data-i18n="title">Observation des motifs</h1>
+        <p class="eyebrow">Fragment 008 // Tri des symboles</p>
+        <h1 data-i18n="title">Tri des symboles</h1>
         <p class="level-description" data-i18n="description">
-          Trouve les trois symboles identiques dans le mur holographique.
+          Classe les symboles selon leur couleur.
         </p>
-        <div class="system-transmission">
+        <div class="system-transmission" aria-live="polite">
           <span class="system-label" data-i18n="systemLabel">SYSTEM://LOG</span>
           <p id="systemMessage" data-i18n="systemInput">
-            SYSTEME:: MOTIFS EN ATTENTE
+            SYSTEME:: TRI CHROMATIQUE EN ATTENTE // 6 SYMBOLES DETECTES
           </p>
         </div>
       </section>
-      <section class="puzzle-panel pattern-board">
+      <section class="puzzle-panel advanced-sort-board">
         <div class="panel-heading">
-          <h2 data-i18n="puzzleTitle">Motifs cachés</h2>
-          <span class="progress-readout" id="progressReadout">0 / 3</span>
+          <h2 data-i18n="puzzleTitle">Classification chromatique</h2>
+          <span class="progress-readout" id="progressReadout">0 / 6</span>
         </div>
-        <div class="pattern-grid" id="patternGrid"></div>
+        <div class="color-sort-grid" id="colorSortGrid"></div>
         <div class="puzzle-actions">
           <button
             class="sequence-start-button"
@@ -59,8 +57,8 @@
           >
             DÉMARRER LE PUZZLE
           </button>
-          <p class="puzzle-status" id="puzzleStatus" data-i18n="statusReady">
-            Repère les trois symboles identiques.
+          <p class="puzzle-status" id="puzzleStatus">
+            Classe chaque symbole dans sa couleur.
           </p>
           <button
             class="next-level-button"
@@ -68,7 +66,7 @@
             type="button"
             hidden
           >
-            <span data-i18n="continue">CONTINUER</span></button
+            CONTINUER</button
           ><button class="reset-button" id="resetButton" type="button">
             Réinitialiser
           </button>
@@ -77,20 +75,20 @@
     </main>
     <footer class="level-footer">
       <span data-i18n="footer">ÉCHO // INITIATION ACTIVE</span
-      ><span data-i18n="counter">6 / 60</span>
+      ><span data-i18n="counter">8 / 60</span>
     </footer>
     <script src="../../js/translations.js"></script>
-    <script src="../../js/save-system.js"></script>
-    <script src="../../js/partie-1-puzzles.js?v=6"></script>
+    <script src="../../js/save-system.js?v=4"></script>
+    <script src="../../js/partie-1-puzzles.js?v=8"></script>
     <script src="../../js/language.js"></script>
     <script src="../../js/page-i18n.js"></script>
     <script src="../../js/micro-animations.js"></script>
     <script src="../../js/premium-animations.js?v=2"></script>
-    <script src="../../js/dev-mode.js?v=3"></script>
+    <script src="../../js/dev-mode.js?v=5"></script>
     <script src="../../js/puzzle-demos.js"></script>
     <script src="../../js/ambient-background.js"></script>
-    <script src="../../js/save-system.js"></script>
-    <script src="../../js/levels-config.js"></script>
-    <script src="../../js/level-guard.js?v=3"></script>
+    <script src="../../js/save-system.js?v=4"></script>
+    <script src="../../js/levels-config.js?v=7"></script>
+    <script src="../../js/level-guard.js?v=6"></script>
   </body>
 </html>

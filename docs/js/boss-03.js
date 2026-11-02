@@ -617,10 +617,12 @@
   resetButton.addEventListener("click", reset);
   errorReset.addEventListener("click", reset);
   $("cineContinue").addEventListener("click", () => {
-    window.location.href = "../partie-4_niveau-31_à_40/niveau-31.html";
+    window.location.href =
+      "../partie-4_niveau-31_à_40/partie-4_niveau-1.html";
   });
   nextButton.addEventListener("click", () => {
-    window.location.href = "../partie-4_niveau-31_à_40/niveau-31.html";
+    window.location.href =
+      "../partie-4_niveau-31_à_40/partie-4_niveau-1.html";
   });
   saveButton.addEventListener("click", () => {
     if (

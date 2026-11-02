@@ -267,9 +267,9 @@
     let body;
     if (locked) {
       body = `<g class="tile-icon" transform="translate(50 46) scale(1.25)">${LOCK_SVG}</g>
-        <text class="tile-num" x="50" y="92">${item.number}</text>`;
+        <text class="tile-num" x="50" y="92">${item.displayNumber ?? item.number}</text>`;
     } else {
-      body = `<text class="tile-num" x="50" y="70">${item.number}</text>`;
+      body = `<text class="tile-num" x="50" y="70">${item.displayNumber ?? item.number}</text>`;
       if (item.state === "completed") {
         body += `<g transform="translate(80 26)"><circle class="tile-badge-bg" r="12"/><path class="tile-badge-icon" d="M-5 0.500L-1.500 4 5.500-3.500"/></g>`;
       }
@@ -366,7 +366,7 @@
     const name =
       isBoss || isFinal || item.type === "intro"
         ? item.label[language]
-        : `${text.level} ${item.number}`;
+        : `${text.level} ${item.displayNumber ?? item.number}`;
     const stateLabel = {
       completed: text.completed,
       current: text.current,
@@ -435,6 +435,8 @@
         </header>
         <div class="level-grid"></div>`;
       const grid = section.querySelector(".level-grid");
+      const bossGrid = document.createElement("div");
+      bossGrid.className = "level-grid boss-grid";
       entries.forEach((item, index) => {
         const fresh =
           ["current", "unlocked"].includes(item.state) && !seen.has(item.id);
@@ -444,8 +446,9 @@
           card.style.animationDelay = `${delay}ms`;
           delay += 140;
         }
-        grid.appendChild(card);
+        (item.type === "boss" ? bossGrid : grid).appendChild(card);
       });
+      if (bossGrid.childElementCount) section.appendChild(bossGrid);
       seriesList.appendChild(section);
     });
 

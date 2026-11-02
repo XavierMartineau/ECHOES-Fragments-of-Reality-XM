@@ -8,7 +8,7 @@
   const rootUrl = new URL("../../", script.src);
   const style = document.createElement("link");
   style.rel = "stylesheet";
-  style.href = new URL("../css/dev-mode.css?v=21", script.src).href;
+  style.href = new URL("../css/dev-mode.css?v=22", script.src).href;
   document.head.appendChild(style);
   const uiStyle = document.createElement("link");
   uiStyle.rel = "stylesheet";
@@ -30,6 +30,7 @@
       name: "Initiation",
       start: 1,
       end: 10,
+      levels: [6, 7, 8, 9, 10],
       folder: "partie-1_niveau-1_à_10",
       special: [
         {
@@ -43,6 +44,7 @@
       name: "Fractures",
       start: 11,
       end: 20,
+      levels: [16, 17, 18, 19, 20],
       folder: "partie-2_niveau-11_à_20",
       special: [
         {
@@ -56,6 +58,7 @@
       name: "Éclipse",
       start: 21,
       end: 30,
+      levels: [26, 27, 28, 29, 30],
       folder: "partie-3_niveau-21_à_30",
       special: [
         {
@@ -69,6 +72,7 @@
       name: "Resonance",
       start: 31,
       end: 40,
+      levels: [36, 37, 38, 39, 40],
       folder: "partie-4_niveau-31_à_40",
     },
     {
@@ -98,11 +102,13 @@
   };
 
   // Construit le lien vers la page d'un niveau.
-  const levelLink = (level) =>
-    new URL(
-      `docs/html/${folderForLevel(level)}/niveau-${String(level).padStart(2, "0")}.html`,
-      rootUrl,
-    ).href;
+  const levelLink = (level) => {
+    const part = parts.find((entry) => entry.levels?.includes(level));
+    const file = part
+      ? `partie-${part.number}_niveau-${part.levels.indexOf(level) + 1}.html`
+      : `niveau-${String(level).padStart(2, "0")}.html`;
+    return new URL(`docs/html/${folderForLevel(level)}/${file}`, rootUrl).href;
+  };
   // Construit le lien vers une page spéciale (boss, cinématique, récupération).
   const specialLink = (part, file) =>
     new URL(`docs/html/${part.folder}/${file}`, rootUrl).href;
@@ -162,7 +168,7 @@
                 <button class="dev-mode-part-toggle" type="button" data-part="${part.number}" aria-expanded="false">
                   <span>PART ${part.number}</span>
                   <span class="dev-mode-part-name">${part.name}</span>
-                  <span class="dev-mode-part-count">${part.end - part.start + 1} niveaux</span>
+                  <span class="dev-mode-part-count">${part.levels ? part.levels.length : part.end - part.start + 1} niveaux</span>
                   <span class="dev-mode-chevron" aria-hidden="true">›</span>
                 </button>
               `,
@@ -174,15 +180,17 @@
             .map(
               (part) => `
                 <div class="dev-mode-level-group" data-levels-for="${part.number}" hidden>
-                  <span class="dev-mode-level-title">PART ${part.number} // NIVEAUX ${part.start}–${part.end}</span>
+                  <span class="dev-mode-level-title">PART ${part.number} // NIVEAUX ${part.levels ? "1–" + part.levels.length : part.start + "–" + part.end}</span>
                   <div class="dev-mode-levels">
-                    ${Array.from(
+                    ${(part.levels || Array.from(
                       { length: part.end - part.start + 1 },
-                      (_, index) => {
-                        const level = part.start + index;
-                        return `<a href="${levelLink(level)}">${String(level).padStart(2, "0")}</a>`;
-                      },
-                    ).join("")}
+                      (_, index) => part.start + index,
+                    ))
+                      .map(
+                        (level, index) =>
+                          `<a href="${levelLink(level)}">${String(part.levels ? index + 1 : level).padStart(2, "0")}</a>`,
+                      )
+                      .join("")}
                   </div>
                   ${
                     part.special
@@ -280,21 +288,9 @@
     menu.classList.toggle("is-open", isOpen);
   };
 
-  // Verification par code envoye par e-mail (EmailJS). Cote client uniquement : dissuasif, pas infaillible.
-  const OWNER_EMAIL = "xavier.g.martinea@gmail.com";
-  const CODE_TTL = 10 * 60 * 1000;
-  const LOCK_TIME = 5 * 60 * 1000;
-  const MAX_TRIES = 3;
-  const store = {
-    get: (k) => { try { return JSON.parse(sessionStorage.getItem(k) || localStorage.getItem(k) || "null"); } catch (e) { return null; } },
-    set: (k, v, persist) => { try { (persist ? localStorage : sessionStorage).setItem(k, JSON.stringify(v)); } catch (e) { /* ignore */ } },
-  };
-  const MASKED_EMAIL = "*****.g.*****@gmail.com";
-  const sha = async (text) => {
-    if (!window.crypto || !crypto.subtle) return text;
-    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
-    return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
-  };
+  const DEV_ACCESS_CODE = "popol";
+  const DEV_ACCESS_KEY = "echoes-dev-ok";
+  const DEV_ACCESS_DURATION = 24 * 60 * 60 * 1000;
 
   const openGate = () => {
     const gate = document.createElement("div");
@@ -302,10 +298,9 @@
     gate.innerHTML = `
       <div class="dev-gate-card" role="dialog" aria-modal="true" aria-labelledby="devGateTitle">
         <h2 id="devGateTitle">ACCÈS DEV MODE</h2>
-        <p class="dev-gate-text">Un code à 4 chiffres va être envoyé par Gmail à <strong>${MASKED_EMAIL}</strong>.</p>
-        <button type="button" class="dev-gate-send">ENVOYER LE CODE</button>
-        <form class="dev-gate-form" hidden>
-          <input class="dev-gate-input" inputmode="numeric" maxlength="4" autocomplete="one-time-code" aria-label="Code à 4 chiffres" placeholder="••••" />
+        <p class="dev-gate-text">Entre le code d’accès pour ouvrir le mode développeur.</p>
+        <form class="dev-gate-form">
+          <input class="dev-gate-input" type="password" maxlength="32" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="Code d’accès" placeholder="Code d’accès" required />
           <button type="submit" class="dev-gate-ok">VALIDER</button>
         </form>
         <p class="dev-gate-msg" role="status"></p>
@@ -315,97 +310,24 @@
     const q = (s) => gate.querySelector(s);
     const msg = q(".dev-gate-msg");
     const form = q(".dev-gate-form");
-    const send = q(".dev-gate-send");
     const input = q(".dev-gate-input");
     const done = () => gate.remove();
     q(".dev-gate-cancel").addEventListener("click", done);
     gate.addEventListener("keydown", (e) => { if (e.key === "Escape") { e.stopPropagation(); done(); } });
+    input.focus();
 
-    const lockLeft = () => Math.max(0, (store.get("echoes-dev-lock") || 0) - Date.now());
-    const showLock = () => {
-      const s = Math.ceil(lockLeft() / 1000);
-      msg.textContent = `Trop d'essais. Réessaie dans ${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}.`;
-      send.disabled = true;
-      input.disabled = true;
-    };
-    const tick = setInterval(() => {
-      if (!gate.isConnected) return clearInterval(tick);
-      if (lockLeft() > 0) showLock();
-      else if (send.disabled && !store.get("echoes-dev-pending")) { send.disabled = false; msg.textContent = ""; }
-    }, 1000);
-    if (lockLeft() > 0) showLock();
-
-    send.addEventListener("click", async () => {
-      if (lockLeft() > 0) return showLock();
-      const cfg0 = () => window.ECHOES_EMAILJS || {};
-      if (!cfg0().publicKey) {
-        await new Promise((resolve) => {
-          const s = document.createElement("script");
-          s.src = new URL("emailjs-config.js", script.src).href;
-          s.onload = s.onerror = resolve;
-          document.head.appendChild(s);
-        });
-      }
-      const cfg = cfg0();
-      if (!cfg.publicKey || !cfg.serviceId || !cfg.templateId) {
-        msg.textContent = "EmailJS n'est pas configuré (docs/js/emailjs-config.js).";
-        return;
-      }
-      send.disabled = true;
-      msg.textContent = "Envoi du code…";
-      const code = String(crypto.getRandomValues(new Uint32Array(1))[0] % 10000).padStart(4, "0");
-      try {
-        const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            service_id: cfg.serviceId,
-            template_id: cfg.templateId,
-            user_id: cfg.publicKey,
-            template_params: { to_email: OWNER_EMAIL, code, minutes: 10 },
-          }),
-        });
-        if (!res.ok) throw new Error(String(res.status));
-      } catch (e) {
-        msg.textContent = "Échec de l'envoi du code. Réessaie.";
-        send.disabled = false;
-        return;
-      }
-      store.set("echoes-dev-pending", { hash: await sha(code), exp: Date.now() + CODE_TTL, tries: 0 });
-      msg.textContent = "Code envoyé. Valable 10 minutes.";
-      form.hidden = false;
-      send.textContent = "RENVOYER LE CODE";
-      send.disabled = false;
-      input.focus();
-    });
-
-    form.addEventListener("submit", async (e) => {
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
-      if (lockLeft() > 0) return showLock();
-      const pending = store.get("echoes-dev-pending");
-      if (!pending || Date.now() > pending.exp) {
-        msg.textContent = "Code expiré. Demande-en un nouveau.";
-        sessionStorage.removeItem("echoes-dev-pending");
-        return;
-      }
-      if ((await sha(input.value.trim())) === pending.hash) {
-        sessionStorage.removeItem("echoes-dev-pending");
-        store.set("echoes-dev-ok", Date.now() + 12 * 60 * 60 * 1000, true);
+      if (input.value.trim().toLowerCase() === DEV_ACCESS_CODE) {
+        localStorage.setItem(DEV_ACCESS_KEY, String(Date.now() + DEV_ACCESS_DURATION));
         done();
         setOpen(true);
         showLevels("1");
         return;
       }
-      pending.tries += 1;
       input.value = "";
-      if (pending.tries >= MAX_TRIES) {
-        sessionStorage.removeItem("echoes-dev-pending");
-        store.set("echoes-dev-lock", Date.now() + LOCK_TIME, true);
-        showLock();
-      } else {
-        store.set("echoes-dev-pending", pending);
-        msg.textContent = `Code incorrect. ${MAX_TRIES - pending.tries} essai(s) restant(s).`;
-      }
+      msg.textContent = "Code incorrect. Réessaie.";
+      input.focus();
     });
   };
 
@@ -414,7 +336,7 @@
       setOpen(false);
       return;
     }
-    if ((store.get("echoes-dev-ok") || 0) > Date.now()) {
+    if (Number(localStorage.getItem(DEV_ACCESS_KEY)) > Date.now()) {
       setOpen(true);
       showLevels("1");
     } else if (!document.querySelector(".dev-gate")) {

@@ -9,10 +9,10 @@
       href="../../assets/svg/echoes-favicon.svg?v=2"
     />
     <title>ECHOES - BOSS 01 // GARDIEN DU SIGNAL</title>
-    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css?v=11" />
+    <link rel="stylesheet" href="../../css/partie-1.css?v=1" />
     <link rel="stylesheet" href="../../css/responsive.css?v=t4" />
     <link rel="stylesheet" href="../../css/fonts.css" />
-    <link rel="stylesheet" href="../../css/boss-01.css?v=4" />
+    <link rel="stylesheet" href="../../css/boss-01.css?v=5" />
     <link rel="stylesheet" href="../../css/key-fragments.css?v=6" />
   </head>
   <body class="boss01-page">
@@ -27,7 +27,7 @@
           id="levelProgress"
           aria-label="Progression de la Partie 1"
         ></div>
-        <strong data-boss-copy="level">CLEE_01 // GARDIEN</strong>
+        <strong data-boss-copy="level">CLÉ 01 // SENTINELLE</strong>
       </div>
       <button
         class="save-game-button"
@@ -48,22 +48,24 @@
       <strong class="key-hud-value" id="keyCount">1 / 6</strong>
       <span class="key-redesign-hud-line" aria-hidden="true"></span>
       <span class="key-redesign-hud-note" id="keyHudNote"
-        >CLÉ 01 // À RÉCUPÉRER</span
+        >CLÉ 01 // À LIBÉRER</span
       >
       <span class="key-redesign-hud-slot" id="keyHudSlot" aria-hidden="true">
         <img src="../../assets/svg/key-01-usb.svg" alt="" />
-        <b>CLEE_01</b>
+        <b>CLÉ_01</b>
       </span>
     </aside>
 
     <main class="boss01-shell">
       <section class="boss01-intro">
-        <p class="boss01-eyebrow">CLEE_01 // ÉPREUVE DU SIGNAL</p>
-        <h1 data-boss-copy="title">Le Gardien du Signal</h1>
+        <p class="boss01-eyebrow" data-boss-copy="eyebrow">
+          ARCHIVE 01 // SCEAU FRAGMENTÉ
+        </p>
+        <h1 data-boss-copy="title">La Sentinelle de la Clé</h1>
         <p data-boss-copy="description">
-          Trois petits défis pour accorder le signal : repère les sceaux, répète
-          une courte mélodie, puis touche le noyau quand il s’illumine.
-          Difficulté 1/6.
+          Le Gardien a fragmenté la Clé 01 en trois épreuves. Décode ses glyphes,
+          mémorise sa séquence lumineuse et intercepte la pulsation au bon
+          instant. Six charges te permettront de résister aux erreurs.
         </p>
       </section>
 
@@ -73,9 +75,11 @@
       >
         <div class="boss01-panel-heading">
           <div>
-            <p class="panel-kicker">COMBAT // RÉSONANCE 01</p>
+            <p class="panel-kicker" data-boss-copy="panelKicker">
+              DUEL // NOYAU DE LA SENTINELLE
+            </p>
             <h2 id="bossArenaTitle" data-boss-copy="arenaTitle">
-              Le cœur du signal
+              Chambre d’accordage
             </h2>
           </div>
           <div class="boss01-readouts">
@@ -110,23 +114,31 @@
               class="boss01-guardian-core"
               id="bossCore"
               type="button"
-              aria-label="Noyau du gardien, attends le signal vert"
+              aria-label="Noyau en attente de sa prochaine pulsation"
             ></button>
             <span class="boss01-guardian-caption">ECHO // 01</span>
           </div>
           <div class="boss01-game">
             <p class="boss01-stage-label" id="bossStageLabel">
-              STAGE 1 // LES SCEAUX
+              ÉPREUVE 1 // DÉCODAGE
             </p>
-            <h3 id="bossPrompt">Trouve le même sceau</h3>
+            <h3 id="bossPrompt">Choisis le glyphe affiché</h3>
             <div class="boss01-target" id="bossTarget" aria-live="polite">
               ◇
             </div>
+            <button
+              class="sequence-start-button boss01-start"
+              id="startPuzzleButton"
+              type="button"
+              data-boss-copy="start"
+            >
+              DÉFIER LA SENTINELLE
+            </button>
             <div
               class="boss01-choices"
               id="bossChoices"
               role="group"
-              aria-label="Choix de sceaux"
+              aria-label="Choix de glyphes"
             ></div>
             <button
               class="sequence-demo-button boss01-replay"
@@ -134,20 +146,12 @@
               type="button"
               hidden
             >
-              REVOIR LA SÉQUENCE
+              REJOUER LA SÉQUENCE
             </button>
           </div>
         </div>
 
         <div class="boss01-actions">
-          <button
-            class="sequence-start-button"
-            id="startPuzzleButton"
-            type="button"
-            data-boss-copy="start"
-          >
-            DÉMARRER L’ÉPREUVE
-          </button>
           <button
             class="next-level-button"
             id="nextLevelButton"
@@ -163,7 +167,7 @@
             type="button"
             data-boss-copy="reset"
           >
-            Recommencer
+            Reprendre depuis le début
           </button>
         </div>
         <p
@@ -171,29 +175,30 @@
           id="puzzleStatus"
           aria-live="polite"
         >
-          Trois défis courts. Une erreur coûte une unité d’énergie; tu en as
-          six.
+          La Sentinelle verrouille la Clé 01. Six charges disponibles : chaque
+          erreur en consomme une.
         </p>
       </section>
     </main>
 
     <footer class="level-footer">
-      <span>ÉCHO // INITIATION ACTIVE</span><span>CLEE_01</span>
+      <span data-boss-copy="footerState">ARCHIVE // INITIATION ACTIVE</span
+      ><span data-boss-copy="keyCode">CLÉ_01</span>
     </footer>
     <script src="../../js/translations.js"></script>
-    <script src="../../js/save-system.js"></script>
-    <script src="../../js/partie-1_niveau-1_à_10.js?v=36"></script>
+    <script src="../../js/save-system.js?v=4"></script>
+    <script src="../../js/partie-1_niveau-1_à_10.js?v=37"></script>
     <script src="../../js/language.js"></script>
     <script src="../../js/page-i18n.js"></script>
     <script src="../../js/micro-animations.js"></script>
     <script src="../../js/premium-animations.js?v=2"></script>
-    <script src="../../js/dev-mode.js?v=3"></script>
+    <script src="../../js/dev-mode.js?v=5"></script>
     <script src="../../js/ambient-background.js"></script>
     <script src="../../js/key-fragments.js?v=3"></script>
-    <script src="../../js/boss-01.js?v=7"></script>
-    <script src="../../js/save-system.js"></script>
-    <script src="../../js/levels-config.js"></script>
-    <script src="../../js/level-guard.js?v=3"></script>
+    <script src="../../js/boss-01.js?v=10"></script>
+    <script src="../../js/save-system.js?v=4"></script>
+    <script src="../../js/levels-config.js?v=7"></script>
+    <script src="../../js/level-guard.js?v=6"></script>
     <script src="../../js/key-tray.js" data-auto-boss></script>
   </body>
 </html>

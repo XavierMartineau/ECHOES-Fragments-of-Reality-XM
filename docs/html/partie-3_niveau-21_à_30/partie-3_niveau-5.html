@@ -8,13 +8,13 @@
       type="image/svg+xml"
       href="../../assets/svg/echoes-favicon.svg?v=2"
     />
-    <title>ECHOES - Niveau 28</title>
-    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css" />
-    <link rel="stylesheet" href="../../css/partie-3_niveau-21_à_30.css" />
+    <title>ECHOES - Niveau 30</title>
+    <link rel="stylesheet" href="../../css/partie-1.css?v=1" />
+    <link rel="stylesheet" href="../../css/partie-3.css?v=1" />
     <link rel="stylesheet" href="../../css/responsive.css?v=t4" />
     <link rel="stylesheet" href="../../css/fonts.css" />
   </head>
-  <body class="part-three-theme" data-level="28">
+  <body class="part-three-theme" data-level="30">
     <div class="background-glow" aria-hidden="true"></div>
     <div class="grid-overlay" aria-hidden="true"></div>
     <header class="level-header">
@@ -26,23 +26,23 @@
           id="levelProgress"
           aria-label="Progression de la Partie 3"
         ></div>
-        <strong data-copy="level">NIVEAU 28</strong>
+        <strong data-copy="level">NIVEAU 30</strong>
       </div>
       <button class="save-game-button" id="saveGameButton" type="button">
         SAUVEGARDER
       </button>
     </header>
-    <main class="level-shell level-28-shell">
+    <main class="level-shell level-30-shell">
       <section class="level-intro" aria-labelledby="levelTitle">
         <p class="eyebrow" data-copy="eyebrow">
-          Fragment 028 // Nœud de Möbius
+          Fragment 030 // Épreuve de l'ultime trace
         </p>
-        <h1 id="levelTitle" data-copy="title">Le nœud de Möbius</h1>
+        <h1 id="levelTitle" data-copy="title">L'ultime trace</h1>
         <p class="level-description" data-copy="description">
-          Relie les points de contrôle en comptant chaque pas et chaque virage.
+          Le dernier réseau exige une trace parfaitement exacte.
         </p>
         <blockquote class="echo-dialogue" data-copy="dialogue">
-          « La grille ment. Les nombres, eux, restent exacts. »
+          « Une seule ligne. Cinq repères. Pas de seconde chance. »
         </blockquote>
         <div
           class="system-transmission"
@@ -51,7 +51,7 @@
         >
           <span class="system-label">ECHO://NEON-NET</span>
           <p id="systemMessage">
-            SYSTEME:: TOPOLOGIE 028 INSTABLE // TRAJET EXACT REQUIS
+            SYSTEME:: PROTOCOLE 030 // AUTHENTIFICATION FINALE REQUISE
           </p>
         </div>
       </section>
@@ -59,12 +59,14 @@
         <div class="panel-heading">
           <div>
             <p class="panel-kicker" data-copy="kicker">
-              PUZZLE // CAPTCHA GÉOMÉTRIQUE
+              PUZZLE // CAPTCHA FINAL
             </p>
-            <h2 id="puzzleTitle" data-copy="puzzle">Traçage à contraintes</h2>
+            <h2 id="puzzleTitle" data-copy="puzzle">
+              Protocole d'authentification final
+            </h2>
           </div>
           <span class="progress-readout" id="progressReadout" aria-live="polite"
-            >0 / 3</span
+            >0 / 28</span
           >
         </div>
         <p class="snake-rules" data-copy="rules"></p>
@@ -72,7 +74,7 @@
           class="neon-board snake-captcha-board snake-board"
           id="puzzleBoard"
           role="group"
-          aria-label="Grille géométrique de traçage"
+          aria-label="Grille finale de traçage"
         ></div>
         <div class="sequence-controls">
           <button
@@ -81,10 +83,11 @@
             type="button"
             data-copy="start"
           >
-            DÉCHIFFRER LA GRILLE
+            LANCER L'ÉPREUVE
           </button>
           <p class="puzzle-status" id="puzzleStatus" aria-live="polite">
-            Compte les segments et repère les checkpoints avant de tracer.
+            Prépare ton itinéraire : cette grille est le dernier captcha de la
+            partie.
           </p>
         </div>
         <div class="puzzle-actions">
@@ -109,18 +112,18 @@
     </main>
     <footer class="level-footer">
       <span data-copy="footer">ÉCHO // ÉCLIPSE</span
-      ><span data-copy="counter">28 / 60</span>
+      ><span data-copy="counter">30 / 60</span>
     </footer>
     <script src="../../js/translations.js"></script>
-    <script src="../../js/save-system.js"></script>
+    <script src="../../js/save-system.js?v=4"></script>
     <script src="../../js/language.js"></script>
-    <script src="../../js/partie-3_niveau-21_à_30.js"></script>
+    <script src="../../js/partie-3_niveau-21_à_30.js?v=3"></script>
     <script src="../../js/micro-animations.js"></script>
     <script src="../../js/premium-animations.js?v=2"></script>
-    <script src="../../js/dev-mode.js?v=3"></script>
+    <script src="../../js/dev-mode.js?v=5"></script>
     <script src="../../js/ambient-background.js"></script>
-    <script src="../../js/save-system.js"></script>
-    <script src="../../js/levels-config.js"></script>
-    <script src="../../js/level-guard.js?v=3"></script>
+    <script src="../../js/save-system.js?v=4"></script>
+    <script src="../../js/levels-config.js?v=7"></script>
+    <script src="../../js/level-guard.js?v=6"></script>
   </body>
 </html>

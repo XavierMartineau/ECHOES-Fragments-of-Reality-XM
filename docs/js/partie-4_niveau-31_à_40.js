@@ -311,10 +311,12 @@
   };
 
   const saveProgress = (current = level) => {
-    localStorage.setItem(
-      progressKey,
-      JSON.stringify([...completed].sort((a, b) => a - b)),
-    );
+    if (!window.EchoesSave?.isDevMode?.()) {
+      localStorage.setItem(
+        progressKey,
+        JSON.stringify([...completed].sort((a, b) => a - b)),
+      );
+    }
     return (
       currentUser === "guest" ||
       Boolean(

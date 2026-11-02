@@ -14,6 +14,7 @@ window.EchoesLevels = (() => {
       name: { fr: "Initiation", en: "Initiation" },
       start: 1,
       end: 10,
+      levels: [6, 7, 8, 9, 10],
       boss: {
         file: "boss-01.html",
         key: "resonance-1",
@@ -27,6 +28,7 @@ window.EchoesLevels = (() => {
       name: { fr: "Fractures", en: "Fractures" },
       start: 11,
       end: 20,
+      levels: [16, 17, 18, 19, 20],
       boss: {
         file: "boss-02.html",
         key: "resonance-2",
@@ -40,6 +42,7 @@ window.EchoesLevels = (() => {
       name: { fr: "Éclipse", en: "Eclipse" },
       start: 21,
       end: 30,
+      levels: [26, 27, 28, 29, 30],
       boss: {
         file: "boss-03.html",
         key: "resonance-3",
@@ -53,6 +56,7 @@ window.EchoesLevels = (() => {
       name: { fr: "Résonance", en: "Resonance" },
       start: 31,
       end: 40,
+      levels: [36, 37, 38, 39, 40],
     },
     {
       id: 5,
@@ -118,20 +122,30 @@ window.EchoesLevels = (() => {
     series.forEach((serie) => {
       const ready = serie.ready !== false;
       const levelIds = [];
-      for (let number = serie.start; number <= serie.end; number += 1) {
+      const selectedLevels =
+        serie.levels ||
+        Array.from(
+          { length: serie.end - serie.start + 1 },
+          (_, index) => serie.start + index,
+        );
+      selectedLevels.forEach((number, index) => {
         const id = `level-${number}`;
+        const displayNumber = serie.levels ? index + 1 : number;
         items.push({
           id,
           type: "level",
           number,
-          label: String(number),
+          displayNumber,
+          label: String(displayNumber),
           series: serie.id,
           ready,
-          file: `${serie.folder}/niveau-${pad(number)}.html`,
+          file: serie.levels
+            ? `${serie.folder}/partie-${serie.id}_niveau-${displayNumber}.html`
+            : `${serie.folder}/niveau-${pad(number)}.html`,
           requires: levelIds.length ? [levelIds[levelIds.length - 1]] : gate,
         });
         levelIds.push(id);
-      }
+      });
       if (serie.boss) {
         const id = `boss-${pad(serie.id)}`;
         items.push({
@@ -183,6 +197,14 @@ window.EchoesLevels = (() => {
   // Retrouve un niveau à partir du chemin de la page courante.
   function itemForPath(pathname = window.location.pathname) {
     const decoded = decodeURIComponent(pathname);
+    const localLevel = /partie-(\d+)_niveau-(\d+)\.html$/i.exec(decoded);
+    if (localLevel) {
+      const serie = series.find(
+        (entry) => entry.id === Number(localLevel[1]),
+      );
+      const number = serie?.levels?.[Number(localLevel[2]) - 1];
+      return number ? byId.get(`level-${number}`) || null : null;
+    }
     const level = /niveau-(\d+)\.html$/i.exec(decoded);
     if (level) return byId.get(`level-${Number(level[1])}`) || null;
     const boss = /boss-(\d+)\.html$/i.exec(decoded);

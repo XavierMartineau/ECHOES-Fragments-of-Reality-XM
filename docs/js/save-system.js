@@ -3,6 +3,20 @@ window.EchoesSave = (() => {
   const currentUserKey = "echoes-current-user";
   const accountPrefix = "echoes-account-";
   const savePrefix = "echoes-save-";
+  const progressionFields = [
+    "currentPage",
+    "currentLevel",
+    "completedLevels",
+    "completedBosses",
+    "keys",
+  ];
+
+  function isDevMode() {
+    return (
+      localStorage.getItem("echoes-dev-unlock") === "1" ||
+      sessionStorage.getItem("echoes-dev-unlock") === "1"
+    );
+  }
 
   // Normalise le nom de joueur.
   function normalizeUsername(username) {
@@ -77,10 +91,16 @@ window.EchoesSave = (() => {
   // Merges the latest level state into the active account checkpoint.
   function saveProgress(progress, username = getCurrentUser()) {
     if (!username) return false;
+    const safeProgress = { ...progress };
+    if (isDevMode()) {
+      // Ces champs déterminent la progression affichée dans le hub.
+      progressionFields.forEach((field) => delete safeProgress[field]);
+    }
+    if (!Object.keys(safeProgress).length) return true;
     const previousSave = getSave(username) || {};
     const nextSave = {
       ...previousSave,
-      ...progress,
+      ...safeProgress,
       username: normalizeUsername(username),
       updatedAt: new Date().toISOString(),
     };
@@ -134,7 +154,9 @@ window.EchoesSave = (() => {
         localStorage.getItem("echoes-guest-keys") || "[]",
       );
       const keys = [...new Set(guestKeys.concat(keyId))];
-      localStorage.setItem("echoes-guest-keys", JSON.stringify(keys));
+      if (!isDevMode()) {
+        localStorage.setItem("echoes-guest-keys", JSON.stringify(keys));
+      }
       unlocked = true;
     } else {
       const keys = [...new Set(getKeys(username).concat(keyId))];
@@ -182,6 +204,7 @@ window.EchoesSave = (() => {
 
   return {
     getCurrentUser,
+    isDevMode,
     getAccount,
     getSave,
     loginOrCreate,

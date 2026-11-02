@@ -185,15 +185,21 @@ body {
   font-weight: 600;
 }
 .level-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
-  gap: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.boss-grid {
+  margin-top: 12px;
 }
 
 /* Carte de niveau : tuile SVG (hexagone) ou emblème de boss */
 .level-card {
   position: relative;
   display: block;
+  flex: 0 1 66px;
+  width: 66px;
   aspect-ratio: 100 / 112;
   color: var(--hub-text);
   text-decoration: none;
@@ -370,10 +376,11 @@ a.level-card:active {
 
 /* Boss : emblème large, couleur magenta, halo, animation, crâne */
 .level-card.is-boss {
-  grid-column: 1 / -1;
-  justify-self: center;
-  width: min(100%, 190px);
+  flex: 0 1 150px;
+  width: min(100%, 150px);
+  max-width: 150px;
   aspect-ratio: 200 / 112;
+  margin-inline: auto;
   --tile-edge: var(--accent2);
   --tile-glow: var(--accent2);
   transform: scale(1.04);
@@ -556,8 +563,11 @@ a.level-card.is-boss:focus-visible {
 
 @media (max-width: 560px) {
   .level-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    gap: 8px;
+  }
+  .level-card {
+    flex-basis: 56px;
+    width: 56px;
   }
   .hub-actions .hub-button {
     flex: 1 1 100%;
@@ -1012,5 +1022,5 @@ html body.hub-page .dev-mode-toggle:focus-visible {
   width: min(100%, 150px);
 }
 .series-intro .level-grid {
-  justify-items: center;
+  justify-content: center;
 }

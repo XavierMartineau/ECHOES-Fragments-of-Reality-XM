@@ -32,65 +32,71 @@
 
   const copy = {
     part: text("PARTIE 1 // INITIATION", "PART 1 // INITIATION"),
-    level: text("CLEE_01 // GARDIEN", "CLEE_01 // GUARDIAN"),
-    title: text("Le Gardien du Signal", "The Signal Guardian"),
+    level: text("CLÉ 01 // SENTINELLE", "KEY 01 // SENTINEL"),
+    eyebrow: text("ARCHIVE 01 // SCEAU FRAGMENTÉ", "ARCHIVE 01 // FRACTURED SEAL"),
+    panelKicker: text("DUEL // NOYAU DE LA SENTINELLE", "DUEL // SENTINEL CORE"),
+    title: text("La Sentinelle de la Clé", "The Key Sentinel"),
     description: text(
-      "Trois petits défis pour accorder le signal : repère les sceaux, répète une courte mélodie, puis touche le noyau quand il s’illumine. Difficulté 1/6.",
-      "Three quick challenges to tune the signal: match the seals, repeat a short melody, then tap the core when it lights up. Difficulty 1/6.",
+      "Le Gardien a fragmenté la Clé 01 en trois épreuves. Décode ses glyphes, mémorise sa séquence lumineuse et intercepte la pulsation au bon instant. Six charges te permettront de résister aux erreurs.",
+      "The Guardian has split Key 01 into three trials. Decode its glyphs, memorize its light sequence, and intercept the pulse at the right moment. You have six charges to withstand mistakes.",
     ),
-    arenaTitle: text("Le cœur du signal", "The heart of the signal"),
+    arenaTitle: text("Chambre d’accordage", "Tuning chamber"),
     lives: text("ÉNERGIE", "ENERGY"),
     save: text("SAUVEGARDER", "SAVE"),
-    reset: text("Recommencer", "Reset"),
-    start: text("DÉMARRER L’ÉPREUVE", "START THE TRIAL"),
+    reset: text("Reprendre depuis le début", "Restart the encounter"),
+    start: text("DÉFIER LA SENTINELLE", "CHALLENGE THE SENTINEL"),
     next: text("RÉCUPÉRER LA CLÉ 01", "CLAIM KEY 01"),
+    keyCode: text("CLÉ_01", "KEY_01"),
+    keyNote: text("CLÉ 01 // À LIBÉRER", "KEY 01 // TO BE RELEASED"),
+    keyOwned: text("CLÉ 01 // LIBÉRÉE", "KEY 01 // RELEASED"),
+    footerState: text("ARCHIVE // INITIATION ACTIVE", "ARCHIVE // INITIATION ACTIVE"),
     ready: text(
-      "Trois défis courts. Une erreur coûte une unité d’énergie; tu en as six.",
-      "Three short challenges. Each mistake costs one energy unit; you have six.",
+      "La Sentinelle verrouille la Clé 01. Six charges disponibles : chaque erreur en consomme une.",
+      "The Sentinel has sealed Key 01. Six charges remain; each mistake consumes one.",
     ),
     startHint: text(
-      "Observe les trois sceaux, puis choisis celui qui correspond.",
-      "Watch the three seals, then choose the matching one.",
+      "Un glyphe sert de modèle. Sélectionne les trois correspondances dans l’ordre.",
+      "A glyph is your reference. Select all three matches in order.",
     ),
     wrong: text(
-      "Ce n’est pas le bon sceau. Réessaie.",
-      "That is not the matching seal. Try again.",
+      "Ce glyphe ne correspond pas au modèle. Une charge vient d’être perdue.",
+      "That glyph does not match the reference. One charge has been lost.",
     ),
     stageOneWin: text(
-      "Bien joué. Le Gardien envoie une courte mélodie.",
-      "Good job. The Guardian sends a short melody.",
+      "Les trois glyphes sont reconnus. La Sentinelle transmet son code lumineux.",
+      "All three glyphs are recognized. The Sentinel is transmitting its light code.",
     ),
     stageTwoHint: text(
-      "Observe les couleurs qui s’allument, puis répète-les dans le même ordre.",
-      "Watch the colors light up, then repeat them in the same order.",
+      "Mémorise l’ordre des quatre éclats : la séquence ne sera jouée qu’une fois.",
+      "Memorize the order of the four flashes: the sequence will play only once.",
     ),
     sequenceHint: text(
-      "À toi : reproduis la mélodie.",
-      "Your turn: repeat the melody.",
+      "À toi de jouer : reproduis le code avec les quatre pastilles.",
+      "Your turn: enter the code using the four pads.",
     ),
     sequenceError: text(
-      "La mélodie recommence. Tu peux la revoir quand tu veux.",
-      "The melody starts over. You can replay it whenever you like.",
+      "Mauvaise fréquence. La séquence repart du début; tu peux la revoir avant de retenter.",
+      "Wrong frequency. The sequence has reset; replay it before trying again.",
     ),
     stageTwoWin: text(
-      "Mélodie accordée. Touche le noyau quand il s’illumine en vert.",
-      "Melody tuned. Tap the core when it glows green.",
+      "Code lumineux déchiffré. Le noyau va émettre deux pulsations vertes : intercepte-les.",
+      "Light code decoded. The core will emit two green pulses: intercept them.",
     ),
     stageThreeHint: text(
-      "Attends le halo vert, puis clique le noyau. Réussis deux fois.",
-      "Wait for the green glow, then click the core. Do it twice.",
+      "Dernière épreuve : intercepte deux pulsations vertes. Un clic anticipé coûte une charge.",
+      "Final trial: intercept two green pulses. Clicking too early costs one charge.",
     ),
     wait: text(
-      "Attends que le noyau s’illumine en vert.",
-      "Wait for the core to glow green.",
+      "Trop tôt : le noyau n’a pas encore envoyé sa pulsation.",
+      "Too early: the core has not sent its pulse yet.",
     ),
     defeated: text(
-      "Ton énergie est épuisée. Clique sur Réinitialiser pour retenter l’épreuve.",
-      "You ran out of energy. Click Reset to try the trial again.",
+      "Tes six charges sont épuisées. Recommence le combat pour tenter une nouvelle percée.",
+      "All six charges are spent. Restart the encounter to make another attempt.",
     ),
     victory: text(
-      "Le Gardien est apaisé. La Clé 01 t’attend.",
-      "The Guardian is calm. Key 01 awaits.",
+      "Le sceau est brisé. La Clé 01 vient d’être libérée.",
+      "The seal is broken. Key 01 has been released.",
     ),
     rewardError: text(
       "La Clé 01 n’a pas pu être enregistrée. Vérifie ta sauvegarde puis réessaie.",
@@ -107,32 +113,45 @@
       "Sign in to save your progress.",
     ),
     sealLabel: (number) => text(`Sceau ${number}`, `Seal ${number}`),
-    stageOne: text("STAGE 1 // LES SCEAUX", "STAGE 1 // THE SEALS"),
-    stageOnePrompt: text("Trouve le même sceau", "Find the matching seal"),
-    stageTwo: text("STAGE 2 // LA MÉLODIE", "STAGE 2 // THE MELODY"),
+    stageOne: text("ÉPREUVE 1 // DÉCODAGE", "TRIAL 1 // DECODE"),
+    stageOnePrompt: text("Choisis le glyphe affiché", "Select the displayed glyph"),
+    stageTwo: text("ÉPREUVE 2 // MÉMOIRE", "TRIAL 2 // MEMORY"),
     stageTwoPrompt: text(
-      "Observe les couleurs, puis répète",
-      "Watch the colors, then repeat",
+      "Rejoue l’ordre des éclats lumineux",
+      "Repeat the order of the light flashes",
     ),
     padLabel: (name) => text(`Pastille ${name}`, `${name} pad`),
-    stageThree: text("STAGE 3 // LE NOYAU", "STAGE 3 // THE CORE"),
+    stageThree: text("ÉPREUVE 3 // RÉFLEXES", "TRIAL 3 // REFLEXES"),
     stageThreePrompt: text(
-      "Clique quand le noyau est vert",
-      "Click when the core turns green",
+      "Intercepte les deux pulsations vertes",
+      "Intercept both green pulses",
     ),
-    stageThreeWait: text("ATTENDS LE SIGNAL", "WAIT FOR THE SIGNAL"),
+    stageThreeWait: text("PULSATION EN ATTENTE", "PULSE PENDING"),
+    stageStripLabel: text(
+      "Progression des trois épreuves",
+      "Progress through the three trials",
+    ),
+    choicesLabel: text("Choix de glyphes", "Glyph choices"),
+    coreWaitAria: text(
+      "Noyau en attente de sa prochaine pulsation",
+      "Core waiting for its next pulse",
+    ),
+    coreLitAria: text(
+      "Pulsation verte active, clique maintenant",
+      "Green pulse active, click now",
+    ),
     now: text("MAINTENANT !", "NOW!"),
     signalCaught: text(
-      "Signal capté. Encore une fois !",
-      "Signal caught. One more time!",
+      "Première pulsation interceptée. Garde le rythme pour la seconde.",
+      "First pulse intercepted. Keep the rhythm for the second.",
     ),
     correctSeal: text(
-      "Sceau accordé. Voici le suivant.",
-      "Seal tuned. Here is the next one.",
+      "Correspondance validée. Déchiffre le glyphe suivant.",
+      "Match confirmed. Decode the next glyph.",
     ),
     resetHint: text(
-      "Le combat reprend. Observe les trois sceaux.",
-      "The fight resumes. Watch the three seals.",
+      "La Sentinelle est de nouveau prête. La Clé reste scellée.",
+      "The Sentinel is ready again. The key remains sealed.",
     ),
   };
 
@@ -157,6 +176,10 @@
     marker.setAttribute("aria-hidden", "true");
     levels.appendChild(marker);
   }
+  document
+    .querySelector(".boss01-stage-strip")
+    ?.setAttribute("aria-label", copy.stageStripLabel);
+  choices.setAttribute("aria-label", copy.choicesLabel);
   levels.setAttribute(
     "aria-label",
     text("Progression de la Partie 1", "Part 1 progress"),
@@ -167,13 +190,7 @@
     sequenceTimers = [];
     window.clearTimeout(pulseTimer);
     core.classList.remove("is-lit");
-    core.setAttribute(
-      "aria-label",
-      text(
-        "Noyau du gardien, attends le signal vert",
-        "Guardian core, wait for the green signal",
-      ),
-    );
+    core.setAttribute("aria-label", copy.coreWaitAria);
     inputLocked = false;
   };
 
@@ -242,6 +259,12 @@
     });
   };
 
+  const setChoicesEnabled = (enabled) => {
+    choices.querySelectorAll("button").forEach((button) => {
+      button.disabled = !enabled;
+    });
+  };
+
   const flashPad = (index, duration = 420) => {
     const button = choices.querySelector(`[data-pad="${index}"]`);
     if (!button) return;
@@ -257,6 +280,7 @@
     clearTimers();
     replayButton.hidden = true;
     startButton.hidden = true;
+    choices.hidden = true;
     setStatus(copy.defeated, "error");
     return true;
   };
@@ -266,6 +290,8 @@
     target.style.color = "";
     stage = index;
     stageStep = 0;
+    core.disabled = stage !== 2;
+    choices.hidden = !active;
     updateProgress();
     if (stage === 0) {
       stageLabel.textContent = copy.stageOne;
@@ -284,6 +310,7 @@
         stageStep += 1;
         if (stageStep === symbols.length) {
           inputLocked = true;
+          setChoicesEnabled(false);
           setStatus(copy.stageOneWin, "success");
           window.setTimeout(() => enterStage(1), 650);
           return;
@@ -324,6 +351,7 @@
         target.style.color = pads[index].color;
         if (stageStep === melody.length) {
           inputLocked = true;
+          setChoicesEnabled(false);
           setStatus(copy.stageTwoWin, "success");
           window.setTimeout(() => enterStage(2), 650);
         }
@@ -347,6 +375,7 @@
     clearTimers();
     stageStep = 0;
     inputLocked = true;
+    setChoicesEnabled(false);
     target.textContent = "· · ·";
     target.style.color = "";
     choices.querySelectorAll(".boss01-choice").forEach((button) => {
@@ -380,6 +409,7 @@
           target.textContent = "· · ·";
           target.style.color = "";
           inputLocked = false;
+          setChoicesEnabled(true);
           replayButton.disabled = false;
           setStatus(copy.sequenceHint);
         },
@@ -394,22 +424,10 @@
       if (!active || stage !== 2) return;
       core.classList.add("is-lit");
       target.textContent = copy.now;
-      core.setAttribute(
-        "aria-label",
-        text(
-          "Noyau illuminé en vert, clique maintenant",
-          "Core glowing green, click now",
-        ),
-      );
+      core.setAttribute("aria-label", copy.coreLitAria);
       pulseTimer = window.setTimeout(() => {
         core.classList.remove("is-lit");
-        core.setAttribute(
-          "aria-label",
-          text(
-            "Noyau du gardien, attends le signal vert",
-            "Guardian core, wait for the green signal",
-          ),
-        );
+        core.setAttribute("aria-label", copy.coreWaitAria);
         target.textContent = copy.stageThreeWait;
         schedulePulse();
       }, 1200);
@@ -429,6 +447,7 @@
     startButton.disabled = false;
     replayButton.hidden = true;
     replayButton.disabled = false;
+    choices.hidden = true;
     nextButton.hidden = true;
     updateLives();
     updateProgress();
@@ -441,7 +460,7 @@
     if (!core.classList.contains("is-lit")) {
       if (!loseEnergy())
         setStatus(
-          text("Attends le halo vert.", "Wait for the green glow."),
+          copy.wait,
           "error",
         );
       return;
@@ -452,6 +471,7 @@
     if (stageStep === 2) {
       active = false;
       won = true;
+      choices.hidden = true;
       panel.classList.add("is-victory");
       updateProgress();
       setStatus(copy.victory, "success");
@@ -478,12 +498,14 @@
     active = true;
     startButton.disabled = true;
     startButton.hidden = true;
+    choices.hidden = false;
     setStatus(copy.startHint);
     enterStage(0);
   });
   resetButton.addEventListener("click", resetFight);
   nextButton.addEventListener("click", () => {
-    window.location.href = "../partie-2_niveau-11_à_20/niveau-11.html";
+    window.location.href =
+      "../partie-2_niveau-11_à_20/partie-2_niveau-1.html";
   });
   finishBoss = () => {
     nextButton.hidden = true;
@@ -511,7 +533,9 @@
       ...readCompletedLevels(progressKey),
     ]);
     const completedLevels = [...completed].sort((a, b) => a - b);
-    localStorage.setItem(progressKey, JSON.stringify(completedLevels));
+    if (!window.EchoesSave?.isDevMode?.()) {
+      localStorage.setItem(progressKey, JSON.stringify(completedLevels));
+    }
     window.EchoesSave?.saveProgress({
       currentPage: "level-11",
       currentLevel: 11,
@@ -523,7 +547,7 @@
     const hud = document.getElementById("keyHud");
     if (!hud || !window.EchoesSave?.getKeys?.().includes("resonance-1")) return;
     hud.classList.add("is-unlocked");
-    document.getElementById("keyHudNote").textContent = "CLÉ 01 // RÉCUPÉRÉE";
+    document.getElementById("keyHudNote").textContent = copy.keyOwned;
     const slot = document.getElementById("keyHudSlot");
     slot.removeAttribute("aria-hidden");
     slot.classList.add("is-visible");

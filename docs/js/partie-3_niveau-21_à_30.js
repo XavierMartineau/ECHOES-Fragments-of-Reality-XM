@@ -70,10 +70,10 @@
   function renderProgress() {
     const progress = $("levelProgress");
     progress.replaceChildren();
-    for (let number = 21; number <= 30; number += 1) {
+    for (let number = 26; number <= 30; number += 1) {
       const marker = document.createElement("span");
       marker.className = "level-square";
-      marker.title = format(part.progressMarker, { level: number });
+      marker.title = format(part.progressMarker, { level: number - 25 });
       marker.setAttribute("aria-label", marker.title);
       if (completedLevels.has(number)) marker.classList.add("completed");
       if (number === level) marker.classList.add("current");
@@ -87,10 +87,12 @@
       currentLevel,
       completedLevels: [...completedLevels].sort((a, b) => a - b),
     };
-    localStorage.setItem(
-      progressStorageKey,
-      JSON.stringify(progress.completedLevels),
-    );
+    if (!window.EchoesSave?.isDevMode?.()) {
+      localStorage.setItem(
+        progressStorageKey,
+        JSON.stringify(progress.completedLevels),
+      );
+    }
     return (
       currentUser === "guest" ||
       Boolean(window.EchoesSave?.saveProgress(progress))
@@ -2165,7 +2167,9 @@
     window.location.href =
       level === 30
         ? "boss-03.html"
-        : `niveau-${String(nextLevel).padStart(2, "0")}.html`;
+        : level >= 25
+          ? `partie-3_niveau-${nextLevel - 25}.html`
+          : `niveau-${String(nextLevel).padStart(2, "0")}.html`;
   });
   saveButton.addEventListener("click", () => {
     const saved = saveProgress();

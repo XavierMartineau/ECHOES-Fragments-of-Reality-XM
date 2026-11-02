@@ -559,7 +559,8 @@
     render();
   });
   nextButton.addEventListener("click", () => {
-    window.location.href = "../partie-3_niveau-21_à_30/niveau-21.html";
+    window.location.href =
+      "../partie-3_niveau-21_à_30/partie-3_niveau-1.html";
   });
   saveButton.addEventListener("click", () => {
     const saved = window.EchoesSave?.saveProgress({

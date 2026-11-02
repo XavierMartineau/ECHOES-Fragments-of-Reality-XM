@@ -377,14 +377,25 @@ compatibles avec le système de sauvegarde existant.
 #### Travail réalisé
 
 - **Alphabet (niveau 3)** : bouton dans la barre d'outils (`partie-1-puzzles.js`), taille réduite ≤ 1024 px, popup violet (`partie-1-redesign.css`).
-- **DEV MODE** : `echoes-dev-ok` valable 12 h (`dev-mode.js`). Footer des niveaux sans débordement ≤ 700 px (`dev-mode.css`).
+- **DEV MODE** : code `popol` ; accès mémorisé 24 h dans `echoes-dev-ok` (`dev-mode.js`). Vérification côté client uniquement, adaptée au développement et non sécurisée pour protéger des données. Footer des niveaux sans débordement ≤ 700 px (`dev-mode.css`).
 - **Pages Boss** : le logo `.brand` de `boss-01/02/03.html` pointe vers `niveaux.html`. Les pages `niveau-XX` pointent toujours vers l'accueil.
 - **Entité ECHO** : nouveau composant canvas `echo-ai.js` + `echo-ai.css` (anneaux, spectre vocal radial, étincelles, noyau vitré, mode glitch rouge). Rendu identique PC/mobile, branché via `EchoAI.init` / `EchoAI.setState` dans `introduction.js`.
 - **Intro** : fond SVG (`intro-bg.svg`, `intro-shards.svg`) à la place de la grille et des lignes bleues ; barre du haut sur une ligne ; footer centré avec « Tous droits réservés » ; point lumineux du dialogue aligné avec le titre.
-- **Niveau 31 mobile** (`partie-4_niveau-31_à_40.css`) : plateau dimensionné selon la hauteur d'écran, boutons ◀ ▶ juste sous le plateau, marges du panneau.
+- **Niveau 31 mobile** (`partie-4.css`) : plateau dimensionné selon la hauteur d'écran, boutons ◀ ▶ juste sous le plateau, marges du panneau.
 - **Niveau 31 jeu** (`partie-4_niveau-31_à_40.js`) : les pièges du dernier étage du secteur 1 (scie, gardien, tapis) ne traversent plus la barre de séparation ; lasers et rebondisseurs en sont exclus.
 - **Niveau 31 couleurs** : fond et cadre bleu nuit/violet (plus de vert), danger en rouge/orange (gardiens, scies, lasers), tapis roulants cyan, rebondisseurs et portails inchangés.
 - **Boutons ECHOES** : sur les 40 pages de niveau, le logo du haut renvoie à `niveaux.html`.
 - **Accueil** : barre du haut en cartouches angulaires (système / FR-EN / dimension) ; avertissement stroboscopique refait (icône SVG, plaque d'alerte, bouton à interrupteur).
 - **DEV MODE** : bouton compact angulaire et panneau refaits (`docs/css/dev-mode-ui.css`) : raccourcis, interrupteurs d'options, cartes de parties colorées, grille de niveaux, accès spéciaux.
 - **À vérifier** : rendu final du niveau 31 en jeu, glitch rouge de l'intro sur PC large, couleur violette de l'alphabet (choix perso).
+
+### 01/11/2026 — Noms des fichiers des parties
+
+- Les cinq niveaux conservés des parties 1 à 4 utilisent des noms locaux (`partie-N_niveau-1.html` à `partie-N_niveau-5.html`) ; les anciens niveaux non retenus restent archivés sous leurs noms d'origine.
+- Les feuilles CSS partagées sont renommées `partie-1.css` à `partie-4.css`. Les routes du hub, de l'introduction, des boss, des boutons « suivant » et du DEV MODE pointent vers les nouveaux fichiers.
+
+### 01/11/2026 — Réduction des défis
+
+- Parties 1 à 4 : conservation des cinq défis les plus avancés (niveaux internes 6–10, 16–20, 26–30 et 36–40), affichés de 1 à 5 dans chaque partie.
+- Les trois boss existants restent après les parties 1 à 3. Aucun boss n'est ajouté à la partie 4 ; les parties 5 et 6 restent en construction.
+- Les autres pages de niveaux sont conservées en archive et redirigent vers le hub hors DEV MODE.

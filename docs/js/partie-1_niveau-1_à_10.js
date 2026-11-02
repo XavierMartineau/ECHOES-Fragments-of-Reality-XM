@@ -206,7 +206,11 @@ if (activeLevelScript) {
     ...legacyCompletedLevels,
     ...(accountId === "guest" ? [] : readCompletedLevels(progressStorageKey)),
   ]);
-  if (accountId !== "guest" && completedLevels.size) {
+  if (
+    accountId !== "guest" &&
+    completedLevels.size &&
+    !window.EchoesSave?.isDevMode?.()
+  ) {
     localStorage.setItem(
       progressStorageKey,
       JSON.stringify([...completedLevels].sort((a, b) => a - b)),
@@ -371,7 +375,9 @@ if (activeLevelScript) {
     }
     completedLevels.add(levelNumber);
     const levels = [...completedLevels].sort((a, b) => a - b);
-    localStorage.setItem(progressStorageKey, JSON.stringify(levels));
+    if (!window.EchoesSave?.isDevMode?.()) {
+      localStorage.setItem(progressStorageKey, JSON.stringify(levels));
+    }
     window.EchoesSave.saveProgress({
       currentPage: `level-${levelNumber}`,
       currentLevel: levelNumber,
@@ -901,7 +907,7 @@ if (activeLevelScript) {
     });
     reset.addEventListener("click", () => window.location.reload());
     next.addEventListener("click", () => {
-      window.location.href = "niveau-06.html";
+      window.location.href = "partie-1_niveau-1.html";
     });
     status.textContent = levelCopy.statusReady;
     if (completedLevels.has(5)) {
@@ -1227,7 +1233,11 @@ if (activeLevelScript) {
           ...readCompletedLevels(progressStorageKey),
         ],
   );
-  if (accountId !== "guest" && completedLevels.size) {
+  if (
+    accountId !== "guest" &&
+    completedLevels.size &&
+    !window.EchoesSave?.isDevMode?.()
+  ) {
     localStorage.setItem(
       progressStorageKey,
       JSON.stringify([...completedLevels].sort((a, b) => a - b)),
@@ -1334,10 +1344,12 @@ if (activeLevelScript) {
       return;
     }
     completedLevels.add(currentLevel);
-    localStorage.setItem(
-      progressStorageKey,
-      JSON.stringify([...completedLevels].sort((a, b) => a - b)),
-    );
+    if (!window.EchoesSave?.isDevMode?.()) {
+      localStorage.setItem(
+        progressStorageKey,
+        JSON.stringify([...completedLevels].sort((a, b) => a - b)),
+      );
+    }
     window.EchoesSave.saveProgress({
       currentPage: "level-1",
       currentLevel: currentLevel,
@@ -1613,7 +1625,9 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
     }
     completedLevels.add(levelNumber);
     const levels = [...completedLevels].sort((a, b) => a - b);
-    localStorage.setItem(progressKey, JSON.stringify(levels));
+    if (!window.EchoesSave?.isDevMode?.()) {
+      localStorage.setItem(progressKey, JSON.stringify(levels));
+    }
     window.EchoesSave?.saveProgress({
       currentPage: `level-${levelNumber}`,
       currentLevel: levelNumber,

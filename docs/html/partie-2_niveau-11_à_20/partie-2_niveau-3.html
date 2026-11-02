@@ -8,9 +8,9 @@
       type="image/svg+xml"
       href="../../assets/svg/echoes-favicon.svg?v=2"
     />
-    <title>ECHOES - Niveau 17</title>
-    <link rel="stylesheet" href="../../css/partie-1_niveau-1_à_10.css" />
-    <link rel="stylesheet" href="../../css/partie-2_niveau-11_à_20.css" />
+    <title>ECHOES - Niveau 18</title>
+    <link rel="stylesheet" href="../../css/partie-1.css?v=1" />
+    <link rel="stylesheet" href="../../css/partie-2.css?v=1" />
     <link rel="stylesheet" href="../../css/responsive.css?v=t4" />
     <link rel="stylesheet" href="../../css/fonts.css" />
   </head>
@@ -26,28 +26,26 @@
           id="levelProgress"
           aria-label="Progression de la Partie 2"
         ></div>
-        <strong data-i18n="level">NIVEAU 17</strong>
+        <strong data-i18n="level">NIVEAU 18</strong>
       </div>
       <button class="save-game-button" id="saveGameButton" type="button">
         SAUVEGARDER
       </button>
     </header>
-    <main class="level-shell level-17-shell">
+    <main class="level-shell level-18-shell">
       <section class="level-intro" aria-labelledby="levelTitle">
         <p class="eyebrow" data-i18n="eyebrow">
-          Fragment 017 // La balance du vide
+          Fragment 018 // La tour des échos
         </p>
-        <h1 id="levelTitle" data-i18n="title">La balance du vide</h1>
+        <h1 id="levelTitle" data-i18n="title">La tour des échos</h1>
         <p class="level-description" data-i18n="description">
-          Deux plateaux, un seul équilibre. Répartis chaque masse sur les
-          plateaux pour que les deux côtés pèsent exactement pareil.
+          Déplace toute la pile de disques vers la tour de droite. Un seul
+          disque à la fois, et jamais un grand disque sur un plus petit.
         </p>
         <div class="system-transmission" aria-live="polite">
-          <span class="system-label" data-i18n="systemLabel"
-            >ECHO://EQUILIBRE</span
-          >
+          <span class="system-label" data-i18n="systemLabel">ECHO://TOUR</span>
           <p id="systemMessage">
-            SYSTEME:: BALANCE 017 DESEQUILIBREE // REPARTITION REQUISE
+            SYSTEME:: TOUR 018 DESALIGNEE // TRANSFERT REQUIS
           </p>
         </div>
       </section>
@@ -55,11 +53,9 @@
         <div class="panel-heading">
           <div>
             <p class="panel-kicker" data-i18n="puzzleKicker">
-              PUZZLE // ÉQUILIBRE
+              PUZZLE // TRANSFERT DE PILE
             </p>
-            <h2 id="puzzleTitle" data-i18n="puzzleTitle">
-              Plateaux de la balance
-            </h2>
+            <h2 id="puzzleTitle" data-i18n="puzzleTitle">Tours d'écho</h2>
           </div>
           <div class="logic-readouts">
             <span
@@ -73,26 +69,16 @@
             >
           </div>
         </div>
-        <div class="scale-board" id="scaleBoard">
-          <div class="scale-beam-wrap" aria-hidden="true">
-            <span class="scale-total" id="scaleLeftTotal">0</span>
-            <div class="scale-beam" id="scaleBeam"></div>
-            <span class="scale-total" id="scaleRightTotal">0</span>
-          </div>
-          <div class="scale-zones">
-            <div class="scale-zone">
-              <span class="scale-zone-label" id="scaleLeftLabel"></span>
-              <div class="scale-items" id="scaleLeft"></div>
-            </div>
-            <div class="scale-zone is-tray">
-              <span class="scale-zone-label" id="scaleTrayLabel"></span>
-              <div class="scale-items" id="scaleTray"></div>
-            </div>
-            <div class="scale-zone">
-              <span class="scale-zone-label" id="scaleRightLabel"></span>
-              <div class="scale-items" id="scaleRight"></div>
-            </div>
-          </div>
+        <div class="tower-board" id="towerBoard" role="group">
+          <button class="tower-peg" type="button">
+            <span class="tower-stack"></span>
+          </button>
+          <button class="tower-peg" type="button">
+            <span class="tower-stack"></span>
+          </button>
+          <button class="tower-peg" type="button">
+            <span class="tower-stack"></span>
+          </button>
         </div>
         <div class="sequence-controls">
           <p class="puzzle-status" id="puzzleStatus" aria-live="polite"></p>
@@ -105,7 +91,7 @@
             hidden
             data-i18n="next"
           >
-            CONTINUER VERS LE NIVEAU 18
+            CONTINUER VERS LE NIVEAU 19
           </button>
           <button
             class="reset-button"
@@ -120,18 +106,18 @@
     </main>
     <footer class="level-footer">
       <span data-i18n="footer">ÉCHO // FRACTURES ACTIVES</span>
-      <span data-i18n="counter">17 / 60</span>
+      <span data-i18n="counter">18 / 60</span>
     </footer>
-    <script src="../../js/save-system.js"></script>
+    <script src="../../js/save-system.js?v=4"></script>
     <script src="../../js/language.js"></script>
     <script src="../../js/page-i18n.js"></script>
     <script src="../../js/micro-animations.js"></script>
     <script src="../../js/premium-animations.js?v=2"></script>
-    <script src="../../js/dev-mode.js?v=3"></script>
+    <script src="../../js/dev-mode.js?v=5"></script>
     <script src="../../js/ambient-background.js"></script>
-    <script src="../../js/partie-2_niveau-11_à_20.js"></script>
-    <script src="../../js/save-system.js"></script>
-    <script src="../../js/levels-config.js"></script>
-    <script src="../../js/level-guard.js?v=3"></script>
+    <script src="../../js/partie-2_niveau-11_à_20.js?v=2"></script>
+    <script src="../../js/save-system.js?v=4"></script>
+    <script src="../../js/levels-config.js?v=7"></script>
+    <script src="../../js/level-guard.js?v=6"></script>
   </body>
 </html>
