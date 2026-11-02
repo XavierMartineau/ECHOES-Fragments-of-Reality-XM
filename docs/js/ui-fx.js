@@ -21,17 +21,23 @@
     :focus-visible{outline:2px solid rgba(var(--fx-rgb),.85);outline-offset:3px;border-radius:4px}
     .fx-cursor-on,.fx-cursor-on *{cursor:none!important}
     .fx-cursor-on input:not([type=checkbox]):not([type=radio]):not([type=range]),.fx-cursor-on textarea,.fx-cursor-on [contenteditable]{cursor:text!important}
-    #fx-dot,#fx-ring{position:fixed;left:0;top:0;pointer-events:none;z-index:2147483647;opacity:0;transition:opacity .25s,width .25s,height .25s,margin .25s,border-color .25s,background .25s}
-    #fx-dot{width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:rgb(var(--fx-rgb));box-shadow:0 0 10px 2px rgba(var(--fx-rgb),.6)}
-    #fx-ring{width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;border:1px solid rgba(var(--fx-rgb),.55);box-shadow:0 0 14px rgba(var(--fx-rgb),.18),inset 0 0 8px rgba(var(--fx-rgb),.1)}
-    #fx-ring::before,#fx-ring::after{content:"";position:absolute;left:50%;top:50%;background:rgba(var(--fx-rgb),.7);transition:opacity .25s}
-    #fx-ring::before{width:8px;height:1px;margin:0 0 0 -4px;opacity:0;box-shadow:0 0 0 0 transparent}
-    #fx-ring::after{width:1px;height:8px;margin:-4px 0 0 0;opacity:0}
+    #fx-dot,#fx-ring{position:fixed;left:0;top:0;pointer-events:none;z-index:2147483647;opacity:0;transition:opacity .2s,width .2s,height .2s,margin .2s,border-color .2s,background .2s,border-radius .2s,box-shadow .2s}
+    #fx-dot{width:6px;height:6px;margin:-3px 0 0 -3px;border:1px solid #fff;border-radius:50%;background:rgb(var(--fx-rgb));box-shadow:0 0 10px 2px rgba(var(--fx-rgb),.7);transition:opacity .2s,width .16s,height .16s,margin .16s,background .2s,box-shadow .2s}
+    #fx-ring{width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1px solid rgba(var(--fx-rgb),.62);box-shadow:0 0 14px rgba(var(--fx-rgb),.2),inset 0 0 8px rgba(var(--fx-rgb),.1)}
+    #fx-ring::before,#fx-ring::after{content:"";position:absolute;left:50%;top:50%;background:rgba(var(--fx-rgb),.9);opacity:0;transition:opacity .16s}
+    #fx-ring::before{width:9px;height:1px;margin:0 0 0 -4px}
+    #fx-ring::after{width:1px;height:9px;margin:-4px 0 0 0}
     .fx-on #fx-dot,.fx-on #fx-ring{opacity:1}
-    .fx-hover #fx-ring{width:46px;height:46px;margin:-23px 0 0 -23px;border-color:rgba(var(--fx-rgb),.95);background:rgba(var(--fx-rgb),.08)}
-    .fx-hover #fx-dot{width:4px;height:4px;margin:-2px 0 0 -2px}
-    .fx-down #fx-ring{width:22px;height:22px;margin:-11px 0 0 -11px;background:rgba(var(--fx-rgb),.2)}
-    .fx-disabled #fx-ring{border-style:dashed;border-color:rgba(160,170,190,.5);background:none}
+    .fx-hover #fx-ring{width:42px;height:42px;margin:-21px 0 0 -21px;border-color:#fff;background:rgba(var(--fx-rgb),.1);box-shadow:0 0 18px rgba(var(--fx-rgb),.4),inset 0 0 10px rgba(var(--fx-rgb),.14)}
+    .fx-hover #fx-ring::before,.fx-hover #fx-ring::after{opacity:.8}
+    .fx-hover #fx-dot{width:4px;height:4px;margin:-2px 0 0 -2px;box-shadow:0 0 12px 3px rgba(var(--fx-rgb),.85)}
+    .fx-grab #fx-ring{border-radius:9px;border-style:dashed}
+    .fx-grabbing #fx-ring{width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:7px;background:rgba(var(--fx-rgb),.2)}
+    .fx-crosshair #fx-ring{border-radius:8px}
+    .fx-down #fx-ring{width:24px;height:24px;margin:-12px 0 0 -12px;background:rgba(var(--fx-rgb),.28);box-shadow:0 0 22px rgba(var(--fx-rgb),.55)}
+    .fx-click #fx-ring{border-color:#fff;box-shadow:0 0 24px rgba(var(--fx-rgb),.7),inset 0 0 10px rgba(var(--fx-rgb),.2)}
+    .fx-disabled #fx-ring{border-style:dashed;border-color:rgba(160,170,190,.5);background:none;box-shadow:none}
+    .fx-disabled #fx-ring::before,.fx-disabled #fx-ring::after{opacity:0}
     .fx-disabled #fx-dot{background:#8a93a8;box-shadow:none}
     .fx-text #fx-ring{opacity:0!important}
     .fx-text #fx-dot{width:2px;height:18px;margin:-9px 0 0 -1px;border-radius:1px}
@@ -50,12 +56,32 @@
   root.classList.add("fx-cursor-on");
 
   const INTERACTIVE = "a[href],button,[role=button],summary,select,label[for],input[type=checkbox],input[type=radio],input[type=range],.level-card,.dev-mode-toggle,[data-cursor=hover]";
+  const DRAGGABLE = "[draggable=true],[data-cursor=grab],.drag-handle,.puzzle-piece,.resonance-piece,.alignment-token,.sorting-token,.color-symbol,.geometry-point";
+  const CROSSHAIR = "[data-cursor=crosshair],.flow-cell,.rhythm-pulse";
   const TEXT = "input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=button]):not([type=submit]),textarea,[contenteditable=true]";
   let x = -100;
   let y = -100;
   let rx = x;
   let ry = y;
   let started = false;
+  let frame = 0;
+  let pressed = false;
+  let clickTimer;
+
+  const render = () => {
+    frame = 0;
+    const easing = reduce ? 1 : 0.2;
+    rx += (x - rx) * easing;
+    ry += (y - ry) * easing;
+    dot.style.transform = `translate3d(${x}px,${y}px,0)`;
+    ring.style.transform = `translate3d(${rx}px,${ry}px,0)`;
+    if (Math.abs(x - rx) > 0.1 || Math.abs(y - ry) > 0.1)
+      frame = requestAnimationFrame(render);
+  };
+
+  const scheduleRender = () => {
+    if (!frame) frame = requestAnimationFrame(render);
+  };
 
   window.addEventListener("pointermove", (e) => {
     x = e.clientX;
@@ -68,10 +94,20 @@
     }
     const el = e.target instanceof Element ? e.target : null;
     const hit = el && el.closest(INTERACTIVE);
-    root.classList.toggle("fx-hover", !!hit);
-    root.classList.toggle("fx-disabled", !!(hit && (hit.disabled || hit.getAttribute("aria-disabled") === "true")));
+    const draggable = el && el.closest(DRAGGABLE);
+    const crosshair = el && el.closest(CROSSHAIR);
+    const pointerTarget = hit || draggable || crosshair;
+    const disabled = pointerTarget &&
+      (pointerTarget.matches(":disabled") ||
+        pointerTarget.getAttribute("aria-disabled") === "true");
+    root.classList.toggle("fx-hover", !!pointerTarget && !disabled);
+    root.classList.toggle("fx-disabled", !!disabled);
+    root.classList.toggle("fx-grab", !!draggable && !e.buttons);
+    root.classList.toggle("fx-grabbing", !!draggable && !!e.buttons);
+    root.classList.toggle("fx-crosshair", !!crosshair);
     root.classList.toggle("fx-text", !!(el && el.closest(TEXT)));
     window.__echoesPointer = { x, y };
+    scheduleRender();
 
     // Projecteur lumineux sur le panneau central et attraction magnétique des boutons d'accueil.
     if (document.body.classList.contains("index-page")) {
@@ -88,17 +124,34 @@
       }
     }
   }, { passive: true });
-  window.addEventListener("pointerdown", () => root.classList.add("fx-down"), { passive: true });
-  window.addEventListener("pointerup", () => root.classList.remove("fx-down"), { passive: true });
-  document.addEventListener("pointerleave", () => root.classList.remove("fx-on"));
+  window.addEventListener("pointerdown", (e) => {
+    if (e.button !== 0) return;
+    pressed = true;
+    root.classList.remove("fx-click");
+    root.classList.add("fx-down");
+  }, { passive: true });
+  window.addEventListener("pointerup", (e) => {
+    if (e.button !== 0) return;
+    root.classList.remove("fx-down");
+    if (!pressed) return;
+    pressed = false;
+    root.classList.add("fx-click");
+    window.clearTimeout(clickTimer);
+    clickTimer = window.setTimeout(() => root.classList.remove("fx-click"), 180);
+  }, { passive: true });
+  window.addEventListener("pointercancel", () => {
+    pressed = false;
+    root.classList.remove("fx-down");
+  }, { passive: true });
+  document.addEventListener("pointerleave", () => {
+    root.classList.remove(
+      "fx-on",
+      "fx-hover",
+      "fx-grab",
+      "fx-grabbing",
+      "fx-crosshair",
+      "fx-text",
+    );
+  });
   document.addEventListener("pointerenter", () => started && root.classList.add("fx-on"));
-
-  const k = reduce ? 1 : 0.2;
-  (function loop() {
-    rx += (x - rx) * k;
-    ry += (y - ry) * k;
-    dot.style.transform = `translate3d(${x}px,${y}px,0)`;
-    ring.style.transform = `translate3d(${rx}px,${ry}px,0)`;
-    requestAnimationFrame(loop);
-  })();
 })();

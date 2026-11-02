@@ -207,7 +207,7 @@
     if (!reduceMotion) requestAnimationFrame(frame);
   }
 
-  load("ui-fx.js?v=1").catch(() => {});
+  load("ui-fx.js?v=2").catch(() => {});
   load("scene-motifs.js?v=1")
     .then(() => {
       const scene = detect(window.EchoesSceneMotifs);

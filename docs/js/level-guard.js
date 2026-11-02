@@ -3,7 +3,7 @@
   // Fond animé de la partie (voir scene-bg.js).
   if (document.currentScript) {
     const scene = document.createElement("script");
-    scene.src = new URL("scene-bg.js?v=1", document.currentScript.src).href;
+    scene.src = new URL("scene-bg.js?v=2", document.currentScript.src).href;
     document.body.appendChild(scene);
   }
 
@@ -297,7 +297,7 @@
           },
         ],
       ];
-      const example = examples[item.series - 1]?.[seriesPosition - 1];
+      const example = examples[item.series - 1]?.[item.number - serie.start];
       const previousInertStates = [...panel.children].map((child) => [
         child,
         child.inert,
