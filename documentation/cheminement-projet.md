@@ -54,8 +54,8 @@ Les niveaux 31 à 40 sont des bonus jouables, dont les labyrinthes procéduraux 
 | 11:22 | `bfb6bd8` | Mise à jour de `level-guard.js`, des exemples visuels et de leurs styles. |
 | 11:32 | `53177ab` | Ajout des styles et animations des bonus 41–50 et 51–60. |
 | 11:32 | `d0e8ce1` | Ajustement des styles/scripts bonus 45–60 et des défis/traductions de `level-guard.js`. |
-| 11:35 | `988d209` | Suppression des CSS devenus inutiles après la refonte des panneaux et le regroupement des bonus. |
-| 11:35 | `f7784b9` | Mise à jour des liens CSS des niveaux 24–30 et des bonus 31–60. |
+| 11:35 | `988d209` | Nommage CSS aligné sur la portée réelle (`niveaux-communs`, `niveaux-11-20`, `niveaux-21-30`, bonus 31–40) ; fusion des styles bonus 41–60 et suppression des feuilles redondantes. |
+| 11:35 | `f7784b9` | Mise à jour des liens vers ces feuilles dans les pages concernées, notamment niveaux 24–30 et bonus 31–60 ; README actualisé. |
 
 ### Points à revalider
 
