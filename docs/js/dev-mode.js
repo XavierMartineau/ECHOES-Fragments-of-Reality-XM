@@ -8,12 +8,8 @@
   const rootUrl = new URL("../../", script.src);
   const style = document.createElement("link");
   style.rel = "stylesheet";
-  style.href = new URL("../css/composants/dev-mode.css?v=23", script.src).href;
+  style.href = new URL("../css/composants/dev-mode.css?v=24", script.src).href;
   document.head.appendChild(style);
-  const uiStyle = document.createElement("link");
-  uiStyle.rel = "stylesheet";
-  uiStyle.href = new URL("../css/composants/dev-mode-ui.css?v=1", script.src).href;
-  document.head.appendChild(uiStyle);
 
   // Keeps the browser tab title synchronized with the current level language.
   const levelMatch = window.location.pathname.match(/niveau-(\d+)\.html$/i);

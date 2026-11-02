@@ -13,6 +13,9 @@ reste [Info-fr.txt](./Info-fr.txt).
   `bosses/`, `composants/`, `niveaux/` et `pages/`.
 - Les contrôleurs des puzzles et niveaux sont dans `docs/js/niveaux/`, les trois
   combats dans `docs/js/bosses/`, et les services partagés restent dans `docs/js/`.
+- Les animations micro et premium partagent maintenant `docs/js/ui-effects.js` et
+  `docs/css/composants/ui-effects.css`. Les surcharges DEV MODE sont regroupées
+  dans `docs/css/composants/dev-mode.css`.
 - Les contrôles de sauvegarde manuelle ont été retirés des pages. La sauvegarde
   automatique de la progression, des réussites et des récompenses est conservée.
 
