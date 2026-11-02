@@ -71,7 +71,8 @@
 
   const render = () => {
     frame = 0;
-    const easing = reduce ? 1 : 0.2;
+    const easing =
+      reduce || document.body.classList.contains("index-page") ? 1 : 0.2;
     rx += (x - rx) * easing;
     ry += (y - ry) * easing;
     dot.style.transform = `translate3d(${x}px,${y}px,0)`;
@@ -108,23 +109,7 @@
     root.classList.toggle("fx-grabbing", overDraggable && !!e.buttons);
     root.classList.toggle("fx-crosshair", !!crosshair);
     root.classList.toggle("fx-text", !!(el && el.closest(TEXT)));
-    window.__echoesPointer = { x, y };
     scheduleRender();
-
-    // Projecteur lumineux sur le panneau central et attraction magnétique des boutons d'accueil.
-    if (document.body.classList.contains("index-page")) {
-      root.style.setProperty("--mx", `${x}px`);
-      root.style.setProperty("--my", `${y}px`);
-      if (!reduce) {
-        document.querySelectorAll(".primary-btn,.strobe-notice button,.lang-btn").forEach((b) => {
-          const r = b.getBoundingClientRect();
-          const dx = x - (r.left + r.width / 2);
-          const dy = y - (r.top + r.height / 2);
-          const near = Math.hypot(dx / (r.width / 2 + 40), dy / (r.height / 2 + 40)) < 1;
-          b.style.translate = near ? `${(dx * 0.12).toFixed(1)}px ${(dy * 0.18).toFixed(1)}px` : "";
-        });
-      }
-    }
   }, { passive: true });
   window.addEventListener("pointerdown", (e) => {
     if (e.button !== 0) return;

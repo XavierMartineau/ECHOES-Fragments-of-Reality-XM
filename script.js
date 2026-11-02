@@ -112,17 +112,6 @@ function drawBackground(timestamp) {
     }
 
     particle.y += particle.speed * particleFactor;
-    const pointer = window.__echoesPointer;
-    if (pointer && !isReduced) {
-      const dx = particle.x - pointer.x;
-      const dy = particle.y - pointer.y;
-      const dist = Math.hypot(dx, dy);
-      if (dist < 140 && dist > 0.1) {
-        const push = (1 - dist / 140) * 2.2;
-        particle.x += (dx / dist) * push;
-        particle.y += (dy / dist) * push;
-      }
-    }
     if (particle.y > height + 10) {
       particle.y = -10;
       particle.x = Math.random() * width;

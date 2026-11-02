@@ -1961,6 +1961,12 @@ html body .puzzle-panel button { font-weight: 700; }
   background-size: 15px 15px;
 }
 
+.level-example-visual[data-layout="grid-3"] {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(32px, 46px));
+  justify-content: center;
+}
+
 .level-example-token {
   display: inline-grid;
   min-width: 27px;

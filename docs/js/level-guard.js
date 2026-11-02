@@ -130,6 +130,48 @@
       const examples = [
         [
           {
+            fr: "Repère la règle qui relie les termes pour trouver le nombre manquant.",
+            en: "Find the rule connecting the terms to work out the missing number.",
+            steps: [
+              { fr: "La première suite augmente de cinq à chaque étape.", en: "The first sequence increases by five at each step.", tokens: ["4", "9", "14", "19", "?"] },
+              { fr: "Ajoute 5 au dernier terme : 19 + 5 = 24.", en: "Add 5 to the last term: 19 + 5 = 24.", tokens: ["19", "+ 5", "→", "24"] },
+            ],
+          },
+          {
+            fr: "Récupère les trois éclats avant de rejoindre la sortie ; les murs bloquent le passage.",
+            en: "Collect all three shards before reaching the exit; walls block your path.",
+            steps: [
+              { fr: "Déplace le joueur vers une case voisine libre.", en: "Move the player to a neighboring open cell.", tokens: ["DÉPART", "→", "◆", "→", "CASE LIBRE"] },
+              { fr: "Ramasse les trois éclats pour déverrouiller la sortie.", en: "Collect all three shards to unlock the exit.", tokens: ["✦", "✦", "✦", "→", "◎ SORTIE"] },
+            ],
+          },
+          {
+            fr: "Déchiffre le message en reculant chaque lettre de trois rangs dans l'alphabet.",
+            en: "Decode the message by moving each letter three places back in the alphabet.",
+            steps: [
+              { fr: "Recule chaque lettre de trois rangs : HFKR devient ECHO.", en: "Move each letter back three places: HFKR becomes ECHO.", tokens: ["HFKR", "−3", "→", "ECHO"] },
+              { fr: "Applique le même décalage aux trois messages.", en: "Apply the same shift to all three messages.", tokens: ["V→S", "L→I", "J→G", "Q→N", "D→A", "O→L"] },
+            ],
+          },
+          {
+            fr: "Fais glisser une tuile voisine dans la case vide pour remettre les nombres de 1 à 8 en ordre.",
+            en: "Slide a neighboring tile into the empty space to put numbers 1 through 8 in order.",
+            steps: [
+              { fr: "La tuile 8 touche la case vide : tu peux la faire glisser à gauche.", en: "Tile 8 touches the empty space, so you can slide it left.", tokens: ["1", "2", "3", "4", "5", "6", "7", "□", "8"], layout: "grid-3" },
+              { fr: "Le but est d'ordonner les tuiles, avec le vide en dernière case.", en: "Arrange the tiles in order, leaving the empty space in the last cell.", tokens: ["1", "2", "3", "4", "5", "6", "7", "8", "□"], layout: "grid-3" },
+            ],
+          },
+          {
+            fr: "Retourne deux cartes à la fois : conserve les paires identiques et mémorise les autres positions.",
+            en: "Turn over two cards at a time: keep matching pairs and remember the other positions.",
+            steps: [
+              { fr: "Deux symboles identiques forment une paire.", en: "Two identical symbols make a pair.", tokens: ["✦", "✦", "✓"] },
+              { fr: "Si les symboles diffèrent, les cartes se referment : retiens leur emplacement.", en: "If the symbols differ, the cards turn face down again; remember where they were.", tokens: ["◈", "≠", "☾", "↻"] },
+            ],
+          },
+        ],
+        [
+          {
             fr: "Les indices séparent les couleurs bien placées des couleurs présentes au mauvais endroit.",
             en: "Feedback separates colors in the right place from colors in the wrong place.",
             steps: [
@@ -362,6 +404,7 @@
       const showExampleStep = () => {
         const step = example?.steps[stepIndex];
         exampleStep.textContent = step?.[language] || "";
+        exampleVisual.dataset.layout = step?.layout || "sequence";
         exampleVisual.replaceChildren(
           ...(step?.tokens || []).map((token, index) => {
             const chip = document.createElement("span");
