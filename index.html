@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="style.css?v=2" />
     <link rel="stylesheet" href="docs/css/base/responsive.css" />
     <link rel="stylesheet" href="docs/css/base/fonts.css" />
-    <link rel="stylesheet" href="docs/css/pages/home.css?v=15" />
+    <link rel="stylesheet" href="docs/css/pages/home.css?v=16" />
   </head>
   <body class="index-page">
     <canvas id="background"></canvas>
@@ -54,6 +54,25 @@
 
     <main class="hero">
       <div class="scanlines"></div>
+      <div class="home-ai" aria-hidden="true">
+        <img class="home-ai-orbit" src="docs/assets/svg/accueil/home-emblem.svg?v=4" alt="" />
+        <img class="home-ai-core" src="docs/assets/svg/accueil/echo-neural-core.svg?v=1" alt="" />
+        <div class="home-ai-readout home-ai-readout-top">
+          <span class="home-ai-readout-dot"></span>
+          <span data-i18n="aiSignal">SIGNAL NEURAL</span>
+          <strong>98.7<span>%</span></strong>
+        </div>
+        <div class="home-ai-readout home-ai-readout-bottom">
+          <span class="home-ai-wave">
+            <svg viewBox="0 0 72 22" focusable="false">
+              <path d="M1 11h13l5-8 8 16 7-13 7 9 6-4h24" />
+            </svg>
+          </span>
+          <span><b data-i18n="aiState">CONSCIENCE ACTIVE</b><small>ECH-01 // CORE</small></span>
+        </div>
+        <span class="home-ai-coordinate home-ai-coordinate-left">40° 44′ 55.2″ N</span>
+        <span class="home-ai-coordinate home-ai-coordinate-right">SYNC // 01</span>
+      </div>
 
       <div class="content">
         <div class="home-copy">
@@ -88,25 +107,6 @@
           </div>
         </div>
 
-        <div class="home-ai" aria-hidden="true">
-          <img class="home-ai-orbit" src="docs/assets/svg/accueil/home-emblem.svg?v=4" alt="" />
-          <img class="home-ai-core" src="docs/assets/svg/accueil/echo-neural-core.svg?v=1" alt="" />
-          <div class="home-ai-readout home-ai-readout-top">
-            <span class="home-ai-readout-dot"></span>
-            <span data-i18n="aiSignal">SIGNAL NEURAL</span>
-            <strong>98.7<span>%</span></strong>
-          </div>
-          <div class="home-ai-readout home-ai-readout-bottom">
-            <span class="home-ai-wave">
-              <svg viewBox="0 0 72 22" focusable="false">
-                <path d="M1 11h13l5-8 8 16 7-13 7 9 6-4h24" />
-              </svg>
-            </span>
-            <span><b data-i18n="aiState">CONSCIENCE ACTIVE</b><small>ECH-01 // CORE</small></span>
-          </div>
-          <span class="home-ai-coordinate home-ai-coordinate-left">40° 44′ 55.2″ N</span>
-          <span class="home-ai-coordinate home-ai-coordinate-right">SYNC // 01</span>
-        </div>
       </div>
 
       <aside class="strobe-notice" role="note">

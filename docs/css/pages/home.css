@@ -1428,3 +1428,84 @@ html body.index-page .strobe-notice button:focus-visible {
     width: 100%;
   }
 }
+
+/* Full-screen neural artwork stays behind the centered landing content. */
+html body.index-page .home-ai {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+html body.index-page .home-ai-orbit,
+html body.index-page .home-ai-core {
+  top: 50%;
+  left: 50%;
+  width: max(100vw, 100svh);
+  max-width: none;
+  height: auto;
+}
+
+html body.index-page .home-ai-orbit {
+  opacity: 0.4;
+}
+
+html body.index-page .home-ai-core {
+  width: max(82vw, 82svh);
+  opacity: 0.62;
+}
+
+html body.index-page .home-ai-readout {
+  opacity: 0.72;
+}
+
+html body.index-page .home-ai-readout-top {
+  top: 17%;
+  right: clamp(18px, 8vw, 128px);
+}
+
+html body.index-page .home-ai-readout-bottom {
+  right: clamp(18px, 9vw, 144px);
+  bottom: 14%;
+}
+
+html body.index-page .content {
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: center;
+  justify-items: center;
+  width: min(940px, calc(100vw - 32px));
+  min-height: clamp(470px, 64svh, 740px);
+  padding: clamp(24px, 5vw, 58px);
+  border: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(5, 10, 26, 0.56),
+    rgba(5, 10, 26, 0.22) 58%,
+    transparent 100%
+  );
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+html body.index-page .content::before {
+  display: none;
+}
+
+html body.index-page .home-copy {
+  z-index: 2;
+  width: min(100%, 860px);
+  text-align: center;
+}
+
+html body.index-page .home-brandline,
+html body.index-page .meta {
+  justify-content: center;
+}
