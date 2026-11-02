@@ -34,8 +34,6 @@
       restart: "REPRENDRE",
       reset: "Réinitialiser",
       next: "CONTINUER",
-      save: "SAUVEGARDER",
-      saved: "SAUVEGARDÉ",
       round: (n) => `MANCHE ${n} / 4`,
       roundBanner: (n) => `MANCHE ${n}`,
       system:
@@ -72,8 +70,6 @@
       restart: "RETRY",
       reset: "Reset",
       next: "CONTINUE",
-      save: "SAVE",
-      saved: "SAVED",
       round: (n) => `ROUND ${n} / 4`,
       roundBanner: (n) => `ROUND ${n}`,
       system: "SYSTEM:: UNSTABLE BOARD // GUIDE THE BALLS TO THE RECYCLER",
@@ -143,7 +139,6 @@
   const startButton = $("startPuzzleButton");
   const nextButton = $("nextLevelButton");
   const resetButton = $("resetButton");
-  const saveButton = $("saveGameButton");
   const leftButton = $("leftButton");
   const rightButton = $("rightButton");
   const status = $("puzzleStatus");
@@ -287,7 +282,6 @@
   setText("footerLabel", text.footer);
   resetButton.textContent = text.reset;
   nextButton.textContent = text.next;
-  saveButton.textContent = text.save;
   document.querySelectorAll("#legend li span").forEach((item, index) => {
     item.textContent = text.legend[index] || "";
   });
@@ -1277,10 +1271,6 @@
       return;
     }
     window.location.href = "niveau-32.html";
-  });
-  saveButton.addEventListener("click", () => {
-    const saved = saveProgress();
-    setStatus(saved ? text.saved : text.saveError, saved ? "success" : "error");
   });
 
   [

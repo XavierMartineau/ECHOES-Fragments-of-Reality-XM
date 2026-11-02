@@ -37,7 +37,6 @@
       shield: "BOUCLIER",
       next: "CONTINUER VERS LE NIVEAU 21",
       reset: "Réinitialiser",
-      save: "SAUVEGARDER",
       ready:
         "Déplace-toi d'une case à la fois. Évite la ligne rouge, puis pulse l'ancre active.",
       movement:
@@ -53,8 +52,6 @@
       shieldReady: "Bouclier actif : le prochain impact est annulé.",
       shieldEmpty: "Il ne te reste plus de bouclier.",
       anchorReady: "Ancre atteinte. Appuie sur « Pulser l'ancre ».",
-      saved: "Point de reprise enregistré.",
-      saveRequired: "Connecte-toi pour enregistrer ton point de reprise.",
       rewardError:
         "Impossible d'enregistrer la Clé 02. Réinitialise et réessaie.",
       player: "toi",
@@ -109,7 +106,6 @@
       shield: "WARD",
       next: "CONTINUE TO LEVEL 21",
       reset: "Reset",
-      save: "SAVE",
       ready:
         "Move one tile at a time. Avoid the red line, then pulse the active anchor.",
       movement:
@@ -124,8 +120,6 @@
       shieldReady: "Ward active: the next impact is cancelled.",
       shieldEmpty: "No wards remain.",
       anchorReady: "Anchor reached. Press “Pulse anchor”.",
-      saved: "Checkpoint saved.",
-      saveRequired: "Sign in to save your checkpoint.",
       rewardError: "Could not register Key 02. Reset the fight and try again.",
       player: "you",
       playerAtAnchor: "you, on the active anchor",
@@ -561,16 +555,6 @@
   nextButton.addEventListener("click", () => {
     window.location.href =
       "../partie-5_niveau-21_à_25/niveau-21.html";
-  });
-  saveButton.addEventListener("click", () => {
-    const saved = window.EchoesSave?.saveProgress({
-      currentPage: "boss-02",
-      currentLevel: 20,
-    });
-    setStatus(
-      saved ? copy.saved : copy.saveRequired,
-      saved ? "success" : "error",
-    );
   });
 
   buildBoard();

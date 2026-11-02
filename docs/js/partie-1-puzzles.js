@@ -13,8 +13,6 @@
       footer: "ÉCHO // PROTOCOLE DE STABILISATION",
       start: "LANCER LE DÉFI",
       reset: "RECOMMENCER",
-      save: "SAUVEGARDER",
-      saved: "SAUVEGARDÉ",
       continue: (number, isFinal) =>
         isFinal
           ? "AFFRONTER LE GARDIEN"
@@ -175,8 +173,6 @@
       footer: "ECHO // STABILIZATION PROTOCOL",
       start: "START CHALLENGE",
       reset: "RESTART",
-      save: "SAVE",
-      saved: "SAVED",
       continue: (number, isFinal) =>
         isFinal ? "FACE THE GUARDIAN" : `CONTINUE TO LEVEL ${number + 1}`,
       completed: "Challenge solved. The fragment is stable.",
@@ -403,7 +399,6 @@
   const startButton = document.getElementById("startPuzzleButton");
   const resetButton = document.getElementById("resetButton");
   const nextButton = document.getElementById("nextLevelButton");
-  const saveButton = document.getElementById("saveGameButton");
   const accountId = window.EchoesSave?.getCurrentUser?.() || "guest";
   const progressKey = `echoes-completed-levels-${encodeURIComponent(accountId)}`;
   let completed = [];
@@ -495,15 +490,6 @@
     beginPuzzle();
   });
   resetButton.addEventListener("click", () => window.location.reload());
-  saveButton.textContent = copy.save;
-  saveButton.addEventListener("click", () => {
-    const saved = window.EchoesSave?.saveProgress({
-      currentPage: `level-${level}`,
-      currentLevel: level,
-      completedLevels: completed,
-    });
-    if (saved) saveButton.textContent = copy.saved;
-  });
   for (let index = partStart; index <= partEnd; index += 1) {
     const square = document.createElement("span");
     square.className = `level-square${index === level ? " current" : ""}${completed.includes(index) ? " completed" : ""}`;

@@ -1733,23 +1733,6 @@ body::before {
     inset 0 0 14px rgba(121, 247, 255, 0.28);
   transform: rotate(8deg) scale(1.06);
 }
-.save-game-button {
-  display: none !important;
-  padding: 8px 12px;
-  border: 1px solid rgba(121, 247, 255, 0.5);
-  background: rgba(121, 247, 255, 0.08);
-  color: var(--cyan);
-  cursor: pointer;
-  font-family: var(--font-display, "Orbitron", sans-serif);
-  font-size: 0.58rem;
-  letter-spacing: 0.08rem;
-  text-transform: uppercase;
-}
-.save-game-button:hover,
-.save-game-button:focus-visible {
-  background: rgba(121, 247, 255, 0.2);
-  outline: none;
-}
 .level-meta {
   display: flex;
   align-items: center;
@@ -5144,7 +5127,6 @@ html[lang="en"] .color-sort-pieces::before {
   }
 
   .brand,
-  .save-game-button,
   .sequence-start-button,
   .next-level-button,
   .reset-button,
@@ -5154,7 +5136,6 @@ html[lang="en"] .color-sort-pieces::before {
     touch-action: manipulation;
   }
 
-  .save-game-button,
   .sequence-start-button,
   .next-level-button,
   .reset-button {

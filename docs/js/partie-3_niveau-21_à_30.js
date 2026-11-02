@@ -22,7 +22,6 @@
   const startButton = $("startPuzzleButton");
   const resetButton = $("resetButton");
   const nextButton = $("nextLevelButton");
-  const saveButton = $("saveGameButton");
   const systemMessage = $("systemMessage");
   const currentUser = window.EchoesSave?.getCurrentUser?.() || "guest";
   const progressStorageKey = `echoes-completed-levels-${encodeURIComponent(currentUser)}`;
@@ -57,7 +56,6 @@
   resetButton.textContent = part.reset;
   nextButton.textContent =
     level === 25 ? part.nextFinal : format(part.next, { level: level + 1 });
-  saveButton.textContent = part.save;
   systemMessage.textContent = strings.system;
   board.setAttribute("aria-label", strings.boardAria);
   renderProgress();
@@ -2187,10 +2185,6 @@
         : level === 25
           ? "../partie-6_niveau-26_à_30/niveau-26.html"
           : `niveau-${String(nextLevel).padStart(2, "0")}.html`;
-  });
-  saveButton.addEventListener("click", () => {
-    const saved = saveProgress();
-    setStatus(saved ? part.saved : part.saveError, saved ? "success" : "error");
   });
   saveProgress();
 })();

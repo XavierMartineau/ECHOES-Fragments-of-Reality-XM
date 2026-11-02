@@ -32,8 +32,6 @@
       errorSub: "SÉQUENCE TERMINÉE",
       next: "CONTINUER VERS LE NIVEAU 31",
       reset: "Réinitialiser",
-      save: "SAUVEGARDER",
-      saved: "SAUVEGARDÉ",
       keyLabel: "RÉSONANCES",
       keyNote: "CLÉ 03 // À RÉCUPÉRER",
       keyRecovered: "CLÉ 03 // RÉCUPÉRÉE",
@@ -82,8 +80,6 @@
       errorSub: "SEQUENCE TERMINATED",
       next: "CONTINUE TO LEVEL 31",
       reset: "Reset",
-      save: "SAVE",
-      saved: "SAVED",
       keyLabel: "RESONANCES",
       keyNote: "KEY 03 // TO RECOVER",
       keyRecovered: "KEY 03 // RECOVERED",
@@ -204,7 +200,6 @@
   setText("cinematicSub", text.cineSub);
   setText("cineContinue", text.next);
   setText("systemMessage", text.system);
-  saveButton.textContent = text.save;
   resetButton.textContent = text.reset;
   nextButton.textContent = text.next;
   $("helpList").replaceChildren(
@@ -623,19 +618,6 @@
   nextButton.addEventListener("click", () => {
     window.location.href =
       "../niveaux.html";
-  });
-  saveButton.addEventListener("click", () => {
-    if (
-      !window.EchoesSave?.saveProgress({
-        currentPage: "boss-03",
-        currentLevel: 30,
-      })
-    )
-      return;
-    saveButton.textContent = text.saved;
-    window.setTimeout(() => {
-      saveButton.textContent = text.save;
-    }, 1800);
   });
   document.addEventListener("keydown", (event) => {
     if (event.code !== "Space" || event.repeat) return;

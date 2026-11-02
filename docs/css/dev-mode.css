@@ -1362,8 +1362,7 @@ html body > .hub-footer {
     white-space: normal;
   }
 }
-/* Sauvegarde automatique : le bouton manuel est retire, barre superieure compacte */
-.save-game-button{display:none !important}
+/* Barre supérieure compacte */
 html body .top-bar{padding-top:12px !important;padding-bottom:12px !important}
 html body .top-bar .status-pill{padding:6px 12px !important}
 
@@ -1542,9 +1541,6 @@ html body .top-bar > .status-pill {
   justify-self: end !important;
   margin: 0 !important;
 }
-html body .level-header > .save-game-button,
-html body .top-bar > .save-game-button { display: none !important; }
-
 /* Tablette */
 @media (max-width: 1024px) {
   html body .level-header,
@@ -1801,7 +1797,7 @@ html body { scrollbar-width: thin; scrollbar-color: rgba(var(--fx-rgb, 121, 247,
 .dev-gate-msg { min-height: 1.4em; margin: 14px 0 6px; font-size: 0.82rem; color: #ffd166; }
 .dev-gate button.dev-gate-cancel { border-color: transparent; background: none; color: #8a97ad; }
 /* Boutons « futur brisé » : coins coupés partout (le halo passe par la luminosité, car clip-path masque les ombres) */
-html body :is(.sequence-start-button, .next-level-button, .reset-button, .save-game-button, .dev-mode-toggle, .dev-gate button, .primary-btn, .hub-btn, .boss-btn) {
+html body :is(.sequence-start-button, .next-level-button, .reset-button, .dev-mode-toggle, .dev-gate button, .primary-btn, .hub-btn, .boss-btn) {
   border-radius: 0 !important;
   clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
 }

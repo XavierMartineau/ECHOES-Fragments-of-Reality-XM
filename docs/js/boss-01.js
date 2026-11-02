@@ -27,7 +27,6 @@
   const resetButton = document.getElementById("resetButton");
   const nextButton = document.getElementById("nextLevelButton");
   const status = document.getElementById("puzzleStatus");
-  const saveButton = document.getElementById("saveGameButton");
   const stageDots = [...document.querySelectorAll("[data-stage-dot]")];
 
   const copy = {
@@ -42,7 +41,6 @@
     ),
     arenaTitle: text("Chambre d’accordage", "Tuning chamber"),
     lives: text("ÉNERGIE", "ENERGY"),
-    save: text("SAUVEGARDER", "SAVE"),
     reset: text("Reprendre depuis le début", "Restart the encounter"),
     start: text("DÉFIER LA SENTINELLE", "CHALLENGE THE SENTINEL"),
     next: text("RÉCUPÉRER LA CLÉ 01", "CLAIM KEY 01"),
@@ -107,7 +105,6 @@
         `${count} unités d’énergie restantes`,
         `${count} energy units remaining`,
       ),
-    saveSuccess: text("Progression enregistrée.", "Progress saved."),
     saveFailure: text(
       "Connecte-toi pour enregistrer ta progression.",
       "Sign in to save your progress.",
@@ -483,16 +480,6 @@
   });
 
   replayButton.addEventListener("click", playSequence);
-  saveButton.addEventListener("click", () => {
-    const saved = window.EchoesSave?.saveProgress({
-      currentPage: "boss-01",
-      currentLevel: 11,
-    });
-    setStatus(
-      saved ? copy.saveSuccess : copy.saveFailure,
-      saved ? "success" : "error",
-    );
-  });
 
   startButton.addEventListener("click", () => {
     active = true;

@@ -232,7 +232,6 @@ if (activeLevelScript) {
       systemSuccess: "SYSTEME:: MOTIF 006 RESTAURE // MEMOIRE SYNCHRONISEE",
       systemError: "SYSTEME:: MOTIF INCOMPATIBLE",
       reset: "Reinitialiser",
-      save: "SAUVEGARDER",
     },
     7: {
       level: "NIVEAU 07",
@@ -248,7 +247,6 @@ if (activeLevelScript) {
       systemSuccess: "SYSTEME:: PORTE 007 OUVERTE",
       systemError: "SYSTEME:: SEQUENCE REFUSEE",
       reset: "Reinitialiser",
-      save: "SAUVEGARDER",
     },
     8: {
       level: "NIVEAU 08",
@@ -262,7 +260,6 @@ if (activeLevelScript) {
       systemSuccess: "SYSTEME:: COULEURS 008 RESTAUREES",
       systemError: "SYSTEME:: COULEUR INCOMPATIBLE",
       reset: "Reinitialiser",
-      save: "SAUVEGARDER",
     },
     9: {
       level: "NIVEAU 09",
@@ -276,7 +273,6 @@ if (activeLevelScript) {
       systemSuccess: "SYSTEME:: REFLEXION 009 RESTAUREE",
       systemError: "SYSTEME:: RAYON DESYNCHRONISE",
       reset: "Reinitialiser",
-      save: "SAUVEGARDER",
     },
     10: {
       level: "NIVEAU 10",
@@ -290,7 +286,6 @@ if (activeLevelScript) {
       systemSuccess: "SYSTEME:: ILLUSION 010 STABILISEE",
       systemError: "SYSTEME:: PROJECTION DETECTEE",
       reset: "Reinitialiser",
-      save: "SAUVEGARDER",
     },
     11: {
       level: "NIVEAU 11",
@@ -301,7 +296,6 @@ if (activeLevelScript) {
       statusSuccess: "Les deux lignes sont synchronisees.",
       statusError: "Mauvais module. La sequence recommence.",
       reset: "Reinitialiser",
-      save: "SAUVEGARDER",
     },
     12: {
       level: "NIVEAU 12",
@@ -312,7 +306,6 @@ if (activeLevelScript) {
       statusSuccess: "Le reseau lumineux est stabilise.",
       statusError: "Mauvaise intersection. La sequence recommence.",
       reset: "Reinitialiser",
-      save: "SAUVEGARDER",
     },
     13: {
       level: "NIVEAU 13",
@@ -323,7 +316,6 @@ if (activeLevelScript) {
       statusSuccess: "Le motif fractal est reconstruit.",
       statusError: "Le motif reste instable.",
       reset: "Reinitialiser",
-      save: "SAUVEGARDER",
     },
     14: {
       level: "NIVEAU 14",
@@ -334,7 +326,6 @@ if (activeLevelScript) {
       statusSuccess: "Les signaux combines sont stabilises.",
       statusError: "Signal incorrect. La sequence recommence.",
       reset: "Reinitialiser",
-      save: "SAUVEGARDER",
     },
   };
   const levelCopy =
@@ -408,8 +399,6 @@ if (activeLevelScript) {
           Array.isArray(value) ? value.join(" / ") : value,
         );
     });
-    const saveGameButton = document.getElementById("saveGameButton");
-    if (saveGameButton) saveGameButton.textContent = levelCopy.save;
     document.getElementById("resetButton").textContent = levelCopy.reset;
     const nextButton = document.getElementById("nextLevelButton");
     if (nextButton) {
@@ -438,7 +427,6 @@ if (activeLevelScript) {
     const system = document.getElementById("systemMessage");
     const start = document.getElementById("sequenceStartButton");
     const reset = document.getElementById("resetButton");
-    const save = document.getElementById("saveGameButton");
     const next = document.getElementById("nextLevelButton");
     const demoButton = document.getElementById("sequenceDemoButton");
     const demoPanel = document.getElementById("sequenceDemoPanel");
@@ -583,7 +571,6 @@ if (activeLevelScript) {
     const system = document.getElementById("systemMessage");
     const start = document.getElementById("startPuzzleButton");
     const reset = document.getElementById("resetButton");
-    const save = document.getElementById("saveGameButton");
     const next = document.getElementById("nextLevelButton");
     const transmission = document.querySelector(".system-transmission");
     const shapes = [
@@ -1189,7 +1176,6 @@ if (activeLevelScript) {
   const startPuzzleButton = document.getElementById("startPuzzleButton");
   const resetButton = document.getElementById("resetButton");
   const levelProgress = document.getElementById("levelProgress");
-  const saveGameButton = document.getElementById("saveGameButton");
   const nextLevelButton = document.getElementById("nextLevelButton");
   const systemTransmission = document.querySelector(".system-transmission");
 
@@ -1265,7 +1251,6 @@ if (activeLevelScript) {
       element.setAttribute("aria-label", values);
     }
   });
-  if (saveGameButton) saveGameButton.textContent = levelCopy.save;
   resetButton.textContent = levelCopy.reset;
   status.textContent = levelCopy.statusReady;
   const shapeLabels =
@@ -1520,14 +1505,6 @@ if (activeLevelScript) {
   });
 
   resetButton.addEventListener("click", resetPuzzle);
-  saveGameButton.addEventListener("click", () => {
-    window.EchoesSave.saveProgress({
-      currentPage: "level-1",
-      currentLevel: currentLevel,
-      completedLevels: [...completedLevels].sort((a, b) => a - b),
-    });
-    saveGameButton.textContent = language === "en" ? "SAVED" : "SAUVEGARDÉ";
-  });
 
   nextLevelButton.addEventListener("click", (event) => {
     event.preventDefault();

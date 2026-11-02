@@ -79,9 +79,6 @@ else {
       system: "SYSTEME:: DEUX FRAGMENTS DETECTES // SYNCHRONISATION EN ATTENTE",
       systemSuccess:
         "SYSTEME:: DOUBLE RESONANCE STABILISEE // PROTOCOLE 012 DEBLOQUE",
-      save: "SAUVEGARDER",
-      saved: "SAUVEGARDÉ",
-      saveHint: "Progression sauvegardée.",
       counter: "11 / 60",
       progress: "Progression de la Partie 2",
     },
@@ -128,9 +125,6 @@ else {
       system: "SYSTEM:: TWO FRAGMENTS DETECTED // SYNCHRONIZATION PENDING",
       systemSuccess:
         "SYSTEM:: DOUBLE RESONANCE STABILIZED // PROTOCOL 012 UNLOCKED",
-      save: "SAVE",
-      saved: "SAVED",
-      saveHint: "Progress saved.",
       counter: "11 / 60",
       progress: "Part 2 progress",
     },
@@ -143,7 +137,6 @@ else {
   const startButton = $("startPuzzleButton");
   const resetButton = $("resetButton");
   const nextButton = $("nextLevelButton");
-  const saveButton = $("saveGameButton");
   const hintButton = $("hintButton");
   const timerReadout = $("timerReadout");
   const systemMessage = $("systemMessage");
@@ -497,18 +490,6 @@ else {
   nextButton.addEventListener("click", () => {
     window.location.href = "niveau-12.html";
   });
-  saveButton.addEventListener("click", () => {
-    const saved = window.EchoesSave?.saveProgress({
-      currentPage: "level-11",
-      currentLevel: 11,
-    });
-    if (!saved) return;
-    saveButton.textContent = copy.saved;
-    setStatus(copy.saveHint);
-    window.setTimeout(() => {
-      saveButton.textContent = copy.save;
-    }, 1800);
-  });
 
   const progress = $("levelProgress");
   for (let level = 11; level <= 20; level += 1) {
@@ -559,9 +540,6 @@ else {
       system: "SYSTEME:: FAISCEAUX CROISES // INTERSECTIONS EN ATTENTE",
       systemSuccess:
         "SYSTEME:: SEQUENCE 012 RECONSTITUEE // PROTOCOLE 013 DEBLOQUE",
-      save: "SAUVEGARDER",
-      saved: "SAUVEGARDÉ",
-      saveHint: "Progression sauvegardée.",
       progress: "Progression de la Partie 2",
     },
     en: {
@@ -591,9 +569,6 @@ else {
       reset: "Reset",
       system: "SYSTEM:: CROSSED BEAMS // INTERSECTIONS AWAITING INPUT",
       systemSuccess: "SYSTEM:: SEQUENCE 012 RESTORED // PROTOCOL 013 UNLOCKED",
-      save: "SAVE",
-      saved: "SAVED",
-      saveHint: "Progress saved.",
       progress: "Part 2 progress",
     },
   }[language];
@@ -604,7 +579,6 @@ else {
   const playButton = $("sequenceStartButton");
   const resetButton = $("resetButton");
   const nextButton = $("nextLevelButton");
-  const saveButton = $("saveGameButton");
   const systemMessage = $("systemMessage");
   const patterns = [
     [0, 2, 1, 3],
@@ -772,18 +746,6 @@ else {
   nextButton.addEventListener("click", () => {
     window.location.href = "niveau-13.html";
   });
-  saveButton.addEventListener("click", () => {
-    const saved = window.EchoesSave?.saveProgress({
-      currentPage: "level-12",
-      currentLevel: 12,
-    });
-    if (!saved) return;
-    saveButton.textContent = copy.saved;
-    setStatus(copy.saveHint);
-    window.setTimeout(() => {
-      saveButton.textContent = copy.save;
-    }, 1800);
-  });
 
   const progress = $("levelProgress");
   for (let level = 11; level <= 20; level += 1) {
@@ -831,9 +793,6 @@ else {
         "SYSTEME:: FRACTURE 013 DETECTEE // MOTIF EN ATTENTE DE RESTAURATION",
       systemSuccess:
         "SYSTEME:: MOTIF FRACTAL RESTAURE // PROTOCOLE 014 DEBLOQUE",
-      save: "SAUVEGARDER",
-      saved: "SAUVEGARDÉ",
-      saveHint: "Progression sauvegardée.",
       panel: "Panneau",
       position: "position",
       inPlace: "correctement placé",
@@ -866,9 +825,6 @@ else {
       system: "SYSTEM:: FRACTURE 013 DETECTED // PATTERN AWAITS RESTORATION",
       systemSuccess:
         "SYSTEM:: FRACTAL PATTERN RESTORED // PROTOCOL 014 UNLOCKED",
-      save: "SAVE",
-      saved: "SAVED",
-      saveHint: "Progress saved.",
       panel: "Panel",
       position: "position",
       inPlace: "correctly placed",
@@ -885,7 +841,6 @@ else {
   const startButton = $("startPuzzleButton");
   const resetButton = $("resetButton");
   const nextButton = $("nextLevelButton");
-  const saveButton = $("saveGameButton");
   const systemMessage = $("systemMessage");
   const goal = [1, 2, 3, 4, 5, 6, 7, 8, 0];
   let tiles = [];
@@ -1046,19 +1001,6 @@ else {
   nextButton.addEventListener("click", () => {
     window.location.href = "niveau-14.html";
   });
-  saveButton.addEventListener("click", () => {
-    const saved = window.EchoesSave?.saveProgress({
-      currentPage: "level-13",
-      currentLevel: 13,
-    });
-    if (saved) {
-      saveButton.textContent = copy.saved;
-      setStatus(copy.saveHint);
-      window.setTimeout(() => {
-        saveButton.textContent = copy.save;
-      }, 1800);
-    }
-  });
 
   const progress = $("levelProgress");
   for (let level = 11; level <= 20; level += 1) {
@@ -1109,9 +1051,6 @@ else {
       mirror: "Miroir",
       board: "Grille de miroirs",
       progress: "Progression de la Partie 2",
-      save: "SAUVEGARDER",
-      saved: "SAUVEGARDÉ",
-      saveHint: "Progression sauvegardée.",
       footer: "ÉCHO // FRACTURES ACTIVES",
       counter: "14 / 60",
     },
@@ -1140,9 +1079,6 @@ else {
       mirror: "Mirror",
       board: "Mirror grid",
       progress: "Part 2 progress",
-      save: "SAVE",
-      saved: "SAVED",
-      saveHint: "Progress saved.",
       footer: "ECHO // ACTIVE FRACTURES",
       counter: "14 / 60",
     },
@@ -1154,7 +1090,6 @@ else {
   const startButton = $("startPuzzleButton");
   const resetButton = $("resetButton");
   const nextButton = $("nextLevelButton");
-  const saveButton = $("saveGameButton");
   const systemMessage = $("systemMessage");
   const mirrors = new Map([
     [11, { direction: "/", target: "\\" }],
@@ -1178,7 +1113,6 @@ else {
   startButton.textContent = copy.start;
   resetButton.textContent = copy.reset;
   nextButton.textContent = copy.next;
-  saveButton.textContent = copy.save;
 
   // Affiche un message d'état (réussite, erreur ou info).
   const setStatus = (message, state = "") => {
@@ -1316,20 +1250,6 @@ else {
   nextButton.addEventListener("click", () => {
     window.location.href = "niveau-15.html";
   });
-  saveButton.addEventListener("click", () => {
-    if (
-      !window.EchoesSave?.saveProgress({
-        currentPage: "level-14",
-        currentLevel: 14,
-      })
-    )
-      return;
-    saveButton.textContent = copy.saved;
-    setStatus(copy.saveHint);
-    window.setTimeout(() => {
-      saveButton.textContent = copy.save;
-    }, 1800);
-  });
 
   for (let level = 11; level <= 20; level += 1) {
     const marker = document.createElement("span");
@@ -1405,9 +1325,6 @@ else {
       ],
       board: "Grille de connexion 14 par 14",
       progress: "Progression de la Partie 2",
-      save: "SAUVEGARDER",
-      saved: "SAUVEGARDÉ",
-      saveHint: "Progression sauvegardée.",
       footer: "ÉCHO // FRACTURES ACTIVES",
       counter: "15 / 60",
     },
@@ -1466,9 +1383,6 @@ else {
       ],
       board: "14 by 14 connection grid",
       progress: "Part 2 progress",
-      save: "SAVE",
-      saved: "SAVED",
-      saveHint: "Progress saved.",
       footer: "ECHO // ACTIVE FRACTURES",
       counter: "15 / 60",
     },
@@ -1480,7 +1394,6 @@ else {
   const startButton = $("startPuzzleButton");
   const resetButton = $("resetButton");
   const nextButton = $("nextLevelButton");
-  const saveButton = $("saveGameButton");
   const systemMessage = $("systemMessage");
   const size = 14;
   const palette = [
@@ -1656,7 +1569,6 @@ else {
   startButton.textContent = copy.start;
   resetButton.textContent = copy.reset;
   nextButton.textContent = copy.next;
-  saveButton.textContent = copy.save;
 
   // Affiche un message d'état (réussite, erreur ou info).
   const setStatus = (message, variant = "") => {
@@ -1905,20 +1817,6 @@ else {
   nextButton.addEventListener("click", () => {
     window.location.href = "../partie-4_niveau-16_à_20/niveau-16.html";
   });
-  saveButton.addEventListener("click", () => {
-    if (
-      !window.EchoesSave?.saveProgress({
-        currentPage: "level-15",
-        currentLevel: 15,
-      })
-    )
-      return;
-    saveButton.textContent = copy.saved;
-    setStatus(copy.saveHint);
-    window.setTimeout(() => {
-      saveButton.textContent = copy.save;
-    }, 1800);
-  });
 
   for (let level = 11; level <= 20; level += 1) {
     const marker = document.createElement("span");
@@ -1966,9 +1864,6 @@ else {
       moves: "Impulsions",
       board: "Grille logique",
       progress: "Progression de la Partie 2",
-      save: "SAUVEGARDER",
-      saved: "SAUVEGARDÉ",
-      saveHint: "Progression sauvegardée.",
       footer: "ÉCHO // FRACTURES ACTIVES",
       counter: "20 / 60",
     },
@@ -1997,9 +1892,6 @@ else {
       moves: "Pulses",
       board: "Logic grid",
       progress: "Part 2 progress",
-      save: "SAVE",
-      saved: "SAVED",
-      saveHint: "Progress saved.",
       footer: "ECHO // ACTIVE FRACTURES",
       counter: "20 / 60",
     },
@@ -2012,7 +1904,6 @@ else {
   const startButton = $("startPuzzleButton");
   const resetButton = $("resetButton");
   const nextButton = $("nextLevelButton");
-  const saveButton = $("saveGameButton");
   const systemMessage = $("systemMessage");
   const scrambles = [
     [0, 4, 8],
@@ -2038,7 +1929,6 @@ else {
   startButton.textContent = copy.start;
   resetButton.textContent = copy.reset;
   nextButton.textContent = copy.next;
-  saveButton.textContent = copy.save;
 
   // Affiche un message d'état (réussite, erreur ou info).
   const setStatus = (message, variant = "") => {
@@ -2168,20 +2058,6 @@ else {
   nextButton.addEventListener("click", () => {
     window.location.href = "boss-02.html";
   });
-  saveButton.addEventListener("click", () => {
-    if (
-      !window.EchoesSave?.saveProgress({
-        currentPage: "level-20",
-        currentLevel: 20,
-      })
-    )
-      return;
-    saveButton.textContent = copy.saved;
-    setStatus(copy.saveHint);
-    window.setTimeout(() => {
-      saveButton.textContent = copy.save;
-    }, 1800);
-  });
 
   for (let level = 11; level <= 20; level += 1) {
     const marker = document.createElement("span");
@@ -2227,9 +2103,6 @@ else {
       mass: "Masse",
       moves: "Déplacements",
       progress: "Progression de la Partie 2",
-      save: "SAUVEGARDER",
-      saved: "SAUVEGARDÉ",
-      saveHint: "Progression sauvegardée.",
       footer: "ÉCHO // FRACTURES ACTIVES",
       counter: "17 / 60",
     },
@@ -2256,9 +2129,6 @@ else {
       mass: "Mass",
       moves: "Moves",
       progress: "Part 2 progress",
-      save: "SAVE",
-      saved: "SAVED",
-      saveHint: "Progress saved.",
       footer: "ECHO // ACTIVE FRACTURES",
       counter: "17 / 60",
     },
@@ -2270,7 +2140,6 @@ else {
   const moveReadout = $("moveReadout");
   const resetButton = $("resetButton");
   const nextButton = $("nextLevelButton");
-  const saveButton = $("saveGameButton");
   const systemMessage = $("systemMessage");
   const containers = [$("scaleTray"), $("scaleLeft"), $("scaleRight")];
   const totals = [null, $("scaleLeftTotal"), $("scaleRightTotal")];
@@ -2301,7 +2170,6 @@ else {
   $("scaleTrayLabel").textContent = copy.tray;
   resetButton.textContent = copy.reset;
   nextButton.textContent = copy.next;
-  saveButton.textContent = copy.save;
 
   // Affiche un message d'état (réussite, erreur ou info).
   const setStatus = (message, variant = "") => {
@@ -2427,20 +2295,6 @@ else {
   nextButton.addEventListener("click", () => {
     window.location.href = "niveau-18.html";
   });
-  saveButton.addEventListener("click", () => {
-    if (
-      !window.EchoesSave?.saveProgress({
-        currentPage: "level-17",
-        currentLevel: 17,
-      })
-    )
-      return;
-    saveButton.textContent = copy.saved;
-    setStatus(copy.saveHint);
-    window.setTimeout(() => {
-      saveButton.textContent = copy.save;
-    }, 1800);
-  });
 
   for (let level = 11; level <= 20; level += 1) {
     const marker = document.createElement("span");
@@ -2485,9 +2339,6 @@ else {
       discs: "disques",
       moves: "Coups",
       progress: "Progression de la Partie 2",
-      save: "SAUVEGARDER",
-      saved: "SAUVEGARDÉ",
-      saveHint: "Progression sauvegardée.",
       footer: "ÉCHO // FRACTURES ACTIVES",
       counter: "18 / 60",
     },
@@ -2515,9 +2366,6 @@ else {
       discs: "discs",
       moves: "Moves",
       progress: "Part 2 progress",
-      save: "SAVE",
-      saved: "SAVED",
-      saveHint: "Progress saved.",
       footer: "ECHO // ACTIVE FRACTURES",
       counter: "18 / 60",
     },
@@ -2529,7 +2377,6 @@ else {
   const moveReadout = $("moveReadout");
   const resetButton = $("resetButton");
   const nextButton = $("nextLevelButton");
-  const saveButton = $("saveGameButton");
   const systemMessage = $("systemMessage");
   const pegs = [...board.querySelectorAll(".tower-peg")];
   const discCounts = [4, 5, 6];
@@ -2549,7 +2396,6 @@ else {
   $("levelProgress").setAttribute("aria-label", copy.progress);
   resetButton.textContent = copy.reset;
   nextButton.textContent = copy.next;
-  saveButton.textContent = copy.save;
 
   // Affiche un message d'état (réussite, erreur ou info).
   const setStatus = (message, variant = "") => {
@@ -2675,20 +2521,6 @@ else {
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
     window.location.href = "niveau-19.html";
-  });
-  saveButton.addEventListener("click", () => {
-    if (
-      !window.EchoesSave?.saveProgress({
-        currentPage: "level-18",
-        currentLevel: 18,
-      })
-    )
-      return;
-    saveButton.textContent = copy.saved;
-    setStatus(copy.saveHint);
-    window.setTimeout(() => {
-      saveButton.textContent = copy.save;
-    }, 1800);
   });
 
   for (let level = 11; level <= 20; level += 1) {
@@ -2830,9 +2662,6 @@ else {
       systemSuccess: "SYSTEME:: LEXIQUE 019 COMPLET // PROTOCOLE 020 DEBLOQUE",
       words: "mots",
       progress: "Progression de la Partie 2",
-      save: "SAUVEGARDER",
-      saved: "SAUVEGARDÉ",
-      saveHint: "Progression sauvegardée.",
       footer: "ÉCHO // FRACTURES ACTIVES",
       counter: "19 / 60",
       codeLabel: (n) => `Code de la lettre numéro ${n}`,
@@ -2867,9 +2696,6 @@ else {
       systemSuccess: "SYSTEM:: LEXICON 019 COMPLETE // PROTOCOL 020 UNLOCKED",
       words: "words",
       progress: "Part 2 progress",
-      save: "SAVE",
-      saved: "SAVED",
-      saveHint: "Progress saved.",
       footer: "ECHO // ACTIVE FRACTURES",
       counter: "19 / 60",
       codeLabel: (n) => `Code of numbered letter ${n}`,
@@ -2881,7 +2707,6 @@ else {
   const readout = $("progressReadout");
   const resetButton = $("resetButton");
   const nextButton = $("nextLevelButton");
-  const saveButton = $("saveGameButton");
   const checkButton = $("checkButton");
   const systemMessage = $("systemMessage");
   const grid = $("sdGrid");
@@ -2911,7 +2736,6 @@ else {
   resetButton.textContent = copy.reset;
   checkButton.textContent = copy.check;
   nextButton.textContent = copy.next;
-  saveButton.textContent = copy.save;
 
   // Affiche un message d'état (réussite, erreur ou info).
   const setStatus = (message, variant = "") => {
@@ -3302,20 +3126,6 @@ else {
   nextButton.addEventListener("click", () => {
     window.location.href = "niveau-20.html";
   });
-  saveButton.addEventListener("click", () => {
-    if (
-      !window.EchoesSave?.saveProgress({
-        currentPage: "level-19",
-        currentLevel: 19,
-      })
-    )
-      return;
-    saveButton.textContent = copy.saved;
-    setStatus(copy.saveHint, "success");
-    window.setTimeout(() => {
-      saveButton.textContent = copy.save;
-    }, 1400);
-  });
 
   for (let level = 11; level <= 20; level += 1) {
     const marker = document.createElement("span");
@@ -3369,9 +3179,6 @@ else {
       wheel: "Molette",
       stage: "Série",
       progress: "Progression de la Partie 2",
-      save: "SAUVEGARDER",
-      saved: "SAUVEGARDÉ",
-      saveHint: "Progression sauvegardée.",
       footer: "ÉCHO // FRACTURES ACTIVES",
       counter: "16 / 60",
     },
@@ -3406,9 +3213,6 @@ else {
       wheel: "Wheel",
       stage: "Series",
       progress: "Part 2 progress",
-      save: "SAVE",
-      saved: "SAVED",
-      saveHint: "Progress saved.",
       footer: "ECHO // ACTIVE FRACTURES",
       counter: "16 / 60",
     },
@@ -3419,7 +3223,6 @@ else {
   const readout = $("progressReadout");
   const resetButton = $("resetButton");
   const nextButton = $("nextLevelButton");
-  const saveButton = $("saveGameButton");
   const systemMessage = $("systemMessage");
   const cluesBox = $("codeClues");
   const questionsBox = $("codeQuestions");
@@ -3444,7 +3247,6 @@ else {
   $("levelProgress").setAttribute("aria-label", copy.progress);
   resetButton.textContent = copy.reset;
   nextButton.textContent = copy.next;
-  saveButton.textContent = copy.save;
 
   // Affiche un message d'état (réussite, erreur ou info).
   const setStatus = (message, variant = "") => {
@@ -3658,20 +3460,6 @@ else {
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
     window.location.href = "niveau-17.html";
-  });
-  saveButton.addEventListener("click", () => {
-    if (
-      !window.EchoesSave?.saveProgress({
-        currentPage: "level-16",
-        currentLevel: 16,
-      })
-    )
-      return;
-    saveButton.textContent = copy.saved;
-    setStatus(copy.saveHint, "success");
-    window.setTimeout(() => {
-      saveButton.textContent = copy.save;
-    }, 1400);
   });
 
   for (let level = 11; level <= 20; level += 1) {
