@@ -5,6 +5,17 @@ Il est maintenu à partir des fonctionnalités présentes dans le dépôt et des
 significatifs de l'historique Git. La référence narrative et fonctionnelle principale
 reste [Info-fr.txt](./Info-fr.txt).
 
+## Organisation actuelle du code
+
+- Les 18 SVG sont classés par usage dans `docs/assets/svg/` : `accueil/`,
+  `animations-depart/`, `cles/`, `connexion/`, `ia/`, `identite/` et `motifs/`.
+- Les feuilles CSS sont regroupées dans `docs/css/` par rôle : `base/`,
+  `bosses/`, `composants/`, `niveaux/` et `pages/`.
+- Les contrôleurs des puzzles et niveaux sont dans `docs/js/niveaux/`, les trois
+  combats dans `docs/js/bosses/`, et les services partagés restent dans `docs/js/`.
+- Les contrôles de sauvegarde manuelle ont été retirés des pages. La sauvegarde
+  automatique de la progression, des réussites et des récompenses est conservée.
+
 ## Dernière mise à jour — 16/10/2026
 
 **Résumé :** journée consacrée à l'habillage visuel et à la sécurité du mode développeur : hub de niveaux gamifié, effets d'interface, accueil en nébuleuse, DEV MODE protégé par code courriel, page de connexion « style brisé » et nouveaux SVG. Le gameplay, les puzzles et le contenu n'ont pas été modifiés.
@@ -71,7 +82,7 @@ reste [Info-fr.txt](./Info-fr.txt).
 
 ### Responsive et qualité d'affichage
 
-- Responsive centralisé dans `docs/css/responsive.css`.
+- Responsive centralisé dans `docs/css/base/responsive.css`.
 - Adaptation pour téléphone, tablette et ordinateur.
 - Interfaces tactiles sans dépendance obligatoire au survol.
 - Détection des petites fenêtres PC avec pointeur fin.
@@ -95,8 +106,8 @@ reste [Info-fr.txt](./Info-fr.txt).
 - **Niveau 9 — Les tours du temps :** transfert de quatre disques selon les règles de Hanoï.
 - **Niveau 10 — La matrice d'ECHO :** Sudoku 4 × 4 avant le combat de boss.
 
-Les dix pages partagent le contrôleur `docs/js/partie-1-puzzles.js` et les styles
-`docs/css/partie-1-redesign.css`. La progression et les niveaux déjà terminés restent
+Les dix pages partagent le contrôleur `docs/js/niveaux/partie-1-puzzles.js` et les styles
+`docs/css/niveaux/partie-1-redesign.css`. La progression et les niveaux déjà terminés restent
 compatibles avec le système de sauvegarde existant.
 
 ### Niveaux 11 à 20
@@ -142,17 +153,17 @@ compatibles avec le système de sauvegarde existant.
   le menu développeur et l'ambiance visuelle utilisent ce nom.
 - Trois stages accessibles : trouver trois sceaux correspondants, répéter une mélodie de trois symboles et toucher le noyau pendant deux halos verts.
 - Difficulté visée : `1/6`, avec six unités d'énergie et une reprise par réinitialisation.
-- Contrôleur et styles isolés dans `docs/js/boss-01.js` et `docs/css/boss-01.css`.
+- Contrôleur et styles isolés dans `docs/js/bosses/boss-01.js` et `docs/css/bosses/boss-01.css`.
 - La victoire enregistre `resonance-1` et présente la réunion des trois fragments
   dans une fenêtre de récompense. « Continuer » ouvre directement le niveau 11 ;
   aucune page cinématique Clé 01 séparée n'est conservée.
 
 ## Architecture technique
 
-- Le favicon commun est `docs/assets/svg/echoes-favicon.svg` et est référencé par
+- Le favicon commun est `docs/assets/svg/identite/echoes-favicon.svg` et est référencé par
   toutes les pages HTML du site, y compris `404.html`.
 - Scripts centralisés des niveaux 1 à 10 dans
-  `docs/js/partie-1_niveau-1_à_10.js`.
+  `docs/js/niveaux/partie-1_niveau-1_à_10.js`.
 - Styles communs et styles de partie séparés dans `docs/css/`.
 - `save-system.js` gère les comptes et la progression persistante.
 - `dev-mode.js` fournit les outils de test et de navigation.
@@ -359,7 +370,7 @@ compatibles avec le système de sauvegarde existant.
 - **Responsive** : tests à 390 et 768 px sans débordement ; panneau des clés replié par défaut sous 900 px (`ambient-background.js`).
 - **DEV MODE protégé** (`dev-mode.js`, `emailjs-config.js`) : popup, adresse masquée, code à 4 chiffres valable 10 min, 3 essais puis blocage 5 min, accès mémorisé 3 h dans `localStorage`, envoi via EmailJS. Limite : site statique, la protection reste contournable.
 - **Page de connexion** (`login.html`, `login.css`) : titre fracturé cyan/violet, contenu flottant sur la nébuleuse, champ à coins coupés, bouton « Continuer » refait, logo hexagonal.
-- **SVG** : nouveau `docs/assets/svg/login-fragments.svg` (éclats cyan/violet flottants et points lumineux), masqué en mode performance (`fx-lite`).
+- **SVG** : nouveau `docs/assets/svg/connexion/login-fragments.svg` (éclats cyan/violet flottants et points lumineux), masqué en mode performance (`fx-lite`).
 - **À vérifier** : rendu du bouton « Continuer » au repos (contour sombre non confirmé), envoi réel du courriel EmailJS et expiration des 3 h.
 
 
@@ -386,7 +397,7 @@ compatibles avec le système de sauvegarde existant.
 - **Niveau 31 couleurs** : fond et cadre bleu nuit/violet (plus de vert), danger en rouge/orange (gardiens, scies, lasers), tapis roulants cyan, rebondisseurs et portails inchangés.
 - **Boutons ECHOES** : sur les 40 pages de niveau, le logo du haut renvoie à `niveaux.html`.
 - **Accueil** : barre du haut en cartouches angulaires (système / FR-EN / dimension) ; avertissement stroboscopique refait (icône SVG, plaque d'alerte, bouton à interrupteur).
-- **DEV MODE** : bouton compact angulaire et panneau refaits (`docs/css/dev-mode-ui.css`) : raccourcis, interrupteurs d'options, cartes de parties colorées, grille de niveaux, accès spéciaux.
+- **DEV MODE** : bouton compact angulaire et panneau refaits (`docs/css/composants/dev-mode-ui.css`) : raccourcis, interrupteurs d'options, cartes de parties colorées, grille de niveaux, accès spéciaux.
 - **À vérifier** : rendu final du niveau 31 en jeu, glitch rouge de l'intro sur PC large, couleur violette de l'alphabet (choix perso).
 
 ### 01/11/2026 — Noms des fichiers des parties

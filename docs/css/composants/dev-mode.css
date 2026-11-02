@@ -1417,7 +1417,7 @@ html body .brand:focus-visible::before {
   height: 1.7rem !important;
   border: 0 !important;
   border-radius: 0 !important;
-  background: url("../assets/svg/echoes-mark.svg") center / contain no-repeat !important;
+  background: url("../../assets/svg/identite/echoes-mark.svg") center / contain no-repeat !important;
   box-shadow: none !important;
   content: "" !important;
   filter: drop-shadow(0 0 7px rgba(121, 247, 255, 0.6));

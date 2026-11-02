@@ -8,7 +8,7 @@
   if (script) {
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = new URL("../css/micro-animations.css", script.src).href;
+    link.href = new URL("../css/composants/micro-animations.css", script.src).href;
     document.head.appendChild(link);
   }
   if (reduced) return;

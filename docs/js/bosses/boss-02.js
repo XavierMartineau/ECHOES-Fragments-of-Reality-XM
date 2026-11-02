@@ -156,7 +156,6 @@
   const shieldButton = $("shieldButton");
   const nextButton = $("nextLevelButton");
   const resetButton = $("resetButton");
-  const saveButton = $("bossSaveButton");
   const keyHud = $("keyHud");
   const keyCount = $("keyCount");
   const keyHudNote = $("keyHudNote");
@@ -281,7 +280,7 @@
 
   const fragments = window.EchoesKeyFragments.mount({
     keyNumber: 2,
-    src: "../../assets/svg/key-02-usb.svg?v=2",
+    src: "../../assets/svg/cles/key-02-usb.svg?v=2",
     core,
     before: document.querySelector(".boss02-actions"),
   });
@@ -392,7 +391,7 @@
     window.setTimeout(() => {
       window.EchoesKeyFragments.playCinematic({
         keyNumber: 2,
-        src: "../../assets/svg/key-02-usb.svg?v=2",
+        src: "../../assets/svg/cles/key-02-usb.svg?v=2",
         onComplete: () => {
           if (!window.EchoesSave?.unlockKey?.("resonance-2")) {
             setStatus(copy.rewardError, "error");

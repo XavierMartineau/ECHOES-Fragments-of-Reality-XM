@@ -79,7 +79,7 @@ window.EchoesLevels = (() => {
   ];
 
   const assetRoot = document.currentScript
-    ? new URL("../assets/svg/", document.currentScript.src)
+    ? new URL("../assets/svg/cles/", document.currentScript.src)
     : new URL("./", window.location.href);
 
   function pad2(number) {

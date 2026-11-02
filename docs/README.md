@@ -1,31 +1,46 @@
 # Documentation du projet
 
-Ce dossier contient la structure de développement du projet ECHOES: Fragments of Reality.
+Ce dossier contient les pages, styles, scripts et ressources du jeu ECHOES.
 
 ## Arborescence
 
-- assets/
-  - images/
-  - audio/
-- css/
-- data/
-- html/
-  - partie-1_niveau-1_à_5/
-  - partie-2_niveau-6_à_10/
-  - partie-3_niveau-11_à_15/
-  - partie-4_niveau-16_à_20/
-  - partie-5_niveau-21_à_25/
-  - partie-6_niveau-26_à_30/
-  - partie-bonus/ (niveaux 31 à 60, DEV MODE uniquement)
-- js/
+```text
+assets/
+├── images/
+└── svg/
+    ├── accueil/
+    ├── animations-depart/
+    ├── cles/
+    ├── connexion/
+    ├── ia/
+    ├── identite/
+    └── motifs/
+css/
+├── base/          Polices et règles responsive
+├── bosses/
+├── composants/
+├── niveaux/
+└── pages/
+html/
+├── partie-1_niveau-1_à_5/ à partie-6_niveau-26_à_30/
+└── partie-bonus/  Niveaux 31 à 60, accessibles par le DEV MODE
+js/
+├── bosses/
+├── niveaux/
+└── scripts partagés à la racine
+```
 
-## Utilisation
+Les contrôleurs de niveaux sont dans `js/niveaux/`, les combats dans
+`js/bosses/` et les services communs (sauvegarde, progression, traductions,
+interface) restent dans `js/`.
 
-- Les fichiers HTML du jeu sont à placer dans html/
-- Les styles sont à mettre dans css/
-- Les scripts dans js/
-- Les données JSON, langues et contenus narratifs dans data/
-- Les visuels et sons dans assets/
+## Sauvegarde
+
+La progression est enregistrée automatiquement. Les boutons « Save » ont été
+supprimés des niveaux et des boss ; les sauvegardes de progression, de réussite
+et de récompenses restent gérées par les contrôleurs et `js/save-system.js`.
+
+## Parcours
 
 Les six parties principales couvrent les niveaux 1 à 30, par groupes de cinq.
 Les niveaux 31 à 60 sont conservés comme bonus et s'ouvrent depuis le DEV MODE.

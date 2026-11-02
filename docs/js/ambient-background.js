@@ -50,7 +50,7 @@
     const keyStylesheet = document.createElement("link");
     keyStylesheet.rel = "stylesheet";
     keyStylesheet.href = new URL(
-      "../css/key-collection-ui.css?v=1",
+      "../css/composants/key-collection-ui.css?v=1",
       document.currentScript.src,
     ).href;
     document.head.appendChild(keyStylesheet);
@@ -86,7 +86,7 @@
       imageFrame.className = "key-collection-image";
       imageFrame.setAttribute("aria-hidden", "true");
       const image = document.createElement("img");
-      image.src = `../../assets/svg/key-${number}-usb.svg`;
+      image.src = `../../assets/svg/cles/key-${number}-usb.svg`;
       image.alt = "";
       imageFrame.appendChild(image);
 

@@ -8,7 +8,7 @@
  *  - Niveau 03 : tri des formes (.sort-board)    - Niveau 08 : tri couleurs (.advanced-sort-*)
  *  - Niveau 04 : rotation (.rotation-*)          - Niveau 09 : constellation (.constellation-*)
  *  - Niveau 05 : séquence sonore (.sound-*)      - Niveau 10 : couleurs (.color-sequence-*)
- *  - Boss Clé 01 : docs/css/boss-01.css ; scènes de clé (.key-*)
+ *  - Boss Clé 01 : docs/css/bosses/boss-01.css ; scènes de clé (.key-*)
  * ========================================================================== */
 :root {
   --void: #050711;

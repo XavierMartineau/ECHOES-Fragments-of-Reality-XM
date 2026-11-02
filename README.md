@@ -113,11 +113,27 @@ principale. Les niveaux bonus restent accessibles depuis le DEV MODE.
 
 ```text
 docs/
-├── assets/      Images, SVG et ressources visuelles
-├── css/         Styles globaux, responsive et styles des parties
-├── html/        Pages du jeu, six parties et niveaux bonus 31 à 60
-├── js/          Progression, sauvegarde, puzzles et mode développeur
-└── data/        Données et contenus auxiliaires
+├── assets/
+│   ├── images/
+│   └── svg/
+│       ├── accueil/
+│       ├── animations-depart/
+│       ├── cles/
+│       ├── connexion/
+│       ├── ia/
+│       ├── identite/
+│       └── motifs/
+├── css/
+│   ├── base/       Polices et règles responsive
+│   ├── bosses/
+│   ├── composants/
+│   ├── niveaux/
+│   └── pages/
+├── html/           Pages du jeu et niveaux bonus 31 à 60
+└── js/
+    ├── bosses/     Contrôleurs des combats
+    ├── niveaux/    Contrôleurs des niveaux et puzzles
+    └── *.js        Modules partagés à la racine
 
 documentation/
 ├── Info-fr.txt
@@ -132,11 +148,11 @@ Les pages de la campagne sont regroupées par blocs de cinq dans
 Fichiers importants :
 
 - `docs/js/save-system.js` : comptes, sauvegardes et clés débloquées ;
-- `docs/js/partie-1-puzzles.js` : nouveaux puzzles des niveaux 1 à 10 ;
-- `docs/js/partie-1_niveau-1_à_10.js` : anciens contrôleurs et utilitaires du premier arc ;
+- `docs/js/niveaux/partie-1-puzzles.js` : puzzles des niveaux 1 à 10 ;
+- `docs/js/bosses/` : contrôleurs des trois combats de boss ;
 - `docs/js/key-fragments.js` : assemblage des fragments et cinématique de récompense ;
 - `docs/js/dev-mode.js` : accès développeur aux niveaux et scènes spéciales ;
-- `docs/assets/svg/key-01-usb.svg` : visuel cyberpunk de la première clé ;
+- `docs/assets/svg/cles/key-01-usb.svg` : visuel cyberpunk de la première clé ;
 - `documentation/cheminement-projet.md` : historique fonctionnel et cheminement détaillé.
 
 ## Sauvegarde et développement
@@ -144,12 +160,16 @@ Fichiers importants :
 La progression est stockée localement par utilisateur. Le système prend en charge :
 
 - création de compte et connexion locale ;
-- sauvegarde du niveau courant ;
+- sauvegarde automatique du niveau courant et de la progression ;
 - points verts des niveaux terminés ;
 - reprise de progression ;
 - réinitialisation d'une nouvelle partie ;
 - sauvegarde des clés de résonance ;
 - mode développeur pour rejouer les scènes.
+
+Les boutons de sauvegarde manuelle ont été retirés des niveaux et des boss :
+la progression est enregistrée automatiquement par les contrôleurs, tandis que
+les récompenses et validations de boss conservent leurs propres sauvegardes.
 
 Le paramètre `?dev=1` permet notamment de rejouer la scène Clé 01 sans considérer
 la clé comme déjà récupérée.
@@ -171,7 +191,7 @@ Les vérifications courantes du projet comprennent :
 
 ```bash
 node --check docs/js/key-fragments.js
-node --check docs/js/boss-01.js
+node --check docs/js/bosses/boss-01.js
 git diff --check
 ```
 
@@ -186,6 +206,6 @@ Pour le détail des jalons, des mécaniques et des commits fonctionnels, consult
 ## Campagne et progression
 
 - `docs/html/login.html` : nom d'utilisateur seul (identifiant unique de la sauvegarde, `localStorage`).
-- `docs/html/niveaux.html` : grille des niveaux, progression globale, bouton de r?initialisation (avec confirmation).
-- `docs/js/levels-config.js` : structure de la campagne. Pour ajouter des niveaux, ?diter `series` (et mettre `ready: true` quand les pages existent).
-- `docs/js/level-guard.js` : bloque les niveaux verrouill?s et enregistre la r?ussite (apparition du bouton ? niveau suivant ?). Contournement dev : `localStorage.setItem("echoes-dev-unlock", "1")`.
+- `docs/html/niveaux.html` : grille des niveaux, progression globale et réinitialisation avec confirmation.
+- `docs/js/levels-config.js` : structure de la campagne. Pour ajouter des niveaux, éditer `series` et mettre `ready: true` quand les pages existent.
+- `docs/js/level-guard.js` : bloque les niveaux verrouillés et enregistre leur réussite. Contournement dev : `localStorage.setItem("echoes-dev-unlock", "1")`.

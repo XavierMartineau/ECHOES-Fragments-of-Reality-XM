@@ -441,7 +441,7 @@ body.intro-page .spectrum-label {
   align-items: end;
   padding-bottom: 6%;
   border: 0;
-  background: url("../assets/svg/echo-ai.svg") center / contain no-repeat;
+  background: url("../../assets/svg/ia/echo-ai.svg") center / contain no-repeat;
   box-shadow: none;
   filter: drop-shadow(0 0 18px rgba(var(--acc), 0.5));
   font-size: clamp(0.55rem, 1.2vw, 0.72rem);

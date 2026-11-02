@@ -41,7 +41,7 @@
   if (!devModeUnlocked && document.currentScript) {
     const style = document.createElement("link");
     style.rel = "stylesheet";
-    style.href = new URL("../css/level-victory.css?v=2", document.currentScript.src).href;
+    style.href = new URL("../css/composants/level-victory.css?v=2", document.currentScript.src).href;
     document.head.appendChild(style);
     const effect = document.createElement("script");
     effect.src = new URL("level-victory.js?v=3", document.currentScript.src).href;

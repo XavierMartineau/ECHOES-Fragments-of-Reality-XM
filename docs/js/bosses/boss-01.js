@@ -105,10 +105,6 @@
         `${count} unités d’énergie restantes`,
         `${count} energy units remaining`,
       ),
-    saveFailure: text(
-      "Connecte-toi pour enregistrer ta progression.",
-      "Sign in to save your progress.",
-    ),
     sealLabel: (number) => text(`Sceau ${number}`, `Seal ${number}`),
     stageOne: text("ÉPREUVE 1 // DÉCODAGE", "TRIAL 1 // DECODE"),
     stageOnePrompt: text("Choisis le glyphe affiché", "Select the displayed glyph"),
@@ -215,7 +211,7 @@
 
   const fragments = window.EchoesKeyFragments.mount({
     keyNumber: 1,
-    src: "../../assets/svg/key-01-usb.svg",
+    src: "../../assets/svg/cles/key-01-usb.svg",
     core,
     before: document.querySelector(".boss01-actions"),
   });
@@ -501,7 +497,7 @@
     window.setTimeout(() => {
       window.EchoesKeyFragments.playCinematic({
         keyNumber: 1,
-        src: "../../assets/svg/key-01-usb.svg",
+        src: "../../assets/svg/cles/key-01-usb.svg",
         onComplete: () => {
           if (!window.EchoesSave?.unlockKey?.("resonance-1")) {
             setStatus(copy.rewardError, "error");

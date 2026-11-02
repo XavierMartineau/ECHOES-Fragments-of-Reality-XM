@@ -26,12 +26,12 @@ html body.intro-page .intro-bg > div {
 }
 
 html body.intro-page .intro-bg-nebula {
-  background-image: url("../assets/svg/intro-bg.svg");
+  background-image: url("../../assets/svg/animations-depart/intro-bg.svg");
   animation: intro-bg-breathe 22s ease-in-out infinite alternate;
 }
 
 html body.intro-page .intro-bg-shards {
-  background-image: url("../assets/svg/intro-shards.svg");
+  background-image: url("../../assets/svg/animations-depart/intro-shards.svg");
   opacity: 0.9;
   animation: intro-bg-drift 28s ease-in-out infinite alternate;
 }
