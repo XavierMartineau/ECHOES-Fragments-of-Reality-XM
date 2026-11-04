@@ -100,7 +100,7 @@
     if (level <= 20) return "partie-4_niveau-16_à_20";
     if (level <= 25) return "partie-5_niveau-21_à_25";
     if (level <= 30) return "partie-6_niveau-26_à_30";
-    return "partie-bonus";
+    return "partie-6_niveau-26_à_30";
   };
 
   // Construit le lien vers la page d'un niveau.
@@ -138,7 +138,6 @@
         <a class="dev-mode-home" href="${new URL("index.html", rootUrl).href}">Home</a>
         <a class="dev-mode-home" href="${new URL("docs/html/login.html", rootUrl).href}">Connexion</a>
         <a class="dev-mode-home" href="${new URL("docs/html/niveaux.html", rootUrl).href}">Hub des niveaux</a>
-        <a class="dev-mode-home" href="${new URL("docs/html/partie-bonus/bonus-01.html", rootUrl).href}">Partie bonus</a>
       </div>
       <span class="dev-mode-section">Options</span>
       <div class="dev-mode-options">
@@ -159,6 +158,16 @@
           <input type="checkbox" data-fx-toggle="echoes-perf" data-on="lite" data-off="auto" />
         </label>
       </div>
+      <span class="dev-mode-section">Progression (test)</span>
+      <div class="dev-mode-options dev-mode-progress">
+        <button class="dev-mode-home" type="button" data-give-keys>Donner les clés 1 à 6</button>
+        <label class="dev-mode-accessibility">
+          <span>Passer jusqu'au niveau</span>
+          <input type="number" min="1" max="30" value="30" data-skip-level aria-label="Niveau cible" />
+        </label>
+        <button class="dev-mode-home" type="button" data-skip-go>Skip jusqu'à ce niveau</button>
+        <small class="dev-mode-hint" data-progress-msg role="status"></small>
+      </div>
       <span class="dev-mode-section">Parties</span>
       <div class="dev-mode-navigation">
         <div class="dev-mode-parts">
@@ -174,12 +183,6 @@
               `,
             )
             .join("")}
-          <button class="dev-mode-part-toggle" type="button" data-part="bonus" aria-expanded="false">
-            <span>BONUS</span>
-            <span class="dev-mode-part-name">Niveaux bonus</span>
-            <span class="dev-mode-part-count">30 niveaux</span>
-            <span class="dev-mode-chevron" aria-hidden="true">›</span>
-          </button>
         </div>
         <div class="dev-mode-level-panel" hidden>
           ${parts
@@ -215,17 +218,6 @@
               `,
             )
             .join("")}
-          <div class="dev-mode-level-group" data-levels-for="bonus" hidden>
-            <span class="dev-mode-level-title">NIVEAUX BONUS // 31–60</span>
-            <div class="dev-mode-levels">
-              ${Array.from({ length: 30 }, (_, index) => index + 31)
-                .map(
-                  (level) =>
-                    `<a href="${levelLink(level)}">${String(level).padStart(2, "0")}</a>`,
-                )
-                .join("")}
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -259,6 +251,59 @@
   menu.addEventListener("click", (event) => {
     if (event.target.closest("a[href]"))
       sessionStorage.setItem("echoes-dev-unlock", "1");
+  });
+
+  // Progression de test : écrit directement dans la sauvegarde (saveProgress ignore la progression en dev).
+  const progressMsg = menu.querySelector("[data-progress-msg]");
+  const patchSave = (build) => {
+    const user = window.EchoesSave?.getCurrentUser();
+    if (!user) {
+      progressMsg.textContent = "Connecte-toi d'abord (page Connexion).";
+      return false;
+    }
+    const save = window.EchoesSave.getSave(user) || {};
+    const next = {
+      ...save,
+      ...build(save),
+      username: user.trim().toLowerCase(),
+      updatedAt: new Date().toISOString(),
+    };
+    localStorage.setItem(
+      `echoes-save-${encodeURIComponent(user.trim().toLowerCase())}`,
+      JSON.stringify(next),
+    );
+    return true;
+  };
+  const allKeys = [1, 2, 3, 4, 5, 6].map((n) => `resonance-${n}`);
+  menu.querySelector("[data-give-keys]").addEventListener("click", () => {
+    if (patchSave((save) => ({ keys: [...new Set([...(save.keys || []), ...allKeys])] }))) {
+      progressMsg.textContent = "Clés 1 à 6 données.";
+    }
+  });
+  menu.querySelector("[data-skip-go]").addEventListener("click", () => {
+    const target = Math.min(30, Math.max(1, Number(menu.querySelector("[data-skip-level]").value) || 1));
+    const levels = Array.from({ length: target - 1 }, (_, i) => i + 1);
+    const bosses = [];
+    const keys = [];
+    [[10, "boss-02", "resonance-1"], [20, "boss-04", "resonance-2"], [30, "boss-06", "resonance-3"]].forEach(
+      ([end, id, key]) => {
+        if (target > end) {
+          bosses.push(id);
+          keys.push(key);
+        }
+      },
+    );
+    const ok = patchSave((save) => ({
+      currentPage: "level",
+      currentLevel: target,
+      completedLevels: [...new Set([...(save.completedLevels || []), ...levels])].sort((a, b) => a - b),
+      completedBosses: [...new Set([...(save.completedBosses || []), "intro", ...bosses])],
+      keys: [...new Set([...(save.keys || []), ...keys])],
+    }));
+    if (ok) {
+      sessionStorage.setItem("echoes-dev-unlock", "1");
+      window.location.href = levelLink(target);
+    }
   });
 
   const colorAssist = menu.querySelector("[data-color-assist]");

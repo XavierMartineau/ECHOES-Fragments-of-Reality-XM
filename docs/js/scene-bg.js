@@ -66,7 +66,6 @@
     if (level && level <= 40) return M.level(level);
     if (part === 5) return M.make("converge", ["#ffb84d", "#ff7a45", "#fff1c4"], 4, 0.85);
     if (part === 6) return M.make("memcore", ["#f5e6a8", "#ffd27a", "#ffffff"], 4, 1);
-    if (/partie-bonus/i.test(path)) return M.make("wave", ["#ff79d1", "#79a8ff", "#ffd24d"], 2, 0.6);
     return null;
   }
 

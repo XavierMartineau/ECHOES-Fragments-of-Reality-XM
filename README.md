@@ -13,7 +13,6 @@ dimensions instables pour retrouver six clés de résonance.
 - **Version de travail :** bêta v4
 - **Campagne principale :** 6 parties, niveaux 1 à 30
 - **Jalons narratifs :** boss `CLEE_01` / Clé 01, `CLEE_02` / Clé 02 et `CLEE_03` / Clé 03
-- **Niveaux bonus :** niveaux 31 à 60, accessibles depuis le DEV MODE
 - **Déploiement prévu :** GitHub Pages
 - **Technologies :** HTML, CSS et JavaScript sans framework ni serveur obligatoire
 
@@ -78,9 +77,7 @@ difficulté croissante :
 10. Sudoku 4 × 4 avant le combat de boss.
 
 Chaque niveau conserve sa progression, ses points verts et ses états de réussite.
-Les niveaux déjà terminés restent rejouables. Les niveaux 31 à 60 sont des
-niveaux bonus : ils ne figurent pas dans le parcours principal et se lancent
-depuis la navigation du DEV MODE.
+Les niveaux déjà terminés restent rejouables.
 
 ### Boss et Clé 01
 
@@ -107,7 +104,7 @@ le rayon au bon instant (de l'anneau extérieur à l'intérieur). Une erreur co�
 de la cohérence et libère l'anneau précédent ; la phase 2 accélère les anneaux
 restants à chaque verrouillage, la phase 3 inverse leur sens. La victoire
 débloque la Clé 03 (SVG animé `key-03-usb.svg`) et termine la campagne
-principale. Les niveaux bonus restent accessibles depuis le DEV MODE.
+principale.
 
 ## Organisation du dépôt
 
@@ -129,7 +126,7 @@ docs/
 │   ├── composants/
 │   ├── niveaux/
 │   └── pages/
-├── html/           Pages du jeu et niveaux bonus 31 à 60
+├── html/           Pages du jeu et des niveaux 1 à 30
 └── js/
     ├── bosses/     Contrôleurs des combats
     ├── niveaux/    Contrôleurs des niveaux et puzzles
@@ -142,14 +139,13 @@ documentation/
 
 Les pages de la campagne sont regroupées par blocs de cinq dans
 `docs/html/partie-1_niveau-1_à_5/` à
-`docs/html/partie-6_niveau-26_à_30/`. Les pages 31 à 60 se trouvent dans
-`docs/html/partie-bonus/`.
+`docs/html/partie-6_niveau-26_à_30/`.
 
 Fichiers importants :
 
 - `docs/js/save-system.js` : comptes, sauvegardes et clés débloquées ;
 - `docs/js/niveaux/partie-1-puzzles.js` : puzzles des niveaux 1 à 10 ;
-- `docs/css/niveaux/` : styles communs, plages de niveaux 11–30 et styles des pages bonus ;
+- `docs/css/niveaux/` : styles communs et un fichier par partie (1 à 6) ;
 - `docs/js/bosses/` : contrôleurs des trois combats de boss ;
 - `docs/js/key-fragments.js` : assemblage des fragments et cinématique de récompense ;
 - `docs/js/dev-mode.js` : accès développeur aux niveaux et scènes spéciales ;

@@ -3,10 +3,6 @@
  * Styles propres à ces niveaux, chargés après niveaux-communs.css (base partagée).
  * ========================================================================== */
 
-.key-redesign-scene .reward-feedback.is-success { color: var(--success); }
-
-.interlude-status.is-success { color: var(--success); text-shadow: 0 0 12px rgba(128, 255, 207, 0.45); }
-
 /* ---------------------------------------------------------------------------
  * MIROIRS // Puzzle de miroirs, projecteur et rayons (.mirror-*).
  * ------------------------------------------------------------------------- */
@@ -27,17 +23,6 @@
       transparent 0 39px,
       rgba(121, 247, 255, 0.05) 40px
     );
-}
-
-.laser-cell.is-receiver {
-  border-color: var(--success, #80ffcf);
-  background: rgba(128, 255, 207, 0.14);
-  color: var(--success, #80ffcf);
-  box-shadow: 0 0 14px rgba(128, 255, 207, 0.22);
-}
-
-.laser-cell.is-emitter {
-  color: #ff9b76;
 }
 
 /* STYLES PUZZLES // niveaux 21 a 30, repartis sur les parties 5 et 6. */
@@ -599,15 +584,15 @@ body.part-three-theme {
 .part-three-theme .level-header,
 .part-three-theme .level-intro,
 .part-three-theme .puzzle-panel,
-.part-three-theme .level-footer {
+.part-three-theme .level-footer,
+.rhythm-pulse,
+.mirror-control,
+.sorting-token {
     animation: none !important;
     transition: none !important;
   }
 
-.memory-pad,
-.rhythm-pulse,
-.mirror-control,
-.sorting-token {
+.memory-pad {
     animation: none !important;
     transition: none !important;
   }
@@ -893,8 +878,9 @@ body.part-three-theme {
     animation: ladder-pop 260ms cubic-bezier(0.2, 1.2, 0.4, 1);
   }
 
-.ladder-modal.is-ladder .ladder-dialog,
-  .ladder-modal.is-final .ladder-dialog { border-color: #c6ff4d; box-shadow: 0 0 40px rgba(198, 255, 77, 0.3); }
+.ladder-modal.is-ladder .ladder-dialog { border-color: #c6ff4d; box-shadow: 0 0 40px rgba(198, 255, 77, 0.3); }
+
+.ladder-modal.is-final .ladder-dialog { border-color: #c6ff4d; box-shadow: 0 0 40px rgba(198, 255, 77, 0.3); }
 
 .ladder-dialog h3 {
     margin: 0 0 8px;

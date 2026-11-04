@@ -23,15 +23,16 @@ reste [Info-fr.txt](./Info-fr.txt).
 
 **Campagne active :** 30 niveaux répartis en six parties de cinq niveaux (1–5, 6–10, 11–15, 16–20, 21–25 et 26–30). Les boss 01, 02 et 03 suivent respectivement les niveaux 10, 20 et 30.
 
-Les niveaux 31 à 40 sont des bonus jouables, dont les labyrinthes procéduraux 32 à 40. Les pages 41 à 60 sont présentes dans la section bonus, mais affichent encore « En construction ».
+Les niveaux bonus 31 à 60 ont été supprimés : la campagne se limite aux niveaux 1 à 30.
 
 ### Travail réalisé aujourd'hui
 
 - **Accueil et performances :** visuel neural SVG plein écran, panneau de lecture de l'IA repositionné pour les écrans étroits et traductions FR/EN. Les effets communs ont été regroupés dans `ui-effects.js` et `ui-effects.css` ; des anciens scripts ont été retirés et le redimensionnement du canvas a été ajusté.
 - **Sauvegarde :** boutons « Save » et code JavaScript associé supprimés des pages concernées ; la progression continue d'être sauvegardée automatiquement.
-- **Niveaux bonus :** labyrinthes procéduraux 32–40 et éveil du fragment bonus ; pages 41–60 préparées, avec les défis et traductions toujours en construction.
+- **Niveaux bonus :** niveaux 31 à 60 supprimés (pages, scripts et feuilles CSS).
 - **Exemples visuels :** exemples des niveaux 1 à 30 réalignés sur les mécaniques des puzzles, avec grilles d'exemple adaptées.
-- **CSS :** feuilles nommées selon leur portée plutôt que d'après un numéro de partie historique. Les styles communs et ceux des niveaux 11–30 sont séparés ; les feuilles identiques des bonus 41–50 et 51–60 ont été fusionnées.
+- **CSS :** un fichier par partie (partie-N_niveau-a_à_b.css) en plus de 
+iveaux-communs.css.
 - **Cache et références :** versions des scripts et feuilles CSS harmonisées dans les pages concernées.
 
 ### Commits Git du 02/11/2026
@@ -95,7 +96,7 @@ Cette journée portait sur l'habillage du hub, de l'accueil et du DEV MODE, ains
 - **Type :** expérience narrative et jeu de puzzles web statique
 - **Déploiement visé :** GitHub Pages
 - **Version de travail :** bêta v4
-- **Jalon actuel :** campagne principale de 30 niveaux en six parties de cinq niveaux ; trois boss après les niveaux 10, 20 et 30 ; bonus 31–40 jouables et 41–60 en construction
+- **Jalon actuel :** campagne principale de 30 niveaux en six parties de cinq niveaux ; trois boss après les niveaux 10, 20 et 30
 - **Fondations disponibles :** accueil, connexion, introduction interactive, sauvegarde par compte,
   mode développeur, navigation partagée et responsive multi-écrans
 
@@ -178,12 +179,6 @@ compatibles avec le système de sauvegarde existant.
   le réseau dormant au niveau 20. Le niveau 20 existait déjà ; ses mécaniques ont été
   réaffectées plutôt que dupliquées.
 
-### Niveaux bonus 31 à 60
-
-- Niveau 31 : le Recycleur, un jeu d'action avec pièges et mécanismes de déplacement.
-- Niveaux 32 à 40 : labyrinthes procéduraux avec des mécaniques distinctes et textes FR/EN.
-- Niveaux 41 à 60 : pages bonus préparées, mais encore marquées « En construction ».
-
 ### Boss — `boss-02.html`
 
 - Combat placé après le niveau 20 et avant l'entrée dans la partie 5.
@@ -219,9 +214,10 @@ compatibles avec le système de sauvegarde existant.
   procéduraux 32–40 sont partagés par `partie-4_niveaux-proceduraux.js`.
 - Les styles de `docs/css/niveaux/` sont nommés selon leur portée :
   `niveaux-communs.css`, un fichier par partie (`partie-1_niveau-1_à_5.css` … `partie-6_niveau-26_à_30.css`),
-  `partie-bonus_niveau-31_à_40.css` et `partie-bonus_niveau-41_à_60.css`.
-- Les anciennes feuilles de redesign ont été fusionnées dans la feuille commune et les styles
-  identiques des bonus 41–50 et 51–60 ont été regroupés.
+  
+iveaux-communs.css et un fichier par partie (partie-1_niveau-1_à_5.css … partie-6_niveau-26_à_30.css).
+- Les anciennes feuilles de redesign ont été fusionnées dans la feuille commune.
+
 - Les effets d'interface partagés utilisent `docs/js/ui-effects.js` et
   `docs/css/composants/ui-effects.css`.
 - `level-guard.js` fournit l'accès aux niveaux, la progression et les exemples visuels.
@@ -235,7 +231,7 @@ compatibles avec le système de sauvegarde existant.
 - Vérification navigateur des exemples des niveaux 1 à 30 : aucun exemple manquant ni erreur
   JavaScript, avec contrôle des grilles des niveaux 4 et 11.
 - Vérification navigateur de neuf pages représentatives : feuilles CSS attendues chargées
-  pour les six parties et les plages bonus 31–60, sans erreur JavaScript.
+  pour les six parties, sans erreur JavaScript.
 - Vérification automatisée des chemins CSS locaux dans les 67 pages HTML de `docs/html/` :
   aucun fichier référencé manquant.
 - Vérifications antérieures : parcours du boss 01 et test du boss 02 tactique, traductions
@@ -245,8 +241,8 @@ compatibles avec le système de sauvegarde existant.
 ## Travail en cours
 
 - Valider complètement les parcours des six parties et des trois boss sur desktop et mobile.
-- Vérifier les labyrinthes bonus 31–40 et leurs textes FR/EN.
-- Créer les puzzles des niveaux bonus 41–60, encore en construction.
+
+
 - Relier complètement les six clés aux verrous et fragments narratifs.
 - Effectuer une validation complète des parcours sur GitHub Pages.
 
@@ -400,7 +396,7 @@ compatibles avec le système de sauvegarde existant.
 ## Prochain jalon recommandé
 
 1. Tester les six parties et les trois boss sur ordinateur et mobile.
-2. Vérifier les exemples visuels, les traductions et les effets réduits sur toutes les pages jouables.
+3. Valider l'ensemble de la campagne de 30 niveaux.
 3. Terminer les puzzles bonus 41–60 et valider les bonus 31–40.
 4. Vérifier les clés, les liens et les ressources sur le déploiement GitHub Pages.
 5. Préparer une nouvelle version bêta après ces validations.
@@ -458,10 +454,10 @@ compatibles avec le système de sauvegarde existant.
 
 ### 01/11/2026 — Noms des fichiers des parties
 
-- La campagne active est répartie en six dossiers de cinq niveaux : 1–5, 6–10, 11–15, 16–20, 21–25 et 26–30. Les pages 31–60 restent des niveaux bonus dans `docs/html/partie-bonus/`.
+- La campagne active est répartie en six dossiers de cinq niveaux : 1–5, 6–10, 11–15, 16–20, 21–25 et 26–30. Les niveaux bonus 31–60 ont été supprimés.
 
 ### 01/11/2026 — Réduction des défis
 
 - La campagne active comporte six parties de cinq niveaux chacune, du niveau 1 au niveau 30.
-- Les trois boss sont placés après les parties 2, 4 et 6. Les niveaux 31 à 60 restent séparés de la campagne dans le dossier bonus.
+- Les trois boss sont placés après les parties 2, 4 et 6.
 - Les autres pages de niveaux sont conservées en archive et redirigent vers le hub hors DEV MODE.

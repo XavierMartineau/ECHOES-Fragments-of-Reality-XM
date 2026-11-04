@@ -3,8 +3,6 @@
  * Styles propres à ces niveaux, chargés après niveaux-communs.css (base partagée).
  * ========================================================================== */
 
-.transmission-console.is-complete { border-color: rgba(128, 255, 207, 0.65); box-shadow: 0 0 40px rgba(128, 255, 207, 0.2); }
-
 .level-back-button {
   position: fixed;
   top: 18px;
@@ -25,37 +23,6 @@
 .level-back-button:focus-visible {
   background: rgba(121, 247, 255, 0.18);
   box-shadow: 0 0 18px rgba(121, 247, 255, 0.32);
-  outline: none;
-}
-
-.sequence-progress-dot.is-complete {
-  border-color: var(--success);
-  background: var(--success);
-  box-shadow: 0 0 10px rgba(128, 255, 207, 0.85);
-}
-
-.primary-alignment-progress .sequence-progress-dot.is-complete {
-  animation: alignment-dot-activate 0.45s ease-out both;
-}
-
-.primary-alignment-progress .sequence-progress-dot.is-complete:nth-child(n + 2)::before {
-  position: absolute;
-  top: 2px;
-  right: 100%;
-  width: 8px;
-  height: 2px;
-  background: var(--success);
-  box-shadow: 0 0 8px rgba(128, 255, 207, 0.8);
-  content: "";
-  transform-origin: right center;
-  animation: alignment-line-draw 0.35s ease-out 0.16s both;
-}
-
-.geometry-point.is-connected {
-  border-color: var(--success);
-  background: rgba(128, 255, 207, 0.24);
-  box-shadow: 0 0 24px rgba(128, 255, 207, 0.76);
-  cursor: grabbing;
   outline: none;
 }
 
@@ -665,6 +632,32 @@ body.part-two-theme {
   text-align: right;
 }
 
+.logic-cell {
+  min-width: 0;
+  padding: 0;
+  border: 1px solid rgba(75, 158, 255, 0.42);
+  border-radius: 9px;
+  background: rgba(75, 158, 255, 0.08);
+  cursor: pointer;
+  transition: background 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.logic-cell.is-on {
+  border-color: #80ffcf;
+  background: radial-gradient(circle, rgba(128, 255, 207, 0.85), rgba(75, 158, 255, 0.22) 70%);
+  box-shadow: 0 0 20px rgba(128, 255, 207, 0.48), inset 0 0 14px rgba(128, 255, 207, 0.32);
+}
+
+.logic-cell:not(:disabled):hover,
+.logic-cell:focus-visible {
+  outline: 2px solid #d4dce7;
+  outline-offset: 2px;
+}
+
+.logic-cell:disabled {
+  cursor: default;
+}
+
 .level-14-shell .sequence-controls,
 .level-15-shell .sequence-controls,
 .level-16-shell .sequence-controls,
@@ -705,7 +698,8 @@ body.part-two-theme {
     transition: none;
   }
 
-.prism-cell {
+.prism-cell,
+  .logic-cell {
     transition: none;
   }
 }
@@ -725,6 +719,12 @@ body.part-two-theme {
   letter-spacing: 0.08em;
   text-align: center;
   font-variant-numeric: tabular-nums;
+}
+
+.level-11-timer.is-warning {
+  border-color: rgba(255, 190, 110, 0.86);
+  color: #ffd18a;
+  box-shadow: 0 0 15px rgba(255, 190, 110, 0.28);
 }
 
 /* Niveau 11 // Anneaux de résonance : bouton d'indice et minuteur de 30 secondes. */
@@ -904,7 +904,14 @@ body.part-two-theme {
   pointer-events: none;
 }
 
-.resonance-lane-title,
+.resonance-lane-title {
+  position: relative;
+  margin: 0 0 12px;
+  color: #4b9eff;
+  font: 0.62rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.12em;
+}
+
 .resonance-tray h3 {
   position: relative;
   margin: 0 0 12px;
@@ -1343,8 +1350,176 @@ body.part-two-theme {
   }
 }
 
+.scale-weight {
+  min-width: 42px;
+  padding: 9px 10px;
+  border: 1px solid rgba(75, 158, 255, 0.6);
+  border-radius: 8px;
+  background: rgba(75, 158, 255, 0.14);
+  color: #d4dce7;
+  cursor: pointer;
+  font: 0.85rem var(--font-display, "Orbitron", sans-serif);
+}
+
+.scale-weight:not(:disabled):hover,
+.scale-weight:focus-visible {
+  outline: 2px solid #d4dce7;
+  outline-offset: 2px;
+}
+
+.scale-weight.is-selected {
+  border-color: #ffffff;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.7);
+}
+
 @keyframes scale-target-pulse {
   50% { box-shadow: 0 0 28px rgba(128, 255, 207, 0.9), inset 0 0 20px rgba(128, 255, 207, 0.4); }
+}
+
+.scale-weight:disabled {
+  cursor: default;
+}
+
+.tower-peg {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 230px;
+  padding: 0 4px 8px;
+  border: 1px solid rgba(75, 158, 255, 0.3);
+  border-radius: 10px;
+  background: rgba(75, 158, 255, 0.05);
+  cursor: pointer;
+}
+
+.tower-peg::before {
+  content: "";
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  width: 6px;
+  height: calc(100% - 24px);
+  border-radius: 4px;
+  background: rgba(212, 220, 231, 0.35);
+  transform: translateX(-50%);
+}
+
+.tower-peg:last-child {
+  border-color: rgba(128, 255, 207, 0.5);
+}
+
+.tower-peg.is-selected {
+  border-color: #4b9eff;
+  box-shadow: 0 0 18px rgba(75, 158, 255, 0.4);
+}
+
+.tower-peg:not(:disabled):hover,
+.tower-peg:focus-visible {
+  outline: 2px solid #d4dce7;
+  outline-offset: 2px;
+}
+
+.tower-peg:disabled {
+  cursor: default;
+}
+
+.tower-stack {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 3px;
+  width: 100%;
+}
+
+.tower-disc {
+  display: block;
+  height: 20px;
+  border-radius: 6px;
+  background: hsl(var(--disc-hue) 80% 58%);
+  box-shadow: 0 0 10px hsl(var(--disc-hue) 80% 58% / 0.5);
+  transition: transform 160ms ease;
+}
+
+.tower-disc.is-lifted {
+  transform: translateY(-14px);
+}
+
+.code-equation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid rgba(75, 158, 255, 0.25);
+  border-radius: 8px;
+  background: rgba(75, 158, 255, 0.05);
+  color: #d4dce7;
+  font: 1rem var(--font-display, "Orbitron", sans-serif);
+}
+
+.code-symbol {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.code-result {
+  min-width: 2ch;
+  color: #4b9eff;
+}
+
+.code-answer,
+.code-wheel {
+  padding: 6px 8px;
+  border: 1px solid rgba(75, 158, 255, 0.6);
+  border-radius: 8px;
+  background: #07142b;
+  color: #d4dce7;
+  cursor: pointer;
+  font: 0.95rem var(--font-display, "Orbitron", sans-serif);
+}
+
+.code-answer {
+  width: 78px;
+  text-align: center;
+}
+
+.code-wheel {
+  width: 58px;
+  height: 58px;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+.code-answer.is-correct,
+.code-wheel.is-correct {
+  border-color: #80ffcf;
+  color: #80ffcf;
+  opacity: 1;
+}
+
+.code-answer.is-wrong {
+  border-color: #ff6b8a;
+  color: #ff6b8a;
+}
+
+.code-wheel.is-active {
+  border-color: #80ffcf;
+  box-shadow: 0 0 18px rgba(128, 255, 207, 0.6);
+  animation: scale-target-pulse 1.1s ease-in-out infinite;
+}
+
+.code-wheel:disabled:not(.is-correct) {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.code-answer:focus-visible,
+.code-wheel:focus-visible {
+  outline: 2px solid #d4dce7;
+  outline-offset: 2px;
 }
 
 [data-symbol="0"] { color: #ff8edb; }
@@ -1356,3 +1531,188 @@ body.part-two-theme {
 [data-symbol="3"] { color: #80ffcf; }
 
 [data-symbol="4"] { color: #ff9f6b; }
+
+.sd-cell {
+  border: 1px solid rgba(75, 158, 255, 0.28);
+  background: rgba(75, 158, 255, 0.05);
+}
+
+.sd-cell input {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #80d4ff;
+  caret-color: transparent;
+  font: 700 calc(var(--sd-cell) * 0.5) var(--font-display, "Orbitron", sans-serif);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.sd-cell input:focus {
+  outline: none;
+}
+
+.sd-cell.is-given {
+  background: rgba(75, 158, 255, 0.16);
+}
+
+.sd-cell.is-given input {
+  color: #ffffff;
+}
+
+.sd-cell.is-hidden-row:not(.is-given) {
+  box-shadow: inset 0 0 0 1px rgba(255, 209, 102, 0.45);
+}
+
+.sd-cell.is-active {
+  background: rgba(75, 158, 255, 0.45);
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.55);
+}
+
+.sd-cell.is-wrong input {
+  color: #ff6b8a;
+}
+
+.sd-cell.is-wrong {
+  background: rgba(255, 107, 138, 0.2);
+}
+
+.sd-letter {
+  padding: 9px 0;
+  border: 1px solid rgba(75, 158, 255, 0.5);
+  border-radius: 6px;
+  background: rgba(75, 158, 255, 0.1);
+  color: #d4dce7;
+  cursor: pointer;
+  font: 700 0.95rem var(--font-display, "Orbitron", sans-serif);
+}
+
+.sd-letter:hover {
+  background: rgba(75, 158, 255, 0.3);
+}
+
+.sd-cell {
+  position: relative;
+}
+
+.sd-cell[data-number]::before {
+  content: attr(data-number);
+  position: absolute;
+  top: 1px;
+  left: 3px;
+  color: #8fa3bd;
+  font: 0.55rem var(--font-display, "Orbitron", sans-serif);
+  pointer-events: none;
+}
+
+.sd-cell[data-order]::after {
+  content: attr(data-order);
+  position: absolute;
+  right: 3px;
+  bottom: 1px;
+  color: #ffd166;
+  font: 0.55rem var(--font-display, "Orbitron", sans-serif);
+  pointer-events: none;
+}
+
+.sd-code-input {
+  width: 64px;
+  height: 40px;
+  border: 1px solid #ffd166;
+  border-radius: 6px;
+  background: rgba(255, 209, 102, 0.08);
+  color: #ffd166;
+  font: 700 1rem var(--font-display, "Orbitron", sans-serif);
+  text-align: center;
+}
+
+.sd-code-input.is-wrong {
+  border-color: #ff6b8a;
+  color: #ff6b8a;
+}
+
+.sd-letter {
+  cursor: default;
+  font-size: 0.75rem;
+}
+
+.sd-letter:hover {
+  background: rgba(75, 158, 255, 0.1);
+}
+
+.sd-cell button {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #80d4ff;
+  cursor: pointer;
+  font: 700 calc(var(--sd-cell) * 0.5) var(--font-display, "Orbitron", sans-serif);
+}
+
+.sd-cell.is-start {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.sd-cell.is-found {
+  background: rgba(128, 255, 207, 0.22);
+}
+
+.sd-cell.is-found button {
+  color: #80ffcf;
+}
+
+.sd-cell.is-hidden-row {
+  background: rgba(255, 209, 102, 0.25);
+}
+
+.sd-cell.is-hidden-row button {
+  color: #ffd166;
+}
+
+@media (max-width: 560px) {
+.tower-peg {
+    min-height: 190px;
+  }
+
+.tower-disc {
+    height: 16px;
+  }
+
+.code-wheel {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+.tower-disc {
+    transition: none;
+  }
+}
+
+.sd-cell.is-hidden-row:not(.is-given) {
+  background: rgba(255, 209, 102, 0.45);
+  box-shadow: inset 0 0 0 2px #ffd166, 0 0 10px rgba(255, 209, 102, 0.55);
+}
+
+.sd-cell.is-hidden-row button {
+  color: #fff3c4;
+  font-weight: 900;
+  text-shadow: 0 0 8px rgba(255, 209, 102, 0.9);
+}
+
+.sd-cell[data-order]::after {
+  right: 2px;
+  bottom: 2px;
+  min-width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #ffd166;
+  color: #0a0f1c;
+  font: 900 0.8rem/17px var(--font-display, "Orbitron", sans-serif);
+  text-align: center;
+}

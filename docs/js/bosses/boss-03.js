@@ -429,8 +429,8 @@
         return;
       }
       window.EchoesSave?.saveProgress({
-        currentPage: "level-31",
-        currentLevel: 31,
+        currentPage: "niveaux",
+        currentLevel: 30,
       });
       updateKeyHud();
       nextButton.hidden = false;

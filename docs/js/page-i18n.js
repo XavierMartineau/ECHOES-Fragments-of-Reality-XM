@@ -138,7 +138,7 @@
     initializeLegacyPageI18n();
   } else {
     const translationScript = document.createElement("script");
-    translationScript.src = new URL("translations.en.js?v=3", sourceScript.src).href;
+    translationScript.src = new URL("translations.en.js?v=4", sourceScript.src).href;
     translationScript.addEventListener("load", initializeLegacyPageI18n, {
       once: true,
     });

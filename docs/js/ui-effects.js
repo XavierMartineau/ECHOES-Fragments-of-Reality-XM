@@ -194,7 +194,7 @@
         : isThirdBoss
           ? 30
           : 0;
-  const part = level ? Math.ceil(level / 10) : path.includes("bonus") ? 7 : 0;
+  const part = level ? Math.ceil(level / 10) : 0;
   const palettes = [
     ["#79f7ff", "#b36cff"],
     ["#79f7ff", "#b36cff"],
