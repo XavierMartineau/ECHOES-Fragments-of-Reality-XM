@@ -138,7 +138,7 @@
     initializeLegacyPageI18n();
   } else {
     const translationScript = document.createElement("script");
-    translationScript.src = new URL("translations.js", sourceScript.src).href;
+    translationScript.src = new URL("translations.en.js?v=1", sourceScript.src).href;
     translationScript.addEventListener("load", initializeLegacyPageI18n, {
       once: true,
     });
@@ -146,7 +146,7 @@
       "error",
       () => {
         console.error(
-          "Failed to load translations.js for English page translations.",
+          "Failed to load translations.en.js for English page translations.",
         );
       },
       { once: true },

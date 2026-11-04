@@ -3,8 +3,9 @@
 // ============================================================================
 (() => {
   const translations = window.translations || {};
-  const availableLanguages = Object.keys(translations);
-  if (availableLanguages.length < 2) return;
+  // Seule la langue courante est chargée (voir translations.js) : la liste est donc fixe.
+  const availableLanguages = ["fr", "en"];
+  if (!window.translations) return;
 
   const existing = document.querySelector(".lang-switcher");
   if (!document.body.classList.contains("index-page")) {
@@ -48,7 +49,7 @@
     const language = button.dataset.lang || button.dataset.language;
     button.classList.toggle("active", language === currentLanguage);
     button.addEventListener("click", () => {
-      if (translations[language]) {
+      if (availableLanguages.includes(language)) {
         localStorage.setItem("echoes-language", language);
         window.location.reload();
       }

@@ -498,3 +498,76 @@
   });
   document.addEventListener("pointerenter", () => started && root.classList.add("fx-on"));
 })();
+
+
+// ============================================================================
+// Socle commun : accessibilité (lien d'évitement, réglage « réduire les effets ») .
+// ============================================================================
+(() => {
+  const script = document.currentScript;
+  const root = document.documentElement;
+  const en = (() => {
+    try {
+      return localStorage.getItem("echoes-language") === "en";
+    } catch (e) {
+      return false;
+    }
+  })();
+  const read = (key) => {
+    try {
+      return localStorage.getItem(key);
+    } catch (e) {
+      return null;
+    }
+  };
+
+  const style = document.createElement("style");
+  style.textContent = `
+    .skip-link{position:fixed;left:12px;top:-60px;z-index:100000;padding:10px 16px;border-radius:8px;background:#05070f;color:#79f7ff;border:1px solid #79f7ff;font:600 .85rem sans-serif;text-decoration:none;transition:top .15s}
+    .skip-link:focus{top:calc(12px + env(safe-area-inset-top))}
+    .fx-toggle{position:fixed;left:calc(12px + env(safe-area-inset-left));bottom:calc(12px + env(safe-area-inset-bottom));z-index:9000;min-width:44px;min-height:44px;padding:0 12px;border-radius:22px;border:1px solid rgba(121,247,255,.45);background:rgba(5,7,15,.82);color:#cfeff5;font:600 .72rem sans-serif;letter-spacing:.04em;cursor:pointer;opacity:.7;transition:opacity .2s,background .2s}
+    .fx-toggle:hover,.fx-toggle:focus-visible,.fx-toggle[aria-pressed="true"]{opacity:1}
+    .fx-toggle[aria-pressed="true"]{background:rgba(121,247,255,.22)}
+    .fx-reduce *,.fx-reduce *::before,.fx-reduce *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  `;
+  document.head.appendChild(style);
+
+  const main = document.querySelector("main");
+  if (main) {
+    if (!main.id) main.id = "main-content";
+    if (!main.hasAttribute("tabindex")) main.setAttribute("tabindex", "-1");
+    const skip = document.createElement("a");
+    skip.className = "skip-link";
+    skip.href = `#${main.id}`;
+    skip.textContent = en ? "Skip to content" : "Aller au contenu";
+    document.body.prepend(skip);
+  }
+
+  const reduceOnStart =
+    read("echoes-reduce") === "1" ||
+    (read("echoes-reduce") === null &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  const toggle = document.createElement("button");
+  toggle.type = "button";
+  toggle.className = "fx-toggle";
+  const labels = en
+    ? ["Reduce effects", "Effects reduced"]
+    : ["Réduire les effets", "Effets réduits"];
+  const apply = (on, save) => {
+    root.classList.toggle("fx-reduce", on);
+    toggle.setAttribute("aria-pressed", String(on));
+    toggle.textContent = on ? labels[1] : labels[0];
+    if (save) {
+      try {
+        localStorage.setItem("echoes-reduce", on ? "1" : "0");
+      } catch (e) {}
+    }
+    window.dispatchEvent(new CustomEvent("echoes:reduce", { detail: on }));
+  };
+  toggle.addEventListener("click", () =>
+    apply(!root.classList.contains("fx-reduce"), true),
+  );
+  // Le bouton n'existe que sur l'accueil ; le réglage mémorisé s'applique ensuite partout.
+  if (document.body.classList.contains("index-page")) document.body.appendChild(toggle);
+  apply(reduceOnStart, false);
+})();

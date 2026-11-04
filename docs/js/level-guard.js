@@ -3,7 +3,7 @@
   // Fond animé de la partie (voir scene-bg.js).
   if (document.currentScript) {
     const scene = document.createElement("script");
-    scene.src = new URL("scene-bg.js?v=3", document.currentScript.src).href;
+    scene.src = new URL("scene-bg.js?v=4", document.currentScript.src).href;
     document.body.appendChild(scene);
   }
 

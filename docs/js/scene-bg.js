@@ -44,7 +44,9 @@
   const me = document.currentScript;
   const base = me ? me.src : location.href;
   const path = decodeURIComponent(location.pathname);
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    store("echoes-reduce") === "1";
 
   const load = (file) =>
     new Promise((ok, ko) => {
@@ -91,6 +93,7 @@
       @keyframes sb-line{from{left:0}to{left:100%}}
       @media (prefers-reduced-motion:reduce){.sb-neb{animation:none}.sb-reveal{display:none}}
       .fx-lite .sb-neb{animation:none;will-change:auto}
+.fx-reduce .sb-neb{display:none}
     `;
     document.head.appendChild(style);
 
@@ -183,7 +186,7 @@
     }
 
     let last = 0;
-    let frozen = false;
+    let frozen = reduceMotion;
     function frame(now) {
       if (frozen) return;
       requestAnimationFrame(frame);
@@ -202,6 +205,14 @@
       s.my += (ty - s.my) * Math.min(1, s.dt * 3);
       render();
     }
+
+    // Réglage « réduire les effets » (ui-effects.js) : fige ou relance l'animation sans recharger.
+    window.addEventListener("echoes:reduce", (e) => {
+      const wasFrozen = frozen;
+      frozen = !!e.detail;
+      if (frozen) render();
+      else if (wasFrozen) requestAnimationFrame(frame);
+    });
 
     resize();
     if (!reduceMotion) requestAnimationFrame(frame);

@@ -198,6 +198,9 @@ node --check docs/js/bosses/boss-01.js
 git diff --check
 ```
 
+Les dictionnaires sont séparés par langue (`translations.fr.js`, `translations.en.js`) :
+`translations.js` ne charge que la langue choisie.
+
 Les parcours principaux sont également vérifiés dans un navigateur : navigation,
 dialogues, progression, sauvegarde de clé, responsive et liens locaux.
 

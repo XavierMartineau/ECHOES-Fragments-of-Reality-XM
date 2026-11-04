@@ -2022,3 +2022,44 @@ html body .puzzle-actions .level-example {
     transition: none;
   }
 }
+/* Mobile / tablette : encoches, débordements, performance tactile. */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  overflow-x: clip;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+video,
+canvas {
+  max-width: 100%;
+}
+
+@media (pointer: coarse) {
+  button,
+  a.button,
+  [role="button"],
+  select {
+    min-height: 44px;
+  }
+
+  /* Le flou d'arrière-plan est très coûteux sur GPU mobile. */
+  * {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
+@media (max-width: 900px) {
+  /* Les sections hors écran ne sont pas rendues avant d'être proches du viewport. */
+  footer,
+  .level-footer {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 200px;
+  }
+}
