@@ -218,8 +218,8 @@ compatibles avec le système de sauvegarde existant.
 - Les scripts des puzzles sont regroupés par lots dans `docs/js/niveaux/` ; les labyrinthes
   procéduraux 32–40 sont partagés par `partie-4_niveaux-proceduraux.js`.
 - Les styles de `docs/css/niveaux/` sont nommés selon leur portée :
-  `niveaux-communs.css`, `niveaux-11-20.css`, `niveaux-21-30.css`,
-  `niveaux-bonus-31-40.css` et `niveaux-bonus-41-60.css`.
+  `niveaux-communs.css`, `partie-3-4_niveau-11_à_20.css`, `partie-5-6_niveau-21_à_30.css`,
+  `partie-bonus_niveau-31_à_40.css` et `partie-bonus_niveau-41_à_60.css`.
 - Les anciennes feuilles de redesign ont été fusionnées dans la feuille commune et les styles
   identiques des bonus 41–50 et 51–60 ont été regroupés.
 - Les effets d'interface partagés utilisent `docs/js/ui-effects.js` et
@@ -448,7 +448,7 @@ compatibles avec le système de sauvegarde existant.
 - **Pages Boss** : le logo `.brand` de `boss-01/02/03.html` pointe vers `niveaux.html`. Les pages `niveau-XX` pointent toujours vers l'accueil.
 - **Entité ECHO** : nouveau composant canvas `echo-ai.js` + `echo-ai.css` (anneaux, spectre vocal radial, étincelles, noyau vitré, mode glitch rouge). Rendu identique PC/mobile, branché via `EchoAI.init` / `EchoAI.setState` dans `introduction.js`.
 - **Intro** : fond SVG (`intro-bg.svg`, `intro-shards.svg`) à la place de la grille et des lignes bleues ; barre du haut sur une ligne ; footer centré avec « Tous droits réservés » ; point lumineux du dialogue aligné avec le titre.
-- **Niveau 31 mobile** (`niveaux-bonus-31-40.css`) : plateau dimensionné selon la hauteur d'écran, boutons ◀ ▶ juste sous le plateau, marges du panneau.
+- **Niveau 31 mobile** (`partie-bonus_niveau-31_à_40.css`) : plateau dimensionné selon la hauteur d'écran, boutons ◀ ▶ juste sous le plateau, marges du panneau.
 - **Niveau 31 jeu** (`partie-4_niveau-31_à_40.js`) : les pièges du dernier étage du secteur 1 (scie, gardien, tapis) ne traversent plus la barre de séparation ; lasers et rebondisseurs en sont exclus.
 - **Niveau 31 couleurs** : fond et cadre bleu nuit/violet (plus de vert), danger en rouge/orange (gardiens, scies, lasers), tapis roulants cyan, rebondisseurs et portails inchangés.
 - **Boutons ECHOES** : sur les 40 pages de niveau, le logo du haut renvoie à `niveaux.html`.

@@ -5,6 +5,6 @@
   try {
     if (localStorage.getItem("echoes-language") === "en") lang = "en";
   } catch (e) {}
-  const url = new URL(`translations.${lang}.js?v=1`, document.currentScript.src).href;
+  const url = new URL(`translations.${lang}.js?v=2`, document.currentScript.src).href;
   document.write(`<script src="${url}"><\/script>`);
 })();
