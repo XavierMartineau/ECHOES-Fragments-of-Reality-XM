@@ -286,7 +286,6 @@
       button.addEventListener("click", () => {
         const open = button.dataset.accAll === "open";
         $$(".dm-acc").forEach((acc) => (acc.open = open));
-        msg(open ? "Toutes les catégories sont ouvertes." : "Toutes les catégories sont fermées.");
       }),
     );
     $("#dmFilter").addEventListener("input", (event) => {
