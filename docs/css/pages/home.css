@@ -1519,24 +1519,13 @@ html body.index-page .meta {
 }
 
 /* Accueil allégé : orbite et fond à 80 % d'opacité ; la sphère est réduite et placée au-dessus du texte. */
-html body.index-page .home-ai-orbit {
-  opacity: 0.32;
+/* Nébuleuse, orbite (32 %) et ampoule (75 %) sont fusionnées dans home-scene.svg. */
+body.index-page .home-skyline {
+  opacity: 1;
 }
 
 html body.index-page #background {
   opacity: 0.44;
-}
-
-html body.index-page .home-ai-core {
-  position: absolute;
-  inset: 50% auto auto 50%;
-  width: max(90vw, 90svh);
-  max-width: none;
-  height: auto;
-  transform: translate(-50%, -50%);
-  opacity: 0.75;
-  pointer-events: none;
-  user-select: none;
 }
 
 html body.index-page .content {

@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" fill="none">
+  <defs>
+    <radialGradient id="neb-a" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#79f7ff" stop-opacity=".30"/><stop offset="1" stop-color="#79f7ff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="neb-b" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#b36cff" stop-opacity=".34"/><stop offset="1" stop-color="#b36cff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="neb-c" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#4f6dff" stop-opacity=".26"/><stop offset="1" stop-color="#4f6dff" stop-opacity="0"/></radialGradient>
+  </defs>
+  <style>
+    .o{transform-box:fill-box;transform-origin:center;animation:float 22s ease-in-out infinite}
+    .o2{animation-duration:28s;animation-delay:-9s}.o3{animation-duration:34s;animation-delay:-15s}
+    .p{animation:tw 5s ease-in-out infinite}.p2{animation-delay:-1.6s}.p3{animation-delay:-3.2s}
+    .r{transform-box:fill-box;transform-origin:center}
+    .a{animation:spin 60s linear infinite}
+    .b{animation:spin 90s linear infinite reverse}
+    .c{animation:spin 140s linear infinite}
+    .glow{animation:glow 6s ease-in-out infinite}
+    .orbit-a{transform-box:fill-box;transform-origin:center;animation:rotate 46s linear infinite}
+    .orbit-b{transform-box:fill-box;transform-origin:center;animation:rotate 64s linear infinite reverse}
+    .orbit-c{transform-box:fill-box;transform-origin:center;animation:rotate 31s linear infinite}
+    .core-pulse{transform-box:fill-box;transform-origin:center;animation:pulse 5s ease-in-out infinite}
+    .nodes{animation:node-glow 3.8s ease-in-out infinite alternate}
+    @keyframes float{50%{transform:translate(70px,-50px) scale(1.12)}}
+    @keyframes tw{50%{opacity:.15}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes glow{50%{opacity:.45}}
+    @keyframes rotate{to{transform:rotate(360deg)}}
+    @keyframes pulse{50%{transform:scale(1.035);opacity:.8}}
+    @keyframes node-glow{to{opacity:.5}}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+  </style>
+
+  <g opacity=".7">
+    <ellipse class="o" cx="360" cy="260" rx="560" ry="420" fill="url(#neb-a)"/>
+    <ellipse class="o o2" cx="1240" cy="640" rx="620" ry="460" fill="url(#neb-b)"/>
+    <ellipse class="o o3" cx="860" cy="470" rx="520" ry="360" fill="url(#neb-c)"/>
+    <g fill="#bff6ff">
+      <circle class="p" cx="210" cy="130" r="1.6"/><circle class="p p2" cx="470" cy="610" r="1.2"/>
+      <circle class="p p3" cx="690" cy="170" r="1.8"/><circle class="p" cx="930" cy="760" r="1.3"/>
+      <circle class="p p2" cx="1130" cy="210" r="1.7"/><circle class="p p3" cx="1390" cy="480" r="1.3"/>
+      <circle class="p" cx="1500" cy="130" r="1.5"/><circle class="p p2" cx="120" cy="720" r="1.5"/>
+      <circle class="p p3" cx="820" cy="400" r="1.1"/><circle class="p" cx="1010" cy="540" r="1.4"/>
+    </g>
+  </g>
+
+  <svg x="0" y="-350" width="1600" height="1600" viewBox="0 0 800 800" opacity=".32">
+    <defs>
+      <linearGradient id="emb-g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#79f7ff"/>
+        <stop offset="1" stop-color="#b36cff"/>
+      </linearGradient>
+      <radialGradient id="emb-h" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#79f7ff" stop-opacity=".16"/>
+        <stop offset="1" stop-color="#79f7ff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <circle cx="400" cy="400" r="380" fill="url(#emb-h)" class="glow"/>
+    <g class="r a" stroke="url(#emb-g)" stroke-width="2" stroke-linecap="round">
+      <circle cx="400" cy="400" r="350" stroke-dasharray="340 60 120 60 260 60 180 60" opacity=".9"/>
+    </g>
+    <g class="r b" stroke="url(#emb-g)" stroke-width="1" opacity=".7">
+      <circle cx="400" cy="400" r="305" stroke-dasharray="3 9"/>
+    </g>
+    <g class="r c" stroke="#79f7ff" stroke-width="1.4" stroke-linecap="round" opacity=".8">
+      <circle cx="400" cy="400" r="262" stroke-dasharray="180 40 70 40 220 40"/>
+      <path d="M400 30v26M400 744v26M30 400h26M744 400h26" stroke-width="2"/>
+    </g>
+    <g class="r b" stroke="url(#emb-g)" stroke-width="1.6" stroke-linejoin="round" opacity=".85">
+      <path d="M400 168L600 284V380M600 420V516L400 632L200 516V284L360 192"/>
+    </g>
+    <g fill="url(#emb-g)" opacity=".7">
+      <g class="r a"><circle cx="400" cy="400" r="250" fill="none"/><polygon points="400,150 414,176 386,176"/></g>
+      <g class="r c"><circle cx="400" cy="400" r="210" fill="none"/><polygon points="610,400 624,416 596,416"/></g>
+      <g class="r b"><circle cx="400" cy="400" r="250" fill="none"/><polygon points="400,650 414,624 386,624"/></g>
+    </g>
+  </svg>
+
+  <svg x="80" y="-270" width="1440" height="1440" viewBox="0 0 640 640" opacity=".75">
+    <defs>
+      <radialGradient id="aura" cx="50%" cy="48%" r="50%">
+        <stop offset="0" stop-color="#79f7ff" stop-opacity=".24"/>
+        <stop offset=".46" stop-color="#8f70ff" stop-opacity=".1"/>
+        <stop offset="1" stop-color="#06101f" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="core" cx="40%" cy="32%" r="72%">
+        <stop offset="0" stop-color="#edffff" stop-opacity=".95"/>
+        <stop offset=".16" stop-color="#79f7ff" stop-opacity=".72"/>
+        <stop offset=".58" stop-color="#526dff" stop-opacity=".24"/>
+        <stop offset="1" stop-color="#b36cff" stop-opacity=".04"/>
+      </radialGradient>
+      <linearGradient id="line" x1="120" y1="120" x2="520" y2="520" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#a8ffff"/>
+        <stop offset=".52" stop-color="#79f7ff"/>
+        <stop offset="1" stop-color="#c078ff"/>
+      </linearGradient>
+      <filter id="glow-f" x="-80%" y="-80%" width="260%" height="260%">
+        <feGaussianBlur stdDeviation="8" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+      <filter id="soft-glow" x="-80%" y="-80%" width="260%" height="260%">
+        <feGaussianBlur stdDeviation="24"/>
+      </filter>
+      <clipPath id="sphere">
+        <circle cx="320" cy="320" r="152"/>
+      </clipPath>
+    </defs>
+
+    <circle cx="320" cy="320" r="292" fill="url(#aura)"/>
+    <circle cx="320" cy="320" r="160" fill="#79f7ff" fill-opacity=".08" filter="url(#soft-glow)"/>
+
+    <g class="orbit-a" stroke="url(#line)" stroke-linecap="round">
+      <circle cx="320" cy="320" r="282" stroke-width="1" stroke-dasharray="2 12" opacity=".48"/>
+      <circle cx="320" cy="320" r="248" stroke-width="2" stroke-dasharray="112 20 48 36 182 34" opacity=".66"/>
+      <path d="M320 37v38m0 490v38M37 320h38m490 0h38" stroke-width="2" opacity=".8"/>
+      <path d="m120 120 25 25m350 350 25 25m0-400-25 25M145 495l-25 25" stroke-width="2" opacity=".6"/>
+    </g>
+    <g class="orbit-b" stroke="url(#line)" stroke-linecap="round">
+      <circle cx="320" cy="320" r="207" stroke-width="1.5" stroke-dasharray="58 10 5 10 92 18 5 18" opacity=".72"/>
+      <circle cx="320" cy="320" r="178" stroke-width="1" stroke-dasharray="1 9" opacity=".38"/>
+      <path d="M320 112v24m0 368v24M112 320h24m368 0h24" stroke-width="3"/>
+    </g>
+    <g class="orbit-c" stroke="url(#line)" stroke-width="1.4" opacity=".7">
+      <path d="m320 110 182 105v210L320 530 138 425V215l182-105Z"/>
+      <path d="m320 146 151 87v174l-151 87-151-87V233l151-87Z" stroke-dasharray="36 8"/>
+      <path d="m226 158 188 324m0-324L226 482"/>
+    </g>
+
+    <g clip-path="url(#sphere)" stroke="#a9fbff" stroke-opacity=".42" stroke-width="1">
+      <circle cx="320" cy="320" r="152" fill="url(#core)" stroke="none"/>
+      <ellipse cx="320" cy="320" rx="150" ry="48"/>
+      <ellipse cx="320" cy="320" rx="150" ry="94"/>
+      <ellipse cx="320" cy="320" rx="48" ry="150"/>
+      <ellipse cx="320" cy="320" rx="94" ry="150"/>
+      <path d="M168 320h304M320 168v304"/>
+      <path d="m207 218 222 204M431 211 205 429"/>
+      <path d="m187 274 265 92M187 367l265-94"/>
+    </g>
+    <circle cx="320" cy="320" r="152" stroke="url(#line)" stroke-width="2" stroke-opacity=".85"/>
+    <circle class="core-pulse" cx="320" cy="320" r="118" fill="url(#core)" stroke="#d7ffff" stroke-opacity=".55" stroke-width="1.2"/>
+
+    <g stroke="url(#line)" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow-f)">
+      <path d="M320 234c-48 0-82 35-82 79 0 29 15 50 38 63v27h88v-27c23-13 38-34 38-63 0-44-34-79-82-79Z" stroke-width="2.2"/>
+      <path d="M290 417h60m-50 13h40m-30 13h20" stroke-width="2"/>
+      <path d="M273 306c11-15 25-22 47-22s36 7 47 22m-80 30c9-8 20-12 33-12s24 4 33 12" stroke-width="2"/>
+      <circle cx="320" cy="358" r="8" fill="#eaffff" stroke="none"/>
+    </g>
+    <circle cx="320" cy="358" r="28" fill="#79f7ff" fill-opacity=".28" filter="url(#soft-glow)"/>
+
+    <g class="nodes" fill="#eaffff" filter="url(#glow-f)">
+      <circle cx="138" cy="215" r="4"/><circle cx="502" cy="215" r="4"/>
+      <circle cx="138" cy="425" r="4"/><circle cx="502" cy="425" r="4"/>
+      <circle cx="320" cy="112" r="3"/><circle cx="320" cy="528" r="3"/>
+      <circle cx="112" cy="320" r="3"/><circle cx="528" cy="320" r="3"/>
+    </g>
+    <g stroke="#c8ffff" stroke-width="1" opacity=".7">
+      <path d="M72 320h28m440 0h28M320 72v28m0 440v28"/>
+      <path d="M320 182v-18m0 308v-18m-138-134h-18m308 0h-18"/>
+    </g>
+  </svg>
+</svg>
