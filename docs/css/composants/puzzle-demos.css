@@ -1,3 +1,7 @@
+/* ============================================================================
+   Exemples visuels animés affichés dans l'introduction de chaque niveau.
+   ============================================================================ */
+
 .generic-demo {
   display: flex;
   flex-wrap: wrap;

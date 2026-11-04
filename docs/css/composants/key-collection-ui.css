@@ -1,3 +1,7 @@
+/* ============================================================================
+   Panneau latéral des six clés de résonance (collection, états verrouillé/débloqué).
+   ============================================================================ */
+
 .key-collection-dock {
   position: relative;
   z-index: 5;

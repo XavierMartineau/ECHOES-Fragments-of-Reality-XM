@@ -1,3 +1,6 @@
+// ============================================================================
+// Boss 2 (après le niveau 20) : logique du plateau, des phases et de la victoire.
+// ============================================================================
 (() => {
   const board = document.getElementById("tacticalBoard");
   if (!board) return;

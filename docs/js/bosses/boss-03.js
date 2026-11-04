@@ -1,3 +1,6 @@
+// ============================================================================
+// Boss 3 (après le niveau 30) : logique du plateau, des phases et de la victoire.
+// ============================================================================
 (() => {
   const svg = document.getElementById("bossSvg");
   if (!svg) return;

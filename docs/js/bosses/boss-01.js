@@ -1,3 +1,6 @@
+// ============================================================================
+// Boss 1 (après le niveau 10) : logique du plateau, des phases et de la victoire.
+// ============================================================================
 (() => {
   const board = document.querySelector(".boss-board");
   if (!board) return;

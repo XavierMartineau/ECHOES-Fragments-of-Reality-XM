@@ -1,3 +1,7 @@
+/* ============================================================================
+   DEV MODE : panneau de navigation, boutons et surcharges par partie.
+   ============================================================================ */
+
 .dev-mode {
   position: fixed !important;
   top: auto !important;

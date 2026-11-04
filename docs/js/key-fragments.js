@@ -1,3 +1,6 @@
+// ============================================================================
+// Fragments de clé : assemblage SVG des morceaux de clé gagnés pendant les niveaux.
+// ============================================================================
 (() => {
   const NS = "http://www.w3.org/2000/svg";
   const pieceHeight = 87;

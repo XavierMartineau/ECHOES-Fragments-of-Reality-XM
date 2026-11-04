@@ -1,3 +1,7 @@
+/* ============================================================================
+   Assemblage des fragments de clé (pièces SVG et animations).
+   ============================================================================ */
+
 .kf-assembly {
   display: flex;
   align-items: center;

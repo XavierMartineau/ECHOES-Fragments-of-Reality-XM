@@ -1,3 +1,6 @@
+// ============================================================================
+// DEV MODE : navigateur de niveaux injecté sur chaque page, réglages de performance et raccourcis de test.
+// ============================================================================
 (() => {
   // DEV MODE // shared navigator injected on every page.
   const script = document.currentScript;
