@@ -9,7 +9,7 @@
     <title>ECHOES - DEV MODE</title>
     <script src="../../lag-fix/fps-boost.js"></script>
     <link rel="stylesheet" href="../css/base/fonts.css" />
-    <link rel="stylesheet" href="../css/pages/dev-mode-page.css?v=2" />
+    <link rel="stylesheet" href="../css/pages/dev-mode-page.css?v=3" />
   </head>
   <body>
     <header class="dm-top">
@@ -29,8 +29,8 @@
     </div>
 
     <main class="dm-body" id="dmBody" hidden>
-      <section class="dm-col">
-        <details class="dm-acc" data-acc="raccourcis" open>
+      <section class="dm-pinned">
+<details class="dm-acc dm-fixed" data-acc="raccourcis" data-fixed open>
           <summary><span class="dm-ico">01</span>Raccourcis</summary>
           <div class="dm-grid dm-grid-3">
             <a class="dm-btn" href="../../index.html">Home</a>
@@ -38,6 +38,15 @@
             <a class="dm-btn" href="niveaux.html">Hub des niveaux</a>
           </div>
         </details>
+<details class="dm-acc dm-fixed" data-acc="parties" data-fixed open>
+          <summary><span class="dm-ico">07</span>Parties et niveaux</summary>
+          <div class="dm-parts" id="dmParts"></div>
+          <div id="dmLevels"></div>
+        </details>
+</section>
+
+      <section class="dm-col">
+        
 
         <details class="dm-acc" data-acc="etat" open>
           <summary><span class="dm-ico">02</span>État du joueur</summary>
@@ -89,11 +98,7 @@
       </section>
 
       <section class="dm-col dm-col-nav">
-        <details class="dm-acc" data-acc="parties" open>
-          <summary><span class="dm-ico">07</span>Parties et niveaux</summary>
-          <div class="dm-parts" id="dmParts"></div>
-          <div id="dmLevels"></div>
-        </details>
+        
 
         <details class="dm-acc dm-debug" data-acc="dbg-systeme" open>
           <summary><span class="dm-ico">DBG</span>Débogueur · Système et performance</summary>
@@ -152,6 +157,6 @@
 
     <script src="../js/save-system.js"></script>
     <script src="../js/ui-effects.js?v=12"></script>
-    <script src="../js/dev-mode-page.js?v=3"></script>
+    <script src="../js/dev-mode-page.js?v=4"></script>
   </body>
 </html>

@@ -274,7 +274,13 @@
       state = {};
     }
     const save = () => localStorage.setItem(STATE_KEY, JSON.stringify(state));
-    $$(".dm-acc").forEach((acc) => {
+    // Raccourcis et Parties/niveaux : toujours ouverts, jamais repliables.
+    $$(".dm-acc[data-fixed]").forEach((acc) => {
+      acc.open = true;
+      acc.querySelector("summary").addEventListener("click", (event) => event.preventDefault());
+    });
+    const foldable = () => $$(".dm-acc:not([data-fixed])");
+    foldable().forEach((acc) => {
       const id = acc.dataset.acc;
       if (id in state) acc.open = state[id];
       acc.addEventListener("toggle", () => {
@@ -285,12 +291,12 @@
     $$("[data-acc-all]").forEach((button) =>
       button.addEventListener("click", () => {
         const open = button.dataset.accAll === "open";
-        $$(".dm-acc").forEach((acc) => (acc.open = open));
+        foldable().forEach((acc) => (acc.open = open));
       }),
     );
     $("#dmFilter").addEventListener("input", (event) => {
       const query = event.target.value.trim().toLowerCase();
-      $$(".dm-acc").forEach((acc) => {
+      foldable().forEach((acc) => {
         const match = !query || acc.textContent.toLowerCase().includes(query);
         acc.hidden = !match;
         if (query && match) acc.open = true;

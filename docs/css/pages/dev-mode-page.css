@@ -105,6 +105,16 @@ a { color: inherit; text-decoration: none; }
   padding: 0 clamp(18px, 5vw, 80px) 60px;
 }
 
+.dm-pinned {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 16px;
+}
+
+.dm-fixed > summary { cursor: default; }
+.dm-fixed > summary::after { display: none; }
+.dm-fixed > summary:hover { background: none; }
+
 .dm-body[hidden], .dm-gate[hidden], .dm-levels[hidden] { display: none; }
 
 .dm-col-nav {
@@ -280,7 +290,7 @@ a { color: inherit; text-decoration: none; }
 
 @media (max-width: 1023px) {
   .dm-body { grid-template-columns: 1fr; }
-  .dm-col-nav { order: -1; padding-left: 0; border-left: 0; }
+  .dm-col-nav { padding-left: 0; border-left: 0; }
   .dm-parts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
