@@ -84,7 +84,7 @@ function resizeCanvas() {
     (performance.getEntriesByType("navigation")[0] || {}).responseEnd > 2500;
   if (lowEnd) sessionStorage.setItem("echoes-slow", "1");
   document.documentElement.classList.toggle("fx-lite", lowEnd);
-  particles = Array.from({ length: lowEnd ? 14 : 28 }, () => ({
+  particles = Array.from({ length: lowEnd ? 18 : 36 }, () => ({
     x: Math.random() * width,
     y: Math.random() * height,
     radius: Math.random() * 2.2 + 0.8,
@@ -135,7 +135,7 @@ function drawBackground(timestamp) {
 
   ctx.strokeStyle = `rgba(176, 96, 255, ${lineAlpha})`;
   ctx.lineWidth = 1;
-  const lineCount = isReduced ? 2 : 3;
+  const lineCount = isReduced ? 3 : 4;
   for (let i = 0; i < lineCount; i++) {
     const y = (height / lineCount) * i + 40;
     ctx.beginPath();

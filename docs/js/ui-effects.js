@@ -567,7 +567,5 @@
   toggle.addEventListener("click", () =>
     apply(!root.classList.contains("fx-reduce"), true),
   );
-  // Le bouton n'existe que sur l'accueil ; le réglage mémorisé s'applique ensuite partout.
-  if (document.body.classList.contains("index-page")) document.body.appendChild(toggle);
   apply(reduceOnStart, false);
 })();
