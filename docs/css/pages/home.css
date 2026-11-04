@@ -1519,7 +1519,7 @@ html body.index-page .meta {
 }
 
 /* Accueil allégé : orbite et fond à 80 % d'opacité ; la sphère est réduite et placée au-dessus du texte. */
-/* Nébuleuse, orbite (32 %) et ampoule (75 %) sont fusionnées dans home-scene.svg. */
+/* Nébuleuse, orbite (32 %) et ampoule (75 %) sont fusionnées dans un SVG unique décliné en 3 tailles (accueil/adaptatif : pc, tablette, mobile). */
 body.index-page .home-skyline {
   opacity: 1;
 }
@@ -1609,4 +1609,10 @@ html body.index-page .primary-btn {
 html body.index-page .strobe-notice {
   margin-right: auto;
   margin-left: auto;
+}
+
+@media (max-width: 1100px) and (orientation: portrait) {
+  html body.index-page .home-ai-readout-bottom {
+    display: none;
+  }
 }

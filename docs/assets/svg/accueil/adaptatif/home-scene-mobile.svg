@@ -1,0 +1,472 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 1100" preserveAspectRatio="xMidYMid slice" fill="none">
+  <defs>
+    <linearGradient id="wire" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="540" y2="1100">
+      <stop offset="0" stop-color="#7ffbff"/>
+      <stop offset=".5" stop-color="#7f9bff"/>
+      <stop offset="1" stop-color="#d08bff"/>
+    </linearGradient>
+    <radialGradient id="glow" gradientUnits="userSpaceOnUse" cx="270" cy="550" r="480">
+      <stop offset="0" stop-color="#79f7ff" stop-opacity=".30"/>
+      <stop offset=".5" stop-color="#6c5cff" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#6c5cff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" gradientUnits="userSpaceOnUse" cx="270" cy="550" r="759.7">
+      <stop offset=".7" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".45"/>
+    </radialGradient>
+    <radialGradient id="fade" gradientUnits="userSpaceOnUse" cx="270" cy="550" r="300">
+      <stop offset="0" stop-color="#2a2a2a"/>
+      <stop offset=".5" stop-color="#333"/>
+      <stop offset="1" stop-color="#fff"/>
+    </radialGradient>
+    <mask id="calm" maskUnits="userSpaceOnUse" x="0" y="0" width="540" height="1100">
+      <rect width="540" height="1100" fill="url(#fade)"/>
+    </mask>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" stroke="#7f9bff" stroke-opacity=".10" stroke-width="1"/>
+      <circle cx="0" cy="0" r="1.4" fill="#9fe9ff" fill-opacity=".45"/>
+    </pattern>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3"/></filter>
+  </defs>
+  <style>
+    .breath{animation:breath 8s ease-in-out infinite}
+    .sig{animation:sig 5s linear infinite}
+    .v{animation:np 5s ease-in-out infinite}
+    @keyframes breath{50%{opacity:.7}}
+    @keyframes np{50%{opacity:.45}}
+    @keyframes sig{from{stroke-dashoffset:12}to{stroke-dashoffset:-88}}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+  </style>
+
+  <rect width="540" height="1100" fill="#02040a"/>
+  <rect width="540" height="1100" fill="url(#grid)"/>
+  <ellipse class="breath" cx="270" cy="550" rx="600" ry="556.8" fill="url(#glow)"/>
+
+  <g mask="url(#calm)">
+    <g stroke="url(#wire)" stroke-width="1.2" stroke-linejoin="round" opacity=".6">
+      <path d="M477.7 136.2L540 136.2L560.7 157"/>
+      <path d="M25.4 993.7L81.6 993.7L111.4 1023.5L111.4 1077.9"/>
+      <path d="M114.9 133.1L114.9 74.5L159.9 29.4"/>
+      <path d="M196.8 111.5L196.8 174.6L130.7 240.7L130.7 273.3"/>
+      <path d="M378.9 240.7L378.9 277.4L404.4 302.9L499.1 302.9L552.8 356.6"/>
+      <path d="M22.5 422.5L22.5 391L0.7 369.2L0.7 315.8"/>
+      <path d="M513.2 414.2L513.2 505.9L452.3 566.8L452.3 660.1"/>
+      <path d="M419.7 363.2L351.6 363.2L295.9 307.5L235.3 307.5"/>
+      <path d="M117.3 604.3L117.3 534.9L74.7 492.4L74.7 411.7L41.5 378.5"/>
+      <path d="M312.8 130.4L312.8 180.8L351 219"/>
+      <path d="M134.9 492L134.9 418.5L153.2 400.2L153.2 344.3"/>
+      <path d="M107.4 721.8L107.4 673.7L151.2 629.9L218.7 629.9L261.4 587.2"/>
+      <path d="M214.6 566.4L214.6 645.9L245.4 676.7L334.3 676.7L376.4 718.8"/>
+      <path d="M91.1 481.7L46.1 481.7L-2.5 530.3L-37.8 530.3"/>
+      <path d="M378.7 839.1L327.4 839.1L282.2 884.3"/>
+      <path d="M219.8 383.5L172.3 383.5L141.4 414.3L141.4 455.6"/>
+      <path d="M315.1 187.7L269 187.7L244.6 212.2L244.6 254.4L286.3 296.1"/>
+      <path d="M262.4 246L207.7 246L182.4 220.7"/>
+      <path d="M191.7 746.3L256.8 746.3L284.1 719L330 719"/>
+      <path d="M321 428.9L321 455.2L386.4 520.6"/>
+      <path d="M330.5 98.9L422.3 98.9L463.6 57.6L463.6 15.6"/>
+      <path d="M495.4 17.5L495.4 -64.3L449.7 -110"/>
+      <path d="M52.8 230L143.7 230L161.8 248.1L216.9 248.1"/>
+      <path d="M482.7 48.7L482.7 -2.9L514.6 -34.7"/>
+      <path d="M345.2 1027.8L345.2 960.5L380.3 925.3L380.3 852.1"/>
+      <path d="M151 270.1L59.7 270.1L5.9 323.8L-79.5 323.8"/>
+      <path d="M33.3 277L75.3 277L101.9 250.4L101.9 168.7L60.8 127.6"/>
+      <path d="M297.2 217L273.2 217L254 236.1"/>
+      <path d="M367.6 868.9L280.7 868.9L256.1 893.5L202.5 893.5L162.7 933.4"/>
+      <path d="M342.7 992.9L387.2 992.9L443 1048.8L443 1106.5L507 1170.5"/>
+      <path d="M527.7 176.5L527.7 111.5L462.3 46"/>
+      <path d="M187.3 523.5L103.2 523.5L73.7 493.9"/>
+      <path d="M346 43.6L346 -35.7L380.9 -70.6L418.5 -70.6L459.4 -29.7"/>
+      <path d="M467.3 439.3L467.3 471.2L517.3 521.1L517.3 547.4L464.6 600.1"/>
+      <path d="M365.2 688.3L365.2 729.8L398.6 763.2L431.1 763.2"/>
+      <path d="M165.5 372L165.5 300L231.7 233.8"/>
+      <path d="M164.7 1059.5L164.7 1145.8L99.7 1210.8"/>
+      <path d="M513.7 10.6L513.7 -79.1L484.4 -108.4L484.4 -173.8L535.2 -224.6"/>
+      <path d="M125.9 430.1L95.1 430.1L43.9 481.3"/>
+      <path d="M101.8 926.4L101.8 1020.7L51.6 1071"/>
+      <path d="M161.2 641.8L161.2 551.8L181 532L234.7 532L265 562.3"/>
+      <path d="M94.9 695.3L190.3 695.3L222.3 663.3"/>
+      <path d="M242.8 374L173.8 374L125.3 325.5L83.8 325.5"/>
+      <path d="M176.4 473.6L176.4 395.1L235.4 336.1L235.4 283"/>
+      <path d="M247.2 70.4L277.4 70.4L328.2 121.2L328.2 170.6"/>
+    </g>
+    <g stroke="#9fe9ff" stroke-width="1.2" fill="#02040a" opacity=".8">
+      <circle cx="560.7" cy="157" r="3"/>
+      <circle cx="111.4" cy="1077.9" r="3"/>
+      <circle cx="159.9" cy="29.4" r="3"/>
+      <circle cx="130.7" cy="273.3" r="3"/>
+      <circle cx="552.8" cy="356.6" r="3"/>
+      <circle cx="0.7" cy="315.8" r="3"/>
+      <circle cx="452.3" cy="660.1" r="3"/>
+      <circle cx="235.3" cy="307.5" r="3"/>
+      <circle cx="41.5" cy="378.5" r="3"/>
+      <circle cx="351" cy="219" r="3"/>
+      <circle cx="153.2" cy="344.3" r="3"/>
+      <circle cx="261.4" cy="587.2" r="3"/>
+      <circle cx="376.4" cy="718.8" r="3"/>
+      <circle cx="-37.8" cy="530.3" r="3"/>
+      <circle cx="282.2" cy="884.3" r="3"/>
+      <circle cx="141.4" cy="455.6" r="3"/>
+      <circle cx="286.3" cy="296.1" r="3"/>
+      <circle cx="182.4" cy="220.7" r="3"/>
+      <circle cx="330" cy="719" r="3"/>
+      <circle cx="386.4" cy="520.6" r="3"/>
+      <circle cx="463.6" cy="15.6" r="3"/>
+      <circle cx="449.7" cy="-110" r="3"/>
+      <circle cx="216.9" cy="248.1" r="3"/>
+      <circle cx="514.6" cy="-34.7" r="3"/>
+      <circle cx="380.3" cy="852.1" r="3"/>
+      <circle cx="-79.5" cy="323.8" r="3"/>
+      <circle cx="60.8" cy="127.6" r="3"/>
+      <circle cx="254" cy="236.1" r="3"/>
+      <circle cx="162.7" cy="933.4" r="3"/>
+      <circle cx="507" cy="1170.5" r="3"/>
+      <circle cx="462.3" cy="46" r="3"/>
+      <circle cx="73.7" cy="493.9" r="3"/>
+      <circle cx="459.4" cy="-29.7" r="3"/>
+      <circle cx="464.6" cy="600.1" r="3"/>
+      <circle cx="431.1" cy="763.2" r="3"/>
+      <circle cx="231.7" cy="233.8" r="3"/>
+      <circle cx="99.7" cy="1210.8" r="3"/>
+      <circle cx="535.2" cy="-224.6" r="3"/>
+      <circle cx="43.9" cy="481.3" r="3"/>
+      <circle cx="51.6" cy="1071" r="3"/>
+      <circle cx="265" cy="562.3" r="3"/>
+      <circle cx="222.3" cy="663.3" r="3"/>
+      <circle cx="83.8" cy="325.5" r="3"/>
+      <circle cx="235.4" cy="283" r="3"/>
+      <circle cx="328.2" cy="170.6" r="3"/>
+    </g>
+
+    <g stroke="url(#wire)" stroke-width="5" stroke-linejoin="round" opacity=".8" filter="url(#soft)">
+      <path d="M299.6 555.1L378 568.5L454.5 546.7L1662.2 754"/>
+      <path d="M293.1 569.2L367.6 631.1L407.3 718L1349.5 1501.4"/>
+      <path d="M280.4 578.1L309.9 658L367.5 713.7L791.8 1863.3"/>
+      <path d="M264.9 579.6L253.6 645.3L202.5 717.1L-4.8 1924.8"/>
+      <path d="M250.8 573.1L205.8 627.3L181.2 725.4L-602.2 1667.7"/>
+      <path d="M241.9 560.4L159.4 590.8L47.1 580.1L-1102.5 1004.4"/>
+      <path d="M240.4 544.9L159.3 531L34.7 566.7L-1173 359.3"/>
+      <path d="M246.9 530.8L193 486L146.2 383.5L-796.1 -399.9"/>
+      <path d="M259.6 521.9L227.2 434L173.9 382.5L-250.4 -767.1"/>
+      <path d="M275.1 520.4L289.3 437.7L328.4 382.8L535.7 -825"/>
+      <path d="M289.2 526.9L329.7 478.2L348.1 404.8L1131.5 -537.5"/>
+      <path d="M298.1 539.6L355 518.6L429.3 525.7L1578.9 101.4"/>
+      <path d="M304.9 554.3L441.2 557L490.5 594.4L1716.8 618.9"/>
+      <path d="M297.9 571.1L423.2 666L498.9 667.5L1475.7 1407.5"/>
+      <path d="M276.7 584.5L323.9 740.3L297.8 815.4L653.4 1989.3"/>
+      <path d="M258.5 583.1L197.7 758.2L218.5 826.8L-183.4 1984.4"/>
+      <path d="M239.2 567L127.4 645L26.1 642.9L-980.4 1343.9"/>
+      <path d="M235 549.3L100.2 546.6L26.7 597.8L-1198.5 573.3"/>
+      <path d="M244.3 526L108.9 423.4L88.9 357.6L-888.8 -383.1"/>
+      <path d="M259.9 516.5L207.4 343.3L166.4 312.3L-188.9 -860.5"/>
+      <path d="M284.9 518.1L346.7 340L392.7 308L795 -850.8"/>
+      <path d="M298.7 530L429.5 438.9L457.7 357.7L1463.3 -342.6"/>
+      <path d="M422 135.2L439.4 92.6L427.8 7.2L559.9 -315.9"/>
+      <path d="M50.5 141.4L11.4 87.3L-54.2 57.9L-258.6 -225"/>
+      <path d="M433.1 1054L449.1 1122L425.3 1200.6L504.9 1541.4"/>
+      <path d="M465.4 945.7L487.5 1007.7L546.9 1058.1L664.6 1387.7"/>
+      <path d="M224.1 917.8L220.2 986.4L241.9 1029.7L221.7 1379.1"/>
+      <path d="M360.1 31.6L369.2 -5.2L349.5 -73.9L433.8 -412.6"/>
+      <path d="M144.3 1078.1L126.8 1138.4L86.5 1177.1L-11.2 1514.2"/>
+      <path d="M2 1068.9L-32.6 1117.7L-36.4 1159.5L-238 1444.4"/>
+      <path d="M25.8 740.2L-37.4 733.9L-78 752.2L-376.5 722.4"/>
+      <path d="M538.2 542.9L594.1 542.6L638.8 516.3L938.8 514.3"/>
+      <path d="M20.3 312.9L-12.9 310.3L-58.4 332.1L-357.6 309"/>
+      <path d="M507.6 556.5L543.7 558.1L578.6 580.4L878.3 593.7"/>
+    </g>
+
+    <g stroke="url(#wire)" stroke-width="1.8" stroke-linejoin="round">
+      <path d="M302.3 539.3L377.1 552.2L453.6 530.3L1664.9 738.2"/>
+      <path d="M300.9 547.2L377.6 560.3L454 538.5L1663.5 746.1"/>
+      <path d="M299.6 555.1L378 568.5L454.5 546.7L1662.2 754"/>
+      <path d="M298.2 563L378.5 576.7L454.9 554.9L1660.8 761.9"/>
+      <path d="M296.9 570.8L378.9 584.9L455.3 563.1L1659.5 769.7"/>
+      <path d="M298.2 563L374.1 626.1L413.8 713L1354.6 1495.3"/>
+      <path d="M293.1 569.2L367.6 631.1L407.3 718L1349.5 1501.4"/>
+      <path d="M288 575.3L361.1 636.1L400.7 723L1344.4 1507.6"/>
+      <path d="M287.9 575.4L316.7 653.5L374.4 709.2L799.3 1860.5"/>
+      <path d="M280.4 578.1L309.9 658L367.5 713.7L791.8 1863.3"/>
+      <path d="M272.9 580.9L303 662.5L360.6 718.2L784.3 1866"/>
+      <path d="M280.7 582.3L268.8 651.6L217.7 723.4L11 1927.5"/>
+      <path d="M272.8 580.9L261.2 648.4L210.1 720.2L3.1 1926.1"/>
+      <path d="M264.9 579.6L253.6 645.3L202.5 717.1L-4.8 1924.8"/>
+      <path d="M257 578.2L246.1 642.1L195 713.9L-12.7 1923.4"/>
+      <path d="M249.2 576.9L238.5 639L187.4 710.7L-20.5 1922.1"/>
+      <path d="M257 578.2L213.1 631L188.6 729.1L-596 1672.8"/>
+      <path d="M250.8 573.1L205.8 627.3L181.2 725.4L-602.2 1667.7"/>
+      <path d="M244.7 568L198.4 623.6L173.9 721.7L-608.3 1662.6"/>
+      <path d="M244.6 567.9L160.4 599L48.1 588.2L-1099.7 1011.9"/>
+      <path d="M241.9 560.4L159.4 590.8L47.1 580.1L-1102.5 1004.4"/>
+      <path d="M239.1 552.9L158.3 582.7L46 572L-1105.3 996.9"/>
+      <path d="M237.7 560.7L160.2 547.4L35.6 583L-1175.8 375.1"/>
+      <path d="M239.1 552.8L159.7 539.2L35.1 574.9L-1174.4 367.2"/>
+      <path d="M240.4 544.9L159.3 531L34.7 566.7L-1173 359.3"/>
+      <path d="M241.8 537L158.8 522.8L34.2 558.5L-1171.7 351.5"/>
+      <path d="M243.1 529.2L158.4 514.6L33.8 550.3L-1170.3 343.6"/>
+      <path d="M241.8 537L186.5 490.9L139.7 388.5L-801.2 -393.7"/>
+      <path d="M246.9 530.8L193 486L146.2 383.5L-796.1 -399.9"/>
+      <path d="M252 524.7L199.5 481L152.7 378.6L-791 -406"/>
+      <path d="M252.1 524.6L220.3 438.4L167.1 387L-257.9 -764.3"/>
+      <path d="M259.6 521.9L227.2 434L173.9 382.5L-250.4 -767.1"/>
+      <path d="M267.1 519.1L234 429.5L180.8 378L-242.9 -769.9"/>
+      <path d="M259.3 517.7L274.1 431.4L313.3 376.5L520 -827.7"/>
+      <path d="M267.2 519.1L281.7 434.6L320.8 379.6L527.8 -826.3"/>
+      <path d="M275.1 520.4L289.3 437.7L328.4 382.8L535.7 -825"/>
+      <path d="M283 521.8L296.8 440.9L336 385.9L543.6 -823.6"/>
+      <path d="M290.8 523.1L304.4 444L343.6 389.1L551.5 -822.3"/>
+      <path d="M283 521.8L322.4 474.5L340.7 401.1L1125.3 -542.6"/>
+      <path d="M289.2 526.9L329.7 478.2L348.1 404.8L1131.5 -537.5"/>
+      <path d="M295.3 532L337 481.9L355.4 408.5L1137.6 -532.4"/>
+      <path d="M295.4 532.1L353.9 510.5L428.3 517.6L1576.2 93.9"/>
+      <path d="M298.1 539.6L355 518.6L429.3 525.7L1578.9 101.4"/>
+      <path d="M300.9 547.1L356 526.8L430.4 533.9L1581.7 108.9"/>
+      <path d="M305.1 547.1L443.7 549.9L493 587.2L1717 611.7"/>
+      <path d="M304.9 554.3L441.2 557L490.5 594.4L1716.8 618.9"/>
+      <path d="M302.2 565.4L425.6 658.9L501.4 660.4L1480 1401.8"/>
+      <path d="M297.9 571.1L423.2 666L498.9 667.5L1475.7 1407.5"/>
+      <path d="M293.6 576.9L420.7 673.2L496.4 674.7L1471.3 1413.2"/>
+      <path d="M283.6 582.5L331.5 740.5L305.4 815.6L660.3 1987.2"/>
+      <path d="M276.7 584.5L323.9 740.3L297.8 815.4L653.4 1989.3"/>
+      <path d="M265.3 585.4L205.3 758.4L226.1 827L-176.6 1986.8"/>
+      <path d="M258.5 583.1L197.7 758.2L218.5 826.8L-183.4 1984.4"/>
+      <path d="M251.7 580.7L190.1 758.1L210.9 826.7L-190.2 1982.1"/>
+      <path d="M243.3 573L129.6 652.2L28.3 650.2L-976.3 1349.8"/>
+      <path d="M239.2 567L127.4 645L26.1 642.9L-980.4 1343.9"/>
+      <path d="M234.9 556.5L102.4 553.8L28.9 605.1L-1198.6 580.5"/>
+      <path d="M235 549.3L100.2 546.6L26.7 597.8L-1198.5 573.3"/>
+      <path d="M235.2 542.1L98 539.4L24.5 590.6L-1198.3 566.1"/>
+      <path d="M239.9 531.7L102.7 427.7L82.7 361.9L-893.1 -377.3"/>
+      <path d="M244.3 526L108.9 423.4L88.9 357.6L-888.8 -383.1"/>
+      <path d="M253 518.6L201.2 347.6L160.2 316.6L-195.8 -858.4"/>
+      <path d="M259.9 516.5L207.4 343.3L166.4 312.3L-188.9 -860.5"/>
+      <path d="M266.7 514.4L213.6 339L172.6 307.9L-182 -862.6"/>
+      <path d="M278.1 515.8L340.7 335.4L386.7 303.4L788.2 -853.1"/>
+      <path d="M284.9 518.1L346.7 340L392.7 308L795 -850.8"/>
+      <path d="M294.6 524.1L423.4 434.4L451.6 353.1L1459.1 -348.5"/>
+      <path d="M298.7 530L429.5 438.9L457.7 357.7L1463.3 -342.6"/>
+      <path d="M302.8 535.9L435.5 443.5L463.7 362.2L1467.4 -336.7"/>
+      <path d="M408.7 129.8L424.7 90.7L413 5.3L546.6 -321.4"/>
+      <path d="M415.4 132.5L432.1 91.7L420.4 6.2L553.2 -318.6"/>
+      <path d="M422 135.2L439.4 92.6L427.8 7.2L559.9 -315.9"/>
+      <path d="M428.7 137.9L446.8 93.6L435.2 8.1L566.6 -313.2"/>
+      <path d="M44.7 145.6L6.7 93.1L-58.9 63.7L-264.5 -220.8"/>
+      <path d="M50.5 141.4L11.4 87.3L-54.2 57.9L-258.6 -225"/>
+      <path d="M440.2 1052.3L456.5 1122.3L432.7 1200.8L512 1539.8"/>
+      <path d="M433.1 1054L449.1 1122L425.3 1200.6L504.9 1541.4"/>
+      <path d="M426.1 1055.6L441.6 1121.8L417.8 1200.4L497.9 1543"/>
+      <path d="M472.1 943.3L493.6 1003.5L553 1053.9L671.4 1385.3"/>
+      <path d="M465.4 945.7L487.5 1007.7L546.9 1058.1L664.6 1387.7"/>
+      <path d="M458.6 948.1L481.4 1012L540.7 1062.4L657.8 1390.2"/>
+      <path d="M231.3 918.2L227.5 984.9L249.2 1028.2L228.9 1379.6"/>
+      <path d="M224.1 917.8L220.2 986.4L241.9 1029.7L221.7 1379.1"/>
+      <path d="M216.9 917.3L212.9 987.9L234.6 1031.2L214.5 1378.7"/>
+      <path d="M346.1 28.2L354.3 -5L334.6 -73.6L419.8 -416"/>
+      <path d="M353.1 29.9L361.8 -5.1L342.1 -73.7L426.8 -414.3"/>
+      <path d="M360.1 31.6L369.2 -5.2L349.5 -73.9L433.8 -412.6"/>
+      <path d="M367.1 33.4L376.7 -5.4L357 -74L440.8 -410.8"/>
+      <path d="M158.1 1082.1L139.6 1146.1L99.3 1184.8L2.7 1518.2"/>
+      <path d="M151.2 1080.1L133.2 1142.3L92.9 1181L-4.2 1516.2"/>
+      <path d="M144.3 1078.1L126.8 1138.4L86.5 1177.1L-11.2 1514.2"/>
+      <path d="M137.4 1076.1L120.4 1134.5L80.1 1173.3L-18.1 1512.2"/>
+      <path d="M13.7 1077.2L-18.6 1122.8L-22.4 1164.6L-226.3 1452.7"/>
+      <path d="M7.8 1073L-25.6 1120.3L-29.4 1162.1L-232.1 1448.6"/>
+      <path d="M2 1068.9L-32.6 1117.7L-36.4 1159.5L-238 1444.4"/>
+      <path d="M-3.9 1064.7L-39.6 1115.1L-43.4 1156.9L-243.9 1440.3"/>
+      <path d="M25 747.4L-36.2 741.3L-76.8 759.6L-377.2 729.6"/>
+      <path d="M25.8 740.2L-37.4 733.9L-78 752.2L-376.5 722.4"/>
+      <path d="M26.5 733.1L-38.6 726.6L-79.2 744.9L-375.8 715.2"/>
+      <path d="M538.1 535.7L592.1 535.4L636.8 509.1L938.8 507.1"/>
+      <path d="M538.2 542.9L594.1 542.6L638.8 516.3L938.8 514.3"/>
+      <path d="M538.2 550.1L596 549.7L640.8 523.5L938.9 521.5"/>
+      <path d="M19.8 320L-11.6 317.6L-57.1 339.4L-358.1 316.2"/>
+      <path d="M20.3 312.9L-12.9 310.3L-58.4 332.1L-357.6 309"/>
+      <path d="M20.9 305.7L-14.3 303L-59.8 324.8L-357 301.8"/>
+      <path d="M507.9 549.3L546 551L580.8 573.3L878.6 586.5"/>
+      <path d="M507.6 556.5L543.7 558.1L578.6 580.4L878.3 593.7"/>
+      <path d="M507.3 563.7L541.5 565.2L576.3 587.5L878 600.9"/>
+    </g>
+
+    <g stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-4.7s;animation-duration:4.9s" d="M302.3 539.3L377.1 552.2L453.6 530.3L1664.9 738.2"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-4.1s;animation-duration:5.5s" d="M298.2 563L378.5 576.7L454.9 554.9L1660.8 761.9"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-0.2s;animation-duration:6.5s" d="M293.1 569.2L367.6 631.1L407.3 718L1349.5 1501.4"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-2.4s;animation-duration:6.5s" d="M280.4 578.1L309.9 658L367.5 713.7L791.8 1863.3"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-3.1s;animation-duration:4.2s" d="M272.8 580.9L261.2 648.4L210.1 720.2L3.1 1926.1"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-1.3s;animation-duration:6.5s" d="M249.2 576.9L238.5 639L187.4 710.7L-20.5 1922.1"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-4.9s;animation-duration:5.2s" d="M244.7 568L198.4 623.6L173.9 721.7L-608.3 1662.6"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-4.8s;animation-duration:6.1s" d="M239.1 552.9L158.3 582.7L46 572L-1105.3 996.9"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-1.4s;animation-duration:4.6s" d="M240.4 544.9L159.3 531L34.7 566.7L-1173 359.3"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-2.5s;animation-duration:6.1s" d="M241.8 537L186.5 490.9L139.7 388.5L-801.2 -393.7"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-1.8s;animation-duration:6.0s" d="M252.1 524.6L220.3 438.4L167.1 387L-257.9 -764.3"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-2.4s;animation-duration:5.5s" d="M259.3 517.7L274.1 431.4L313.3 376.5L520 -827.7"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-2.5s;animation-duration:6.1s" d="M283 521.8L296.8 440.9L336 385.9L543.6 -823.6"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-3.9s;animation-duration:4.3s" d="M289.2 526.9L329.7 478.2L348.1 404.8L1131.5 -537.5"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-2.7s;animation-duration:5.5s" d="M298.1 539.6L355 518.6L429.3 525.7L1578.9 101.4"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-1.5s;animation-duration:4.7s" d="M304.9 554.3L441.2 557L490.5 594.4L1716.8 618.9"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-5.0s;animation-duration:6.8s" d="M293.6 576.9L420.7 673.2L496.4 674.7L1471.3 1413.2"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-2.3s;animation-duration:6.5s" d="M265.3 585.4L205.3 758.4L226.1 827L-176.6 1986.8"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-1.1s;animation-duration:4.7s" d="M243.3 573L129.6 652.2L28.3 650.2L-976.3 1349.8"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-3.8s;animation-duration:5.8s" d="M235 549.3L100.2 546.6L26.7 597.8L-1198.5 573.3"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-4.5s;animation-duration:6.5s" d="M244.3 526L108.9 423.4L88.9 357.6L-888.8 -383.1"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-0.6s;animation-duration:4.5s" d="M266.7 514.4L213.6 339L172.6 307.9L-182 -862.6"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-3.5s;animation-duration:6.6s" d="M294.6 524.1L423.4 434.4L451.6 353.1L1459.1 -348.5"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-1.5s;animation-duration:5.9s" d="M408.7 129.8L424.7 90.7L413 5.3L546.6 -321.4"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-1.0s;animation-duration:5.9s" d="M428.7 137.9L446.8 93.6L435.2 8.1L566.6 -313.2"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-0.1s;animation-duration:5.6s" d="M440.2 1052.3L456.5 1122.3L432.7 1200.8L512 1539.8"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-3.8s;animation-duration:5.3s" d="M472.1 943.3L493.6 1003.5L553 1053.9L671.4 1385.3"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-2.9s;animation-duration:5.8s" d="M231.3 918.2L227.5 984.9L249.2 1028.2L228.9 1379.6"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-1.0s;animation-duration:6.6s" d="M346.1 28.2L354.3 -5L334.6 -73.6L419.8 -416"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-1.6s;animation-duration:4.9s" d="M367.1 33.4L376.7 -5.4L357 -74L440.8 -410.8"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-1.4s;animation-duration:5.2s" d="M144.3 1078.1L126.8 1138.4L86.5 1177.1L-11.2 1514.2"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-2.9s;animation-duration:4.2s" d="M7.8 1073L-25.6 1120.3L-29.4 1162.1L-232.1 1448.6"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-2.1s;animation-duration:6.2s" d="M25 747.4L-36.2 741.3L-76.8 759.6L-377.2 729.6"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-1.1s;animation-duration:6.4s" d="M538.1 535.7L592.1 535.4L636.8 509.1L938.8 507.1"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-2.3s;animation-duration:5.2s" d="M19.8 320L-11.6 317.6L-57.1 339.4L-358.1 316.2"/>
+      <path class="sig" pathLength="100" stroke-dasharray="7 93" style="animation-delay:-1.0s;animation-duration:5.7s" d="M507.9 549.3L546 551L580.8 573.3L878.6 586.5"/>
+    </g>
+
+    <g fill="#02040a" stroke="#bffcff" stroke-width="1.6">
+      <circle class="v" cx="377.1" cy="552.2" r="3.4" style="animation-delay:-1.4s"/>
+      <circle class="v" cx="453.6" cy="530.3" r="3.4" style="animation-delay:-4.8s"/>
+      <circle class="v" cx="378" cy="568.5" r="3.4" style="animation-delay:-3.6s"/>
+      <circle class="v" cx="454.5" cy="546.7" r="3.4" style="animation-delay:-1.7s"/>
+      <circle class="v" cx="378.9" cy="584.9" r="3.4" style="animation-delay:-1.8s"/>
+      <circle class="v" cx="455.3" cy="563.1" r="3.4" style="animation-delay:-0.4s"/>
+      <circle class="v" cx="374.1" cy="626.1" r="3.4" style="animation-delay:-4.4s"/>
+      <circle class="v" cx="413.8" cy="713" r="3.4" style="animation-delay:-1.9s"/>
+      <circle class="v" cx="361.1" cy="636.1" r="3.4" style="animation-delay:-3.8s"/>
+      <circle class="v" cx="400.7" cy="723" r="3.4" style="animation-delay:-3.3s"/>
+      <circle class="v" cx="316.7" cy="653.5" r="3.4" style="animation-delay:-4.8s"/>
+      <circle class="v" cx="374.4" cy="709.2" r="3.4" style="animation-delay:-0.6s"/>
+      <circle class="v" cx="303" cy="662.5" r="3.4" style="animation-delay:-4.4s"/>
+      <circle class="v" cx="360.6" cy="718.2" r="3.4" style="animation-delay:-1.3s"/>
+      <circle class="v" cx="268.8" cy="651.6" r="3.4" style="animation-delay:-0.4s"/>
+      <circle class="v" cx="217.7" cy="723.4" r="3.4" style="animation-delay:-4.8s"/>
+      <circle class="v" cx="253.6" cy="645.3" r="3.4" style="animation-delay:-3.8s"/>
+      <circle class="v" cx="202.5" cy="717.1" r="3.4" style="animation-delay:-0.1s"/>
+      <circle class="v" cx="238.5" cy="639" r="3.4" style="animation-delay:-0.9s"/>
+      <circle class="v" cx="187.4" cy="710.7" r="3.4" style="animation-delay:-0.4s"/>
+      <circle class="v" cx="213.1" cy="631" r="3.4" style="animation-delay:-4.8s"/>
+      <circle class="v" cx="188.6" cy="729.1" r="3.4" style="animation-delay:-0.8s"/>
+      <circle class="v" cx="198.4" cy="623.6" r="3.4" style="animation-delay:-3.6s"/>
+      <circle class="v" cx="173.9" cy="721.7" r="3.4" style="animation-delay:-3.4s"/>
+      <circle class="v" cx="160.4" cy="599" r="3.4" style="animation-delay:-4.7s"/>
+      <circle class="v" cx="48.1" cy="588.2" r="3.4" style="animation-delay:-1.2s"/>
+      <circle class="v" cx="158.3" cy="582.7" r="3.4" style="animation-delay:-2.8s"/>
+      <circle class="v" cx="46" cy="572" r="3.4" style="animation-delay:-1.8s"/>
+      <circle class="v" cx="160.2" cy="547.4" r="3.4" style="animation-delay:-3.5s"/>
+      <circle class="v" cx="35.6" cy="583" r="3.4" style="animation-delay:-2.9s"/>
+      <circle class="v" cx="159.3" cy="531" r="3.4" style="animation-delay:-2.5s"/>
+      <circle class="v" cx="34.7" cy="566.7" r="3.4" style="animation-delay:-5.0s"/>
+      <circle class="v" cx="158.4" cy="514.6" r="3.4" style="animation-delay:-0.2s"/>
+      <circle class="v" cx="33.8" cy="550.3" r="3.4" style="animation-delay:-0.6s"/>
+      <circle class="v" cx="186.5" cy="490.9" r="3.4" style="animation-delay:-1.2s"/>
+      <circle class="v" cx="139.7" cy="388.5" r="3.4" style="animation-delay:-0.1s"/>
+      <circle class="v" cx="199.5" cy="481" r="3.4" style="animation-delay:-3.3s"/>
+      <circle class="v" cx="152.7" cy="378.6" r="3.4" style="animation-delay:-4.7s"/>
+      <circle class="v" cx="220.3" cy="438.4" r="3.4" style="animation-delay:-3.0s"/>
+      <circle class="v" cx="167.1" cy="387" r="3.4" style="animation-delay:-1.5s"/>
+      <circle class="v" cx="234" cy="429.5" r="3.4" style="animation-delay:-2.3s"/>
+      <circle class="v" cx="180.8" cy="378" r="3.4" style="animation-delay:-2.8s"/>
+      <circle class="v" cx="274.1" cy="431.4" r="3.4" style="animation-delay:-1.6s"/>
+      <circle class="v" cx="313.3" cy="376.5" r="3.4" style="animation-delay:-2.6s"/>
+      <circle class="v" cx="289.3" cy="437.7" r="3.4" style="animation-delay:-4.9s"/>
+      <circle class="v" cx="328.4" cy="382.8" r="3.4" style="animation-delay:-0.0s"/>
+      <circle class="v" cx="304.4" cy="444" r="3.4" style="animation-delay:-3.1s"/>
+      <circle class="v" cx="343.6" cy="389.1" r="3.4" style="animation-delay:-4.5s"/>
+      <circle class="v" cx="322.4" cy="474.5" r="3.4" style="animation-delay:-3.8s"/>
+      <circle class="v" cx="340.7" cy="401.1" r="3.4" style="animation-delay:-1.2s"/>
+      <circle class="v" cx="337" cy="481.9" r="3.4" style="animation-delay:-2.8s"/>
+      <circle class="v" cx="355.4" cy="408.5" r="3.4" style="animation-delay:-3.1s"/>
+      <circle class="v" cx="353.9" cy="510.5" r="3.4" style="animation-delay:-2.3s"/>
+      <circle class="v" cx="428.3" cy="517.6" r="3.4" style="animation-delay:-2.4s"/>
+      <circle class="v" cx="356" cy="526.8" r="3.4" style="animation-delay:-3.7s"/>
+      <circle class="v" cx="430.4" cy="533.9" r="3.4" style="animation-delay:-2.0s"/>
+      <circle class="v" cx="443.7" cy="549.9" r="3.4" style="animation-delay:-0.0s"/>
+      <circle class="v" cx="493" cy="587.2" r="3.4" style="animation-delay:-1.8s"/>
+      <circle class="v" cx="425.6" cy="658.9" r="3.4" style="animation-delay:-3.1s"/>
+      <circle class="v" cx="501.4" cy="660.4" r="3.4" style="animation-delay:-3.2s"/>
+      <circle class="v" cx="420.7" cy="673.2" r="3.4" style="animation-delay:-4.1s"/>
+      <circle class="v" cx="496.4" cy="674.7" r="3.4" style="animation-delay:-3.5s"/>
+      <circle class="v" cx="331.5" cy="740.5" r="3.4" style="animation-delay:-0.8s"/>
+      <circle class="v" cx="305.4" cy="815.6" r="3.4" style="animation-delay:-0.8s"/>
+      <circle class="v" cx="205.3" cy="758.4" r="3.4" style="animation-delay:-4.7s"/>
+      <circle class="v" cx="226.1" cy="827" r="3.4" style="animation-delay:-0.7s"/>
+      <circle class="v" cx="190.1" cy="758.1" r="3.4" style="animation-delay:-1.1s"/>
+      <circle class="v" cx="210.9" cy="826.7" r="3.4" style="animation-delay:-1.5s"/>
+      <circle class="v" cx="129.6" cy="652.2" r="3.4" style="animation-delay:-4.3s"/>
+      <circle class="v" cx="28.3" cy="650.2" r="3.4" style="animation-delay:-2.7s"/>
+      <circle class="v" cx="102.4" cy="553.8" r="3.4" style="animation-delay:-3.1s"/>
+      <circle class="v" cx="28.9" cy="605.1" r="3.4" style="animation-delay:-3.2s"/>
+      <circle class="v" cx="98" cy="539.4" r="3.4" style="animation-delay:-0.4s"/>
+      <circle class="v" cx="24.5" cy="590.6" r="3.4" style="animation-delay:-4.9s"/>
+      <circle class="v" cx="102.7" cy="427.7" r="3.4" style="animation-delay:-0.2s"/>
+      <circle class="v" cx="82.7" cy="361.9" r="3.4" style="animation-delay:-3.7s"/>
+      <circle class="v" cx="201.2" cy="347.6" r="3.4" style="animation-delay:-0.4s"/>
+      <circle class="v" cx="160.2" cy="316.6" r="3.4" style="animation-delay:-3.8s"/>
+      <circle class="v" cx="213.6" cy="339" r="3.4" style="animation-delay:-4.2s"/>
+      <circle class="v" cx="172.6" cy="307.9" r="3.4" style="animation-delay:-1.1s"/>
+      <circle class="v" cx="340.7" cy="335.4" r="3.4" style="animation-delay:-3.9s"/>
+      <circle class="v" cx="386.7" cy="303.4" r="3.4" style="animation-delay:-0.1s"/>
+      <circle class="v" cx="423.4" cy="434.4" r="3.4" style="animation-delay:-1.8s"/>
+      <circle class="v" cx="451.6" cy="353.1" r="3.4" style="animation-delay:-4.0s"/>
+      <circle class="v" cx="435.5" cy="443.5" r="3.4" style="animation-delay:-2.1s"/>
+      <circle class="v" cx="463.7" cy="362.2" r="3.4" style="animation-delay:-0.0s"/>
+      <circle class="v" cx="424.7" cy="90.7" r="3.4" style="animation-delay:-2.9s"/>
+      <circle class="v" cx="413" cy="5.3" r="3.4" style="animation-delay:-3.5s"/>
+      <circle class="v" cx="439.4" cy="92.6" r="3.4" style="animation-delay:-1.4s"/>
+      <circle class="v" cx="427.8" cy="7.2" r="3.4" style="animation-delay:-3.6s"/>
+      <circle class="v" cx="6.7" cy="93.1" r="3.4" style="animation-delay:-3.7s"/>
+      <circle class="v" cx="-58.9" cy="63.7" r="3.4" style="animation-delay:-4.8s"/>
+      <circle class="v" cx="456.5" cy="1122.3" r="3.4" style="animation-delay:-1.4s"/>
+      <circle class="v" cx="432.7" cy="1200.8" r="3.4" style="animation-delay:-0.3s"/>
+      <circle class="v" cx="441.6" cy="1121.8" r="3.4" style="animation-delay:-3.5s"/>
+      <circle class="v" cx="417.8" cy="1200.4" r="3.4" style="animation-delay:-2.0s"/>
+      <circle class="v" cx="493.6" cy="1003.5" r="3.4" style="animation-delay:-0.2s"/>
+      <circle class="v" cx="553" cy="1053.9" r="3.4" style="animation-delay:-0.4s"/>
+      <circle class="v" cx="481.4" cy="1012" r="3.4" style="animation-delay:-4.4s"/>
+      <circle class="v" cx="540.7" cy="1062.4" r="3.4" style="animation-delay:-4.9s"/>
+      <circle class="v" cx="227.5" cy="984.9" r="3.4" style="animation-delay:-2.8s"/>
+      <circle class="v" cx="249.2" cy="1028.2" r="3.4" style="animation-delay:-0.3s"/>
+      <circle class="v" cx="212.9" cy="987.9" r="3.4" style="animation-delay:-4.6s"/>
+      <circle class="v" cx="234.6" cy="1031.2" r="3.4" style="animation-delay:-2.3s"/>
+      <circle class="v" cx="354.3" cy="-5" r="3.4" style="animation-delay:-0.2s"/>
+      <circle class="v" cx="334.6" cy="-73.6" r="3.4" style="animation-delay:-1.3s"/>
+      <circle class="v" cx="369.2" cy="-5.2" r="3.4" style="animation-delay:-4.6s"/>
+      <circle class="v" cx="349.5" cy="-73.9" r="3.4" style="animation-delay:-1.5s"/>
+      <circle class="v" cx="139.6" cy="1146.1" r="3.4" style="animation-delay:-0.6s"/>
+      <circle class="v" cx="99.3" cy="1184.8" r="3.4" style="animation-delay:-1.2s"/>
+      <circle class="v" cx="126.8" cy="1138.4" r="3.4" style="animation-delay:-4.1s"/>
+      <circle class="v" cx="86.5" cy="1177.1" r="3.4" style="animation-delay:-1.2s"/>
+      <circle class="v" cx="-18.6" cy="1122.8" r="3.4" style="animation-delay:-1.8s"/>
+      <circle class="v" cx="-22.4" cy="1164.6" r="3.4" style="animation-delay:-4.1s"/>
+      <circle class="v" cx="-32.6" cy="1117.7" r="3.4" style="animation-delay:-4.3s"/>
+      <circle class="v" cx="-36.4" cy="1159.5" r="3.4" style="animation-delay:-4.7s"/>
+      <circle class="v" cx="-36.2" cy="741.3" r="3.4" style="animation-delay:-4.0s"/>
+      <circle class="v" cx="-76.8" cy="759.6" r="3.4" style="animation-delay:-2.4s"/>
+      <circle class="v" cx="-38.6" cy="726.6" r="3.4" style="animation-delay:-0.6s"/>
+      <circle class="v" cx="-79.2" cy="744.9" r="3.4" style="animation-delay:-3.2s"/>
+      <circle class="v" cx="592.1" cy="535.4" r="3.4" style="animation-delay:-2.0s"/>
+      <circle class="v" cx="636.8" cy="509.1" r="3.4" style="animation-delay:-1.5s"/>
+      <circle class="v" cx="596" cy="549.7" r="3.4" style="animation-delay:-3.4s"/>
+      <circle class="v" cx="640.8" cy="523.5" r="3.4" style="animation-delay:-4.8s"/>
+      <circle class="v" cx="-11.6" cy="317.6" r="3.4" style="animation-delay:-3.4s"/>
+      <circle class="v" cx="-57.1" cy="339.4" r="3.4" style="animation-delay:-3.0s"/>
+      <circle class="v" cx="-14.3" cy="303" r="3.4" style="animation-delay:-4.2s"/>
+      <circle class="v" cx="-59.8" cy="324.8" r="3.4" style="animation-delay:-4.5s"/>
+      <circle class="v" cx="546" cy="551" r="3.4" style="animation-delay:-2.9s"/>
+      <circle class="v" cx="580.8" cy="573.3" r="3.4" style="animation-delay:-4.0s"/>
+      <circle class="v" cx="541.5" cy="565.2" r="3.4" style="animation-delay:-3.9s"/>
+      <circle class="v" cx="576.3" cy="587.5" r="3.4" style="animation-delay:-0.3s"/>
+    </g>
+  </g>
+
+  <rect width="540" height="1100" fill="url(#vig)"/>
+
+  <g stroke="#79f7ff" stroke-width="1.8" opacity=".7">
+    <path d="M24 24h36l20 20M24 24v36"/>
+    <path d="M516 24h-36l-20 20M516 24v36"/>
+    <path d="M24 1076h36l20-20M24 1076v-36"/>
+    <path d="M516 1076h-36l-20-20M516 1076v-36"/>
+  </g>
+</svg>
