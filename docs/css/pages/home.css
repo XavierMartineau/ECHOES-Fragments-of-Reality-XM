@@ -1824,12 +1824,8 @@ html body.index-page .home-topbar-line {
   height: 30px;
   overflow: visible;
   pointer-events: none;
-  filter: drop-shadow(0 0 6px rgba(var(--home-cyan), 0.75));
 }
 
-html body.index-page .home-topbar-line .home-line-head {
-  filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px rgba(var(--home-cyan), 0.9));
-}
 
 
 /* Onde « CONSCIENCE ACTIVE » : ligne droite avec des pics par moments */

@@ -373,20 +373,20 @@
     .fx-cursor-on input:not([type=checkbox]):not([type=radio]):not([type=range]),.fx-cursor-on textarea,.fx-cursor-on [contenteditable]{cursor:text!important}
     #fx-dot,#fx-ring{position:fixed;left:0;top:0;pointer-events:none;z-index:2147483647;opacity:0;transition:opacity .2s,width .2s,height .2s,margin .2s,border-color .2s,background .2s,border-radius .2s,box-shadow .2s}
     #fx-dot{width:6px;height:6px;margin:-3px 0 0 -3px;border:0;border-radius:0;rotate:45deg;background:#fff;box-shadow:0 0 10px rgb(var(--fx-rgb)),0 0 2px #fff;transition:opacity .2s,width .16s,height .16s,margin .16s,background .2s,box-shadow .2s,rotate .2s}
-    #fx-ring{--k:rgb(var(--fx-rgb));width:34px;height:34px;margin:-17px 0 0 -17px;background:linear-gradient(var(--k),var(--k)) 0 0/10px 2px,linear-gradient(var(--k),var(--k)) 0 0/2px 10px,linear-gradient(var(--k),var(--k)) 100% 0/10px 2px,linear-gradient(var(--k),var(--k)) 100% 0/2px 10px,linear-gradient(var(--k),var(--k)) 0 100%/10px 2px,linear-gradient(var(--k),var(--k)) 0 100%/2px 10px,linear-gradient(var(--k),var(--k)) 100% 100%/10px 2px,linear-gradient(var(--k),var(--k)) 100% 100%/2px 10px;background-repeat:no-repeat;filter:drop-shadow(0 0 4px rgba(var(--fx-rgb),.8))}
+    #fx-ring{--k:rgb(var(--fx-rgb));width:34px;height:34px;margin:-17px 0 0 -17px;background:linear-gradient(var(--k),var(--k)) 0 0/10px 2px,linear-gradient(var(--k),var(--k)) 0 0/2px 10px,linear-gradient(var(--k),var(--k)) 100% 0/10px 2px,linear-gradient(var(--k),var(--k)) 100% 0/2px 10px,linear-gradient(var(--k),var(--k)) 0 100%/10px 2px,linear-gradient(var(--k),var(--k)) 0 100%/2px 10px,linear-gradient(var(--k),var(--k)) 100% 100%/10px 2px,linear-gradient(var(--k),var(--k)) 100% 100%/2px 10px;background-repeat:no-repeat;,.8))}
     #fx-ring::before,#fx-ring::after{content:"";position:absolute;left:50%;top:50%;background:var(--k);opacity:0;transition:opacity .16s}
     #fx-ring::before{width:9px;height:1px;margin:0 0 0 -4px}
     #fx-ring::after{width:1px;height:9px;margin:-4px 0 0 0}
     #fx-ring span{position:absolute;left:calc(100% + 8px);top:calc(100% + 2px);white-space:nowrap;color:rgba(var(--fx-rgb),.9);font:600 .58rem Orbitron,sans-serif;letter-spacing:.12em;text-shadow:0 0 6px rgba(0,0,0,.9)}
     .fx-on #fx-dot,.fx-on #fx-ring{opacity:1}
-    .fx-hover #fx-ring{--k:#ffd27a;width:24px;height:24px;margin:-12px 0 0 -12px;filter:drop-shadow(0 0 5px rgba(255,210,122,.8))}
+    .fx-hover #fx-ring{--k:#ffd27a;width:24px;height:24px;margin:-12px 0 0 -12px}
     .fx-hover #fx-dot{background:#ffd27a;box-shadow:0 0 12px #ffd27a}
     .fx-grab #fx-ring{rotate:45deg;width:30px;height:30px;margin:-15px 0 0 -15px}
     .fx-grabbing #fx-ring{rotate:45deg;width:20px;height:20px;margin:-10px 0 0 -10px}
     .fx-crosshair #fx-ring{width:46px;height:46px;margin:-23px 0 0 -23px}
     .fx-crosshair #fx-ring::before,.fx-crosshair #fx-ring::after{opacity:.9}
-    .fx-down #fx-ring,.fx-click #fx-ring{--k:#ff4d6d;width:18px;height:18px;margin:-9px 0 0 -9px;filter:drop-shadow(0 0 6px rgba(255,77,109,.9))}
-    .fx-down #fx-dot,.fx-click #fx-dot{background:#ff4d6d;box-shadow:0 0 12px #ff4d6d}
+    .fx-down #fx-ring,.fx-click #fx-ring{--k:#ff4d6d;width:18px;height:18px;margin:-9px 0 0 -9px;}
+    .fx-down #fx-dot,.fx-click #fx-dot,.fx-grabbing #fx-dot{opacity:0!important}
     .fx-disabled #fx-ring{--k:rgba(160,170,190,.6);filter:none}
     .fx-disabled #fx-dot{background:#8a93a8;box-shadow:none}
     .fx-hover #fx-ring span,.fx-text #fx-ring span,.fx-down #fx-ring span{opacity:0}
