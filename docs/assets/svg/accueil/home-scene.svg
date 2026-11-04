@@ -1,74 +1,128 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" fill="none">
   <defs>
-    <radialGradient id="neb-a" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#79f7ff" stop-opacity=".26"/><stop offset="1" stop-color="#79f7ff" stop-opacity="0"/></radialGradient>
-    <radialGradient id="neb-b" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#b36cff" stop-opacity=".30"/><stop offset="1" stop-color="#b36cff" stop-opacity="0"/></radialGradient>
-    <radialGradient id="neb-c" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#4f6dff" stop-opacity=".22"/><stop offset="1" stop-color="#4f6dff" stop-opacity="0"/></radialGradient>
-    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#79f7ff"/>
-      <stop offset="1" stop-color="#b36cff"/>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#04060f"/>
+      <stop offset=".55" stop-color="#0b1230"/>
+      <stop offset="1" stop-color="#1a1040"/>
     </linearGradient>
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#79f7ff" stop-opacity=".55"/>
+      <stop offset=".35" stop-color="#8f70ff" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#8f70ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#79f7ff" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#b36cff" stop-opacity=".06"/>
+    </linearGradient>
+    <linearGradient id="mono" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#79f7ff" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#b36cff" stop-opacity=".08"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#79f7ff" stop-opacity="0"/>
+      <stop offset=".6" stop-color="#79f7ff" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#79f7ff" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="below"><rect x="0" y="560" width="1600" height="340"/></clipPath>
   </defs>
   <style>
-    .o{transform-box:fill-box;transform-origin:center;animation:float 26s ease-in-out infinite}
-    .o2{animation-duration:32s;animation-delay:-9s}.o3{animation-duration:38s;animation-delay:-15s}
-    .ring{transform-box:fill-box;transform-origin:center}
-    .ra{animation:spin 140s linear infinite}
-    .rb{animation:spin 200s linear infinite reverse}
-    .shard{animation:drift 30s ease-in-out infinite}
-    .s2{animation-duration:38s;animation-delay:-12s}.s3{animation-duration:44s;animation-delay:-20s}
-    .p{animation:tw 6s ease-in-out infinite}.p2{animation-delay:-2s}.p3{animation-delay:-4s}
-    @keyframes float{50%{transform:translate(50px,-36px) scale(1.08)}}
+    .box{transform-box:fill-box;transform-origin:center}
+    .ripple{transform-box:fill-box;transform-origin:center;animation:ripple 10s ease-out infinite;opacity:0}
+    .r2{animation-delay:-2.5s}.r3{animation-delay:-5s}.r4{animation-delay:-7.5s}
+    .mono{animation:bob 10s ease-in-out infinite}
+    .m2{animation-duration:13s;animation-delay:-4s}.m3{animation-duration:16s;animation-delay:-8s}.m4{animation-duration:12s;animation-delay:-6s}
+    .spin{transform-box:fill-box;transform-origin:center;animation:spin 40s linear infinite}
+    .spin2{animation-duration:55s;animation-direction:reverse}
+    .row{animation:rush 6s cubic-bezier(.55,0,1,.6) infinite;opacity:0}
+    .w2{animation-delay:-1s}.w3{animation-delay:-2s}.w4{animation-delay:-3s}.w5{animation-delay:-4s}.w6{animation-delay:-5s}
+    .crack{animation:crack 5s ease-in-out infinite}
+    .beam{animation:sway 14s ease-in-out infinite}
+    .b2{animation-duration:18s;animation-delay:-7s}
+    .rise{animation:rise 9s linear infinite;opacity:0}
+    .u2{animation-delay:-2s}.u3{animation-delay:-4s}.u4{animation-delay:-6s}.u5{animation-delay:-7.5s}
+    .st{animation:tw 5s ease-in-out infinite}.st2{animation-delay:-1.7s}.st3{animation-delay:-3.4s}
+    .halo{animation:halo 7s ease-in-out infinite}
+    @keyframes ripple{0%{transform:scale(.12);opacity:.75}100%{transform:scale(1.9);opacity:0}}
+    @keyframes bob{50%{transform:translate(10px,-26px)}}
     @keyframes spin{to{transform:rotate(360deg)}}
-    @keyframes drift{50%{transform:translate(18px,-14px)}}
-    @keyframes tw{50%{opacity:.2}}
-    @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+    @keyframes rush{0%{transform:translateY(0);opacity:0}15%{opacity:.8}100%{transform:translateY(340px);opacity:0}}
+    @keyframes crack{50%{opacity:.25}}
+    @keyframes sway{50%{transform:translateX(70px)}}
+    @keyframes rise{0%{transform:translateY(0);opacity:0}20%{opacity:.9}100%{transform:translateY(-320px);opacity:0}}
+    @keyframes tw{50%{opacity:.15}}
+    @keyframes halo{50%{opacity:.6}}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important}.ripple{opacity:.25}}
   </style>
 
-  <g opacity=".8">
-    <ellipse class="o" cx="340" cy="250" rx="560" ry="400" fill="url(#neb-a)"/>
-    <ellipse class="o o2" cx="1260" cy="650" rx="620" ry="440" fill="url(#neb-b)"/>
-    <ellipse class="o o3" cx="820" cy="450" rx="520" ry="340" fill="url(#neb-c)"/>
+  <rect width="1600" height="900" fill="url(#sky)"/>
 
-    <g stroke="url(#edge)" stroke-linecap="round">
-      <circle class="ring ra" cx="800" cy="450" r="400" stroke-width="2" stroke-dasharray="260 50 90 50 340 50 150 50" opacity=".45"/>
-      <circle class="ring rb" cx="800" cy="450" r="470" stroke-width="1" stroke-dasharray="3 10" opacity=".4"/>
-      <circle cx="800" cy="450" r="330" stroke-width="1" stroke-dasharray="40 14 4 14" opacity=".3"/>
-    </g>
+  <g fill="#cfeff5">
+    <circle class="st" cx="140" cy="90" r="1.4"/><circle class="st st2" cx="380" cy="190" r="1.1"/>
+    <circle class="st st3" cx="560" cy="70" r="1.6"/><circle class="st" cx="1010" cy="120" r="1.2"/>
+    <circle class="st st2" cx="1220" cy="60" r="1.5"/><circle class="st st3" cx="1450" cy="210" r="1.2"/>
+    <circle class="st" cx="1530" cy="100" r="1.4"/><circle class="st st2" cx="260" cy="330" r="1"/>
+    <circle class="st st3" cx="1340" cy="360" r="1.1"/><circle class="st" cx="720" cy="250" r="1"/>
+  </g>
 
-    <g stroke="#79f7ff" stroke-width="1.4" stroke-linejoin="round" opacity=".5">
-      <path d="M800 450L690 360 640 270 560 210 470 120"/>
-      <path d="M800 450L930 400 1010 320 1130 290 1250 200"/>
-      <path d="M800 450L880 540 960 600 1010 700 1120 790"/>
-      <path d="M800 450L700 520 650 610 540 650 440 760"/>
-      <path d="M690 360L610 380 560 350" stroke-opacity=".6"/>
-      <path d="M960 600L1040 590 1100 640" stroke-opacity=".6"/>
-    </g>
+  <rect class="beam" x="420" y="0" width="90" height="620" fill="url(#beam)"/>
+  <rect class="beam b2" x="1090" y="0" width="70" height="620" fill="url(#beam)"/>
 
-    <g stroke="url(#edge)" stroke-width="1.4" stroke-linejoin="round">
-      <polygon class="shard" points="250,170 360,120 410,210 300,260" fill="#79f7ff" fill-opacity=".05" opacity=".7"/>
-      <polygon class="shard s2" points="1230,560 1360,520 1390,640 1270,690" fill="#b36cff" fill-opacity=".06" opacity=".7"/>
-      <polygon class="shard s3" points="1180,110 1290,90 1320,170 1220,200" fill="#4f6dff" fill-opacity=".06" opacity=".6"/>
-      <polygon class="shard s2" points="170,640 270,600 320,690 210,750" fill="#b36cff" fill-opacity=".05" opacity=".6"/>
-      <path d="M520 800l60-40 70 20" opacity=".5"/>
-      <path d="M1000 120l50 30 80-10" opacity=".5"/>
-    </g>
+  <ellipse class="halo" cx="800" cy="560" rx="560" ry="200" fill="url(#sun)"/>
 
-    <g stroke="#79f7ff" stroke-width="2" opacity=".6">
-      <path d="M40 40h60l20 20M40 40v60"/>
-      <path d="M1560 40h-60l-20 20M1560 40v60"/>
-      <path d="M40 860h60l20-20M40 860v-60"/>
-      <path d="M1560 860h-60l-20-20M1560 860v-60"/>
-    </g>
-    <g stroke="#79f7ff" stroke-width="1" opacity=".35">
-      <path d="M0 450h60M1540 450h60M800 0v36M800 864v36"/>
-    </g>
+  <g stroke="#79f7ff" stroke-width="1.6" fill="none">
+    <ellipse class="ripple" cx="800" cy="560" rx="360" ry="70"/>
+    <ellipse class="ripple r2" cx="800" cy="560" rx="360" ry="70"/>
+    <ellipse class="ripple r3" cx="800" cy="560" rx="360" ry="70"/>
+    <ellipse class="ripple r4" cx="800" cy="560" rx="360" ry="70"/>
+  </g>
 
-    <g fill="#bff6ff">
-      <circle class="p" cx="210" cy="130" r="1.6"/><circle class="p p2" cx="470" cy="610" r="1.2"/>
-      <circle class="p p3" cx="690" cy="170" r="1.8"/><circle class="p" cx="930" cy="760" r="1.3"/>
-      <circle class="p p2" cx="1130" cy="210" r="1.7"/><circle class="p p3" cx="1390" cy="480" r="1.3"/>
-      <circle class="p" cx="1500" cy="130" r="1.5"/><circle class="p p2" cx="120" cy="720" r="1.5"/>
-      <circle class="p p3" cx="1010" cy="540" r="1.4"/>
+  <g clip-path="url(#below)" stroke="url(#floor)" stroke-width="1">
+    <path d="M800 560L-1200 900M800 560L-700 900M800 560L-300 900M800 560L60 900M800 560L360 900M800 560L580 900M800 560L800 900M800 560L1020 900M800 560L1240 900M800 560L1540 900M800 560L1900 900M800 560L2300 900M800 560L2800 900"/>
+  </g>
+  <g stroke="#79f7ff" stroke-width="1.2">
+    <path class="row" d="M0 562H1600"/>
+    <path class="row w2" d="M0 562H1600"/>
+    <path class="row w3" d="M0 562H1600"/>
+    <path class="row w4" d="M0 562H1600"/>
+    <path class="row w5" d="M0 562H1600"/>
+    <path class="row w6" d="M0 562H1600"/>
+  </g>
+
+  <g stroke-linejoin="round">
+    <path d="M0 560H610L640 548L690 572L735 556L800 560" stroke="#79f7ff" stroke-width="1.6" opacity=".7"/>
+    <path d="M800 560L868 576L915 552L962 566H1600" stroke="#b36cff" stroke-width="1.6" opacity=".7"/>
+    <g class="crack">
+      <path d="M735 556L760 380L742 250L790 120L772 0" stroke="#a8ffff" stroke-width="1.6" opacity=".85"/>
+      <path d="M742 250L700 262M790 120L840 142M760 380L722 396" stroke="#79f7ff" stroke-width="1" opacity=".6"/>
     </g>
+  </g>
+
+  <g stroke="#79f7ff" stroke-width="1.2" stroke-linejoin="round">
+    <g class="mono"><path d="M300 330l60-26 20 150-60 26Z" fill="url(#mono)" fill-opacity=".5" opacity=".8"/></g>
+    <g class="mono m2"><path d="M1190 250l50-34 40 190-50 34Z" fill="url(#mono)" fill-opacity=".5" opacity=".8"/></g>
+    <g class="mono m3"><path d="M1060 420l28-16 18 90-28 16Z" fill="url(#mono)" fill-opacity=".5" opacity=".65"/></g>
+    <g class="mono m4"><path d="M520 430l24-12 14 72-24 12Z" fill="url(#mono)" fill-opacity=".5" opacity=".65"/></g>
+  </g>
+
+  <g stroke="url(#mono)" stroke-width="1.4" stroke-linejoin="round">
+    <polygon class="spin" points="1400,140 1440,160 1420,200 1380,180" opacity=".7"/>
+    <polygon class="spin spin2" points="180,220 214,238 196,272 162,254" opacity=".7"/>
+    <polygon class="spin" points="1450,520 1478,534 1462,562 1434,548" opacity=".55"/>
+    <polygon class="spin spin2" points="120,560 148,572 134,600 106,588" opacity=".55"/>
+  </g>
+
+  <g fill="#79f7ff">
+    <circle class="rise" cx="300" cy="640" r="1.8"/>
+    <circle class="rise u2" cx="560" cy="700" r="1.5"/>
+    <circle class="rise u3" cx="800" cy="620" r="2"/>
+    <circle class="rise u4" cx="1050" cy="690" r="1.6"/>
+    <circle class="rise u5" cx="1300" cy="650" r="1.8"/>
+  </g>
+
+  <g stroke="#79f7ff" stroke-width="2" opacity=".5">
+    <path d="M40 40h60l20 20M40 40v60"/>
+    <path d="M1560 40h-60l-20 20M1560 40v60"/>
+    <path d="M40 860h60l20-20M40 860v-60"/>
+    <path d="M1560 860h-60l-20-20M1560 860v-60"/>
   </g>
 </svg>
