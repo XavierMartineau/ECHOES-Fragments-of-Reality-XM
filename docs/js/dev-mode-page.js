@@ -29,47 +29,7 @@
   $("#dmGateCancel").href = from || "../../index.html";
   const fromLevel = Number((/niveau-(\d+)\.html/i.exec(from) || [])[1]) || null;
 
-  // Curseur propre au DEV MODE : réticule à crochets avec lecture des coordonnées (souris uniquement).
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-    document.documentElement.classList.add("dm-cursor-on");
-    const dot = document.createElement("div");
-    dot.className = "dm-cur-dot";
-    const reticle = document.createElement("div");
-    reticle.className = "dm-cur-reticle";
-    reticle.innerHTML = "<i></i><i></i><i></i><i></i><span></span>";
-    const readout = reticle.querySelector("span");
-    document.body.append(reticle, dot);
-    let x = -100;
-    let y = -100;
-    let rx = x;
-    let ry = y;
-    let frame = 0;
-    const loop = () => {
-      rx += (x - rx) * (reducedMotion ? 1 : 0.2);
-      ry += (y - ry) * (reducedMotion ? 1 : 0.2);
-      reticle.style.transform = `translate(${rx}px, ${ry}px)`;
-      frame = Math.abs(x - rx) + Math.abs(y - ry) > 0.2 ? requestAnimationFrame(loop) : 0;
-    };
-    document.addEventListener("pointermove", (event) => {
-      x = event.clientX;
-      y = event.clientY;
-      dot.style.transform = `translate(${x}px, ${y}px)`;
-      readout.textContent = `X ${String(Math.round(x)).padStart(4, "0")} Y ${String(Math.round(y)).padStart(4, "0")}`;
-      reticle.classList.toggle("is-link", Boolean(event.target.closest?.("a, button, label, input, .dm-part")));
-      if (!frame) frame = requestAnimationFrame(loop);
-    });
-    document.addEventListener("pointerdown", () => reticle.classList.add("is-down"));
-    document.addEventListener("pointerup", () => reticle.classList.remove("is-down"));
-    document.documentElement.addEventListener("pointerleave", () => {
-      reticle.style.opacity = "0";
-      dot.style.opacity = "0";
-    });
-    document.documentElement.addEventListener("pointerenter", () => {
-      reticle.style.opacity = "";
-      dot.style.opacity = "";
-    });
-  }
+  // Le curseur à réticule est celui de tout le site (ui-effects.js).
 
   const msg = (text) => {
     $("#dmMsg").textContent = text;

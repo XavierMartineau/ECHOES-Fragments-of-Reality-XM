@@ -351,7 +351,7 @@
 // --- Curseur premium (point + anneau à inertie), scrollbars thématiques et sélection de texte ---
 // Couleur pilotée par --fx-rgb (posée par scene-bg.js selon l'univers de la page).
 (() => {
-  if (window.__echoesUiFx || document.querySelector(".level-header")) return;
+  if (window.__echoesUiFx) return;
   window.__echoesUiFx = true;
 
   const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -372,25 +372,26 @@
     .fx-cursor-on,.fx-cursor-on *{cursor:none!important}
     .fx-cursor-on input:not([type=checkbox]):not([type=radio]):not([type=range]),.fx-cursor-on textarea,.fx-cursor-on [contenteditable]{cursor:text!important}
     #fx-dot,#fx-ring{position:fixed;left:0;top:0;pointer-events:none;z-index:2147483647;opacity:0;transition:opacity .2s,width .2s,height .2s,margin .2s,border-color .2s,background .2s,border-radius .2s,box-shadow .2s}
-    #fx-dot{width:6px;height:6px;margin:-3px 0 0 -3px;border:1px solid #fff;border-radius:50%;background:rgb(var(--fx-rgb));box-shadow:0 0 10px 2px rgba(var(--fx-rgb),.7);transition:opacity .2s,width .16s,height .16s,margin .16s,background .2s,box-shadow .2s}
-    #fx-ring{width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1px solid rgba(var(--fx-rgb),.62);box-shadow:0 0 14px rgba(var(--fx-rgb),.2),inset 0 0 8px rgba(var(--fx-rgb),.1)}
-    #fx-ring::before,#fx-ring::after{content:"";position:absolute;left:50%;top:50%;background:rgba(var(--fx-rgb),.9);opacity:0;transition:opacity .16s}
+    #fx-dot{width:6px;height:6px;margin:-3px 0 0 -3px;border:0;border-radius:0;rotate:45deg;background:#fff;box-shadow:0 0 10px rgb(var(--fx-rgb)),0 0 2px #fff;transition:opacity .2s,width .16s,height .16s,margin .16s,background .2s,box-shadow .2s,rotate .2s}
+    #fx-ring{--k:rgb(var(--fx-rgb));width:34px;height:34px;margin:-17px 0 0 -17px;background:linear-gradient(var(--k),var(--k)) 0 0/10px 2px,linear-gradient(var(--k),var(--k)) 0 0/2px 10px,linear-gradient(var(--k),var(--k)) 100% 0/10px 2px,linear-gradient(var(--k),var(--k)) 100% 0/2px 10px,linear-gradient(var(--k),var(--k)) 0 100%/10px 2px,linear-gradient(var(--k),var(--k)) 0 100%/2px 10px,linear-gradient(var(--k),var(--k)) 100% 100%/10px 2px,linear-gradient(var(--k),var(--k)) 100% 100%/2px 10px;background-repeat:no-repeat;filter:drop-shadow(0 0 4px rgba(var(--fx-rgb),.8))}
+    #fx-ring::before,#fx-ring::after{content:"";position:absolute;left:50%;top:50%;background:var(--k);opacity:0;transition:opacity .16s}
     #fx-ring::before{width:9px;height:1px;margin:0 0 0 -4px}
     #fx-ring::after{width:1px;height:9px;margin:-4px 0 0 0}
+    #fx-ring span{position:absolute;left:calc(100% + 8px);top:calc(100% + 2px);white-space:nowrap;color:rgba(var(--fx-rgb),.9);font:600 .58rem Orbitron,sans-serif;letter-spacing:.12em;text-shadow:0 0 6px rgba(0,0,0,.9)}
     .fx-on #fx-dot,.fx-on #fx-ring{opacity:1}
-    .fx-hover #fx-ring{width:42px;height:42px;margin:-21px 0 0 -21px;border-color:#fff;background:rgba(var(--fx-rgb),.1);box-shadow:0 0 18px rgba(var(--fx-rgb),.4),inset 0 0 10px rgba(var(--fx-rgb),.14)}
-    .fx-hover #fx-ring::before,.fx-hover #fx-ring::after{opacity:.8}
-    .fx-hover #fx-dot{width:4px;height:4px;margin:-2px 0 0 -2px;box-shadow:0 0 12px 3px rgba(var(--fx-rgb),.85)}
-    .fx-grab #fx-ring{border-radius:9px;border-style:dashed}
-    .fx-grabbing #fx-ring{width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:7px;background:rgba(var(--fx-rgb),.2)}
-    .fx-crosshair #fx-ring{border-radius:8px}
-    .fx-down #fx-ring{width:24px;height:24px;margin:-12px 0 0 -12px;background:rgba(var(--fx-rgb),.28);box-shadow:0 0 22px rgba(var(--fx-rgb),.55)}
-    .fx-click #fx-ring{border-color:#fff;box-shadow:0 0 24px rgba(var(--fx-rgb),.7),inset 0 0 10px rgba(var(--fx-rgb),.2)}
-    .fx-disabled #fx-ring{border-style:dashed;border-color:rgba(160,170,190,.5);background:none;box-shadow:none}
-    .fx-disabled #fx-ring::before,.fx-disabled #fx-ring::after{opacity:0}
+    .fx-hover #fx-ring{--k:#ffd27a;width:24px;height:24px;margin:-12px 0 0 -12px;filter:drop-shadow(0 0 5px rgba(255,210,122,.8))}
+    .fx-hover #fx-dot{background:#ffd27a;box-shadow:0 0 12px #ffd27a}
+    .fx-grab #fx-ring{rotate:45deg;width:30px;height:30px;margin:-15px 0 0 -15px}
+    .fx-grabbing #fx-ring{rotate:45deg;width:20px;height:20px;margin:-10px 0 0 -10px}
+    .fx-crosshair #fx-ring{width:46px;height:46px;margin:-23px 0 0 -23px}
+    .fx-crosshair #fx-ring::before,.fx-crosshair #fx-ring::after{opacity:.9}
+    .fx-down #fx-ring,.fx-click #fx-ring{--k:#ff4d6d;width:18px;height:18px;margin:-9px 0 0 -9px;filter:drop-shadow(0 0 6px rgba(255,77,109,.9))}
+    .fx-down #fx-dot,.fx-click #fx-dot{background:#ff4d6d;box-shadow:0 0 12px #ff4d6d}
+    .fx-disabled #fx-ring{--k:rgba(160,170,190,.6);filter:none}
     .fx-disabled #fx-dot{background:#8a93a8;box-shadow:none}
+    .fx-hover #fx-ring span,.fx-text #fx-ring span,.fx-down #fx-ring span{opacity:0}
     .fx-text #fx-ring{opacity:0!important}
-    .fx-text #fx-dot{width:2px;height:18px;margin:-9px 0 0 -1px;border-radius:1px}
+    .fx-text #fx-dot{width:2px;height:18px;margin:-9px 0 0 -1px;rotate:0deg;background:rgb(var(--fx-rgb))}
     @media (prefers-reduced-motion:reduce){#fx-ring,#fx-dot{transition:none}}
   `;
   document.head.appendChild(style);
@@ -402,10 +403,12 @@
   dot.id = "fx-dot";
   const ring = document.createElement("div");
   ring.id = "fx-ring";
+  const readout = document.createElement("span");
+  ring.appendChild(readout);
   document.body.append(ring, dot);
   root.classList.add("fx-cursor-on");
 
-  const INTERACTIVE = "a[href],button,[role=button],summary,select,label[for],input[type=checkbox],input[type=radio],input[type=range],.level-card,.dev-mode-toggle,[data-cursor=hover]";
+  const INTERACTIVE = "a[href],button,[role=button],summary,select,label,.dm-part,.dm-switch,input[type=checkbox],.level-card,input[type=radio],input[type=range],.level-card,.dev-mode-toggle,[data-cursor=hover]";
   const DRAGGABLE = "[draggable=true],[data-cursor=grab],.drag-handle,.puzzle-piece,.resonance-piece,.alignment-token,.sorting-token,.color-symbol,.geometry-point";
   const CROSSHAIR = "[data-cursor=crosshair],.flow-cell,.rhythm-pulse";
   const TEXT = "input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=button]):not([type=submit]),textarea,[contenteditable=true]";
@@ -438,6 +441,9 @@
   window.addEventListener("pointermove", (e) => {
     x = e.clientX;
     y = e.clientY;
+    if (!root.classList.contains("fx-lite")) {
+      readout.textContent = `X ${String(Math.round(x)).padStart(4, "0")} Y ${String(Math.round(y)).padStart(4, "0")}`;
+    }
     if (!started) {
       started = true;
       rx = x;
