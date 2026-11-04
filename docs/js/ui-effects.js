@@ -391,10 +391,10 @@
     .fx-disabled #fx-dot{background:#8a93a8;box-shadow:none}
     .fx-hover #fx-ring span,.fx-text #fx-ring span,.fx-down #fx-ring span{opacity:0}
     .fx-text #fx-ring{opacity:0!important}
-    .fx-text #fx-dot{width:2px;height:24px;margin:-12px 0 0 -1px;rotate:0deg;border-radius:1px;background:linear-gradient(180deg,#fff,rgb(var(--fx-rgb)) 30%,rgb(var(--fx-rgb)) 70%,#fff);box-shadow:0 0 8px rgba(var(--fx-rgb),.85);animation:fx-caret 1.1s ease-in-out infinite}
-    .fx-text #fx-dot::before,.fx-text #fx-dot::after{content:"";position:absolute;left:50%;width:10px;height:2px;margin-left:-5px;border-radius:1px;background:rgb(var(--fx-rgb));box-shadow:0 0 6px rgba(var(--fx-rgb),.8)}
-    .fx-text #fx-dot::before{top:-2px}.fx-text #fx-dot::after{bottom:-2px}
-    @keyframes fx-caret{0%,100%{opacity:1}50%{opacity:.45}}
+    .fx-text #fx-dot{width:11px;height:20px;margin:-10px 0 0 -2px;rotate:0deg;border-radius:1px;background:rgba(var(--fx-rgb),.85);box-shadow:0 0 10px rgba(var(--fx-rgb),.7);animation:fx-caret 1s steps(1,end) infinite}
+    .fx-text #fx-dot::before{content:">_";position:absolute;left:14px;top:-1px;font:700 .62rem "Courier New",Consolas,monospace;letter-spacing:.04em;color:rgb(var(--fx-rgb));text-shadow:0 0 6px rgba(0,0,0,.9)}
+    @keyframes fx-caret{0%,100%{opacity:1}50%{opacity:.25}}
+    input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=button]):not([type=submit]),textarea,[contenteditable=true]{font-family:"Cascadia Code","Fira Code",Consolas,"Courier New",monospace!important;letter-spacing:.02em;caret-color:#79f7ff;caret-shape:block}
     @media (prefers-reduced-motion:reduce){#fx-ring,#fx-dot{transition:none;animation:none!important}}
   `;
   document.head.appendChild(style);
