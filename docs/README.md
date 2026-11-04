@@ -43,4 +43,3 @@ et de récompenses restent gérées par les contrôleurs et `js/save-system.js`.
 ## Parcours
 
 Les six parties principales couvrent les niveaux 1 à 30, par groupes de cinq.
-Les niveaux 31 à 60 sont conservés comme bonus et s'ouvrent depuis le DEV MODE.
