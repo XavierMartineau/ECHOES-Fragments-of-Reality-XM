@@ -171,12 +171,17 @@ function updateStartButton() {
 }
 
 function applyLanguage(lang) {
-  currentLang = translations[lang] ? lang : "fr";
+  const target = lang === "en" ? "en" : "fr";
+  if (!translations[target]) {
+    loadDictionary(target).then(() => applyLanguage(target));
+    return;
+  }
+  currentLang = target;
   const dictionary = translations[currentLang];
 
   translatableElements.forEach((element) => {
     const key = element.dataset.i18n;
-    if (dictionary[key]) {
+    if (dictionary[key] && element.textContent !== dictionary[key]) {
       element.textContent = dictionary[key];
     }
   });
@@ -186,10 +191,32 @@ function applyLanguage(lang) {
   });
 
   document.documentElement.lang = currentLang;
+  document
+    .querySelector(".lang-switcher")
+    ?.setAttribute(
+      "aria-label",
+      currentLang === "en" ? "Language selection" : "Choix de langue",
+    );
   localStorage.setItem("echoes-language", currentLang);
   updateStartButton();
   updateReducedEffects();
 }
+
+// Seul le dictionnaire de la langue courante est chargé au départ ; l'autre arrive en tâche de fond.
+const dictionaryRequests = {};
+function loadDictionary(lang) {
+  if (translations[lang]) return Promise.resolve();
+  dictionaryRequests[lang] ||= new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = new URL(`docs/js/translations.${lang}.js?v=3`, document.baseURI).href;
+    script.onload = script.onerror = () => resolve();
+    document.head.appendChild(script);
+  });
+  return dictionaryRequests[lang];
+}
+
+const idle = window.requestIdleCallback || ((callback) => setTimeout(callback, 600));
+idle(() => loadDictionary(currentLang === "fr" ? "en" : "fr"));
 
 startButton.addEventListener("click", () => {
   startButton.dataset.loading = "true";

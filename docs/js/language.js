@@ -48,11 +48,5 @@
   buttons.forEach((button) => {
     const language = button.dataset.lang || button.dataset.language;
     button.classList.toggle("active", language === currentLanguage);
-    button.addEventListener("click", () => {
-      if (availableLanguages.includes(language)) {
-        localStorage.setItem("echoes-language", language);
-        window.location.reload();
-      }
-    });
   });
 })();
