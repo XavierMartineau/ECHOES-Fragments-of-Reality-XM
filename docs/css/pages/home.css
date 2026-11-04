@@ -1819,9 +1819,9 @@ html body.index-page .home-topbar-line {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -14px;
+  bottom: -26px;
   width: 100%;
-  height: 30px;
+  height: 54px;
   overflow: visible;
   pointer-events: none;
 }
