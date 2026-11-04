@@ -1530,7 +1530,8 @@ html body.index-page #background {
 html body.index-page .home-ai-core {
   position: absolute;
   inset: 50% auto auto 50%;
-  width: min(100%, 540px);
+  width: max(90vw, 90svh);
+  max-width: none;
   height: auto;
   transform: translate(-50%, -50%);
   opacity: 0.75;

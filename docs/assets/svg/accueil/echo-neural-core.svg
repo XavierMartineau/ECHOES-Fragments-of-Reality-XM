@@ -31,11 +31,9 @@
     </clipPath>
   </defs>
   <style>
-    .orbit-a{transform-origin:320px 320px;animation:rotate 46s linear infinite}
-    .orbit-b{transform-origin:320px 320px;animation:rotate 64s linear infinite reverse}
-    .orbit-c{transform-origin:320px 320px;animation:rotate 31s linear infinite}
+    .orbit-a{transform-origin:320px 320px;animation:rotate 120s linear infinite}
     .core-pulse{transform-origin:320px 320px;animation:pulse 5s ease-in-out infinite}
-    .nodes{animation:node-glow 3.8s ease-in-out infinite alternate}
+    .nodes{animation:none}
     @keyframes rotate{to{transform:rotate(360deg)}}
     @keyframes pulse{50%{transform:scale(1.035);opacity:.8}}
     @keyframes node-glow{to{opacity:.5}}
@@ -50,16 +48,6 @@
     <circle cx="320" cy="320" r="248" stroke-width="2" stroke-dasharray="112 20 48 36 182 34" opacity=".66"/>
     <path d="M320 37v38m0 490v38M37 320h38m490 0h38" stroke-width="2" opacity=".8"/>
     <path d="m120 120 25 25m350 350 25 25m0-400-25 25M145 495l-25 25" stroke-width="2" opacity=".6"/>
-  </g>
-  <g class="orbit-b" stroke="url(#line)" stroke-linecap="round">
-    <circle cx="320" cy="320" r="207" stroke-width="1.5" stroke-dasharray="58 10 5 10 92 18 5 18" opacity=".72"/>
-    <circle cx="320" cy="320" r="178" stroke-width="1" stroke-dasharray="1 9" opacity=".38"/>
-    <path d="M320 112v24m0 368v24M112 320h24m368 0h24" stroke-width="3"/>
-  </g>
-  <g class="orbit-c" stroke="url(#line)" stroke-width="1.4" opacity=".7">
-    <path d="m320 110 182 105v210L320 530 138 425V215l182-105Z"/>
-    <path d="m320 146 151 87v174l-151 87-151-87V233l151-87Z" stroke-dasharray="36 8"/>
-    <path d="m226 158 188 324m0-324L226 482"/>
   </g>
 
   <g clip-path="url(#sphere)" stroke="#a9fbff" stroke-opacity=".42" stroke-width="1">
@@ -83,7 +71,7 @@
   </g>
   <circle cx="320" cy="358" r="28" fill="#79f7ff" fill-opacity=".28" filter="url(#soft-glow)"/>
 
-  <g class="nodes" fill="#eaffff" filter="url(#glow)">
+  <g class="nodes" opacity=".6" fill="#eaffff" filter="url(#glow)">
     <circle cx="138" cy="215" r="4"/><circle cx="502" cy="215" r="4"/>
     <circle cx="138" cy="425" r="4"/><circle cx="502" cy="425" r="4"/>
     <circle cx="320" cy="112" r="3"/><circle cx="320" cy="528" r="3"/>
