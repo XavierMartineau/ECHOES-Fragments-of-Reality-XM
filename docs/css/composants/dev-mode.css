@@ -2387,3 +2387,212 @@ html body aside.dev-mode .dev-mode-number {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* ===== PC : DEV MODE en page complète, deux colonnes, plus clair et premium ===== */
+@media (min-width: 1024px) {
+  html body aside.dev-mode .dev-mode-panel:not([hidden]) {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 2147482000 !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    border: 0 !important;
+    background:
+      radial-gradient(900px 500px at 12% -10%, rgba(var(--dm-cyan), 0.16), transparent 60%),
+      radial-gradient(900px 600px at 100% 110%, rgba(var(--dm-violet), 0.2), transparent 60%),
+      linear-gradient(180deg, #0d1430, #070b1c) !important;
+    box-shadow: none !important;
+    animation: dev-full-in 0.28s ease both !important;
+  }
+
+  @keyframes dev-full-in {
+    from { opacity: 0; transform: scale(0.985); }
+    to { opacity: 1; transform: none; }
+  }
+
+  html body aside.dev-mode .dev-mode-heading {
+    position: static !important;
+    flex: none !important;
+    margin: 0 !important;
+    padding: 22px clamp(32px, 5vw, 80px) 18px !important;
+    background: linear-gradient(90deg, rgba(var(--dm-cyan), 0.1), rgba(var(--dm-violet), 0.1)) !important;
+    border-bottom: 1px solid rgba(var(--dm-cyan), 0.35) !important;
+  }
+
+  html body aside.dev-mode .dev-mode-heading strong {
+    font-size: 1.5rem !important;
+    letter-spacing: 0.12em !important;
+  }
+
+  html body aside.dev-mode .dev-mode-kicker {
+    font-size: 0.72rem !important;
+  }
+
+  html body aside.dev-mode .dev-mode-hint {
+    color: rgba(225, 233, 255, 0.78) !important;
+    font-size: 1rem !important;
+  }
+
+  html body aside.dev-mode .dev-mode-close {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 1.6rem !important;
+  }
+
+  html body aside.dev-mode .dev-mode-body {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    display: grid !important;
+    grid-template-columns: minmax(380px, 5fr) minmax(0, 7fr) !important;
+    gap: clamp(24px, 3vw, 56px) !important;
+    padding: 0 clamp(32px, 5vw, 80px) !important;
+  }
+
+  html body aside.dev-mode .dev-mode-col {
+    min-height: 0 !important;
+    padding: 6px 14px 40px 0 !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain !important;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(var(--dm-cyan), 0.6) transparent;
+  }
+
+  html body aside.dev-mode .dev-mode-col-nav {
+    padding-left: clamp(24px, 3vw, 56px) !important;
+    padding-right: 0 !important;
+    border-left: 1px solid rgba(var(--dm-cyan), 0.2) !important;
+  }
+
+  html body aside.dev-mode .dev-mode-section {
+    margin: 26px 0 12px !important;
+    color: rgb(var(--dm-cyan)) !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.3em !important;
+  }
+
+  html body aside.dev-mode .dev-mode-section:first-child {
+    margin-top: 18px !important;
+  }
+
+  html body aside.dev-mode .dev-mode-section::after {
+    background: linear-gradient(90deg, rgba(var(--dm-cyan), 0.55), transparent) !important;
+  }
+
+  html body aside.dev-mode .dev-mode-home {
+    padding: 14px 16px !important;
+    background: rgba(var(--dm-cyan), 0.12) !important;
+    box-shadow: inset 0 0 0 1px rgba(var(--dm-cyan), 0.38) !important;
+    color: #fff !important;
+    font-size: 0.7rem !important;
+  }
+
+  html body aside.dev-mode .dev-mode-home:hover,
+  html body aside.dev-mode .dev-mode-home:focus-visible {
+    background: rgba(var(--dm-cyan), 0.3) !important;
+    box-shadow: inset 0 0 0 1px rgb(var(--dm-cyan)), 0 0 18px rgba(var(--dm-cyan), 0.25) !important;
+  }
+
+  html body aside.dev-mode .dev-mode-key-btn.is-owned {
+    background: rgba(255, 210, 122, 0.28) !important;
+    box-shadow: inset 0 0 0 1px #ffd27a, 0 0 14px rgba(255, 210, 122, 0.25) !important;
+  }
+
+  html body aside.dev-mode .dev-mode-accessibility,
+  html body aside.dev-mode .dev-mode-number-row,
+  html body aside.dev-mode .dev-mode-info span {
+    padding: 13px 16px !important;
+    background: rgba(255, 255, 255, 0.055) !important;
+    box-shadow: inset 0 0 0 1px rgba(var(--dm-cyan), 0.24) !important;
+  }
+
+  html body aside.dev-mode .dev-mode-accessibility > span,
+  html body aside.dev-mode .dev-mode-number-row,
+  html body aside.dev-mode .dev-mode-info span {
+    color: #f2f6ff !important;
+    font-size: 1.02rem !important;
+  }
+
+  html body aside.dev-mode .dev-mode-info em {
+    color: rgba(215, 226, 255, 0.75) !important;
+  }
+
+  html body aside.dev-mode .dev-mode-part-toggle {
+    padding: 16px 18px 16px 22px !important;
+    background: linear-gradient(100deg, rgba(var(--a), 0.26), rgba(var(--a), 0.06)) !important;
+    box-shadow: inset 0 0 0 1px rgba(var(--a), 0.45) !important;
+  }
+
+  html body aside.dev-mode .dev-mode-part-toggle > span:first-child {
+    color: rgb(var(--a)) !important;
+    font-size: 0.7rem !important;
+  }
+
+  html body aside.dev-mode .dev-mode-part-name {
+    color: #fff !important;
+    font-size: 1.15rem !important;
+  }
+
+  html body aside.dev-mode .dev-mode-part-count {
+    color: rgba(225, 233, 255, 0.75) !important;
+    font-size: 0.9rem !important;
+  }
+
+  html body aside.dev-mode .dev-mode-parts {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  html body aside.dev-mode .dev-mode-level-panel {
+    margin-top: 26px !important;
+    padding-top: 20px !important;
+  }
+
+  html body aside.dev-mode .dev-mode-level-title {
+    font-size: 0.8rem !important;
+  }
+
+  html body aside.dev-mode .dev-mode-levels {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  html body aside.dev-mode .dev-mode-levels a {
+    height: 64px !important;
+    background: rgba(var(--a), 0.2) !important;
+    box-shadow: inset 0 0 0 1px rgba(var(--a), 0.55) !important;
+    font-size: 1.15rem !important;
+    transition: transform 0.15s ease, background 0.15s ease !important;
+  }
+
+  html body aside.dev-mode .dev-mode-levels a:hover,
+  html body aside.dev-mode .dev-mode-levels a:focus-visible {
+    background: rgba(var(--a), 0.55) !important;
+    transform: translateY(-2px) !important;
+  }
+
+  html body aside.dev-mode .dev-mode-special-link {
+    padding: 16px 18px !important;
+    font-size: 0.8rem !important;
+  }
+
+  html body aside.dev-mode .dev-mode-special-title {
+    font-size: 0.68rem !important;
+    color: rgba(225, 233, 255, 0.75) !important;
+  }
+
+  /* Le panneau couvre la page : le bouton se cache, la croix et Échap ferment. */
+  html body aside.dev-mode.is-open .dev-mode-toggle {
+    visibility: hidden !important;
+  }
+
+  html body aside.dev-mode .dev-mode-col-tools > .dev-mode-links:first-of-type {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}

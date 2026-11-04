@@ -484,3 +484,12 @@ Les niveaux bonus 31–60 ont été supprimés ; ils ne font plus partie de la p
 - **Langue** : plus de `reload()` ; `applyLanguage` agit sur place et charge le dictionnaire manquant à la demande (`script.js`, `language.js`). Mesuré : environ 85 ms par clic, sans erreur.
 - **DEV MODE** (`dev-mode.js`, `dev-mode.css` v25) : panneau 600 px avec défilement et en-tête fixe ; état du joueur ; don/retrait de chaque clé ou de toutes les clés (événement `echoes:key-unlocked` puis rechargement pour que hub et HUD de boss se mettent à jour) ; niveau précédent/suivant ; terminer ce niveau ; tout terminer ; réinitialiser (confirmation) ; compteur de FPS ; copie de la sauvegarde ; verrouillage du DEV MODE ; champ numérique du skip corrigé.
 - **Vérification** : test Playwright + Edge de tous les boutons (0 erreur de console). Non testé sur appareils réels.
+
+#### Suite du 04/11/2026 — DEV MODE en page indépendante
+
+- Le panneau DEV MODE n'est plus injecté dans chaque page : docs/js/dev-mode.js ne crée plus que le bouton, qui ouvre docs/html/dev-mode.html?from=<page>. Le HTML du panneau et sa logique (dev-mode-page.js) ne se chargent que sur cette page, ce qui allège les pages de jeu.
+- Code d'accès conservé (24 h) ; bouton « Retour au jeu » et touche Échap renvoient à la page d'origine (même origine uniquement).
+- Mise en page deux colonnes sur PC (outils à gauche, parties et niveaux à droite), une colonne sur mobile/tablette.
+- Curseur dédié à cette page : réticule à crochets avec coordonnées, doré sur les éléments cliquables, rouge au clic (souris uniquement, désactivé au toucher).
+- Réglages (couleurs accessibles, curseur premium, fonds animés, performance, FPS) enregistrés dans localStorage et appliqués au prochain chargement du jeu.
+- Test Playwright + Edge : code refusé/accepté, clés, tout terminer, réinitialiser, navigation, retour, FPS ; aucune erreur de console. Reste : dev-mode.css est toujours chargé sur les pages de jeu (il contient aussi des styles globaux) et garde des règles de l'ancien panneau à nettoyer.

@@ -1,0 +1,93 @@
+<!doctype html>
+<!-- ECHOES // DEV MODE : page indépendante, chargée uniquement à la demande. -->
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="../assets/svg/identite/echoes-favicon.svg?v=2" />
+    <title>ECHOES - DEV MODE</title>
+    <link rel="stylesheet" href="../css/base/fonts.css" />
+    <link rel="stylesheet" href="../css/pages/dev-mode-page.css?v=1" />
+  </head>
+  <body>
+    <header class="dm-top">
+      <div class="dm-title">
+        <span class="dm-kicker">ECHO // NAVIGATOR</span>
+        <h1>Developer Access</h1>
+        <p>Outils de test, progression et navigation entre les niveaux</p>
+      </div>
+      <a class="dm-back" id="dmBack" href="../../index.html">← Retour au jeu</a>
+    </header>
+
+    <main class="dm-body" id="dmBody" hidden>
+      <section class="dm-col">
+        <h2 class="dm-section">Raccourcis</h2>
+        <div class="dm-grid dm-grid-3">
+          <a class="dm-btn" href="../../index.html">Home</a>
+          <a class="dm-btn" href="login.html">Connexion</a>
+          <a class="dm-btn" href="niveaux.html">Hub des niveaux</a>
+        </div>
+
+        <h2 class="dm-section">Options</h2>
+        <div class="dm-stack">
+          <label class="dm-switch"><span>Repères couleurs accessibles</span><input type="checkbox" data-color-assist /></label>
+          <label class="dm-switch"><span>Curseur premium</span><input type="checkbox" data-fx-toggle="echoes-fx-cursor" /></label>
+          <label class="dm-switch"><span>Fonds animés contextuels</span><input type="checkbox" data-fx-toggle="echoes-fx-scene" /></label>
+          <label class="dm-switch"><span>Mode performance (appareils lents)</span><input type="checkbox" data-fx-toggle="echoes-perf" data-on="lite" data-off="auto" /></label>
+          <label class="dm-switch"><span>Compteur de FPS dans le jeu</span><input type="checkbox" data-fps-toggle /></label>
+        </div>
+
+        <h2 class="dm-section">État du joueur</h2>
+        <div class="dm-grid dm-grid-2" id="dmInfo" role="status"></div>
+
+        <h2 class="dm-section">Clés de résonance</h2>
+        <div class="dm-grid dm-grid-2">
+          <button class="dm-btn" type="button" data-give-keys>Donner les clés 1 à 6</button>
+          <button class="dm-btn" type="button" data-clear-keys>Retirer toutes les clés</button>
+        </div>
+        <div class="dm-grid dm-grid-3 dm-gap-top" id="dmKeyGrid"></div>
+
+        <h2 class="dm-section">Progression (test)</h2>
+        <div class="dm-stack">
+          <div class="dm-number">
+            <span>Passer jusqu'au niveau</span>
+            <input type="number" min="1" max="30" value="30" data-skip-level aria-label="Niveau cible" />
+          </div>
+          <button class="dm-btn" type="button" data-skip-go>Skip jusqu'à ce niveau</button>
+          <div class="dm-grid dm-grid-2">
+            <button class="dm-btn" type="button" data-complete-all>Tout terminer</button>
+            <button class="dm-btn dm-danger" type="button" data-reset-progress>Réinitialiser la progression</button>
+          </div>
+        </div>
+
+        <h2 class="dm-section">Outils</h2>
+        <div class="dm-grid dm-grid-2">
+          <button class="dm-btn" type="button" data-copy-save>Copier la sauvegarde</button>
+          <button class="dm-btn" type="button" data-lock-dev>Verrouiller le DEV MODE</button>
+        </div>
+        <p class="dm-msg" id="dmMsg" role="status"></p>
+      </section>
+
+      <section class="dm-col dm-col-nav">
+        <h2 class="dm-section">Parties</h2>
+        <div class="dm-parts" id="dmParts"></div>
+        <div id="dmLevels"></div>
+      </section>
+    </main>
+
+    <div class="dm-gate" id="dmGate" hidden>
+      <form class="dm-gate-card" id="dmGateForm" autocomplete="off">
+        <h2>ACCÈS DEV MODE</h2>
+        <p>Entre le code d’accès pour ouvrir le mode développeur.</p>
+        <input id="dmGateInput" type="password" maxlength="32" autocapitalize="none" spellcheck="false" aria-label="Code d’accès" placeholder="Code d’accès" required />
+        <button type="submit" class="dm-btn">VALIDER</button>
+        <p class="dm-gate-msg" id="dmGateMsg" role="status"></p>
+        <a class="dm-gate-cancel" id="dmGateCancel" href="../../index.html">Annuler</a>
+      </form>
+    </div>
+
+    <script src="../js/save-system.js"></script>
+    <script src="../js/dev-mode-page.js?v=1"></script>
+  </body>
+</html>
