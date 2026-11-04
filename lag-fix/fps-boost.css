@@ -1,0 +1,57 @@
+/* Correctifs de performance, chargés par lag-fix/fps-boost.js. Sans effet sur le rendu normal. */
+
+/* Onglet masqué : on fige toutes les animations CSS. */
+html.lagfix-hidden *,
+html.lagfix-hidden *::before,
+html.lagfix-hidden *::after {
+  animation-play-state: paused !important;
+}
+
+/* Mode allégé (activé automatiquement si le jeu tourne sous ~45 FPS) */
+html.lagfix-lite *,
+html.lagfix-lite *::before,
+html.lagfix-lite *::after {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  text-shadow: none !important;
+}
+
+html.lagfix-lite .scanlines,
+html.lagfix-lite .fx-scanline,
+html.lagfix-lite .fx-particles,
+html.lagfix-lite .ambient-grid {
+  display: none !important;
+}
+
+/* Les filtres drop-shadow sur de grands éléments sont très coûteux. */
+html.lagfix-lite .home-skyline,
+html.lagfix-lite .home-topbar-line,
+html.lagfix-lite .login-fragments {
+  filter: none !important;
+}
+
+html.lagfix-lite [class*="glow"],
+html.lagfix-lite [class*="halo"] {
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Animations décoratives infinies coupées en mode allégé. */
+html.lagfix-lite .home-skyline,
+html.lagfix-lite .login-fragments,
+html.lagfix-lite .login-background {
+  animation: none !important;
+}
+
+/* Le pied de page hors écran n'est ni mis en page ni dessiné. */
+.site-footer,
+.level-footer,
+.console-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 120px;
+}
+
+/* Les canevas passent sur leur propre calque GPU. */
+canvas {
+  transform: translateZ(0);
+}

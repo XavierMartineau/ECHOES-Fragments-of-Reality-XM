@@ -148,6 +148,8 @@ Fichiers importants :
 - `docs/css/niveaux/` : styles communs et un fichier par partie (1 à 6) ;
 - `docs/js/bosses/` : contrôleurs des trois combats de boss ;
 - `docs/js/key-fragments.js` : assemblage des fragments et cinématique de récompense ;
+- `lag-fix/` : `fps-boost.js` et `fps-boost.css`, chargés sur toutes les pages ; mesurent les FPS et passent automatiquement en mode allégé (sans flou, ombres ni effets décoratifs) sous 45 FPS, et figent les animations quand l'onglet est masqué ;
+- `docs/js/home-line.js` : ligne du haut de l'accueil, déformée par une impulsion (la ligne elle-même bouge) ;
 - `docs/html/dev-mode.html`, `docs/js/dev-mode-page.js` et `docs/css/pages/dev-mode-page.css` : DEV MODE sous forme de page indépendante (code d'accès, navigation par partie, état du joueur, don/retrait des clés 1 à 6, skip de niveau, tout terminer, réinitialisation, compteur de FPS, copie de la sauvegarde, curseur à réticule) ;
 - `docs/js/dev-mode.js` : version légère injectée sur chaque page, qui ne crée que le bouton « DEV MODE » et ouvre la page ci-dessus ;
 - `docs/assets/svg/accueil/adaptatif/` : le même décor d'accueil en trois tailles (PC, tablette, mobile), choisi par `<picture>` dans `index.html` ;
