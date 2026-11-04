@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="style.css?v=2" />
     <link rel="stylesheet" href="docs/css/base/responsive.css?v=m1" />
     <link rel="stylesheet" href="docs/css/base/fonts.css" />
-    <link rel="stylesheet" href="docs/css/pages/home.css?v=30" />
+    <link rel="stylesheet" href="docs/css/pages/home.css?v=31" />
   </head>
   <body class="index-page">
     <canvas id="background"></canvas>
@@ -69,12 +69,14 @@
         <div class="home-ai-readout home-ai-readout-top">
           <span class="home-ai-readout-dot"></span>
           <span data-i18n="aiSignal">SIGNAL NEURAL</span>
-          <strong>98.7<span>%</span></strong>
+          <strong>0<span>%</span></strong>
         </div>
         <div class="home-ai-readout home-ai-readout-bottom">
           <span class="home-ai-wave">
             <svg viewBox="0 0 72 22" focusable="false">
-              <path d="M1 11h13l5-8 8 16 7-13 7 9 6-4h24" />
+              <path class="wave-base" d="M1 11h70" />
+              <path class="wave-spike wave-spike-a" d="M8 11h6l3-8 4 16 3-8h6" />
+              <path class="wave-spike wave-spike-b" d="M40 11h5l3-6 3 12 3-6h6" />
             </svg>
           </span>
           <span
