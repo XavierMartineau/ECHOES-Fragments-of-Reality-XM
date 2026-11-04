@@ -73,5 +73,6 @@
       "matchCommandLine": true
     }
   },
-  "chat.permissions.default": "autoApprove"
+  "chat.permissions.default": "autoApprove",
+  "liveServer.settings.port": 5501
 }

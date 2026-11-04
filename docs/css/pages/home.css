@@ -1517,3 +1517,21 @@ html body.index-page .home-brandline,
 html body.index-page .meta {
   justify-content: center;
 }
+
+/* Accueil allégé : moitié moins d'éléments animés. Le titre, le sous-titre, le logo
+   et le point d'état restent fixes ; seuls l'orbite, le noyau, l'onde d'ECHO et le fond bougent. */
+html body.index-page .title,
+html body.index-page .subtitle,
+html body.index-page .home-logo,
+html body.index-page .meta span:first-child::after {
+  animation: none;
+}
+
+html body.index-page .title::before,
+html body.index-page .title::after {
+  display: none;
+}
+
+html body.index-page .home-ai-orbit {
+  animation-duration: 90s;
+}
