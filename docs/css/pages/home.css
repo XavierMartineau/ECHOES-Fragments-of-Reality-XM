@@ -1533,3 +1533,80 @@ html body.index-page .content {
   padding-top: 0;
   padding-bottom: clamp(8px, 1.5vw, 16px);
 }
+
+/* Tout le contenu de l'accueil est centré. */
+html body.index-page .hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+html body.index-page .content {
+  display: flex;
+  justify-content: center;
+  width: min(920px, 100%);
+  text-align: center;
+}
+
+html body.index-page .home-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+html body.index-page .home-brandline,
+html body.index-page .eyebrow,
+html body.index-page .subtitle,
+html body.index-page .actions,
+html body.index-page .meta {
+  justify-content: center;
+  text-align: center;
+}
+
+html body.index-page .home-brandline::before {
+  width: 34px;
+  height: 1px;
+  background: linear-gradient(270deg, rgba(var(--home-cyan), 0.65), transparent);
+  content: "";
+}
+
+html body.index-page .eyebrow::before {
+  display: block;
+  flex: 0 1 54px;
+  max-width: 54px;
+}
+
+html body.index-page .title {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0.14em;
+}
+
+@media (max-width: 680px) {
+  html body.index-page .title {
+    font-size: clamp(2.2rem, 13vw, 3.4rem);
+    letter-spacing: 0.1em;
+    padding-left: 0.1em;
+  }
+}
+
+html body.index-page .description {
+  max-width: 560px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
+html body.index-page .primary-btn {
+  justify-content: center;
+  text-align: center;
+}
+
+html body.index-page .strobe-notice {
+  margin-right: auto;
+  margin-left: auto;
+}
