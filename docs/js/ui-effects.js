@@ -378,7 +378,7 @@
     #fx-ring::before{width:9px;height:1px;margin:0 0 0 -4px}
     #fx-ring::after{width:1px;height:9px;margin:-4px 0 0 0}
     #fx-ring span{position:absolute;left:calc(100% + 8px);top:calc(100% + 2px);white-space:nowrap;color:rgba(var(--fx-rgb),.9);font:600 .58rem Orbitron,sans-serif;letter-spacing:.12em;text-shadow:0 0 6px rgba(0,0,0,.9)}
-    .fx-on #fx-dot,.fx-on #fx-ring{opacity:1}
+    .fx-on #fx-ring{opacity:1}.fx-text #fx-dot{opacity:1}
     .fx-hover #fx-ring{--k:#ffd27a;width:24px;height:24px;margin:-12px 0 0 -12px}
     .fx-hover #fx-dot{background:#ffd27a;box-shadow:0 0 12px #ffd27a}
     .fx-grab #fx-ring{rotate:45deg;width:30px;height:30px;margin:-15px 0 0 -15px}
@@ -425,7 +425,7 @@
   const render = () => {
     frame = 0;
     const easing =
-      reduce || document.body.classList.contains("index-page") ? 1 : 0.2;
+      1;
     rx += (x - rx) * easing;
     ry += (y - ry) * easing;
     dot.style.transform = `translate3d(${x}px,${y}px,0)`;
