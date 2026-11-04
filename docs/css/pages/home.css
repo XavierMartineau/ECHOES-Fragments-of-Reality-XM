@@ -1518,8 +1518,8 @@ html body.index-page .meta {
   justify-content: center;
 }
 
-/* Accueil allégé : moitié moins d'éléments animés. Le titre, le sous-titre, le logo
-   et le point d'état restent fixes ; seuls l'orbite, le noyau, l'onde d'ECHO et le fond bougent. */
+/* Accueil allégé : titre, sous-titre, logo et point d'état fixes. La grosse sphère centrale
+   et ses anneaux en rotation sont supprimés ; la sphère est réduite et placée au-dessus du texte. */
 html body.index-page .title,
 html body.index-page .subtitle,
 html body.index-page .home-logo,
@@ -1532,6 +1532,18 @@ html body.index-page .title::after {
   display: none;
 }
 
-html body.index-page .home-ai-orbit {
-  animation-duration: 90s;
+html body.index-page .home-core-top {
+  display: block;
+  width: clamp(48px, 6vw, 68px);
+  height: auto;
+  margin: 0 auto 6px;
+  filter: drop-shadow(0 0 18px rgba(var(--home-cyan), 0.35));
+  pointer-events: none;
+  user-select: none;
+}
+
+html body.index-page .content {
+  min-height: 0;
+  padding-top: 0;
+  padding-bottom: clamp(8px, 1.5vw, 16px);
 }
