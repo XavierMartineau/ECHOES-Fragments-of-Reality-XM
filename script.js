@@ -104,7 +104,7 @@ function drawBackground(timestamp) {
   lastBackgroundFrame = timestamp;
 
   const isReduced = reducedEffects;
-  const particleFactor = isReduced ? 0.6 : 1;
+  const particleFactor = 1;
   const lineAlpha = isReduced ? 0.1 : 0.18;
 
   ctx.clearRect(0, 0, width, height);
@@ -114,7 +114,7 @@ function drawBackground(timestamp) {
       return;
     }
 
-    particle.y += particle.speed * particleFactor;
+    particle.y += particle.speed * (isReduced ? 0.25 : 1);
     if (particle.y > height + 10) {
       particle.y = -10;
       particle.x = Math.random() * width;
@@ -155,8 +155,21 @@ const translatableElements = document.querySelectorAll("[data-i18n]");
 let currentLang = localStorage.getItem("echoes-language") || "fr";
 let reducedEffects = localStorage.getItem("echoes-reduced-effects") === "true";
 
+// Effets réduits : toutes les animations CSS tournent 4 fois plus lentement (aucun clignotement rapide).
+const SLOW_RATE = 0.25;
+function applyAnimationSlowdown() {
+  const rate = reducedEffects ? SLOW_RATE : 1;
+  document.getAnimations().forEach((animation) => {
+    if (animation.playbackRate !== rate) animation.playbackRate = rate;
+  });
+}
+document.addEventListener("animationstart", () => {
+  if (reducedEffects) applyAnimationSlowdown();
+}, true);
+
 function updateReducedEffects() {
   document.body.classList.toggle("reduced-effects", reducedEffects);
+  applyAnimationSlowdown();
   reducedEffectsButton.textContent =
     translations[currentLang][
       reducedEffects ? "effectsReduced" : "reduceStrobe"

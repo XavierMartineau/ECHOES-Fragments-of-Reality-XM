@@ -45,7 +45,7 @@
 
   const AMP = MID - 3;
   const draw = (time) => {
-    const shift = time * SPEED;
+    const shift = time * SPEED * (document.body.classList.contains("reduced-effects") ? 0.25 : 1);
     let d = "";
     for (let i = 0; i <= POINTS; i += 1) {
       const x = i * STEP;
