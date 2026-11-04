@@ -485,6 +485,13 @@ Les niveaux bonus 31–60 ont été supprimés ; ils ne font plus partie de la p
 - **DEV MODE** (`dev-mode.js`, `dev-mode.css` v25) : panneau 600 px avec défilement et en-tête fixe ; état du joueur ; don/retrait de chaque clé ou de toutes les clés (événement `echoes:key-unlocked` puis rechargement pour que hub et HUD de boss se mettent à jour) ; niveau précédent/suivant ; terminer ce niveau ; tout terminer ; réinitialiser (confirmation) ; compteur de FPS ; copie de la sauvegarde ; verrouillage du DEV MODE ; champ numérique du skip corrigé.
 - **Vérification** : test Playwright + Edge de tous les boutons (0 erreur de console). Non testé sur appareils réels.
 
+#### Suite du 04/11/2026 — DEV MODE en catégories, débogueur et README
+
+- DEV MODE : catégories ouvrables/fermables (état mémorisé), filtre, Tout ouvrir/fermer, compteur de FPS en direct et notifications flottantes.
+- Débogueur : performance (graphique FPS, mémoire, tâches longues), journal d'erreurs du jeu (capté par lag-fix/fps-boost.js quand le DEV MODE est déverrouillé), inspecteur de stockage, vérificateur de pages (37/37 OK) et terminal de commandes.
+- Effets réduits : animations 4 fois plus lentes ; ligne d'accueil en électrocardiogramme ; curseur à réticule sur tout le site.
+- README entièrement réécrit : nomenclature officielle (parties, boss, clés, dossiers, conventions), organisation du dépôt, données locales, DEV MODE, performance.
+
 #### Suite du 04/11/2026 — Ligne animée et dossier lag-fix
 
 - La ligne sous la barre du haut de l'accueil n'est plus une impulsion superposée : docs/js/home-line.js dessine un tracé SVG dont la ligne elle-même se déforme (battement) puis redevient droite.

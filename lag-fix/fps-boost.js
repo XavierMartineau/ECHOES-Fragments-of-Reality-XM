@@ -7,6 +7,29 @@
   const SAMPLE_MS = 1500;
   const STRIKES = 2;
 
+  // Journal du DEV MODE : erreurs et avertissements gardés (60 max) seulement quand le DEV MODE est déverrouillé.
+  try {
+    if (Number(localStorage.getItem("echoes-dev-ok")) > Date.now()) {
+      const LOG_KEY = "echoes-dev-log";
+      const push = (type, text) => {
+        try {
+          const list = JSON.parse(localStorage.getItem(LOG_KEY) || "[]");
+          list.push({ t: Date.now(), type, page: location.pathname.split("/").pop() || "index", text: String(text).slice(0, 300) });
+          localStorage.setItem(LOG_KEY, JSON.stringify(list.slice(-60)));
+        } catch (e) {}
+      };
+      window.addEventListener("error", (e) => push("error", `${e.message} (${(e.filename || "").split("/").pop()}:${e.lineno})`));
+      window.addEventListener("unhandledrejection", (e) => push("promise", (e.reason && e.reason.message) || e.reason));
+      ["error", "warn"].forEach((level) => {
+        const original = console[level];
+        console[level] = function (...args) {
+          push(level, args.map((a) => (a && a.message) || String(a)).join(" "));
+          return original.apply(this, args);
+        };
+      });
+    }
+  } catch (e) {}
+
   if (script) {
     const link = document.createElement("link");
     link.rel = "stylesheet";

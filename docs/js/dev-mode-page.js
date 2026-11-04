@@ -43,6 +43,7 @@
 
   const start = () => {
     $("#dmGate").hidden = true;
+    $("#dmToolbar").hidden = false;
     $("#dmBody").hidden = false;
     sessionStorage.setItem("echoes-dev-unlock", "1");
     init();
@@ -259,5 +260,289 @@
       if (event.key === "Escape" && !event.target.closest?.("input")) window.location.href = $("#dmBack").href;
     });
     refresh();
+    setupCategories();
+    setupDebugger({ currentKeys, writeKeys, refresh, patchSave });
+  }
+
+  // ---- Catégories ouvrables / fermables (état mémorisé) ----
+  function setupCategories() {
+    const STATE_KEY = "echoes-dev-acc";
+    let state = {};
+    try {
+      state = JSON.parse(localStorage.getItem(STATE_KEY) || "{}");
+    } catch {
+      state = {};
+    }
+    const save = () => localStorage.setItem(STATE_KEY, JSON.stringify(state));
+    $$(".dm-acc").forEach((acc) => {
+      const id = acc.dataset.acc;
+      if (id in state) acc.open = state[id];
+      acc.addEventListener("toggle", () => {
+        state[id] = acc.open;
+        save();
+      });
+    });
+    $$("[data-acc-all]").forEach((button) =>
+      button.addEventListener("click", () => {
+        const open = button.dataset.accAll === "open";
+        $$(".dm-acc").forEach((acc) => (acc.open = open));
+        msg(open ? "Toutes les catégories sont ouvertes." : "Toutes les catégories sont fermées.");
+      }),
+    );
+    $("#dmFilter").addEventListener("input", (event) => {
+      const query = event.target.value.trim().toLowerCase();
+      $$(".dm-acc").forEach((acc) => {
+        const match = !query || acc.textContent.toLowerCase().includes(query);
+        acc.hidden = !match;
+        if (query && match) acc.open = true;
+      });
+    });
+  }
+
+  // ---- Débogueur ----
+  function setupDebugger({ currentKeys, writeKeys, refresh, patchSave }) {
+    const LOG_KEY = "echoes-dev-log";
+    const pad = (n) => String(n).padStart(2, "0");
+    const clock = (t) => {
+      const d = new Date(t);
+      return `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+    };
+    const esc = (text) => String(text).replace(/[&<>]/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[ch]);
+
+    // FPS en direct, graphique et mémoire
+    const graph = $("#dmGraph");
+    const gctx = graph.getContext("2d");
+    const samples = [];
+    let frames = 0;
+    let since = performance.now();
+    let longTasks = 0;
+    let worst = 0;
+    try {
+      new PerformanceObserver((list) => (longTasks += list.getEntries().length)).observe({ entryTypes: ["longtask"] });
+    } catch {}
+    const drawGraph = () => {
+      const { width, height } = graph;
+      gctx.clearRect(0, 0, width, height);
+      gctx.strokeStyle = "rgba(121,247,255,0.15)";
+      gctx.lineWidth = 1;
+      [0.25, 0.5, 0.75].forEach((p) => {
+        gctx.beginPath();
+        gctx.moveTo(0, height * p);
+        gctx.lineTo(width, height * p);
+        gctx.stroke();
+      });
+      const top = Math.max(60, ...samples);
+      gctx.beginPath();
+      samples.forEach((value, i) => {
+        const x = (i / 59) * width;
+        const y = height - (value / top) * (height - 6) - 3;
+        i ? gctx.lineTo(x, y) : gctx.moveTo(x, y);
+      });
+      gctx.strokeStyle = "#79f7ff";
+      gctx.lineWidth = 2;
+      gctx.stroke();
+    };
+    const row = (label, value) => `<div class="dm-info"><em>${label}</em><b>${value}</b></div>`;
+    const tick = (now) => {
+      frames += 1;
+      worst = Math.max(worst, now - (tick.last || now));
+      tick.last = now;
+      if (now - since >= 1000) {
+        const fps = Math.round((frames * 1000) / (now - since));
+        frames = 0;
+        since = now;
+        samples.push(fps);
+        if (samples.length > 60) samples.shift();
+        const live = $("#dmLive");
+        live.textContent = `${fps} FPS`;
+        live.dataset.level = fps >= 55 ? "ok" : fps >= 30 ? "mid" : "low";
+        if ($('[data-acc="dbg-systeme"]').open && !document.hidden) {
+          drawGraph();
+          const mem = performance.memory;
+          const avg = Math.round(samples.reduce((a, b) => a + b, 0) / samples.length);
+          $("#dmPerf").innerHTML =
+            row("FPS", fps) +
+            row("Moyenne / min", `${avg} / ${Math.min(...samples)}`) +
+            row("Pire image", `${Math.round(worst)} ms`) +
+            row("Tâches longues", longTasks) +
+            row("Mémoire JS", mem ? `${(mem.usedJSHeapSize / 1048576).toFixed(1)} Mo` : "n/d") +
+            row("Éléments DOM", document.getElementsByTagName("*").length);
+        }
+        worst = 0;
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+
+    const conn = navigator.connection || {};
+    const storageBytes = () => {
+      let total = 0;
+      for (let i = 0; i < localStorage.length; i += 1) {
+        const key = localStorage.key(i);
+        total += (key.length + (localStorage.getItem(key) || "").length) * 2;
+      }
+      return total;
+    };
+    $("#dmSys").innerHTML =
+      row("Écran", `${screen.width}×${screen.height} @${window.devicePixelRatio}x`) +
+      row("Fenêtre", `${innerWidth}×${innerHeight}`) +
+      row("Cœurs CPU", navigator.hardwareConcurrency || "n/d") +
+      row("RAM estimée", navigator.deviceMemory ? `${navigator.deviceMemory} Go` : "n/d") +
+      row("Réseau", conn.effectiveType || "n/d") +
+      row("Langue", localStorage.getItem("echoes-language") || "fr") +
+      row("Mode allégé", sessionStorage.getItem("echoes-lagfix") === "lite" || localStorage.getItem("echoes-perf") === "lite" ? "actif" : "non") +
+      row("Mouvements réduits", matchMedia("(prefers-reduced-motion: reduce)").matches ? "oui" : "non") +
+      row("Stockage local", `${(storageBytes() / 1024).toFixed(1)} Ko`) +
+      row("Navigateur", esc((navigator.userAgent.match(/(Edg|Chrome|Firefox|Safari)\/[\d.]+/) || ["inconnu"])[0]));
+
+    // Journal d'erreurs du jeu
+    const readLog = () => {
+      try {
+        return JSON.parse(localStorage.getItem(LOG_KEY) || "[]");
+      } catch {
+        return [];
+      }
+    };
+    const renderLog = () => {
+      const list = readLog();
+      $("#dmLog").innerHTML = list.length
+        ? list.slice().reverse().map((e) => `<span class="dm-l-${e.type}">${clock(e.t)} [${e.type}] ${esc(e.page)} — ${esc(e.text)}</span>`).join("\n")
+        : "Aucune entrée.";
+    };
+    $("[data-log-refresh]").addEventListener("click", () => {
+      renderLog();
+      msg("Journal actualisé.");
+    });
+    $("[data-log-clear]").addEventListener("click", () => {
+      localStorage.removeItem(LOG_KEY);
+      renderLog();
+      msg("Journal vidé.");
+    });
+    $("[data-log-copy]").addEventListener("click", async () => {
+      const text = readLog().map((e) => `${clock(e.t)} [${e.type}] ${e.page} — ${e.text}`).join("\n");
+      try {
+        await navigator.clipboard.writeText(text || "(vide)");
+        msg("Journal copié.");
+      } catch {
+        msg("Copie impossible sur ce navigateur.");
+      }
+    });
+    window.addEventListener("storage", (event) => event.key === LOG_KEY && renderLog());
+    renderLog();
+
+    // Inspecteur de stockage
+    const store = $("#dmStore");
+    const renderStore = () => {
+      const query = $("#dmStoreFilter").value.trim().toLowerCase();
+      const keys = Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i))
+        .filter((key) => key.toLowerCase().includes(query))
+        .sort();
+      store.innerHTML = keys.length
+        ? keys
+            .map((key) => `<div class="dm-store-row"><button type="button" data-store-view="${esc(key)}">${esc(key)}</button><small>${((key.length + localStorage.getItem(key).length) * 2 / 1024).toFixed(1)} Ko</small><button type="button" class="dm-x" data-store-del="${esc(key)}" aria-label="Supprimer ${esc(key)}">×</button></div>`)
+            .join("")
+        : '<p class="dm-hint">Aucune clé.</p>';
+    };
+    store.addEventListener("click", (event) => {
+      const view = event.target.closest("[data-store-view]");
+      const del = event.target.closest("[data-store-del]");
+      if (view) {
+        const raw = localStorage.getItem(view.dataset.storeView) || "";
+        let shown = raw;
+        try {
+          shown = JSON.stringify(JSON.parse(raw), null, 2);
+        } catch {}
+        $("#dmStoreView").textContent = `${view.dataset.storeView}\n\n${shown}`;
+      }
+      if (del && window.confirm(`Supprimer « ${del.dataset.storeDel} » ?`)) {
+        localStorage.removeItem(del.dataset.storeDel);
+        renderStore();
+        refresh();
+        msg("Clé supprimée.");
+      }
+    });
+    $("#dmStoreFilter").addEventListener("input", renderStore);
+    renderStore();
+
+    // Vérificateur de pages
+    $("[data-check-pages]").addEventListener("click", async () => {
+      const out = $("#dmCheck");
+      const targets = [];
+      parts.forEach((part) => {
+        for (let n = part.start; n <= part.end; n += 1) targets.push([`Niveau ${pad(n)}`, levelLink(n)]);
+        (part.special || []).forEach((item) => targets.push([item.label, `${encodeURIComponent(part.folder)}/${item.file}`]));
+      });
+      ["../../index.html", "login.html", "niveaux.html", "introduction.html"].forEach((page) => targets.push([page, page]));
+      out.textContent = "Vérification…";
+      const lines = [];
+      let bad = 0;
+      for (const [label, url] of targets) {
+        try {
+          const res = await fetch(url, { cache: "no-store" });
+          if (!res.ok) throw new Error(res.status);
+          lines.push(`OK   ${label}`);
+        } catch (error) {
+          bad += 1;
+          lines.push(`FAIL ${label} (${error.message})`);
+        }
+        out.textContent = lines.join("\n");
+      }
+      out.textContent += `\n\n${targets.length - bad}/${targets.length} pages OK`;
+      msg(bad ? `${bad} page(s) en échec.` : "Toutes les pages répondent.");
+    });
+
+    // Terminal
+    const out = $("#dmTermOut");
+    const print = (text) => {
+      out.textContent += `\n${text}`;
+      out.scrollTop = out.scrollHeight;
+    };
+    const commands = {
+      help: () => "help · keys · give <1-6|all> · take <1-6|all> · skip <niveau> · save · ls [filtre] · get <clé> · set <clé> <valeur> · del <clé> · fps · clear",
+      keys: () => `Clés : ${currentKeys().filter((id) => id.startsWith("resonance-")).join(", ") || "aucune"}`,
+      give: ([n]) => {
+        const ids = n === "all" ? allKeys : [`resonance-${n}`];
+        if (!ids.every((id) => allKeys.includes(id))) return "Usage : give <1-6|all>";
+        return writeKeys([...new Set([...currentKeys(), ...ids])]) ? (refresh(), "Clé(s) donnée(s).") : "Échec.";
+      },
+      take: ([n]) => {
+        const ids = n === "all" ? allKeys : [`resonance-${n}`];
+        if (!ids.every((id) => allKeys.includes(id))) return "Usage : take <1-6|all>";
+        return writeKeys(currentKeys().filter((id) => !ids.includes(id))) ? (refresh(), "Clé(s) retirée(s).") : "Échec.";
+      },
+      skip: ([n]) => {
+        const level = Number(n);
+        if (!(level >= 1 && level <= 30)) return "Usage : skip <1-30>";
+        $("[data-skip-level]").value = level;
+        $("[data-skip-go]").click();
+        return `Saut vers le niveau ${level}…`;
+      },
+      save: () => {
+        const user = Save.getCurrentUser();
+        return user ? JSON.stringify(Save.getSave(user), null, 2) : "Aucun joueur connecté.";
+      },
+      ls: ([filter = ""]) =>
+        Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i)).filter((k) => k.includes(filter)).sort().join("\n") || "(vide)",
+      get: ([key]) => (key ? localStorage.getItem(key) ?? "(null)" : "Usage : get <clé>"),
+      set: ([key, ...value]) => (key && value.length ? (localStorage.setItem(key, value.join(" ")), renderStore(), "OK") : "Usage : set <clé> <valeur>"),
+      del: ([key]) => (key ? (localStorage.removeItem(key), renderStore(), refresh(), "Supprimée.") : "Usage : del <clé>"),
+      fps: () => `${samples[samples.length - 1] ?? "--"} FPS (min ${Math.min(...samples, 999)})`,
+      clear: () => {
+        out.textContent = "";
+        return "";
+      },
+    };
+    $("#dmTermForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const input = $("#dmTermInput");
+      const line = input.value.trim();
+      input.value = "";
+      if (!line) return;
+      print(`> ${line}`);
+      const [name, ...args] = line.split(/\s+/);
+      const run = commands[name.toLowerCase()];
+      const result = run ? run(args) : `Commande inconnue : ${name}. Tape « help ».`;
+      if (result) print(result);
+    });
   }
 })();

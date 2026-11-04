@@ -9,7 +9,7 @@
     <title>ECHOES - DEV MODE</title>
     <script src="../../lag-fix/fps-boost.js"></script>
     <link rel="stylesheet" href="../css/base/fonts.css" />
-    <link rel="stylesheet" href="../css/pages/dev-mode-page.css?v=1" />
+    <link rel="stylesheet" href="../css/pages/dev-mode-page.css?v=2" />
   </head>
   <body>
     <header class="dm-top">
@@ -21,62 +21,124 @@
       <a class="dm-back" id="dmBack" href="../../index.html">← Retour au jeu</a>
     </header>
 
+    <div class="dm-toolbar" id="dmToolbar" hidden>
+      <input type="search" id="dmFilter" placeholder="Filtrer les catégories…" aria-label="Filtrer les catégories" />
+      <button class="dm-btn dm-mini" type="button" data-acc-all="open">Tout ouvrir</button>
+      <button class="dm-btn dm-mini" type="button" data-acc-all="close">Tout fermer</button>
+      <span class="dm-live" id="dmLive" aria-label="FPS en direct">-- FPS</span>
+    </div>
+
     <main class="dm-body" id="dmBody" hidden>
       <section class="dm-col">
-        <h2 class="dm-section">Raccourcis</h2>
-        <div class="dm-grid dm-grid-3">
-          <a class="dm-btn" href="../../index.html">Home</a>
-          <a class="dm-btn" href="login.html">Connexion</a>
-          <a class="dm-btn" href="niveaux.html">Hub des niveaux</a>
-        </div>
-
-        <h2 class="dm-section">Options</h2>
-        <div class="dm-stack">
-          <label class="dm-switch"><span>Repères couleurs accessibles</span><input type="checkbox" data-color-assist /></label>
-          <label class="dm-switch"><span>Curseur premium</span><input type="checkbox" data-fx-toggle="echoes-fx-cursor" /></label>
-          <label class="dm-switch"><span>Fonds animés contextuels</span><input type="checkbox" data-fx-toggle="echoes-fx-scene" /></label>
-          <label class="dm-switch"><span>Mode performance (appareils lents)</span><input type="checkbox" data-fx-toggle="echoes-perf" data-on="lite" data-off="auto" /></label>
-          <label class="dm-switch"><span>Compteur de FPS dans le jeu</span><input type="checkbox" data-fps-toggle /></label>
-        </div>
-
-        <h2 class="dm-section">État du joueur</h2>
-        <div class="dm-grid dm-grid-2" id="dmInfo" role="status"></div>
-
-        <h2 class="dm-section">Clés de résonance</h2>
-        <div class="dm-grid dm-grid-2">
-          <button class="dm-btn" type="button" data-give-keys>Donner les clés 1 à 6</button>
-          <button class="dm-btn" type="button" data-clear-keys>Retirer toutes les clés</button>
-        </div>
-        <div class="dm-grid dm-grid-3 dm-gap-top" id="dmKeyGrid"></div>
-
-        <h2 class="dm-section">Progression (test)</h2>
-        <div class="dm-stack">
-          <div class="dm-number">
-            <span>Passer jusqu'au niveau</span>
-            <input type="number" min="1" max="30" value="30" data-skip-level aria-label="Niveau cible" />
+        <details class="dm-acc" data-acc="raccourcis" open>
+          <summary><span class="dm-ico">01</span>Raccourcis</summary>
+          <div class="dm-grid dm-grid-3">
+            <a class="dm-btn" href="../../index.html">Home</a>
+            <a class="dm-btn" href="login.html">Connexion</a>
+            <a class="dm-btn" href="niveaux.html">Hub des niveaux</a>
           </div>
-          <button class="dm-btn" type="button" data-skip-go>Skip jusqu'à ce niveau</button>
+        </details>
+
+        <details class="dm-acc" data-acc="etat" open>
+          <summary><span class="dm-ico">02</span>État du joueur</summary>
+          <div class="dm-grid dm-grid-2" id="dmInfo" role="status"></div>
+        </details>
+
+        <details class="dm-acc" data-acc="cles" open>
+          <summary><span class="dm-ico">03</span>Clés de résonance</summary>
           <div class="dm-grid dm-grid-2">
-            <button class="dm-btn" type="button" data-complete-all>Tout terminer</button>
-            <button class="dm-btn dm-danger" type="button" data-reset-progress>Réinitialiser la progression</button>
+            <button class="dm-btn" type="button" data-give-keys>Donner les clés 1 à 6</button>
+            <button class="dm-btn" type="button" data-clear-keys>Retirer toutes les clés</button>
           </div>
-        </div>
+          <div class="dm-grid dm-grid-3 dm-gap-top" id="dmKeyGrid"></div>
+        </details>
 
-        <h2 class="dm-section">Outils</h2>
-        <div class="dm-grid dm-grid-2">
-          <button class="dm-btn" type="button" data-copy-save>Copier la sauvegarde</button>
-          <button class="dm-btn" type="button" data-lock-dev>Verrouiller le DEV MODE</button>
-        </div>
-        <p class="dm-msg" id="dmMsg" role="status"></p>
+        <details class="dm-acc" data-acc="progression">
+          <summary><span class="dm-ico">04</span>Progression (test)</summary>
+          <div class="dm-stack">
+            <div class="dm-number">
+              <span>Passer jusqu'au niveau</span>
+              <input type="number" min="1" max="30" value="30" data-skip-level aria-label="Niveau cible" />
+            </div>
+            <button class="dm-btn" type="button" data-skip-go>Skip jusqu'à ce niveau</button>
+            <div class="dm-grid dm-grid-2">
+              <button class="dm-btn" type="button" data-complete-all>Tout terminer</button>
+              <button class="dm-btn dm-danger" type="button" data-reset-progress>Réinitialiser la progression</button>
+            </div>
+          </div>
+        </details>
+
+        <details class="dm-acc" data-acc="options">
+          <summary><span class="dm-ico">05</span>Options</summary>
+          <div class="dm-stack">
+            <label class="dm-switch"><span>Repères couleurs accessibles</span><input type="checkbox" data-color-assist /></label>
+            <label class="dm-switch"><span>Curseur premium</span><input type="checkbox" data-fx-toggle="echoes-fx-cursor" /></label>
+            <label class="dm-switch"><span>Fonds animés contextuels</span><input type="checkbox" data-fx-toggle="echoes-fx-scene" /></label>
+            <label class="dm-switch"><span>Mode performance (appareils lents)</span><input type="checkbox" data-fx-toggle="echoes-perf" data-on="lite" data-off="auto" /></label>
+            <label class="dm-switch"><span>Compteur de FPS dans le jeu</span><input type="checkbox" data-fps-toggle /></label>
+          </div>
+        </details>
+
+        <details class="dm-acc" data-acc="outils">
+          <summary><span class="dm-ico">06</span>Outils</summary>
+          <div class="dm-grid dm-grid-2">
+            <button class="dm-btn" type="button" data-copy-save>Copier la sauvegarde</button>
+            <button class="dm-btn" type="button" data-lock-dev>Verrouiller le DEV MODE</button>
+          </div>
+        </details>
       </section>
 
       <section class="dm-col dm-col-nav">
-        <h2 class="dm-section">Parties</h2>
-        <div class="dm-parts" id="dmParts"></div>
-        <div id="dmLevels"></div>
+        <details class="dm-acc" data-acc="parties" open>
+          <summary><span class="dm-ico">07</span>Parties et niveaux</summary>
+          <div class="dm-parts" id="dmParts"></div>
+          <div id="dmLevels"></div>
+        </details>
+
+        <details class="dm-acc dm-debug" data-acc="dbg-systeme" open>
+          <summary><span class="dm-ico">DBG</span>Débogueur · Système et performance</summary>
+          <canvas class="dm-graph" id="dmGraph" width="520" height="90" aria-label="Graphique des FPS"></canvas>
+          <div class="dm-grid dm-grid-2" id="dmPerf" role="status"></div>
+          <div class="dm-grid dm-grid-2 dm-gap-top" id="dmSys"></div>
+        </details>
+
+        <details class="dm-acc dm-debug" data-acc="dbg-journal">
+          <summary><span class="dm-ico">DBG</span>Débogueur · Journal d'erreurs du jeu</summary>
+          <p class="dm-hint">Erreurs et avertissements captés sur les pages du jeu pendant que le DEV MODE est actif.</p>
+          <div class="dm-grid dm-grid-3">
+            <button class="dm-btn" type="button" data-log-refresh>Actualiser</button>
+            <button class="dm-btn" type="button" data-log-copy>Copier</button>
+            <button class="dm-btn dm-danger" type="button" data-log-clear>Vider</button>
+          </div>
+          <pre class="dm-pre" id="dmLog" tabindex="0">Aucune entrée.</pre>
+        </details>
+
+        <details class="dm-acc dm-debug" data-acc="dbg-stockage">
+          <summary><span class="dm-ico">DBG</span>Débogueur · Inspecteur de stockage</summary>
+          <input type="search" id="dmStoreFilter" class="dm-input" placeholder="Filtrer les clés…" aria-label="Filtrer les clés du stockage" />
+          <div class="dm-store" id="dmStore"></div>
+          <pre class="dm-pre" id="dmStoreView" tabindex="0">Sélectionne une clé pour voir sa valeur.</pre>
+        </details>
+
+        <details class="dm-acc dm-debug" data-acc="dbg-liens">
+          <summary><span class="dm-ico">DBG</span>Débogueur · Vérificateur de pages</summary>
+          <p class="dm-hint">Teste que chaque page de niveau et de boss répond.</p>
+          <button class="dm-btn" type="button" data-check-pages>Lancer la vérification</button>
+          <pre class="dm-pre" id="dmCheck" tabindex="0">Pas encore lancé.</pre>
+        </details>
+
+        <details class="dm-acc dm-debug" data-acc="dbg-terminal">
+          <summary><span class="dm-ico">DBG</span>Débogueur · Terminal</summary>
+          <pre class="dm-pre dm-term" id="dmTermOut" tabindex="0">Tape « help » pour la liste des commandes.</pre>
+          <form class="dm-term-form" id="dmTermForm" autocomplete="off">
+            <span aria-hidden="true">&gt;</span>
+            <input id="dmTermInput" type="text" spellcheck="false" autocapitalize="none" aria-label="Commande" placeholder="help" />
+          </form>
+        </details>
       </section>
     </main>
 
+    <p class="dm-msg" id="dmMsg" role="status" aria-live="polite"></p>
     <div class="dm-gate" id="dmGate" hidden>
       <form class="dm-gate-card" id="dmGateForm" autocomplete="off">
         <h2>ACCÈS DEV MODE</h2>
@@ -90,6 +152,6 @@
 
     <script src="../js/save-system.js"></script>
     <script src="../js/ui-effects.js?v=10"></script>
-    <script src="../js/dev-mode-page.js?v=1"></script>
+    <script src="../js/dev-mode-page.js?v=2"></script>
   </body>
 </html>
