@@ -1879,3 +1879,53 @@ html body.index-page .home-ai-wave path.wave-spike-b {
     opacity: 0;
   }
 }
+/* Titre « programme » : police monospace de terminal, curseur clignotant, glitch rouge */
+html body.index-page .title {
+  font-family: "JetBrains Mono", "Cascadia Mono", Consolas, "Courier New", monospace;
+  font-size: clamp(2.6rem, 9vw, 6.4rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding-left: 0;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+html body.index-page .title .title-cursor {
+  position: absolute;
+  left: 100%;
+  bottom: 0.1em;
+  width: 0.5em;
+  height: 0.09em;
+  margin-left: 0.06em;
+  background: rgb(var(--home-cyan));
+  box-shadow: 0 0 14px rgba(var(--home-cyan), 0.9);
+  animation: home-cursor-blink 1.05s steps(1, end) infinite;
+}
+
+@keyframes home-cursor-blink {
+  0%, 55% { opacity: 1; }
+  56%, 100% { opacity: 0; }
+}
+
+html body.index-page .title::before {
+  color: #ff2d53;
+  -webkit-text-fill-color: #ff2d53;
+}
+
+html body.index-page .title::after {
+  color: #ff5c7a;
+  -webkit-text-fill-color: #ff5c7a;
+}
+
+@media (max-width: 680px) {
+  html body.index-page .title {
+    font-size: clamp(2rem, 12vw, 3.2rem);
+    letter-spacing: 0.04em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body.index-page .title .title-cursor {
+    animation: none;
+  }
+}

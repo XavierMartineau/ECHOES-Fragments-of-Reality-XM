@@ -2278,3 +2278,112 @@ html body aside.dev-mode .dev-mode-special-link:focus-visible {
     gap: 5px !important;
   }
 }
+
+/* Panneau agrandi + éléments ajoutés (état joueur, clés, FPS) */
+html body aside.dev-mode .dev-mode-panel {
+  width: min(600px, calc(100vw - 24px)) !important;
+  max-height: min(88vh, 820px) !important;
+  overscroll-behavior: contain !important;
+}
+
+html body aside.dev-mode .dev-mode-heading {
+  position: sticky !important;
+  top: -18px !important;
+  z-index: 2 !important;
+  margin: -18px -16px 0 !important;
+  padding: 18px 16px 10px !important;
+  background: rgba(8, 12, 28, 0.98) !important;
+}
+
+html body aside.dev-mode .dev-mode-links {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+html body aside.dev-mode .dev-mode-info {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 6px !important;
+}
+
+html body aside.dev-mode .dev-mode-info span {
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  padding: 8px 12px !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  box-shadow: inset 0 0 0 1px rgba(var(--dm-cyan), 0.14) !important;
+  font-size: 0.82rem !important;
+}
+
+html body aside.dev-mode .dev-mode-info em {
+  color: rgba(200, 212, 240, 0.6) !important;
+  font-style: normal !important;
+}
+
+html body aside.dev-mode .dev-mode-info b {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  color: #fff !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+html body aside.dev-mode .dev-mode-key-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 6px !important;
+}
+
+html body aside.dev-mode .dev-mode-key-btn.is-owned {
+  background: rgba(255, 210, 122, 0.2) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 210, 122, 0.8) !important;
+  color: #fff3d1 !important;
+}
+
+html body aside.dev-mode .dev-mode-danger {
+  background: rgba(255, 77, 109, 0.12) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 77, 109, 0.5) !important;
+  color: #ffd9e0 !important;
+}
+
+html body aside.dev-mode .dev-mode-number-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  padding: 9px 12px !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  box-shadow: inset 0 0 0 1px rgba(var(--dm-cyan), 0.14) !important;
+  color: #dde6ff !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+}
+
+html body aside.dev-mode .dev-mode-number {
+  width: 64px !important;
+  padding: 4px 6px !important;
+  border: 1px solid rgba(var(--dm-cyan), 0.4) !important;
+  background: rgba(10, 14, 32, 0.95) !important;
+  color: #fff !important;
+  font: inherit !important;
+  text-align: center !important;
+}
+
+.dev-fps {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 2147483000;
+  padding: 3px 8px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #79f7ff;
+  font: 700 12px/1.4 monospace;
+  pointer-events: none;
+}
+
+@media (max-width: 520px) {
+  html body aside.dev-mode .dev-mode-info,
+  html body aside.dev-mode .dev-mode-links {
+    grid-template-columns: 1fr !important;
+  }
+}

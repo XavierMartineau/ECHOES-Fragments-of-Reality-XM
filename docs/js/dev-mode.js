@@ -1,4 +1,4 @@
-// ============================================================================
+﻿// ============================================================================
 // DEV MODE : navigateur de niveaux injecté sur chaque page, réglages de performance et raccourcis de test.
 // ============================================================================
 (() => {
@@ -11,7 +11,7 @@
   const rootUrl = new URL("../../", script.src);
   const style = document.createElement("link");
   style.rel = "stylesheet";
-  style.href = new URL("../css/composants/dev-mode.css?v=24", script.src).href;
+  style.href = new URL("../css/composants/dev-mode.css?v=25", script.src).href;
   document.head.appendChild(style);
 
   // Keeps the browser tab title synchronized with the current level language.
@@ -158,15 +158,49 @@
           <input type="checkbox" data-fx-toggle="echoes-perf" data-on="lite" data-off="auto" />
         </label>
       </div>
+      <span class="dev-mode-section">État du joueur</span>
+      <div class="dev-mode-info" data-dev-info role="status"></div>
+      <span class="dev-mode-section">Clés de résonance</span>
+      <div class="dev-mode-options dev-mode-progress">
+        <div class="dev-mode-links">
+          <button class="dev-mode-home" type="button" data-give-keys>Donner les clés 1 à 6</button>
+          <button class="dev-mode-home" type="button" data-clear-keys>Retirer toutes les clés</button>
+        </div>
+        <div class="dev-mode-key-grid">
+          ${[1, 2, 3, 4, 5, 6]
+            .map(
+              (n) =>
+                `<button class="dev-mode-home dev-mode-key-btn" type="button" data-key-toggle="${n}" aria-pressed="false">Clé 0${n}</button>`,
+            )
+            .join("")}
+        </div>
+      </div>
       <span class="dev-mode-section">Progression (test)</span>
       <div class="dev-mode-options dev-mode-progress">
-        <button class="dev-mode-home" type="button" data-give-keys>Donner les clés 1 à 6</button>
-        <label class="dev-mode-accessibility">
+        <div class="dev-mode-number-row">
           <span>Passer jusqu'au niveau</span>
-          <input type="number" min="1" max="30" value="30" data-skip-level aria-label="Niveau cible" />
-        </label>
+          <input class="dev-mode-number" type="number" min="1" max="30" value="30" data-skip-level aria-label="Niveau cible" />
+        </div>
         <button class="dev-mode-home" type="button" data-skip-go>Skip jusqu'à ce niveau</button>
+        <div class="dev-mode-links">
+          <button class="dev-mode-home" type="button" data-level-prev>Niveau précédent</button>
+          <button class="dev-mode-home" type="button" data-level-next>Niveau suivant</button>
+          <button class="dev-mode-home" type="button" data-complete-level>Terminer ce niveau</button>
+          <button class="dev-mode-home" type="button" data-complete-all>Tout terminer</button>
+        </div>
+        <button class="dev-mode-home dev-mode-danger" type="button" data-reset-progress>Réinitialiser la progression</button>
         <small class="dev-mode-hint" data-progress-msg role="status"></small>
+      </div>
+      <span class="dev-mode-section">Outils</span>
+      <div class="dev-mode-options">
+        <label class="dev-mode-accessibility">
+          <span>Compteur de FPS</span>
+          <input type="checkbox" data-fps-toggle />
+        </label>
+        <div class="dev-mode-links">
+          <button class="dev-mode-home" type="button" data-copy-save>Copier la sauvegarde</button>
+          <button class="dev-mode-home" type="button" data-lock-dev>Verrouiller le DEV MODE</button>
+        </div>
       </div>
       <span class="dev-mode-section">Parties</span>
       <div class="dev-mode-navigation">
@@ -275,13 +309,197 @@
     return true;
   };
   const allKeys = [1, 2, 3, 4, 5, 6].map((n) => `resonance-${n}`);
-  menu.querySelector("[data-give-keys]").addEventListener("click", () => {
-    if (patchSave((save) => ({ keys: [...new Set([...(save.keys || []), ...allKeys])] }))) {
-      progressMsg.textContent = "Clés 1 à 6 données.";
+  const q = (selector) => menu.querySelector(selector);
+  const say = (text) => {
+    progressMsg.textContent = text;
+  };
+  const currentKeys = () => window.EchoesSave?.getKeys?.() || [];
+
+  // Écrit la liste de clés (compte connecté ou invité) puis prévient les interfaces de clés.
+  const writeKeys = (nextKeys) => {
+    const user = window.EchoesSave?.getCurrentUser();
+    if (user) {
+      if (!patchSave(() => ({ keys: nextKeys }))) return false;
+    } else {
+      localStorage.setItem("echoes-guest-keys", JSON.stringify(nextKeys));
+    }
+    allKeys.forEach((id) =>
+      document.dispatchEvent(new CustomEvent("echoes:key-unlocked", { detail: { keyId: id } })),
+    );
+    refreshInfo();
+    return true;
+  };
+  // Les HUD de boss et le hub lisent les clés au chargement : on recharge pour que toutes les interfaces soient à jour.
+  const refreshPageSoon = () => setTimeout(() => window.location.reload(), 500);
+
+  const keyButtons = menu.querySelectorAll("[data-key-toggle]");
+  const info = q("[data-dev-info]");
+  const refreshInfo = () => {
+    const keys = currentKeys();
+    keyButtons.forEach((button) => {
+      const owned = keys.includes(`resonance-${button.dataset.keyToggle}`);
+      button.classList.toggle("is-owned", owned);
+      button.setAttribute("aria-pressed", String(owned));
+    });
+    const user = window.EchoesSave?.getCurrentUser();
+    const save = (user && window.EchoesSave.getSave(user)) || {};
+    const done = (save.completedLevels || []).length;
+    info.innerHTML = [
+      ["Joueur", user || "invité (non connecté)"],
+      ["Niveau actuel", levelMatch ? Number(levelMatch[1]) : "—"],
+      ["Niveaux terminés", `${done} / 30`],
+      ["Clés", `${keys.filter((id) => allKeys.includes(id)).length} / 6`],
+    ]
+      .map(([label, value]) => `<span><em>${label}</em><b>${value}</b></span>`)
+      .join("");
+  };
+
+  q("[data-give-keys]").addEventListener("click", () => {
+    if (writeKeys([...new Set([...currentKeys(), ...allKeys])])) {
+      say("Clés 1 à 6 données.");
+      refreshPageSoon();
     }
   });
+  q("[data-clear-keys]").addEventListener("click", () => {
+    if (writeKeys([])) {
+      say("Toutes les clés retirées.");
+      refreshPageSoon();
+    }
+  });
+  keyButtons.forEach((button) =>
+    button.addEventListener("click", () => {
+      const id = `resonance-${button.dataset.keyToggle}`;
+      const keys = currentKeys();
+      const next = keys.includes(id) ? keys.filter((key) => key !== id) : [...keys, id];
+      if (writeKeys(next)) {
+        say(`Clé 0${button.dataset.keyToggle} ${next.includes(id) ? "donnée" : "retirée"}.`);
+        refreshPageSoon();
+      }
+    }),
+  );
+
+  const currentLevelNumber = levelMatch ? Number(levelMatch[1]) : null;
+  const goToLevel = (number) => {
+    sessionStorage.setItem("echoes-dev-unlock", "1");
+    window.location.href = levelLink(number);
+  };
+  q("[data-level-prev]").addEventListener("click", () => {
+    if (!currentLevelNumber) return say("Ouvre d'abord un niveau.");
+    if (currentLevelNumber <= 1) return say("Déjà au premier niveau.");
+    goToLevel(currentLevelNumber - 1);
+  });
+  q("[data-level-next]").addEventListener("click", () => {
+    if (!currentLevelNumber) return say("Ouvre d'abord un niveau.");
+    if (currentLevelNumber >= 30) return say("Déjà au dernier niveau.");
+    goToLevel(currentLevelNumber + 1);
+  });
+  q("[data-complete-level]").addEventListener("click", () => {
+    if (!currentLevelNumber) return say("Ouvre d'abord un niveau.");
+    if (
+      patchSave((save) => ({
+        completedLevels: [...new Set([...(save.completedLevels || []), currentLevelNumber])].sort((a, b) => a - b),
+        completedBosses: [...new Set([...(save.completedBosses || []), "intro"])],
+        currentLevel: Math.max(Number(save.currentLevel) || 0, Math.min(30, currentLevelNumber + 1)),
+      }))
+    ) {
+      say(`Niveau ${currentLevelNumber} marqué comme terminé.`);
+      refreshInfo();
+    }
+  });
+  q("[data-complete-all]").addEventListener("click", () => {
+    if (
+      patchSave((save) => ({
+        currentPage: "level",
+        currentLevel: 30,
+        completedLevels: Array.from({ length: 30 }, (_, i) => i + 1),
+        completedBosses: [...new Set([...(save.completedBosses || []), "intro", "boss-02", "boss-04", "boss-06"])],
+        keys: [...new Set([...(save.keys || []), ...allKeys])],
+      }))
+    ) {
+      say("Tout est terminé (niveaux 1–30, boss, 6 clés).");
+      refreshInfo();
+      refreshPageSoon();
+    }
+  });
+  q("[data-reset-progress]").addEventListener("click", () => {
+    if (!window.confirm("Réinitialiser la progression de ce joueur ?")) return;
+    const user = window.EchoesSave?.getCurrentUser();
+    if (user) {
+      const ok = patchSave(() => ({
+        currentPage: "introduction",
+        currentLevel: 0,
+        completedLevels: [],
+        completedBosses: [],
+        keys: [],
+      }));
+      if (!ok) return;
+      localStorage.removeItem(`echoes-completed-levels-${encodeURIComponent(user.trim().toLowerCase())}`);
+    }
+    localStorage.removeItem("echoes-guest-keys");
+    localStorage.removeItem("echoes-completed-levels");
+    say("Progression réinitialisée.");
+    refreshInfo();
+    refreshPageSoon();
+  });
+
+  // Compteur de FPS : simple surcouche mise à jour une fois par seconde.
+  let fpsBox = null;
+  let fpsFrame = 0;
+  const setFps = (enabled) => {
+    if (!enabled) {
+      cancelAnimationFrame(fpsFrame);
+      fpsBox?.remove();
+      fpsBox = null;
+      return;
+    }
+    fpsBox = document.createElement("div");
+    fpsBox.className = "dev-fps";
+    fpsBox.setAttribute("aria-hidden", "true");
+    document.body.appendChild(fpsBox);
+    let frames = 0;
+    let last = performance.now();
+    const tick = (now) => {
+      frames += 1;
+      if (now - last >= 1000) {
+        fpsBox.textContent = `${Math.round((frames * 1000) / (now - last))} FPS`;
+        frames = 0;
+        last = now;
+      }
+      fpsFrame = requestAnimationFrame(tick);
+    };
+    fpsFrame = requestAnimationFrame(tick);
+  };
+  const fpsToggle = q("[data-fps-toggle]");
+  fpsToggle.checked = localStorage.getItem("echoes-dev-fps") === "1";
+  setFps(fpsToggle.checked);
+  fpsToggle.addEventListener("change", () => {
+    fpsToggle.checked
+      ? localStorage.setItem("echoes-dev-fps", "1")
+      : localStorage.removeItem("echoes-dev-fps");
+    setFps(fpsToggle.checked);
+  });
+
+  q("[data-copy-save]").addEventListener("click", async () => {
+    const user = window.EchoesSave?.getCurrentUser();
+    const data = JSON.stringify(
+      { user: user || null, save: user ? window.EchoesSave.getSave(user) : null, keys: currentKeys() },
+      null,
+      2,
+    );
+    try {
+      await navigator.clipboard.writeText(data);
+      say("Sauvegarde copiée dans le presse-papiers.");
+    } catch {
+      window.prompt("Copie la sauvegarde :", data);
+    }
+  });
+  q("[data-lock-dev]").addEventListener("click", () => {
+    localStorage.removeItem("echoes-dev-ok");
+    setOpen(false);
+  });
+  refreshInfo();
   menu.querySelector("[data-skip-go]").addEventListener("click", () => {
-    const target = Math.min(30, Math.max(1, Number(menu.querySelector("[data-skip-level]").value) || 1));
+    const target = Math.min(30, Math.max(1, Number(q("[data-skip-level]").value) || 1));
     const levels = Array.from({ length: target - 1 }, (_, i) => i + 1);
     const bosses = [];
     const keys = [];
@@ -345,6 +563,7 @@
 
   // Opens or closes the level navigator.
   const setOpen = (isOpen) => {
+    if (isOpen) refreshInfo();
     panel.hidden = !isOpen;
     toggle.setAttribute("aria-expanded", String(isOpen));
     menu.classList.toggle("is-open", isOpen);

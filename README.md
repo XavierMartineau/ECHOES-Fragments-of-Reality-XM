@@ -148,7 +148,9 @@ Fichiers importants :
 - `docs/css/niveaux/` : styles communs et un fichier par partie (1 à 6) ;
 - `docs/js/bosses/` : contrôleurs des trois combats de boss ;
 - `docs/js/key-fragments.js` : assemblage des fragments et cinématique de récompense ;
-- `docs/js/dev-mode.js` : accès développeur aux niveaux et scènes spéciales ;
+- `docs/js/dev-mode.js` : DEV MODE (code d'accès, navigation par partie, état du joueur, don/retrait des clés 1 à 6 avec mise à jour de toutes les interfaces de clés, skip de niveau, terminer un niveau ou tout terminer, réinitialisation, compteur de FPS, copie de la sauvegarde) ; le panneau est agrandi et défile ;
+- `docs/assets/svg/accueil/adaptatif/` : le même décor d'accueil en trois tailles (PC, tablette, mobile), choisi par `<picture>` dans `index.html` ;
+- `script.js` : fond canvas de l'accueil et changement de langue FR/EN en place (sans rechargement, dictionnaire de l'autre langue préchargé au repos) ;
 - `docs/js/ui-effects.js` et `docs/css/composants/ui-effects.css` : animations partagées, ambiance par niveau, panneau des clés et curseur premium ;
 - `docs/css/composants/dev-mode.css` : styles DEV MODE, y compris les anciens styles UI ;
 - `docs/assets/svg/cles/key-01-usb.svg` : visuel cyberpunk de la première clé ;
@@ -179,7 +181,7 @@ ECHOES utilise une identité visuelle fondée sur :
 
 - fonds sombres et grilles holographiques ;
 - cyan, violet, vert néon et magenta ;
-- typographie de terminal ;
+- typographie de terminal (titre ECHOES en monospace avec curseur clignotant et glitch rouge) ;
 - orbites, halos et noyaux de résonance ;
 - perturbations glitch limitées aux signaux d'ECHO ;
 - interfaces centrées et adaptées au mobile.

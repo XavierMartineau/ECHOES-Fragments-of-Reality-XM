@@ -240,6 +240,7 @@ iveaux-communs.css et un fichier par partie (partie-1_niveau-1_à_5.css … part
 
 ## Travail en cours
 
+- Valider les nouveautés du 04/11/2026 sur mobile et tablette réels (accueil adaptatif, DEV MODE agrandi).
 - Valider complètement les parcours des six parties et des trois boss sur desktop et mobile.
 
 
@@ -395,11 +396,13 @@ iveaux-communs.css et un fichier par partie (partie-1_niveau-1_à_5.css … part
 
 ## Prochain jalon recommandé
 
-1. Tester les six parties et les trois boss sur ordinateur et mobile.
-3. Valider l'ensemble de la campagne de 30 niveaux.
-3. Terminer les puzzles bonus 41–60 et valider les bonus 31–40.
+1. Tester les six parties et les trois boss sur ordinateur, tablette et mobile.
+2. Valider l'ensemble de la campagne de 30 niveaux.
+3. Créer la partie finale (ECHO, assemblage des clés, fin, crédits) et la câbler via `levels-config.js` (`finale`).
 4. Vérifier les clés, les liens et les ressources sur le déploiement GitHub Pages.
 5. Préparer une nouvelle version bêta après ces validations.
+
+Les niveaux bonus 31–60 ont été supprimés ; ils ne font plus partie de la planification.
 
 > Mettre à jour ce document à chaque commit : ajouter une entrée datée avec le hash du commit,
 > sa portée (fichiers ou fonctionnalités) et corriger les sections d'état si elles changent.
@@ -461,3 +464,23 @@ iveaux-communs.css et un fichier par partie (partie-1_niveau-1_à_5.css … part
 - La campagne active comporte six parties de cinq niveaux chacune, du niveau 1 au niveau 30.
 - Les trois boss sont placés après les parties 2, 4 et 6.
 - Les autres pages de niveaux sont conservées en archive et redirigent vers le hub hors DEV MODE.
+
+### 04/11/2026 — Accueil adaptatif, titre terminal, langue et DEV MODE
+
+#### Demandes (résumé)
+
+- Corriger les erreurs, réduire le lag, améliorer mobile/tablette, traductions FR/EN partout.
+- Refonte du SVG de l'accueil (circuits, contraste, centrage), puis un seul décor en trois tailles (PC, tablette, mobile).
+- Refaire les animations des boutons FR/EN et du bouton de départ ; contraste du HUD, « SIGNAL NEURAL » à 0 %, ligne basse droite avec des pics.
+- Titre ECHOES style programme, glitch rouge.
+- Corriger le lag au changement de langue.
+- DEV MODE : clés 1 à 6 visibles dans toutes les interfaces, panneau plus grand avec défilement, nouveaux outils, vérifier tous les boutons.
+
+#### Travail réalisé
+
+- **Accueil** : fond SVG de pistes de circuit ; `docs/assets/svg/accueil/adaptatif/home-scene-{pc,tablette,mobile}.svg` choisis par `<picture>` (mobile ≤ 600 px, tablette portrait ≤ 1100 px) ; contenu centré ; HUD plus contrasté ; ligne basse droite avec pics (`home.css`).
+- **Boutons** : entrées et reflets des boutons de langue, pulsation du bouton de départ, interrupteur animé ; coupés avec `prefers-reduced-motion`.
+- **Titre** : monospace (JetBrains Mono), curseur clignotant, glitch rouge (`#ff2d53` / `#ff5c7a`).
+- **Langue** : plus de `reload()` ; `applyLanguage` agit sur place et charge le dictionnaire manquant à la demande (`script.js`, `language.js`). Mesuré : environ 85 ms par clic, sans erreur.
+- **DEV MODE** (`dev-mode.js`, `dev-mode.css` v25) : panneau 600 px avec défilement et en-tête fixe ; état du joueur ; don/retrait de chaque clé ou de toutes les clés (événement `echoes:key-unlocked` puis rechargement pour que hub et HUD de boss se mettent à jour) ; niveau précédent/suivant ; terminer ce niveau ; tout terminer ; réinitialiser (confirmation) ; compteur de FPS ; copie de la sauvegarde ; verrouillage du DEV MODE ; champ numérique du skip corrigé.
+- **Vérification** : test Playwright + Edge de tous les boutons (0 erreur de console). Non testé sur appareils réels.
