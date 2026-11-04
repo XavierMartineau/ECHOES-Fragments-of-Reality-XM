@@ -1,0 +1,1163 @@
+/* ============================================================================
+ * PARTIE 1 // NIVEAUX 1 À 5
+ * Styles propres à ces niveaux, chargés après niveaux-communs.css (base partagée).
+ * ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+.sequence-demo-items {
+    grid-template-columns: repeat(2, minmax(70px, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+.sort-slot.is-target {
+    animation: none !important;
+  }
+}
+
+.volume-notice {
+  display: inline-block;
+  margin: 18px 0 0;
+  padding: 9px 12px;
+  border: 1px solid rgba(255, 209, 102, 0.6);
+  background: rgba(255, 209, 102, 0.08);
+  color: #ffd166;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.62rem;
+  letter-spacing: 0.08rem;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 1 // ALIGNEMENT PRIMAIRE : cibles et pièces triangle, cercle, carré (.target-slots, .puzzle-piece).
+ * ------------------------------------------------------------------------- */
+
+.puzzle-board {
+  position: relative;
+  min-height: 330px;
+  overflow: hidden;
+  padding: 46px 30px 30px;
+  background:
+    radial-gradient(circle at center, rgba(20, 63, 92, 0.25), transparent 62%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    );
+}
+
+.target-line {
+  position: absolute;
+  top: 45%;
+  right: 14%;
+  left: 14%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  box-shadow: 0 0 18px var(--cyan);
+  opacity: 0.6;
+}
+
+.target-slots {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  gap: clamp(24px, 6vw, 70px);
+}
+
+.target-slot {
+  display: grid;
+  width: 76px;
+  height: 76px;
+  place-items: center;
+  border: 1px dashed rgba(121, 247, 255, 0.52);
+  border-radius: 50%;
+  background: rgba(4, 15, 29, 0.66);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.target-slot:hover,
+.target-slot:focus-visible,
+.target-slot.active {
+  border-color: #fff;
+  box-shadow:
+    0 0 24px rgba(121, 247, 255, 0.5),
+    inset 0 0 16px rgba(121, 247, 255, 0.1);
+  outline: none;
+}
+
+.target-slot.filled {
+  border-style: solid;
+}
+
+.target-slot.slot-triangle {
+  border-color: var(--cyan);
+  background: radial-gradient(
+    circle,
+    rgba(121, 247, 255, 0.28),
+    rgba(4, 15, 29, 0.7)
+  );
+  box-shadow:
+    0 0 18px rgba(121, 247, 255, 0.42),
+    inset 0 0 16px rgba(121, 247, 255, 0.12);
+}
+
+.target-slot.slot-circle {
+  border-color: #48b0ff;
+  background: radial-gradient(
+    circle,
+    rgba(72, 176, 255, 0.28),
+    rgba(4, 15, 29, 0.7)
+  );
+  box-shadow:
+    0 0 18px rgba(72, 176, 255, 0.42),
+    inset 0 0 16px rgba(72, 176, 255, 0.12);
+}
+
+.target-slot.slot-square {
+  border-color: var(--violet);
+  background: radial-gradient(
+    circle,
+    rgba(179, 108, 255, 0.28),
+    rgba(4, 15, 29, 0.7)
+  );
+  box-shadow:
+    0 0 18px rgba(179, 108, 255, 0.42),
+    inset 0 0 16px rgba(179, 108, 255, 0.12);
+}
+
+.target-slot.preview-triangle {
+  border-color: rgba(121, 247, 255, 0.7);
+  background: rgba(121, 247, 255, 0.08);
+  box-shadow:
+    0 0 14px rgba(121, 247, 255, 0.2),
+    inset 0 0 12px rgba(121, 247, 255, 0.08);
+}
+
+.target-slot.preview-circle {
+  border-color: rgba(72, 176, 255, 0.72);
+  background: rgba(72, 176, 255, 0.08);
+  box-shadow:
+    0 0 14px rgba(72, 176, 255, 0.22),
+    inset 0 0 12px rgba(72, 176, 255, 0.08);
+}
+
+.target-slot.preview-square {
+  border-color: rgba(179, 108, 255, 0.72);
+  background: rgba(179, 108, 255, 0.08);
+  box-shadow:
+    0 0 14px rgba(179, 108, 255, 0.22),
+    inset 0 0 12px rgba(179, 108, 255, 0.08);
+}
+
+.target-slot.correct {
+  border-color: var(--success);
+  box-shadow: 0 0 24px rgba(128, 255, 207, 0.56);
+}
+
+.target-slot.incorrect {
+  border-color: var(--danger);
+  box-shadow: 0 0 24px rgba(255, 69, 109, 0.62);
+  animation: puzzle-shake 0.25s linear 2;
+}
+
+.piece-tray {
+  position: absolute;
+  right: 0;
+  bottom: 22px;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  gap: 42px;
+}
+
+.piece-tray-hint {
+  position: absolute;
+  right: 0;
+  bottom: 84px;
+  left: 0;
+  margin: 0;
+  color: rgba(223, 234, 249, 0.72);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.56rem;
+  letter-spacing: 0.08rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.puzzle-piece {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgba(121, 247, 255, 0.72);
+  background: rgba(19, 66, 95, 0.35);
+  cursor: grab;
+  filter: drop-shadow(0 0 9px rgba(121, 247, 255, 0.42));
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.puzzle-piece:hover,
+.puzzle-piece.selected {
+  transform: translateY(-5px) scale(1.08);
+  box-shadow: 0 0 22px rgba(121, 247, 255, 0.6);
+}
+
+.puzzle-piece:active {
+  cursor: grabbing;
+}
+
+.puzzle-piece.placed {
+  opacity: 0.25;
+  pointer-events: none;
+  transform: scale(0.8);
+}
+
+.piece-triangle {
+  border-color: var(--cyan);
+  background: rgba(121, 247, 255, 0.3);
+  filter: drop-shadow(0 0 10px rgba(121, 247, 255, 0.58));
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.piece-triangle:hover,
+.piece-triangle.selected {
+  box-shadow: 0 0 24px rgba(121, 247, 255, 0.72);
+}
+
+@media (hover: hover) and (pointer: fine) {
+.piece-triangle:hover {
+    animation: triangle-hover 0.7s ease-in-out infinite alternate;
+  }
+}
+
+.piece-circle {
+  border-color: #48b0ff;
+  background: rgba(72, 176, 255, 0.32);
+  border-radius: 50%;
+  filter: drop-shadow(0 0 10px rgba(72, 176, 255, 0.55));
+}
+
+.piece-circle:hover,
+.piece-circle.selected {
+  box-shadow: 0 0 24px rgba(72, 176, 255, 0.72);
+}
+
+.piece-square {
+  transform: rotate(45deg) scale(0.74);
+  border-color: #d7b6ff;
+  background: rgba(133, 69, 187, 0.35);
+}
+
+.piece-square:hover,
+.piece-square.selected {
+  transform: rotate(45deg) translateY(-5px) scale(0.82);
+  box-shadow:
+    0 0 26px rgba(179, 108, 255, 0.78),
+    0 0 42px rgba(210, 146, 255, 0.28);
+}
+
+.target-slot .piece-triangle,
+.target-slot .piece-circle,
+.target-slot .piece-square {
+  width: 38px;
+  height: 38px;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 3 // CLASSIFICATION DES FORMES : six formes à ranger dans six emplacements (.sort-*).
+ * ------------------------------------------------------------------------- */
+
+.sort-board {
+  display: grid;
+  gap: 28px;
+  min-height: 390px;
+}
+
+.sort-slots,
+.sort-pieces {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(48px, 1fr));
+  gap: 12px;
+  align-items: center;
+  justify-items: center;
+}
+
+.sort-slots {
+  padding-top: 22px;
+}
+
+.sort-slot,
+.sort-piece {
+  position: relative;
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border: 1px dashed rgba(121, 247, 255, 0.55);
+  background: rgba(4, 15, 29, 0.7);
+  color: var(--cyan);
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.68rem;
+  transition: 0.2s ease;
+}
+
+.sort-slot::after {
+  position: absolute;
+  inset: 12px;
+  border: 1px solid currentColor;
+  content: "";
+  opacity: 0.36;
+}
+
+.sort-piece {
+  border-style: solid;
+  color: #d7b6ff;
+  box-shadow: 0 0 12px rgba(179, 108, 255, 0.2);
+}
+
+.sort-slot:hover,
+.sort-slot:focus-visible,
+.sort-piece:hover,
+.sort-piece.is-selected {
+  border-color: #fff;
+  box-shadow: 0 0 22px currentColor;
+  outline: none;
+  transform: translateY(-4px);
+}
+
+.sort-piece.is-selected {
+  border-width: 2px;
+  box-shadow:
+    0 0 0 4px rgba(121, 247, 255, 0.12),
+    0 0 28px currentColor;
+}
+
+.sort-slot.is-target {
+  border-style: solid;
+  border-color: var(--success);
+  box-shadow:
+    0 0 0 4px rgba(128, 255, 207, 0.12),
+    0 0 26px rgba(128, 255, 207, 0.68);
+  animation: target-pulse 0.9s ease-in-out infinite alternate;
+}
+
+.sort-piece.is-placed {
+  width: 38px;
+  height: 38px;
+  cursor: default;
+  pointer-events: none;
+}
+
+.sort-piece.is-locked {
+  animation: light-pulse 0.8s ease-in-out infinite alternate;
+}
+
+.sort-slot.is-filled {
+  border-style: solid;
+  border-color: var(--success);
+  box-shadow: 0 0 18px rgba(128, 255, 207, 0.4);
+}
+
+.sort-slot.is-error {
+  border-color: var(--danger);
+  box-shadow: 0 0 22px rgba(255, 69, 109, 0.7);
+  animation: puzzle-shake 0.25s linear 2;
+}
+
+.shape-hexagon,
+.shape-star {
+  color: var(--cyan);
+}
+
+.shape-hexagon::after {
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  background: currentColor;
+  border: 0;
+}
+
+.shape-star::after {
+  clip-path: polygon(
+    50% 0,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 100%,
+    50% 73%,
+    21% 100%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  background: currentColor;
+  border: 0;
+}
+
+.slot-circle {
+  color: #48b0ff;
+}
+
+.slot-square {
+  color: var(--violet);
+}
+
+.slot-hexagon,
+.shape-hexagon {
+  color: var(--success);
+}
+
+.slot-diamond {
+  color: #ff70c2;
+}
+
+.slot-star,
+.shape-star {
+  color: #ffd166;
+}
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 4 // ROTATION HOLOGRAPHIQUE : objet à orienter vers sa cible (.rotation-*).
+ * ------------------------------------------------------------------------- */
+
+.rotation-board {
+  display: grid;
+  min-height: 390px;
+  place-items: center;
+}
+
+.rotation-target,
+.rotation-object {
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  border: 1px dashed rgba(128, 255, 207, 0.72);
+  clip-path: polygon(50% 0, 100% 25%, 78% 100%, 22% 100%, 0 25%);
+  transform: rotate(120deg);
+}
+
+.rotation-target {
+  box-shadow: 0 0 28px rgba(128, 255, 207, 0.22);
+}
+
+.rotation-object {
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--violet);
+  background: rgba(179, 108, 255, 0.16);
+  color: #fff;
+  font-size: 3.2rem;
+  transform: rotate(var(--object-angle, 0deg));
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.2s ease;
+  box-shadow:
+    0 0 22px rgba(179, 108, 255, 0.48),
+    inset 0 0 28px rgba(179, 108, 255, 0.22);
+}
+
+.rotation-object.shape-diamond {
+  border-radius: 0;
+  color: #ff70c2;
+}
+
+.rotation-object.shape-circle {
+  border-radius: 50%;
+  color: #48b0ff;
+}
+
+.rotation-object.shape-hexagon {
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  color: var(--success);
+}
+
+.rotation-object.is-cleared {
+  opacity: 0;
+  transform: scale(0.2) rotate(var(--object-angle, 0deg));
+}
+
+.rotation-object::before {
+  position: absolute;
+  inset: 14px;
+  border: 1px solid currentColor;
+  content: "";
+  opacity: 0.5;
+}
+
+.rotation-readout {
+  position: absolute;
+  right: 24px;
+  bottom: 22px;
+  display: grid;
+  gap: 4px;
+  color: var(--muted);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.56rem;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+
+.rotation-readout strong {
+  color: var(--cyan);
+  font-size: 0.82rem;
+}
+
+.rotation-board.solved .rotation-object {
+  border-color: var(--success);
+  box-shadow:
+    0 0 36px rgba(128, 255, 207, 0.8),
+    inset 0 0 28px rgba(128, 255, 207, 0.25);
+}
+
+.rotation-controls {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 22px;
+  border-top: 1px solid rgba(121, 247, 255, 0.16);
+}
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 5 // SÉQUENCE SONORE : ondes et notes à rejouer (.sound-*, .note-*).
+ * ------------------------------------------------------------------------- */
+
+.sound-board {
+  display: grid;
+  min-height: 360px;
+  place-items: center;
+}
+
+.sound-wave {
+  position: absolute;
+  width: 78%;
+  height: 100px;
+  border-top: 1px solid rgba(121, 247, 255, 0.32);
+  border-bottom: 1px solid rgba(179, 108, 255, 0.25);
+  border-radius: 50%;
+  transform: skewY(-8deg);
+  box-shadow: 0 0 28px rgba(121, 247, 255, 0.16);
+}
+
+.note-sequence {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: clamp(18px, 4vw, 42px);
+  align-items: end;
+}
+
+.sound-note {
+  display: grid;
+  width: 58px;
+  height: 118px;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50% 50% 8px 8px;
+  background: rgba(7, 18, 35, 0.72);
+  color: var(--cyan);
+  cursor: pointer;
+  appearance: none;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.68rem;
+  transition: 0.2s ease;
+}
+
+.sound-note:nth-child(2) {
+  height: 148px;
+}
+
+.sound-note:nth-child(3) {
+  height: 178px;
+}
+
+.sound-note:nth-child(4) {
+  height: 132px;
+}
+
+.sound-note:hover,
+.sound-note:focus-visible {
+  transform: translateY(-6px);
+  outline: none;
+  box-shadow: 0 0 22px currentColor;
+}
+
+.sound-note:focus:not(:focus-visible),
+.sound-note:active {
+  background: rgba(7, 18, 35, 0.72);
+  color: inherit;
+  outline: none;
+}
+
+.sound-note.is-active,
+.sound-note.is-correct {
+  background: currentColor;
+  color: #06101d;
+  box-shadow:
+    0 0 26px currentColor,
+    0 0 50px currentColor;
+  animation: light-pulse 0.42s ease-out;
+}
+
+.sound-note.is-correct {
+  background:
+    linear-gradient(rgba(128, 255, 207, 0.18), rgba(128, 255, 207, 0.18)),
+    rgba(7, 18, 35, 0.72);
+  color: currentColor;
+  box-shadow: 0 0 22px currentColor;
+}
+
+.sound-note.is-error {
+  border-color: var(--danger);
+  color: #ff9bb0;
+  box-shadow: 0 0 24px rgba(255, 69, 109, 0.8);
+  animation: puzzle-shake 0.25s linear 2;
+}
+
+.note-mid {
+  color: #48b0ff;
+}
+
+.note-high {
+  color: var(--violet);
+}
+
+.note-clear {
+  color: #ff70c2;
+}
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 2 // SÉQUENCE LUMINEUSE : piliers lumineux et boutons de lecture (.sequence-*, .light-*).
+ * ------------------------------------------------------------------------- */
+
+.sequence-board {
+  min-height: 360px;
+  display: grid;
+  place-items: center;
+}
+
+.sequence-orbit {
+  position: absolute;
+  width: min(420px, 78%);
+  aspect-ratio: 1;
+  border: 1px solid rgba(121, 247, 255, 0.14);
+  border-radius: 50%;
+  box-shadow:
+    0 0 34px rgba(121, 247, 255, 0.08),
+    inset 0 0 34px rgba(179, 108, 255, 0.08);
+  transform: rotate(18deg) scaleY(0.48);
+}
+
+.sequence-orbit::before,
+.sequence-orbit::after {
+  position: absolute;
+  inset: 12%;
+  border: 1px solid rgba(179, 108, 255, 0.16);
+  border-radius: 50%;
+  content: "";
+}
+
+.sequence-orbit::after {
+  inset: 24%;
+  border-color: rgba(255, 112, 194, 0.16);
+}
+
+.light-sequence {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(86px, 110px));
+  gap: 30px 58px;
+}
+
+.sequence-light {
+  position: relative;
+  display: grid;
+  width: 100%;
+  aspect-ratio: 0.68;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  background: rgba(7, 18, 35, 0.72);
+  color: var(--cyan);
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.68rem;
+  letter-spacing: 0.1rem;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.sequence-light::before,
+.sequence-light::after {
+  position: absolute;
+  right: 12%;
+  left: 12%;
+  height: 1px;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+  content: "";
+  opacity: 0.48;
+}
+
+.sequence-light::before {
+  top: 25%;
+}
+
+.sequence-light::after {
+  bottom: 25%;
+}
+
+.sequence-light:hover,
+.sequence-light:focus-visible {
+  transform: translateY(-5px);
+  outline: none;
+  box-shadow: 0 0 24px currentColor;
+}
+
+.sequence-light.is-active,
+.sequence-light.is-correct {
+  background: currentColor;
+  color: #06101d;
+  box-shadow:
+    0 0 20px currentColor,
+    0 0 52px currentColor;
+  animation: light-pulse 0.42s ease-out;
+}
+
+.sequence-light.is-error {
+  border-color: var(--danger);
+  background: rgba(255, 69, 109, 0.32);
+  color: #ff9bb0;
+  box-shadow: 0 0 26px rgba(255, 69, 109, 0.82);
+  animation: puzzle-shake 0.25s linear 2;
+}
+
+.light-blue {
+  color: #48b0ff;
+}
+
+.light-violet {
+  color: var(--violet);
+}
+
+.light-pink {
+  color: #ff70c2;
+}
+
+.sequence-board.solved .sequence-orbit {
+  border-color: rgba(128, 255, 207, 0.42);
+  box-shadow:
+    0 0 50px rgba(128, 255, 207, 0.22),
+    inset 0 0 42px rgba(128, 255, 207, 0.14);
+  animation: orbit-breathe 1.2s ease-in-out infinite alternate;
+}
+
+/* ---------------------------------------------------------------------------
+ * EXEMPLES DE DÉMONSTRATION // Aperçus animés des puzzles (.sequence-demo, .demo-*).
+ * ------------------------------------------------------------------------- */
+
+.sequence-demo {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem 1.4rem;
+  border-top: 1px solid rgba(121, 247, 255, 0.12);
+}
+
+.generic-demo .sequence-demo-panel {
+  display: grid;
+  gap: 0.7rem;
+  padding: 0.9rem;
+  border: 1px solid rgba(255, 142, 219, 0.25);
+  background: rgba(14, 8, 29, 0.72);
+}
+
+.generic-demo .sequence-demo-panel p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.demo-light {
+  padding: 0.8rem 0.4rem;
+  border: 1px solid currentColor;
+  text-align: center;
+  font-size: 0.58rem;
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+}
+
+.sequence-demo-panel {
+  display: grid;
+  gap: 0.7rem;
+  padding: 0.9rem;
+  border: 1px solid rgba(255, 142, 219, 0.25);
+  background: rgba(14, 8, 29, 0.72);
+}
+
+.sequence-demo-panel p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.sequence-demo-items {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(70px, 1fr));
+  gap: 0.65rem;
+}
+
+.demo-light {
+  padding: 0.8rem 0.4rem;
+  border: 1px solid currentColor;
+  text-align: center;
+  font-size: 0.58rem;
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+}
+
+.demo-amber { color: #ffc857; }
+
+.demo-mint { color: #80ffcf; }
+
+.demo-coral { color: #ff8f70; }
+
+.demo-indigo { color: #9b8cff; }
+
+@media (max-width: 560px) {
+.puzzle-board {
+    min-height: 290px;
+    padding-inline: 12px;
+  }
+
+.target-slots {
+    gap: 12px;
+  }
+
+.target-slot {
+    width: 64px;
+    height: 64px;
+  }
+
+.piece-tray {
+    gap: 24px;
+  }
+
+.sequence-board {
+    min-height: 310px;
+  }
+
+.sort-board {
+    min-height: 450px;
+    gap: 24px;
+  }
+
+.sort-slots,
+  .sort-pieces {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px 8px;
+  }
+
+.sort-slot,
+  .sort-piece {
+    width: 62px;
+    height: 62px;
+    touch-action: manipulation;
+  }
+
+.sort-piece.is-selected {
+    transform: scale(1.08);
+  }
+
+.sort-slot.is-target {
+    transform: scale(1.08);
+  }
+
+.rotation-board {
+    min-height: 330px;
+  }
+
+.rotation-target,
+  .rotation-object {
+    width: 132px;
+    height: 132px;
+  }
+
+.rotation-readout {
+    right: 14px;
+    bottom: 14px;
+  }
+
+.rotation-controls {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+.rotation-controls .sequence-start-button {
+    width: 100%;
+  }
+
+.sound-board {
+    min-height: 310px;
+  }
+
+.note-sequence {
+    gap: 12px;
+  }
+
+.sound-note {
+    width: 48px;
+    height: 94px;
+  }
+
+.sound-note:nth-child(2) {
+    height: 118px;
+  }
+
+.sound-note:nth-child(3) {
+    height: 142px;
+  }
+
+.sound-note:nth-child(4) {
+    height: 106px;
+  }
+
+.light-sequence {
+    grid-template-columns: repeat(2, 76px);
+    gap: 22px 32px;
+  }
+
+.target-slot,
+.puzzle-piece {
+    touch-action: manipulation;
+  }
+}
+
+.maze-grid {
+  display: grid;
+  width: min(100%, 390px);
+  gap: 5px;
+}
+
+.maze-grid {
+  grid-template-columns: repeat(7, minmax(28px, 1fr));
+}
+
+.maze-cell {
+  display: grid;
+  min-width: 0;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid rgba(121, 247, 255, 0.14);
+  background: rgba(15, 32, 52, 0.7);
+  color: var(--cyan, #79f7ff);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: clamp(0.72rem, 2vw, 1rem);
+}
+
+.maze-cell.is-player,
+.maze-cell.is-goal {
+  border-color: var(--success, #80ffcf);
+  background: rgba(128, 255, 207, 0.14);
+  color: var(--success, #80ffcf);
+  box-shadow: 0 0 14px rgba(128, 255, 207, 0.22);
+}
+
+.memory-card {
+  display: grid;
+  min-width: 0;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid rgba(179, 108, 255, 0.4);
+  background: linear-gradient(145deg, rgba(30, 22, 56, 0.95), rgba(8, 17, 35, 0.95));
+  color: #d4c1ff;
+  cursor: pointer;
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.memory-card.is-revealed {
+  border-color: var(--cyan, #79f7ff);
+  background: rgba(121, 247, 255, 0.12);
+  color: var(--cyan, #79f7ff);
+}
+
+.memory-card.is-matched {
+  border-color: var(--success, #80ffcf);
+  color: var(--success, #80ffcf);
+  box-shadow: 0 0 16px rgba(128, 255, 207, 0.25);
+}
+
+@media (max-width: 420px) {
+.maze-grid {
+    gap: 3px;
+  }
+}
+
+/* Niveau 2 : grand labyrinthe, traînée derrière le noyau, éclats et sortie scellée */
+
+.maze-grid { width: min(100%, 470px); gap: 2px; }
+
+.maze-cell { font-size: clamp(0.5rem, 1.8vw, 0.8rem); transition: background 0.25s, box-shadow 0.25s; }
+
+.maze-cell.is-trail {
+  background: rgba(121, 247, 255, calc(var(--t, 0) * 0.34));
+  box-shadow: inset 0 0 calc(var(--t, 0) * 10px) rgba(121, 247, 255, calc(var(--t, 0) * 0.6));
+}
+
+.maze-cell.is-player { box-shadow: 0 0 18px rgba(128, 255, 207, 0.7), 0 0 34px rgba(121, 247, 255, 0.35); }
+
+.maze-cell.is-shard {
+  border-color: #ffd27a;
+  background: rgba(255, 210, 122, 0.14);
+  color: #ffd27a;
+  animation: maze-shard 1.6s ease-in-out infinite;
+}
+
+.maze-cell.is-sealed { border-color: rgba(255, 90, 110, 0.6); background: rgba(255, 90, 110, 0.12); color: #ff8a98; }
+
+@media (prefers-reduced-motion: reduce) {
+.maze-cell.is-shard { animation: none; }
+}
+
+/* Niveau 5 : symboles lisibles sur mobile (la taille était écrasée à 12 px) */
+
+html body .memory-grid .memory-card {
+  font-size: clamp(1.8rem, 9vw, 2.6rem) !important;
+  line-height: 1;
+  border-radius: 6px;
+  position: relative;
+}
+
+html body .memory-grid .memory-card:not(.is-revealed):not(.is-matched) {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 0 !important;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(179, 108, 255, 0.28), transparent 62%),
+    linear-gradient(145deg, rgba(38, 26, 70, 0.98), rgba(10, 20, 42, 0.98));
+}
+
+html body .memory-grid .memory-card:not(.is-revealed):not(.is-matched)::after {
+  content: "?";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+  color: rgba(212, 193, 255, 0.7);
+  font: 700 clamp(1.3rem, 6vw, 1.9rem) var(--font-display, sans-serif);
+}
+
+html body .memory-grid .memory-card.is-revealed {
+  box-shadow: 0 0 18px rgba(121, 247, 255, 0.55);
+  text-shadow: 0 0 12px currentColor;
+}
+
+html body .memory-grid .memory-card.is-matched {
+  background: rgba(128, 255, 207, 0.14);
+  text-shadow: 0 0 12px currentColor;
+}
+
+/* Niveau 3 : fenêtre « Alphabet » centrée */
+
+html body .alphabet-help-button {
+  margin: 0 auto;
+  min-width: 0;
+  min-height: 0;
+  padding: 8px 18px;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 1024px) {
+html body .alphabet-help-button {
+    padding: 3px 9px;
+    font-size: 0.55rem;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+
+html body .alphabet-box {
+    width: min(100%, 300px);
+    padding: 50px 10px 12px;
+  }
+
+html body .alphabet-close {
+    width: 32px;
+    height: 32px;
+    font-size: 1.3rem;
+  }
+
+html body .alphabet-cell {
+    font-size: 0.95rem;
+  }
+}
+
+.alphabet-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(2, 6, 16, 0.78);
+}
+
+.alphabet-box {
+  position: relative;
+  width: min(100%, 420px);
+  padding: 54px 14px 16px;
+  border: 1px solid rgba(190, 140, 255, 0.7);
+  border-radius: 12px;
+  background: linear-gradient(160deg, rgba(48, 20, 92, 0.98), rgba(24, 10, 52, 0.98));
+  box-shadow: 0 0 40px rgba(170, 110, 255, 0.4);
+}
+
+.alphabet-close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(121, 247, 255, 0.6);
+  border-radius: 8px;
+  background: rgba(121, 247, 255, 0.12);
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.alphabet-strip {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.alphabet-cell {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border: 1px solid rgba(190, 140, 255, 0.5);
+  border-radius: 6px;
+  background: rgba(190, 140, 255, 0.16);
+  color: #fff;
+  font: 700 clamp(1rem, 5vw, 1.4rem) var(--font-display, sans-serif);
+}

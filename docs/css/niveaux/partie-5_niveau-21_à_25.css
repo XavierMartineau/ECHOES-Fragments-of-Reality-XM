@@ -1,4 +1,47 @@
+/* ============================================================================
+ * PARTIE 5 // NIVEAUX 21 À 25
+ * Styles propres à ces niveaux, chargés après niveaux-communs.css (base partagée).
+ * ========================================================================== */
+
+.key-redesign-scene .reward-feedback.is-success { color: var(--success); }
+
+.interlude-status.is-success { color: var(--success); text-shadow: 0 0 12px rgba(128, 255, 207, 0.45); }
+
+/* ---------------------------------------------------------------------------
+ * MIROIRS // Puzzle de miroirs, projecteur et rayons (.mirror-*).
+ * ------------------------------------------------------------------------- */
+
+.mirror-board .mirror-field {
+  position: relative;
+  min-height: 390px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at center, rgba(20, 63, 92, 0.25), transparent 62%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    );
+}
+
+.laser-cell.is-receiver {
+  border-color: var(--success, #80ffcf);
+  background: rgba(128, 255, 207, 0.14);
+  color: var(--success, #80ffcf);
+  box-shadow: 0 0 14px rgba(128, 255, 207, 0.22);
+}
+
+.laser-cell.is-emitter {
+  color: #ff9b76;
+}
+
 /* STYLES PUZZLES // niveaux 21 a 30, repartis sur les parties 5 et 6. */
+
 @keyframes part-three-enter {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
@@ -139,7 +182,9 @@ body.part-three-theme {
 }
 
 .part-three-theme .level-intro { animation-delay: 0.08s; }
+
 .part-three-theme .puzzle-panel { animation-delay: 0.16s; }
+
 .part-three-theme .level-footer { animation-delay: 0.24s; }
 
 .neon-board {
@@ -153,6 +198,7 @@ body.part-three-theme {
 }
 
 /* Niveau 21 : la séquence doit être reproduite en ordre inverse. */
+
 .memory-board {
   display: grid;
   grid-template-columns: repeat(2, minmax(90px, 132px));
@@ -172,9 +218,13 @@ body.part-three-theme {
 }
 
 .memory-pad[data-pad="0"] { background: #ed38c7; }
+
 .memory-pad[data-pad="1"] { background: #a855f7; }
+
 .memory-pad[data-pad="2"] { background: #c6ff4d; }
+
 .memory-pad[data-pad="3"] { background: #38d9ff; }
+
 .memory-pad.is-lit,
 .memory-pad:hover:not(:disabled),
 .memory-pad:focus-visible {
@@ -187,6 +237,7 @@ body.part-three-theme {
 .memory-pad:disabled { cursor: default; }
 
 /* Niveau 21 : décryptage d'un code temporel affiché à l'écran. */
+
 .reverse-cipher-board {
   display: grid;
   min-height: 310px;
@@ -257,8 +308,11 @@ body.part-three-theme {
 .reverse-cipher-entry button:disabled { cursor: not-allowed; opacity: 0.45; }
 
 /* Niveau 22 : trois hologrammes avec leurs propres fragments à réaligner. */
+
 .alignment-content { display: grid; gap: 18px; }
+
 .alignment-lanes { display: grid; gap: 10px; }
+
 .alignment-lane {
   display: grid;
   grid-template-columns: 62px repeat(3, minmax(46px, 1fr));
@@ -334,6 +388,7 @@ body.part-three-theme {
 .alignment-token:disabled { cursor: default; opacity: 0.55; }
 
 /* Niveau 23 : intervalles de tempo irréguliers, et non une simple séquence fixe. */
+
 .rhythm-board {
   display: grid;
   min-height: 310px;
@@ -354,10 +409,13 @@ body.part-three-theme {
 }
 
 .rhythm-pulse:disabled { cursor: default; }
+
 .rhythm-pulse.is-pulsing { animation: rhythm-flash 320ms ease-out; }
+
 .rhythm-pulse:focus-visible { outline: 2px solid #ff4fd8; outline-offset: 6px; }
 
 /* Niveau 24 : chaque miroir change réellement la trajectoire du rayon. */
+
 .mirror-board {
   display: grid;
   width: min(100% - 32px, 390px);
@@ -387,7 +445,9 @@ body.part-three-theme {
 }
 
 .mirror-cell.is-emitter { color: #ff4fd8; text-shadow: 0 0 15px #ff4fd8; }
+
 .mirror-cell.is-receiver { color: #8c8c9c; }
+
 .mirror-cell.is-receiver.is-beam { color: #c6ff4d; text-shadow: 0 0 18px #c6ff4d; }
 
 .mirror-control {
@@ -413,8 +473,11 @@ body.part-three-theme {
 .mirror-control:disabled { cursor: default; }
 
 /* Niveau 25 : dix glyphes flottants à trier dans cinq cibles. */
+
 .sorting-board { width: min(100% - 24px, 520px); }
+
 .sort-content { display: grid; gap: 18px; }
+
 .sorting-targets { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
 
 .sorting-target {
@@ -439,8 +502,11 @@ body.part-three-theme {
 .sorting-target[aria-disabled="true"] { opacity: 0.65; }
 
 .sorting-target-glyph { font-size: 1.15rem; text-shadow: 0 0 10px currentColor; }
+
 .sorting-target-items { display: flex; justify-content: center; flex-wrap: wrap; gap: 2px; min-height: 24px; }
+
 .sorting-target-items .sorting-token { width: 23px; height: 23px; font-size: 0.75rem; }
+
 .sorting-target-items .sorting-token.is-sorted {
   animation: none;
   pointer-events: none;
@@ -469,7 +535,9 @@ body.part-three-theme {
 }
 
 .sorting-token:nth-child(3n) { animation-delay: -0.7s; }
+
 .sorting-token:nth-child(4n) { animation-delay: -1.2s; }
+
 .sorting-token:disabled { cursor: default; opacity: 0.66; }
 
 .neon-board.is-solved {
@@ -480,63 +548,77 @@ body.part-three-theme {
 .part-three-theme .level-footer { border-color: rgba(255, 79, 216, 0.25); }
 
 @media (max-width: 760px) {
-  .part-three-theme .level-shell {
+.part-three-theme .level-shell {
     grid-template-columns: minmax(0, 1fr);
     width: min(100% - 28px, 560px);
     gap: 26px;
     padding: 42px 0 100px;
   }
 
-  .part-three-theme .level-intro { max-width: none; }
-  .part-three-theme .system-transmission { margin-top: 22px; }
+.part-three-theme .level-intro { max-width: none; }
+
+.part-three-theme .system-transmission { margin-top: 22px; }
 }
 
 @media (max-width: 480px) {
-  .part-three-theme .level-header {
+.part-three-theme .level-header {
     width: calc(100% - 28px);
     flex-wrap: wrap;
     gap: 14px;
   }
 
-  .part-three-theme .level-meta {
+.part-three-theme .level-meta {
     width: 100%;
     justify-content: space-between;
     gap: 8px;
     font-size: 0.52rem;
   }
 
-  .part-three-theme .level-progress { max-width: 84px; gap: 4px; }
-  .part-three-theme .level-progress .level-square { width: 8px; height: 8px; }
-  .memory-board { min-height: 264px; }
-  .memory-pad { min-height: 94px; }
-  .alignment-lane { grid-template-columns: 48px repeat(3, minmax(42px, 1fr)); gap: 5px; }
-  .alignment-token { width: 36px; height: 36px; }
-  .sorting-board { width: calc(100% - 14px); padding: 10px; }
-  .sorting-target { min-height: 94px; }
-  .sorting-target-label { font-size: 0.44rem; }
-  .mirror-board { width: calc(100% - 24px); padding: 12px; }
+.part-three-theme .level-progress { max-width: 84px; gap: 4px; }
+
+.part-three-theme .level-progress .level-square { width: 8px; height: 8px; }
+
+.memory-board { min-height: 264px; }
+
+.memory-pad { min-height: 94px; }
+
+.alignment-lane { grid-template-columns: 48px repeat(3, minmax(42px, 1fr)); gap: 5px; }
+
+.alignment-token { width: 36px; height: 36px; }
+
+.sorting-board { width: calc(100% - 14px); padding: 10px; }
+
+.sorting-target { min-height: 94px; }
+
+.sorting-target-label { font-size: 0.44rem; }
+
+.mirror-board { width: calc(100% - 24px); padding: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .part-three-theme .level-header,
-  .part-three-theme .level-intro,
-  .part-three-theme .puzzle-panel,
-  .part-three-theme .level-footer,
-  .memory-pad,
-  .rhythm-pulse,
-  .mirror-control,
-  .sorting-token {
+.part-three-theme .level-header,
+.part-three-theme .level-intro,
+.part-three-theme .puzzle-panel,
+.part-three-theme .level-footer {
+    animation: none !important;
+    transition: none !important;
+  }
+
+.memory-pad,
+.rhythm-pulse,
+.mirror-control,
+.sorting-token {
     animation: none !important;
     transition: none !important;
   }
 }
 
-  .snake-captcha-board {
+.snake-captcha-board {
     width: min(100% - 20px, 600px);
     padding: clamp(8px, 2vw, 16px);
   }
 
-  .snake-rules {
+.snake-rules {
     width: min(100% - 32px, 600px);
     margin: 0 auto 20px;
     padding: 13px 16px;
@@ -546,7 +628,7 @@ body.part-three-theme {
     font: 0.7rem/1.7 "Space Mono", monospace;
   }
 
-  .snake-grid {
+.snake-grid {
     display: grid;
     grid-template-columns: repeat(var(--snake-grid-size), minmax(0, 1fr));
     width: 100%;
@@ -554,7 +636,7 @@ body.part-three-theme {
     aspect-ratio: 1;
   }
 
-  .snake-cell {
+.snake-cell {
     display: grid;
     min-width: 0;
     min-height: 0;
@@ -568,26 +650,26 @@ body.part-three-theme {
     transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease, transform 120ms ease;
   }
 
-  .snake-cell:disabled { cursor: default; }
+.snake-cell:disabled { cursor: default; }
 
-  .snake-cell.is-wall {
+.snake-cell.is-wall {
     border-color: rgba(255, 79, 216, 0.18);
     background: repeating-linear-gradient(135deg, rgba(255, 79, 216, 0.11) 0 5px, rgba(8, 4, 13, 0.96) 5px 10px);
     color: rgba(255, 131, 227, 0.65);
   }
 
-  .snake-cell.is-checkpoint {
+.snake-cell.is-checkpoint {
     border-color: rgba(198, 255, 77, 0.65);
     color: #d6ff85;
   }
 
-  .snake-cell.is-path {
+.snake-cell.is-path {
     border-color: #ff4fd8;
     background: rgba(255, 79, 216, 0.25);
     box-shadow: inset 0 0 13px rgba(255, 79, 216, 0.16);
   }
 
-  .snake-cell.is-current {
+.snake-cell.is-current {
     border-color: #c6ff4d;
     background: rgba(198, 255, 77, 0.28);
     box-shadow: 0 0 15px rgba(198, 255, 77, 0.55), inset 0 0 10px rgba(198, 255, 77, 0.2);
@@ -595,18 +677,18 @@ body.part-three-theme {
     transform: scale(1.04);
   }
 
-  .snake-cell:focus-visible {
+.snake-cell:focus-visible {
     outline: 2px solid #fff0fc;
     outline-offset: 2px;
     z-index: 1;
   }
 
-  .snake-board.is-solved .snake-cell.is-path {
+.snake-board.is-solved .snake-cell.is-path {
     border-color: #c6ff4d;
     background: rgba(198, 255, 77, 0.2);
   }
 
-  .ladder-stage {
+.ladder-stage {
     position: relative;
     padding: 0;
     border: 1px solid rgba(56, 242, 255, 0.45);
@@ -615,7 +697,7 @@ body.part-three-theme {
     box-shadow: 0 0 22px rgba(255, 79, 216, 0.2);
   }
 
-  .ladder-stage .snake-grid {
+.ladder-stage .snake-grid {
     gap: 2px;
     padding: 5px;
     border-radius: 3px;
@@ -623,7 +705,7 @@ body.part-three-theme {
     box-sizing: border-box;
   }
 
-  .ladder-lines {
+.ladder-lines {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -633,26 +715,26 @@ body.part-three-theme {
     z-index: 2;
   }
 
-  .ladder-rail-glow {
+.ladder-rail-glow {
     stroke: rgba(198, 255, 77, 0.35);
     stroke-width: 7;
     stroke-linecap: round;
     filter: blur(2px);
   }
 
-  .ladder-rail {
+.ladder-rail {
     stroke: #d9ff6b;
     stroke-width: 3;
     stroke-linecap: round;
   }
 
-  .ladder-rung {
+.ladder-rung {
     stroke: #c6ff4d;
     stroke-width: 2.4;
     stroke-linecap: round;
   }
 
-  .snake-shadow {
+.snake-shadow {
     fill: none;
     stroke: rgba(0, 0, 0, 0.55);
     stroke-width: 12;
@@ -661,7 +743,7 @@ body.part-three-theme {
     transform: translate(2px, 3px);
   }
 
-  .snake-body {
+.snake-body {
     fill: none;
     stroke: var(--snake-color);
     stroke-linecap: round;
@@ -669,19 +751,22 @@ body.part-three-theme {
     filter: drop-shadow(0 0 5px var(--snake-color));
   }
 
-  .snake-pattern {
+.snake-pattern {
     fill: none;
     stroke: rgba(10, 4, 20, 0.62);
     stroke-linecap: round;
     stroke-linejoin: round;
   }
 
-  .snake-head { fill: var(--snake-color); stroke: rgba(10, 4, 20, 0.7); stroke-width: 1.5; }
-  .snake-eye { fill: #fff; stroke: #12061f; stroke-width: 1; }
-  .snake-tongue { fill: none; stroke: #ff3f6c; stroke-width: 1.6; stroke-linecap: round; }
-  .snake-tail { fill: var(--snake-color); }
+.snake-head { fill: var(--snake-color); stroke: rgba(10, 4, 20, 0.7); stroke-width: 1.5; }
 
-  .ladder-token {
+.snake-eye { fill: #fff; stroke: #12061f; stroke-width: 1; }
+
+.snake-tongue { fill: none; stroke: #ff3f6c; stroke-width: 1.6; stroke-linecap: round; }
+
+.snake-tail { fill: var(--snake-color); }
+
+.ladder-token {
     position: absolute;
     left: 0;
     top: 0;
@@ -694,7 +779,7 @@ body.part-three-theme {
     z-index: 4;
   }
 
-  .ladder-square {
+.ladder-square {
     position: relative;
     display: grid;
     min-width: 0;
@@ -709,15 +794,15 @@ body.part-three-theme {
     transition: background 200ms ease, box-shadow 200ms ease;
   }
 
-  .ladder-square.is-finish {
+.ladder-square.is-finish {
     border-color: #ffd24d;
     background: linear-gradient(160deg, rgba(255, 210, 77, 0.35), rgba(22, 8, 40, 0.92));
     box-shadow: inset 0 0 12px rgba(255, 210, 77, 0.5);
   }
 
-  .ladder-square.is-alt { background: linear-gradient(160deg, rgba(28, 44, 96, 0.9), rgba(10, 8, 34, 0.95)); }
+.ladder-square.is-alt { background: linear-gradient(160deg, rgba(28, 44, 96, 0.9), rgba(10, 8, 34, 0.95)); }
 
-  .ladder-square.is-ladder {
+.ladder-square.is-ladder {
     border-color: #c6ff4d;
     background: linear-gradient(160deg, rgba(198, 255, 77, 0.32), rgba(20, 40, 24, 0.92));
     color: #f4ffd0;
@@ -725,7 +810,7 @@ body.part-three-theme {
     box-shadow: inset 0 0 10px rgba(198, 255, 77, 0.28);
   }
 
-  .ladder-square.is-snake {
+.ladder-square.is-snake {
     border-color: #ff5a7a;
     background: linear-gradient(160deg, rgba(255, 90, 122, 0.34), rgba(48, 8, 28, 0.92));
     color: #ffe0e8;
@@ -733,10 +818,11 @@ body.part-three-theme {
     box-shadow: inset 0 0 10px rgba(255, 90, 122, 0.28);
   }
 
-  .ladder-square.is-visited { background: linear-gradient(160deg, rgba(255, 79, 216, 0.3), rgba(22, 8, 40, 0.92)); }
-  .ladder-square.is-token { box-shadow: inset 0 0 14px rgba(255, 210, 77, 0.6); }
+.ladder-square.is-visited { background: linear-gradient(160deg, rgba(255, 79, 216, 0.3), rgba(22, 8, 40, 0.92)); }
 
-  .ladder-panel {
+.ladder-square.is-token { box-shadow: inset 0 0 14px rgba(255, 210, 77, 0.6); }
+
+.ladder-panel {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -744,7 +830,7 @@ body.part-three-theme {
     margin-top: 16px;
   }
 
-  .ladder-die-face {
+.ladder-die-face {
     display: grid;
     width: 64px;
     height: 64px;
@@ -757,15 +843,15 @@ body.part-three-theme {
     font: 700 2rem "Space Mono", monospace;
   }
 
-  .ladder-die-face.is-rolling { animation: ladder-roll 0.7s ease-in-out; }
+.ladder-die-face.is-rolling { animation: ladder-roll 0.7s ease-in-out; }
 
-  @keyframes ladder-roll {
+@keyframes ladder-roll {
     0% { transform: rotate(0) scale(1); }
     40% { transform: rotate(360deg) scale(1.25); }
     100% { transform: rotate(720deg) scale(1); }
   }
 
-  .ladder-roll {
+.ladder-roll {
     padding: 15px 26px;
     border: 1px solid #ff4fd8;
     border-radius: 10px;
@@ -777,9 +863,9 @@ body.part-three-theme {
     letter-spacing: 0.1em;
   }
 
-  .ladder-roll:disabled { cursor: default; opacity: 0.4; box-shadow: none; }
+.ladder-roll:disabled { cursor: default; opacity: 0.4; box-shadow: none; }
 
-  .ladder-modal {
+.ladder-modal {
     position: fixed;
     inset: 0;
     z-index: 1000;
@@ -791,10 +877,11 @@ body.part-three-theme {
     animation: ladder-fade 200ms ease;
   }
 
-  @keyframes ladder-fade { from { opacity: 0; } }
-  @keyframes ladder-pop { from { opacity: 0; transform: translateY(16px) scale(0.94); } }
+@keyframes ladder-fade { from { opacity: 0; } }
 
-  .ladder-dialog {
+@keyframes ladder-pop { from { opacity: 0; transform: translateY(16px) scale(0.94); } }
+
+.ladder-dialog {
     width: min(100%, 440px);
     padding: 26px 24px;
     border: 1px solid #ff4fd8;
@@ -806,21 +893,23 @@ body.part-three-theme {
     animation: ladder-pop 260ms cubic-bezier(0.2, 1.2, 0.4, 1);
   }
 
-  .ladder-modal.is-ladder .ladder-dialog,
+.ladder-modal.is-ladder .ladder-dialog,
   .ladder-modal.is-final .ladder-dialog { border-color: #c6ff4d; box-shadow: 0 0 40px rgba(198, 255, 77, 0.3); }
 
-  .ladder-dialog h3 {
+.ladder-dialog h3 {
     margin: 0 0 8px;
     color: #c6ff4d;
     font: 700 1.15rem "Space Mono", monospace;
     letter-spacing: 0.14em;
   }
 
-  .ladder-modal.is-snake .ladder-dialog h3 { color: #ff8be6; }
-  .ladder-hint { margin: 0 0 16px; font-size: 0.85rem; opacity: 0.75; }
-  .ladder-prompt { margin: 0 0 10px; font-weight: 700; }
+.ladder-modal.is-snake .ladder-dialog h3 { color: #ff8be6; }
 
-  .ladder-display {
+.ladder-hint { margin: 0 0 16px; font-size: 0.85rem; opacity: 0.75; }
+
+.ladder-prompt { margin: 0 0 10px; font-weight: 700; }
+
+.ladder-display {
     margin-bottom: 16px;
     padding: 14px;
     border: 1px dashed rgba(198, 255, 77, 0.5);
@@ -831,15 +920,21 @@ body.part-three-theme {
     letter-spacing: 0.08em;
   }
 
-  .ladder-puzzle { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .ladder-puzzle.is-odd { grid-template-columns: repeat(3, 1fr); }
-  .ladder-puzzle.is-placement { grid-template-columns: 1fr; }
-  .ladder-shape-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-  .ladder-shape-target { border-style: dashed; color: #91eaf1; opacity: 0.52; }
-  .ladder-shape-target.is-placed { border-style: solid; border-color: #c6ff4d; color: #d6ff85; opacity: 1; }
-  .ladder-piece.is-selected { border-color: #38f2ff; background: rgba(56, 242, 255, 0.2); box-shadow: 0 0 16px rgba(56, 242, 255, 0.5); }
+.ladder-puzzle { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 
-  .ladder-choice {
+.ladder-puzzle.is-odd { grid-template-columns: repeat(3, 1fr); }
+
+.ladder-puzzle.is-placement { grid-template-columns: 1fr; }
+
+.ladder-shape-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+
+.ladder-shape-target { border-style: dashed; color: #91eaf1; opacity: 0.52; }
+
+.ladder-shape-target.is-placed { border-style: solid; border-color: #c6ff4d; color: #d6ff85; opacity: 1; }
+
+.ladder-piece.is-selected { border-color: #38f2ff; background: rgba(56, 242, 255, 0.2); box-shadow: 0 0 16px rgba(56, 242, 255, 0.5); }
+
+.ladder-choice {
     padding: 13px;
     border: 1px solid rgba(255, 79, 216, 0.6);
     border-radius: 10px;
@@ -850,42 +945,72 @@ body.part-three-theme {
     transition: transform 120ms ease, box-shadow 120ms ease;
   }
 
-  .ladder-glyph { padding: 14px 0; font-size: 1.7rem; }
-  .ladder-group { padding: 14px 6px; font-size: 1.3rem; letter-spacing: 0.12em; text-shadow: 0 0 8px currentColor; }
-  .ladder-choice:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 0 14px rgba(255, 79, 216, 0.5); }
-  .ladder-choice:focus-visible { outline: 2px solid #c6ff4d; outline-offset: 2px; }
-  .ladder-result { min-height: 1.4em; margin: 14px 0 0; font-weight: 700; }
-  .ladder-dialog.is-success { border-color: #c6ff4d; box-shadow: 0 0 50px rgba(198, 255, 77, 0.5); }
-  .ladder-dialog.is-success .ladder-result { color: #c6ff4d; }
-  .ladder-dialog.is-failure { border-color: #ff3f6c; box-shadow: 0 0 50px rgba(255, 63, 108, 0.5); }
-  .ladder-dialog.is-failure .ladder-result { color: #ff7a99; }
+.ladder-glyph { padding: 14px 0; font-size: 1.7rem; }
 
-  @media (max-width: 480px) {
-    .snake-captcha-board { width: calc(100% - 12px); }
-    .snake-rules { width: calc(100% - 20px); }
-  }
+.ladder-group { padding: 14px 6px; font-size: 1.3rem; letter-spacing: 0.12em; text-shadow: 0 0 8px currentColor; }
+
+.ladder-choice:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 0 14px rgba(255, 79, 216, 0.5); }
+
+.ladder-choice:focus-visible { outline: 2px solid #c6ff4d; outline-offset: 2px; }
+
+.ladder-result { min-height: 1.4em; margin: 14px 0 0; font-weight: 700; }
+
+.ladder-dialog.is-success { border-color: #c6ff4d; box-shadow: 0 0 50px rgba(198, 255, 77, 0.5); }
+
+.ladder-dialog.is-success .ladder-result { color: #c6ff4d; }
+
+.ladder-dialog.is-failure { border-color: #ff3f6c; box-shadow: 0 0 50px rgba(255, 63, 108, 0.5); }
+
+.ladder-dialog.is-failure .ladder-result { color: #ff7a99; }
+
+@media (max-width: 480px) {
+.snake-captcha-board { width: calc(100% - 12px); }
+
+.snake-rules { width: calc(100% - 20px); }
+}
 
 .captcha-frame { display: grid; gap: 14px; width: 100%; }
+
 .captcha-title { margin: 0; color: #ff9fe9; font: 700 0.8rem "Space Mono", monospace; letter-spacing: 0.08em; text-transform: uppercase; }
+
 .captcha-prompt { display: flex; align-items: center; gap: 10px; margin: 0; color: #f2e4ef; font: 0.82rem/1.6 "Space Mono", monospace; }
+
 .captcha-swatch { flex: none; width: 16px; height: 16px; border-radius: 50%; box-shadow: 0 0 10px currentColor; }
+
 .captcha-stage { display: grid; gap: 14px; padding: 14px; border: 1px solid rgba(255, 79, 216, 0.4); border-radius: 8px; background: rgba(10, 6, 16, 0.85); transition: border-color 160ms ease, box-shadow 160ms ease; }
+
 .captcha-stage:empty { min-height: 90px; }
+
 .captcha-stage.is-ok { border-color: #c6ff4d; box-shadow: 0 0 24px rgba(198, 255, 77, 0.4); }
+
 .captcha-stage.is-bad { border-color: #ff3f6c; box-shadow: 0 0 24px rgba(255, 63, 108, 0.4); }
+
 .captcha-image { width: 100%; height: auto; border-radius: 6px; border: 1px solid rgba(56, 242, 255, 0.35); }
+
 .captcha-form { display: flex; flex-wrap: wrap; gap: 8px; }
+
 .captcha-input { flex: 1 1 140px; min-width: 0; padding: 10px 12px; border: 1px solid rgba(198, 255, 77, 0.55); border-radius: 5px; background: #0b0613; color: #f6ffd8; font: 1.1rem "Space Mono", monospace; letter-spacing: 0.25em; text-transform: uppercase; }
+
 .captcha-button { padding: 10px 16px; border: 1px solid #c6ff4d; border-radius: 5px; background: rgba(198, 255, 77, 0.12); color: #e9ffb0; cursor: pointer; font: 0.74rem "Space Mono", monospace; letter-spacing: 0.1em; text-transform: uppercase; }
+
 .captcha-button.is-ghost { border-color: rgba(255, 79, 216, 0.5); background: transparent; color: #ffb3ef; }
+
 .captcha-button:disabled, .captcha-tile:disabled, .captcha-orb:disabled { cursor: default; }
+
 .captcha-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; width: min(100%, 340px); margin: 0 auto; }
+
 .captcha-tile { min-width: 0; aspect-ratio: 1; padding: 8px; border: 2px solid rgba(255, 79, 216, 0.3); border-radius: 6px; background: rgba(20, 12, 30, 0.9); cursor: pointer; }
+
 .captcha-tile svg { width: 100%; height: 100%; }
+
 .captcha-tile.is-selected { border-color: #c6ff4d; box-shadow: 0 0 14px rgba(198, 255, 77, 0.55), inset 0 0 14px rgba(198, 255, 77, 0.2); }
+
 .captcha-orbs { position: relative; width: 100%; aspect-ratio: 2 / 1; border-radius: 6px; background: radial-gradient(circle at 30% 30%, rgba(167, 139, 255, 0.12), transparent 60%), #0b0613; }
+
 .captcha-orb { position: absolute; aspect-ratio: 1; padding: 0; border: 2px solid var(--orb); border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff8, var(--orb) 70%); box-shadow: 0 0 14px var(--orb); cursor: pointer; transform: translate(-50%, -50%); }
+
 .captcha-orb.is-done { opacity: 0.28; box-shadow: none; }
+
 .level-29-shell .system-label,
 .level-29-shell .panel-kicker,
 .level-29-shell .progress-readout { color: #38f2ff; }
@@ -993,7 +1118,8 @@ body.part-three-theme {
 }
 
 @media (max-width: 480px) {
-  .memory-nonogram { grid-template-rows: 44px auto; }
-  .memory-column-clues,
+.memory-nonogram { grid-template-rows: 44px auto; }
+
+.memory-column-clues,
   .memory-row-clues { gap: 2px; }
 }

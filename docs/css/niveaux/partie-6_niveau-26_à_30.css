@@ -1,0 +1,289 @@
+/* ============================================================================
+ * PARTIE 6 // NIVEAUX 26 À 30
+ * Styles propres à ces niveaux, chargés après niveaux-communs.css (base partagée).
+ * ========================================================================== */
+
+/* STYLES PUZZLES // niveaux 21 a 30, repartis sur les parties 5 et 6. */
+
+@keyframes part-three-enter {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes neon-float {
+  50% { transform: translate3d(0, -6px, 0) rotate(2deg); }
+}
+
+@keyframes rhythm-flash {
+  0%, 100% { transform: scale(0.94); opacity: 0.65; }
+  40% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 46px rgba(198, 255, 77, 0.9); }
+}
+
+body.part-three-theme {
+  --cyan: #ff4fd8;
+  --violet: #a855f7;
+  --text: #fff0fc;
+  --muted: #c7a8c5;
+  --line: rgba(255, 79, 216, 0.4);
+  --panel: rgba(23, 6, 29, 0.9);
+  --success: #c6ff4d;
+  background:
+    radial-gradient(ellipse at 78% 18%, rgba(111, 22, 126, 0.28), transparent 42%),
+    radial-gradient(ellipse at 15% 80%, rgba(34, 95, 72, 0.15), transparent 45%),
+    #090611;
+  color: var(--text);
+}
+
+.part-three-theme .grid-overlay {
+  background-image:
+    linear-gradient(rgba(255, 79, 216, 0.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(198, 255, 77, 0.045) 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: radial-gradient(circle at center, black 8%, transparent 88%);
+}
+
+.part-three-theme .level-header,
+.part-three-theme .level-footer,
+.part-three-theme .panel-heading {
+  border-color: rgba(255, 79, 216, 0.32);
+}
+
+.part-three-theme .brand,
+.part-three-theme .eyebrow,
+.part-three-theme .panel-kicker,
+.part-three-theme .system-label,
+.part-three-theme .progress-readout {
+  color: #ff4fd8;
+}
+
+.part-three-theme .brand,
+.part-three-theme .brand::before {
+  border-color: #ff4fd8;
+}
+
+.part-three-theme .brand,
+.part-three-theme .level-intro h1 {
+  text-shadow: 0 0 18px rgba(255, 79, 216, 0.52);
+}
+
+.part-three-theme .level-meta strong {
+  border-color: rgba(198, 255, 77, 0.62);
+  color: #d6ff85;
+}
+
+.part-three-theme .level-description,
+.part-three-theme .puzzle-status {
+  color: #c7a8c5;
+}
+
+.part-three-theme .echo-dialogue {
+  margin: 20px 0 0;
+  padding-left: 14px;
+  border-left: 2px solid #a855f7;
+  color: #e0b3ee;
+  font-family: "Space Mono", monospace;
+  font-size: 0.88rem;
+  font-style: italic;
+  line-height: 1.7;
+  text-shadow: 0 0 12px rgba(168, 85, 247, 0.35);
+}
+
+.part-three-theme .system-transmission {
+  border-color: #c6ff4d;
+  box-shadow: inset 0 0 22px rgba(198, 255, 77, 0.08);
+}
+
+.part-three-theme .system-transmission p { color: #e3ffa1; }
+
+.part-three-theme .puzzle-panel {
+  border-color: rgba(255, 79, 216, 0.42);
+  box-shadow: 0 0 60px rgba(210, 45, 171, 0.16), inset 0 0 28px rgba(255, 79, 216, 0.06);
+}
+
+.part-three-theme .panel-kicker { color: #c6ff4d; }
+
+.part-three-theme .level-progress .level-square {
+  border-color: rgba(255, 79, 216, 0.48);
+  background: rgba(255, 79, 216, 0.1);
+}
+
+.part-three-theme .level-progress .level-square.current {
+  border-color: #ff4fd8;
+  background: rgba(255, 79, 216, 0.38);
+  box-shadow: 0 0 15px rgba(255, 79, 216, 0.72);
+}
+
+.part-three-theme .level-progress .level-square.completed {
+  border-color: #c6ff4d;
+  background: #c6ff4d;
+  box-shadow: 0 0 14px rgba(198, 255, 77, 0.82);
+}
+
+.part-three-theme .next-level-button {
+  border-color: #c6ff4d;
+  background: rgba(198, 255, 77, 0.12);
+  color: #d6ff85;
+}
+
+.part-three-theme .next-level-button:hover,
+.part-three-theme .next-level-button:focus-visible {
+  background: rgba(198, 255, 77, 0.24);
+  box-shadow: 0 0 18px rgba(198, 255, 77, 0.38);
+}
+
+.part-three-theme .level-shell {
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(24px, 5vw, 72px);
+  padding-bottom: 112px;
+}
+
+.part-three-theme .level-header,
+.part-three-theme .level-intro,
+.part-three-theme .puzzle-panel,
+.part-three-theme .level-footer {
+  animation: part-three-enter 0.65s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.part-three-theme .level-intro { animation-delay: 0.08s; }
+
+.part-three-theme .puzzle-panel { animation-delay: 0.16s; }
+
+.part-three-theme .level-footer { animation-delay: 0.24s; }
+
+.neon-board {
+  width: min(100% - 32px, 470px);
+  margin: 26px auto;
+  padding: 18px;
+  border: 1px solid rgba(255, 79, 216, 0.3);
+  border-radius: 12px;
+  background: radial-gradient(ellipse at center, rgba(119, 23, 111, 0.16), rgba(4, 4, 13, 0.72));
+  box-shadow: inset 0 0 26px rgba(255, 79, 216, 0.08), 0 0 22px rgba(255, 79, 216, 0.08);
+}
+
+/* Niveau 21 : la séquence doit être reproduite en ordre inverse. */
+
+.memory-board {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(90px, 132px));
+  justify-content: center;
+  gap: 12px;
+  min-height: 308px;
+  align-content: center;
+}
+
+.neon-board.is-solved {
+  border-color: rgba(198, 255, 77, 0.72);
+  box-shadow: 0 0 28px rgba(198, 255, 77, 0.2), inset 0 0 26px rgba(198, 255, 77, 0.08);
+}
+
+.part-three-theme .level-footer { border-color: rgba(255, 79, 216, 0.25); }
+
+@media (max-width: 760px) {
+.part-three-theme .level-shell {
+    grid-template-columns: minmax(0, 1fr);
+    width: min(100% - 28px, 560px);
+    gap: 26px;
+    padding: 42px 0 100px;
+  }
+
+.part-three-theme .level-intro { max-width: none; }
+
+.part-three-theme .system-transmission { margin-top: 22px; }
+}
+
+@media (max-width: 480px) {
+.part-three-theme .level-header {
+    width: calc(100% - 28px);
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+.part-three-theme .level-meta {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 0.52rem;
+  }
+
+.part-three-theme .level-progress { max-width: 84px; gap: 4px; }
+
+.part-three-theme .level-progress .level-square { width: 8px; height: 8px; }
+
+.memory-board { min-height: 264px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+.part-three-theme .level-header,
+.part-three-theme .level-intro,
+.part-three-theme .puzzle-panel,
+.part-three-theme .level-footer {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.snake-captcha-board {
+    width: min(100% - 20px, 600px);
+    padding: clamp(8px, 2vw, 16px);
+  }
+
+.snake-rules {
+    width: min(100% - 32px, 600px);
+    margin: 0 auto 20px;
+    padding: 13px 16px;
+    border-left: 2px solid #c6ff4d;
+    background: rgba(198, 255, 77, 0.055);
+    color: #e4d1e1;
+    font: 0.7rem/1.7 "Space Mono", monospace;
+  }
+
+@keyframes ladder-roll {
+    0% { transform: rotate(0) scale(1); }
+    40% { transform: rotate(360deg) scale(1.25); }
+    100% { transform: rotate(720deg) scale(1); }
+  }
+
+@keyframes ladder-fade { from { opacity: 0; } }
+
+@keyframes ladder-pop { from { opacity: 0; transform: translateY(16px) scale(0.94); } }
+
+@media (max-width: 480px) {
+.snake-captcha-board { width: calc(100% - 12px); }
+
+.snake-rules { width: calc(100% - 20px); }
+}
+
+.level-29-shell .system-label,
+.level-29-shell .panel-kicker,
+.level-29-shell .progress-readout { color: #38f2ff; }
+
+.level-29-shell .system-transmission { border-color: #38f2ff; }
+
+.level-29-shell .memory-rules {
+  width: min(100% - 32px, 560px);
+  margin: 0 auto 22px;
+  padding: 13px 16px;
+  border-left: 2px solid #38f2ff;
+  background: rgba(56, 242, 255, 0.055);
+  color: #d7e6ed;
+  font: 0.7rem/1.7 "Space Mono", monospace;
+}
+
+.level-29-shell .memory-board {
+  display: block;
+  width: 100%;
+  padding: clamp(10px, 1.2vw, 16px);
+  border-color: rgba(56, 242, 255, 0.42);
+  background:
+    radial-gradient(circle at 52% 48%, rgba(56, 242, 255, 0.09), transparent 60%),
+    rgba(8, 13, 24, 0.88);
+}
+
+.memory-grid {
+  grid-area: grid;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+  gap: clamp(3px, 0.8vw, 6px);
+  aspect-ratio: 1;
+}

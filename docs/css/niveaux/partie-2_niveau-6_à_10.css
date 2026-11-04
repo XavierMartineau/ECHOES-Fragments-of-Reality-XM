@@ -1,0 +1,1035 @@
+/* ============================================================================
+ * PARTIE 2 // NIVEAUX 6 À 10
+ * Styles propres à ces niveaux, chargés après niveaux-communs.css (base partagée).
+ * ========================================================================== */
+
+.pattern-board {
+  min-height: 390px;
+}
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 7 // PORTE LUMINEUSE : porte, anneaux, noyau et symboles de la séquence (.gate-*).
+ * ------------------------------------------------------------------------- */
+
+.gate-board {
+  min-height: 590px;
+}
+
+.gate-door {
+  position: relative;
+  display: grid;
+  min-height: 430px;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(121, 247, 255, 0.16),
+      transparent 35%
+    ),
+    linear-gradient(135deg, rgba(4, 18, 34, 0.92), rgba(20, 7, 35, 0.78));
+}
+
+.gate-ring {
+  position: absolute;
+  border: 1px solid rgba(121, 247, 255, 0.48);
+  border-radius: 50%;
+  box-shadow:
+    0 0 24px rgba(121, 247, 255, 0.24),
+    inset 0 0 18px rgba(121, 247, 255, 0.12);
+  transition: 0.6s ease;
+}
+
+.gate-ring-outer {
+  width: 350px;
+  aspect-ratio: 1;
+  transform: rotate(18deg) scaleY(0.72);
+}
+
+.gate-ring-inner {
+  width: 255px;
+  aspect-ratio: 1;
+  border-color: rgba(179, 108, 255, 0.55);
+  transform: rotate(-28deg) scaleY(0.72);
+}
+
+.gate-core {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 124px;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid var(--cyan);
+  border-radius: 50%;
+  background: rgba(4, 12, 25, 0.9);
+  box-shadow:
+    0 0 28px rgba(121, 247, 255, 0.35),
+    inset 0 0 18px rgba(121, 247, 255, 0.14);
+  color: var(--cyan);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.65rem;
+  letter-spacing: 0.08rem;
+}
+
+.gate-symbols {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  gap: 30px;
+  transform: translateY(155px);
+}
+
+.gate-symbol {
+  display: grid;
+  width: 78px;
+  height: 78px;
+  place-items: center;
+  border: 1px solid currentColor;
+  background: rgba(5, 15, 30, 0.86);
+  color: var(--cyan);
+  cursor: pointer;
+  font-size: 2rem;
+  transition: 0.2s ease;
+}
+
+.gate-symbol:hover,
+.gate-symbol:focus-visible,
+.gate-symbol.is-preview {
+  outline: none;
+  box-shadow: 0 0 24px currentColor;
+  transform: translateY(-4px);
+}
+
+.gate-symbol.is-preview {
+  background: currentColor;
+  color: #06101d;
+}
+
+.gate-symbol.is-correct {
+  border-color: var(--success);
+  color: var(--success);
+  box-shadow: 0 0 22px rgba(128, 255, 207, 0.68);
+}
+
+.gate-symbol.is-error {
+  border-color: var(--danger);
+  color: #ff9bb0;
+  animation: puzzle-shake 0.25s linear 2;
+}
+
+.gate-symbol-triangle {
+  color: #ff70c2;
+}
+
+.gate-symbol-circle {
+  color: #ffd166;
+}
+
+.gate-sequence-status {
+  margin: 0;
+  padding: 16px 22px;
+  border-top: 1px solid rgba(121, 247, 255, 0.16);
+  background: rgba(3, 10, 22, 0.72);
+  color: var(--muted);
+  font-family: "Space Mono", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.06rem;
+  text-align: center;
+}
+
+.gate-door.is-open .gate-ring-outer {
+  transform: rotate(198deg) scaleY(0.72);
+  border-color: var(--success);
+  box-shadow: 0 0 34px rgba(128, 255, 207, 0.7);
+}
+
+.gate-door.is-open .gate-ring-inner {
+  transform: rotate(-208deg) scaleY(0.72);
+  border-color: var(--success);
+}
+
+.level-shell:has(.pattern-board) .level-intro h1 {
+  font-size: clamp(1.7rem, 3.1vw, 3.1rem);
+}
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 6 // OBSERVATION DES MOTIFS : mur de symboles à comparer (.pattern-*).
+ * ------------------------------------------------------------------------- */
+
+.pattern-board .panel-heading h2 {
+  font-size: clamp(1rem, 1.8vw, 1.45rem);
+}
+
+.pattern-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(48px, 1fr));
+  gap: 14px;
+  padding: 34px 30px;
+}
+
+.pattern-symbol {
+  display: grid;
+  min-width: 48px;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid rgba(121, 247, 255, 0.42);
+  background: rgba(4, 18, 34, 0.7);
+  color: var(--cyan);
+  cursor: pointer;
+  font-size: 1.45rem;
+  transition: 0.2s ease;
+}
+
+.pattern-symbol:not(.pattern-target) {
+  border-color: rgba(255, 209, 102, 0.48);
+  color: #ffd166;
+  text-shadow: 0 0 8px rgba(255, 209, 102, 0.42);
+}
+
+.pattern-symbol:nth-child(4n + 1) {
+  color: var(--cyan);
+  border-color: rgba(121, 247, 255, 0.55);
+}
+
+.pattern-symbol:nth-child(4n + 2) {
+  color: #ff70c2;
+  border-color: rgba(255, 112, 194, 0.55);
+}
+
+.pattern-symbol:nth-child(4n + 3) {
+  color: var(--violet);
+  border-color: rgba(179, 108, 255, 0.55);
+}
+
+.pattern-symbol:nth-child(4n) {
+  color: #ffd166;
+  border-color: rgba(255, 209, 102, 0.55);
+}
+
+.pattern-symbol.pattern-target {
+  border-color: rgba(255, 209, 102, 0.62);
+  color: #ffd166;
+  font-size: 1.7rem;
+  text-shadow: 0 0 12px rgba(255, 209, 102, 0.7);
+}
+
+.pattern-symbol:hover,
+.pattern-symbol:focus-visible {
+  border-color: #fff;
+  box-shadow: 0 0 20px currentColor;
+  outline: none;
+  transform: translateY(-3px);
+}
+
+.pattern-symbol.is-correct {
+  border-color: var(--success);
+  background: rgba(128, 255, 207, 0.18);
+  color: var(--success);
+  box-shadow: 0 0 22px rgba(128, 255, 207, 0.7);
+}
+
+.pattern-symbol.pattern-target.is-correct {
+  border-color: var(--success);
+  background: rgba(128, 255, 207, 0.18);
+  color: var(--success);
+  box-shadow: 0 0 24px rgba(128, 255, 207, 0.78);
+}
+
+.pattern-symbol,
+.pattern-symbol.pattern-target,
+.pattern-symbol.pattern-target.is-correct {
+  border-color: var(--success);
+  background: rgba(128, 255, 207, 0.18);
+  color: var(--success);
+  font-size: 1.45rem;
+  text-shadow: 0 0 10px rgba(128, 255, 207, 0.58);
+  box-shadow: 0 0 18px rgba(128, 255, 207, 0.48);
+}
+
+.pattern-symbol.is-correct,
+.pattern-symbol.pattern-target.is-correct {
+  background: rgba(128, 255, 207, 0.18);
+  box-shadow: 0 0 22px rgba(128, 255, 207, 0.7);
+}
+
+.pattern-symbol:not(.is-correct):not(.is-error),
+.pattern-symbol.pattern-target:not(.is-correct):not(.is-error) {
+  border-color: rgba(121, 247, 255, 0.55);
+  background: rgba(4, 38, 72, 0.78);
+  color: var(--cyan);
+  font-size: 1.45rem;
+  text-shadow: 0 0 10px rgba(121, 247, 255, 0.58);
+  box-shadow: 0 0 14px rgba(121, 247, 255, 0.28);
+}
+
+.pattern-symbol.is-error {
+  border-color: var(--danger);
+  color: #ff9bb0;
+  animation: puzzle-shake 0.25s linear 2;
+}
+
+.pattern-grid.is-solved {
+  box-shadow: inset 0 0 36px rgba(128, 255, 207, 0.12);
+}
+
+.sequence-replay-button {
+  padding: 10px 14px;
+  border: 1px solid var(--violet);
+  background: rgba(179, 108, 255, 0.1);
+  color: var(--violet);
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.58rem;
+  letter-spacing: 0.08rem;
+}
+
+.sequence-replay-button:hover,
+.sequence-replay-button:focus-visible {
+  background: rgba(179, 108, 255, 0.24);
+  box-shadow: 0 0 18px rgba(179, 108, 255, 0.34);
+  outline: none;
+}
+
+.sequence-replay-button:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 8 // TRI DE COULEURS : symboles à placer sur leur cible (.advanced-sort-*, .color-*).
+ * ------------------------------------------------------------------------- */
+
+.advanced-sort-board .color-sort-grid {
+  display: grid;
+  gap: 26px;
+  min-height: 390px;
+  padding: 38px 28px;
+  align-content: center;
+  background:
+    radial-gradient(circle at center, rgba(20, 63, 92, 0.25), transparent 62%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    );
+}
+
+.color-sort-targets,
+.color-sort-pieces {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(40px, 1fr));
+  gap: 10px;
+}
+
+.color-sort-targets::before,
+.color-sort-pieces::before {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.54rem;
+  letter-spacing: 0.1rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.color-sort-targets::before {
+  content: "COULEURS CIBLES";
+}
+
+.color-sort-pieces::before {
+  content: "SYMBOLES À CLASSER";
+}
+
+html[lang="en"] .color-sort-targets::before {
+  content: "TARGET COLORS";
+}
+
+html[lang="en"] .color-sort-pieces::before {
+  content: "SYMBOLS TO SORT";
+}
+
+.color-target,
+.color-symbol {
+  min-height: 58px;
+  border: 1px solid currentColor;
+  background: rgba(5, 7, 17, 0.72);
+  color: var(--cyan);
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.52rem;
+  letter-spacing: 0.04rem;
+  transition: 0.2s ease;
+}
+
+.color-symbol {
+  border-style: solid;
+  box-shadow: 0 0 14px currentColor;
+  cursor: grab;
+}
+
+.color-target:hover,
+.color-target:focus-visible,
+.color-symbol:hover,
+.color-symbol.is-selected {
+  transform: translateY(-4px);
+  outline: none;
+  box-shadow: 0 0 22px currentColor;
+}
+
+.color-target.is-filled {
+  border-color: var(--success);
+  background: rgba(128, 255, 207, 0.16);
+  color: var(--success);
+}
+
+.color-symbol:disabled {
+  cursor: default;
+  opacity: 0.28;
+}
+
+.color-cyan {
+  color: var(--cyan);
+}
+
+.color-violet {
+  color: var(--violet);
+}
+
+.color-green {
+  color: var(--success);
+}
+
+.color-pink {
+  color: #ff70c2;
+}
+
+.color-yellow {
+  color: #ffd166;
+}
+
+.color-blue {
+  color: #48b0ff;
+}
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 9 // SÉQUENCE STELLAIRE : champ d'étoiles et constellations à reproduire (.constellation-*, .star).
+ * ------------------------------------------------------------------------- */
+
+.constellation-field {
+  position: relative;
+  min-height: 390px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at center, rgba(20, 63, 92, 0.25), transparent 62%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    );
+}
+
+.constellation-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.constellation-lines polyline {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 0.8;
+  filter: drop-shadow(0 0 5px var(--cyan));
+  transition: points 0.2s ease;
+}
+
+.constellation-field[data-round="2"] .constellation-lines polyline {
+  stroke: var(--violet);
+  filter: drop-shadow(0 0 5px var(--violet));
+}
+
+.constellation-field[data-round="3"] .constellation-lines polyline {
+  stroke: var(--success);
+  filter: drop-shadow(0 0 5px var(--success));
+}
+
+.constellation-sequence-display {
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+  left: 16px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border: 1px solid rgba(121, 247, 255, 0.28);
+  background: rgba(5, 7, 17, 0.82);
+  color: var(--muted);
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.54rem;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+
+.constellation-sequence-display strong {
+  color: var(--cyan);
+  font-size: 0.72rem;
+  letter-spacing: 0.14rem;
+}
+
+.constellation-sequence-display .sequence-number {
+  display: inline-block;
+  min-width: 2.2em;
+  padding: 4px 5px;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  text-align: center;
+  text-shadow: 0 0 8px currentColor;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.constellation-sequence-display .sequence-number.is-selected {
+  background: currentColor;
+  box-shadow:
+    0 0 16px currentColor,
+    inset 0 0 8px rgba(255, 255, 255, 0.45);
+  color: #050711;
+  text-shadow: none;
+  transform: translateY(-3px) scale(1.08);
+}
+
+.constellation-sequence-display .sequence-separator {
+  display: inline-block;
+  margin: 0 5px;
+  color: #ffffff;
+}
+
+.constellation-sequence-display .star-sequence-1 {
+  color: #79f7ff;
+}
+
+.constellation-sequence-display .star-sequence-2 {
+  color: #b36cff;
+}
+
+.constellation-sequence-display .star-sequence-3 {
+  color: #ff70c2;
+}
+
+.constellation-sequence-display .star-sequence-4 {
+  color: #ffd166;
+}
+
+.constellation-sequence-display .star-sequence-5 {
+  color: #80ffcf;
+}
+
+.constellation-sequence-display .star-sequence-6 {
+  color: #48b0ff;
+}
+
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-1 {
+  background: #79f7ff;
+  color: #050711;
+}
+
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-2 {
+  background: #b36cff;
+  color: #050711;
+}
+
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-3 {
+  background: #ff70c2;
+  color: #050711;
+}
+
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-4 {
+  background: #ffd166;
+  color: #050711;
+}
+
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-5 {
+  background: #80ffcf;
+  color: #050711;
+}
+
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-6 {
+  background: #48b0ff;
+  color: #050711;
+}
+
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-1,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-2,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-3,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-4,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-5,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-6 {
+  border-color: #ffffff;
+  background: #050711;
+  color: #ffffff;
+  box-shadow:
+    0 0 16px rgba(255, 255, 255, 0.9),
+    inset 0 0 8px rgba(255, 255, 255, 0.2);
+  text-shadow: 0 0 8px #ffffff;
+}
+
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-1,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-2,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-3,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-4,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-5,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-6 {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  color: #050711;
+  filter: blur(2.8px);
+  opacity: 0.16;
+  text-shadow: 0 0 8px #050711;
+  transform: none;
+}
+
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-1,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-2,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-3,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-4,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-5,
+.constellation-sequence-display .sequence-number.is-selected.star-sequence-6 {
+  border-color: #ffffff;
+  background: transparent;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.82);
+  color: #ffffff;
+  filter: none;
+  opacity: 1;
+  text-shadow: none;
+  transform: none;
+}
+
+.constellation-sequence-display .sequence-number.is-selected .sequence-label {
+  display: inline-block;
+  color: #050711;
+  filter: blur(2.8px);
+  opacity: 0.16;
+  text-shadow: 0 0 8px #050711;
+}
+
+.constellation-field[data-round="2"] .constellation-sequence-display strong {
+  color: var(--violet);
+}
+
+.constellation-field[data-round="3"] .constellation-sequence-display strong {
+  color: var(--success);
+}
+
+.constellation-space {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.flying-star {
+  position: absolute;
+  display: block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 10px 2px currentColor;
+  color: var(--cyan);
+  opacity: 0.7;
+  animation: constellation-flight 7s linear infinite;
+}
+
+.flying-star:nth-child(2n) {
+  width: 2px;
+  height: 2px;
+  color: var(--violet);
+  animation-duration: 9s;
+}
+
+.flying-star:nth-child(3n) {
+  color: #ff70c2;
+  animation-duration: 11s;
+}
+
+.flying-star-1 {
+  top: 12%;
+  left: 8%;
+  animation-delay: -1s;
+}
+
+.flying-star-2 {
+  top: 34%;
+  left: 31%;
+  animation-delay: -5s;
+}
+
+.flying-star-3 {
+  top: 18%;
+  left: 63%;
+  animation-delay: -3s;
+}
+
+.flying-star-4 {
+  top: 52%;
+  left: 9%;
+  animation-delay: -7s;
+}
+
+.flying-star-5 {
+  top: 76%;
+  left: 38%;
+  animation-delay: -2s;
+}
+
+.flying-star-6 {
+  top: 68%;
+  left: 70%;
+  animation-delay: -6s;
+}
+
+.flying-star-7 {
+  top: 42%;
+  left: 88%;
+  animation-delay: -4s;
+}
+
+.flying-star-8 {
+  top: 84%;
+  left: 84%;
+  animation-delay: -8s;
+}
+
+.flying-star-9 {
+  top: 8%;
+  left: 92%;
+  animation-delay: -10s;
+}
+
+.flying-star-10 {
+  top: 61%;
+  left: 52%;
+  animation-delay: -3.5s;
+}
+
+.flying-star-11 {
+  top: 29%;
+  left: 4%;
+  animation-delay: -6.5s;
+}
+
+.flying-star-12 {
+  top: 90%;
+  left: 18%;
+  animation-delay: -9s;
+}
+
+.constellation-star {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.65rem;
+  transform: translate(-50%, -50%);
+  transition: 0.2s ease;
+  filter: drop-shadow(0 0 9px var(--star-glow, rgba(121, 247, 255, 0.38)));
+}
+
+.constellation-star::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  background: var(--star-background, rgba(5, 15, 30, 0.88));
+  clip-path: polygon(
+    50% 0,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 100%,
+    50% 73%,
+    21% 100%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  content: "";
+  transition: background 0.2s ease;
+}
+
+.constellation-star span {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+  line-height: 1;
+  text-shadow: 0 0 8px rgba(121, 247, 255, 0.9);
+}
+
+.constellation-star:hover,
+.constellation-star:focus-visible,
+.constellation-star.is-active,
+.constellation-star.is-confirmed {
+  background: transparent;
+  color: var(--success);
+  outline: none;
+  filter: drop-shadow(0 0 15px var(--star-glow, rgba(128, 255, 207, 0.68)));
+}
+
+.constellation-star:hover::before,
+.constellation-star:focus-visible::before,
+.constellation-star.is-active::before,
+.constellation-star.is-confirmed::before {
+  background: var(--star-active-background, rgba(128, 255, 207, 0.3));
+}
+
+.star-1 {
+  top: 28%;
+  left: 18%;
+  --star-color: #79f7ff;
+  --star-background: rgba(25, 170, 205, 0.35);
+  --star-active-background: rgba(121, 247, 255, 0.45);
+  --star-glow: rgba(121, 247, 255, 0.62);
+}
+
+.star-2 {
+  top: 18%;
+  left: 42%;
+  --star-color: #b36cff;
+  --star-background: rgba(132, 61, 210, 0.38);
+  --star-active-background: rgba(179, 108, 255, 0.48);
+  --star-glow: rgba(179, 108, 255, 0.66);
+}
+
+.star-3 {
+  top: 26%;
+  left: 76%;
+  --star-color: #ff70c2;
+  --star-background: rgba(210, 66, 145, 0.35);
+  --star-active-background: rgba(255, 112, 194, 0.46);
+  --star-glow: rgba(255, 112, 194, 0.64);
+}
+
+.star-4 {
+  top: 70%;
+  left: 24%;
+  --star-color: #ffd166;
+  --star-background: rgba(201, 145, 39, 0.35);
+  --star-active-background: rgba(255, 209, 102, 0.46);
+  --star-glow: rgba(255, 209, 102, 0.62);
+}
+
+.star-5 {
+  top: 78%;
+  left: 57%;
+  --star-color: #80ffcf;
+  --star-background: rgba(44, 180, 137, 0.35);
+  --star-active-background: rgba(128, 255, 207, 0.46);
+  --star-glow: rgba(128, 255, 207, 0.64);
+}
+
+.star-6 {
+  top: 62%;
+  left: 82%;
+  --star-color: #48b0ff;
+  --star-background: rgba(37, 125, 207, 0.36);
+  --star-active-background: rgba(72, 176, 255, 0.46);
+  --star-glow: rgba(72, 176, 255, 0.64);
+}
+
+/* ---------------------------------------------------------------------------
+ * NIVEAU 10 // SÉQUENCE DE COULEURS : mémoriser puis reproduire les couleurs (.color-sequence-*).
+ * ------------------------------------------------------------------------- */
+
+.color-sequence-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(70px, 1fr));
+  gap: 18px;
+  min-height: 390px;
+  padding: 48px 34px;
+  align-content: center;
+  background:
+    radial-gradient(circle at center, rgba(20, 63, 92, 0.25), transparent 62%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 39px,
+      rgba(121, 247, 255, 0.05) 40px
+    );
+}
+
+.color-sequence-option {
+  min-height: 112px;
+  border: 2px solid currentColor;
+  border-radius: 8px;
+  background: var(--sequence-color);
+  color: var(--sequence-color);
+  cursor: pointer;
+  font-family: var(--font-display, "Orbitron", sans-serif);
+  font-size: 0.72rem;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 0 22px var(--sequence-glow);
+}
+
+.color-sequence-option span {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  margin: auto;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.76);
+  border-radius: 50%;
+  background: rgba(5, 7, 17, 0.72);
+  color: #ffffff;
+}
+
+.color-sequence-option:hover,
+.color-sequence-option:focus-visible,
+.color-sequence-option.is-preview {
+  transform: translateY(-6px) scale(1.04);
+  outline: none;
+  filter: brightness(1.35);
+  box-shadow: 0 0 38px var(--sequence-glow);
+}
+
+.color-sequence-option.is-picked {
+  animation: color-sequence-settle 0.45s ease both;
+  filter: brightness(1.08);
+}
+
+.color-sequence-option.is-error {
+  border-color: var(--danger);
+  animation: puzzle-shake 0.25s linear 2;
+}
+
+.color-sequence-cyan {
+  --sequence-color: #079db7;
+  --sequence-glow: rgba(121, 247, 255, 0.68);
+}
+
+.color-sequence-pink {
+  --sequence-color: #c33c85;
+  --sequence-glow: rgba(255, 112, 194, 0.68);
+}
+
+.color-sequence-yellow {
+  --sequence-color: #c79424;
+  --sequence-glow: rgba(255, 209, 102, 0.68);
+}
+
+.color-sequence-violet {
+  --sequence-color: #7540bd;
+  --sequence-glow: rgba(179, 108, 255, 0.68);
+}
+
+.color-sequence-blue {
+  --sequence-color: #267fca;
+  --sequence-glow: rgba(72, 176, 255, 0.68);
+}
+
+@media (max-width: 560px) {
+.color-sequence-grid {
+    grid-template-columns: repeat(3, minmax(70px, 1fr));
+    padding-inline: 18px;
+  }
+
+.constellation-star {
+    width: 48px;
+    height: 48px;
+  }
+
+.color-sort-targets,
+  .color-sort-pieces {
+    grid-template-columns: repeat(3, minmax(54px, 1fr));
+  }
+
+.advanced-sort-board .color-sort-grid {
+    padding-inline: 16px;
+  }
+}
+
+.resonance-card.is-open {
+  transform: rotateY(180deg);
+}
+
+@media (max-width: 560px) {
+.pattern-grid {
+    grid-template-columns: repeat(4, minmax(48px, 1fr));
+    gap: 10px;
+    padding: 24px 12px;
+  }
+
+.gate-board {
+    min-height: 500px;
+  }
+
+.gate-door {
+    min-height: 350px;
+  }
+
+.gate-ring-outer {
+    width: 250px;
+  }
+
+.gate-ring-inner {
+    width: 180px;
+  }
+
+.gate-symbols {
+    gap: 16px;
+    transform: translateY(126px);
+  }
+
+.gate-symbol {
+    width: 62px;
+    height: 62px;
+    font-size: 1.6rem;
+  }
+
+.pattern-symbol {
+    min-width: 42px;
+    font-size: 1.15rem;
+  }
+}

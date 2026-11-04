@@ -218,7 +218,7 @@ compatibles avec le système de sauvegarde existant.
 - Les scripts des puzzles sont regroupés par lots dans `docs/js/niveaux/` ; les labyrinthes
   procéduraux 32–40 sont partagés par `partie-4_niveaux-proceduraux.js`.
 - Les styles de `docs/css/niveaux/` sont nommés selon leur portée :
-  `niveaux-communs.css`, `partie-3-4_niveau-11_à_20.css`, `partie-5-6_niveau-21_à_30.css`,
+  `niveaux-communs.css`, un fichier par partie (`partie-1_niveau-1_à_5.css` … `partie-6_niveau-26_à_30.css`),
   `partie-bonus_niveau-31_à_40.css` et `partie-bonus_niveau-41_à_60.css`.
 - Les anciennes feuilles de redesign ont été fusionnées dans la feuille commune et les styles
   identiques des bonus 41–50 et 51–60 ont été regroupés.
