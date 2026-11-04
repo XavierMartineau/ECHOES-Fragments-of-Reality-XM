@@ -1616,3 +1616,135 @@ html body.index-page .strobe-notice {
     display: none;
   }
 }
+
+/* Animations des boutons de l'accueil : langue FR/EN, bouton principal, interrupteur d'avertissement */
+@keyframes home-btn-in {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes home-btn-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes home-btn-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes home-btn-pulse {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(var(--home-cyan), 0.25)); }
+  50% { filter: drop-shadow(0 0 14px rgba(var(--home-cyan), 0.6)); }
+}
+
+html body.index-page .home-topbar .lang-btn {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  animation: home-btn-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  transition: color 0.25s ease, background-color 0.25s ease, transform 0.2s ease, filter 0.25s ease;
+}
+
+html body.index-page .home-topbar .lang-btn:nth-child(2) { animation-delay: 0.12s; }
+
+html body.index-page .home-topbar .lang-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+  transform: translateX(-130%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+html body.index-page .home-topbar .lang-btn:hover,
+html body.index-page .home-topbar .lang-btn:focus-visible {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 8px rgba(var(--home-cyan), 0.55));
+  outline: none;
+}
+
+html body.index-page .home-topbar .lang-btn:hover::after,
+html body.index-page .home-topbar .lang-btn:focus-visible::after {
+  transform: translateX(130%);
+}
+
+html body.index-page .home-topbar .lang-btn:active {
+  transform: translateY(0) scale(0.95);
+}
+
+html body.index-page .home-topbar .lang-btn.active {
+  background-size: 200% 100%;
+  background-image: linear-gradient(110deg, rgb(var(--home-cyan)), rgb(var(--home-violet)), rgb(var(--home-cyan)));
+  animation: home-btn-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both, home-btn-flow 5s linear infinite;
+}
+
+html body.index-page .home-topbar .lang-btn.active:nth-child(2) {
+  animation-delay: 0.12s, 0s;
+}
+
+html body.index-page .actions .primary-btn {
+  animation: home-btn-rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.35s both, home-btn-pulse 3.6s ease-in-out 1.4s infinite;
+  transition: transform 0.2s ease, border-color 0.25s ease;
+}
+
+html body.index-page .actions .primary-btn:hover,
+html body.index-page .actions .primary-btn:focus-visible {
+  animation: home-btn-rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.35s both;
+}
+
+html body.index-page .actions .primary-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+html body.index-page .strobe-notice button {
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+html body.index-page .strobe-notice button:hover,
+html body.index-page .strobe-notice button:focus-visible {
+  transform: translateY(-2px);
+}
+
+html body.index-page .strobe-notice button:active {
+  transform: scale(0.97);
+}
+
+/* Interrupteur : la pastille glisse au lieu de sauter */
+html body.index-page .strobe-notice button::before,
+html body.index-page .strobe-notice button[aria-pressed="true"]::before {
+  background: rgba(10, 3, 10, 0.85);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+html body.index-page .strobe-notice button[aria-pressed="true"]::before {
+  background: #3dff9a;
+}
+
+html body.index-page .strobe-notice button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 18px;
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: #ffe6eb;
+  transition: transform 0.3s cubic-bezier(0.3, 1.4, 0.5, 1), background-color 0.3s ease;
+  pointer-events: none;
+}
+
+html body.index-page .strobe-notice button[aria-pressed="true"]::after {
+  background: #0b1a14;
+  transform: translateX(16px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body.index-page .home-topbar .lang-btn,
+  html body.index-page .home-topbar .lang-btn.active,
+  html body.index-page .actions .primary-btn {
+    animation: none;
+  }
+}
