@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="icon" type="image/svg+xml" href="../../assets/svg/identite/echoes-favicon.svg?v=2" />
-    <title>ECHOES - BOSS 06 // LE TISSEUR D'ORIGINE</title>
+    <title>ECHOES - BOSS 06 // LE RÉGULATEUR</title>
     <script src="../../../lag-fix/fps-boost.js"></script>
     <link rel="stylesheet" href="../../css/niveaux/niveaux-communs.css?v=2" />
     <link rel="stylesheet" href="../../css/niveaux/partie-6_niveau-26_à_30.css?v=1" />
     <link rel="stylesheet" href="../../css/base/responsive.css?v=m1" />
     <link rel="stylesheet" href="../../css/base/fonts.css" />
-    <link rel="stylesheet" href="../../css/bosses/boss-06.css?v=2" />
+    <link rel="stylesheet" href="../../css/bosses/boss-06.css?v=3" />
   </head>
   <body
     class="boss06-page"
@@ -27,83 +27,108 @@
       <div class="level-meta">
         <span id="bossPart">PARTIE 6 // ORIGINE</span>
         <div class="level-progress" id="levelProgress" aria-label="Progression de la Partie 6"></div>
-        <strong id="bossLevel">CLÉ 06 // LABYRINTHE ORIGINEL</strong>
+        <strong id="bossLevel">BOSS 06 // LE RÉGULATEUR</strong>
       </div>
     </header>
-    <aside class="key-redesign-hud boss06-key-hud" id="keyHud" aria-label="Progression des clés">
-      <span class="key-redesign-hud-label">RÉSONANCES</span>
-      <strong class="key-hud-value" id="keyCount">6 / 6</strong>
-      <span class="key-redesign-hud-line" aria-hidden="true"></span>
-      <span class="key-redesign-hud-note" id="keyHudNote">CLÉ 06 // À RÉCUPÉRER</span>
-      <span class="key-redesign-hud-slot" id="keyHudSlot" aria-hidden="true">
+    <aside class="boss06-key-hud" id="keyHud" aria-label="Progression des clés">
+      <span id="keyHudLabel">RÉSONANCES</span>
+      <strong id="keyCount">6 / 6</strong>
+      <span id="keyHudNote">CLÉ 06 // À RÉCUPÉRER</span>
+      <span class="boss06-key-slot" id="keyHudSlot" aria-hidden="true">
         <img src="../../assets/svg/cles/key-06-usb.svg" alt="" />
-        <b>CLÉ_06</b>
+        <b>CLÉ 06</b>
       </span>
     </aside>
     <main class="level-shell boss06-shell">
       <section class="level-intro" aria-labelledby="bossTitle">
-        <p class="eyebrow" id="bossKicker">BOSS // PROTOCOLE DU LABYRINTHE ORIGINEL</p>
-        <h1 id="bossTitle">Le Tisseur d'origine</h1>
+        <p class="eyebrow" id="bossKicker">BOSS // PROTOCOLE DE SURCHARGE</p>
+        <h1 id="bossTitle">Le Régulateur du noyau</h1>
         <p class="level-description" id="bossDescription">
-          Le gardien final a dissimulé un itinéraire unique dans quatre labyrinthes grandissants. Atteins les checkpoints de coordonnées dans l'ordre, évite les cases corrompues et rejoins chaque sortie avant la fin du budget.
+          Charge le flux, maîtrise la chaleur et bloque les impulsions du Régulateur. Trois phases exigent une gestion précise des ressources.
         </p>
         <div class="system-transmission" aria-live="polite">
-          <span class="system-label">ECHO://PROTOCOLE_06</span>
-          <p id="systemMessage">SYSTÈME EN ATTENTE // QUATRE LABYRINTHES</p>
+          <span class="system-label">ECHO://RÉGULATEUR-06</span>
+          <p id="systemMessage">SYSTÈME EN ATTENTE // NOYAU STABLE</p>
         </div>
       </section>
       <section class="puzzle-panel boss06-panel" aria-labelledby="arenaTitle">
         <div class="panel-heading">
           <div>
-            <p class="panel-kicker">COMBAT // CARTOGRAPHIE ORIGINELLE</p>
-            <h2 id="arenaTitle">Quatre phases de labyrinthe</h2>
+            <p class="panel-kicker" id="panelKicker">COMBAT // GESTION DU RÉACTEUR</p>
+            <h2 id="arenaTitle">Stabiliser le noyau</h2>
           </div>
           <div class="boss06-readouts">
-            <span class="progress-readout" id="phaseReadout" aria-live="polite">LABYRINTHE 1 / 4</span>
-            <span class="boss06-integrity-label">INTÉGRITÉ</span>
-            <strong id="integrityReadout">5</strong>
+            <span class="progress-readout" id="phaseReadout">PHASE 1 / 3</span>
+            <strong id="integrityReadout">4 intégrités restantes</strong>
           </div>
         </div>
         <details class="boss06-help" open>
-          <summary id="helpTitle">COMMENT RÉSOUDRE L'ÉPREUVE</summary>
-          <ol id="helpList"></ol>
+          <summary id="helpTitle">PROTOCOLE DE COMBAT</summary>
+          <ol id="helpList">
+            <li>Surcharge : +3 flux, +2 chaleur. Mise à la terre : +1 flux, -3 chaleur.</li>
+            <li>Blindage : +1 flux, -1 chaleur et annule l'impulsion annoncée ce tour.</li>
+            <li>Choisis un ordre par tour. L'impulsion indiquée s'ajoute à la chaleur après l'ordre, sauf si tu blindes.</li>
+            <li>Atteins l'objectif de flux avant la limite de tours sans dépasser la limite de chaleur. Un échec coûte une intégrité et relance la phase.</li>
+          </ol>
         </details>
-        <div class="boss06-route-readouts">
-          <span id="checkpointReadout" aria-live="polite">Checkpoint 1</span>
-          <span id="movesReadout">Déplacements restants</span>
-          <span id="mazeReadout">0 / 4 labyrinthes</span>
-        </div>
         <div class="boss06-arena">
-          <div class="boss06-core" id="bossCore" aria-hidden="true">
+          <div class="boss06-boss-core" aria-hidden="true">
             <span class="boss06-core-ring"></span>
-            <span class="boss06-core-label">ORIGINE // 06</span>
+            <span class="boss06-core-symbol">E</span>
+            <span class="boss06-core-caption">RÉGULATEUR</span>
           </div>
-          <div
-            class="boss06-maze"
-            id="originMaze"
-            role="group"
-            aria-label="Labyrinthe à checkpoints"
-          ></div>
+          <div class="boss06-state">
+            <p id="turnReadout">ACTION 1 / 5</p>
+            <p id="phaseObjective">FLUX 9 REQUIS // CHALEUR MAXIMALE 10</p>
+            <p class="boss06-telegraph">
+              <span id="pulseLabel">IMPULSION SUIVANTE</span>
+              <strong id="pulseReadout">+1 CHALEUR</strong>
+            </p>
+            <div class="boss06-meters">
+              <div class="boss06-meter-row">
+                <span id="fluxLabel">FLUX</span>
+                <div class="boss06-meter" id="fluxMeter" role="progressbar" aria-label="Flux" aria-valuemin="0" aria-valuemax="9" aria-valuenow="0">
+                  <i id="fluxFill"></i>
+                </div>
+                <strong id="fluxReadout">0 / 9</strong>
+              </div>
+              <div class="boss06-meter-row">
+                <span id="heatLabel">CHALEUR</span>
+                <div class="boss06-meter is-heat" id="heatMeter" role="progressbar" aria-label="Chaleur" aria-valuemin="0" aria-valuemax="10" aria-valuenow="2">
+                  <i id="heatFill"></i>
+                </div>
+                <strong id="heatReadout">2 / 10</strong>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="boss06-actions">
-          <button class="sequence-start-button" id="startBossButton" type="button">ENTRER DANS LE LABYRINTHE</button>
+          <button class="boss06-command" id="overchargeButton" type="button" disabled>
+            <strong>SURCHARGE</strong><span>+3 FLUX // +2 CHALEUR</span>
+          </button>
+          <button class="boss06-command" id="groundButton" type="button" disabled>
+            <strong>MISE À LA TERRE</strong><span>+1 FLUX // -3 CHALEUR</span>
+          </button>
+          <button class="boss06-command boss06-shield" id="shieldButton" type="button" disabled>
+            <strong>BLINDAGE</strong><span>+1 FLUX // BLOQUE L'IMPULSION</span>
+          </button>
+          <button class="sequence-start-button" id="startBossButton" type="button">ENTRER DANS LE COMBAT</button>
           <button class="next-level-button" id="nextLevelButton" type="button" hidden>ENTRER DANS LA FORGE MÉMOIRE</button>
           <button class="reset-button" id="resetButton" type="button">RECOMMENCER LE COMBAT</button>
         </div>
         <p class="puzzle-status" id="puzzleStatus" role="status" aria-live="polite">
-          Atteins chaque checkpoint dans l'ordre, puis la sortie.
+          Lis l'impulsion annoncée, puis choisis une commande pour équilibrer flux et chaleur.
         </p>
       </section>
     </main>
     <footer class="level-footer">
-      <span>ÉCHO // ORIGINE ACTIVE</span>
+      <span id="footerLabel">ÉCHO // ORIGINE ACTIVE</span>
       <span>BOSS // 06</span>
     </footer>
     <script src="../../js/save-system.js?v=5"></script>
     <script src="../../js/language.js?v=2"></script>
-    <script src="../../js/ui-effects.js?v=12"></script>
     <script src="../../js/levels-config.js?v=10"></script>
     <script src="../../js/level-guard.js?v=16"></script>
-    <script src="../../js/bosses/boss-06.js?v=2"></script>
+    <script src="../../js/bosses/boss-06.js?v=3"></script>
   </body>
 </html>

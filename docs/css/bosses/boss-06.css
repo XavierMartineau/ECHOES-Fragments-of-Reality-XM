@@ -4,19 +4,45 @@
   --boss06-red: #ff5577;
 }
 
-.boss06-key-hud {
-  border-left: 2px solid var(--boss06-cyan);
-  color: var(--boss06-cyan);
-}
-
-.boss06-key-hud .key-redesign-hud-note,
-.boss06-key-hud .key-redesign-hud-label {
-  color: #b7c8df;
-}
-
 .boss06-shell {
   width: min(1120px, calc(100% - 32px));
   margin: 28px auto 50px;
+}
+
+.boss06-key-hud {
+  display: flex;
+  width: min(1100px, calc(100% - 48px));
+  min-height: 60px;
+  margin: 12px auto 0;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  border: 1px solid rgba(124, 247, 231, 0.3);
+  border-left: 2px solid var(--boss06-cyan);
+  background: rgba(3, 9, 22, 0.76);
+  color: var(--boss06-cyan);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.boss06-key-slot {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.22;
+}
+
+.boss06-key-slot.is-visible {
+  color: #80ffcf;
+  opacity: 1;
+  filter: drop-shadow(0 0 9px rgba(128, 255, 207, 0.7));
+}
+
+.boss06-key-slot img {
+  width: 22px;
+  height: 32px;
+  object-fit: contain;
 }
 
 .boss06-panel {
@@ -30,21 +56,13 @@
 
 .boss06-readouts {
   display: grid;
-  grid-template-columns: auto auto;
-  gap: 5px 12px;
-  align-items: center;
+  gap: 5px;
   justify-items: end;
-}
-
-.boss06-integrity-label {
-  color: #a7bdd3;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
 }
 
 #integrityReadout {
   color: var(--boss06-gold);
-  font-size: 1.15rem;
+  font-size: 0.72rem;
 }
 
 .boss06-help {
@@ -64,149 +82,159 @@
 }
 
 .boss06-help ol {
+  display: grid;
+  gap: 6px;
   margin: 10px 0 0;
   padding-left: 22px;
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
-.boss06-help li + li {
-  margin-top: 5px;
-}
-
-.boss06-route-readouts {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 10px;
-  margin: 14px 0;
-  color: #dce8f6;
-  font-size: 0.88rem;
-}
-
-.boss06-route-readouts span {
-  padding: 7px 10px;
-  border: 1px solid rgba(124, 247, 231, 0.2);
-  border-radius: 8px;
-  background: rgba(5, 12, 25, 0.7);
+.boss06-help li::marker {
+  color: var(--boss06-gold);
 }
 
 .boss06-arena {
-  position: relative;
   display: grid;
-  min-height: 310px;
-  place-items: center;
-  overflow: hidden;
-  padding: clamp(10px, 3vw, 26px);
-  border: 1px solid rgba(124, 247, 231, 0.18);
+  grid-template-columns: minmax(140px, 0.7fr) minmax(0, 1.5fr);
+  align-items: center;
+  gap: clamp(18px, 5vw, 56px);
+  min-height: 300px;
+  padding: clamp(20px, 5vw, 44px);
+  border: 1px solid rgba(124, 247, 231, 0.2);
   border-radius: 16px;
   background:
-    linear-gradient(rgba(7, 17, 31, 0.84), rgba(7, 17, 31, 0.94)),
-    repeating-linear-gradient(0deg, transparent 0 22px, rgba(124, 247, 231, 0.06) 23px),
-    repeating-linear-gradient(90deg, transparent 0 22px, rgba(124, 247, 231, 0.06) 23px);
+    radial-gradient(ellipse at 25% 50%, rgba(54, 105, 149, 0.22), transparent 38%),
+    linear-gradient(145deg, rgba(6, 16, 33, 0.95), rgba(8, 10, 27, 0.98));
 }
 
-.boss06-core {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+.boss06-boss-core {
+  position: relative;
   display: grid;
-  width: min(72vw, 430px);
+  width: min(100%, 210px);
   aspect-ratio: 1;
+  justify-self: center;
   place-items: center;
-  border: 1px solid rgba(124, 247, 231, 0.1);
+  border: 2px solid rgba(124, 247, 231, 0.68);
   border-radius: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
+  background: radial-gradient(circle, rgba(124, 247, 231, 0.16), rgba(9, 20, 42, 0.96) 68%);
+  box-shadow: 0 0 38px rgba(124, 247, 231, 0.18), inset 0 0 30px rgba(124, 247, 231, 0.15);
+  color: #d9fffa;
 }
 
 .boss06-core-ring {
   position: absolute;
   inset: 12%;
-  border: 1px dashed rgba(255, 210, 122, 0.14);
-  border-radius: inherit;
-  animation: boss06-scan 18s linear infinite;
+  border: 1px dashed rgba(255, 210, 122, 0.62);
+  border-radius: 50%;
+  animation: boss06-core-turn 18s linear infinite;
 }
 
-.boss06-core-label {
-  color: rgba(124, 247, 231, 0.17);
-  font-size: clamp(0.65rem, 2vw, 1rem);
-  font-weight: 900;
-  letter-spacing: 0.3em;
+.boss06-core-symbol {
+  font: 900 clamp(2.5rem, 8vw, 5rem) var(--font-display, "Orbitron", sans-serif);
+  text-shadow: 0 0 28px var(--boss06-cyan);
 }
 
-.boss06-maze {
-  position: relative;
-  z-index: 1;
+.boss06-core-caption {
+  position: absolute;
+  bottom: 17%;
+  color: var(--boss06-gold);
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
+}
+
+.boss06-state {
   display: grid;
-  width: min(100%, 680px);
-  grid-template-columns: repeat(var(--maze-columns, 11), minmax(0, 1fr));
-  border: 2px solid rgba(124, 247, 231, 0.52);
-  background: rgba(3, 10, 23, 0.94);
-  box-shadow: 0 0 26px rgba(124, 247, 231, 0.14);
+  gap: 17px;
 }
 
-.boss06-cell {
+#turnReadout {
+  margin: 0;
+  color: #dce8f6;
+  font: 0.72rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.1em;
+}
+
+#phaseObjective {
+  margin: -10px 0 0;
+  color: #b7c8df;
+  font-size: 0.67rem;
+  letter-spacing: 0.04em;
+}
+
+.boss06-telegraph {
+  display: flex;
+  min-height: 56px;
+  margin: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 210, 122, 0.34);
+  border-left: 3px solid var(--boss06-gold);
+  border-radius: 9px;
+  color: #c3d0e0;
+  background: rgba(41, 31, 25, 0.5);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+}
+
+.boss06-telegraph strong {
+  color: var(--boss06-gold);
+  font: 0.82rem var(--font-display, "Orbitron", sans-serif);
+}
+
+.boss06-meters {
   display: grid;
-  min-width: 0;
-  aspect-ratio: 1;
-  place-items: center;
-  padding: 0;
-  border: 1px solid rgba(124, 247, 231, 0.08);
-  color: #b8d5e0;
-  background: rgba(14, 33, 47, 0.83);
-  font-size: clamp(0.48rem, 1.5vw, 0.9rem);
-  font-weight: 900;
-  line-height: 1;
-  cursor: pointer;
-  transition: background 100ms ease, color 100ms ease, box-shadow 100ms ease;
+  gap: 18px;
 }
 
-.boss06-cell:not(:disabled):hover,
-.boss06-cell:focus-visible {
-  outline: 1px solid var(--boss06-gold);
-  outline-offset: -2px;
-  background: rgba(48, 80, 95, 0.95);
-}
-
-.boss06-cell.is-wall {
-  border-color: rgba(50, 72, 93, 0.28);
-  background:
-    linear-gradient(135deg, rgba(38, 54, 72, 0.96), rgba(16, 25, 41, 0.98));
-  cursor: not-allowed;
-}
-
-.boss06-cell.is-start {
+.boss06-meter-row {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) 64px;
+  align-items: center;
+  gap: 12px;
   color: var(--boss06-cyan);
-  box-shadow: inset 0 0 10px rgba(124, 247, 231, 0.2);
+  font: 0.65rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.07em;
 }
 
-.boss06-cell.is-exit {
-  color: var(--boss06-gold);
-  box-shadow: inset 0 0 12px rgba(255, 210, 122, 0.22);
+.boss06-meter-row strong {
+  color: #edf5ff;
+  text-align: right;
+  font-size: 0.68rem;
 }
 
-.boss06-cell.is-checkpoint {
-  border-color: rgba(255, 210, 122, 0.65);
-  color: var(--boss06-gold);
-  background: rgba(92, 63, 24, 0.7);
+.boss06-meter {
+  height: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(124, 247, 231, 0.38);
+  border-radius: 99px;
+  background: rgba(4, 10, 23, 0.9);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.8);
 }
 
-.boss06-cell.is-checkpoint-done {
-  color: #07151b;
-  background: #80ffcf;
+.boss06-meter i {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #267e88, var(--boss06-cyan));
+  box-shadow: 0 0 12px rgba(124, 247, 231, 0.58);
+  transition: width 240ms ease;
 }
 
-.boss06-cell.is-hazard {
-  color: #fff;
-  background: rgba(171, 27, 59, 0.72);
-  box-shadow: inset 0 0 8px rgba(255, 60, 101, 0.3);
+.boss06-meter.is-heat {
+  border-color: rgba(255, 96, 125, 0.48);
 }
 
-.boss06-cell.is-player {
-  z-index: 2;
-  color: #06121a;
-  background: var(--boss06-cyan);
-  box-shadow: 0 0 12px rgba(124, 247, 231, 0.75);
+.boss06-meter.is-heat i {
+  background: linear-gradient(90deg, #b95d42, var(--boss06-red));
+  box-shadow: 0 0 12px rgba(255, 85, 119, 0.48);
+}
+
+.boss06-meter.is-danger i {
+  background: #ff263f;
+  box-shadow: 0 0 18px #ff263f;
 }
 
 .boss06-actions {
@@ -217,22 +245,121 @@
   margin-top: 18px;
 }
 
-@keyframes boss06-scan {
+.boss06-command {
+  display: grid;
+  min-width: 190px;
+  min-height: 72px;
+  align-content: center;
+  gap: 7px;
+  padding: 10px 14px;
+  border: 1px solid rgba(124, 247, 231, 0.44);
+  border-radius: 10px;
+  color: #ecfffc;
+  background: linear-gradient(145deg, rgba(31, 69, 80, 0.62), rgba(10, 21, 39, 0.9));
+  cursor: pointer;
+  text-align: left;
+  touch-action: manipulation;
+}
+
+.boss06-command strong {
+  color: var(--boss06-cyan);
+  font: 0.66rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.07em;
+}
+
+.boss06-command span {
+  color: #c2d4e5;
+  font-size: 0.66rem;
+}
+
+.boss06-command:not(:disabled):hover,
+.boss06-command:focus-visible {
+  border-color: #fff;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+  box-shadow: 0 0 20px rgba(124, 247, 231, 0.28);
+}
+
+.boss06-command:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.boss06-shield {
+  border-color: rgba(255, 210, 122, 0.48);
+}
+
+.boss06-shield strong {
+  color: var(--boss06-gold);
+}
+
+.boss06-panel > .puzzle-status {
+  min-height: 1.5em;
+  text-align: center;
+}
+
+.boss06-panel.is-overheated .boss06-boss-core {
+  border-color: var(--boss06-red);
+  box-shadow: 0 0 40px rgba(255, 85, 119, 0.6);
+}
+
+.boss06-panel.is-victory .boss06-boss-core {
+  border-color: #80ffcf;
+  box-shadow: 0 0 56px rgba(128, 255, 207, 0.5);
+}
+
+@keyframes boss06-core-turn {
   to { transform: rotate(360deg); }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 760px) {
+  .boss06-key-hud {
+    width: calc(100% - 28px);
+    gap: 9px;
+    margin: 10px 14px 0;
+    padding: 9px 10px;
+    font-size: 0.62rem;
+  }
+
   .boss06-arena {
-    min-height: 220px;
-    padding: 8px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    padding: 20px 14px;
   }
 
-  .boss06-route-readouts {
-    font-size: 0.74rem;
+  .boss06-boss-core {
+    width: 150px;
   }
 
-  .boss06-route-readouts span {
-    padding: 6px 7px;
+  .boss06-state {
+    width: 100%;
+  }
+
+  .boss06-command {
+    flex: 1 1 190px;
+  }
+}
+
+@media (max-width: 480px) {
+  .boss06-help {
+    padding: 10px;
+    font-size: 0.84rem;
+  }
+
+  .boss06-meter-row {
+    grid-template-columns: 58px minmax(0, 1fr) 48px;
+    gap: 7px;
+    font-size: 0.56rem;
+  }
+
+  .boss06-meter-row strong {
+    font-size: 0.58rem;
+  }
+
+  .boss06-telegraph {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
   }
 }
 
@@ -241,7 +368,7 @@
     animation: none;
   }
 
-  .boss06-cell {
+  .boss06-meter i {
     transition: none;
   }
 }

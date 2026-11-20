@@ -1,1 +1,271 @@
-@import url("boss-02.css");
+.boss04-page {
+  --prism-cyan: #7cf7e7;
+  --prism-gold: #ffd27a;
+}
+
+.boss04-shell {
+  width: min(1120px, calc(100% - 32px));
+  margin: 28px auto 50px;
+}
+
+.boss04-key-hud {
+  display: flex;
+  width: min(1100px, calc(100% - 48px));
+  min-height: 60px;
+  margin: 12px auto 0;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  border: 1px solid rgba(124, 247, 231, 0.3);
+  border-left: 2px solid var(--prism-cyan);
+  background: rgba(3, 9, 22, 0.76);
+  color: var(--prism-cyan);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.boss04-key-note {
+  color: #b7c8df;
+}
+
+.boss04-key-slot {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.22;
+}
+
+.boss04-key-slot.is-visible {
+  color: #80ffcf;
+  opacity: 1;
+  filter: drop-shadow(0 0 9px rgba(128, 255, 207, 0.7));
+}
+
+.boss04-key-slot img {
+  width: 22px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.boss04-panel {
+  border-color: rgba(124, 247, 231, 0.38);
+  box-shadow: 0 0 34px rgba(34, 178, 210, 0.15), inset 0 0 30px rgba(124, 247, 231, 0.04);
+}
+
+.boss04-readouts {
+  display: grid;
+  justify-items: end;
+  gap: 6px;
+}
+
+#integrityReadout {
+  color: var(--prism-gold);
+  font-size: 0.72rem;
+}
+
+.boss04-help {
+  margin: 0 0 14px;
+  padding: 12px 16px;
+  border: 1px solid rgba(124, 247, 231, 0.22);
+  border-radius: 12px;
+  color: #dce8f6;
+  background: rgba(5, 12, 25, 0.74);
+  line-height: 1.55;
+}
+
+.boss04-help summary {
+  color: var(--prism-cyan);
+  cursor: pointer;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.boss04-help p {
+  margin: 10px 0 0;
+}
+
+#routeHint {
+  color: var(--prism-gold);
+}
+
+.boss04-arena {
+  display: grid;
+  min-height: 350px;
+  place-items: center;
+  padding: clamp(14px, 4vw, 32px);
+  border: 1px solid rgba(124, 247, 231, 0.2);
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(52, 124, 149, 0.22), transparent 58%),
+    linear-gradient(rgba(7, 17, 31, 0.86), rgba(7, 17, 31, 0.96));
+}
+
+.boss04-grid {
+  display: grid;
+  width: min(100%, 500px);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  aspect-ratio: 1;
+  gap: 7px;
+  padding: 12px;
+  border: 1px solid rgba(124, 247, 231, 0.42);
+  border-radius: 14px;
+  background: rgba(4, 12, 27, 0.85);
+  box-shadow: 0 0 28px rgba(124, 247, 231, 0.12), inset 0 0 24px rgba(124, 247, 231, 0.05);
+}
+
+.boss04-tile {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  place-content: center;
+  gap: 3px;
+  padding: 3px;
+  border: 1px solid rgba(124, 247, 231, 0.14);
+  border-radius: 9px;
+  color: #b9d1df;
+  background: rgba(26, 48, 69, 0.34);
+  font: 1.6rem var(--font-display, "Orbitron", sans-serif);
+  transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.boss04-tile small {
+  font: 0.46rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.06em;
+}
+
+.boss04-tile.is-mirror {
+  border-color: rgba(124, 247, 231, 0.55);
+  color: #ecfdff;
+  background: linear-gradient(145deg, rgba(42, 94, 119, 0.62), rgba(11, 23, 45, 0.9));
+  cursor: pointer;
+}
+
+.boss04-tile.is-mirror:not(:disabled):hover,
+.boss04-tile.is-mirror:focus-visible {
+  border-color: #fff;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.boss04-tile.is-slash .mirror-glyph {
+  color: var(--prism-gold);
+  transform: rotate(-8deg);
+}
+
+.mirror-glyph {
+  display: block;
+  color: var(--prism-cyan);
+  font-size: 2.2rem;
+  text-shadow: 0 0 12px currentColor;
+  transition: transform 160ms ease, color 160ms ease;
+}
+
+.boss04-tile.is-source {
+  border-color: #70dcff;
+  color: #70dcff;
+  background: rgba(22, 104, 151, 0.28);
+}
+
+.boss04-tile.is-receiver {
+  border-color: var(--prism-gold);
+  color: var(--prism-gold);
+  background: rgba(139, 102, 31, 0.26);
+  box-shadow: inset 0 0 15px rgba(255, 210, 122, 0.12);
+}
+
+.boss04-tile.is-wall {
+  border-color: rgba(170, 94, 255, 0.28);
+  color: #bd8cff;
+  background: repeating-linear-gradient(135deg, rgba(86, 47, 126, 0.28) 0 5px, rgba(8, 16, 35, 0.9) 5px 10px);
+}
+
+.boss04-tile.is-beam {
+  z-index: 1;
+  border-color: #fff;
+  color: #fff;
+  background: #45e5d2;
+  box-shadow: 0 0 24px #79f7ff, inset 0 0 15px #fff;
+}
+
+.boss04-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.boss04-fire-button {
+  min-height: 42px;
+  padding: 9px 16px;
+  border: 1px solid rgba(124, 247, 231, 0.62);
+  border-radius: 8px;
+  color: #c9fffa;
+  background: rgba(124, 247, 231, 0.11);
+  cursor: pointer;
+  font: 0.68rem var(--font-display, "Orbitron", sans-serif);
+  letter-spacing: 0.05em;
+}
+
+.boss04-fire-button:not(:disabled):hover,
+.boss04-fire-button:focus-visible {
+  border-color: #fff;
+  background: rgba(124, 247, 231, 0.24);
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.boss04-fire-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.boss04-panel > .puzzle-status {
+  min-height: 1.5em;
+  text-align: center;
+}
+
+.boss04-panel.is-victory {
+  border-color: #80ffcf;
+  box-shadow: 0 0 48px rgba(128, 255, 207, 0.25);
+}
+
+@media (max-width: 650px) {
+  .boss04-key-hud {
+    width: calc(100% - 28px);
+    gap: 9px;
+    margin: 10px 14px 0;
+    padding: 9px 10px;
+    font-size: 0.62rem;
+  }
+
+  .boss04-key-note {
+    font-size: 0.5rem;
+  }
+
+  .boss04-arena {
+    min-height: 0;
+    padding: 10px;
+  }
+
+  .boss04-grid {
+    gap: 4px;
+    padding: 7px;
+  }
+
+  .boss04-tile {
+    font-size: 1.2rem;
+  }
+
+  .boss04-tile small {
+    font-size: 0.34rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boss04-tile,
+  .mirror-glyph {
+    transition: none;
+  }
+}

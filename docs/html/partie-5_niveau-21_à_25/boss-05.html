@@ -1,26 +1,19 @@
 <!doctype html>
-<!-- ECHOES // Boss 4 : combat final de la partie 4. -->
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="../../assets/svg/identite/echoes-favicon.svg?v=2"
-    />
-    <title>ECHOES - CLEE 02 // BOSS</title>
-    <!-- Feuilles de style : base, composants, page -->
+    <link rel="icon" type="image/svg+xml" href="../../assets/svg/identite/echoes-favicon.svg?v=2" />
+    <title>ECHOES - BOSS 05 // DUELISTE DU TEMPO</title>
     <script src="../../../lag-fix/fps-boost.js"></script>
     <link rel="stylesheet" href="../../css/niveaux/niveaux-communs.css?v=2" />
     <link rel="stylesheet" href="../../css/niveaux/partie-5_niveau-21_à_25.css?v=1" />
     <link rel="stylesheet" href="../../css/base/responsive.css?v=m1" />
     <link rel="stylesheet" href="../../css/base/fonts.css" />
-    <link rel="stylesheet" href="../../css/bosses/boss-05.css?v=1" />
-    <link rel="stylesheet" href="../../css/composants/key-fragments.css?v=6" />
+    <link rel="stylesheet" href="../../css/bosses/boss-05.css?v=2" />
   </head>
   <body
-    class="part-two-theme"
+    class="boss05-page"
     data-key-number="5"
     data-level-start="21"
     data-level-end="25"
@@ -31,197 +24,88 @@
     <div class="background-glow" aria-hidden="true"></div>
     <div class="grid-overlay" aria-hidden="true"></div>
     <header class="level-header">
-      <a class="brand" href="../niveaux.html">ECHOES</a>
+      <a class="brand" href="../niveaux.html" aria-label="ECHOES">ECHOES</a>
       <div class="level-meta">
-        <span data-i18n="part">PARTIE 2 // FRACTURES</span>
-        <div
-          class="level-progress"
-          id="levelProgress"
-          aria-label="Progression de la Partie 2"
-        ></div>
-        <strong data-i18n="level">CLÉE_02 // GARDIEN</strong>
+        <span>PARTIE 5 // CONVERGENCE</span>
+        <div class="level-progress" id="levelProgress" aria-label="Progression de la Partie 5"></div>
+        <strong>BOSS 05 // LE TEMPO</strong>
       </div>
-      
     </header>
-    <aside
-      class="key-redesign-hud boss02-key-hud"
-      id="keyHud"
-      aria-label="Progression des clés"
-    >
-      <span class="key-redesign-hud-label" data-i18n="keyLabel"
-        >RÉSONANCES</span
-      >
-      <strong class="key-hud-value" id="keyCount">2 / 6</strong>
-      <span class="key-redesign-hud-line" aria-hidden="true"></span>
-      <span class="key-redesign-hud-note" id="keyHudNote" data-i18n="keyNote"
-        >CLÉ 02 // À RÉCUPÉRER</span
-      >
-      <span
-        class="key-redesign-hud-slot"
-        id="keyHudSlot"
-        aria-label="Clé 02 récupérée"
-        aria-hidden="true"
-      >
-        <img src="../../assets/svg/cles/key-02-usb.svg?v=2" alt="" />
-        <b>CLEE_02</b>
+    <aside class="boss05-key-hud" id="keyHud" aria-label="Progression des clés">
+      <span>RÉSONANCES</span>
+      <strong id="keyCount">5 / 6</strong>
+      <span class="boss05-key-note" id="keyHudNote">CLÉ 05 // À RÉCUPÉRER</span>
+      <span class="boss05-key-slot" id="keyHudSlot" aria-hidden="true">
+        <img src="../../assets/svg/cles/key-05-usb.svg" alt="" />
+        <b>CLÉ 05</b>
       </span>
     </aside>
-    <main class="level-shell fracture-boss-shell">
+    <main class="level-shell boss05-shell">
       <section class="level-intro" aria-labelledby="bossTitle">
-        <p class="eyebrow" data-i18n="eyebrow">
-          CLEE_02 // ARCHONTE DES FRACTURES
-        </p>
-        <h1 id="bossTitle" data-i18n="title">L'Architecte du Néant</h1>
-        <p class="level-description" data-i18n="description">
-          À chaque phase, l'arène change. Traverse ses lignes de frappe, atteins
-          les ancres et brise ses trois armures avant que ta cohérence ne cède.
+        <p class="eyebrow" id="bossKicker">BOSS // ÉPREUVE DE RÉSONANCE TEMPORELLE</p>
+        <h1 id="bossTitle">Le Dueliste du tempo</h1>
+        <p class="level-description" id="bossDescription">
+          Lis le déplacement du signal, puis frappe uniquement lorsqu'il traverse la fenêtre de capture lumineuse.
         </p>
         <div class="system-transmission" aria-live="polite">
-          <span class="system-label" data-i18n="systemLabel"
-            >ECHO://PROTOCOLE_02</span
-          >
-          <p id="systemMessage">
-            SYSTEME:: ARCHONTE ACTIF // TROIS COUCHES D'ARMURE
-          </p>
+          <span class="system-label">ECHO://TEMPO-05</span>
+          <p id="systemMessage">SYSTÈME EN ATTENTE // SIGNAL À CAPTURER</p>
         </div>
       </section>
-      <section class="puzzle-panel boss02-panel" aria-labelledby="arenaTitle">
+      <section class="puzzle-panel boss05-panel" aria-labelledby="arenaTitle">
         <div class="panel-heading">
           <div>
-            <p class="panel-kicker" data-i18n="kicker">
-              COMBAT // NAVIGATION TACTIQUE
-            </p>
-            <h2 id="arenaTitle" data-i18n="arenaTitle">L'arène fracturée</h2>
+            <p class="panel-kicker">COMBAT // PRÉCISION ET RYTHME</p>
+            <h2 id="arenaTitle">Capturer le signal</h2>
           </div>
-          <div class="boss02-readouts">
-            <span class="progress-readout" id="armorReadout" aria-live="polite"
-              >0 / 6</span
-            >
-            <span class="boss02-lives-label" data-i18n="coherence"
-              >COHÉRENCE</span
-            >
-            <span
-              class="boss02-lives"
-              id="livesReadout"
-              aria-label="8 unités de cohérence"
-            ></span>
+          <div class="boss05-readouts">
+            <span class="progress-readout" id="phaseReadout">TEMPO 1 / 3</span>
+            <strong id="integrityReadout">5 unités d'intégrité restantes</strong>
           </div>
         </div>
-        <details class="boss02-help" open>
-          <summary data-i18n="helpTitle">COMMENT COMBATTRE</summary>
-          <ol>
-            <li data-i18n="helpStart">
-              Démarre le combat avec le bouton ci-dessous.
-            </li>
-            <li data-i18n="helpMove">
-              Clique une case voisine pour te déplacer. Évite les murs ▩.
-            </li>
-            <li data-i18n="helpPulse">
-              Rejoins l'ancre active ◆ puis appuie sur « Pulser l'ancre ».
-              Stabilise deux ancres dans chacune des trois phases.
-            </li>
-            <li data-i18n="helpThreat">
-              La rangée ou colonne rouge sera frappée quand le compteur arrive à
-              zéro. Un déplacement ou une impulsion fait avancer le compteur.
-            </li>
-            <li data-i18n="helpShield">
-              Le bouclier annule le prochain impact sans consommer une action.
-              Tu en as deux; tu as aussi huit unités de cohérence.
-            </li>
-          </ol>
-        </details>
-        <div class="boss02-arena">
-          <div class="boss02-core" id="bossCore" aria-hidden="true">
-            <span class="boss02-core-ring"></span>
-            <img
-              class="boss02-reward-key"
-              id="bossRewardKey"
-              src="../../assets/svg/cles/key-02-usb.svg?v=2"
-              alt=""
-              aria-hidden="true"
-            />
-            <span class="boss02-core-label">CLEE_02</span>
-          </div>
-          <p class="boss02-phase" id="phaseReadout" aria-live="polite">
-            PHASE 1 // CARTOGRAPHIER L'IMPACT
+        <details class="boss05-help" open>
+          <summary>PROTOCOLE DE COMBAT</summary>
+          <p id="helpText">
+            Le curseur balaie la piste dans les deux sens; frappe uniquement lorsqu'il traverse la fenêtre dorée.
           </p>
-          <div class="boss02-forecast">
-            <span data-i18n="incoming">PROCHAINE FRACTURE</span>
-            <strong id="strikeReadout">RANGÉE 5</strong>
-            <span id="actionsReadout">Impact dans 4 actions</span>
-          </div>
+        </details>
+        <div class="boss05-arena">
           <div
-            class="boss02-grid"
-            id="tacticalBoard"
-            role="group"
-            aria-label="Arène tactique 5 par 5"
-          ></div>
+            class="boss05-track"
+            id="timingTrack"
+            role="img"
+            aria-label="Curseur mobile à capturer dans la fenêtre dorée"
+          >
+            <span class="boss05-rail"></span>
+            <span class="boss05-target-zone" id="targetZone" aria-hidden="true"></span>
+            <span class="boss05-cursor" id="timingCursor" aria-hidden="true"></span>
+            <span class="boss05-endpoint boss05-start">1</span>
+            <span class="boss05-endpoint boss05-end">2</span>
+          </div>
+          <div class="boss05-status-readouts">
+            <strong id="beatReadout" aria-live="polite">FRAPPES NETTES 0 / 4</strong>
+            <span>ZONE D'IMPACT // OR</span>
+          </div>
         </div>
-        <div class="boss02-actions">
-          <button
-            class="sequence-start-button"
-            id="startBossButton"
-            type="button"
-            data-i18n="start"
-          >
-            ENTRER DANS L'ARÈNE
-          </button>
-          <button
-            class="boss02-action-button"
-            id="pulseButton"
-            type="button"
-            disabled
-            data-i18n="pulse"
-          >
-            PULSER L'ANCRE
-          </button>
-          <button
-            class="boss02-action-button boss02-shield-button"
-            id="shieldButton"
-            type="button"
-            data-i18n="shield"
-          >
-            BOUCLIER (2)
-          </button>
-          <button
-            class="next-level-button"
-            id="nextLevelButton"
-            type="button"
-            hidden
-            data-i18n="next"
-          >
-            CONTINUER VERS LE NIVEAU 21
-          </button>
-          <button
-            class="reset-button"
-            id="resetButton"
-            type="button"
-            data-i18n="reset"
-          >
-            Réinitialiser
-          </button>
+        <div class="boss05-actions">
+          <button class="sequence-start-button" id="startBossButton" type="button">LANCER LA PHASE</button>
+          <button class="boss05-strike-button" id="strikeButton" type="button" disabled>FRAPPER</button>
+          <button class="next-level-button" id="nextLevelButton" type="button" hidden>CONTINUER VERS LE NIVEAU 26</button>
+          <button class="reset-button" id="resetButton" type="button">RECOMMENCER LE COMBAT</button>
         </div>
-        <p class="puzzle-status" id="puzzleStatus" aria-live="polite">
-          Déplace-toi d'une case à la fois. Les cases menacées indiquent la
-          prochaine frappe.
+        <p class="puzzle-status" id="puzzleStatus" role="status" aria-live="polite">
+          Lance la première phase, observe le curseur et frappe uniquement dans la fenêtre dorée.
         </p>
       </section>
     </main>
     <footer class="level-footer">
-      <span data-i18n="footer">ÉCHO // FRACTURES ACTIVES</span>
-      <span data-i18n="counter">BOSS // 02</span>
+      <span>ÉCHO // TEMPO ACTIF</span>
+      <span>BOSS // 05</span>
     </footer>
-    <!-- Scripts : traductions, sauvegarde, langue, effets, puis logique de la page -->
     <script src="../../js/save-system.js?v=5"></script>
     <script src="../../js/language.js?v=2"></script>
-    <script src="../../js/page-i18n.js?v=3"></script>
-    <script src="../../js/ui-effects.js?v=12"></script>
-    <script src="../../js/dev-mode.js?v=13"></script>
-    <script src="../../js/key-fragments.js?v=3"></script>
-    <script src="../../js/bosses/boss-05.js?v=1"></script>
-
     <script src="../../js/levels-config.js?v=10"></script>
-    <script src="../../js/level-guard.js?v=15"></script>
-    <script src="../../js/key-tray.js" data-auto-boss></script>
+    <script src="../../js/level-guard.js?v=16"></script>
+    <script src="../../js/bosses/boss-05.js?v=2"></script>
   </body>
 </html>
