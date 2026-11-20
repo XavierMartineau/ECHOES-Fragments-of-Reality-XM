@@ -21,7 +21,7 @@ reste [Info-fr.txt](./Info-fr.txt).
 
 ## État du projet — 02/11/2026
 
-**Campagne active :** 30 niveaux répartis en six parties de cinq niveaux (1–5, 6–10, 11–15, 16–20, 21–25 et 26–30). Les boss 01, 02 et 03 suivent respectivement les niveaux 10, 20 et 30.
+**Campagne active :** 30 niveaux répartis en six parties de cinq niveaux (1–5, 6–10, 11–15, 16–20, 21–25 et 26–30), chacune suivie de son boss. Après le Boss 06, la forge assemble les six clés pour créer la clé mémoire 07.
 
 Les niveaux bonus 31 à 60 ont été supprimés : la campagne se limite aux niveaux 1 à 30.
 
@@ -60,7 +60,7 @@ iveaux-communs.css.
 
 ### Points à revalider
 
-- Parcours complet des six parties et des trois boss sur ordinateur et mobile.
+- Parcours complet des six parties, des six boss et de la forge sur ordinateur et mobile.
 - Correspondance des traductions FR/EN et des exemples visuels sur toutes les pages de puzzle.
 - Parcours et responsive des bonus 31–40 ; création des puzzles 41–60.
 - Déploiement GitHub Pages : liens, ressources et casse des chemins.
@@ -96,7 +96,7 @@ Cette journée portait sur l'habillage du hub, de l'accueil et du DEV MODE, ains
 - **Type :** expérience narrative et jeu de puzzles web statique
 - **Déploiement visé :** GitHub Pages
 - **Version de travail :** bêta v4
-- **Jalon actuel :** campagne principale de 30 niveaux en six parties de cinq niveaux ; trois boss après les niveaux 10, 20 et 30
+- **Jalon actuel :** campagne principale de 30 niveaux, six boss (un par partie) et une forge finale pour créer la clé mémoire 07
 - **Fondations disponibles :** accueil, connexion, introduction interactive, sauvegarde par compte,
   mode développeur, navigation partagée et responsive multi-écrans
 
@@ -179,32 +179,37 @@ compatibles avec le système de sauvegarde existant.
   le réseau dormant au niveau 20. Le niveau 20 existait déjà ; ses mécaniques ont été
   réaffectées plutôt que dupliquées.
 
-### Boss — `boss-02.html`
+### Boss tactiques — `boss-02.html`, `boss-04.html` et `boss-05.html`
 
-- Combat placé après le niveau 20 et avant l'entrée dans la partie 5.
+- Boss placé à la fin de chaque partie correspondante.
 - Arène tactique 5 × 5, déplacements orthogonaux, murs et lignes de frappe télégraphiées.
-- Six ancres à stabiliser en trois phases, huit unités de cohérence et deux boucliers.
+- La difficulté progresse : plus d'ancres, moins de cohérence et des frappes plus rapprochées.
 - Les ancres stabilisées sont indiquées par un rond vert foncé dans le compteur de
   cohérence, plutôt que par l'indicateur orange.
-- Victoire débloquant la Clé 02 et le niveau 21.
+- La victoire de chaque combat débloque la clé de sa partie et la suivante.
 
 ### Boss — `boss-03.html`
 
-- Combat placé après le niveau 30, à la fin de la partie 6.
-- Page, contrôleur et styles dédiés ; la victoire complète la dernière étape de la campagne principale.
+- Combat d'anneaux conservé à la fin de la partie 3.
+- Les brèches doivent être alignées sur le repère lumineux avant la fin du temps.
 
 ### Boss — `boss-01.html`
 
-- Boss placé après le niveau 10, à la fin de la partie 2.
+- Boss placé après le niveau 5, à la fin de la partie 1.
 - Nouvelle direction visuelle : gardien spectral, cœur lumineux et orbites de résonance cyan/violettes.
-- Page située dans `docs/html/partie-2_niveau-6_à_10/boss-01.html` ; le lien du niveau 10,
+- Page située dans `docs/html/partie-1_niveau-1_à_5/boss-01.html` ; le lien du niveau 5,
   le menu développeur et l'ambiance visuelle utilisent ce nom.
-- Trois stages accessibles : trouver trois sceaux correspondants, répéter une mélodie de trois symboles et toucher le noyau pendant deux halos verts.
+- Trois épreuves : reconnaître les sceaux, mémoriser une séquence et intercepter les impulsions du noyau. Les défis s'allongent et l'énergie baisse avec le rang du boss.
 - Difficulté visée : `1/6`, avec six unités d'énergie et une reprise par réinitialisation.
 - Contrôleur et styles isolés dans `docs/js/bosses/boss-01.js` et `docs/css/bosses/boss-01.css`.
-- La victoire enregistre `resonance-1` et présente la réunion des trois fragments
-  dans une fenêtre de récompense. « Continuer » ouvre directement le niveau 11 ;
+- La victoire enregistre `resonance-1` et présente la réunion des fragments
+  dans une fenêtre de récompense. « Continuer » ouvre directement le niveau 6 ;
   aucune page cinématique Clé 01 séparée n'est conservée.
+
+### Boss — `boss-06.html` et forge mémoire
+
+- Le Boss 06 propose quatre labyrinthes procéduraux de taille croissante, des checkpoints à suivre dans l'ordre, des cases corrompues et un budget de déplacements décroissant.
+- Après sa victoire, la forge affiche les six clés de résonance sous la machine SVG. Il faut les glisser sur les matrices correspondantes puis abaisser le levier ; elles sont absorbées une par une pour forger `key-07-usb.svg`.
 
 ## Architecture technique
 
@@ -241,7 +246,7 @@ iveaux-communs.css et un fichier par partie (partie-1_niveau-1_à_5.css … part
 ## Travail en cours
 
 - Valider les nouveautés du 04/11/2026 sur mobile et tablette réels (accueil adaptatif, DEV MODE agrandi).
-- Valider complètement les parcours des six parties et des trois boss sur desktop et mobile.
+- Valider complètement les parcours des six parties, des six boss et de la forge sur desktop et mobile.
 
 
 - Relier complètement les six clés aux verrous et fragments narratifs.
@@ -396,9 +401,9 @@ iveaux-communs.css et un fichier par partie (partie-1_niveau-1_à_5.css … part
 
 ## Prochain jalon recommandé
 
-1. Tester les six parties et les trois boss sur ordinateur, tablette et mobile.
+1. Tester les six parties, les six boss et la forge sur ordinateur, tablette et mobile.
 2. Valider l'ensemble de la campagne de 30 niveaux.
-3. Créer la partie finale (ECHO, assemblage des clés, fin, crédits) et la câbler via `levels-config.js` (`finale`).
+3. Créer la suite narrative et les crédits après la forge, puis les câbler via `levels-config.js` (`finale`).
 4. Vérifier les clés, les liens et les ressources sur le déploiement GitHub Pages.
 5. Préparer une nouvelle version bêta après ces validations.
 
@@ -462,7 +467,7 @@ Les niveaux bonus 31–60 ont été supprimés ; ils ne font plus partie de la p
 ### 01/11/2026 — Réduction des défis
 
 - La campagne active comporte six parties de cinq niveaux chacune, du niveau 1 au niveau 30.
-- Les trois boss sont placés après les parties 2, 4 et 6.
+- Un boss termine chacune des six parties ; le Boss 06 mène à la forge de la clé 07.
 - Les autres pages de niveaux sont conservées en archive et redirigent vers le hub hors DEV MODE.
 
 ### 04/11/2026 — Accueil adaptatif, titre terminal, langue et DEV MODE

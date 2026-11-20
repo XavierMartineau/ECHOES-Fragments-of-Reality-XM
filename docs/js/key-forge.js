@@ -17,17 +17,18 @@
       ready: "Les six clés sont alignées. Active la forge pour créer la clé 07.",
       missing: "Les six clés de résonance sont requises avant de lancer la forge.",
       saving: "Forge activée : synchronisation de la clé mémoire 07…",
+      merging: (number) => `La clé ${number} est absorbée par le noyau central…`,
       error: "La clé 07 n'a pas pu être enregistrée. Réessaie sans quitter la forge.",
       forged: "Assemblage réussi. La clé mémoire 07 est maintenant dans ta collection.",
       owned: "La clé mémoire 07 est déjà forgée et enregistrée.",
-      finish: "FORGER LA CLÉ 07",
+      finish: "ABAISSER LE LEVIER // FORGER",
       retry: "RÉESSAYER L'ENREGISTREMENT",
       exit: "Retourner à la campagne",
-      complete: "CLÉ MÉMOIRE 07 FORGÉE",
       empty: "MATRICE LIBRE",
       installed: "INSTALLÉE",
       anvil: "NOYAU INACTIF",
       anvilReady: "NOYAU ACTIF",
+      complete: "CLÉ MÉMOIRE 07 FORGÉE",
     },
     en: {
       label: "KEY",
@@ -39,17 +40,18 @@
       ready: "All six keys are aligned. Activate the forge to create key 07.",
       missing: "All six resonance keys are required before the forge can start.",
       saving: "Forge activated: synchronizing memory key 07…",
+      merging: (number) => `Key ${number} is being absorbed by the central core…`,
       error: "Key 07 could not be saved. Retry without leaving the forge.",
       forged: "Assembly complete. Memory key 07 is now in your collection.",
       owned: "Memory key 07 has already been forged and saved.",
-      finish: "FORGE KEY 07",
+      finish: "PULL LEVER // FORGE KEY 07",
       retry: "RETRY SAVE",
       exit: "Return to campaign",
-      complete: "MEMORY KEY 07 FORGED",
       empty: "EMPTY MATRIX",
       installed: "INSTALLED",
       anvil: "CORE INACTIVE",
       anvilReady: "CORE ACTIVE",
+      complete: "MEMORY KEY 07 FORGED",
     },
   }[language];
   const keySevenId = "resonance-7";
@@ -66,8 +68,10 @@
   const placed = new Set();
   const keyButtons = new Map();
   const slotButtons = new Map();
+  const mergedKeys = new Set();
   let selectedKey = null;
   let forged = false;
+  let merging = false;
 
   const setStatus = (message, isError = false) => {
     status.textContent = message;
@@ -185,34 +189,82 @@
   const showForgedKey = () => {
     forged = true;
     document.body.classList.add("is-forged");
+    document.body.classList.remove("is-merging");
     keySeven.hidden = false;
     coreLabel.textContent = copy.anvilReady;
+    coreLabel.hidden = true;
     finishButton.hidden = true;
     exitButton.hidden = false;
     finishButton.disabled = false;
     exitButton.textContent = copy.exit;
   };
 
-  const forgeKey = () => {
-    if (placed.size !== keyIds.length || forged) return;
+  const mergeKey = async (number) => {
+    if (mergedKeys.has(number)) return;
+    const slot = slotButtons.get(number);
+    const image = slot.querySelector("img");
+    const core = document.getElementById("forgeCore");
+    const from = image.getBoundingClientRect();
+    const to = core.getBoundingClientRect();
+    const deltaX = to.left + to.width / 2 - (from.left + from.width / 2);
+    const deltaY = to.top + to.height / 2 - (from.top + from.height / 2);
+    image.classList.add("is-merging");
+    slot.classList.add("is-merging");
+    setStatus(copy.merging(number));
+    document.getElementById("forgeMessage").textContent = copy.merging(number);
+    if (typeof image.animate === "function") {
+      const animation = image.animate(
+        [
+          { transform: "translate(0, 0) scale(1) rotate(0)", opacity: 1 },
+          {
+            transform: `translate(${deltaX}px, ${deltaY}px) scale(.15) rotate(720deg)`,
+            opacity: 0,
+          },
+        ],
+        { duration: 850, easing: "cubic-bezier(.2,.8,.25,1)", fill: "forwards" },
+      );
+      await new Promise((resolve) => {
+        animation.onfinish = resolve;
+        animation.oncancel = resolve;
+      });
+    } else {
+      await new Promise((resolve) => window.setTimeout(resolve, 850));
+    }
+    image.hidden = true;
+    slot.classList.add("is-merged");
+    mergedKeys.add(number);
+    core.classList.add("is-absorbing");
+    await new Promise((resolve) => window.setTimeout(resolve, 180));
+    core.classList.remove("is-absorbing");
+  };
+
+  const forgeKey = async () => {
+    if (placed.size !== keyIds.length || forged || merging) return;
+    merging = true;
     finishButton.disabled = true;
     finishButton.textContent = copy.saving;
+    document.body.classList.add("is-merging");
+    for (let number = 1; number <= 6; number += 1) {
+      await mergeKey(number);
+    }
+    document.body.classList.remove("is-merging");
     setStatus(copy.saving);
-    if (
-      !save.getKeys().includes(keySevenId) &&
-      !save.unlockKey(keySevenId)
-    ) {
+    document.getElementById("forgeMessage").textContent = copy.complete;
+    if (!save.getKeys().includes(keySevenId) && !save.unlockKey(keySevenId)) {
+      merging = false;
       finishButton.disabled = false;
       finishButton.textContent = copy.retry;
       setStatus(copy.error, true);
       return;
     }
     if (!levels.markCompleted("finale")) {
+      merging = false;
       finishButton.disabled = false;
       finishButton.textContent = copy.retry;
       setStatus(copy.error, true);
       return;
     }
+    merging = false;
     showForgedKey();
     finishButton.textContent = copy.finish;
     setStatus(copy.forged);
@@ -260,6 +312,9 @@
     return;
   }
   if (ownedKeys.includes(keySevenId)) {
+    for (let number = 1; number <= 6; number += 1) {
+      placeKey(number, number);
+    }
     showForgedKey();
     levels.markCompleted("finale");
     setStatus(copy.owned);

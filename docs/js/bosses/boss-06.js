@@ -217,7 +217,7 @@
     phaseReadout.textContent = copy.phase(phaseIndex + 1);
     integrityReadout.textContent = copy.integrity(integrity);
     movesReadout.textContent = copy.moves(movesLeft);
-    mazeReadout.textContent = copy.progress(phaseIndex);
+    mazeReadout.textContent = copy.progress(phaseIndex + 1);
     const target = checkpoints[nextCheckpoint];
     if (target === undefined) {
       checkpointReadout.textContent = copy.exitLabel;

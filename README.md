@@ -28,9 +28,9 @@ instables pour retrouver six clés de résonance.
 | Élément | Valeur |
 | --- | --- |
 | Version de travail | bêta v4 |
-| Campagne jouable | 6 parties, niveaux 1 à 30, 3 boss |
-| Clés obtenues en jeu | Clé 01, Clé 02, Clé 03 (clés 04 à 06 prévues) |
-| Niveau final | « La fin finale » : câblé dans `levels-config.js`, pas encore jouable |
+| Campagne jouable | 6 parties, niveaux 1 à 30, 6 boss |
+| Clés obtenues en jeu | Clés de résonance 01 à 06, puis clé mémoire 07 |
+| Niveau final | Forge de mémoire : assembler les clés 01 à 06 pour forger la clé 07 |
 | Langues | français et anglais, changement en place sans rechargement |
 | Appareils | PC, tablette et mobile (décor d'accueil adaptatif en trois tailles) |
 | Déploiement prévu | GitHub Pages |
@@ -58,12 +58,12 @@ le bouton « DEV MODE » présent sur chaque page.
 
 | Partie | Nom (FR / EN) | Niveaux | Dossier de pages | Fin de partie |
 | --- | --- | --- | --- | --- |
-| 1 | Initiation | 1 à 5 | `partie-1_niveau-1_à_5` | : |
-| 2 | Fractures | 6 à 10 | `partie-2_niveau-6_à_10` | Boss // CLÉ 01 |
-| 3 | Éclipse / Eclipse | 11 à 15 | `partie-3_niveau-11_à_15` | : |
-| 4 | Résonance / Resonance | 16 à 20 | `partie-4_niveau-16_à_20` | Boss // CLÉ 02 |
-| 5 | Convergence | 21 à 25 | `partie-5_niveau-21_à_25` | : |
-| 6 | Origine / Origin | 26 à 30 | `partie-6_niveau-26_à_30` | Boss // CLÉ 03 |
+| 1 | Initiation | 1 à 5 | `partie-1_niveau-1_à_5` | Boss // CLÉ 01 |
+| 2 | Fractures | 6 à 10 | `partie-2_niveau-6_à_10` | Boss // CLÉ 02 |
+| 3 | Éclipse / Eclipse | 11 à 15 | `partie-3_niveau-11_à_15` | Boss // CLÉ 03 |
+| 4 | Résonance / Resonance | 16 à 20 | `partie-4_niveau-16_à_20` | Boss // CLÉ 04 |
+| 5 | Convergence | 21 à 25 | `partie-5_niveau-21_à_25` | Boss // CLÉ 05 |
+| 6 | Origine / Origin | 26 à 30 | `partie-6_niveau-26_à_30` | Boss // CLÉ 06 |
 
 La source unique de cette structure est `docs/js/levels-config.js` : parties,
 boss, clés et niveau final y sont déclarés, et les autres scripts la lisent.
@@ -72,27 +72,32 @@ boss, clés et niveau final y sont déclarés, et les autres scripts la lisent.
 
 | Boss | Page | Après | Récompense | Identifiant de clé |
 | --- | --- | --- | --- | --- |
-| Boss // CLÉ 01 : le Gardien du Signal | `boss-01.html` | niveau 10 | Clé 01 | `resonance-1` |
-| Boss // CLÉ 02 : l'Archonte des Fractures | `boss-02.html` | niveau 20 | Clé 02 | `resonance-2` |
-| Boss // CLÉ 03 : l'Occulteur | `boss-03.html` | niveau 30 | Clé 03 | `resonance-3` |
+| Boss // CLÉ 01 : la Sentinelle | `boss-01.html` | niveau 5 | Clé 01 | `resonance-1` |
+| Boss // CLÉ 02 : l'Architecte du Néant | `boss-02.html` | niveau 10 | Clé 02 | `resonance-2` |
+| Boss // CLÉ 03 : l'Occulteur | `boss-03.html` | niveau 15 | Clé 03 | `resonance-3` |
+| Boss // CLÉ 04 : le Cartographe des Failles | `boss-04.html` | niveau 20 | Clé 04 | `resonance-4` |
+| Boss // CLÉ 05 : la Matrice de Convergence | `boss-05.html` | niveau 25 | Clé 05 | `resonance-5` |
+| Boss // CLÉ 06 : le Tisseur d'origine | `boss-06.html` | niveau 30 | Clé 06 | `resonance-6` |
 
-Les identifiants de clés vont de `resonance-1` à `resonance-6`. Les visuels
-`key-01-usb.svg` à `key-07-usb.svg` existent déjà dans `docs/assets/svg/cles/`.
-Dans les sauvegardes, les boss sont enregistrés sous `boss-02`, `boss-04` et
-`boss-06` (numéro de la série qui les contient).
+Chaque boss donne une clé `resonance-1` à `resonance-6`. Après le niveau 30 et le
+Boss 06, la forge demande de glisser les six clés dans leurs matrices numérotées,
+puis d'abaisser son levier. La fusion animée débloque `resonance-7` et
+`key-07-usb.svg`.
 
 ### Parcours
 
 ```text
 Introduction → Connexion → Hub des niveaux
         ↓
-Partie 1 (niv. 1–5) → Partie 2 (niv. 6–10) → Boss // CLÉ 01
+Partie 1 (niv. 1–5) → Boss // CLÉ 01
         ↓
-Partie 3 (niv. 11–15) → Partie 4 (niv. 16–20) → Boss // CLÉ 02
+Partie 2 (niv. 6–10) → Boss // CLÉ 02
         ↓
-Partie 5 (niv. 21–25) → Partie 6 (niv. 26–30) → Boss // CLÉ 03
+Partie 3 → Boss // CLÉ 03 → Partie 4 → Boss // CLÉ 04
         ↓
-La fin finale (à venir)
+Partie 5 → Boss // CLÉ 05 → Partie 6 (niv. 26–30) → Boss // CLÉ 06
+        ↓
+Forge de mémoire : six clés alignées → levier → clé mémoire 07
 ```
 
 Les niveaux terminés restent rejouables.
@@ -112,16 +117,17 @@ Les niveaux terminés restent rejouables.
 
 ### Combats de boss
 
-- **Boss // CLÉ 01** : trois stages courts (associer des sceaux, répéter une
-  mélodie de trois symboles, cliquer le noyau pendant deux halos verts) avec six
-  unités d'énergie. La victoire reconstitue la Clé 01 dans une cinématique
-  intégrée, enregistre la récompense et mène au niveau 11.
-- **Boss // CLÉ 02** : arène tactique à cases, lignes d'impact télégraphiées,
-  six ancres à stabiliser et deux boucliers sur trois phases. La victoire
-  débloque la Clé 02 et ouvre le niveau 21.
-- **Boss // CLÉ 03** : trois phases d'anneaux d'éclipse à verrouiller du plus
-  extérieur au plus intérieur ; la phase 2 accélère, la phase 3 inverse le sens.
-  La victoire débloque la Clé 03 et termine la campagne principale.
+- **Boss // CLÉ 01** : sceaux, mémorisation d'une séquence et interception de
+  pulsations. Les séquences s'allongent et l'énergie diminue avec la difficulté.
+- **Boss // CLÉ 02, 04 et 05** : arène tactique, ancres à stabiliser et lignes
+  d'impact télégraphiées. Les boss avancés ajoutent des ancres, réduisent la
+  cohérence et raccourcissent le délai avant les frappes.
+- **Boss // CLÉ 03** : combat d'anneaux d'éclipse conservé, avec rotations,
+  fenêtres à aligner et plusieurs phases.
+- **Boss // CLÉ 06** : quatre labyrinthes procéduraux de plus en plus grands,
+  checkpoints ordonnés, cases corrompues et budget de déplacements décroissant.
+- **Forge mémoire** : glisser les six clés sur les matrices correspondantes,
+  abaisser le levier et les voir fusionner une à une pour obtenir la clé 07.
 
 ## Fonctionnalités
 
@@ -158,7 +164,7 @@ docs/
 │       └── motifs/
 ├── css/
 │   ├── base/           fonts.css, responsive.css
-│   ├── bosses/         boss-01.css … boss-03.css
+│   ├── bosses/         boss-01.css … boss-06.css, key-forge.css
 │   ├── composants/     ui-effects, key-tray, key-fragments, echo-ai, dev-mode…
 │   ├── niveaux/        niveaux-communs.css + un fichier par partie
 │   └── pages/          home, login, niveaux, introduction, dev-mode-page…
@@ -166,7 +172,8 @@ docs/
 │   ├── introduction.html, login.html, niveaux.html, dev-mode.html
 │   └── partie-N_niveau-X_à_Y/   niveau-NN.html et boss-0N.html
 └── js/
-    ├── bosses/         boss-01.js … boss-03.js
+    ├── bosses/         boss-01.js … boss-06.js
+    ├── key-forge.js    Fusion des six clés et récompense clé 07
     ├── niveaux/        Contrôleurs et puzzles des niveaux
     └── *.js            Modules partagés
 
@@ -183,7 +190,7 @@ documentation/
 | `docs/js/save-system.js` | Comptes, sauvegardes et clés débloquées |
 | `docs/js/level-guard.js` | Accès aux niveaux selon la progression |
 | `docs/js/niveaux/` | Puzzles et contrôleurs des niveaux (`partie-1-puzzles.js`, etc.) |
-| `docs/js/bosses/` | Contrôleurs des trois combats |
+| `docs/js/bosses/` | Contrôleurs des six combats |
 | `docs/js/key-fragments.js`, `key-tray.js` | Assemblage des clés et panneau des clés |
 | `docs/js/ui-effects.js` | Curseur, scrollbars, accessibilité et « Réduire les effets » |
 | `docs/js/home-line.js` | Ligne de l'accueil en électrocardiogramme |

@@ -51,8 +51,8 @@
         </div>
 
         <div class="forge-workbench">
-          <div class="forge-key-tray" id="forgeKeyTray" role="group" aria-label="Clés de résonance à assembler"></div>
           <div class="forge-anvil" id="forgeAnvil">
+            <img class="forge-machine" src="../../assets/svg/cles/key-forge-machine.svg" alt="" aria-hidden="true" />
             <div class="forge-anvil-rings" aria-hidden="true"><i></i><i></i><i></i></div>
             <div class="forge-core" id="forgeCore">
               <span class="forge-core-label" id="forgeCoreLabel">NOYAU INACTIF</span>
@@ -60,13 +60,14 @@
             </div>
             <div class="forge-slots" id="forgeSlots" role="group" aria-label="Six emplacements numérotés"></div>
           </div>
+          <div class="forge-key-tray" id="forgeKeyTray" role="group" aria-label="Six clés de résonance à glisser"></div>
         </div>
 
         <p class="puzzle-status forge-status" id="forgeStatus" role="status" aria-live="polite">
           Sélectionne une clé ou fais-la glisser vers son emplacement.
         </p>
         <div class="forge-actions">
-          <button class="next-level-button forge-finish" id="forgeFinishButton" type="button" hidden>
+          <button class="next-level-button forge-finish" id="forgeFinishButton" type="button" aria-label="Abaisser le levier pour forger la clé 07" hidden>
             FORGER LA CLÉ 07
           </button>
           <button class="reset-button" id="forgeExitButton" type="button" hidden>
@@ -79,7 +80,7 @@
       <span id="forgeFooter">ÉCHO // FORGE DE MÉMOIRE</span>
       <span>CLÉ MÉMOIRE // 07</span>
     </footer>
-    <script src="../../js/save-system.js?v=4"></script>
+    <script src="../../js/save-system.js?v=5"></script>
     <script src="../../js/levels-config.js?v=10"></script>
     <script src="../../js/language.js?v=2"></script>
     <script src="../../js/ui-effects.js?v=12"></script>
