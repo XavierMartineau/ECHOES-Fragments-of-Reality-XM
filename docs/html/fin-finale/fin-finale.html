@@ -4,87 +4,80 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="icon" type="image/svg+xml" href="../../assets/svg/identite/echoes-favicon.svg?v=2" />
-    <title>ECHOES - FORGE DE MÉMOIRE</title>
-    <script src="../../../lag-fix/fps-boost.js"></script>
-    <link rel="stylesheet" href="../../css/niveaux/niveaux-communs.css?v=2" />
-    <link rel="stylesheet" href="../../css/base/responsive.css?v=m1" />
+    <title>ECHOES — Forge de mémoire</title>
     <link rel="stylesheet" href="../../css/base/fonts.css" />
-    <link rel="stylesheet" href="../../css/bosses/key-forge.css?v=1" />
+    <link rel="stylesheet" href="../../css/composants/key-fragments.css?v=1" />
+    <link rel="stylesheet" href="../../css/bosses/key-forge.css?v=6" />
   </head>
   <body class="forge-page">
-    <div class="background-glow" aria-hidden="true"></div>
-    <div class="grid-overlay" aria-hidden="true"></div>
-    <header class="level-header">
-      <a class="brand" href="../niveaux.html" aria-label="ECHOES">ECHOES</a>
-      <div class="level-meta">
-        <span id="forgeEyebrow">FORGE MÉMOIRE // PROTOCOLE 07</span>
-        <div class="level-progress" aria-hidden="true"></div>
-        <strong id="forgeProgress">0 / 6 MODULES</strong>
+    <section class="forge-orientation" role="status" aria-live="polite" aria-labelledby="forgeOrientationTitle">
+      <div class="forge-orientation-card">
+        <svg class="forge-orientation-icon" viewBox="0 0 120 100" aria-hidden="true">
+          <g class="forge-orientation-device forge-orientation-phone">
+            <rect x="28" y="13" width="38" height="65" rx="6" fill="none" stroke="currentColor" stroke-width="3"/>
+            <path d="M42 70h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </g>
+          <g class="forge-orientation-device forge-orientation-tablet">
+            <rect x="17" y="10" width="60" height="72" rx="5" fill="none" stroke="currentColor" stroke-width="3"/>
+            <circle cx="47" cy="76" r="2" fill="currentColor"/>
+          </g>
+          <path d="M75 26a35 35 0 0 1 11 43M79 62l7 8 8-7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h1 id="forgeOrientationTitle">Tourne ton appareil à l’horizontale</h1>
+        <p id="forgeOrientationDescription">Place ton téléphone ou ton iPad sur le côté pour afficher la forge et les six clés.</p>
       </div>
+    </section>
+    <div class="forge-background" aria-hidden="true"></div>
+    <header class="forge-header">
+      <a class="forge-brand" href="../niveaux.html">ECHOES <span>// FONDERIE</span></a>
+      <div class="forge-header-meta"><span id="forgeEyebrow">FIN FINALE // PROTOCOLE 07</span><strong id="forgeProgress">0 / 6 SIGNAUX</strong></div>
     </header>
-    <main class="level-shell forge-shell">
-      <section class="level-intro" aria-labelledby="forgeTitle">
-        <p class="eyebrow" id="forgeKicker">APRÈS LE NIVEAU 30 // ATELIER D'ECHO</p>
-        <h1 id="forgeTitle">La forge de mémoire</h1>
-        <p class="level-description" id="forgeDescription">
-          Les six clés de résonance doivent être réassemblées dans l'ordre. Place chaque clé dans l'emplacement portant le même numéro pour activer le noyau.
-        </p>
-        <div class="system-transmission" aria-live="polite">
-          <span class="system-label">ECHO://FORGE-07</span>
-          <p id="forgeMessage">SYSTÈME EN ATTENTE // SIX CLÉS REQUISES</p>
+    <main class="forge-shell">
+      <section class="forge-intro" aria-labelledby="forgeHeading">
+        <div>
+          <p class="forge-kicker" id="forgeKicker">APRÈS LE NIVEAU 30 // ATELIER D'ECHO</p>
+          <h1 id="forgeHeading">La forge de mémoire</h1>
+          <p class="forge-description" id="forgeDescription">Glisse les six clés sur les cercles correspondants. Lorsque les six voyants sont allumés, abaisse le levier pour forger la clé 07.</p>
+        </div>
+        <div class="forge-protocol" aria-hidden="true"><span>PROTOCOL</span><strong>07</strong><small>MEMORY FOUNDRY</small></div>
+      </section>
+      <section class="forge-panel" aria-labelledby="forgePanelHeading">
+        <div class="forge-panel-heading">
+          <div><p class="forge-kicker" id="forgePanelKicker">SIX CLÉS // UNE MÉMOIRE</p><h2 id="forgePanelHeading">La forge des résonances</h2></div>
+          <span class="forge-panel-index" aria-hidden="true">ECHO // 07</span>
+        </div>
+        <p class="forge-help" id="forgeHelp">Glisse une clé du tiroir vers son cercle, ou sélectionne une clé puis un cercle. Double-clique sur une clé placée pour la remettre dans le tiroir. Sur tactile ou au clavier, sélectionne le cercle pour la retirer.</p>
+        <p class="forge-help forge-touch-help" id="forgeTouchHelp">Touche un cercle, choisis sa clé, puis touche le levier quand les six voyants sont allumés.</p>
+        <div class="forge-workspace">
+          <div id="forgeStage" class="forge-stage"></div>
+          <div class="forge-dock-wrap">
+            <h3 id="forgeDockTitle">CLÉS DE RÉSONANCE // GLISSER VERS LA FORGE</h3>
+            <section id="forgeDock" class="forge-dock" aria-label="Clés disponibles"></section>
+          </div>
+        </div>
+        <p id="forgeStatus" class="forge-status" role="status" aria-live="polite">Chargement de la forge…</p>
+        <div class="forge-toolbar">
+          <button type="button" id="forgeReset">Recommencer</button>
+          <a href="../niveaux.html" id="forgeExit">Retour à la campagne</a>
         </div>
       </section>
-
-      <section class="puzzle-panel forge-panel" aria-labelledby="forgePanelTitle">
-        <div class="panel-heading">
-          <div>
-            <p class="panel-kicker" id="forgePanelKicker">ASSEMBLAGE // NOYAU DE MÉMOIRE</p>
-            <h2 id="forgePanelTitle">Les matrices d'accordage</h2>
-          </div>
-          <span class="progress-readout" id="forgeReadout" aria-live="polite">0 / 6</span>
-        </div>
-
-        <div class="forge-instructions" id="forgeInstructions">
-          <p><strong>1.</strong> Fais glisser chaque clé vers la matrice du même numéro.</p>
-          <p><strong>2.</strong> Sur écran tactile ou au clavier, sélectionne une clé puis son emplacement.</p>
-          <p><strong>3.</strong> Une mauvaise matrice refuse la clé; les six correspondances sont nécessaires.</p>
-        </div>
-
-        <div class="forge-workbench">
-          <div class="forge-anvil" id="forgeAnvil">
-            <img class="forge-machine" src="../../assets/svg/cles/key-forge-machine.svg" alt="" aria-hidden="true" />
-            <div class="forge-anvil-rings" aria-hidden="true"><i></i><i></i><i></i></div>
-            <div class="forge-core" id="forgeCore">
-              <span class="forge-core-label" id="forgeCoreLabel">NOYAU INACTIF</span>
-              <img id="keySeven" src="../../assets/svg/cles/key-07-usb.svg" alt="Clé mémoire ECHO 07" hidden />
-            </div>
-            <div class="forge-slots" id="forgeSlots" role="group" aria-label="Six emplacements numérotés"></div>
-          </div>
-          <div class="forge-key-tray" id="forgeKeyTray" role="group" aria-label="Six clés de résonance à glisser"></div>
-        </div>
-
-        <p class="puzzle-status forge-status" id="forgeStatus" role="status" aria-live="polite">
-          Sélectionne une clé ou fais-la glisser vers son emplacement.
-        </p>
-        <div class="forge-actions">
-          <button class="next-level-button forge-finish" id="forgeFinishButton" type="button" aria-label="Abaisser le levier pour forger la clé 07" hidden>
-            FORGER LA CLÉ 07
-          </button>
-          <button class="reset-button" id="forgeExitButton" type="button" hidden>
-            Retourner à la campagne
-          </button>
-        </div>
-      </section>
+      <footer class="forge-footer"><span>ÉCHO // FORGE DE MÉMOIRE</span><span>CLÉ MÉMOIRE // 07</span></footer>
     </main>
-    <footer class="level-footer">
-      <span id="forgeFooter">ÉCHO // FORGE DE MÉMOIRE</span>
-      <span>CLÉ MÉMOIRE // 07</span>
-    </footer>
+      <section id="forgePicker" class="forge-picker" role="dialog" aria-modal="true" aria-labelledby="forgePickerTitle" hidden>
+        <div class="forge-picker-panel">
+          <div class="forge-picker-heading">
+            <h2 id="forgePickerTitle">Choisis une clé</h2>
+            <button type="button" id="forgePickerClose" aria-label="Fermer">×</button>
+          </div>
+          <div id="forgePickerKeys" class="forge-picker-keys"></div>
+          <button type="button" id="forgeRemove" hidden>Retirer la clé</button>
+        </div>
+      </section>
     <script src="../../js/save-system.js?v=5"></script>
     <script src="../../js/levels-config.js?v=10"></script>
-    <script src="../../js/language.js?v=2"></script>
-    <script src="../../js/ui-effects.js?v=12"></script>
     <script src="../../js/level-guard.js?v=16"></script>
-    <script src="../../js/key-forge.js?v=1"></script>
+    <script src="../../js/dev-mode.js?v=14"></script>
+    <script src="../../js/key-fragments.js?v=1"></script>
+    <script type="module" src="../../js/key-forge.js?v=6"></script>
   </body>
 </html>

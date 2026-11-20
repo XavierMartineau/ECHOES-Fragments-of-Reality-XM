@@ -39,7 +39,7 @@
     },
   }[lang];
 
-  const playCinematic = ({ keyNumber, src, onContinue, onComplete }) => {
+  const playCinematic = ({ keyNumber, src, subtitle, onContinue, onComplete }) => {
     const root = document.createElement("div");
     root.className = "kf-cine";
     root.setAttribute("role", "dialog");
@@ -88,7 +88,7 @@
     const sub = document.createElement("p");
     sub.className = "kf-cine-sub";
     sub.id = "kf-cine-sub";
-    sub.textContent = cineText.sub;
+    sub.textContent = subtitle || cineText.sub;
     const actions = document.createElement("div");
     actions.className = "kf-cine-actions";
     actions.setAttribute(

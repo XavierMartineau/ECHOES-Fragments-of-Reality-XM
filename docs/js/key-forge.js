@@ -1,326 +1,558 @@
-// FINAL FORGE // match the six resonance keys to their numbered sockets.
-(() => {
-  const save = window.EchoesSave;
-  const levels = window.EchoesLevels;
-  if (!save || !levels) return;
+const save = window.EchoesSave;
+const levels = window.EchoesLevels;
+const english = localStorage.getItem("echoes-language") === "en";
+const text = english ? {
+  loading: "Loading the forge…",
+  instructions: "Place each key in its matching socket, then pull the lever.",
+  missing: "Collect the six resonance keys before using the forge.",
+  empty: n => `Socket ${n}, empty`,
+  occupied: (n, k, correct) => `Socket ${n}, key ${k}, ${correct ? "correct" : "incorrect"}`,
+  placed: (k, n, correct) => `Key ${k} placed in socket ${n}: ${correct ? "correct" : "incorrect"}.`,
+  removed: n => `Key removed from socket ${n}.`,
+  ready: "All six sockets are correct. The lever is unlocked.",
+  locked: "Place all six correct keys before pulling the lever.",
+  complete: "Key 07 forged.",
+  forging: "The six signals are merging. Key 07 is taking shape…",
+  cinematicSub: "The six resonance keys have united to create the memory key.",
+  error: "Could not save key 07. Pull the lever again to retry.",
+  loadError: "Unable to load the forge. Use a local web server and try again.",
+  picker: n => `Choose a key for socket ${n}`,
+  key: n => `Key ${n}`,
+  used: "already placed",
+  remove: "Remove key",
+  close: "Close",
+  reset: "Restart",
+  exit: "Return to campaign",
+  lever: "Pull the forge lever",
+  eyebrow: "FINAL ENDING // PROTOCOL 07",
+  kicker: "AFTER LEVEL 30 // ECHO'S WORKSHOP",
+  heading: "The memory forge",
+  description: "Drag the six keys onto their matching circles. Once all six lights are on, pull the lever to forge key 07.",
+  panelKicker: "SIX KEYS // ONE MEMORY",
+  panelHeading: "The resonance forge",
+  help: "Drag a key from the tray to its circle, or select a key and then a circle. Double-click a placed key to return it to the tray. On touch or keyboard, select a circle to remove it.",
+  touchHelp: "Tap a circle, choose its key, then tap the lever when all six lights are on.",
+  orientationTitle: "Turn your device sideways",
+  orientationDescription: "Turn your phone or iPad horizontally to display the forge and all six keys.",
+  dockTitle: "RESONANCE KEYS // DRAG TO THE FORGE",
+  dockLabel: "Available keys",
+  progress: n => `${n} / 6 SIGNALS`,
+  selected: n => `Key ${n} selected. Choose a socket.`,
+} : {
+  loading: "Chargement de la forge…",
+  instructions: "Place chaque clé dans son emplacement, puis abaisse le levier.",
+  missing: "Récupère les six clés de résonance avant d'utiliser la forge.",
+  empty: n => `Emplacement ${n}, vide`,
+  occupied: (n, k, correct) => `Emplacement ${n}, clé ${k}, ${correct ? "correcte" : "incorrecte"}`,
+  placed: (k, n, correct) => `Clé ${k} placée sur l'emplacement ${n} : ${correct ? "correct" : "incorrect"}.`,
+  removed: n => `Clé retirée de l'emplacement ${n}.`,
+  ready: "Les six emplacements sont validés. Le levier est débloqué.",
+  locked: "Place les six bonnes clés avant de tirer le levier.",
+  complete: "Clé 07 forgée.",
+  forging: "Les six signaux fusionnent. La clé 07 prend forme…",
+  cinematicSub: "Les six clés de résonance se sont réunies pour créer la clé mémoire.",
+  error: "Impossible d'enregistrer la clé 07. Tire de nouveau le levier pour réessayer.",
+  loadError: "Impossible de charger la forge. Utilise un serveur local et réessaie.",
+  picker: n => `Choisis une clé pour l'emplacement ${n}`,
+  key: n => `Clé ${n}`,
+  used: "déjà placée",
+  remove: "Retirer la clé",
+  close: "Fermer",
+  reset: "Recommencer",
+  exit: "Retour à la campagne",
+  lever: "Tirer le levier de la forge",
+  eyebrow: "FIN FINALE // PROTOCOLE 07",
+  kicker: "APRÈS LE NIVEAU 30 // ATELIER D'ECHO",
+  heading: "La forge de mémoire",
+  description: "Glisse les six clés sur les cercles correspondants. Lorsque les six voyants sont allumés, abaisse le levier pour forger la clé 07.",
+  panelKicker: "SIX CLÉS // UNE MÉMOIRE",
+  panelHeading: "La forge des résonances",
+  help: "Glisse une clé du tiroir vers son cercle, ou sélectionne une clé puis un cercle. Double-clique sur une clé placée pour la remettre dans le tiroir. Sur tactile ou au clavier, sélectionne le cercle pour la retirer.",
+  touchHelp: "Touche un cercle, choisis sa clé, puis touche le levier quand les six voyants sont allumés.",
+  orientationTitle: "Tourne ton appareil à l’horizontale",
+  orientationDescription: "Place ton téléphone ou ton iPad sur le côté pour afficher la forge et les six clés.",
+  dockTitle: "CLÉS DE RÉSONANCE // GLISSER VERS LA FORGE",
+  dockLabel: "Clés disponibles",
+  progress: n => `${n} / 6 SIGNAUX`,
+  selected: n => `Clé ${n} sélectionnée. Choisis un emplacement.`,
+};
 
-  const language =
-    localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
-  const copy = {
-    fr: {
-      label: "CLÉ",
-      select: (number) => `Clé ${number} sélectionnée. Choisis l'emplacement ${number}.`,
-      placed: (number) => `Clé ${number} correctement installée.`,
-      wrong: (key, slot) => `Mauvais emplacement : la clé ${key} va dans la matrice ${key}, pas ${slot}.`,
-      progress: (count) => `${count} / 6 MODULES`,
-      status: "Sélectionne une clé ou fais-la glisser vers son emplacement.",
-      ready: "Les six clés sont alignées. Active la forge pour créer la clé 07.",
-      missing: "Les six clés de résonance sont requises avant de lancer la forge.",
-      saving: "Forge activée : synchronisation de la clé mémoire 07…",
-      merging: (number) => `La clé ${number} est absorbée par le noyau central…`,
-      error: "La clé 07 n'a pas pu être enregistrée. Réessaie sans quitter la forge.",
-      forged: "Assemblage réussi. La clé mémoire 07 est maintenant dans ta collection.",
-      owned: "La clé mémoire 07 est déjà forgée et enregistrée.",
-      finish: "ABAISSER LE LEVIER // FORGER",
-      retry: "RÉESSAYER L'ENREGISTREMENT",
-      exit: "Retourner à la campagne",
-      empty: "MATRICE LIBRE",
-      installed: "INSTALLÉE",
-      anvil: "NOYAU INACTIF",
-      anvilReady: "NOYAU ACTIF",
-      complete: "CLÉ MÉMOIRE 07 FORGÉE",
-    },
-    en: {
-      label: "KEY",
-      select: (number) => `Key ${number} selected. Choose socket ${number}.`,
-      placed: (number) => `Key ${number} is correctly installed.`,
-      wrong: (key, slot) => `Wrong socket: key ${key} belongs in matrix ${key}, not ${slot}.`,
-      progress: (count) => `${count} / 6 MODULES`,
-      status: "Select a key or drag it to its socket.",
-      ready: "All six keys are aligned. Activate the forge to create key 07.",
-      missing: "All six resonance keys are required before the forge can start.",
-      saving: "Forge activated: synchronizing memory key 07…",
-      merging: (number) => `Key ${number} is being absorbed by the central core…`,
-      error: "Key 07 could not be saved. Retry without leaving the forge.",
-      forged: "Assembly complete. Memory key 07 is now in your collection.",
-      owned: "Memory key 07 has already been forged and saved.",
-      finish: "PULL LEVER // FORGE KEY 07",
-      retry: "RETRY SAVE",
-      exit: "Return to campaign",
-      empty: "EMPTY MATRIX",
-      installed: "INSTALLED",
-      anvil: "CORE INACTIVE",
-      anvilReady: "CORE ACTIVE",
-      complete: "MEMORY KEY 07 FORGED",
-    },
-  }[language];
-  const keySevenId = "resonance-7";
-  const keyIds = Array.from({ length: 6 }, (_, index) => `resonance-${index + 1}`);
-  const tray = document.getElementById("forgeKeyTray");
-  const slots = document.getElementById("forgeSlots");
-  const status = document.getElementById("forgeStatus");
-  const readout = document.getElementById("forgeReadout");
-  const progress = document.getElementById("forgeProgress");
-  const finishButton = document.getElementById("forgeFinishButton");
-  const exitButton = document.getElementById("forgeExitButton");
-  const keySeven = document.getElementById("keySeven");
-  const coreLabel = document.getElementById("forgeCoreLabel");
-  const placed = new Set();
-  const keyButtons = new Map();
-  const slotButtons = new Map();
-  const mergedKeys = new Set();
-  let selectedKey = null;
-  let forged = false;
-  let merging = false;
+const stage = document.getElementById("forgeStage");
+const status = document.getElementById("forgeStatus");
+const dock = document.getElementById("forgeDock");
+const picker = document.getElementById("forgePicker");
+const pickerKeys = document.getElementById("forgePickerKeys");
+const pickerTitle = document.getElementById("forgePickerTitle");
+const pickerClose = document.getElementById("forgePickerClose");
+const removeButton = document.getElementById("forgeRemove");
+const resetButton = document.getElementById("forgeReset");
+const exit = document.getElementById("forgeExit");
+const devMode = localStorage.getItem("echoes-dev-unlock") === "1" ||
+  sessionStorage.getItem("echoes-dev-unlock") === "1";
+const numbers = [1, 2, 3, 4, 5, 6];
+const state = { slots: Object.fromEntries(numbers.map(n => [n, null])), pulled: false };
+let svg;
+let lever;
+let pickerSlot = null;
+let hoverSlot = null;
+let drag = null;
+let leverDrag = null;
+let locked = true;
+let selectedKey = null;
+let pendingSlotClick = null;
+let scrollFrame = null;
+let forging = false;
 
-  const setStatus = (message, isError = false) => {
-    status.textContent = message;
-    status.classList.toggle("error", isError);
-    status.classList.toggle("success", !isError && forged);
-  };
+function cancelPendingSlotClick() {
+  if (pendingSlotClick) window.clearTimeout(pendingSlotClick.timer);
+  pendingSlotClick = null;
+}
 
-  const updateProgress = () => {
-    const count = placed.size;
-    readout.textContent = `${count} / 6`;
-    progress.textContent = copy.progress(count);
-    finishButton.hidden = count !== 6 || forged;
-    if (count === 6 && !forged) setStatus(copy.ready);
-  };
+function announce(message, error = false) {
+  status.textContent = message;
+  status.classList.toggle("is-error", error);
+}
 
-  const makeKeyButton = (key) => {
-    const button = document.createElement("button");
-    button.className = "forge-key";
-    button.type = "button";
-    button.draggable = true;
-    button.dataset.keyNumber = String(key.number);
-    button.setAttribute("aria-pressed", "false");
-    button.setAttribute("aria-label", `${copy.label} ${key.number}`);
-    button.innerHTML = `<img src="${key.image}" alt="" /><span>${copy.label} ${String(key.number).padStart(2, "0")}</span>`;
-    button.addEventListener("click", () => selectKey(key.number));
-    button.addEventListener("dragstart", (event) => {
-      if (placed.has(key.number)) {
-        event.preventDefault();
-        return;
-      }
-      selectedKey = key.number;
-      event.dataTransfer.setData("text/plain", String(key.number));
-      event.dataTransfer.effectAllowed = "move";
-      button.classList.add("is-selected");
-    });
-    button.addEventListener("dragend", () => {
-      button.classList.remove("is-selected");
-    });
-    keyButtons.set(key.number, button);
-    tray.appendChild(button);
-  };
+function snapshot() {
+  return { slots: { ...state.slots }, pulled: state.pulled };
+}
 
-  const makeSlotButton = (number) => {
-    const button = document.createElement("button");
-    button.className = "forge-slot";
-    button.type = "button";
-    button.dataset.slotNumber = String(number);
-    button.setAttribute("aria-label", `${copy.label} ${number}: ${copy.empty}`);
-    button.innerHTML = `
-      <span class="forge-slot-number">MATRICE ${String(number).padStart(2, "0")}</span>
-      <img alt="" hidden />
-      <span class="forge-slot-label">${copy.empty}</span>`;
-    button.addEventListener("click", () => {
-      if (selectedKey !== null) placeKey(selectedKey, number);
-    });
-    button.addEventListener("dragover", (event) => {
-      if (placed.has(number) || forged) return;
-      event.preventDefault();
-      event.dataTransfer.dropEffect = "move";
-      button.classList.add("is-target");
-    });
-    button.addEventListener("dragleave", () => {
-      button.classList.remove("is-target");
-    });
-    button.addEventListener("drop", (event) => {
-      event.preventDefault();
-      button.classList.remove("is-target");
-      const keyNumber = Number(event.dataTransfer.getData("text/plain"));
-      if (Number.isInteger(keyNumber)) placeKey(keyNumber, number);
-    });
-    slotButtons.set(number, button);
-    slots.appendChild(button);
-  };
+function changed() {
+  document.dispatchEvent(new CustomEvent("forge:change", { detail: snapshot() }));
+}
 
-  const selectKey = (number) => {
-    if (forged || placed.has(number)) return;
-    selectedKey = number;
-    keyButtons.forEach((button, key) => {
-      button.classList.toggle("is-selected", key === number);
-      button.setAttribute("aria-pressed", String(key === number));
-    });
-    setStatus(copy.select(number));
-    slotButtons.get(number)?.focus();
-  };
+function ready() {
+  return numbers.every(n => state.slots[n] === n);
+}
 
-  const placeKey = (keyNumber, slotNumber) => {
-    if (forged || placed.has(keyNumber) || placed.has(slotNumber)) return;
-    if (keyNumber !== slotNumber) {
-      const slot = slotButtons.get(slotNumber);
-      slot.classList.add("is-wrong");
-      setStatus(copy.wrong(keyNumber, slotNumber), true);
-      window.setTimeout(() => slot.classList.remove("is-wrong"), 300);
-      return;
-    }
+function element(id) {
+  return svg.querySelector(`#${id}`);
+}
 
-    placed.add(keyNumber);
-    const keyButton = keyButtons.get(keyNumber);
-    const slot = slotButtons.get(slotNumber);
-    const image = slot.querySelector("img");
-    image.src = levels.keys[keyNumber - 1].image;
-    image.hidden = false;
-    slot.querySelector(".forge-slot-label").textContent = copy.installed;
-    slot.classList.add("is-correct");
-    slot.setAttribute("aria-label", `${copy.label} ${slotNumber}: ${copy.installed}`);
-    keyButton.classList.remove("is-selected");
-    keyButton.classList.add("is-placed");
-    keyButton.draggable = false;
-    keyButton.disabled = true;
-    keyButton.setAttribute("aria-pressed", "false");
-    selectedKey = null;
-    setStatus(copy.placed(keyNumber));
-    updateProgress();
-  };
-
-  const showForgedKey = () => {
-    forged = true;
-    document.body.classList.add("is-forged");
-    document.body.classList.remove("is-merging");
-    keySeven.hidden = false;
-    coreLabel.textContent = copy.anvilReady;
-    coreLabel.hidden = true;
-    finishButton.hidden = true;
-    exitButton.hidden = false;
-    finishButton.disabled = false;
-    exitButton.textContent = copy.exit;
-  };
-
-  const mergeKey = async (number) => {
-    if (mergedKeys.has(number)) return;
-    const slot = slotButtons.get(number);
-    const image = slot.querySelector("img");
-    const core = document.getElementById("forgeCore");
-    const from = image.getBoundingClientRect();
-    const to = core.getBoundingClientRect();
-    const deltaX = to.left + to.width / 2 - (from.left + from.width / 2);
-    const deltaY = to.top + to.height / 2 - (from.top + from.height / 2);
-    image.classList.add("is-merging");
-    slot.classList.add("is-merging");
-    setStatus(copy.merging(number));
-    document.getElementById("forgeMessage").textContent = copy.merging(number);
-    if (typeof image.animate === "function") {
-      const animation = image.animate(
-        [
-          { transform: "translate(0, 0) scale(1) rotate(0)", opacity: 1 },
-          {
-            transform: `translate(${deltaX}px, ${deltaY}px) scale(.15) rotate(720deg)`,
-            opacity: 0,
-          },
-        ],
-        { duration: 850, easing: "cubic-bezier(.2,.8,.25,1)", fill: "forwards" },
-      );
-      await new Promise((resolve) => {
-        animation.onfinish = resolve;
-        animation.oncancel = resolve;
-      });
-    } else {
-      await new Promise((resolve) => window.setTimeout(resolve, 850));
-    }
-    image.hidden = true;
-    slot.classList.add("is-merged");
-    mergedKeys.add(number);
-    core.classList.add("is-absorbing");
-    await new Promise((resolve) => window.setTimeout(resolve, 180));
-    core.classList.remove("is-absorbing");
-  };
-
-  const forgeKey = async () => {
-    if (placed.size !== keyIds.length || forged || merging) return;
-    merging = true;
-    finishButton.disabled = true;
-    finishButton.textContent = copy.saving;
-    document.body.classList.add("is-merging");
-    for (let number = 1; number <= 6; number += 1) {
-      await mergeKey(number);
-    }
-    document.body.classList.remove("is-merging");
-    setStatus(copy.saving);
-    document.getElementById("forgeMessage").textContent = copy.complete;
-    if (!save.getKeys().includes(keySevenId) && !save.unlockKey(keySevenId)) {
-      merging = false;
-      finishButton.disabled = false;
-      finishButton.textContent = copy.retry;
-      setStatus(copy.error, true);
-      return;
-    }
-    if (!levels.markCompleted("finale")) {
-      merging = false;
-      finishButton.disabled = false;
-      finishButton.textContent = copy.retry;
-      setStatus(copy.error, true);
-      return;
-    }
-    merging = false;
-    showForgedKey();
-    finishButton.textContent = copy.finish;
-    setStatus(copy.forged);
-  };
-
-  levels.keys.forEach(makeKeyButton);
-  for (let number = 1; number <= 6; number += 1) makeSlotButton(number);
-  finishButton.textContent = copy.finish;
-  exitButton.textContent = copy.exit;
-  coreLabel.textContent = copy.anvil;
-  document.getElementById("forgeMessage").textContent =
-    language === "en" ? "SYSTEM READY // SIX KEYS REQUIRED" : "SYSTÈME EN ATTENTE // SIX CLÉS REQUISES";
-  document.getElementById("forgeEyebrow").textContent =
-    language === "en" ? "MEMORY FORGE // PROTOCOL 07" : "FORGE MÉMOIRE // PROTOCOLE 07";
-  document.getElementById("forgeKicker").textContent =
-    language === "en" ? "AFTER LEVEL 30 // ECHO'S WORKSHOP" : "APRÈS LE NIVEAU 30 // ATELIER D'ECHO";
-  document.getElementById("forgeTitle").textContent =
-    language === "en" ? "The memory forge" : "La forge de mémoire";
-  document.getElementById("forgeDescription").textContent =
-    language === "en"
-      ? "The six resonance keys must be reassembled in order. Place each key in the socket with the matching number to activate the core."
-      : "Les six clés de résonance doivent être réassemblées dans l'ordre. Place chaque clé dans l'emplacement portant le même numéro pour activer le noyau.";
-  document.getElementById("forgePanelKicker").textContent =
-    language === "en" ? "ASSEMBLY // MEMORY CORE" : "ASSEMBLAGE // NOYAU DE MÉMOIRE";
-  document.getElementById("forgePanelTitle").textContent =
-    language === "en" ? "Resonance matrices" : "Les matrices d'accordage";
-  document.getElementById("forgeFooter").textContent =
-    language === "en" ? "ECHO // MEMORY FORGE" : "ÉCHO // FORGE DE MÉMOIRE";
-  document.getElementById("forgeInstructions").innerHTML =
-    language === "en"
-      ? "<p><strong>1.</strong> Drag each key to the matrix with the same number.</p><p><strong>2.</strong> On touch screens or with a keyboard, select a key, then its socket.</p><p><strong>3.</strong> A mismatched socket rejects the key; all six matches are required.</p>"
-      : "<p><strong>1.</strong> Fais glisser chaque clé vers la matrice du même numéro.</p><p><strong>2.</strong> Sur écran tactile ou au clavier, sélectionne une clé puis son emplacement.</p><p><strong>3.</strong> Une mauvaise matrice refuse la clé; les six correspondances sont nécessaires.</p>";
-  exitButton.addEventListener("click", () => {
-    window.location.href = levels.hubUrl;
+function render() {
+  const correctCount = numbers.filter(n => state.slots[n] === n).length;
+  document.getElementById("forgeProgress").textContent = text.progress(correctCount);
+  numbers.forEach(n => {
+    const key = state.slots[n];
+    const correct = key === n;
+    const slot = element(`slot-${n}`);
+    const shape = element(`key-${n}`);
+    if (key === null) slot.removeAttribute("data-holds");
+    else slot.setAttribute("data-holds", String(key));
+    slot.classList.toggle("is-hover", hoverSlot === n || pickerSlot === n);
+    slot.classList.toggle("is-active", correct);
+    slot.classList.toggle("is-correct", correct);
+    slot.classList.toggle("is-wrong", key !== null && !correct);
+    shape.classList.toggle("is-correct", correct);
+    shape.classList.toggle("is-wrong", key !== null && !correct);
+    ["link", "lever-lamp", "pip"].forEach(prefix =>
+      element(`${prefix}-${n}`).classList.toggle("is-active", correct));
+    slot.setAttribute("aria-label", key === null ? text.empty(n) : text.occupied(n, key, correct));
+    slot.setAttribute("aria-disabled", String(locked || state.pulled));
   });
-  finishButton.addEventListener("click", forgeKey);
+  lever.classList.toggle("is-ready", ready() && !locked);
+  lever.classList.toggle("is-pulled", state.pulled);
+  lever.setAttribute("aria-disabled", String(locked || !ready() || state.pulled));
+  element("key-7").classList.toggle("is-correct", state.pulled && !forging);
+  element("core-heat").style.opacity = String(state.pulled ? 1 : .16 + correctCount * .14);
+  ["key7-fill", "core-aura"].forEach(id => {
+    if (state.pulled) element(id).style.opacity = "1";
+    else element(id).style.removeProperty("opacity");
+  });
+  const used = Object.values(state.slots);
+  dock.querySelectorAll("button").forEach(button => {
+    const placed = used.includes(Number(button.dataset.key));
+    button.classList.toggle("is-placed", placed);
+    button.classList.toggle("is-selected", Number(button.dataset.key) === selectedKey);
+    button.setAttribute("aria-pressed", String(Number(button.dataset.key) === selectedKey));
+    button.setAttribute("aria-label", `${text.key(button.dataset.key)}${placed ? ` — ${text.used}` : ""}`);
+    button.disabled = placed || locked || state.pulled;
+  });
+  pickerKeys.querySelectorAll("button").forEach(button => {
+    const placed = used.includes(Number(button.dataset.key));
+    button.classList.toggle("is-used", placed);
+    button.setAttribute("aria-label", `${text.key(button.dataset.key)}${placed ? ` — ${text.used}` : ""}`);
+    button.disabled = locked || state.pulled;
+  });
+  removeButton.hidden = pickerSlot === null || state.slots[pickerSlot] === null;
+  resetButton.disabled = forging;
+}
 
-  const ownedKeys = save.getKeys();
-  if (!keyIds.every((keyId) => ownedKeys.includes(keyId))) {
-    tray.querySelectorAll("button").forEach((button) => {
-      button.disabled = true;
-      button.draggable = false;
+function placeKey(key, slot) {
+  if (locked || state.pulled) return;
+  cancelPendingSlotClick();
+  selectedKey = null;
+  const wasReady = ready();
+  numbers.forEach(n => {
+    if (state.slots[n] === key) state.slots[n] = null;
+  });
+  state.slots[slot] = key;
+  render();
+  announce(!wasReady && ready() ? text.ready : text.placed(key, slot, key === slot));
+  changed();
+}
+
+function selectKey(key) {
+  if (locked || state.pulled) return;
+  selectedKey = selectedKey === key ? null : key;
+  render();
+  announce(selectedKey === null ? text.instructions : text.selected(key));
+}
+
+function removeKey(slot) {
+  if (locked || state.pulled || state.slots[slot] === null) return;
+  cancelPendingSlotClick();
+  state.slots[slot] = null;
+  render();
+  announce(text.removed(slot));
+  changed();
+}
+
+function makeKeyButton(n) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "forge-key";
+  button.dataset.key = String(n);
+  button.setAttribute("aria-label", text.key(n));
+  const image = document.createElement("img");
+  image.src = levels.keys[n - 1].image;
+  image.alt = "";
+  image.draggable = false;
+  const label = document.createElement("span");
+  label.textContent = String(n).padStart(2, "0");
+  button.append(image, label);
+  button.addEventListener("contextmenu", event => event.preventDefault());
+  return button;
+}
+
+function closePicker() {
+  const previous = pickerSlot;
+  pickerSlot = null;
+  picker.hidden = true;
+  document.body.classList.remove("forge-dialog-open");
+  render();
+  if (previous !== null) element(`slot-${previous}`).focus();
+}
+
+function openPicker(n) {
+  if (locked || state.pulled) return;
+  cancelPendingSlotClick();
+  pickerSlot = n;
+  pickerTitle.textContent = text.picker(n);
+  picker.hidden = false;
+  document.body.classList.add("forge-dialog-open");
+  render();
+  pickerKeys.querySelector("button").focus();
+}
+
+function initTouchPicker() {
+  numbers.forEach(n => {
+    const button = makeKeyButton(n);
+    button.addEventListener("click", () => {
+      if (pickerSlot === null) return;
+      placeKey(n, pickerSlot);
+      closePicker();
     });
-    setStatus(copy.missing, true);
+    pickerKeys.appendChild(button);
+    const slot = element(`slot-${n}`);
+    slot.setAttribute("tabindex", "0");
+    slot.setAttribute("role", "button");
+    slot.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        if (selectedKey !== null) placeKey(selectedKey, n);
+        else openPicker(n);
+      }
+    });
+  });
+  pickerClose.addEventListener("click", closePicker);
+  removeButton.addEventListener("click", () => {
+    if (pickerSlot !== null) removeKey(pickerSlot);
+    closePicker();
+  });
+  picker.addEventListener("pointerdown", event => {
+    if (event.target === picker) closePicker();
+  });
+}
+
+function slotAt(x, y) {
+  const target = document.elementFromPoint(x, y);
+  const slot = target && target.closest(".slot");
+  return slot && svg.contains(slot) ? Number(slot.dataset.key) : null;
+}
+
+function autoScrollDrag() {
+  if (!drag || !drag.moved) {
+    scrollFrame = null;
     return;
   }
-  if (ownedKeys.includes(keySevenId)) {
-    for (let number = 1; number <= 6; number += 1) {
-      placeKey(number, number);
-    }
-    showForgedKey();
-    levels.markCompleted("finale");
-    setStatus(copy.owned);
-    document.getElementById("forgeMessage").textContent = copy.complete;
-  } else {
-    setStatus(copy.status);
+  const edge = 60;
+  const distance = drag.clientY < edge ? drag.clientY - edge :
+    drag.clientY > window.innerHeight - edge ? drag.clientY - (window.innerHeight - edge) : 0;
+  if (distance) {
+    window.scrollBy(0, Math.sign(distance) * Math.min(18, Math.abs(distance) / 3));
+    hoverSlot = slotAt(drag.clientX, drag.clientY);
+    render();
   }
-  updateProgress();
-})();
+  scrollFrame = window.requestAnimationFrame(autoScrollDrag);
+}
+
+function finishDrag(event, cancelled = false) {
+  if (!drag || (event && event.pointerId !== drag.pointerId)) return;
+  const current = drag;
+  drag = null;
+  if (scrollFrame !== null) window.cancelAnimationFrame(scrollFrame);
+  scrollFrame = null;
+  const destination = !cancelled && event ? slotAt(event.clientX, event.clientY) : null;
+  hoverSlot = null;
+  if (current.moved && destination !== null) {
+    placeKey(current.key, destination);
+    current.ghost.remove();
+  } else {
+    if (!current.moved && !cancelled) {
+      if (current.fromSlot !== null && current.pointerType !== "touch") {
+        if (pendingSlotClick && pendingSlotClick.slot === current.fromSlot) {
+          removeKey(current.fromSlot);
+        } else {
+          cancelPendingSlotClick();
+          const slot = current.fromSlot;
+          pendingSlotClick = { slot, timer: window.setTimeout(() => {
+            pendingSlotClick = null;
+            if (state.slots[slot] !== null) openPicker(slot);
+          }, 400) };
+        }
+      } else if (current.fromSlot !== null) openPicker(current.fromSlot);
+      else selectKey(current.key);
+    }
+    const rect = current.source.getBoundingClientRect();
+    current.ghost.classList.add("is-returning");
+    current.ghost.style.left = `${rect.left + rect.width / 2}px`;
+    current.ghost.style.top = `${rect.top + rect.height / 2}px`;
+    window.setTimeout(() => current.ghost.remove(), 250);
+  }
+  if (current.source.hasPointerCapture(current.pointerId)) {
+    current.source.releasePointerCapture(current.pointerId);
+  }
+  render();
+}
+
+function startDrag(event, key, fromSlot = null) {
+  if (locked || state.pulled || event.button !== 0 || drag || leverDrag) return;
+  event.preventDefault();
+  const source = event.currentTarget;
+  const ghost = document.createElement("img");
+  ghost.src = levels.keys[key - 1].image;
+  ghost.alt = "";
+  ghost.className = "forge-ghost";
+  ghost.style.left = `${event.clientX}px`;
+  ghost.style.top = `${event.clientY}px`;
+  document.body.appendChild(ghost);
+  drag = { key, fromSlot, source, ghost, pointerId: event.pointerId, pointerType: event.pointerType, x: event.clientX, y: event.clientY, clientX: event.clientX, clientY: event.clientY, moved: false };
+  source.setPointerCapture(event.pointerId);
+}
+
+function initDesktopDrag() {
+  numbers.forEach(n => {
+    const button = makeKeyButton(n);
+    button.addEventListener("pointerdown", event => startDrag(event, n));
+    button.addEventListener("click", event => {
+      if (event.detail === 0 && !locked && !state.pulled) {
+        selectKey(n);
+      }
+    });
+    dock.appendChild(button);
+    const slot = element(`slot-${n}`);
+    slot.querySelector(".slot-hit").addEventListener("pointerdown", event => {
+      if (selectedKey !== null) {
+        event.preventDefault();
+        placeKey(selectedKey, n);
+      } else if (state.slots[n] !== null) {
+        startDrag(event, state.slots[n], n);
+      } else if (!locked && !state.pulled) {
+        openPicker(n);
+      }
+    });
+    slot.addEventListener("contextmenu", event => event.preventDefault());
+  });
+  document.addEventListener("pointermove", event => {
+    if (!drag || event.pointerId !== drag.pointerId) return;
+    drag.moved ||= Math.hypot(event.clientX - drag.x, event.clientY - drag.y) > 5;
+    if (drag.moved) cancelPendingSlotClick();
+    drag.clientX = event.clientX;
+    drag.clientY = event.clientY;
+    if (drag.moved && scrollFrame === null) scrollFrame = window.requestAnimationFrame(autoScrollDrag);
+    drag.ghost.style.left = `${event.clientX}px`;
+    drag.ghost.style.top = `${event.clientY}px`;
+    hoverSlot = slotAt(event.clientX, event.clientY);
+    render();
+  });
+  document.addEventListener("pointerup", event => finishDrag(event));
+  document.addEventListener("pointercancel", event => finishDrag(event, true));
+  document.addEventListener("keydown", event => {
+    if (event.key !== "Escape") return;
+    cancelPendingSlotClick();
+    if (drag) finishDrag(null, true);
+    if (!picker.hidden) closePicker();
+    if (selectedKey !== null) {
+      selectedKey = null;
+      render();
+      announce(text.instructions);
+    }
+  });
+}
+
+function completeForge() {
+  if (locked || state.pulled) return;
+  if (!ready()) {
+    announce(text.locked, true);
+    return;
+  }
+  try {
+    if (!devMode && ((!save.getKeys().includes("resonance-7") && !save.unlockKey("resonance-7")) ||
+        !levels.markCompleted("finale"))) {
+      announce(text.error, true);
+      return;
+    }
+  } catch (error) {
+    console.error("Forge save failed:", error);
+    announce(text.error, true);
+    return;
+  }
+  state.pulled = true;
+  forging = true;
+  render();
+  announce(text.forging);
+  changed();
+  if (navigator.vibrate) navigator.vibrate([80, 40, 120]);
+  const duration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 4000;
+  window.setTimeout(() => {
+    forging = false;
+    render();
+    announce(text.complete);
+    document.dispatchEvent(new CustomEvent("forge:complete", { detail: snapshot() }));
+    window.EchoesKeyFragments.playCinematic({
+      keyNumber: 7,
+      src: new URL("../assets/svg/cles/key-07-usb.svg", import.meta.url).href,
+      subtitle: text.cinematicSub,
+    });
+  }, duration);
+}
+
+function initLever() {
+  const hit = lever.querySelector(".lever-hit");
+  lever.setAttribute("tabindex", "0");
+  lever.setAttribute("role", "button");
+  lever.setAttribute("aria-label", text.lever);
+  lever.addEventListener("keydown", event => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      completeForge();
+    }
+  });
+  hit.addEventListener("pointerdown", event => {
+    if (event.button !== 0 || state.pulled) return;
+    event.preventDefault();
+    if (locked || !ready()) {
+      announce(text.locked, true);
+      return;
+    }
+    leverDrag = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, angle: -50, moved: false, pointerType: event.pointerType };
+    lever.classList.add("is-dragging");
+    hit.setPointerCapture(event.pointerId);
+  });
+  hit.addEventListener("pointermove", event => {
+    if (!leverDrag || event.pointerId !== leverDrag.pointerId) return;
+    leverDrag.moved ||= Math.hypot(event.clientX - leverDrag.x, event.clientY - leverDrag.y) > 8;
+    const matrix = svg.getScreenCTM();
+    if (!matrix) return;
+    const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(matrix.inverse());
+    leverDrag.angle = Math.max(-50, Math.min(50, Math.atan2(point.y - 376, point.x - 934) * 180 / Math.PI));
+    lever.style.setProperty("--lever-angle", `${leverDrag.angle}deg`);
+  });
+  const end = (event, cancelled) => {
+    if (!leverDrag || event.pointerId !== leverDrag.pointerId) return;
+    const pull = !cancelled && (leverDrag.angle >= 40 || (leverDrag.pointerType === "touch" && !leverDrag.moved));
+    leverDrag = null;
+    lever.classList.remove("is-dragging");
+    lever.style.removeProperty("--lever-angle");
+    if (hit.hasPointerCapture(event.pointerId)) hit.releasePointerCapture(event.pointerId);
+    if (pull) completeForge();
+  };
+  hit.addEventListener("pointerup", event => end(event, false));
+  hit.addEventListener("pointercancel", event => end(event, true));
+}
+
+async function loadSvg() {
+  const url = new URL("../assets/svg/forge/forge.svg", import.meta.url);
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`Forge SVG: HTTP ${response.status}`);
+  const documentSvg = new DOMParser().parseFromString(await response.text(), "image/svg+xml");
+  if (documentSvg.querySelector("parsererror") || documentSvg.documentElement.localName !== "svg") {
+    throw new Error("Forge SVG is invalid");
+  }
+  svg = document.importNode(documentSvg.documentElement, true);
+  svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+  svg.setAttribute("role", "group");
+  stage.replaceChildren(svg);
+  lever = element("lever");
+  const ids = numbers.flatMap(n => [`slot-${n}`, `key-${n}`, `link-${n}`, `lever-lamp-${n}`, `pip-${n}`]);
+  ids.push("lever", "key-7", "core-heat", "key7-fill", "core-aura");
+  if (ids.some(id => !element(id)) || !lever.querySelector(".lever-hit") ||
+      numbers.some(n => !element(`slot-${n}`).querySelector(".slot-hit"))) {
+    throw new Error("Forge SVG is missing required controls");
+  }
+}
+
+async function init() {
+  document.documentElement.lang = english ? "en" : "fr";
+  [
+    ["forgeEyebrow", text.eyebrow], ["forgeKicker", text.kicker],
+    ["forgeHeading", text.heading], ["forgeDescription", text.description],
+    ["forgePanelKicker", text.panelKicker], ["forgePanelHeading", text.panelHeading],
+    ["forgeHelp", text.help], ["forgeDockTitle", text.dockTitle],
+    ["forgeTouchHelp", text.touchHelp], ["forgeOrientationTitle", text.orientationTitle],
+    ["forgeOrientationDescription", text.orientationDescription],
+  ].forEach(([id, value]) => { document.getElementById(id).textContent = value; });
+  dock.setAttribute("aria-label", text.dockLabel);
+  announce(text.loading);
+  exit.textContent = text.exit;
+  resetButton.textContent = text.reset;
+  pickerClose.setAttribute("aria-label", text.close);
+  removeButton.textContent = text.remove;
+  if (!save || !levels || !window.EchoesKeyFragments) throw new Error("Campaign or key animation system is unavailable");
+  await loadSvg();
+  locked = !devMode && !numbers.every(n => save.getKeys().includes(`resonance-${n}`));
+  initTouchPicker();
+  initDesktopDrag();
+  initLever();
+  resetButton.addEventListener("click", () => {
+    cancelPendingSlotClick();
+    if (drag) finishDrag(null, true);
+    if (!picker.hidden) closePicker();
+    numbers.forEach(n => { state.slots[n] = null; });
+    state.pulled = false;
+    selectedKey = null;
+    hoverSlot = null;
+    render();
+    announce(locked ? text.missing : text.instructions, locked);
+    changed();
+  });
+  if (!devMode && !locked && save.getKeys().includes("resonance-7")) {
+    numbers.forEach(n => { state.slots[n] = n; });
+    try {
+      state.pulled = levels.markCompleted("finale");
+      announce(state.pulled ? text.complete : text.error, !state.pulled);
+    } catch (error) {
+      console.error("Forge completion save failed:", error);
+      announce(text.error, true);
+    }
+  } else {
+    announce(locked ? text.missing : text.instructions, locked);
+  }
+  render();
+}
+
+init().catch(error => {
+  console.error("Forge initialization failed:", error);
+  announce(text.loadError, true);
+});
