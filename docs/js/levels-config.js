@@ -15,6 +15,11 @@ window.EchoesLevels = (() => {
       start: 1,
       end: 5,
       levels: [1, 2, 3, 4, 5],
+      boss: {
+        file: "boss-01.html",
+        key: "resonance-1",
+        name: { fr: "Boss // CLÉ 01", en: "Boss // KEY 01" },
+      },
     },
     {
       id: 2,
@@ -25,9 +30,9 @@ window.EchoesLevels = (() => {
       end: 10,
       levels: [6, 7, 8, 9, 10],
       boss: {
-        file: "boss-01.html",
-        key: "resonance-1",
-        name: { fr: "Boss // CLÉ 01", en: "Boss // KEY 01" },
+        file: "boss-02.html",
+        key: "resonance-2",
+        name: { fr: "Boss // CLÉ 02", en: "Boss // KEY 02" },
       },
     },
     {
@@ -38,6 +43,11 @@ window.EchoesLevels = (() => {
       start: 11,
       end: 15,
       levels: [11, 12, 13, 14, 15],
+      boss: {
+        file: "boss-03.html",
+        key: "resonance-3",
+        name: { fr: "Boss // CLÉ 03", en: "Boss // KEY 03" },
+      },
     },
     {
       id: 4,
@@ -48,9 +58,9 @@ window.EchoesLevels = (() => {
       end: 20,
       levels: [16, 17, 18, 19, 20],
       boss: {
-        file: "boss-02.html",
-        key: "resonance-2",
-        name: { fr: "Boss // CLÉ 02", en: "Boss // KEY 02" },
+        file: "boss-04.html",
+        key: "resonance-4",
+        name: { fr: "Boss // CLÉ 04", en: "Boss // KEY 04" },
       },
     },
     {
@@ -61,6 +71,11 @@ window.EchoesLevels = (() => {
       start: 21,
       end: 25,
       levels: [21, 22, 23, 24, 25],
+      boss: {
+        file: "boss-05.html",
+        key: "resonance-5",
+        name: { fr: "Boss // CLÉ 05", en: "Boss // KEY 05" },
+      },
     },
     {
       id: 6,
@@ -71,9 +86,9 @@ window.EchoesLevels = (() => {
       end: 30,
       levels: [26, 27, 28, 29, 30],
       boss: {
-        file: "boss-03.html",
-        key: "resonance-3",
-        name: { fr: "Boss // CLÉ 03", en: "Boss // KEY 03" },
+        file: "boss-06.html",
+        key: "resonance-6",
+        name: { fr: "Boss // CLÉ 06", en: "Boss // KEY 06" },
       },
     },
   ];
@@ -98,7 +113,7 @@ window.EchoesLevels = (() => {
     id: "finale",
     file: "fin-finale/fin-finale.html",
     name: { fr: "La fin finale", en: "The final end" },
-    ready: false,
+    ready: true,
   };
 
   const pad = (number) => String(number).padStart(2, "0");
@@ -199,6 +214,9 @@ window.EchoesLevels = (() => {
     if (level) return byId.get(`level-${Number(level[1])}`) || null;
     const boss = /boss-(\d+)\.html$/i.exec(decoded);
     if (boss) return byId.get(`boss-${pad(Number(boss[1]))}`) || null;
+    if (/(?:^|\/)fin-finale\/fin-finale\.html$/i.test(decoded)) {
+      return byId.get(finale.id) || null;
+    }
     return null;
   }
 
@@ -220,6 +238,7 @@ window.EchoesLevels = (() => {
       if (byId.has(`level-${number}`)) done.add(`level-${number}`);
     });
     (save.completedBosses || []).forEach((id) => byId.has(id) && done.add(id));
+    (save.completedFinals || []).forEach((id) => byId.has(id) && done.add(id));
     const keys = save.keys || [];
     items.forEach((item) => {
       if (item.type === "boss" && keys.includes(item.key)) done.add(item.id);
@@ -286,6 +305,10 @@ window.EchoesLevels = (() => {
       const levels = new Set(save.completedLevels || []);
       levels.add(item.number);
       patch.completedLevels = [...levels].sort((a, b) => a - b);
+    } else if (item.type === "final") {
+      patch.completedFinals = [
+        ...new Set([...(save.completedFinals || []), id]),
+      ];
     } else {
       patch.completedBosses = [
         ...new Set([...(save.completedBosses || []), id]),

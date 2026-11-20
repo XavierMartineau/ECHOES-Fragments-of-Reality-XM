@@ -12,7 +12,7 @@
  * - Niveau 08 : tri de couleurs (.advanced-sort-board / #colorSortGrid).
  * - Niveau 09 : séquence stellaire (.constellation-board).
  * - Niveau 10 : séquence de couleurs (.color-sequence-board / #colorSequenceGrid).
- * - Boss (Clé 01) : contrôleur dédié boss-01.js, placé après le niveau 10.
+ * - Un boss de clé suit chaque groupe de cinq niveaux.
  * - Anciens blocs 11 à 14 (paires de mémoire, atelier d'ordre, motif fractal,
  *   séquence combinée) : conservés ici le temps que la partie 2 reprenne ces
  *   mécaniques dans partie-2_niveau-11_à_20.js.
@@ -1658,13 +1658,12 @@ function installAdvancedLevel(levelNumber, buildPuzzle) {
     reset();
   });
   nextButton.addEventListener("click", () => {
-    if (levelNumber === 10) {
+    if (levelNumber === 5) {
       window.location.href = "boss-01.html";
       return;
     }
-    if (levelNumber === 5) {
-      window.location.href =
-        "../partie-2_niveau-6_à_10/niveau-06.html";
+    if (levelNumber === 10) {
+      window.location.href = "boss-02.html";
       return;
     }
     window.location.href = `niveau-${String(levelNumber + 1).padStart(2, "0")}.html`;

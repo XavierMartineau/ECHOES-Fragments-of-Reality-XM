@@ -1815,7 +1815,7 @@ else {
   });
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
-    window.location.href = "../partie-4_niveau-16_à_20/niveau-16.html";
+    window.location.href = "boss-03.html";
   });
 
   for (let level = 11; level <= 20; level += 1) {
@@ -2056,7 +2056,7 @@ else {
   });
   resetButton.addEventListener("click", reset);
   nextButton.addEventListener("click", () => {
-    window.location.href = "boss-02.html";
+    window.location.href = "boss-04.html";
   });
 
   for (let level = 11; level <= 20; level += 1) {

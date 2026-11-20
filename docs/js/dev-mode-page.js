@@ -4,12 +4,12 @@
   const $$ = (selector) => document.querySelectorAll(selector);
 
   const parts = [
-    { number: 1, name: "Initiation", start: 1, end: 5, folder: "partie-1_niveau-1_à_5" },
-    { number: 2, name: "Fractures", start: 6, end: 10, folder: "partie-2_niveau-6_à_10", special: [{ label: "BOSS 01 // CLEE_01", file: "boss-01.html" }] },
-    { number: 3, name: "Éclipse", start: 11, end: 15, folder: "partie-3_niveau-11_à_15" },
-    { number: 4, name: "Résonance", start: 16, end: 20, folder: "partie-4_niveau-16_à_20", special: [{ label: "BOSS 02 // CLEE_02", file: "boss-02.html" }] },
-    { number: 5, name: "Convergence", start: 21, end: 25, folder: "partie-5_niveau-21_à_25" },
-    { number: 6, name: "Origine", start: 26, end: 30, folder: "partie-6_niveau-26_à_30", special: [{ label: "BOSS 03 // CLEE_03", file: "boss-03.html" }] },
+    { number: 1, name: "Initiation", start: 1, end: 5, folder: "partie-1_niveau-1_à_5", special: [{ label: "BOSS 01 // CLEE_01", file: "boss-01.html" }] },
+    { number: 2, name: "Fractures", start: 6, end: 10, folder: "partie-2_niveau-6_à_10", special: [{ label: "BOSS 02 // CLEE_02", file: "boss-02.html" }] },
+    { number: 3, name: "Éclipse", start: 11, end: 15, folder: "partie-3_niveau-11_à_15", special: [{ label: "BOSS 03 // CLEE_03", file: "boss-03.html" }] },
+    { number: 4, name: "Résonance", start: 16, end: 20, folder: "partie-4_niveau-16_à_20", special: [{ label: "BOSS 04 // CLEE_04", file: "boss-04.html" }] },
+    { number: 5, name: "Convergence", start: 21, end: 25, folder: "partie-5_niveau-21_à_25", special: [{ label: "BOSS 05 // CLEE_05", file: "boss-05.html" }] },
+    { number: 6, name: "Origine", start: 26, end: 30, folder: "partie-6_niveau-26_à_30", special: [{ label: "BOSS 06 // CLEE_06", file: "boss-06.html" }] },
   ];
   const folderFor = (level) => parts.find((part) => level <= part.end)?.folder || parts[5].folder;
   const levelLink = (level) =>
@@ -142,10 +142,10 @@
       const levels = Array.from({ length: target - 1 }, (_, i) => i + 1);
       const bosses = [];
       const keys = [];
-      [[10, "boss-02", "resonance-1"], [20, "boss-04", "resonance-2"], [30, "boss-06", "resonance-3"]].forEach(([end, id, key]) => {
-        if (target > end) {
-          bosses.push(id);
-          keys.push(key);
+      parts.forEach((part) => {
+        if (part.special && target > part.end) {
+          bosses.push(`boss-${String(part.number).padStart(2, "0")}`);
+          keys.push(`resonance-${part.number}`);
         }
       });
       const ok = patchSave((save) => ({
@@ -162,7 +162,7 @@
         currentPage: "level",
         currentLevel: 30,
         completedLevels: Array.from({ length: 30 }, (_, i) => i + 1),
-        completedBosses: [...new Set([...(save.completedBosses || []), "intro", "boss-02", "boss-04", "boss-06"])],
+        completedBosses: [...new Set([...(save.completedBosses || []), "intro", ...parts.map((part) => `boss-${String(part.number).padStart(2, "0")}`), "finale"])],
         keys: [...new Set([...(save.keys || []), ...allKeys])],
       }));
       if (ok) {

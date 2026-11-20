@@ -2181,9 +2181,9 @@
     }
     window.location.href =
       level === 30
-        ? "boss-03.html"
+        ? "boss-06.html"
         : level === 25
-          ? "../partie-6_niveau-26_à_30/niveau-26.html"
+          ? "boss-05.html"
           : `niveau-${String(nextLevel).padStart(2, "0")}.html`;
   });
   saveProgress();

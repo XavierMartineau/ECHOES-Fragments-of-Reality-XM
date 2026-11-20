@@ -8,6 +8,7 @@ window.EchoesSave = (() => {
     "currentLevel",
     "completedLevels",
     "completedBosses",
+    "completedFinals",
     "keys",
   ];
 

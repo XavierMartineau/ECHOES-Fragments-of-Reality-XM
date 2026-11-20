@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="icon" type="image/svg+xml" href="../../assets/svg/identite/echoes-favicon.svg?v=2" />
+    <title>ECHOES - BOSS 06 // LE TISSEUR D'ORIGINE</title>
+    <script src="../../../lag-fix/fps-boost.js"></script>
+    <link rel="stylesheet" href="../../css/niveaux/niveaux-communs.css?v=2" />
+    <link rel="stylesheet" href="../../css/niveaux/partie-6_niveau-26_à_30.css?v=1" />
+    <link rel="stylesheet" href="../../css/base/responsive.css?v=m1" />
+    <link rel="stylesheet" href="../../css/base/fonts.css" />
+    <link rel="stylesheet" href="../../css/bosses/boss-06.css?v=2" />
+  </head>
+  <body
+    class="boss06-page"
+    data-key-number="6"
+    data-level-start="26"
+    data-level-end="30"
+    data-part-label="PARTIE 6 // ORIGINE"
+    data-next-url="../fin-finale/fin-finale.html"
+  >
+    <div class="background-glow" aria-hidden="true"></div>
+    <div class="grid-overlay" aria-hidden="true"></div>
+    <header class="level-header">
+      <a class="brand" href="../niveaux.html" aria-label="ECHOES">ECHOES</a>
+      <div class="level-meta">
+        <span id="bossPart">PARTIE 6 // ORIGINE</span>
+        <div class="level-progress" id="levelProgress" aria-label="Progression de la Partie 6"></div>
+        <strong id="bossLevel">CLÉ 06 // LABYRINTHE ORIGINEL</strong>
+      </div>
+    </header>
+    <aside class="key-redesign-hud boss06-key-hud" id="keyHud" aria-label="Progression des clés">
+      <span class="key-redesign-hud-label">RÉSONANCES</span>
+      <strong class="key-hud-value" id="keyCount">6 / 6</strong>
+      <span class="key-redesign-hud-line" aria-hidden="true"></span>
+      <span class="key-redesign-hud-note" id="keyHudNote">CLÉ 06 // À RÉCUPÉRER</span>
+      <span class="key-redesign-hud-slot" id="keyHudSlot" aria-hidden="true">
+        <img src="../../assets/svg/cles/key-06-usb.svg" alt="" />
+        <b>CLÉ_06</b>
+      </span>
+    </aside>
+    <main class="level-shell boss06-shell">
+      <section class="level-intro" aria-labelledby="bossTitle">
+        <p class="eyebrow" id="bossKicker">BOSS // PROTOCOLE DU LABYRINTHE ORIGINEL</p>
+        <h1 id="bossTitle">Le Tisseur d'origine</h1>
+        <p class="level-description" id="bossDescription">
+          Le gardien final a dissimulé un itinéraire unique dans quatre labyrinthes grandissants. Atteins les checkpoints de coordonnées dans l'ordre, évite les cases corrompues et rejoins chaque sortie avant la fin du budget.
+        </p>
+        <div class="system-transmission" aria-live="polite">
+          <span class="system-label">ECHO://PROTOCOLE_06</span>
+          <p id="systemMessage">SYSTÈME EN ATTENTE // QUATRE LABYRINTHES</p>
+        </div>
+      </section>
+      <section class="puzzle-panel boss06-panel" aria-labelledby="arenaTitle">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-kicker">COMBAT // CARTOGRAPHIE ORIGINELLE</p>
+            <h2 id="arenaTitle">Quatre phases de labyrinthe</h2>
+          </div>
+          <div class="boss06-readouts">
+            <span class="progress-readout" id="phaseReadout" aria-live="polite">LABYRINTHE 1 / 4</span>
+            <span class="boss06-integrity-label">INTÉGRITÉ</span>
+            <strong id="integrityReadout">5</strong>
+          </div>
+        </div>
+        <details class="boss06-help" open>
+          <summary id="helpTitle">COMMENT RÉSOUDRE L'ÉPREUVE</summary>
+          <ol id="helpList"></ol>
+        </details>
+        <div class="boss06-route-readouts">
+          <span id="checkpointReadout" aria-live="polite">Checkpoint 1</span>
+          <span id="movesReadout">Déplacements restants</span>
+          <span id="mazeReadout">0 / 4 labyrinthes</span>
+        </div>
+        <div class="boss06-arena">
+          <div class="boss06-core" id="bossCore" aria-hidden="true">
+            <span class="boss06-core-ring"></span>
+            <span class="boss06-core-label">ORIGINE // 06</span>
+          </div>
+          <div
+            class="boss06-maze"
+            id="originMaze"
+            role="group"
+            aria-label="Labyrinthe à checkpoints"
+          ></div>
+        </div>
+        <div class="boss06-actions">
+          <button class="sequence-start-button" id="startBossButton" type="button">ENTRER DANS LE LABYRINTHE</button>
+          <button class="next-level-button" id="nextLevelButton" type="button" hidden>ENTRER DANS LA FORGE MÉMOIRE</button>
+          <button class="reset-button" id="resetButton" type="button">RECOMMENCER LE COMBAT</button>
+        </div>
+        <p class="puzzle-status" id="puzzleStatus" role="status" aria-live="polite">
+          Atteins chaque checkpoint dans l'ordre, puis la sortie.
+        </p>
+      </section>
+    </main>
+    <footer class="level-footer">
+      <span>ÉCHO // ORIGINE ACTIVE</span>
+      <span>BOSS // 06</span>
+    </footer>
+    <script src="../../js/save-system.js?v=4"></script>
+    <script src="../../js/language.js?v=2"></script>
+    <script src="../../js/ui-effects.js?v=12"></script>
+    <script src="../../js/levels-config.js?v=10"></script>
+    <script src="../../js/level-guard.js?v=16"></script>
+    <script src="../../js/bosses/boss-06.js?v=2"></script>
+  </body>
+</html>

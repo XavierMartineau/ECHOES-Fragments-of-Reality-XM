@@ -476,9 +476,9 @@
   };
   const nextUrl =
     level === 5
-      ? "../partie-2_niveau-6_à_10/niveau-06.html"
+      ? "boss-01.html"
       : level === 10
-        ? "boss-01.html"
+        ? "boss-02.html"
         : `niveau-${String(level + 1).padStart(2, "0")}.html`;
   nextButton.addEventListener("click", () => {
     window.location.href = nextUrl;

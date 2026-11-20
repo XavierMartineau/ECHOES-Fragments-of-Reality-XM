@@ -8,6 +8,16 @@
   const $ = (id) => document.getElementById(id);
   const language =
     localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const keyNumber = Number(document.body.dataset.keyNumber) || 3;
+  const keyCode = String(keyNumber).padStart(2, "0");
+  const keyId = `resonance-${keyNumber}`;
+  const keySrc = `../../assets/svg/cles/key-${keyCode}-usb.svg`;
+  const levelStart = Number(document.body.dataset.levelStart) || 11;
+  const levelEnd = Number(document.body.dataset.levelEnd) || 15;
+  const nextUrl = document.body.dataset.nextUrl;
+  const nextLevel = document.body.dataset.nextLevel || String(levelEnd + 1);
+  const phaseCount = keyNumber >= 6 ? 5 : 3;
+  const phaseTimes = keyNumber >= 6 ? [45, 240, 240, 180, 180] : [45, 300, 300];
   const text = {
     fr: {
       part: "PARTIE 6 // ORIGINE",
@@ -105,22 +115,57 @@
       system: "SYSTEM:: TOTAL ECLIPSE // THREE CROWNS",
     },
   }[language];
+  const replaceKeyNumber = (value) =>
+    typeof value === "string" ? value.replace(/03/g, keyCode) : value;
+  Object.keys(text).forEach((key) => {
+    if (Array.isArray(text[key])) {
+      text[key] = text[key].map(replaceKeyNumber);
+    } else {
+      text[key] = replaceKeyNumber(text[key]);
+    }
+  });
+  text.part = document.body.dataset.partLabel || text.part;
+  text.next =
+    nextLevel === "FORGE"
+      ? language === "en"
+        ? "ENTER THE KEY FORGE"
+        : "ENTRER DANS LA FORGE"
+      : language === "en"
+        ? `CONTINUE TO LEVEL ${nextLevel}`
+        : `CONTINUER VERS LE NIVEAU ${nextLevel}`;
+  if (keyNumber >= 6) {
+    text.help[3] =
+      language === "en"
+        ? "Phase 1 lasts 45 seconds. Phases 2–5 last 3 minutes each."
+        : "La phase 1 dure 45 secondes. Les phases 2 à 5 durent 3 minutes chacune.";
+    text.help[4] =
+      language === "en"
+        ? "Phases 1–5: lock every ring in order. Later phases add more rings, narrower gaps, and faster rotation."
+        : "Phases 1 à 5 : verrouille chaque anneau dans l'ordre. Les phases avancées ajoutent des anneaux, resserrent les brèches et accélèrent la rotation.";
+    text.system =
+      language === "en"
+        ? "SYSTEM:: TOTAL ECLIPSE // FIVE CROWNS"
+        : "SYSTEME:: ÉCLIPSE TOTALE // CINQ COURONNES";
+  }
 
   const phases = [
     { gap: 30, speeds: [70, 95, 120, 150], twist: "speed" },
     { gap: 24, speeds: [80, 105, 135, 165, 195], twist: "flip" },
     { gap: 18, speeds: [90, 120, 150, 185, 220, 255], twist: "flip" },
-  ];
+    { gap: 15, speeds: [100, 130, 165, 205, 245, 285, 325], twist: "speed" },
+    { gap: 12, speeds: [110, 145, 180, 220, 265, 310, 355, 400], twist: "flip" },
+  ].slice(0, phaseCount);
   const palettes = [
     ["#6fa8ff", "#8f8bff", "#c084fc", "#f08ad0"],
     ["#f2c66b", "#f09a5a", "#e8736f", "#e07aa8", "#b58cf0"],
     ["#e8566a", "#ee8a4f", "#e6c15a", "#d97ac0", "#8f84ee", "#7fb3c9"],
-  ];
-  const phaseTimes = [45, 300, 300];
-  const missPenalty = 5;
+    ["#58d8d0", "#70b7ff", "#aa8cff", "#e87ac8", "#f08c63", "#e8d45a", "#7ddd8b"],
+    ["#ff5679", "#ff8e52", "#ffd24d", "#8df06e", "#45e5d2", "#59a9ff", "#a87aff", "#f86ad5"],
+  ].slice(0, phaseCount);
+  const missPenalty = keyNumber >= 6 ? 8 : 5;
   const slowCost = 10;
   const slowDuration = 3;
-  const slowFactor = 0.25;
+  const slowFactor = keyNumber >= 6 ? 0.18 : 0.25;
   const slowTimerFactor = 0.5;
   const meltdownDuration = 3.4;
   const ringStroke = 15;
@@ -153,7 +198,7 @@
     holder.setAttribute("class", className);
     holder.setAttribute("aria-hidden", "true");
     const image = document.createElementNS(NS, "image");
-    image.setAttribute("href", "../../assets/svg/cles/key-03-usb.svg");
+    image.setAttribute("href", keySrc);
     image.setAttribute("width", "180");
     image.setAttribute("height", "260");
     holder.appendChild(image);
@@ -202,6 +247,7 @@
   setText("cinematicSub", text.cineSub);
   setText("cineContinue", text.next);
   setText("systemMessage", text.system);
+  keyHudSlot.querySelector("img").src = keySrc;
   resetButton.textContent = text.reset;
   nextButton.textContent = text.next;
   $("helpList").replaceChildren(
@@ -213,9 +259,9 @@
   );
   $("levelProgress").setAttribute(
     "aria-label",
-    language === "en" ? "Part 3 progress" : "Progression de la Partie 3",
+    text.part,
   );
-  for (let level = 21; level <= 30; level += 1) {
+  for (let level = levelStart; level <= levelEnd; level += 1) {
     const marker = document.createElement("span");
     marker.className = "level-square";
     marker.setAttribute("aria-hidden", "true");
@@ -243,8 +289,8 @@
 
   const updateKeyHud = () => {
     const keys = window.EchoesSave?.getKeys?.() || [];
-    setText("keyCount", "3 / 6");
-    const owned = keys.includes("resonance-3");
+    setText("keyCount", `${keyNumber} / 6`);
+    const owned = keys.includes(keyId);
     keyHud.classList.toggle("is-unlocked", owned);
     setText("keyHudNote", owned ? text.keyRecovered : text.keyNote);
     keyHudSlot.classList.toggle("is-visible", owned);
@@ -423,14 +469,19 @@
     nextButton.hidden = true;
     setStatus(text.victory, "success");
     playCinematic(() => {
-      if (!window.EchoesSave?.unlockKey?.("resonance-3")) {
+      if (!window.EchoesSave?.unlockKey?.(keyId)) {
+        setStatus(text.saveError, "error");
+        draw();
+        return;
+      }
+      if (!window.EchoesLevels?.markCompleted?.(`boss-${keyCode}`)) {
         setStatus(text.saveError, "error");
         draw();
         return;
       }
       window.EchoesSave?.saveProgress({
-        currentPage: "niveaux",
-        currentLevel: 30,
+        currentPage: `level-${levelEnd}`,
+        currentLevel: levelEnd,
       });
       updateKeyHud();
       nextButton.hidden = false;
@@ -614,12 +665,10 @@
   resetButton.addEventListener("click", reset);
   errorReset.addEventListener("click", reset);
   $("cineContinue").addEventListener("click", () => {
-    window.location.href =
-      "../niveaux.html";
+    window.location.href = nextUrl;
   });
   nextButton.addEventListener("click", () => {
-    window.location.href =
-      "../niveaux.html";
+    window.location.href = nextUrl;
   });
   document.addEventListener("keydown", (event) => {
     if (event.code !== "Space" || event.repeat) return;

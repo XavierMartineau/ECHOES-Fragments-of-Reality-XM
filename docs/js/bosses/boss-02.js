@@ -7,6 +7,21 @@
 
   const language =
     localStorage.getItem("echoes-language") === "en" ? "en" : "fr";
+  const keyNumber = Number(document.body.dataset.keyNumber) || 2;
+  const keyCode = String(keyNumber).padStart(2, "0");
+  const keyId = `resonance-${keyNumber}`;
+  const keySrc = `../../assets/svg/cles/key-${keyCode}-usb.svg`;
+  const levelStart = Number(document.body.dataset.levelStart) || 6;
+  const levelEnd = Number(document.body.dataset.levelEnd) || 10;
+  const nextLevel = Number(document.body.dataset.nextLevel) || levelEnd;
+  const nextUrl = document.body.dataset.nextUrl;
+  const anchorsPerPhase = Math.min(
+    3,
+    2 + Math.floor((keyNumber - 2) / 2),
+  );
+  const maxCoherence = Math.max(4, 10 - keyNumber);
+  const actionsPerStrike = Math.max(2, 7 - keyNumber);
+  const totalAnchors = anchorsPerPhase * 3;
   const copy = {
     fr: {
       part: "PARTIE 4 // RÉSONANCE",
@@ -32,9 +47,9 @@
       helpPulse:
         "Rejoins l'ancre active ◆ puis appuie sur « Pulser l'ancre ». Stabilise deux ancres dans chacune des trois phases.",
       helpThreat:
-        "La rangée ou colonne rouge sera frappée quand le compteur arrive à zéro. Un déplacement ou une impulsion fait avancer le compteur.",
+        `La rangée ou colonne rouge sera frappée quand le compteur arrive à zéro. Chaque déplacement ou impulsion fait avancer le compteur; l'impact survient toutes les ${actionsPerStrike} actions.`,
       helpShield:
-        "Le bouclier annule le prochain impact sans consommer une action. Tu en as deux; tu as aussi huit unités de cohérence.",
+        `Le bouclier annule le prochain impact sans consommer une action. Tu en as deux et ${maxCoherence} unités de cohérence.`,
       start: "ENTRER DANS L'ARÈNE",
       pulse: "PULSER L'ANCRE",
       shield: "BOUCLIER",
@@ -73,7 +88,7 @@
         `Phase ${index + 1} : stabilise les deux ancres, puis évite la prochaine frappe.`,
       hitCount: (count) => `${count} unités de cohérence restantes`,
       shieldCount: (count) => `BOUCLIER (${count})`,
-      progress: (count) => `${count} / 6`,
+      progress: (count) => `${count} / ${totalAnchors}`,
       footer: "ÉCHO // FRACTURES ACTIVES",
       counter: "BOSS // 02",
     },
@@ -101,9 +116,9 @@
       helpPulse:
         "Reach the active ◆ anchor, then press “Pulse anchor”. Stabilize two anchors in each of the three phases.",
       helpThreat:
-        "The red row or column will be struck when the countdown reaches zero. Moving or pulsing advances the countdown.",
+        `The red row or column will be struck when the countdown reaches zero. Each move or pulse advances it; a strike comes every ${actionsPerStrike} actions.`,
       helpShield:
-        "A ward cancels the next impact without using an action. You have two wards and eight coherence units.",
+        `A ward cancels the next impact without using an action. You have two wards and ${maxCoherence} coherence units.`,
       start: "ENTER THE ARENA",
       pulse: "PULSE ANCHOR",
       shield: "WARD",
@@ -140,11 +155,50 @@
         `Phase ${index + 1}: stabilize both anchors, then avoid the next strike.`,
       hitCount: (count) => `${count} coherence units remaining`,
       shieldCount: (count) => `WARD (${count})`,
-      progress: (count) => `${count} / 6`,
+      progress: (count) => `${count} / ${totalAnchors}`,
       footer: "ECHO // ACTIVE FRACTURES",
       counter: "BOSS // 02",
     },
   }[language];
+  Object.entries(copy).forEach(([key, value]) => {
+    if (typeof value === "string") copy[key] = value.replace(/02/g, keyCode);
+  });
+  copy.part = document.body.dataset.partLabel || copy.part;
+  copy.next =
+    language === "en"
+      ? `CONTINUE TO LEVEL ${document.body.dataset.nextLevel || nextLevel}`
+      : `CONTINUER VERS LE NIVEAU ${document.body.dataset.nextLevel || nextLevel}`;
+  copy.helpPulse =
+    language === "en"
+      ? `Reach the active ◆ anchor, then press “Pulse anchor”. Stabilize ${anchorsPerPhase} anchors in each of the three phases.`
+      : `Rejoins l'ancre active ◆ puis appuie sur « Pulser l'ancre ». Stabilise ${anchorsPerPhase} ancres dans chacune des trois phases.`;
+  copy.phaseIntro = (index) =>
+    language === "en"
+      ? `Phase ${index + 1}: stabilize ${anchorsPerPhase} anchors, then avoid the next strike.`
+      : `Phase ${index + 1} : stabilise ${anchorsPerPhase} ancres, puis évite la prochaine frappe.`;
+  if (keyNumber === 4) {
+    copy.title =
+      language === "en" ? "The Rift Cartographer" : "Le Cartographe des Failles";
+    copy.eyebrow =
+      language === "en"
+        ? `KEY_${keyCode} // RIFT CARTOGRAPHER`
+        : `CLÉ_${keyCode} // CARTOGRAPHE DES FAILLES`;
+    copy.description =
+      language === "en"
+        ? "Three shifting maps overlap. Stabilize three anchors in every phase, with six coherence units and only three actions before each strike."
+        : "Trois cartes mouvantes se superposent. Stabilise trois ancres par phase avec six unités de cohérence et seulement trois actions avant chaque frappe.";
+  } else if (keyNumber >= 5) {
+    copy.title =
+      language === "en" ? "The Convergence Matrix" : "La Matrice de Convergence";
+    copy.eyebrow =
+      language === "en"
+        ? `KEY_${keyCode} // CONVERGENCE MATRIX`
+        : `CLÉ_${keyCode} // MATRICE DE CONVERGENCE`;
+    copy.description =
+      language === "en"
+        ? "The arena is collapsing around four anchor routes. Stabilize three anchors in every phase, keep five coherence units, and react within two actions before each strike."
+        : "L'arène s'effondre autour de quatre routes d'ancres. Stabilise trois ancres par phase, conserve cinq unités de cohérence et réagis en deux actions avant chaque frappe.";
+  }
 
   const $ = (id) => document.getElementById(id);
   const panel = document.querySelector(".boss02-panel");
@@ -167,8 +221,6 @@
   const core = $("bossCore");
   const rewardKey = $("bossRewardKey");
   const size = 5;
-  const maxCoherence = 8;
-  const actionsPerStrike = 4;
   const home = 22;
   const phases = [
     {
@@ -207,6 +259,18 @@
       ],
     },
   ];
+  const extraAnchors = [0, 24, 2, 14, 10, 4, 20, 1, 21, 3, 23];
+  phases.forEach((entry) => {
+    const additional = extraAnchors.filter(
+      (cell) =>
+        !entry.walls.includes(cell) &&
+        cell !== entry.spawn &&
+        !entry.anchors.includes(cell),
+    );
+    entry.anchors.push(
+      ...additional.slice(0, anchorsPerPhase - entry.anchors.length),
+    );
+  });
   const cells = [];
   let phase = 0;
   let anchorIndex = 0;
@@ -227,12 +291,15 @@
   });
   $("levelProgress").setAttribute(
     "aria-label",
-    language === "en" ? "Part 2 progress" : "Progression de la Partie 2",
+    copy.part,
   );
   keyHud.setAttribute("aria-label", copy.keyHudAria);
-  for (let level = 11; level <= 20; level += 1) {
+  keyCount.textContent = `${keyNumber} / 6`;
+  keySlotImage.src = keySrc;
+  rewardKey.src = keySrc;
+  for (let level = levelStart; level <= levelEnd; level += 1) {
     const marker = document.createElement("span");
-    marker.className = `level-square${level === 20 ? " current" : ""}`;
+    marker.className = `level-square${level === levelEnd ? " current" : ""}`;
     marker.setAttribute("aria-hidden", "true");
     $("levelProgress").appendChild(marker);
   }
@@ -245,8 +312,8 @@
 
   const updateKeyHud = () => {
     const keys = window.EchoesSave?.getKeys?.() || [];
-    keyCount.textContent = "2 / 6";
-    if (!keys.includes("resonance-2")) return;
+    keyCount.textContent = `${keyNumber} / 6`;
+    if (!keys.includes(keyId)) return;
     keyHud.classList.add("is-unlocked");
     keyHudNote.textContent = copy.keyRecovered;
     keyHudSlot.setAttribute("aria-label", copy.keySlotAria);
@@ -282,8 +349,8 @@
   };
 
   const fragments = window.EchoesKeyFragments.mount({
-    keyNumber: 2,
-    src: "../../assets/svg/cles/key-02-usb.svg?v=2",
+    keyNumber,
+    src: keySrc,
     core,
     before: document.querySelector(".boss02-actions"),
   });
@@ -368,10 +435,10 @@
     fragments.set(3);
     $("systemMessage").textContent = copy.victory.toUpperCase();
     window.EchoesSave?.saveProgress({
-      currentPage: "level-21",
-      currentLevel: 21,
+      currentPage: `level-${nextLevel}`,
+      currentLevel: nextLevel,
     });
-    keyCount.textContent = "2 / 6";
+    keyCount.textContent = `${keyNumber} / 6`;
     keyHud.classList.add("is-unlocked");
     keyHudNote.textContent = copy.keyRecovered;
     keyHudSlot.setAttribute("aria-label", copy.keySlotAria);
@@ -393,10 +460,15 @@
     setStatus(copy.victory, "success");
     window.setTimeout(() => {
       window.EchoesKeyFragments.playCinematic({
-        keyNumber: 2,
-        src: "../../assets/svg/cles/key-02-usb.svg?v=2",
+        keyNumber,
+        src: keySrc,
         onComplete: () => {
-          if (!window.EchoesSave?.unlockKey?.("resonance-2")) {
+          if (!window.EchoesSave?.unlockKey?.(keyId)) {
+            setStatus(copy.rewardError, "error");
+            render();
+            return;
+          }
+          if (!window.EchoesLevels?.markCompleted?.(`boss-${keyCode}`)) {
             setStatus(copy.rewardError, "error");
             render();
             return;
@@ -555,8 +627,7 @@
     render();
   });
   nextButton.addEventListener("click", () => {
-    window.location.href =
-      "../partie-5_niveau-21_à_25/niveau-21.html";
+    window.location.href = nextUrl;
   });
 
   buildBoard();

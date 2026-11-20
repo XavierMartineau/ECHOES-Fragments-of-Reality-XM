@@ -7,14 +7,27 @@
 
   const english = localStorage.getItem("echoes-language") === "en";
   const text = (fr, en) => (english ? en : fr);
-  const symbols = ["◇", "✦", "⬡"];
+  const keyNumber = Number(document.body.dataset.keyNumber) || 1;
+  const keyCode = String(keyNumber).padStart(2, "0");
+  const keyId = `resonance-${keyNumber}`;
+  const keySrc = `../../assets/svg/cles/key-${keyCode}-usb.svg`;
+  const levelStart = Number(document.body.dataset.levelStart) || 1;
+  const levelEnd = Number(document.body.dataset.levelEnd) || 5;
+  const nextUrl = document.body.dataset.nextUrl;
+  const nextLevel = Number(document.body.dataset.nextLevel) || levelEnd;
+  const symbols = ["◇", "✦", "⬡", "△", "◈", "⬢"].slice(
+    0,
+    Math.min(6, 2 + keyNumber),
+  );
   const pads = [
     { color: "#79f7ff", name: text("cyan", "cyan") },
     { color: "#c08aff", name: text("violet", "violet") },
     { color: "#80ffcf", name: text("vert", "green") },
     { color: "#ffbd69", name: text("ambre", "amber") },
   ];
-  const melodyLength = 4;
+  const melodyLength = 3 + keyNumber;
+  const pulseCount = 1 + keyNumber;
+  const maxEnergy = Math.max(3, 7 - Math.ceil(keyNumber / 2));
   let melody = [];
   const levels = document.getElementById("levelProgress");
   const panel = document.querySelector(".boss01-panel");
@@ -68,8 +81,8 @@
       "All three glyphs are recognized. The Sentinel is transmitting its light code.",
     ),
     stageTwoHint: text(
-      "Mémorise l’ordre des quatre éclats : la séquence ne sera jouée qu’une fois.",
-      "Memorize the order of the four flashes: the sequence will play only once.",
+      `Mémorise l’ordre des ${melodyLength} éclats : la séquence ne sera jouée qu’une fois.`,
+      `Memorize the order of the ${melodyLength} flashes: the sequence will play only once.`,
     ),
     sequenceHint: text(
       "À toi de jouer : reproduis le code avec les quatre pastilles.",
@@ -80,12 +93,12 @@
       "Wrong frequency. The sequence has reset; replay it before trying again.",
     ),
     stageTwoWin: text(
-      "Code lumineux déchiffré. Le noyau va émettre deux pulsations vertes : intercepte-les.",
-      "Light code decoded. The core will emit two green pulses: intercept them.",
+      `Code lumineux déchiffré. Le noyau va émettre ${pulseCount} pulsations vertes : intercepte-les.`,
+      `Light code decoded. The core will emit ${pulseCount} green pulses: intercept them.`,
     ),
     stageThreeHint: text(
-      "Dernière épreuve : intercepte deux pulsations vertes. Un clic anticipé coûte une charge.",
-      "Final trial: intercept two green pulses. Clicking too early costs one charge.",
+      `Dernière épreuve : intercepte ${pulseCount} pulsations vertes. Un clic anticipé coûte une charge.`,
+      `Final trial: intercept ${pulseCount} green pulses. Clicking too early costs one charge.`,
     ),
     wait: text(
       "Trop tôt : le noyau n’a pas encore envoyé sa pulsation.",
@@ -150,10 +163,17 @@
       "The Sentinel is ready again. The key remains sealed.",
     ),
   };
+  Object.entries(copy).forEach(([key, value]) => {
+    if (typeof value === "string") copy[key] = value.replace(/01/g, keyCode);
+  });
+  copy.part = document.body.dataset.partLabel || copy.part;
+  copy.next = english
+    ? `CONTINUE TO LEVEL ${document.body.dataset.nextLevel || nextLevel}`
+    : `CONTINUER VERS LE NIVEAU ${document.body.dataset.nextLevel || nextLevel}`;
 
   let stage = 0;
   let stageStep = 0;
-  let energy = 6;
+  let energy = maxEnergy;
   let active = false;
   let won = false;
   let inputLocked = false;
@@ -166,9 +186,9 @@
     if (copy[key]) element.textContent = copy[key];
   });
 
-  for (let level = 1; level <= 10; level += 1) {
+  for (let level = levelStart; level <= levelEnd; level += 1) {
     const marker = document.createElement("span");
-    marker.className = `level-square${level === 10 ? " completed" : ""}`;
+    marker.className = `level-square${level === levelEnd ? " completed" : ""}`;
     marker.setAttribute("aria-hidden", "true");
     levels.appendChild(marker);
   }
@@ -178,8 +198,11 @@
   choices.setAttribute("aria-label", copy.choicesLabel);
   levels.setAttribute(
     "aria-label",
-    text("Progression de la Partie 1", "Part 1 progress"),
+    copy.part,
   );
+  document.getElementById("keyCount").textContent = `${keyNumber} / 6`;
+  document.querySelector("#keyHudSlot img").src = keySrc;
+  document.querySelector("#keyHudSlot b").textContent = `CLÉ_${keyCode}`;
 
   const clearTimers = () => {
     sequenceTimers.forEach(window.clearTimeout);
@@ -197,7 +220,7 @@
 
   const updateLives = () => {
     livesReadout.replaceChildren();
-    for (let index = 0; index < 6; index += 1) {
+    for (let index = 0; index < maxEnergy; index += 1) {
       const heart = document.createElement("span");
       heart.className = `boss01-heart${index >= energy ? " is-lost" : ""}`;
       heart.setAttribute("aria-hidden", "true");
@@ -213,8 +236,8 @@
   };
 
   const fragments = window.EchoesKeyFragments.mount({
-    keyNumber: 1,
-    src: "../../assets/svg/cles/key-01-usb.svg",
+    keyNumber,
+    src: keySrc,
     core,
     before: document.querySelector(".boss01-actions"),
   });
@@ -436,7 +459,7 @@
     active = false;
     stage = 0;
     stageStep = 0;
-    energy = 6;
+    energy = maxEnergy;
     inputLocked = false;
     panel.classList.remove("is-victory");
     startButton.hidden = false;
@@ -463,8 +486,8 @@
     }
     clearTimers();
     stageStep += 1;
-    target.textContent = `${stageStep} / 2`;
-    if (stageStep === 2) {
+    target.textContent = `${stageStep} / ${pulseCount}`;
+    if (stageStep === pulseCount) {
       active = false;
       won = true;
       choices.hidden = true;
@@ -490,8 +513,7 @@
   });
   resetButton.addEventListener("click", resetFight);
   nextButton.addEventListener("click", () => {
-    window.location.href =
-      "../partie-3_niveau-11_à_15/niveau-11.html";
+    window.location.href = nextUrl;
   });
   finishBoss = () => {
     nextButton.hidden = true;
@@ -500,9 +522,13 @@
     window.setTimeout(() => {
       window.EchoesKeyFragments.playCinematic({
         keyNumber: 1,
-        src: "../../assets/svg/cles/key-01-usb.svg",
+        src: keySrc,
         onComplete: () => {
-          if (!window.EchoesSave?.unlockKey?.("resonance-1")) {
+          if (!window.EchoesSave?.unlockKey?.(keyId)) {
+            setStatus(copy.rewardError, "error");
+            return;
+          }
+          if (!window.EchoesLevels?.markCompleted?.(`boss-${keyCode}`)) {
             setStatus(copy.rewardError, "error");
             return;
           }
@@ -523,15 +549,15 @@
       localStorage.setItem(progressKey, JSON.stringify(completedLevels));
     }
     window.EchoesSave?.saveProgress({
-      currentPage: "level-11",
-      currentLevel: 11,
+      currentPage: `level-${nextLevel}`,
+      currentLevel: nextLevel,
       completedLevels,
     });
   };
 
   const showKeyOwned = () => {
     const hud = document.getElementById("keyHud");
-    if (!hud || !window.EchoesSave?.getKeys?.().includes("resonance-1")) return;
+    if (!hud || !window.EchoesSave?.getKeys?.().includes(keyId)) return;
     hud.classList.add("is-unlocked");
     document.getElementById("keyHudNote").textContent = copy.keyOwned;
     const slot = document.getElementById("keyHudSlot");
