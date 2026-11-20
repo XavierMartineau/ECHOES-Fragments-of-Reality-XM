@@ -232,6 +232,8 @@ compatibles avec le système de sauvegarde existant.
   le choix de la clé à y déposer.
 - Le DEV MODE propose un raccourci vers la forge et permet de la tester sans
   modifier la progression du joueur.
+- Une page de fin visuelle est accessible en aperçu depuis le DEV MODE. Elle
+  reste séparée de la forge en attendant l'intégration de la scène finale.
 
 ## Architecture technique
 
