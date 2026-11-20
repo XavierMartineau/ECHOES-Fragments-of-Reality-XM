@@ -40,8 +40,8 @@ instables pour retrouver six clés de résonance.
 Aucune compilation n'est nécessaire.
 
 1. Cloner le dépôt.
-2. Ouvrir `index.html` à la racine dans un navigateur, ou servir la racine avec
-   un serveur statique local (recommandé : il reproduit GitHub Pages).
+2. Servir la racine avec un serveur statique local (nécessaire pour charger le
+   SVG interactif de la forge, et pour reproduire GitHub Pages).
 
 ```bash
 python -m http.server 8000
@@ -75,14 +75,18 @@ boss, clés et niveau final y sont déclarés, et les autres scripts la lisent.
 | Boss // CLÉ 01 : la Sentinelle | `boss-01.html` | niveau 5 | Clé 01 | `resonance-1` |
 | Boss // CLÉ 02 : l'Architecte du Néant | `boss-02.html` | niveau 10 | Clé 02 | `resonance-2` |
 | Boss // CLÉ 03 : l'Occulteur | `boss-03.html` | niveau 15 | Clé 03 | `resonance-3` |
-| Boss // CLÉ 04 : le Cartographe des Failles | `boss-04.html` | niveau 20 | Clé 04 | `resonance-4` |
-| Boss // CLÉ 05 : la Matrice de Convergence | `boss-05.html` | niveau 25 | Clé 05 | `resonance-5` |
-| Boss // CLÉ 06 : le Tisseur d'origine | `boss-06.html` | niveau 30 | Clé 06 | `resonance-6` |
+| Boss // CLÉ 04 : le Gardien prismatique | `boss-04.html` | niveau 20 | Clé 04 | `resonance-4` |
+| Boss // CLÉ 05 : le Dueliste du tempo | `boss-05.html` | niveau 25 | Clé 05 | `resonance-5` |
+| Boss // CLÉ 06 : le Régulateur du noyau | `boss-06.html` | niveau 30 | Clé 06 | `resonance-6` |
 
 Chaque boss donne une clé `resonance-1` à `resonance-6`. Après le niveau 30 et le
-Boss 06, la forge demande de glisser les six clés dans leurs matrices numérotées,
-puis d'abaisser son levier. La fusion animée débloque `resonance-7` et
-`key-07-usb.svg`.
+Boss 06, la forge présente les dessins des sept clés en gris, comme les clés
+verrouillées du jeu. Glisse les six clés colorées dans les emplacements de même
+forme et numéro : chaque signal colore son circuit. Abaisse ensuite le levier
+pour débloquer `resonance-7` (`key-07-usb.svg`), révéler progressivement la
+clé 07 et lancer sa cinématique de construction. Une
+clé placée disparaît du tiroir et peut être déplacée ou récupérée par double-clic ;
+sur tactile ou au clavier, sélectionne son emplacement puis « Retirer la clé ».
 
 ### Parcours
 
@@ -119,15 +123,18 @@ Les niveaux terminés restent rejouables.
 
 - **Boss // CLÉ 01** : sceaux, mémorisation d'une séquence et interception de
   pulsations. Les séquences s'allongent et l'énergie diminue avec la difficulté.
-- **Boss // CLÉ 02, 04 et 05** : arène tactique, ancres à stabiliser et lignes
-  d'impact télégraphiées. Les boss avancés ajoutent des ancres, réduisent la
-  cohérence et raccourcissent le délai avant les frappes.
+- **Boss // CLÉ 02** : arène tactique, ancres à stabiliser et lignes d'impact
+  télégraphiées.
 - **Boss // CLÉ 03** : combat d'anneaux d'éclipse conservé, avec rotations,
   fenêtres à aligner et plusieurs phases.
-- **Boss // CLÉ 06** : quatre labyrinthes procéduraux de plus en plus grands,
-  checkpoints ordonnés, cases corrompues et budget de déplacements décroissant.
-- **Forge mémoire** : glisser les six clés sur les matrices correspondantes,
-  abaisser le levier et les voir fusionner une à une pour obtenir la clé 07.
+- **Boss // CLÉ 04** : faisceau prismatique à router en orientant des miroirs;
+  trois plateaux ajoutent virages et miroirs-leurres.
+- **Boss // CLÉ 05** : duel de précision; frappe dans une fenêtre mobile tandis
+  que le tempo accélère et que la zone de capture rétrécit.
+- **Boss // CLÉ 06** : combat stratégique de gestion du réacteur. Équilibre le
+  flux et la chaleur, bloque les impulsions annoncées et stabilise trois phases.
+- **Forge mémoire** : placer les six clés sur les matrices correspondantes et
+  abaisser le levier pour obtenir la clé 07.
 
 ## Fonctionnalités
 
@@ -244,7 +251,8 @@ avec un filtre, « Tout ouvrir / Tout fermer » et un compteur de FPS en direct.
 
 - Raccourcis, état du joueur, don et retrait des clés 1 à 6.
 - Progression : skip jusqu'à un niveau, tout terminer, réinitialisation.
-- Options : repères couleurs, curseur, fonds animés, mode performance, compteur de FPS.
+- Options : repères couleurs, curseur, fonds animés, mode performance, compteur de FPS
+  affiché dans le bouton DEV MODE pendant le jeu.
 - Navigation par partie vers chaque niveau et chaque boss.
 - Copie de la sauvegarde et verrouillage du DEV MODE.
 

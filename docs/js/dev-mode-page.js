@@ -162,11 +162,12 @@
         currentPage: "level",
         currentLevel: 30,
         completedLevels: Array.from({ length: 30 }, (_, i) => i + 1),
-        completedBosses: [...new Set([...(save.completedBosses || []), "intro", ...parts.map((part) => `boss-${String(part.number).padStart(2, "0")}`), "finale"])],
-        keys: [...new Set([...(save.keys || []), ...allKeys])],
+        completedBosses: [...new Set([...(save.completedBosses || []), "intro", ...parts.map((part) => `boss-${String(part.number).padStart(2, "0")}`)])],
+        completedFinals: [...new Set([...(save.completedFinals || []), "finale"])],
+        keys: [...new Set([...(save.keys || []), ...allKeys, "resonance-7"])],
       }));
       if (ok) {
-        msg("Tout est terminé (niveaux 1–30, boss, 6 clés).");
+        msg("Tout est terminé (niveaux 1–30, boss, forge et 7 clés).");
         refresh();
       }
     });
@@ -174,7 +175,7 @@
       if (!window.confirm("Réinitialiser la progression de ce joueur ?")) return;
       const user = Save.getCurrentUser();
       if (user) {
-        const ok = patchSave(() => ({ currentPage: "introduction", currentLevel: 0, completedLevels: [], completedBosses: [], keys: [] }));
+        const ok = patchSave(() => ({ currentPage: "introduction", currentLevel: 0, completedLevels: [], completedBosses: [], completedFinals: [], keys: [] }));
         if (!ok) return;
         localStorage.removeItem(`echoes-completed-levels-${encodeURIComponent(user.trim().toLowerCase())}`);
       }
@@ -242,6 +243,7 @@
           <h3>PART ${part.number} // NIVEAUX ${part.start}–${part.end}</h3>
           <div class="dm-level-grid">${levels.map((n) => `<a href="${levelLink(n)}">${String(n).padStart(2, "0")}</a>`).join("")}</div>
           ${(part.special || []).map((item) => `<a class="dm-boss" href="${encodeURIComponent(part.folder)}/${item.file}">${item.label}</a>`).join("")}
+          ${part.number === 6 ? '<a class="dm-boss" href="fin-finale/fin-finale.html">FIN FINALE // FORGE MÉMOIRE</a>' : ""}
         </div>`;
       })
       .join("");
@@ -478,6 +480,7 @@
         (part.special || []).forEach((item) => targets.push([item.label, `${encodeURIComponent(part.folder)}/${item.file}`]));
       });
       ["../../index.html", "login.html", "niveaux.html", "introduction.html"].forEach((page) => targets.push([page, page]));
+      targets.push(["Fin finale // Forge mémoire", "fin-finale/fin-finale.html"]);
       out.textContent = "Vérification…";
       const lines = [];
       let bad = 0;

@@ -179,14 +179,24 @@ compatibles avec le système de sauvegarde existant.
   le réseau dormant au niveau 20. Le niveau 20 existait déjà ; ses mécaniques ont été
   réaffectées plutôt que dupliquées.
 
-### Boss tactiques — `boss-02.html`, `boss-04.html` et `boss-05.html`
+### Boss tactique — `boss-02.html`
 
-- Boss placé à la fin de chaque partie correspondante.
-- Arène tactique 5 × 5, déplacements orthogonaux, murs et lignes de frappe télégraphiées.
-- La difficulté progresse : plus d'ancres, moins de cohérence et des frappes plus rapprochées.
-- Les ancres stabilisées sont indiquées par un rond vert foncé dans le compteur de
-  cohérence, plutôt que par l'indicateur orange.
-- La victoire de chaque combat débloque la clé de sa partie et la suivante.
+- Le Boss 02 conserve l'arène tactique 5 × 5, les déplacements orthogonaux, les
+  ancres et les lignes de frappe télégraphiées.
+- La victoire débloque la clé de la partie et la suivante.
+
+### Boss à mécaniques distinctes — `boss-04.html` à `boss-06.html`
+
+- **Boss 04 — Gardien prismatique :** orienter des miroirs pour router un faisceau
+  vers le récepteur. Trois plateaux ajoutent des virages et des miroirs-leurres;
+  chaque tir manqué coûte une unité de cohérence.
+- **Boss 05 — Dueliste du tempo :** frapper uniquement quand le curseur traverse
+  la fenêtre mobile. Les trois tempos exigent 4, 5 puis 6 frappes nettes, avec une
+  piste plus rapide et une zone plus étroite à chaque phase.
+- **Boss 06 — Régulateur du noyau :** gestion de ressources au tour par tour.
+  Atteindre les objectifs de flux tout en limitant la chaleur et en annulant les
+  impulsions annoncées; les trois phases resserrent les marges et le budget.
+- Chaque victoire débloque la clé de la partie et la partie suivante.
 
 ### Boss — `boss-03.html`
 
@@ -208,8 +218,20 @@ compatibles avec le système de sauvegarde existant.
 
 ### Boss — `boss-06.html` et forge mémoire
 
-- Le Boss 06 propose quatre labyrinthes procéduraux de taille croissante, des checkpoints à suivre dans l'ordre, des cases corrompues et un budget de déplacements décroissant.
-- Après sa victoire, la forge affiche les six clés de résonance sous la machine SVG. Il faut les glisser sur les matrices correspondantes puis abaisser le levier ; elles sont absorbées une par une pour forger `key-07-usb.svg`.
+- Après la victoire du Boss 06, la forge affiche les SVG des sept clés en gris,
+  comme les clés verrouillées dans le projet. Les six clés de résonance se glissent
+  dans des logements reprenant leur forme et leur numéro.
+- Une pose correcte allume le signal de la clé. Le levier révèle progressivement
+  la clé 07 dans le noyau, puis lance la cinématique d'assemblage. La récompense
+  `key-07-usb.svg` est enregistrée avant l'animation. Le SVG est chargé en ligne
+  depuis un serveur local.
+- Une clé placée quitte le tiroir ; un double-clic sur son emplacement l'y
+  renvoie. Sur tactile ou au clavier, le sélecteur permet aussi de la retirer.
+- Sur téléphone et tablette, la forge demande l'orientation horizontale.
+  Les six clés sont alors affichées sous la machine ; toucher un cercle ouvre
+  le choix de la clé à y déposer.
+- Le DEV MODE propose un raccourci vers la forge et permet de la tester sans
+  modifier la progression du joueur.
 
 ## Architecture technique
 

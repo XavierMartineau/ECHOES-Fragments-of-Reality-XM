@@ -11,7 +11,7 @@
   const rootUrl = new URL("../../", script.src);
   const style = document.createElement("link");
   style.rel = "stylesheet";
-  style.href = new URL("../css/composants/dev-mode.css?v=28", script.src).href;
+  style.href = new URL("../css/composants/dev-mode.css?v=29", script.src).href;
   document.head.appendChild(style);
 
   // Garde le titre de l'onglet synchronisé avec la langue du niveau.
@@ -28,11 +28,24 @@
     "echo-color-assist",
     localStorage.getItem("echoes-color-assist") === "true",
   );
+  const menu = document.createElement("aside");
+  menu.className = "dev-mode";
+  menu.innerHTML = `
+    <button class="dev-mode-toggle" type="button" aria-label="Ouvrir le DEV MODE">
+      <svg class="dev-mode-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+        <path d="M7 5 2.5 10 7 15M13 5l4.5 5L13 15M11.2 3.5 8.8 16.5" />
+      </svg>
+      <span class="dev-mode-label">DEV MODE</span>
+      <i class="dev-mode-led" aria-hidden="true"></i>
+    </button>
+  `;
+
   if (localStorage.getItem("echoes-dev-fps") === "1") {
-    const box = document.createElement("div");
+    const box = document.createElement("span");
     box.className = "dev-fps";
     box.setAttribute("aria-hidden", "true");
-    document.body.appendChild(box);
+    box.textContent = "-- FPS";
+    menu.querySelector(".dev-mode-toggle").appendChild(box);
     let frames = 0;
     let last = performance.now();
     const tick = (now) => {
@@ -46,18 +59,6 @@
     };
     requestAnimationFrame(tick);
   }
-
-  const menu = document.createElement("aside");
-  menu.className = "dev-mode";
-  menu.innerHTML = `
-    <button class="dev-mode-toggle" type="button" aria-label="Ouvrir le DEV MODE">
-      <svg class="dev-mode-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-        <path d="M7 5 2.5 10 7 15M13 5l4.5 5L13 15M11.2 3.5 8.8 16.5" />
-      </svg>
-      <span class="dev-mode-label">DEV MODE</span>
-      <i class="dev-mode-led" aria-hidden="true"></i>
-    </button>
-  `;
 
   const footer = document.querySelector(
     ".level-footer, .site-footer, .console-footer, footer",

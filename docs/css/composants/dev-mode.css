@@ -2370,15 +2370,12 @@ html body aside.dev-mode .dev-mode-number {
 }
 
 .dev-fps {
-  position: fixed;
-  top: 8px;
-  left: 8px;
-  z-index: 2147483000;
-  padding: 3px 8px;
-  background: rgba(0, 0, 0, 0.75);
+  display: inline-block;
+  padding-left: 8px;
+  border-left: 1px solid rgba(121, 247, 255, 0.35);
   color: #79f7ff;
   font: 700 12px/1.4 monospace;
-  pointer-events: none;
+  white-space: nowrap;
 }
 
 @media (max-width: 520px) {
