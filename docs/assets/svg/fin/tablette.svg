@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 810">
+  <g id="device-frame">
+    <defs>
+      <linearGradient id="tablet-metal" x1="0" y1="0" x2="1" y2="1">
+        <stop stop-color="#42485d"/><stop offset=".45" stop-color="#141827"/><stop offset="1" stop-color="#2a203e"/>
+      </linearGradient>
+      <linearGradient id="tablet-neon">
+        <stop stop-color="#00f3ff"/><stop offset=".5" stop-color="#6366f1"/><stop offset="1" stop-color="#ff00ea"/>
+      </linearGradient>
+    </defs>
+    <rect x="237" y="109" width="626" height="393" rx="31" fill="#080910" stroke="#515b73" stroke-width="4"/>
+    <rect x="241" y="113" width="618" height="385" rx="27" fill="url(#tablet-metal)" stroke="url(#tablet-neon)" stroke-width="2.5"/>
+    <rect x="246" y="118" width="608" height="375" rx="22" fill="#080b15" stroke="#bce9ff" stroke-opacity=".24"/>
+    <circle cx="250" cy="306" r="4" fill="#02040b" stroke="#536783" stroke-width="1.3"/>
+    <circle cx="250" cy="306" r="1.3" fill="#00f3ff" opacity=".7"/>
+    <path d="M859 180V220" stroke="#a8b4c9" stroke-width="4" stroke-linecap="round"/>
+    <g id="btn-power" data-action="power" role="button" tabindex="0" data-i18n-aria="aria.power" transform="translate(849 200)">
+      <circle class="power-ring" r="9" fill="none" stroke="#00f3ff" stroke-width="1.5"/>
+      <circle r="8" fill="#111725" stroke="#00f3ff" stroke-width="1"/>
+      <g class="power-icon" fill="none" stroke="#00f3ff" stroke-width="1.5" stroke-linecap="round">
+        <path d="M-3 -3A4.5 4.5 0 1 0 3 -3M0 -6V-1"/>
+      </g>
+      <circle r="17" fill="transparent"/>
+    </g>
+    <g id="front-usb-plug" aria-hidden="true" transform="translate(855 298) scale(.38)">
+      <image href="cle-07-3d.svg?v=2" width="160" height="80"/>
+    </g>
+  </g>
+</svg>

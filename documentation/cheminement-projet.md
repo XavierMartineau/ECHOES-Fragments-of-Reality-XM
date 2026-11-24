@@ -232,8 +232,30 @@ compatibles avec le système de sauvegarde existant.
   le choix de la clé à y déposer.
 - Le DEV MODE propose un raccourci vers la forge et permet de la tester sans
   modifier la progression du joueur.
-- Une page de fin visuelle est accessible en aperçu depuis le DEV MODE. Elle
-  reste séparée de la forge en attendant l'intégration de la scène finale.
+- La scène de fin est accessible en aperçu depuis le DEV MODE, séparément de la
+  forge. Le SVG interactif est chargé depuis `docs/assets/svg/fin/ordinateur.svg`
+  ; il faut utiliser un serveur local. Sur ordinateur, le portable est d'abord
+  fermé et s'ouvre au clic avant de pouvoir être allumé ; son clavier QWERTY
+  est dessiné en perspective. Sur téléphone ou tablette, le cadre SVG adapté
+  à l'appareil apparaît directement et l'écran tactile permet de l'allumer.
+  Après l'allumage, une fenêtre de type
+  PowerShell propose d'insérer la clé USB. Cette action ouvre une vue du côté
+  chargée depuis `docs/assets/svg/fin/ordinateur-cote.svg` (ou
+  `appareil-cote.svg` sur appareil tactile), insère la clé
+  automatiquement puis revient à l'écran. La clé en perspective se trouve dans
+  `docs/assets/svg/fin/cle-07-3d.svg`, contient une copie du SVG de la clé 07
+  et apparaît aussi à droite dans la vue de face, avant et après l'insertion.
+  Le port n'est visible que dans la vue de côté. Sur les grands écrans avec
+  souris, la scène et la clé sont agrandies. Les cadres tactiles sont définis
+  dans `docs/assets/svg/fin/telephone.svg` et `tablette.svg` ; leur cadrage
+  limite l'espace vide en portrait. Sur téléphone, l'écran du dialogue
+  s'adapte pour laisser plus de place au texte.
+  Après l'ouverture de `echo_ai.exe`, un chargement de trois secondes affiche
+  une barre de progression et des messages de type PowerShell avant le dialogue
+  final. Celui-ci reprend les échanges de l'introduction et révèle l'identité
+  du Voyageur. Les messages défilent automatiquement avec un temps de lecture
+  adapté ; le dialogue se met en pause hors de la scène ou lorsque l'onglet
+  est masqué. La langue peut être changée pendant le chargement et la conversation.
 
 ## Architecture technique
 

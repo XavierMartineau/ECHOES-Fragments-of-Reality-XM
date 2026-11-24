@@ -1,0 +1,34 @@
+<svg id="side-scene" xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 800 450" preserveAspectRatio="xMidYMid meet"
+     role="group" aria-labelledby="side-title side-desc">
+  <title id="side-title" data-i18n="side.title">Côté de l'ordinateur</title>
+  <desc id="side-desc" data-i18n="side.desc">La clé mémoire est alignée avec le port USB sur le côté de l'ordinateur.</desc>
+  <defs>
+    <linearGradient id="side-metal" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#34384e"/><stop offset=".45" stop-color="#181a28"/><stop offset="1" stop-color="#090a12"/>
+    </linearGradient>
+    <linearGradient id="side-neon">
+      <stop stop-color="#00f3ff"/><stop offset=".5" stop-color="#6366f1"/><stop offset="1" stop-color="#ff00ea"/>
+    </linearGradient>
+    <filter id="side-glow" x="-60%" y="-100%" width="220%" height="300%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <ellipse cx="365" cy="339" rx="300" ry="25" fill="#000" opacity=".5"/>
+  <path d="M104 285 77 91 89 87 126 285Z" fill="url(#side-metal)" stroke="url(#side-neon)" stroke-width="2"/>
+  <path d="M91 96 114 266" stroke="#9cd8ff" stroke-opacity=".3" stroke-width="2"/>
+  <path d="M103 275H496L523 290H77Z" fill="#292c40" stroke="url(#side-neon)" stroke-width="2"/>
+  <path d="M77 290H523L507 319H96Z" fill="url(#side-metal)" stroke="#58627d" stroke-width="1.5"/>
+  <path d="M95 318H507" stroke="url(#side-neon)" stroke-width="2" filter="url(#side-glow)"/>
+  <path d="M140 300H248" stroke="#434b66" stroke-width="3" stroke-dasharray="4 4"/>
+  <circle cx="285" cy="303" r="3" fill="#00f3ff"/>
+  <rect x="449" y="291" width="54" height="19" rx="3" fill="#02040a" stroke="#9cabc4"/>
+  <rect id="side-port-glow" x="445" y="287" width="62" height="27" rx="5" fill="none" stroke="#00f3ff" stroke-width="2"/>
+  <path d="M455 300H495" stroke="#ffc247" stroke-width="2" stroke-dasharray="4 3"/>
+
+  <g id="side-usb-mover" aria-hidden="true">
+    <g id="side-key-holder" transform="translate(600 260)"/>
+  </g>
+</svg>

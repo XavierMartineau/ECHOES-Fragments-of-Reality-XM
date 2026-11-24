@@ -37,14 +37,15 @@
     document.head.appendChild(link);
   }
 
-  // Onglet masqué : on fige les animations CSS.
+  const setLite = () => {
+    root.classList.add("lagfix-lite", "fx-lite");
+    window.dispatchEvent(new Event("echoes:performance"));
+  };
+
+  root.classList.toggle("lagfix-hidden", document.hidden);
   document.addEventListener("visibilitychange", () => {
     root.classList.toggle("lagfix-hidden", document.hidden);
   });
-
-  const setLite = () => {
-    root.classList.add("lagfix-lite", "fx-lite");
-  };
 
   // Réglage manuel du DEV MODE, mouvements réduits ou mesure déjà faite pendant la session : mode allégé direct.
   if (
@@ -58,16 +59,16 @@
 
   // Mesure continue : 2 mesures consécutives sous le seuil => mode allégé pour la session.
   let frames = 0;
-  let windowStart = 0;
+  let windowStart = null;
   let strikes = 0;
   let warmup = 2; // les premières secondes (chargement des images) sont ignorées
+  let frame = 0;
+  let active = true;
   const tick = (now) => {
-    if (document.hidden) {
-      frames = 0;
-      windowStart = 0;
-    } else {
-      if (!windowStart) windowStart = now;
-      frames += 1;
+    frame = 0;
+    if (!document.hidden) {
+      if (windowStart === null) windowStart = now;
+      else frames += 1;
       const elapsed = now - windowStart;
       if (elapsed >= SAMPLE_MS) {
         const fps = (frames * 1000) / elapsed;
@@ -79,6 +80,7 @@
           strikes += 1;
           if (strikes >= STRIKES) {
             sessionStorage.setItem("echoes-lagfix", "lite");
+            active = false;
             setLite();
             return;
           }
@@ -87,7 +89,16 @@
         }
       }
     }
-    requestAnimationFrame(tick);
+    if (!document.hidden) frame = requestAnimationFrame(tick);
   };
-  requestAnimationFrame(tick);
+  document.addEventListener("visibilitychange", () => {
+    if (frame) cancelAnimationFrame(frame);
+    frame = 0;
+    frames = 0;
+    windowStart = null;
+    strikes = 0;
+    warmup = 2;
+    if (active && !document.hidden) frame = requestAnimationFrame(tick);
+  });
+  if (!document.hidden) frame = requestAnimationFrame(tick);
 })();

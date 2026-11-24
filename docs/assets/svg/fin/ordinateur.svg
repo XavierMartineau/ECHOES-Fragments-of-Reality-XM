@@ -1,0 +1,360 @@
+<svg id="scene" xmlns="http://www.w3.org/2000/svg"
+         viewBox="150 40 800 810" preserveAspectRatio="xMidYMid meet"
+         role="group" aria-labelledby="scene-title scene-desc">
+      <title id="scene-title" data-i18n="svg.title">Laptop cyber-futuriste et clé USB ECHOES</title>
+      <desc id="scene-desc" data-i18n="svg.desc">Un ordinateur fermé vu de face et la clé mémoire ECHO 07.</desc>
+
+      <!-- ================= DEFS ================= -->
+      <defs>
+        <!-- Dégradés métal / verre -->
+        <linearGradient id="grad-metal" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#2b2e3d"/><stop offset=".45" stop-color="#181a25"/>
+          <stop offset=".7" stop-color="#232636"/><stop offset="1" stop-color="#11121a"/>
+        </linearGradient>
+        <linearGradient id="grad-side-front" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#1d1f2c"/><stop offset="1" stop-color="#08080d"/>
+        </linearGradient>
+        <linearGradient id="grad-side-right" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#262a3b"/><stop offset="1" stop-color="#0b0c12"/>
+        </linearGradient>
+        <linearGradient id="grad-bezel" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#22253a"/><stop offset=".5" stop-color="#0c0d14"/><stop offset="1" stop-color="#1a1c2a"/>
+        </linearGradient>
+        <linearGradient id="grad-neon" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#00f3ff"/><stop offset=".5" stop-color="#6366f1"/><stop offset="1" stop-color="#ff00ea"/>
+        </linearGradient>
+        <linearGradient id="grad-gloss" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".42" stop-color="#fff" stop-opacity=".04"/>
+          <stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="grad-pad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#10122a"/><stop offset="1" stop-color="#1b0d2e"/>
+        </linearGradient>
+        <linearGradient id="grad-wallpaper" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#0b0b1b"/><stop offset=".6" stop-color="#1a0e33"/><stop offset="1" stop-color="#05030a"/>
+        </linearGradient>
+        <linearGradient id="grad-scan" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#00f3ff" stop-opacity="0"/><stop offset=".5" stop-color="#00f3ff" stop-opacity=".22"/><stop offset="1" stop-color="#00f3ff" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="grad-chrome" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#f2f6ff"/><stop offset=".4" stop-color="#aab6cf"/><stop offset=".7" stop-color="#6b7691"/><stop offset="1" stop-color="#cfd8ea"/>
+        </linearGradient>
+        <linearGradient id="grad-chrome-side" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#8b96b1"/><stop offset="1" stop-color="#383f57"/>
+        </linearGradient>
+        <linearGradient id="grad-gold" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fff3b0"/><stop offset=".5" stop-color="#ffc247"/><stop offset="1" stop-color="#c47a12"/>
+        </linearGradient>
+        <linearGradient id="grad-monitor" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#58b8ff"/><stop offset="1" stop-color="#1565c0"/>
+        </linearGradient>
+        <linearGradient id="grad-folder" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#1f5675"/><stop offset="1" stop-color="#0d2238"/>
+        </linearGradient>
+
+        <!-- Palette de la clé 07 (reprise de key-07-usb.svg) -->
+        <linearGradient id="grad-key-shell" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#153a48"/><stop offset=".22" stop-color="#18264f"/><stop offset=".45" stop-color="#231647"/>
+          <stop offset=".68" stop-color="#321638"/><stop offset=".84" stop-color="#332319"/><stop offset="1" stop-color="#142b45"/>
+        </linearGradient>
+        <linearGradient id="grad-key-side" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#1a2b4f"/><stop offset="1" stop-color="#090f21"/>
+        </linearGradient>
+        <linearGradient id="grad-key-neon" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#00f0ff"/><stop offset=".16" stop-color="#45e5d2"/><stop offset=".33" stop-color="#c6ff4d"/>
+          <stop offset=".5" stop-color="#ffd24d"/><stop offset=".66" stop-color="#ff8c83"/><stop offset=".83" stop-color="#ff4fd8"/><stop offset="1" stop-color="#8a5bff"/>
+        </linearGradient>
+
+        <radialGradient id="grad-halo" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#00f3ff" stop-opacity=".55"/><stop offset=".6" stop-color="#6366f1" stop-opacity=".25"/><stop offset="1" stop-color="#ff00ea" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="grad-floor-fade" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#fff" stop-opacity=".6"/><stop offset="1" stop-color="#000"/>
+        </radialGradient>
+
+        <!-- Motifs -->
+        <pattern id="pat-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M40 0H0V40" fill="none" stroke="#00f3ff" stroke-opacity=".35" stroke-width=".7"/>
+        </pattern>
+        <pattern id="pat-brushed" width="4" height="3" patternUnits="userSpaceOnUse">
+          <rect width="4" height=".6" fill="#fff" opacity=".05"/>
+        </pattern>
+        <pattern id="pat-vent" width="7" height="16" patternUnits="userSpaceOnUse">
+          <rect x="2" y="2" width="3" height="12" rx="1.5" fill="#00f3ff" opacity=".4"/>
+        </pattern>
+
+        <!-- Filtres de lueur -->
+        <filter id="glow-cyan" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="b"/><feFlood flood-color="#00f3ff" flood-opacity=".9" result="c"/>
+          <feComposite in="c" in2="b" operator="in" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="glow-magenta" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="b"/><feFlood flood-color="#ff00ea" flood-opacity=".9" result="c"/>
+          <feComposite in="c" in2="b" operator="in" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="glow-indigo" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="b"/><feFlood flood-color="#6366f1" flood-opacity=".9" result="c"/>
+          <feComposite in="c" in2="b" operator="in" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="glow-lime" x="-150%" y="-150%" width="400%" height="400%" color-interpolation-filters="sRGB">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="b"/><feFlood flood-color="#c6ff4d" flood-opacity="1" result="c"/>
+          <feComposite in="c" in2="b" operator="in" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="glow-soft" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="1.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="blur-shadow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9"/></filter>
+        <filter id="blur-soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3"/></filter>
+
+        <!-- Clips & masques -->
+        <clipPath id="clip-display"><rect width="640" height="390" rx="4"/></clipPath>
+        <clipPath id="clip-screen-interior"><rect x="1.25" y="1.25" width="677.5" height="427.5" rx="14.75"/></clipPath>
+        <!-- Ne montre la clé que du côté « extérieur » du châssis (le connecteur disparaît dans le port) -->
+        <clipPath id="clip-port-outside">
+          <polygon points="217.3,843.1 1083.3,343.1 1583.3,1209.1 717.3,1709.1"/>
+        </clipPath>
+        <mask id="mask-floor" maskUnits="userSpaceOnUse" x="-220" y="-420" width="1100" height="1100">
+          <rect x="-220" y="-420" width="1100" height="1100" fill="url(#grad-floor-fade)"/>
+        </mask>
+
+        <!-- Emblème « E » hexagonal d'ECHO (repris de la clé 07) -->
+        <g id="echo-emblem" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M200 327 233 346v38l-33 19-33-19v-38Z" fill="#0b102b" fill-opacity=".94" stroke="url(#grad-key-neon)" stroke-width="1.7"/>
+          <path d="M213 343H188V387H213M189 365H208" fill="none" stroke="url(#grad-key-neon)" stroke-width="8"/>
+          <circle cx="222" cy="347" r="2.2" fill="#c6ff4d"/><circle cx="222" cy="383" r="2.2" fill="#ff4fd8"/>
+        </g>
+      </defs>
+
+      <g id="scene-world">
+        <g id="layer-floor" aria-hidden="true">
+          <ellipse cx="550" cy="690" rx="360" ry="80" fill="#000" opacity=".55" filter="url(#blur-shadow)"/>
+          <path d="M190 670 550 780 910 670M250 690 550 770 850 690M320 710 550 760 780 710" fill="none" stroke="#00f3ff" stroke-opacity=".15"/>
+          <path id="laptop-underglow" d="M205 670H895" fill="none" stroke="url(#grad-neon)" stroke-width="4" filter="url(#glow-cyan)"/>
+        </g>
+
+        <g id="laptop-base">
+          <path d="M245 475H855L910 665H190Z" fill="url(#grad-metal)" stroke="url(#grad-neon)" stroke-width="2"/>
+          <path d="M190 665H910" stroke="url(#grad-neon)" stroke-width="2" filter="url(#glow-cyan)"/>
+          <path d="M275 477H825" stroke="url(#grad-chrome)" stroke-width="7" stroke-linecap="round"/>
+          <g id="laptop-keyboard-deck" transform="matrix(1.45 0 0 .68 274.5 478)">
+            <!-- Grilles de ventilation (arrière) -->
+            <g id="vents-back">
+              <rect x="22" y="12" width="104" height="18" rx="3" fill="#06060b"/>
+              <rect x="22" y="12" width="104" height="18" rx="3" fill="url(#pat-vent)"/>
+              <rect x="254" y="12" width="104" height="18" rx="3" fill="#06060b"/>
+              <rect x="254" y="12" width="104" height="18" rx="3" fill="url(#pat-vent)"/>
+            </g>
+
+            <!-- BOUTON POWER -->
+            <g id="btn-power" data-action="power" role="button" tabindex="0" data-i18n-aria="aria.power" transform="translate(190 22)">
+              <circle class="power-ring" r="14" fill="none" stroke="#00f3ff" stroke-width="1.5"/>
+              <circle class="power-base" r="14" fill="#0a0b14" stroke="url(#grad-neon)" stroke-width="1.6"/>
+              <circle r="10.5" fill="#12141f" stroke="#2c3050" stroke-width=".8"/>
+              <g class="power-icon" fill="none" stroke="#00f3ff" stroke-width="2" stroke-linecap="round" filter="url(#glow-cyan)">
+                <path d="M-4.4 -4.2A6.2 6.2 0 1 0 4.4 -4.2"/><path d="M0 -8V-1.5"/>
+              </g>
+              <circle r="20" fill="transparent"/>
+            </g>
+
+            <!-- Clavier rétroéclairé (touches générées par script.js → buildKeyboard()) -->
+            <g transform="translate(-45.6 -6.16) scale(1.24 1.14)">
+              <path id="keyboard-well" d="M24 44H356L362 162H18Z" fill="#06070e" stroke="#2a2d48" stroke-linejoin="round"/>
+              <g id="keyboard-keys" aria-hidden="true"></g>
+            </g>
+
+            <!-- Haut-parleurs -->
+            <g id="speaker-grilles">
+              <rect x="34" y="196" width="80" height="36" rx="4" fill="#06060b"/><rect x="34" y="196" width="80" height="36" rx="4" fill="url(#pat-vent)" opacity=".7"/>
+              <rect x="266" y="196" width="80" height="36" rx="4" fill="#06060b"/><rect x="266" y="196" width="80" height="36" rx="4" fill="url(#pat-vent)" opacity=".7"/>
+            </g>
+
+            <!-- Pavé tactile lumineux -->
+            <g id="touchpad">
+              <rect x="140" y="184" width="100" height="62" rx="7" fill="url(#grad-pad)" stroke="url(#grad-neon)" stroke-width="1.6" filter="url(#glow-indigo)"/>
+              <rect x="146" y="190" width="88" height="50" rx="4" fill="none" stroke="#00f3ff" stroke-opacity=".25" stroke-dasharray="2 4"/>
+              <path d="M166 242h48" stroke="#ff00ea" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+            </g>
+
+            <circle id="led-deck" cx="26" cy="258" r="2.4"/>
+            <text x="190" y="263" text-anchor="middle" font-size="8" letter-spacing="5" fill="#3d4370">ECHOES</text>
+          </g>
+          <g id="front-usb-plug" aria-hidden="true" transform="translate(892 600) scale(.36)">
+            <image href="cle-07-3d.svg?v=2" width="160" height="80"/>
+          </g>
+        </g>
+
+        <g id="closed-lid" data-action="open-lid" role="button" tabindex="0" data-i18n-aria="aria.openLid">
+          <path d="M245 475H855L910 665H190Z" fill="url(#grad-bezel)" stroke="url(#grad-neon)" stroke-width="2.5"/>
+          <path d="M258 485H842L886 653H214Z" fill="url(#grad-metal)" stroke="#a9d8ff" stroke-opacity=".24"/>
+          <path d="M258 485H842L886 653H214Z" fill="url(#pat-brushed)"/>
+          <path d="M262 494H838M228 644H872" fill="none" stroke="#00f3ff" stroke-opacity=".3"/>
+          <use href="#echo-emblem" transform="translate(550 568) scale(.8 .8) translate(-200 -365)"/>
+          <path class="lid-hint" d="M207 658H893" fill="none" stroke="#00f3ff" stroke-width="3" filter="url(#glow-cyan)"/>
+        </g>
+
+        <g id="usb-key-3d" aria-hidden="true" transform="translate(935 370) rotate(90) scale(.75)">
+          <image href="cle-07-3d.svg?v=2" width="160" height="80"/>
+        </g>
+      </g>
+
+      <g id="laptop-screen-plane" transform="matrix(.85 0 0 .8 261 135.5)">
+        <rect id="screen-bezel" width="680" height="430" rx="16" fill="url(#grad-bezel)" stroke="url(#grad-neon)" stroke-width="2.5"/>
+        <g clip-path="url(#clip-screen-interior)">
+        <g id="screen-display" transform="translate(1.25 1.25) scale(1.05859375 1.0961538462)">
+          <rect id="screen-panel" width="640" height="390" rx="4" fill="#05030a"/>
+
+          <!-- ========== CONTENU DE L'ÉCRAN (OS) ========== -->
+          <g id="laptop-screen-content" clip-path="url(#clip-display)">
+
+            <!-- == Séquence de boot cybernétique == -->
+            <g id="scr-boot">
+              <rect width="640" height="390" fill="#05030a"/>
+              <g stroke="#00f3ff" stroke-opacity=".08" stroke-width=".6">
+                <path d="M0 65H640M0 130H640M0 195H640M0 260H640M0 325H640M80 0V390M160 0V390M240 0V390M320 0V390M400 0V390M480 0V390M560 0V390"/>
+              </g>
+              <g id="boot-logo" transform="translate(320 138) scale(1.7) translate(-200 -365)" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow-cyan)">
+                <path class="boot-draw boot-draw--hex" d="M200 327 233 346v38l-33 19-33-19v-38Z" stroke="url(#grad-key-neon)" stroke-width="2"/>
+                <path class="boot-draw boot-draw--e" d="M213 343H188V387H213M189 365H208" stroke="url(#grad-key-neon)" stroke-width="8"/>
+              </g>
+              <text x="320" y="246" text-anchor="middle" font-size="24" font-weight="700" letter-spacing="10" fill="url(#grad-neon)">ECHOES</text>
+              <rect x="170" y="268" width="300" height="6" rx="3" fill="#0d1226" stroke="#2a3358" stroke-width=".8"/>
+              <rect id="boot-bar-fill" x="170" y="268" width="0" height="6" rx="3" fill="url(#grad-neon)" filter="url(#glow-cyan)"/>
+              <text id="boot-status" x="170" y="298" font-size="14" fill="#9fb4e8" data-i18n="boot.status">Initialisation du système…</text>
+              <text id="boot-percent" x="470" y="298" text-anchor="end" font-size="14" fill="#00f3ff">0%</text>
+              <rect class="scanline" width="640" height="28" fill="url(#grad-scan)"/>
+            </g>
+
+            <!-- == Bureau == -->
+            <g id="scr-desktop">
+              <rect width="640" height="390" fill="url(#grad-wallpaper)"/>
+              <circle cx="320" cy="226" r="170" fill="url(#grad-halo)" opacity=".5"/>
+              <use href="#echo-emblem" transform="translate(320 128) scale(1.8) translate(-200 -365)" opacity=".13"/>
+              <g id="wallpaper-grid" fill="none" stroke="#ff00ea" stroke-opacity=".28" stroke-width=".8">
+                <path d="M0 226H640M0 238H640M0 254H640M0 276H640M0 306H640M0 346H640" stroke="#00f3ff" stroke-opacity=".3"/>
+                <path d="M320 226L-300 390M320 226L-150 390M320 226L0 390M320 226L120 390M320 226L240 390M320 226L320 390M320 226L400 390M320 226L520 390M320 226L640 390M320 226L790 390M320 226L940 390"/>
+              </g>
+
+              <!-- Icône Explorateur de fichiers (apparaît quand la clé est branchée) -->
+              <g id="icon-explorer" data-action="open-explorer" role="button" tabindex="0" data-i18n-aria="aria.explorer" transform="translate(34 28)">
+                <rect class="icon-halo" x="-10" y="-8" width="72" height="84" rx="8" fill="#00f3ff" fill-opacity=".08" stroke="#00f3ff" stroke-width="1.2" stroke-dasharray="4 3"/>
+                <path d="M3 6Q3 2 7 2H19L24 8H45Q49 8 49 12V32Q49 36 45 36H7Q3 36 3 32Z" transform="translate(0 0)" fill="url(#grad-folder)" stroke="#00f3ff" stroke-width="1.4" filter="url(#glow-cyan)"/>
+                <path d="M7 14H45" stroke="#6366f1" stroke-width="1.2" opacity=".8"/>
+                <text class="ui" x="26" y="52" text-anchor="middle" font-size="12" fill="#fff" data-i18n="icon.explorer" data-wrap="12" data-lh="14">Explorateur de fichiers</text>
+              </g>
+
+              <!-- Barre des tâches -->
+              <g id="taskbar">
+                <rect y="356" width="640" height="34" fill="#080912" fill-opacity=".94"/>
+                <rect y="356" width="640" height="1" fill="url(#grad-neon)"/>
+                <g id="taskbar-start"><rect x="292" y="365" width="7" height="7" fill="#00f3ff"/><rect x="301" y="365" width="7" height="7" fill="#6366f1"/><rect x="292" y="374" width="7" height="7" fill="#6366f1"/><rect x="301" y="374" width="7" height="7" fill="#ff00ea"/></g>
+                <g id="taskbar-explorer"><path d="M322 366Q322 364 324 364H329L331 367H338Q340 367 340 369V378Q340 380 338 380H324Q322 380 322 378Z" fill="url(#grad-folder)" stroke="#00f3ff" stroke-width="1"/><rect x="324" y="384" width="14" height="2" rx="1" fill="#00f3ff"/></g>
+                <text id="tray-lang" class="ui" x="562" y="378" text-anchor="middle" font-size="12" fill="#9fb4e8">FR</text>
+                <text id="tray-clock" class="ui" x="624" y="378" text-anchor="end" font-size="12" fill="#e8eeff">--:--</text>
+              </g>
+
+              <!-- Message système (étapes 1 → 5) -->
+              <g id="sys-message">
+                <rect x="30" y="292" width="580" height="54" rx="8" fill="#0b0d1a" fill-opacity=".9" stroke="url(#grad-neon)" stroke-width="1.2"/>
+                <text x="46" y="326" font-size="20" font-weight="700" fill="#00f3ff" filter="url(#glow-cyan)">&gt;_</text>
+                <rect x="76" y="302" width="1" height="34" fill="#2a3358"/>
+                <text id="sys-message-text" x="90" y="317" font-size="16" fill="#e8eeff" data-wrap="46" data-lh="20"></text>
+              </g>
+
+              <g id="usb-prompt">
+                <rect x="55" y="51" width="530" height="240" rx="5" fill="#012456" stroke="#8291aa" stroke-width="1.5"/>
+                <path d="M60 51H580Q585 51 585 56V84H55V56Q55 51 60 51Z" fill="#e5e9f0"/>
+                <rect x="67" y="59" width="20" height="17" rx="2" fill="#164b88"/>
+                <path d="M71 63 75 67 71 71M77 72H83" fill="none" stroke="#fff" stroke-width="1.5"/>
+                <text class="ui" x="97" y="73" font-size="14" fill="#141b25">Windows PowerShell</text>
+                <text x="76" y="116" font-size="15" fill="#fff">PS C:\ECHOES&gt;</text>
+                <text x="76" y="152" font-size="16" fill="#fff" data-i18n="msg.insertUsb">Veuillez insérer la clé USB.</text>
+                <g id="insert-usb-action" data-action="insert-usb" role="button" tabindex="-1" data-i18n-aria="action.insertUsb">
+                  <rect x="76" y="190" width="190" height="37" rx="3" fill="#1471bd" stroke="#b9dfff" stroke-width="1.2"/>
+                  <text x="171" y="214" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" data-i18n="action.insertUsb">Insérer la clé</text>
+                </g>
+              </g>
+            </g>
+
+            <!-- == Explorateur de fichiers (style Windows sombre) == -->
+            <g id="scr-explorer">
+              <g transform="translate(30 14)">
+                <rect width="580" height="270" rx="8" fill="#1c1c1c" stroke="#3b3b3b"/>
+                <path d="M0 8A8 8 0 0 1 8 0H572A8 8 0 0 1 580 8V30H0Z" fill="#202020"/>
+                <path d="M12 12Q12 10 14 10H18L20 12H26Q28 12 28 14V20Q28 22 26 22H14Q12 22 12 20Z" fill="#e8b84a"/>
+                <text class="ui" x="36" y="21" font-size="12" fill="#e6e6e6" data-i18n="explorer.title">Explorateur de fichiers</text>
+                <g stroke="#cfcfcf" stroke-width="1" fill="none"><path d="M504 15H514"/><rect x="534" y="10" width="9" height="9"/><path d="M560 10L569 19M569 10L560 19"/></g>
+
+                <g id="exp-toolbar" stroke="#bbb" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 46L14 46M17 43L14 46L17 49"/><path d="M36 46H42M39 43L42 46L39 49" opacity=".5"/><path d="M60 50V42M57 45L60 42L63 45" opacity=".5"/>
+                </g>
+                <rect x="80" y="35" width="330" height="22" rx="4" fill="#2b2b2b"/>
+                <text id="addr-home" class="ui" x="92" y="50" font-size="12" fill="#e6e6e6" data-i18n="explorer.thisPc">Ce PC</text>
+                <text id="addr-drive" class="ui" x="92" y="50" font-size="12" fill="#e6e6e6"><tspan data-i18n="explorer.thisPc">Ce PC</tspan> › clee_07</text>
+                <rect x="420" y="35" width="148" height="22" rx="4" fill="#2b2b2b"/>
+                <text class="ui" x="432" y="50" font-size="12" fill="#8f8f8f" data-i18n="explorer.search">Rechercher</text>
+                <rect y="62" width="580" height="1" fill="#2e2e2e"/>
+
+                <!-- Volet gauche : arborescence (cf. capture : Ce PC / lecteur / Réseau) -->
+                <g id="exp-nav">
+                  <!-- Ce PC -->
+                  <path d="M12 77L16 81L20 77" fill="none" stroke="#e8e8e8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="30" y="73" width="20" height="14" rx="1.5" fill="url(#grad-monitor)"/><rect x="37" y="88" width="6" height="2" fill="#7fb4e0"/><rect x="34" y="90" width="12" height="1.6" fill="#7fb4e0"/>
+                  <text class="ui" x="58" y="86" font-size="14" fill="#fff" data-i18n="explorer.thisPc">Ce PC</text>
+
+                  <!-- Lecteur clee_07 (remplace OS (C:)) -->
+                  <g id="nav-clee07" data-action="open-drive" role="button" tabindex="0" data-i18n-aria="aria.drive">
+                    <rect class="nav-hl" x="6" y="95" width="148" height="26" rx="5" fill="#2d2d2d"/>
+                    <path d="M24 104L28 108L24 112" fill="none" stroke="#e8e8e8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <g transform="translate(40 102)"><rect y="1" width="12" height="9" rx="1.5" fill="#cfd8e8"/><rect x="12" y="3.2" width="6" height="4.6" fill="#ffd24d"/><circle cx="3.2" cy="5.5" r="1.4" fill="#00f3ff"/></g>
+                    <text class="ui" x="68" y="113" font-size="14" fill="#fff">clee_07</text>
+                  </g>
+
+                  <!-- Réseau -->
+                  <path d="M16 133L12 137L16 141" fill="none" stroke="#e8e8e8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" transform="translate(0 0)"/>
+                  <rect x="30" y="129" width="18" height="12" rx="1.5" fill="url(#grad-monitor)"/><circle cx="46" cy="140" r="6" fill="#2a8fe0" stroke="#cfe8ff" stroke-width="1"/>
+                  <text class="ui" x="58" y="142" font-size="14" fill="#fff" data-i18n="explorer.network">Réseau</text>
+                </g>
+                <rect x="160" y="63" width="1" height="183" fill="#2e2e2e"/>
+
+                <!-- Vue « Ce PC » : tuile du lecteur -->
+                <g id="exp-view-home">
+                  <path d="M172 80L176 84L180 80" fill="none" stroke="#bdbdbd" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <text class="ui" x="188" y="86" font-size="13" fill="#d4d4d4" data-i18n="explorer.devices">Périphériques et lecteurs (1)</text>
+                  <rect x="172" y="92" width="396" height="1" fill="#2e2e2e"/>
+                  <g id="drive-clee07" data-action="open-drive" role="button" tabindex="0" data-i18n-aria="aria.drive">
+                    <rect class="tile-hl" x="172" y="102" width="220" height="64" rx="6" fill="#262626" stroke="#3a3a3a"/>
+                    <g transform="translate(184 118) scale(1.9)"><rect y="1" width="12" height="9" rx="1.5" fill="#cfd8e8"/><rect x="12" y="3.2" width="6" height="4.6" fill="#ffd24d"/><circle cx="3.2" cy="5.5" r="1.4" fill="#00f3ff"/></g>
+                    <text class="ui" x="236" y="128" font-size="14" fill="#fff">clee_07</text>
+                    <text class="ui" x="236" y="146" font-size="11" fill="#9a9a9a" data-i18n="explorer.usbDrive">Lecteur USB</text>
+                    <rect x="236" y="153" width="140" height="4" rx="2" fill="#3a3a3a"/><rect x="236" y="153" width="46" height="4" rx="2" fill="url(#grad-neon)"/>
+                  </g>
+                </g>
+
+                <!-- Vue « clee_07 » : un seul fichier -->
+                <g id="exp-view-drive">
+                  <text class="ui" x="186" y="82" font-size="12" fill="#9a9a9a" data-i18n="explorer.colName">Nom</text>
+                  <text class="ui" x="360" y="82" font-size="12" fill="#9a9a9a" data-i18n="explorer.colType">Type</text>
+                  <text class="ui" x="480" y="82" font-size="12" fill="#9a9a9a" data-i18n="explorer.colSize">Taille</text>
+                  <rect x="172" y="90" width="396" height="1" fill="#2e2e2e"/>
+                  <g id="file-echoes-exe" data-action="run-exe" role="button" tabindex="0" data-i18n-aria="aria.exe">
+                    <rect class="row-hl" x="170" y="96" width="400" height="28" rx="4" fill="#262626" stroke="#3a3a3a"/>
+                    <rect x="180" y="100" width="20" height="20" rx="4" fill="#0b102b" stroke="#00f3ff" stroke-width="1"/>
+                    <use href="#echo-emblem" transform="translate(190 110) scale(.2) translate(-200 -365)"/>
+                    <text class="ui" x="210" y="115" font-size="13" fill="#fff">echo_ai.exe</text>
+                    <text class="ui" x="360" y="115" font-size="12" fill="#bdbdbd" data-i18n="explorer.typeApp">Application</text>
+                    <text class="ui" x="480" y="115" font-size="12" fill="#bdbdbd">707 Ko</text>
+                  </g>
+                </g>
+
+                <rect y="246" width="580" height="1" fill="#2e2e2e"/>
+                <text class="ui" x="14" y="262" font-size="11" fill="#9a9a9a" data-i18n="explorer.items">1 élément</text>
+              </g>
+            </g>
+
+          </g><!-- /laptop-screen-content -->
+
+          <rect id="screen-gloss" width="640" height="390" rx="4" fill="url(#grad-gloss)" pointer-events="none"/>
+        </g>
+        </g>
+      </g><!-- /laptop-screen-plane -->
+    </svg>

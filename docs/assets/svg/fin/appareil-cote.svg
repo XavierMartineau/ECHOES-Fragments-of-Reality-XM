@@ -1,0 +1,28 @@
+<svg id="side-scene" xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 800 450" preserveAspectRatio="xMidYMid meet"
+     role="group" aria-labelledby="side-title side-desc">
+  <title id="side-title" data-i18n="side.title">Côté de l'appareil</title>
+  <desc id="side-desc" data-i18n="side.desc">La clé mémoire est alignée avec le port sur le côté de l'appareil.</desc>
+  <defs>
+    <linearGradient id="side-metal" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#424a60"/><stop offset=".45" stop-color="#1b2031"/><stop offset="1" stop-color="#080a12"/>
+    </linearGradient>
+    <linearGradient id="side-neon">
+      <stop stop-color="#00f3ff"/><stop offset=".5" stop-color="#6366f1"/><stop offset="1" stop-color="#ff00ea"/>
+    </linearGradient>
+    <filter id="side-glow" x="-60%" y="-100%" width="220%" height="300%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <ellipse cx="310" cy="334" rx="250" ry="15" fill="#000" opacity=".5"/>
+  <rect x="77" y="272" width="446" height="49" rx="14" fill="url(#side-metal)" stroke="url(#side-neon)" stroke-width="2"/>
+  <path d="M91 281H509M91 314H509" stroke="#b5dfff" stroke-opacity=".25"/>
+  <circle cx="285" cy="297" r="3" fill="#00f3ff"/>
+  <rect x="449" y="291" width="54" height="19" rx="3" fill="#02040a" stroke="#9cabc4"/>
+  <rect id="side-port-glow" x="445" y="287" width="62" height="27" rx="5" fill="none" stroke="#00f3ff" stroke-width="2"/>
+  <path d="M455 300H495" stroke="#ffc247" stroke-width="2" stroke-dasharray="4 3"/>
+  <g id="side-usb-mover" aria-hidden="true">
+    <g id="side-key-holder" transform="translate(600 260)"/>
+  </g>
+</svg>

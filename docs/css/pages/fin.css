@@ -1,30 +1,243 @@
+/* ==========================================================================
+   ECHOES — scène interactive · style.css
+   Sommaire : 1 Variables · 2 Page · 3 UI · 4 Scène SVG · 5 États · 6 Écran OS
+              7 Animations · 8 Chat ECHOES · 9 Responsive / reduced-motion
+   ========================================================================== */
+
+/* ---------- 1. Variables ---------- */
+:root {
+  --bg-0: #05030a;
+  --bg-1: #0d0d12;
+  --cyan: #00f3ff;
+  --magenta: #ff00ea;
+  --indigo: #6366f1;
+  --lime: #c6ff4d;
+  --text: #d8e6ff;
+  --muted: #7f8bb0;
+  --font-ui: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --font-mono: "Cascadia Code", "JetBrains Mono", "Fira Code", ui-monospace, Consolas, monospace;
+}
+
+/* ---------- 2. Page ---------- */
 * { box-sizing: border-box; }
-
+html, body { min-height: 100%; margin: 0; }
 html:lang(fr) [lang="en"], html:lang(en) [lang="fr"] { display: none; }
-
-.ending-page {
+[hidden] { display: none !important; }
+body {
   display: flex;
   min-height: 100vh;
   min-height: 100dvh;
-  margin: 0;
   flex-direction: column;
   background:
-    radial-gradient(circle, rgba(121, 247, 255, .3) 1px, transparent 3px) 0 0 / 160px 160px,
-    radial-gradient(ellipse at 75% 30%, rgba(40, 83, 113, .16), transparent 55%),
-    #050b14;
-  color: #edfaff;
-  font-family: var(--font-body, sans-serif);
+    radial-gradient(900px 500px at 15% 10%, rgba(99, 102, 241, .16), transparent 70%),
+    radial-gradient(800px 500px at 90% 95%, rgba(255, 0, 234, .12), transparent 70%),
+    linear-gradient(180deg, var(--bg-0), var(--bg-1));
+  color: var(--text);
+  font-family: var(--font-ui);
+}
+#bg-grid {
+  position: fixed; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0, 243, 255, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, .06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 55%, #000 25%, transparent 78%);
+          mask-image: radial-gradient(ellipse at 50% 55%, #000 25%, transparent 78%);
 }
 
+/* ---------- 3. UI discrète ---------- */
+#topbar {
+  position: relative; z-index: 20;
+  display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center;
+  padding: 10px 16px; pointer-events: none;
+}
+#topbar > * { pointer-events: auto; }
+.scene-brand { font: 700 12px var(--font-mono); letter-spacing: .28em; color: var(--muted); }
+.scene-brand i { color: var(--magenta); font-style: normal; }
+.tools { display: flex; gap: 8px; }
+.chip {
+  font: 600 11px var(--font-mono); letter-spacing: .12em; color: var(--muted);
+  background: rgba(10, 12, 28, .6); border: 1px solid rgba(99, 102, 241, .35);
+  border-radius: 999px; padding: 5px 12px; cursor: pointer;
+  transition: border-color .2s, color .2s, box-shadow .2s;
+}
+.chip:hover, .chip:focus-visible { color: #fff; border-color: var(--cyan); box-shadow: 0 0 12px rgba(0, 243, 255, .35); outline: none; }
+.chip .sep { margin: 0 4px; opacity: .5; }
+html[lang="fr"] [data-lang="fr"], html[lang="en"] [data-lang="en"] { color: var(--cyan); }
+
+#hud {
+  position: relative; z-index: 20; width: min(1180px, calc(100% - 32px)); margin: 8px auto;
+  font: 13px/1.5 var(--font-mono); color: #bcd0ff;
+  padding: 10px 14px; border-left: 2px solid var(--cyan);
+  background: linear-gradient(90deg, rgba(5, 3, 10, .8), transparent);
+}
+#hud p { margin: 0 0 4px; }
+#hud-state { font-size: 10px; letter-spacing: .18em; color: var(--muted); }
+#btn-current-action, #btn-exit-chat { margin-left: 12px; }
 .ending-footer {
-  width: min(1180px, calc(100% - 48px));
+  width: min(1180px, calc(100% - 32px));
   margin: auto auto 0;
   padding: 18px 0;
   border-top: 1px solid rgba(121, 247, 255, .18);
   color: #9cabc4;
-  font-size: .85rem;
+  font: .85rem var(--font-body, sans-serif);
 }
 
-@media (max-width: 600px) {
-  .ending-footer { width: calc(100% - 32px); }
+/* ---------- 4. Scène SVG ---------- */
+#stage { position: relative; width: 100%; height: clamp(300px, calc(100dvh - 200px), 800px); }
+#scene-loading { margin: 2rem; }
+#scene, #side-scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+#scene text { font-family: var(--font-mono); }
+#scene text.ui { font-family: var(--font-ui); }
+#stage [data-action]:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+#stage [data-action] { outline: none; }
+
+/* ---------- 5. États globaux (pilotés par <html data-*>) ---------- */
+/* Curseurs : seul l'élément attendu est « cliquable » */
+html[data-interactive="open-lid"]      #closed-lid,
+html[data-interactive="power"]         #btn-power,
+html[data-interactive="power"]         #mobile-power-screen,
+html[data-interactive="insert-usb"]    #insert-usb-action,
+html[data-interactive="open-explorer"] #icon-explorer,
+html[data-interactive="open-drive"]    #drive-clee07,
+html[data-interactive="open-drive"]    #nav-clee07,
+html[data-interactive="run-exe"]       #file-echoes-exe { cursor: pointer; }
+
+html[data-lid="closed"] #laptop-screen-plane { visibility: hidden; }
+html[data-lid="open"] #closed-lid { display: none; }
+html[data-interactive="open-lid"] .lid-hint { animation: soft-pulse-hi 1.4s ease-in-out infinite; }
+#mobile-power-screen { display: none; }
+html[data-interactive="power"] #mobile-power-screen { display: inline; }
+
+/* Alimentation */
+.power-ring { opacity: 0; transform-box: fill-box; transform-origin: center; }
+html[data-interactive="power"] .power-ring { animation: ring-expand 1.8s ease-out infinite; }
+html[data-interactive="power"] .power-icon { animation: soft-pulse 1.4s ease-in-out infinite; }
+html[data-power="on"] .power-icon { stroke: var(--lime); }
+#keyboard-keys, #touchpad { opacity: .6; transition: opacity .9s ease; }
+html[data-power="on"] #keyboard-keys, html[data-power="on"] #touchpad { opacity: 1; }
+#laptop-underglow { opacity: .18; transition: opacity .9s; }
+html[data-power="on"] #laptop-underglow { opacity: .75; animation: soft-pulse 4s ease-in-out infinite; }
+#led-deck { fill: #2a2f45; }
+html[data-power="on"] #led-deck { fill: var(--cyan); filter: url(#glow-cyan); }
+
+/* Clé USB */
+html[data-usb="in"] #usb-key-3d { display: none; }
+#front-usb-plug { display: none; }
+html[data-usb="in"] #front-usb-plug { display: inline; }
+#side-port-glow { opacity: 0; }
+html[data-state="STATE_BOOTED"] #side-port-glow { animation: soft-pulse-hi 1.4s ease-in-out infinite; }
+html[data-usb="in"] #side-port-glow { opacity: .9; stroke: var(--lime); filter: url(#side-glow); }
+
+/* ---------- 6. Écran : couches ---------- */
+#scr-boot, #scr-desktop, #scr-explorer, #icon-explorer, #taskbar-explorer, #exp-view-drive, #addr-drive { display: none; }
+html[data-phase="booting"] #scr-boot { display: inline; animation: boot-flicker .7s steps(2, end) 1; }
+html[data-power="on"]:not([data-phase="booting"]) #scr-desktop { display: inline; }
+html[data-usb="in"] #icon-explorer { display: inline; animation: icon-pop .5s cubic-bezier(.2, 1.4, .4, 1) 1; }
+html[data-explorer="open"] #scr-explorer { display: inline; }
+html[data-explorer="open"] #taskbar-explorer { display: inline; }
+html[data-view="drive"] #exp-view-home, html[data-view="drive"] #addr-home { display: none; }
+html[data-view="drive"] #exp-view-drive, html[data-view="drive"] #addr-drive { display: inline; }
+
+/* Boot */
+.boot-draw { stroke-dashoffset: 0; }
+.boot-draw--hex { --len: 240; stroke-dasharray: 240; animation: boot-draw 1.6s ease-out both; }
+.boot-draw--e   { --len: 120; stroke-dasharray: 120; animation: boot-draw 1.4s .5s ease-out both; }
+.scanline { animation: scan 1.8s linear infinite; }
+
+/* Surbrillances d'invitation sur l'écran */
+.icon-halo { opacity: 0; }
+html[data-interactive="open-explorer"] .icon-halo { animation: soft-pulse-hi 1.3s ease-in-out infinite; }
+html[data-interactive="open-drive"] .tile-hl { animation: tile-glow 1.3s ease-in-out infinite; }
+html[data-interactive="open-drive"] .nav-hl { fill: #36394f; }
+html[data-interactive="run-exe"] .row-hl { animation: tile-glow 1.3s ease-in-out infinite; }
+#nav-clee07:hover .nav-hl { fill: #3a3a3a; }
+#drive-clee07:hover .tile-hl, #file-echoes-exe:hover .row-hl { fill: #333; }
+#sys-message.msg-in { animation: toast-in .5s ease-out 1; }
+#usb-prompt { display: none; }
+html[data-state="STATE_BOOTED"] #sys-message { display: none; }
+html[data-state="STATE_BOOTED"] #usb-prompt {
+  display: inline; transform-box: fill-box; transform-origin: center;
+  animation: powershell-open .35s ease-out both;
+}
+html[data-interactive="insert-usb"] #insert-usb-action:hover rect,
+html[data-interactive="insert-usb"] #insert-usb-action:focus-visible rect { fill: #258cd7; stroke: #fff; }
+html[data-device="phone"] #usb-prompt text { font-size: 20px; }
+html[data-device="phone"] #usb-prompt text[data-i18n="msg.insertUsb"] { font-size: 23px; }
+html[data-device="phone"] #scr-explorer text.ui { font-size: 16px; }
+
+/* ---------- 7. Animations ---------- */
+@keyframes ring-expand { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
+@keyframes soft-pulse { 50% { opacity: .4; } }
+@keyframes soft-pulse-hi { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+@keyframes halo-pulse { 0%, 100% { opacity: .3; } 50% { opacity: .95; } }
+@keyframes tile-glow { 0%, 100% { stroke: #3a3a3a; } 50% { stroke: var(--cyan); } }
+@keyframes flash { 0% { opacity: 1; stroke-width: 5; } 100% { opacity: .9; stroke-width: 1.6; } }
+@keyframes boot-draw { from { stroke-dashoffset: var(--len); } to { stroke-dashoffset: 0; } }
+@keyframes boot-flicker { 0% { opacity: 0; } 40% { opacity: .6; } 100% { opacity: 1; } }
+@keyframes scan { from { transform: translateY(-30px); } to { transform: translateY(400px); } }
+@keyframes icon-pop { from { opacity: 0; } to { opacity: 1; } }
+@keyframes toast-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes powershell-open { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: scale(1); } }
+@keyframes msg-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ---------- 8. Chat ECHOES (overlay positionné par script.js) ---------- */
+.chat {
+  position: fixed; z-index: 30; display: flex; flex-direction: column;
+  --u: 1; font-size: clamp(15px, calc(var(--u) * 17px), 30px); font-family: var(--font-mono);
+  background: rgba(5, 3, 10, .96); color: var(--text);
+  border-radius: calc(var(--u) * 4px); overflow: hidden;
+  opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .6s ease, visibility .6s;
+}
+.chat.is-visible { opacity: 1; visibility: visible; pointer-events: auto; }
+.chat__content { display: flex; flex: 1; min-height: 0; flex-direction: column; }
+.chat::after { /* scanlines */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0, 243, 255, .035) 0 1px, transparent 1px 3px);
+}
+.chat__titlebar {
+  display: flex; align-items: center; gap: .7em; padding: .55em .9em;
+  background: linear-gradient(90deg, rgba(0, 243, 255, .14), rgba(255, 0, 234, .12));
+  border-bottom: 1px solid rgba(99, 102, 241, .45); font-size: .8em; letter-spacing: .08em;
+}
+.chat__dot { width: .6em; height: .6em; border-radius: 50%; background: var(--lime); box-shadow: 0 0 .8em var(--lime); }
+.chat__title { flex: 1; }
+.chat__status { color: var(--lime); text-transform: uppercase; font-size: .85em; }
+.chat__log { flex: 1; min-height: 0; overflow-y: auto; padding: 1em; display: flex; flex-direction: column; gap: .8em; scrollbar-width: thin; scrollbar-color: var(--indigo) transparent; }
+.msg { flex-shrink: 0; max-width: 90%; padding: .6em .85em; border-radius: .5em; border: 1px solid; animation: msg-in .45s ease-out both; }
+.msg__sender { font-size: .72em; letter-spacing: .18em; text-transform: uppercase; opacity: .8; margin-bottom: .25em; }
+.msg__text { margin: 0; line-height: 1.5; }
+.msg--echoes { align-self: flex-start; border-color: rgba(0, 243, 255, .55); background: rgba(0, 243, 255, .07); box-shadow: 0 0 1em rgba(0, 243, 255, .12); }
+.msg--echoes .msg__sender { color: var(--cyan); }
+.msg--other  { align-self: flex-start; border-color: rgba(255, 0, 234, .55); background: rgba(255, 0, 234, .07); box-shadow: 0 0 1em rgba(255, 0, 234, .12); }
+.msg--other .msg__sender { color: var(--magenta); }
+.msg--user   { align-self: flex-end; border-color: rgba(99, 102, 241, .6); background: rgba(99, 102, 241, .1); text-align: right; }
+.msg--user .msg__sender { color: var(--indigo); }
+.msg--system { align-self: center; border-color: rgba(198, 255, 77, .45); background: rgba(198, 255, 77, .06); }
+.msg--system .msg__sender { color: var(--lime); }
+.chat__input { display: flex; align-items: center; gap: .6em; padding: .6em .9em; border-top: 1px solid rgba(99, 102, 241, .4); background: rgba(10, 12, 28, .8); }
+.chat__prompt { color: var(--cyan); }
+.chat__progress { flex: 1; min-width: 0; color: var(--muted); font-size: .8em; }
+.chat-loader { display: flex; flex: 1; min-height: 0; flex-direction: column; background: #012456; color: #edf5ff; }
+.chat-loader__title { padding: .55em .9em; background: #e4e9ef; color: #182332; font: .8em var(--font-ui); }
+.chat-loader__body { display: flex; flex: 1; min-height: 0; flex-direction: column; gap: .5em; padding: .7em 1em; font-size: max(13px, .75em); }
+.chat-loader__lines { flex: 1; min-height: 0; overflow-y: auto; }
+.chat-loader__lines p { margin: 0 0 .3em; overflow-wrap: anywhere; }
+.chat-loader__progress-label { display: flex; justify-content: space-between; gap: 1em; }
+.chat-loader progress { display: block; width: 100%; height: .7em; margin-top: .3em; accent-color: #65e9ff; }
+
+/* ---------- 9. Responsive / accessibilité ---------- */
+@media (min-width: 1024px) and (min-height: 700px) and (hover: hover) and (pointer: fine) {
+  html[data-device="laptop"] #stage { height: clamp(780px, calc(100dvh + 60px), 1200px); }
+  html[data-device="laptop"][data-state="STATE_ZOOM_CHAT"] #stage { height: clamp(300px, calc(100dvh - 100px), 1100px); }
+  html[data-device="laptop"] #usb-key-3d { transform: translate(944px, 360px) rotate(90deg) scale(1, 1.3); }
+  html[data-device="laptop"] #front-usb-plug { transform: translate(892px, 593px) scale(.36, .7); }
+  html[data-device="laptop"] #side-key-holder { transform: translate(600px, 252px) scale(1.15, 1.2); }
+}
+html:not([data-device="laptop"]) #stage { height: clamp(300px, calc(100dvh - 70px), 950px); }
+@media (orientation: portrait) {
+  html:not([data-device="laptop"]):not([data-state="STATE_ZOOM_CHAT"]) #stage { height: max(260px, 62vw); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }

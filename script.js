@@ -58,22 +58,9 @@ const translations = window.translations || {
 function resizeCanvas() {
   width = window.innerWidth;
   height = window.innerHeight;
-  const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.25);
-  canvas.width = Math.round(width * pixelRatio);
-  canvas.height = Math.round(height * pixelRatio);
-  canvas.style.width = width + "px";
-  canvas.style.height = height + "px";
-  ctx.setTransform(
-    pixelRatio,
-    0,
-    0,
-    pixelRatio,
-    0,
-    0,
-  );
-
   const lowEnd =
     localStorage.getItem("echoes-perf") === "lite" ||
+    document.documentElement.classList.contains("lagfix-lite") ||
     (navigator.hardwareConcurrency || 8) <= 4 ||
     (navigator.deviceMemory || 8) <= 4 ||
     sessionStorage.getItem("echoes-slow") === "1" ||
@@ -83,7 +70,13 @@ function resizeCanvas() {
     (navigator.connection || {}).rtt > 500 ||
     (performance.getEntriesByType("navigation")[0] || {}).responseEnd > 2500;
   if (lowEnd) sessionStorage.setItem("echoes-slow", "1");
-  document.documentElement.classList.toggle("fx-lite", lowEnd);
+  if (lowEnd) document.documentElement.classList.add("fx-lite");
+  const pixelRatio = lowEnd ? 1 : Math.min(window.devicePixelRatio || 1, 1.25);
+  canvas.width = Math.round(width * pixelRatio);
+  canvas.height = Math.round(height * pixelRatio);
+  canvas.style.width = width + "px";
+  canvas.style.height = height + "px";
+  ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
   particles = Array.from({ length: lowEnd ? 18 : 36 }, () => ({
     x: Math.random() * width,
     y: Math.random() * height,
@@ -94,17 +87,24 @@ function resizeCanvas() {
 }
 
 let lastBackgroundFrame = 0;
+let backgroundFrame = 0;
 
 function drawBackground(timestamp) {
-  const frameInterval = reducedEffects ? 1000 / 24 : 1000 / 30;
+  backgroundFrame = 0;
+  if (document.hidden) return;
+  const frameInterval = document.documentElement.classList.contains("fx-lite")
+    ? 1000 / 15
+    : reducedEffects ? 1000 / 24 : 1000 / 30;
   if (timestamp - lastBackgroundFrame < frameInterval) {
-    requestAnimationFrame(drawBackground);
+    backgroundFrame = requestAnimationFrame(drawBackground);
     return;
   }
+  const frameFactor = lastBackgroundFrame
+    ? Math.min((timestamp - lastBackgroundFrame) / (1000 / 30), 3)
+    : 1;
   lastBackgroundFrame = timestamp;
 
   const isReduced = reducedEffects;
-  const particleFactor = 1;
   const lineAlpha = isReduced ? 0.1 : 0.18;
 
   ctx.clearRect(0, 0, width, height);
@@ -114,7 +114,7 @@ function drawBackground(timestamp) {
       return;
     }
 
-    particle.y += particle.speed * (isReduced ? 0.25 : 1);
+    particle.y += particle.speed * frameFactor * (isReduced ? 0.25 : 1);
     if (particle.y > height + 10) {
       particle.y = -10;
       particle.x = Math.random() * width;
@@ -144,7 +144,7 @@ function drawBackground(timestamp) {
     ctx.stroke();
   }
 
-  requestAnimationFrame(drawBackground);
+  backgroundFrame = requestAnimationFrame(drawBackground);
 }
 
 const startButton = document.getElementById("startButton");
@@ -270,6 +270,16 @@ window.addEventListener("resize", () => {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(resizeCanvas, 150);
 });
+window.addEventListener("echoes:performance", resizeCanvas);
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    if (backgroundFrame) cancelAnimationFrame(backgroundFrame);
+    backgroundFrame = 0;
+  } else if (!backgroundFrame) {
+    lastBackgroundFrame = 0;
+    backgroundFrame = requestAnimationFrame(drawBackground);
+  }
+});
 resizeCanvas();
-requestAnimationFrame(drawBackground);
+if (!document.hidden) backgroundFrame = requestAnimationFrame(drawBackground);
 applyLanguage(currentLang);

@@ -36,10 +36,11 @@
   // Appareil lent : réglage manuel, réseau lent, peu de cœurs ou peu de mémoire.
   let lite =
     store("echoes-perf") === "lite" ||
+    document.documentElement.classList.contains("lagfix-lite") ||
     slowConnection() ||
     (navigator.hardwareConcurrency || 8) <= 4 ||
     (navigator.deviceMemory || 8) <= 4;
-  document.documentElement.classList.toggle("fx-lite", lite);
+  if (lite) document.documentElement.classList.add("fx-lite");
 
   const me = document.currentScript;
   const base = me ? me.src : location.href;
@@ -155,45 +156,19 @@
       resizeTimer = setTimeout(resize, 150);
     });
 
-    // Gouverneur de performance : si les images dépassent le budget, on dégrade par paliers
-    // (qualité réduite, puis cadence réduite, puis image fixe) au lieu de saccader.
-    let slow = 0;
-    let sampleT = 0;
-    let sampleN = 0;
-    let stage = lite ? 1 : 0;
-    function govern(frameMs) {
-      sampleT += frameMs;
-      sampleN++;
-      if (sampleN < 45) return;
-      const avg = sampleT / sampleN;
-      sampleT = 0;
-      sampleN = 0;
-      slow = avg > (stage === 0 ? 26 : 40) ? slow + 1 : 0;
-      if (slow < 2) return;
-      slow = 0;
-      stage++;
-      if (stage === 1) {
-        lite = true;
-        try { sessionStorage.setItem("echoes-slow", "1"); } catch (e) {}
-        document.documentElement.classList.add("fx-lite");
-        resize();
-      } else if (stage >= 2) {
-        wrap.querySelectorAll(".sb-neb").forEach((n) => n.remove());
-        frozen = true;
-        render();
-      }
-    }
-
     let last = 0;
     let frozen = reduceMotion;
+    let frameId = 0;
+    function schedule() {
+      if (!frameId && !frozen && !document.hidden) frameId = requestAnimationFrame(frame);
+    }
     function frame(now) {
-      if (frozen) return;
-      requestAnimationFrame(frame);
-      if (document.hidden) return;
-      if (now - last < (lite || s.w < 800 ? 32 : 14)) return;
+      frameId = 0;
+      if (frozen || document.hidden) return;
+      schedule();
+      if (last && now - last < (lite ? 65 : s.w < 800 ? 32 : 14)) return;
       const elapsed = now - last;
-      s.dt = Math.min(0.05, elapsed / 1000);
-      if (last) govern(elapsed);
+      s.dt = last ? Math.min(0.1, elapsed / 1000) : 0;
       last = now;
       s.t += s.dt;
       if (s.t - lastMove > 4) {
@@ -207,14 +182,31 @@
 
     // Réglage « réduire les effets » (ui-effects.js) : fige ou relance l'animation sans recharger.
     window.addEventListener("echoes:reduce", (e) => {
-      const wasFrozen = frozen;
       frozen = !!e.detail;
-      if (frozen) render();
-      else if (wasFrozen) requestAnimationFrame(frame);
+      if (frozen) {
+        if (frameId) cancelAnimationFrame(frameId);
+        frameId = 0;
+        render();
+      } else {
+        last = 0;
+        schedule();
+      }
+    });
+
+    window.addEventListener("echoes:performance", () => {
+      if (lite) return;
+      lite = true;
+      resize();
+    });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && frameId) cancelAnimationFrame(frameId);
+      if (document.hidden) frameId = 0;
+      last = 0;
+      schedule();
     });
 
     resize();
-    if (!reduceMotion) requestAnimationFrame(frame);
+    schedule();
   }
 
   load("scene-motifs.js?v=1")

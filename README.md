@@ -271,9 +271,13 @@ avec un filtre, « Tout ouvrir / Tout fermer » et un compteur de FPS en direct.
 
 - `lag-fix/fps-boost.js` mesure les FPS et active un **mode allégé** (sans flou,
   ombres de texte ni effets décoratifs) sous 45 FPS, ou si « performance » ou
-  « mouvements réduits » est actif. Il fige aussi les animations quand l'onglet
-  est masqué. `fps-boost.css` contient les règles correspondantes.
-- Le canvas de l'accueil limite sa résolution et son rythme.
+  « mouvements réduits » est actif. Après le retour d'un onglet masqué, la
+  mesure repart avec une période de stabilisation. `fps-boost.css` contient
+  les règles correspondantes.
+- Les fonds canvas s'adaptent au mode allégé : résolution et nombre de
+  particules réduits, cadence plafonnée à environ 15 images par seconde.
+  Leur animation et la ligne de l'accueil sont suspendues lorsque l'onglet
+  est masqué ; les mécanismes de jeu restent inchangés.
 - Le décor d'accueil est servi en trois tailles par `<picture>`.
 - Lien d'évitement, focus visible et réglage **« Réduire les effets »** : toutes
   les animations tournent 4 fois plus lentement, pour éviter les changements
@@ -297,6 +301,7 @@ avec un filtre, « Tout ouvrir / Tout fermer » et un compteur de FPS en direct.
 node --check docs/js/dev-mode-page.js
 node --check docs/js/ui-effects.js
 node --check lag-fix/fps-boost.js
+node --test tests/performance.test.js
 git diff --check
 ```
 

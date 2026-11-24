@@ -57,13 +57,26 @@
 
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   let last = 0;
+  let frameId = 0;
   const frame = (now) => {
-    requestAnimationFrame(frame);
-    if (document.hidden || now - last < 33) return;
+    frameId = 0;
+    if (document.hidden) return;
+    frameId = requestAnimationFrame(frame);
+    const interval = document.documentElement.classList.contains("fx-lite") ? 66 : 33;
+    if (now - last < interval) return;
     last = now;
     draw(now);
   };
 
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      if (frameId) cancelAnimationFrame(frameId);
+      frameId = 0;
+    } else if (!reduced.matches && !frameId) {
+      last = 0;
+      frameId = requestAnimationFrame(frame);
+    }
+  });
   draw(0);
-  if (!reduced.matches) requestAnimationFrame(frame);
+  if (!reduced.matches && !document.hidden) frameId = requestAnimationFrame(frame);
 })();

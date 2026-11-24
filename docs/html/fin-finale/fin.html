@@ -1,19 +1,85 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-state="STATE_CLOSED" data-lid="closed" data-power="off" data-phase="idle" data-usb="out"
+      data-explorer="closed" data-view="home" data-interactive="open-lid">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="icon" type="image/svg+xml" href="../../assets/svg/identite/echoes-favicon.svg?v=2" />
-    <title>ECHOES — Fin</title>
+    <title data-i18n="page.title">ECHOES — Scène interactive</title>
     <link rel="stylesheet" href="../../css/base/fonts.css" />
-    <link rel="stylesheet" href="../../css/pages/fin.css?v=4" />
+    <link rel="stylesheet" href="../../css/pages/fin.css?v=20" />
   </head>
   <body class="ending-page">
+  <div id="bg-grid" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       BARRE DISCRÈTE : bascule FR / EN + reset (outils de test)
+       ============================================================ -->
+  <header id="topbar">
+    <span class="scene-brand">ECHOES <i>//</i> MEMORY</span>
+    <div class="tools">
+      <button id="lang-toggle" class="chip" type="button" data-i18n-aria="ui.langAria">
+        <span data-lang="fr">FR</span><span class="sep">/</span><span data-lang="en">EN</span>
+      </button>
+      <button id="btn-reset" class="chip" type="button" data-i18n="ui.reset">Réinitialiser</button>
+    </div>
+  </header>
+
+  <main id="stage">
+    <p id="scene-loading" role="status">Chargement de la scène…</p>
+  </main>
+
+  <!-- ============================================================
+       ZONE DE DIALOGUE (affichée après le zoom sur l'écran)
+       ============================================================ -->
+  <section id="echoes-chat-container" class="chat" aria-label="ECHOES">
+    <div id="chat-loader" class="chat-loader" hidden>
+      <div class="chat-loader__title">Windows PowerShell — echo_ai.exe</div>
+      <div class="chat-loader__body">
+        <div class="chat-loader__lines" aria-live="polite">
+          <p data-load-at="0" data-i18n="load.start">PS C:\clee_07&gt; .\echo_ai.exe</p>
+          <p data-load-at="20" data-i18n="load.core" hidden>&gt; Chargement de memorycore.exe...</p>
+          <p data-load-at="45" data-i18n="load.fragments" hidden>&gt; Assemblage des six fragments de mémoire...</p>
+          <p data-load-at="70" data-i18n="load.system" hidden>&gt; Restauration du système ECHO...</p>
+          <p data-load-at="100" data-i18n="load.ready" hidden>&gt; Chargement terminé. Connexion à ECHO...</p>
+        </div>
+        <div class="chat-loader__progress">
+          <div class="chat-loader__progress-label">
+            <label for="load-progress" data-i18n="load.label">Chargement</label>
+            <span id="load-percent">0%</span>
+          </div>
+          <progress id="load-progress" max="100" value="0">0%</progress>
+        </div>
+      </div>
+    </div>
+    <div id="chat-content" class="chat__content">
+      <div class="chat__titlebar">
+        <span class="chat__dot" aria-hidden="true"></span>
+        <span class="chat__title" data-i18n="chat.title">echo_ai.exe — ECHOES</span>
+        <span class="chat__status" data-i18n="chat.status">en ligne</span>
+      </div>
+
+      <div id="chat-log" class="chat__log" role="log" aria-live="polite"></div>
+
+      <div class="chat__input">
+        <span class="chat__prompt" aria-hidden="true">&gt;</span>
+        <span id="chat-progress" class="chat__progress"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HUD : rappel textuel de l'étape en cours (utile en dev et pour l'accessibilité) -->
+  <div id="hud" role="status" aria-live="polite">
+    <p id="hud-text"></p>
+    <span id="hud-state" aria-hidden="true"></span>
+    <button id="btn-current-action" class="chip" type="button" hidden></button>
+    <button id="btn-exit-chat" class="chip" type="button" data-i18n="ui.back" hidden>Retour à la scène</button>
+  </div>
+
     <footer class="ending-footer">
       <span class="site-copyright">© 2026 Xavier Martineau · <span lang="fr">Tous droits réservés.</span><span lang="en">All rights reserved.</span></span>
     </footer>
-    <script src="../../js/translations.js?v=6"></script>
-    <script src="../../js/language.js?v=2"></script>
     <script src="../../js/dev-mode.js?v=14"></script>
+    <script src="../../js/fin.js?v=20"></script>
   </body>
 </html>
