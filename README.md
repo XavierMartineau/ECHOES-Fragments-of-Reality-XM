@@ -105,6 +105,7 @@ Forge de mémoire : six clés alignées → levier → clé mémoire 07
 ```
 
 Les niveaux terminés restent rejouables.
+À la fin de la dernière transmission d'ECHO, un lien ouvre les crédits.
 
 ### Mécaniques des niveaux 1 à 10
 
@@ -139,7 +140,8 @@ Les niveaux terminés restent rejouables.
 ## Fonctionnalités
 
 - Comptes et sauvegarde locaux, reprise automatique de la progression.
-- Hub des niveaux avec points verts de progression et panneau des six clés.
+- Hub des niveaux avec progression, panneau des six clés et raccourci vers
+  l'étape actuelle.
 - ECHO, l'assistante du jeu, avec ses messages et son habillage glitch.
 - Traductions FR/EN complètes ; le dictionnaire de la langue active est chargé
   en premier, l'autre au repos.

@@ -13,6 +13,7 @@
       kicker: "CAMPAGNE // SÉLECTION DES NIVEAUX",
       title: "Choisis ton niveau",
       continue: "Continuer",
+      findCurrent: "Voir mon étape",
       intro: "Revoir l'introduction",
       switchUser: "Changer de joueur",
       reset: "Réinitialiser la progression",
@@ -43,6 +44,7 @@
       kicker: "CAMPAIGN // LEVEL SELECT",
       title: "Choose your level",
       continue: "Continue",
+      findCurrent: "Find my current step",
       intro: "Replay the introduction",
       switchUser: "Switch player",
       reset: "Reset progress",
@@ -355,6 +357,7 @@
 
   const seriesList = document.getElementById("seriesList");
   const continueButton = document.getElementById("continueButton");
+  const currentStepButton = document.getElementById("currentStepButton");
 
   // Crée la carte d'un niveau selon son état.
   function createCard(item, animate) {
@@ -376,6 +379,7 @@
     }[item.state];
 
     card.className = `level-card state-${item.state}${isBoss ? " is-boss" : ""}${isFinal ? " is-final" : ""}${animate ? " just-unlocked" : ""}`;
+    if (item.state === "current") card.id = "hub-current-step";
     card.dataset.levelId = item.id;
     card.setAttribute("aria-label", `${name} — ${stateLabel}`);
     if (playable) card.href = levels.urlFor(item);
@@ -502,18 +506,15 @@
     if (current) {
       continueButton.href = levels.urlFor(current);
       continueButton.textContent = text.continue;
+      continueButton.hidden = false;
+      currentStepButton.hidden = false;
     } else {
       continueButton.href = "#";
       continueButton.hidden = true;
+      currentStepButton.hidden = true;
     }
 
     observeSeries();
-    document
-      .querySelector(".level-card.state-current")
-      ?.scrollIntoView({
-        block: "center",
-        behavior: reducedMotion ? "auto" : "smooth",
-      });
   }
 
   document.getElementById("switchUserButton").addEventListener("click", () => {

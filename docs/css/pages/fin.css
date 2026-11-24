@@ -73,7 +73,8 @@ html[lang="fr"] [data-lang="fr"], html[lang="en"] [data-lang="en"] { color: var(
 }
 #hud p { margin: 0 0 4px; }
 #hud-state { font-size: 10px; letter-spacing: .18em; color: var(--muted); }
-#btn-current-action, #btn-exit-chat { margin-left: 12px; }
+#btn-current-action, #btn-exit-chat, #credits-link { margin-left: 12px; }
+#credits-link { display: inline-block; min-height: 44px; padding: 12px; text-decoration: none; }
 .ending-footer {
   width: min(1180px, calc(100% - 32px));
   margin: auto auto 0;

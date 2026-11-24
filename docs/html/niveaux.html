@@ -13,7 +13,7 @@
     <!-- Feuilles de style : base, composants, page -->
     <script src="../../lag-fix/fps-boost.js"></script>
     <link rel="stylesheet" href="../css/base/fonts.css" />
-    <link rel="stylesheet" href="../css/pages/niveaux.css?v=15" />
+    <link rel="stylesheet" href="../css/pages/niveaux.css?v=16" />
     <link rel="stylesheet" href="../css/composants/key-tray.css?v=2" />
   </head>
   <body class="hub-page">
@@ -42,6 +42,7 @@
             class="progress-track"
             id="progressTrack"
             role="progressbar"
+            aria-labelledby="progressCount"
             aria-valuemin="0"
             aria-valuemax="100"
             aria-valuenow="0"
@@ -72,6 +73,14 @@
           >
             Changer de joueur
           </button>
+          <a
+            class="hub-button"
+            id="currentStepButton"
+            href="#hub-current-step"
+            data-i18n="findCurrent"
+            hidden
+            >Voir mon étape</a
+          >
           <button
             class="hub-button danger"
             id="resetButton"
@@ -120,7 +129,7 @@
     <script src="../js/save-system.js?v=5"></script>
     <script src="../js/levels-config.js?v=10"></script>
     <script src="../js/key-tray.js"></script>
-    <script src="../js/niveaux.js?v=9"></script>
+    <script src="../js/niveaux.js?v=10"></script>
     <script src="../js/scene-bg.js?v=5"></script>
     <script src="../js/dev-mode.js?v=14"></script>
       <script src="../js/ui-effects.js?v=12"></script>

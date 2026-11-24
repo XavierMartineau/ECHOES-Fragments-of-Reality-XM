@@ -60,7 +60,7 @@ let dialogueIndex = 0;
 let dialogueTimer = null;
 const sceneUrl = new URL('../assets/svg/fin/ordinateur.svg?v=13', document.currentScript.src);
 const sideSceneUrl = new URL(deviceType === 'laptop' ? '../assets/svg/fin/ordinateur-cote.svg?v=3' : '../assets/svg/fin/appareil-cote.svg?v=1', document.currentScript.src);
-const deviceSceneUrl = deviceType === 'laptop' ? null : new URL(`../assets/svg/fin/${deviceType === 'phone' ? 'telephone' : 'tablette'}.svg?v=1`, document.currentScript.src);
+const deviceSceneUrl = deviceType === 'laptop' ? null : new URL(`../assets/svg/fin/${deviceType === 'phone' ? 'telephone' : 'tablette'}.svg?v=2`, document.currentScript.src);
 const key3dUrl = new URL('../assets/svg/fin/cle-07-3d.svg?v=2', document.currentScript.src);
 
 /* ---------- 2. i18n ---------- */
@@ -80,6 +80,7 @@ const i18n = {
     'ui.langAria': 'Changer de langue (FR / EN)',
     'ui.reset': 'Réinitialiser',
     'ui.back': 'Retour à la scène',
+    'ui.credits': 'Voir les crédits',
     'aria.openLid': "Ouvrir l'ordinateur",
     'aria.power': "Bouton d'alimentation",
     'action.insertUsb': 'Insérer la clé',
@@ -140,6 +141,7 @@ const i18n = {
     'ui.langAria': 'Switch language (FR / EN)',
     'ui.reset': 'Reset',
     'ui.back': 'Back to the scene',
+    'ui.credits': 'View credits',
     'aria.openLid': 'Open the laptop',
     'aria.power': 'Power button',
     'action.insertUsb': 'Insert the key',
@@ -418,6 +420,7 @@ function renderHud() {
   actionButton.hidden = !f.action || state.busy;
   if (f.action) actionButton.textContent = t(actionKeys[f.action]);
   $('#btn-exit-chat').hidden = state.current !== STATE_ZOOM_CHAT || state.busy;
+  renderDialogueProgress();
 }
 
 /** Recalcule les attributs data-* de <html> (les CSS en dérivent tout l'affichage). */
@@ -637,6 +640,7 @@ async function exitChat() {
 function renderDialogueProgress() {
   const complete = dialogueIndex === endingDialogue.length;
   $('#chat-progress').textContent = complete ? t('chat.complete') : `${dialogueIndex} / ${endingDialogue.length}`;
+  $('#credits-link').hidden = !complete || state.current !== STATE_ZOOM_CHAT || state.busy;
 }
 
 function scheduleDialogue() {

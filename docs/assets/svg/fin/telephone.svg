@@ -14,8 +14,7 @@
     <path d="M253 151V459M846 151V459" stroke="#00f3ff" stroke-opacity=".22" stroke-width="1"/>
     <circle cx="248" cy="298" r="5" fill="#02040b" stroke="#4d6581" stroke-width="1.5"/>
     <circle cx="248" cy="298" r="1.5" fill="#00f3ff" opacity=".7"/>
-    <path d="M869 189V232" stroke="#9ba8c0" stroke-width="4" stroke-linecap="round"/>
-    <g id="btn-power" data-action="power" role="button" tabindex="0" data-i18n-aria="aria.power" transform="translate(854 210)">
+    <g id="btn-power" data-action="power" role="button" tabindex="0" data-i18n-aria="aria.power" transform="translate(550 497)">
       <circle class="power-ring" r="10" fill="none" stroke="#00f3ff" stroke-width="1.5"/>
       <circle r="9" fill="#111725" stroke="#00f3ff" stroke-width="1"/>
       <g class="power-icon" fill="none" stroke="#00f3ff" stroke-width="1.5" stroke-linecap="round">
