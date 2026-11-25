@@ -173,11 +173,11 @@
         ],
         [
           {
-            fr: "Les indices séparent les couleurs bien placées des couleurs présentes au mauvais endroit.",
-            en: "Feedback separates colors in the right place from colors in the wrong place.",
+            fr: "Les indices indiquent si chaque couleur est bien placée, mal placée ou absente.",
+            en: "Feedback shows whether each color is correctly placed, misplaced, or absent.",
             steps: [
               { fr: "Compose une proposition de cinq couleurs différentes.", en: "Build a guess from five different colors.", tokens: ["●", "◆", "▲", "★", "?" ] },
-              { fr: "Lis les deux compteurs, puis change l'ordre sans répéter une couleur.", en: "Read both counters, then change the order without repeating a color.", tokens: ["POSITION", "COULEUR", "ORDRE", "↻"] },
+              { fr: "Vert : la couleur reste en place. Jaune : essaie une autre position. Rouge : écarte la couleur.", en: "Green: the color stays in place. Yellow: try another position. Red: discard the color.", tokens: ["VERT ✓", "JAUNE ↔", "ROUGE ✕"] },
             ],
           },
           {

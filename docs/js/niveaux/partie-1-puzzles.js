@@ -70,7 +70,7 @@
           eyebrow: "Fragment 006 // Déduction",
           title: "Le code du gardien",
           description:
-            "Le gardien a verrouillé le signal avec cinq couleurs distinctes. Déduis leur ordre avec les indices de position et de couleur en sept essais maximum.",
+            "Déduis l'ordre des cinq couleurs distinctes en sept essais maximum. Les couleurs bien placées restent verrouillées.",
           system: "SYSTEME:: CODE A 5 POSITIONS // 7 ESSAIS MAXIMUM",
           puzzle: "Protocole Mastermind",
           ready:
@@ -141,6 +141,7 @@
         retry: "Les cartes ne correspondent pas. Réessaie.",
         locked: "Choisis d'abord une couleur.",
         fullGuess: "Renseigne les cinq positions avant de valider.",
+        duplicateColor: "Chaque couleur ne peut être utilisée qu'une fois.",
         noRoute:
           "Le faisceau n'atteint pas le récepteur. Réoriente les miroirs.",
         mirror: "Miroir",
@@ -227,7 +228,7 @@
           eyebrow: "Fragment 006 // Deduction",
           title: "The guardian's code",
           description:
-            "The guardian locked the signal with five distinct colors. Deduce their order from position and color feedback in seven attempts or fewer.",
+            "Deduce the order of five distinct colors in seven attempts or fewer. Correctly placed colors stay locked.",
           system: "SYSTEM:: 5-POSITION CODE // 7 ATTEMPTS MAXIMUM",
           puzzle: "Mastermind protocol",
           ready:
@@ -297,6 +298,7 @@
         retry: "Those cards do not match. Try again.",
         locked: "Choose a color first.",
         fullGuess: "Fill all five positions before submitting.",
+        duplicateColor: "Each color can only be used once.",
         noRoute: "The beam missed the receiver. Reorient the mirrors.",
         mirror: "Mirror",
         target: "Receiver",
@@ -994,14 +996,18 @@
     const maxAttempts = 7;
     const palette = [
       "#51e7ef",
-      "#8274ff",
-      "#ff609e",
-      "#ffd35a",
-      "#82e0a8",
-      "#ff8b5b",
+      "#3768e8",
+      "#a06bff",
+      "#ef80d5",
+      "#f4f4f4",
+      "#788294",
     ];
+    const colorNames = language === "en"
+      ? ["cyan", "blue", "purple", "pink", "white", "gray"]
+      : ["cyan", "bleu", "violet", "rose", "blanc", "gris"];
     const code = randomize([...palette.keys()]).slice(0, codeLength);
     const guess = Array(codeLength).fill(null);
+    const lockedPositions = Array(codeLength).fill(false);
     const history = document.createElement("div");
     history.className = "mastermind-history";
     const current = document.createElement("div");
@@ -1015,8 +1021,8 @@
     board.append(
       label(
         language === "en"
-          ? "Five different colors. Feedback gives counts, not exact positions."
-          : "Cinq couleurs différentes. Les indices donnent les quantités, pas les positions exactes.",
+          ? "Green: correct position. Yellow: right color, wrong position. Red: color not in the code. Correct positions stay locked."
+          : "Vert : bien placée. Jaune : bonne couleur, mal placée. Rouge : couleur absente du code. Les bonnes positions restent verrouillées.",
       ),
     );
     board.append(history, current, swatches);
@@ -1029,12 +1035,18 @@
         const position = button(color === null ? "?" : "", "mastermind-slot");
         if (color !== null)
           position.style.setProperty("--peg-color", palette[color]);
+        position.disabled = lockedPositions[index];
+        position.classList.toggle("is-locked", lockedPositions[index]);
         position.setAttribute(
           "aria-label",
-          `${language === "en" ? "Position" : "Position"} ${index + 1}`,
+          `Position ${index + 1}${color === null ? "" : ` : ${colorNames[color]}`}${lockedPositions[index] ? (language === "en" ? ", locked" : ", verrouillée") : ""}`,
         );
         position.addEventListener("click", () => {
-          if (!started || selectedColor === null) return;
+          if (!started || solved || lockedPositions[index] || selectedColor === null) return;
+          if (guess.some((value, other) => other !== index && value === selectedColor)) {
+            setStatus(rules.duplicateColor, "error");
+            return;
+          }
           guess[index] = selectedColor;
           paintGuess();
         });
@@ -1046,10 +1058,10 @@
       peg.style.setProperty("--peg-color", color);
       peg.setAttribute(
         "aria-label",
-        `${language === "en" ? "Color" : "Couleur"} ${index + 1}`,
+        `${language === "en" ? "Color" : "Couleur"} : ${colorNames[index]}`,
       );
       peg.addEventListener("click", () => {
-        if (!started) return;
+        if (!started || solved) return;
         selectedColor = index;
         swatches
           .querySelectorAll(".is-selected")
@@ -1059,9 +1071,9 @@
       swatches.appendChild(peg);
     });
     undo.addEventListener("click", () => {
-      if (!started) return;
+      if (!started || solved) return;
       let last = guess.length - 1;
-      while (last >= 0 && guess[last] === null) last -= 1;
+      while (last >= 0 && (guess[last] === null || lockedPositions[last])) last -= 1;
       if (last >= 0) guess[last] = null;
       paintGuess();
     });
@@ -1080,16 +1092,32 @@
         guess.filter((value) => code.includes(value)).length - exact;
       const row = document.createElement("div");
       row.className = "mastermind-history-row";
-      guess.forEach((value) => {
+      guess.forEach((value, index) => {
+        const result = value === code[index] ? "exact" : code.includes(value) ? "misplaced" : "absent";
+        const resultLabel = result === "exact"
+          ? rules.exact
+          : result === "misplaced"
+            ? rules.misplaced
+            : language === "en" ? "color not in the code" : "couleur absente du code";
+        const item = document.createElement("span");
+        item.className = "mastermind-history-item";
+        item.setAttribute("aria-label", `Position ${index + 1} : ${colorNames[value]}, ${resultLabel}`);
+        const indicator = document.createElement("span");
+        indicator.className = `mastermind-feedback is-${result}`;
+        indicator.setAttribute("aria-hidden", "true");
         const peg = document.createElement("span");
         peg.className = "mastermind-peg";
         peg.style.setProperty("--peg-color", palette[value]);
-        row.appendChild(peg);
+        item.append(indicator, peg);
+        row.appendChild(item);
+        if (result === "exact") lockedPositions[index] = true;
+        else guess[index] = null;
       });
       const clue = document.createElement("span");
       clue.textContent = `${exact} ${rules.exact} · ${misplaced} ${rules.misplaced}`;
       row.appendChild(clue);
       history.prepend(row);
+      paintGuess();
       setProgress(attempts, maxAttempts);
       if (exact === code.length) {
         completeLevel();
@@ -1105,8 +1133,6 @@
         submit.disabled = true;
         return;
       }
-      guess.fill(null);
-      paintGuess();
       setStatus(
         `${maxAttempts - attempts} ${rules.attempts} ${language === "en" ? "remaining." : "restants."}`,
       );

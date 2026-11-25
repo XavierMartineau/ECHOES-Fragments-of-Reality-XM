@@ -4322,6 +4322,35 @@ body.key-reward-page .reward-dialogue {
   cursor: pointer;
 }
 
+.mastermind-slot.is-locked {
+  border: 3px solid #35d877;
+  cursor: default;
+}
+
+.mastermind-history-item {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.mastermind-feedback {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.mastermind-feedback.is-exact {
+  background: #35d877;
+}
+
+.mastermind-feedback.is-misplaced {
+  background: #ffd35a;
+}
+
+.mastermind-feedback.is-absent {
+  background: #ff5263;
+}
+
 .mastermind-palette .mastermind-peg {
   cursor: pointer;
 }

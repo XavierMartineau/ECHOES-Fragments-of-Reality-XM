@@ -114,7 +114,7 @@ Les niveaux terminés restent rejouables.
 3. messages chiffrés par décalage alphabétique ;
 4. taquin 3 × 3 à reconstruire ;
 5. mémoire de huit paires ;
-6. déduction de code façon Mastermind ;
+6. déduction de code façon Mastermind : vert bien placé, jaune mal placé, rouge absent ; les positions correctes restent verrouillées ;
 7. nonogramme 5 × 5 ;
 8. miroirs à orienter pour guider un faisceau laser ;
 9. tours de Hanoï à quatre disques ;

@@ -143,7 +143,7 @@ Cette journée portait sur l'habillage du hub, de l'accueil et du DEV MODE, ains
 - **Niveau 3 — Le chiffre d'ECHO :** décryptage de trois messages par décalage alphabétique.
 - **Niveau 4 — Le cœur fracturé :** taquin 3 × 3 généré par déplacements légaux.
 - **Niveau 5 — Les archives effacées :** jeu de mémoire avec huit paires de glyphes.
-- **Niveau 6 — Le code du gardien :** déduction d'un code de quatre couleurs en huit essais.
+- **Niveau 6 — Le code du gardien :** déduction d'un code de cinq couleurs distinctes en sept essais. Les indices verts, jaunes et rouges signalent les couleurs bien placées, mal placées ou absentes ; les positions correctes restent verrouillées.
 - **Niveau 7 — La grille silencieuse :** nonogramme 5 × 5 à résoudre avec ses indices.
 - **Niveau 8 — Le corridor laser :** orientation de miroirs pour atteindre un récepteur.
 - **Niveau 9 — Les tours du temps :** transfert de quatre disques selon les règles de Hanoï.
